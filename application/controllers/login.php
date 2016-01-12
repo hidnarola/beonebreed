@@ -19,9 +19,9 @@ class	Login	extends	CI_Controller	{
 			$password	=	md5($this->input->post('password'));
 			
 			if(!empty($user)){
-				$result	=	$this->login_model->login($username,	$password,$user);
+				$result	=	$this->login_model->login($username,$password,$user);
 			}else{
-				$result	=	$this->login_model->login($username,	$password);
+				$result	=	$this->login_model->login($username,$password);
 			}
 
 			if	($result)	{

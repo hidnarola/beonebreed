@@ -17,10 +17,7 @@ class	Login_model	extends	CI_Model	{
 				$client_result	=	$client_query->row_array();
 				$this->db->where("client_id",	$client_result['id']);
 			}
-		}	else	{
-			$user_type	=	array(1,	2);
-			$this->$db->where_in('user_type',	$user_type);
-		}
+		}	
 		$this->db->where("username",	$username);
 		$this->db->where("password",	$password);
 
