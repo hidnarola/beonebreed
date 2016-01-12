@@ -261,7 +261,7 @@
                   <!-- end form -->
                   </div>
           <div class='text-left finish-btn container'>
-              <a href="<?php echo site_url('quality') ?>" class="btn btn-primary">Finish</a> 
+              <a href="<?php echo site_url('suggestion') ?>" class="btn btn-primary">Finish</a> 
           </div>
         </div>
 

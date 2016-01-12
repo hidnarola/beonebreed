@@ -1,0 +1,3 @@
+http://proversus/proversuses/books/1#
+
+http://webmaster.iu.edu/tools-and-guides/maintenance/redirect-htaccess.phtml

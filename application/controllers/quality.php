@@ -11,14 +11,14 @@ class Quality extends CI_Controller {
     $this->load->database();
     //$this->load->library('pagination');
     $this->load->library('form_validation');
-    /*
-      if (!$this->session->userdata('admin_logged_in')) {
+      if (!$this->session->userdata('client_user_logged_in')) {
       redirect('/login');
-      } */
+      } 
   }
-
   public function index() {
-    $data['quality_list'] = $this->quality_model->get_all();
+	$client_id=$this->session->userdata('client_id');
+	$user_id=$this->session->userdata('id');
+	$data['quality_list']=$this->quality_model->get_all($user_id,$client_id);
     $this->template->load('mondou_default', 'quality/index', $data);
   }
 
@@ -30,12 +30,15 @@ class Quality extends CI_Controller {
       $data['problem_list'] = $this->quality_model->get_problem_list();
       $this->template->load('mondou_default', 'quality/add', $data);
     } else {
-
-
       if (!empty($_POST)) {
 
         if (!empty($this->session->userdata('client_id'))) {
-          $user_id = $this->session->userdata('client_id');
+          $client_id = $this->session->userdata('client_id');
+        } else {
+          $client_id = 0;
+        }
+		if (!empty($this->session->userdata('id'))) {
+          $user_id = $this->session->userdata('id');
         } else {
           $user_id = 0;
         }
@@ -59,6 +62,7 @@ class Quality extends CI_Controller {
             'contact_info' => $this->input->post('contact_info'),
             'status' => '0',
             'user_id' => $user_id,
+			'client_id' => $client_id,
             'created_date	' => date("Y-m-d H:i:s")
         );
 

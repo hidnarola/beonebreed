@@ -280,7 +280,7 @@
           <li class='dropdown dark user-menu'>
             <a class='dropdown-toggle' data-toggle='dropdown' href='#'>
               <!--<img width="23" height="23" alt="Mila Kunis" src="assets/images/avatar.jpg" />-->
-              <span class='user-name'><?php if(!empty($this->session->userdata('client_username'))){ echo $this->session->userdata('client_username');} ?></span>
+              <span class='user-name'><?php if(!empty($this->session->userdata('username'))){ echo $this->session->userdata('username');} ?></span>
               <b class='caret'></b>
             </a>
             <ul class='dropdown-menu'>

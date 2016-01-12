@@ -8,21 +8,22 @@ class Quality_model extends CI_Model {
   }
 
   public function add_records($data) {
-
     $id = $this->db->insert('quality', $data);
     $last_id = $this->db->insert_id();
     return $last_id;
   }
 
-  public function get_all() {			
+  public function get_all($user_id,$client_id) {
     $this->db->select('quality.*,product.name as product_name,store.name as store_name');
     $this->db->from('quality');
     $this->db->join('product', 'quality.product = product.id', 'left');
     $this->db->join('store', 'quality.store = store.id', 'left');
+	$this->db->where('quality.user_id', $user_id);
+	$this->db->where('quality.client_id',$client_id);
     $query = $this->db->get();
     return $query->result();
   }
-
+ 
   public function get($id) {
     $query = $this->db->get_where('quality', array('id' => $id));
     return $query->row_array();

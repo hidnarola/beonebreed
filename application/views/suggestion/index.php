@@ -78,12 +78,13 @@
 					<td>
 					   <div class='text-left'>
 						<a class='btn btn-primary btn-xs' href='<?php echo site_url('suggestion/edit/'.$u_key->id) ?>'>
-						  <i class='icon-edit'></i>
-						  Edit
+						  <i class='icon-list'></i>
+						  View
 						</a>
+						<!--
 						<a class='btn btn-danger btn-xs' href='<?php echo site_url('suggestion/delete/'.$u_key->id) ?>' onclick="if(!confirm('Are you sure want to delete')){return false;}">
 						  <i class='icon-remove'></i>Delete
-						</a>
+						</a> -->
 					  </div>
 					</td>
 				  </tr>

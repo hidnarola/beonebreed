@@ -8,17 +8,20 @@ class Suggestion_model extends CI_Model {
   }
 
   public function add_records($data) {
-
     $id = $this->db->insert('suggestion', $data);
-    return $id;
+    $last_id = $this->db->insert_id();
+    return $last_id;
   }
-
-  public function get_all() {
-			
-			 $this->db->order_by("id", "desc");
+  
+  public function get_all($user_id,$client_id) {		
+	$this->db->order_by("id", "desc");
+	$this->db->where('suggestion.user_id', $user_id);
+	$this->db->where('suggestion.client_id',$client_id);
     $query = $this->db->get('suggestion');
+	
     return $query->result();
   }
+  
   public function get($id) {
     $query = $this->db->get_where('suggestion', array('id' => $id));
     return $query->row_array();

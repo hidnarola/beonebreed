@@ -11,14 +11,17 @@ class Suggestion extends CI_Controller {
     $this->load->database();
     //$this->load->library('pagination');
     $this->load->library('form_validation');
-    /*
-      if (!$this->session->userdata('admin_logged_in')) {
+    
+      if (!$this->session->userdata('client_user_logged_in')) {
       redirect('/login');
-      } */
+      } 
   }
 
   public function index() {
-    $data['suggestion_list'] = $this->suggestion_model->get_all();
+	$client_id=$this->session->userdata('client_id');
+	$user_id=$this->session->userdata('id');
+    $data['suggestion_list'] = $this->suggestion_model->get_all($user_id,$client_id);
+	
     $this->template->load('mondou_default', 'suggestion/index', $data);
   }
 
@@ -34,7 +37,12 @@ class Suggestion extends CI_Controller {
       if (!empty($_POST)) {
 
         if (!empty($this->session->userdata('client_id'))) {
-          $user_id = $this->session->userdata('client_id');
+          $client_id = $this->session->userdata('client_id');
+        } else {
+          $client_id = 0;
+        }
+		if (!empty($this->session->userdata('id'))) {
+          $user_id = $this->session->userdata('id');
         } else {
           $user_id = 0;
         }
@@ -49,6 +57,7 @@ class Suggestion extends CI_Controller {
             'contact_info' => $this->input->post('contact_info'),
             'status' => '0',
             'user_id' => $user_id,
+			'client_id' => $client_id,
             'created_date	' => date("Y-m-d H:i:s")
         );
         $id = $this->suggestion_model->add_records($data, TRUE);
@@ -145,6 +154,7 @@ class Suggestion extends CI_Controller {
     $data_upload = array(
         'suggestion_id' => $this->input->post('hdn_project_id'),
         'name' => $upload_data['uploads']['file_name'],
+		'created_date' => date("Y-m-d H:i:s")
     );
 
     $last_inserted_id = $this->suggestion_model->add_attachemnt($data_upload, TRUE);
@@ -167,6 +177,7 @@ class Suggestion extends CI_Controller {
         'suggestion_id' => $this->input->post('hdn_project_id'),
         'name' => $this->input->post('external_com'),
         'description' => $this->input->post('description'),
+		'created_date' => date("Y-m-d H:i:s")
     );
     $last_id = $this->suggestion_model->add_external_link($data_link, TRUE);
     if (!empty($last_id)) {
@@ -187,6 +198,7 @@ class Suggestion extends CI_Controller {
         'suggestion_id' => $this->input->post('hdn_project_id'),
         'name' => $this->input->post('notes_name'),
         'description' => $this->input->post('description'),
+		'created_date' => date("Y-m-d H:i:s")
     );
 
     $last_notes_id = $this->suggestion_model->add_notes_records($data_notes, TRUE);

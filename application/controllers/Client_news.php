@@ -11,10 +11,9 @@ class Client_news extends CI_Controller {
     $this->load->database();
     //$this->load->library('pagination');
     $this->load->library('form_validation');
-/*
-    if (!$this->session->userdata('client_logged_in')) {
-      redirect('mondou/login');
-    } */
+    if (!$this->session->userdata('client_user_logged_in')) {
+      redirect('login');
+    } 
   }
 
   public function index() {
