@@ -7,8 +7,7 @@ class User_model extends CI_Model {
 		$this->load->database();
 	}
         
-        public function add_records($data){
-           
+        public function add_records($data){           
             $id = $this->db->insert('users',$data);
             return $id;
         }
@@ -24,8 +23,8 @@ class User_model extends CI_Model {
             $query = $this->db->get();
             return $query->result(); */
 									
-										$user_type = array('1', '2');
-										$this->db->where_in('user_type', $user_type);
+		  $user_type = array('1', '2');
+		  $this->db->where_in('user_type', $user_type);
           $this->db->where('is_deleted','0');
           $query = $this->db->get('users');
           return $query->result();

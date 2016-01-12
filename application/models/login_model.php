@@ -1,6 +1,7 @@
 
 <?php
 
+
 class Login_model extends CI_Model {
 
     public function __construct() {
@@ -21,6 +22,7 @@ class Login_model extends CI_Model {
 	    //admin and admin_user login
 	    $usertype = array('1', '2');
 	    $this->db->where_in('user_type', $usertype);
+
 	}
 	$this->db->where("username", $username);
 	$this->db->where("password", $password);

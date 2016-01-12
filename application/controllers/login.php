@@ -2,6 +2,7 @@
 
 class Login extends CI_Controller {
 
+
     public function __construct() {
 	parent::__construct();
 	$this->load->library('template');
@@ -9,6 +10,9 @@ class Login extends CI_Controller {
 	$this->load->helper('form');
 	$this->load->model('login_model');
     }
+
+
+
 
     public function index($user = null) {
 	$data = array();

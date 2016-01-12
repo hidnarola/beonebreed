@@ -20,12 +20,12 @@
           $suggestion="";   
         }
 								
-								if(!empty($this->session->userdata('client_username'))){
-										$client_username=$this->session->userdata('client_username');
-								}else{
-										$client_username='';
-								}
-       
+				if(!empty($this->session->userdata('client_username'))){
+						$client_username=$this->session->userdata('client_username');
+				}else{
+						$client_username='';
+				}
+
 ?>
 <!DOCTYPE html>
 <html>
