@@ -432,6 +432,24 @@
                 </li>
               </ul>
             </li>
+
+            <li class="">
+              <a class='dropdown-collapse' href='#'>
+                <i class='icon-trello'></i>
+                <span>Products</span>
+                <i class='icon-angle-down angle-down'></i>
+              </a>
+                 
+              <ul class='nav nav-stacked' style="<?php echo $news_setting;?>">
+                <li >
+                  <a href='<?php echo site_url('barcode') ?>'>
+                    <i class='icon-caret-right'></i>
+                    <span>Barcode</span>
+                  </a>
+                </li>
+                
+              </ul>
+            </li>
             <li class='' style="<?php echo $display_setting;?>">
             <a class="dropdown-collapse" href="#"><i class='icon-cog'></i>
               <span>Settings</span>
