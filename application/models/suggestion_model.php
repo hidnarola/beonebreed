@@ -15,8 +15,8 @@ class Suggestion_model extends CI_Model {
   
   public function get_all($user_id,$client_id) {		
 	$this->db->order_by("id", "desc");
-	$this->db->where('suggestion.user_id', $user_id);
-	$this->db->where('suggestion.client_id',$client_id);
+	//$this->db->where('suggestion.user_id', $user_id);
+	//$this->db->where('suggestion.client_id',$client_id);
     $query = $this->db->get('suggestion');
 	
     return $query->result();

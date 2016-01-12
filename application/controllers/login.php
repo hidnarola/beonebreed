@@ -36,7 +36,7 @@ class Login extends CI_Controller {
 		    $newdata = array(
 			'id' => $result[0]->id,
 			'username' => $result[0]->username,
-			'client_logged_in' => TRUE,
+			'client_user_logged_in' => TRUE,
 			'user_type' => $result[0]->user_type,
 		    );
 		    
@@ -53,7 +53,7 @@ class Login extends CI_Controller {
 		if ($user_type == 1 || $user_type == 2) {
 		    redirect('dashboard');
 		} else if ($user_type == 3) {
-		    redirect('client_dashboard');
+		    redirect('client_news');
 		}else if($user_type == 4){
 		   redirect('client_news');
 		}
