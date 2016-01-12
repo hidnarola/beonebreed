@@ -1,0 +1,45 @@
+product frames are so big, you can see only one products, and only one on each stroll of the finger :  Done
+
+Ipad site display Site pricing  : not replicate this issue.
+
+Ipad display  some of the images are not coming up : not replicate this issue.
+
+
+Site Truncation 
+That way the product price will not get out of the frame.
+Set all price to 10px from bottom and 10PX from left of each product. Done
+
+in the related Product page set the Product click area to include all of the product and not just the text. -Done
+
+
+
+
+
+
+
+
+
+
+
+
+For JIgnesh
+2.On all Mobile devices the right banner of social networks should not come up ( scroll down banner) 
+3.Need for the site to be responsive on all the devices and web browser ( Firefox , Chrome , Explorer )
+
+4.Work all the way from Iphone 4 to Iphone 6s and see that everything is working as it should , this time, take the time to do it right. same on Samsung , Motorola ,LG , phones on Android platform.
+
+Go over all the site functionality on all mobile devices and be sure that everything is looking as it should, and that everything is working as it should. 
+
+
+
+(14:56) dc: email:dc.narola@narolainfotech.com
+(14:56) dc: pass: dc.narola
+
+
+
+1) Image should display in full view and alignment is coming different in ipad and device - DOne
+2) In Weevap Squad Page Customer Review text is getting cut  --  Done
+3) Text is getting cut from left on Customer Care Page -Done
+4) Facebook entry get drop down below add on home page and box i coming still to big
+5) Add is getting cut
+6) 

@@ -1,0 +1,13 @@
+Site Url : http://www.dealfiza.com/
+
+Admin detail
+-----------------------------------------
+Asmin Url : http://dealfiza.com/admin
+Username : admin
+Password : admin123
+
+
+
+http://dealfizaindia.com/admin
+Username : admin
+Password : admin123
