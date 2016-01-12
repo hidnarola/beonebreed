@@ -30,11 +30,14 @@ class Project extends CI_Controller {
   public function add() {
 
     if ($this->form_validation->run('project') == FALSE) {
+        
       $data['project_type'] = $this->project_model->get_all_types();
       $data['categories'] = $this->project_model->get_caregory();
       $data['project_manager'] = $this->project_model->get_project_manager();
       $this->template->load('admin_default', 'project/add', $data);
-    } else {
+
+    }else{
+
       if (!empty($_POST)) {
 
         if (empty($this->input->post('category_id'))) {
@@ -146,6 +149,7 @@ class Project extends CI_Controller {
         $upload_data = array('uploads' => $this->upload->data('file'));
       }
     }
+
     $data_upload = array(
         'timesheet_id' => $this->input->post('hdn_timesheet_id'),
         'name' => $upload_data['uploads']['file_name'],

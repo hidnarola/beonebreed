@@ -49,8 +49,8 @@ $result = $query->result();
 foreach( $result as $row )
 {
     $route[ $row->username ] = 'login/index/'.$row->username;
-				$route[ $row->username.'/login/logout' ] = 'login/logout';
-				$route[ $row->username.'/suggestion' ] = 'suggestion';
+	$route[ $row->username.'/login/logout' ] = 'login/logout';
+	$route[ $row->username.'/suggestion' ] = 'suggestion';
 }
 $route['(:any)/quality/(:any)/(:any)'] = 'quality/$2/$3';
 
