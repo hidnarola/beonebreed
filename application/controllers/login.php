@@ -12,6 +12,7 @@ class Login extends CI_Controller {
 
   public function index($user = null) {		
 			$data = array();
+			$abc = 1;
 			$data['company_logo'] = '';
 			if (!empty($_POST)) {
 			
