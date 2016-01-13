@@ -3,6 +3,7 @@
   $CI =& get_instance();
   $CI->load->model('client_model');
   $result = $CI->client_model->get_all_client();
+
   $client_array=array();
   
   if(!empty($result)){   
@@ -10,6 +11,7 @@
 		$client_array[$key]=$val->username;
       }
   }
+
   session_start();
         
         $controller=$this->router->fetch_class();
@@ -310,7 +312,7 @@
             
                 if(!empty($this->session->userdata('user_type'))){
 																	
-																		$user_type=$this->session->userdata('user_type');	
+				  $user_type=$this->session->userdata('user_type');	
                   if($user_type==1){
                   
                       $display_setting="display:block";
@@ -318,8 +320,8 @@
                       $display_setting="display:none";
                   }
                 } 
-            ?>
-             <li class="">
+              ?>
+            <li class="">
               <a class='dropdown-collapse' href='#'>
                 <i class='icon-trello'></i>
                 <span>Marketing</span>
@@ -336,20 +338,27 @@
               </ul>
             </li>
 
-            <li class="">
+            <li class="<?php if($controller == 'barcode' || $controller == 'products' ){ echo 'active'; }?>">
               <a class='dropdown-collapse' href='#'>
                 <i class='icon-trello'></i>
                 <span>Products</span>
                 <i class='icon-angle-down angle-down'></i>
               </a>
                  
-              <ul class='nav nav-stacked' style="<?php echo $news_setting;?>">
-                <li >
+              <ul class='<?php if($controller == 'barcode' || $controller == 'products'){ echo 'in'; }?> nav nav-stacked '>
+                <li class="">
+                  <a href='<?php echo site_url('products') ?>'>
+                    <i class='icon-caret-right'></i>
+                    <span>Products</span>
+                  </a>
+                </li>
+                <li class="">
                   <a href='<?php echo site_url('barcode') ?>'>
                     <i class='icon-caret-right'></i>
                     <span>Barcode</span>
                   </a>
                 </li>
+
                 
               </ul>
             </li>

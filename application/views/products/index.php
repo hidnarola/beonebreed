@@ -6,12 +6,12 @@
         <div class='page-header'>
           <h1 class='pull-left'>
             <i class='icon-table'></i>
-            <span>Manage Barcodes</span>
+            <span>Manage Products</span>
           </h1>
           
           <div class='pull-right'>  
-            <a href="<?php echo base_url().'barcode/import'; ?>" class="btn btn-success">Import UPC EAN Codes</a>
-            <a href="<?php echo base_url().'barcode/export'; ?>" class="btn btn-info">Export</a>
+            <!-- <a href="<?php echo base_url().'barcode/import'; ?>" class="btn btn-success">Import UPC EAN Codes</a> -->
+            <a class="btn btn-info">Export</a>
           </div>
 
         </div>
@@ -27,13 +27,13 @@
         ?>  
       </div>
 <?php } ?>  
-      <?php echo myflash_message('success','success'); echo myflash_message('error'); ?>
+
     <div class="clearfix">	</div>
     <br/>
     <div class='col-sm-12'>
       <div class='box bordered-box orange-border' style='margin-bottom:0;'>
         <div class='box-header orange-background'>
-          <div class='title'> Barcodes </div>
+          <div class='title'> Products </div>
           <div class='actions'>
             <a class="btn box-collapse btn-xs btn-link" href="#">
             </a>
@@ -49,19 +49,19 @@
                       ID
                     </th>
                     <th>
+                      Product
+                    </th>
+                    <th>
+                      Type
+                    </th>
+                    <th>
+                      Code
+                    </th>
+                    <th>
+                      Size
+                    </th>
+                    <th>
                       UPC
-                    </th>
-                    <th>
-                      EAN
-                    </th>
-                    <th>
-                      DESCRIPTION
-                    </th>
-                    <th>
-                      CREATED DATE
-                    </th>
-                    <th>
-                      MODIFIED DATE
                     </th>
                     <th>
                       Action
