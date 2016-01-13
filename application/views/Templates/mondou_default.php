@@ -342,13 +342,13 @@
               </a>
             </li>
            <li class='<?php echo $quality; ?>'>
-              <a href='<?php echo site_url('quality') ?>'>
+              <a href='<?php echo site_url('client_quality') ?>'>
                 <i class='icon-bookmark '></i>
                 <span>QUALITY</span>
               </a>
             </li>
             <li class='<?php echo $suggestion; ?>'>
-              <a href='<?php echo site_url('suggestion') ?>'>
+              <a href='<?php echo site_url('client_suggestion') ?>'>
                 <i class='icon-trello'></i>
                 <span>IDEA/SUGGESTION</span>
               </a>

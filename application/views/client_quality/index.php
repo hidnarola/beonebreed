@@ -4,11 +4,10 @@
 		<div class='col-sm-12'>
 		  <div class='page-header'>
 			<h1 class='pull-left'>
-			  <i class='icon-trello'></i>
-			  <span>Idea</span>
+			  <i class='icon-bookmark'></i>
+			  <span>QUALITÉ</span>
 			</h1>
 			<div class='pull-right'>
-        
 			 
 			</div>
 		  </div>
@@ -26,10 +25,10 @@
 	<div class='col-sm-12'>
 	  <div class='box bordered-box orange-border' style='margin-bottom:0;'>
 		<div class='box-header orange-background'>
-		  <div class='title'>Idea/Suggestion</div>
-                        <!--<a href="<?php //echo site_url('suggestion/add') ?>" class="btn btn-primary pull-right">New</a>-->
+		  <div class='title'>Report</div>
+                        <a href="<?php echo site_url('Client_quality/add') ?>" class="btn btn-primary pull-right">New</a>
 		  </div>
-		</div>
+		
 		<div class='box-content box-no-padding'>
 		  <div class='responsive-table'>
 			<div class='scrollable-area'>
@@ -40,13 +39,16 @@
 					 Id
 					</th>
 					<th>
-					  Subject
+					  Title
 					</th>
-          <th>
+					<th>
 					  Date
 					</th>
 					<th>
-					  #Store
+					  Product
+					</th>
+					<th>
+					  Store
 					</th>
 					<th>
 					  User
@@ -60,29 +62,30 @@
 				  </tr>
 				</thead>
 				<tbody>
-				<?php foreach ($suggestion_list as $u_key){ ?>
+				<?php foreach ($quality_list as $u_key){ ?>
 				  <tr>
 					<td><?php echo $u_key->id; ?> </td>
-					<td><?php echo $u_key->subject; ?> </td>
+					<td><?php echo $u_key->title; ?> </td>
 					<td>
             <?php 
               $date = new DateTime($u_key->created_date);
               echo $date->format('d F Y');
             ?> 
           </td>
+					<td><?php echo $u_key->product_name; ?> </td>
 					<td><?php echo $u_key->store_name; ?> </td>
-					<td><?php echo $u_key->username; ?></td>
+					<td><?php //echo $u_key->user_id; ?> </td>
 					<td> </td>
-					
 					
 					<td>
 					   <div class='text-left'>
-						<a class='btn btn-primary btn-xs' href='<?php echo site_url('suggestion/edit/'.$u_key->id.'/'.$client_id) ?>'>
+						<a class='btn btn-primary btn-xs' href='<?php echo site_url('client_quality/edit/'.$u_key->id) ?>'>
 						  <i class='icon-list'></i>
 						  View
 						</a>
-						<!--
-						<a class='btn btn-danger btn-xs' href='<?php echo site_url('suggestion/delete/'.$u_key->id) ?>' onclick="if(!confirm('Are you sure want to delete')){return false;}">
+							
+						<!--			
+						<a class='btn btn-danger btn-xs' href='<?php //echo site_url('mondou/quality/delete/'.$u_key->id) ?>' onclick="if(!confirm('Are you sure want to delete')){return false;}">
 						  <i class='icon-remove'></i>Delete
 						</a> -->
 					  </div>
@@ -95,9 +98,8 @@
 			</div>
 		  </div>
 		</div>
+				</div>
 	  </div>
 	</div>
   </div>
 </div>
-
- 

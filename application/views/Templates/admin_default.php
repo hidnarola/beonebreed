@@ -3,7 +3,13 @@
   $CI =& get_instance();
   $CI->load->model('client_model');
   $result = $CI->client_model->get_all_client();
+  $client_array=array();
   
+  if(!empty($result)){   
+      foreach($result as $key=>$val){
+		$client_array[$key]=$val->username;
+      }
+  }
   session_start();
         
         $controller=$this->router->fetch_class();
@@ -147,95 +153,16 @@
         </a> 
         <ul class='nav'>
           <li class='dropdown light only-icon'>
-		  <!--
-            <a class='dropdown-toggle' data-toggle='dropdown' href='#'>
-              <i class='icon-cog'></i>
-            </a>-->
+		 
             <ul class='dropdown-menu color-settings'>
-			<!--
-              <li class='color-settings-body-color'>
-                <div class='color-title'>Body color</div>
-                <a data-change-to='assets/stylesheets/light-theme.css' href='#'>
-                  Light
-                  <small>(default)</small>
-                </a>
-                <a data-change-to='assets/stylesheets/dark-theme.css' href='#'>
-                  Dark
-                </a>
-                <a data-change-to='assets/stylesheets/dark-blue-theme.css' href='#'>
-                  Dark blue
-                </a>
-              </li>-->
+			
               <li class='divider'></li>
-				<!--
-			 <li class='color-settings-contrast-color'>
-                <div class='color-title'>Contrast color</div>
-                            <a data-change-to="contrast-red" href="#"><i class='icon-cog text-red'></i>
-                Red
-                <small>(default)</small>
-                </a>
-    
-                            <a data-change-to="contrast-blue" href="#"><i class='icon-cog text-blue'></i>
-                Blue
-                </a>
-    
-                            <a data-change-to="contrast-orange" href="#"><i class='icon-cog text-orange'></i>
-                Orange
-                </a>
-    
-                            <a data-change-to="contrast-purple" href="#"><i class='icon-cog text-purple'></i>
-                Purple
-                </a>
-    
-                            <a data-change-to="contrast-green" href="#"><i class='icon-cog text-green'></i>
-                Green
-                </a>
-    
-                            <a data-change-to="contrast-muted" href="#"><i class='icon-cog text-muted'></i>
-                Muted
-                </a>
-    
-                            <a data-change-to="contrast-fb" href="#"><i class='icon-cog text-fb'></i>
-                Facebook
-                </a>
-    
-                            <a data-change-to="contrast-dark" href="#"><i class='icon-cog text-dark'></i>
-                Dark
-                </a>
-    
-                            <a data-change-to="contrast-pink" href="#"><i class='icon-cog text-pink'></i>
-                Pink
-                </a>
-    
-                            <a data-change-to="contrast-grass-green" href="#"><i class='icon-cog text-grass-green'></i>
-                Grass green
-                </a>
-    
-                            <a data-change-to="contrast-sea-blue" href="#"><i class='icon-cog text-sea-blue'></i>
-                Sea blue
-                </a>
-    
-                            <a data-change-to="contrast-banana" href="#"><i class='icon-cog text-banana'></i>
-                Banana
-                </a>
-    
-                            <a data-change-to="contrast-dark-orange" href="#"><i class='icon-cog text-dark-orange'></i>
-                Dark orange
-                </a>
-    
-                            <a data-change-to="contrast-brown" href="#"><i class='icon-cog text-brown'></i>
-                Brown
-                </a>
-    
-              </li>-->
+			
             </ul>
           </li>
 		  
           <li class='dropdown medium only-icon widget'>
-           <!-- <a class='dropdown-toggle' data-toggle='dropdown' href='#'>
-              <i class='icon-rss'></i>
-              <div class='label'>5</div>
-            </a>-->
+           
             <ul class='dropdown-menu'>
               <li>
                 <a href='#'>
@@ -318,19 +245,7 @@
               <b class='caret'></b>
             </a>
             <ul class='dropdown-menu'>
-              <!--
-			  <li>
-                <a href='user_profile.html'>
-                  <i class='icon-user'></i>
-                  Profile
-                </a>
-              </li>
-              <li>
-                <a href='user_profile.html'>
-                  <i class='icon-cog'></i>
-                  Settings
-                </a>
-              </li>-->
+             
              
               <li>
                 <a href='<?php echo site_url('login/logout') ?>'>
@@ -341,13 +256,7 @@
             </ul>
           </li>
         </ul>
-		<!--
-        <form action='search_results.html' class='navbar-form navbar-right hidden-xs' method='get'>
-          <button class='btn btn-link icon-search' name='button' type='submit'></button>
-          <div class='form-group'>
-            <input value="" class="form-control" placeholder="Search..." autocomplete="off" id="q_header" name="q" type="text" />
-          </div>
-        </form>-->
+		
       </nav>
     </header>
     <div id='wrapper'>
@@ -394,13 +303,7 @@
                 </li>
               </ul>
             </li>
-            <!--
-             <li class='active'>
-              <a href='<?php echo site_url('project/') ?>'>
-                <i class='icon-table'></i>
-                <span>Design</span>
-              </a>
-            </li>-->
+            
             
             <?php 
             
@@ -450,6 +353,68 @@
                 
               </ul>
             </li>
+	    <li class='' style="<?php echo $display_setting;?>">
+            <a class="dropdown-collapse" href="#"><i class='icon-bookmark'></i>
+              <span>Quality</span>
+              <i class='icon-angle-down angle-down'></i>
+              </a>
+                <ul class='nav nav-stacked' style="">
+                    <li>
+                       <a class="dropdown-collapse" href="#"><i class='icon-foursquare'></i>
+                          <span>Store Report</span>
+                          <i class='icon-angle-down angle-down'></i>
+                        </a> 
+                      <ul class='nav nav-stacked' style="">
+							
+					  <?php
+						  if(!empty($result)){   
+							  foreach($result as $key=>$val){ ?>
+								  <li class=''>
+									  <a href='quality/index/<?php echo $val->id; ?>'>
+										<i class='icon-caret-right'></i>
+										<span><?php echo ucfirst($val->username); ?></span>
+									  </a>
+									</li>	
+							<?php  }
+						  }
+						?>
+					</ul>
+                </li>    
+                </li>
+              </ul>
+            </li>
+			
+			<li class='' style="<?php echo $display_setting;?>">
+            <a class="dropdown-collapse" href="#"><i class='icon-trello'></i>
+              <span>Idea</span>
+              <i class='icon-angle-down angle-down'></i>
+              </a>
+                <ul class='nav nav-stacked' style="">
+                    <li>
+                       <a class="dropdown-collapse" href="#"><i class='icon-asterisk'></i>
+                          <span>Store Idea</span>
+                          <i class='icon-angle-down angle-down'></i>
+                        </a> 
+                      <ul class='nav nav-stacked' style="">
+							
+					  <?php
+						  if(!empty($result)){   
+							  foreach($result as $key=>$val){ ?>
+								  <li class=''>
+									  <a href='suggestion/index/<?php echo $val->id; ?>'>
+										<i class='icon-caret-right'></i>
+										<span><?php echo ucfirst($val->username); ?></span>
+									  </a>
+									</li>	
+							<?php  }
+						  }
+						?>
+					</ul>
+                </li>    
+                </li>
+              </ul>
+            </li>
+	    
             <li class='' style="<?php echo $display_setting;?>">
             <a class="dropdown-collapse" href="#"><i class='icon-cog'></i>
               <span>Settings</span>
@@ -478,25 +443,7 @@
                          </li>
                    </ul>
                 </li>
-                <!--
-                <li>
-                <a class="dropdown-collapse" href="#"><i class='icon-retweet'></i>
-                   <span>Stores</span>
-                   <i class='icon-angle-down angle-down'></i>
-                 </a> 
-                  <ul class='nav nav-stacked' style="<?php echo $store_setting ; ?>">
-                      <?php if($controller=='store'){$client="active";}else{$client="";}  
-                     foreach($result as $_key){ 
-                         $key_id = base64_encode($_key->id); ?>
-                      <li class='<?php echo $client; ?>'>
-                        <a href='<?php echo site_url('store/index/'.$key_id); ?>'>
-                          <i class='icon-caret-right'></i>
-                          <span>Store Mondou</span>
-                        </a>
-                      </li>
-                     <?php } ?>
-               </ul>
-                </li> -->
+              
                 <li>
                        <a class="dropdown-collapse" href="#"><i class='icon-user'></i>
                           <span>User</span>
@@ -519,69 +466,11 @@
                     <span>Client</span>
                   </a>
               </li>
-                <!--
-                <?php if($controller=='user'){$user="active";}else{$user="";}  ?>
-              <li class='<?php echo $user; ?>'>
-                    <a href='<?php echo site_url('user/') ?>'>
-                      <i class='icon-user'></i>
-                      <span>Users</span>
-                    </a>
-             </li>
-             <?php if($controller=='client'){$client="active";}else{$client="";}  ?>
-             <li class='<?php echo $client; ?>'>
-                    <a href='<?php echo site_url('client/') ?>'>
-                      <i class='icon-user'></i>
-                      <span>Clients</span>
-                    </a>
-             </li>-->
-          <!--
-                <li>
-                       <a class="dropdown-collapse" href="#"><i class='icon-file-text'></i>
-                          <span>Users</span>
-                          <i class='icon-angle-down angle-down'></i>
-                        </a> 
-                  
-                  <!--
-                      <ul class='nav nav-stacked'>
-                         
-                         <li class=''>
-                           <a href='<?php //echo site_url('user/') ?>'>
-                             <i class='icon-caret-right'></i>
-                             <span>BEONEBREED</span>
-                           </a>
-                         </li>
-                         
-                         <li class=''>
-                           <a href=''>
-                             <i class='icon-caret-right'></i>
-                             <span>MONDOU</span>
-                           </a>
-                         </li>
-                   </ul> -->
                     
                 </li>
               </ul>
             </li>
             
-            <!--
-            <li>
-              <a href='<?php //echo site_url('project/') ?>'>
-                <i class='icon-table'></i>
-                <span>Project</span>
-              </a>
-            </li>
-			 <li class=''>
-              <a href='<?php //echo site_url('category/') ?>'>
-                <i class='icon-tint'></i>
-                <span>Project Category</span>
-              </a>
-            </li>
-			<li class=''>
-              <a href='<?php //echo site_url('project_type/') ?>'>
-                <i class='icon-book'></i>
-                <span>Project Type</span>
-              </a>
-            </li>-->
           </ul>
         </div>
       </nav>

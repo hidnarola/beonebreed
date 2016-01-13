@@ -223,7 +223,7 @@ $config = array(
             'rules' => 'required'
         ),
     ),
-				'edit_client_user' => array(
+	'edit_client_user' => array(
         array(
             'field' => 'username',
             'label' => 'username',
@@ -234,9 +234,16 @@ $config = array(
             'label' => 'Email',
             'rules' => 'required|valid_email'
         ), 
-								array(
+		array(
             'field' => 'store',
             'label' => 'Store',
+            'rules' => 'required'
+        ),
+    ),
+	'admin_quality' => array(
+        array(
+            'field' => 'status',
+            'label' => 'status',
             'rules' => 'required'
         ),
     ),

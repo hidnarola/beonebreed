@@ -97,6 +97,8 @@ class Project extends CI_Controller {
   }
 
   public function project_upload_form() {
+  
+  
     $config['upload_path'] = './uploads/';
     //$config['max_size']	= '5';
     //$config['max_width']  = '1024';
@@ -105,6 +107,9 @@ class Project extends CI_Controller {
     $this->load->library('upload', $config);
 
     if ($_FILES['file']['name']) {
+	
+	
+	
       if (!$this->upload->do_upload('file')) {
         //$error = array('error' => $this->upload->display_errors());
         $response = array('status' => 'fail', 'msg' => $this->upload->display_errors());

@@ -1,15 +1,12 @@
-<?php
-				$this->load->helper('string');
-				$unique_random_id=random_string('numeric',7);
-?>
+
 <div class='row' id='content-wrapper'>
   <div class='col-xs-12'>
     <div class='row'>
       <div class='col-sm-12'>
         <div class='page-header'>
           <h1 class='pull-left'>
-            <i class='icon-bookmark'></i>
-            <span>QUALITÉ</span>
+            <i class='icon-trello'></i>
+            <span>Manage Idea/Suggestion</span>
           </h1>
           <div class='pull-right'>
 
@@ -21,7 +18,7 @@
       <div class='col-sm-12'>
         <div class='box bordered-box orange-border'>
           <div class='box-header orange-background'>
-            <div class="title">Report:	<?php echo $unique_random_id; ?></div>
+            <div class="title">Add Idea/Suggestion</div>
           </div>
           <div class='box-content box-padding'>
             <div class='fuelux'>
@@ -42,12 +39,28 @@
                     <div class='form-group'>
                         <label for='inputText'>Name</label><span style="color:red">*</span>
                         <input class='form-control' id='inputText' placeholder='Name' type='text' name='name' >
-																								<input class='form-control' id='inputT' type='hidden' name='id' value="<?php echo $unique_random_id; ?>" >
                         <span style="color:red"><?php echo form_error('name'); ?><span>
+                    </div>
+                    <div class='form-group'>
+                        <label for='inputText'>Type</label><span style="color:red">*</span>
+                        <select class="form-control js-example-data-array-selected" name="suggestion_type" >
+                          <option value="">Select Type</option>
+                          <?php
+                          if (!empty($suggestion_type)) {
+                            foreach ($suggestion_type as $k => $v) {
+                              ?>
+                              <option value="<?php echo $v->id; ?>"><?php echo ucfirst($v->name); ?></option>
+
+                              <?php
+                            }
+                          }
+                          ?>		
+                      </select>
+                        <span style="color:red"><?php echo form_error('suggestion_type'); ?><span>
                     </div>
                      <div class='form-group'>
                         <label for='inputText'>Product</label><span style="color:red">*</span>
-                        <select class="form-control js-example-data-array-selected1" name="product" >
+                        <select class="form-control js-example-data-array-selected" name="product" >
                           <option value="">Select Product</option>
                           <?php
                           if (!empty($product_list)) {
@@ -63,33 +76,15 @@
                         <span style="color:red"><?php echo form_error('product'); ?><span>
                     </div>
                     <div class='form-group'>
-                        <label for='inputText'>Title</label>
-                        <input class='form-control' id='inputText' placeholder='Title' type='text' name='title' >
+                        <label for='inputText'>Subject</label>
+                        <input class='form-control' id='inputText' placeholder='Title' type='text' name='subject' >
                         
                     </div>
                      <div class='form-group'>
                         <label for='inputText'>Description</label>
                         <textarea class="form-control" rows="5" id="comment" name="description"></textarea>
                         
-                    </div>
-                    <div class='form-group'>
-                      <label for='inputText'>Problem Type</label><span style="color:red">*</span>
-                      <select class="form-control js-example-data-array-selected1" name="problem_type" >
-                          <option value="">Select Problem Type</option>
-                          <?php
-                          if (!empty($problem_list)) {
-                            foreach ($problem_list as $k => $v) {
-                              ?>
-                              <option value="<?php echo $v->id; ?>"><?php echo ucfirst($v->name); ?></option>
-
-                              <?php
-                            }
-                          }
-                          ?>		
-                      </select>
-                      <span style="color:red"><?php echo form_error('problem_type'); ?><span>
-                    </div>
-                    
+                    </div> 
                   </div>
                   <div style="display:inline-block;float:right;width:50%" class='box-content'>
                      <div class='form-group'>
@@ -110,32 +105,16 @@
                          <span style="color:red"><?php echo form_error('store'); ?><span>
                     </div>
                      <div class='form-group'>
-                        <label for='inputText'>Contact Info</label><span style="color:red">*</span>
+                        <label for='inputText'>Contact Info</label>
                         <textarea class="form-control" rows="5" id="contact_info" name="contact_info"></textarea>
                        
-                    </div>
-                     <div class='form-group'>
-                        <label for='inputText'>#Ds</label>
-                        <input class='form-control' id='inputText' placeholder='#Ds' type='text' name='ds' >
-                       <!-- <span style="color:red"><?php //echo form_error('name'); ?><span>-->
-                    </div>
-                     <div class='form-group'>
-                        <label for='inputText'>Qty In Store</label><span style="color:red">*</span>
-                        <input class='form-control store' id='inputText' placeholder='Qty In Store' type='text' name='qty_in_store' >
-                        <span style="color:red"><?php echo form_error('qty_in_store'); ?><span>
-                    </div>
-                     <div class='form-group'>
-                        <label for='inputText'>Qty Defect</label><span style="color:red">*</span>
-                        <input class='form-control' id='inputText' placeholder='Qty Defect' type='text' name='qty_defect' >
-                        <span style="color:red"><?php echo form_error('qty_in_store'); ?><span>
-                    </div>
-                     
+                    </div> 
                     <div class='text-right form-actions form-actions-padding-sm form-actions-padding-md form-actions-padding-lg' style='margin-bottom: 0;'>
                       <button class='btn btn-success' type='submit'>
                         <i class='icon-save'></i>
                         Save
                       </button>
-                      <a class='btn' type='submit' href="<?php echo site_url('client_quality/'); ?>">Cancel</a>
+                      <a class='btn' type='submit' href="<?php echo site_url('client_suggestion'); ?>">Cancel</a>
                     </div>
                   </div>
                   <div class="clearfix"></div>
@@ -157,7 +136,7 @@
     var store_id=$('.store').val();
     if(store_id!=''){
       $.ajax({
-             url: '<?php echo site_url('Client_quality/get_contact_info'); ?>',
+             url: '<?php echo site_url('client_suggestion/get_contact_info'); ?>',
              type: 'post',
              dataType: 'json',
              data:{id:store_id},

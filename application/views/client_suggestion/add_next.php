@@ -4,7 +4,7 @@
           <div class='page-header'>
               <h1 class='pull-left'>
                   <i class='icon-bookmark'></i>
-                  <span>QUALITÉ</span>
+                  <span>Manage Idea/Suggestion</span>
               </h1>
           </div>
       </div>
@@ -14,7 +14,7 @@
       <div class='box'>
         <div class='box-header orange-background'>
           <div class='title'>
-              Add Report
+            Add Idea/Suggestion
           </div>
         </div>
                 <!--strat of tabs -->
@@ -261,7 +261,7 @@
                   <!-- end form -->
                   </div>
           <div class='text-left finish-btn container'>
-              <a href="<?php echo site_url('Client_quality') ?>" class="btn btn-primary">Finish</a> 
+              <a href="<?php echo site_url('client_suggestion') ?>" class="btn btn-primary">Finish</a> 
           </div>
         </div>
 
@@ -355,7 +355,7 @@
         var data = new FormData($("#project_external_form")[0]);
         $('#response_msg').html('');
         $.ajax({
-            url: '<?php echo site_url('Client_quality/quality_add_links'); ?>',
+            url: '<?php echo site_url('client_suggestion/suggestion_add_links'); ?>',
             processData: false,
             type: 'post',
             dataType: 'json',
@@ -391,7 +391,7 @@
         }
         $('#response_msg').html('');
         $.ajax({
-            url: '<?php echo site_url('Client_quality/quality_add_notes'); ?>',
+            url: '<?php echo site_url('client_suggestion/suggestion_add_notes'); ?>',
             processData: false,
             type: 'post',
             dataType: 'json',
@@ -430,7 +430,7 @@
         var data = new FormData($("#project_upload_form")[0]);
         $('#response_msg').html('');
         $.ajax({
-            url: '<?php echo site_url('client_quality/quality_upload_form'); ?>',
+            url: '<?php echo site_url('client_suggestion/suggestion_upload_form'); ?>',
             processData: false,
             type: 'post',
             dataType: 'json',

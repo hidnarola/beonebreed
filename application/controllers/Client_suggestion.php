@@ -1,37 +1,36 @@
 <?php
 
-class Suggestion extends CI_Controller {
+class Client_suggestion extends CI_Controller {
 
   public function __construct() {
     parent::__construct();
     $this->load->library('template');
     $this->load->helper('url');
     $this->load->helper('form');
-    $this->load->model('suggestion_model');
+    $this->load->model('client_suggestion_model');
     $this->load->database();
     //$this->load->library('pagination');
     $this->load->library('form_validation');
     
-      if (!$this->session->userdata('admin_logged_in'))
-			{ 
-				redirect('/login');
-			}
+      if (!$this->session->userdata('client_user_logged_in')) {
+      redirect('/login');
+      } 
   }
 
-  public function index($client_id=0) {
-	//$client_id=$this->session->userdata('client_id');
-	//$user_id=$this->session->userdata('id');
-	$data['client_id']=$client_id;
-    $data['suggestion_list'] = $this->suggestion_model->get_all($client_id);
-    $this->template->load('admin_default', 'suggestion/index', $data);
+  public function index() {
+	$client_id=$this->session->userdata('client_id');
+	$user_id=$this->session->userdata('id');
+    $data['suggestion_list'] = $this->client_suggestion_model->get_all($user_id,$client_id);
+	
+    $this->template->load('mondou_default', 'client_suggestion/index', $data);
   }
 
   public function add() {
     if ($this->form_validation->run('suggestion') == FALSE) {
-      $data['product_list'] = $this->suggestion_model->get_product_list();
-      $data['store_list'] = $this->suggestion_model->get_store_list();
-      $data['suggestion_type'] = $this->suggestion_model->get_suggestion_type();
-      $this->template->load('admin_default', 'suggestion/add', $data);
+      $data['product_list'] = $this->client_suggestion_model->get_product_list();
+      $data['store_list'] = $this->client_suggestion_model->get_store_list();
+      $data['suggestion_type'] = $this->client_suggestion_model->get_suggestion_type();
+      $this->template->load('mondou_default', 'client_suggestion/add', $data);
     } else {
 
 
@@ -61,13 +60,13 @@ class Suggestion extends CI_Controller {
 			'client_id' => $client_id,
             'created_date	' => date("Y-m-d H:i:s")
         );
-        $id = $this->suggestion_model->add_records($data, TRUE);
+        $id = $this->client_suggestion_model->add_records($data, TRUE);
         if (!empty($id)) {
-          redirect('suggestion/add_next/' . $id);
+          redirect('client_suggestion/add_next/' . $id);
         }
 
         /*
-          if ($this->suggestion_model->add_records($data, TRUE)) {
+          if ($this->client_suggestion_model->add_records($data, TRUE)) {
           $this->session->set_flashdata('msg', 'Your record has been successfully added');
           } else {
           $this->session->set_flashdata('err_msg', 'Oops!Something Wrong!');
@@ -79,50 +78,49 @@ class Suggestion extends CI_Controller {
 
   public function add_next($id = 0) {
     $data['last_project_id'] = $id;
-    $data['attachment'] = $this->suggestion_model->get_suggestion_attachment($id);
-    $data['notes'] = $this->suggestion_model->get_suggestion_notes($id);
-    $data['external_link'] = $this->suggestion_model->get_suggestion_external_com($id);
-    $this->template->load('admin_default', 'suggestion/add_next', $data);
+    $data['attachment'] = $this->client_suggestion_model->get_suggestion_attachment($id);
+    $data['notes'] = $this->client_suggestion_model->get_suggestion_notes($id);
+    $data['external_link'] = $this->client_suggestion_model->get_suggestion_external_com($id);
+    $this->template->load('mondou_default', 'client_suggestion/add_next', $data);
   }
 
-  public function edit($id = 0, $client_id=0) {
+  public function edit($id = 0) {
     if ($this->form_validation->run('suggestion') == FALSE) {
-      $data['product_list'] = $this->suggestion_model->get_product_list();
-      $data['store_list'] = $this->suggestion_model->get_store_list();
-      $data['suggestion_type'] = $this->suggestion_model->get_suggestion_type();
-      $data['suggestion'] = $this->suggestion_model->get($id);
-		$data['attachment'] = $this->suggestion_model->get_suggestion_attachment($id);
-      $data['notes'] = $this->suggestion_model->get_suggestion_notes($id);
-      $data['external_link'] = $this->suggestion_model->get_suggestion_external_com($id);
-	  $data['client_id'] = $client_id ;
+      $data['product_list'] = $this->client_suggestion_model->get_product_list();
+      $data['store_list'] = $this->client_suggestion_model->get_store_list();
+      $data['suggestion_type'] = $this->client_suggestion_model->get_suggestion_type();
+      $data['suggestion'] = $this->client_suggestion_model->get($id);
+		$data['attachment'] = $this->client_suggestion_model->get_suggestion_attachment($id);
+      $data['notes'] = $this->client_suggestion_model->get_suggestion_notes($id);
+      $data['external_link'] = $this->client_suggestion_model->get_suggestion_external_com($id);
 
-      $this->template->load('admin_default', 'suggestion/edit', $data);
+      $this->template->load('mondou_default', 'client_suggestion/edit', $data);
     } else {
       if (!empty($_POST)) {
-        if ($this->suggestion_model->update_records($id, TRUE)) {
+        if ($this->client_suggestion_model->update_records($id, TRUE)) {
           $this->session->set_flashdata('msg', 'Your record has been successfully updated');
         } else {
           $this->session->set_flashdata('err_msg', 'Oops!Something Wrong!');
         }
-        redirect('suggestion/');
+        redirect('client_suggestion/');
       }
     }
   }
 
   public function delete($id = 0) {
 
-    if ($this->suggestion_model->delete_records($id, TRUE)) {
+    if ($this->client_suggestion_model->delete_records($id, TRUE)) {
       $this->session->set_flashdata('msg', 'Your record has been successfully deleted');
     } else {
       $this->session->set_flashdata('err_msg', 'Oops!Something Wrong!');
     }
-    redirect('suggestion');
+    redirect('client_suggestion');
   }
 
   public function get_contact_info() {
 
     if (!empty($_POST['id'])) {
-      $list = $this->quality_model->get_contact($_POST['id']);
+      $list = $this->client_suggestion_model->get_contact($_POST['id']);
 
       if (!empty($list['contact'])) {
         $contact_info = $list['contact'];
@@ -159,7 +157,7 @@ class Suggestion extends CI_Controller {
 		'created_date' => date("Y-m-d H:i:s")
     );
 
-    $last_inserted_id = $this->suggestion_model->add_attachemnt($data_upload, TRUE);
+    $last_inserted_id = $this->client_suggestion_model->add_attachemnt($data_upload, TRUE);
 
     if (!empty($last_inserted_id)) {
       $response = array('status' => 'success', 'msg' => 'Your file has been successfully added', 'file_name' => $upload_data['uploads']['file_name'], 'id' => $last_inserted_id);
@@ -181,7 +179,7 @@ class Suggestion extends CI_Controller {
         'description' => $this->input->post('description'),
 		'created_date' => date("Y-m-d H:i:s")
     );
-    $last_id = $this->suggestion_model->add_external_link($data_link, TRUE);
+    $last_id = $this->client_suggestion_model->add_external_link($data_link, TRUE);
     if (!empty($last_id)) {
       $created_time = date("d F Y");
       $response = array('status' => 'success', 'msg' => 'Your notes has been successfully added', 'link_name' => $this->input->post('external_com'), 'link_desc' => $this->input->post('description'), 'link_id' => $last_id, 'dates1' => $created_time);
@@ -203,7 +201,7 @@ class Suggestion extends CI_Controller {
 		'created_date' => date("Y-m-d H:i:s")
     );
 
-    $last_notes_id = $this->suggestion_model->add_notes_records($data_notes, TRUE);
+    $last_notes_id = $this->client_suggestion_model->add_notes_records($data_notes, TRUE);
 
     if (!empty($last_notes_id)) {
       $created_time = date("d F Y");

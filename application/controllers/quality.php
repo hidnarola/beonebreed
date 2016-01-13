@@ -11,15 +11,17 @@ class Quality extends CI_Controller {
     $this->load->database();
     //$this->load->library('pagination');
     $this->load->library('form_validation');
-      if (!$this->session->userdata('client_user_logged_in')) {
+      if (!$this->session->userdata('admin_logged_in')) {
       redirect('/login');
       } 
   }
-  public function index() {
-	$client_id=$this->session->userdata('client_id');
-	$user_id=$this->session->userdata('id');
-	$data['quality_list']=$this->quality_model->get_all($user_id,$client_id);
-    $this->template->load('mondou_default', 'quality/index', $data);
+  public function index($client_id=0) {
+	$data['quality_list']=$this->quality_model->get_all($client_id);
+	$data['completed_quality_list']=$this->quality_model->get_all_completed_report($client_id);
+	$data['client_name']=$this->quality_model->get_client_name($client_id);
+	$data['client_id']=$client_id;
+    $this->template->load('admin_default', 'quality/index', $data);
+	
   }
 
   public function add() {
@@ -28,7 +30,7 @@ class Quality extends CI_Controller {
       $data['product_list'] = $this->quality_model->get_product_list();
       $data['store_list'] = $this->quality_model->get_store_list();
       $data['problem_list'] = $this->quality_model->get_problem_list();
-      $this->template->load('mondou_default', 'quality/add', $data);
+      $this->template->load('admin_default', 'quality/add', $data);
     } else {
       if (!empty($_POST)) {
 
@@ -165,19 +167,22 @@ class Quality extends CI_Controller {
     $data['attachment'] = $this->quality_model->get_quality_attachment($id);
     $data['notes'] = $this->quality_model->get_quality_notes($id);
     $data['external_link'] = $this->quality_model->get_quality_external_com($id);
-    $this->template->load('mondou_default', 'quality/add_next', $data);
+    $this->template->load('admin_default', 'quality/add_next', $data);
   }
 
-  public function edit($id = 0) {
-    if ($this->form_validation->run('quality') == FALSE) {
+  public function edit($id = 0,$client_id=0) {
+    if ($this->form_validation->run('admin_quality') == FALSE) {
       $data['product_list'] = $this->quality_model->get_product_list();
+	  $data['status_list'] = $this->quality_model->get_status_list();
       $data['store_list'] = $this->quality_model->get_store_list();
       $data['problem_list'] = $this->quality_model->get_problem_list();
       $data['quality'] = $this->quality_model->get($id);
       $data['attachment'] = $this->quality_model->get_quality_attachment($id);
       $data['notes'] = $this->quality_model->get_quality_notes($id);
       $data['external_link'] = $this->quality_model->get_quality_external_com($id);
-      $this->template->load('mondou_default', 'quality/edit', $data);
+	  $data['client_id'] = $client_id ;
+	  $data['client_name']=$this->quality_model->get_client_name($client_id);
+      $this->template->load('admin_default', 'quality/edit', $data);
     } else {
       if (!empty($_POST)) {
         if ($this->quality_model->update_records($id, TRUE)) {
@@ -185,7 +190,7 @@ class Quality extends CI_Controller {
         } else {
           $this->session->set_flashdata('err_msg', 'Oops!Something Wrong!');
         }
-        redirect('quality/');
+        redirect('quality/index/'.$client_id);
       }
     }
   }

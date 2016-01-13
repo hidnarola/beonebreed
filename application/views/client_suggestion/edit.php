@@ -6,7 +6,7 @@
 		<div class='page-header'>
 		    <h1 class='pull-left'>
 			<i class='icon-trello'></i>
-			<span>Idea</span>
+			<span>Manage Idea/Suggestion</span>
 		    </h1>
 		    <div class='pull-right'>
 
@@ -140,7 +140,7 @@
 											    </div> 
 											    <div class='text-right form-actions form-actions-padding-sm form-actions-padding-md form-actions-padding-lg' style='margin-bottom: 0;'>
 												
-												<a class='btn' type='submit' href="<?php echo site_url('suggestion/index/'.$client_id); ?>">Back</a>
+												<a class='btn' type='submit' href="<?php echo site_url('client_suggestion/'); ?>">Back</a>
 											    </div>
 											    </div>
 											    <div class="clearfix"></div>
@@ -210,7 +210,7 @@
 
 
 														    </div>
-															
+															<!--
 														    <div class='' style='margin-bottom: 0;'>
 															<button class='btn btn-success' type='button' data-target="#myuploadModal" data-toggle="modal">
 															    <i class='icon-save'></i>
@@ -220,7 +220,7 @@
 															    <i class='icon-save'></i>
 															    Remove
 															</button>
-														    </div> 
+														    </div> -->
 
 														</div>
 
@@ -315,7 +315,7 @@
 																				</ul>
 																			    </div>
 																			</div>
-																			
+																			<!--
 																			<div class="">
 																			    <button class='btn btn-success' type='button' id="expand_notes">
 																				<i class='icon-save'></i>
@@ -325,7 +325,7 @@
 																				<i class='icon-save'></i>
 																				Remove
 																			    </button>
-																			</div> 
+																			</div> -->
 																			<hr>
 																			<form class="form" style="margin-bottom: 0;" method="post" action="#" accept-charset="UTF-8" id="project_notes_form" >
 																			    <div class='' style='margin-bottom: 0;display:none' id="expand_notes_form">
@@ -391,7 +391,7 @@
 																				</ul>
 																			    </div>
 																			</div>
-																		
+																			<!--
 																			<div class="">
 																			    <button class='btn btn-success' type='button' id="expand_external_links">
 																				<i class='icon-save'></i>
@@ -401,7 +401,7 @@
 																				<i class='icon-save'></i>
 																				Remove
 																			    </button>   
-																			</div> 
+																			</div> -->
 																			<hr>
 																			<form class="form" style="margin-bottom: 0;" method="post" action="#" accept-charset="UTF-8" id="project_external_form" >  
 																			    <div class='' style='margin-bottom: 0;display:none' id="expand_external_form">

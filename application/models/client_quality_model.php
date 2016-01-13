@@ -1,6 +1,6 @@
 <?php
 
-class Quality_model extends CI_Model {
+class Client_quality_model extends CI_Model {
 
   public function __construct() {
 
@@ -13,39 +13,15 @@ class Quality_model extends CI_Model {
     return $last_id;
   }
 
-  public function get_all($client_id) {
-  
-    $this->db->select('quality.*,product.name as product_name,store.name as store_name,problem_type.name as defect_type,report_status.name as report_status');
+  public function get_all() {
+    $this->db->select('quality.*,product.name as product_name,store.name as store_name');
     $this->db->from('quality');
     $this->db->join('product', 'quality.product = product.id', 'left');
     $this->db->join('store', 'quality.store = store.id', 'left');
-	$this->db->join('problem_type', 'quality.problem_type = problem_type.id', 'left');
-	$this->db->join('report_status', 'quality.status = report_status.id', 'left');
-	//$this->db->where('quality.status', $user_id);
-	$this->db->where('quality.client_id',$client_id);
-	$this->db->where_not_in('quality.status','5');
-    $query = $this->db->get();
-    return $query->result();
-  }
-  public function get_all_completed_report($client_id) {
-  
-    $this->db->select('quality.*,product.name as product_name,store.name as store_name,problem_type.name as defect_type,report_status.name as report_status');
-    $this->db->from('quality');
-    $this->db->join('product', 'quality.product = product.id', 'left');
-    $this->db->join('store', 'quality.store = store.id', 'left');
-	$this->db->join('problem_type', 'quality.problem_type = problem_type.id', 'left');
-	$this->db->join('report_status', 'quality.status = report_status.id', 'left');
 	//$this->db->where('quality.user_id', $user_id);
-	$this->db->where('quality.client_id',$client_id);
-	$this->db->where('quality.status','5');
+	//$this->db->where('quality.client_id',$client_id);
     $query = $this->db->get();
     return $query->result();
-  }
-  
-  public function get_client_name($client_id) {
-	$this->db->select('username');
-	$query = $this->db->get_where('users', array('id' => $client_id));
-    return $query->row_array();
   }
  
   public function get($id) {
@@ -60,8 +36,7 @@ class Quality_model extends CI_Model {
   }
 
   public function update_records($id) {
-  
-  /*
+
     $editData = array(
         'name' => $this->input->post('name'),
         'store' => $this->input->post('store'),
@@ -73,10 +48,6 @@ class Quality_model extends CI_Model {
         'qty_defect' => $this->input->post('qty_defect'),
         'ds' => $this->input->post('dcs'),
         'contact_info' => $this->input->post('contact_info'),
-		'status' => $this->input->post('status'),
-    ); */
-	$editData = array(
-		'status' => $this->input->post('status'),
     );
     $this->db->where('id', $id);
     return $this->db->update('quality', $editData);
@@ -94,15 +65,13 @@ class Quality_model extends CI_Model {
   }
 
   public function get_store_list() {
-  
-  /*
     if (!empty($this->session->userdata('client_id'))) {
       $user_id = $this->session->userdata('client_id');
     } else {
       $user_id = 0;
-    } */
-	//$this->db->where('user_id', $user_id);
+    }
     $this->db->where('is_deleted', '0');
+    $this->db->where('user_id', $user_id);
     $query = $this->db->get('store');
     return $query->result();
   }
@@ -111,13 +80,6 @@ class Quality_model extends CI_Model {
     $query = $this->db->get('problem_type');
     return $query->result();
   }
-  
-  public function get_status_list() {
-    $query = $this->db->get('report_status');
-    return $query->result();
-  }
-  
-  
   
   public function add_external_link($data) {
 

@@ -1,6 +1,6 @@
 <?php
 
-class Suggestion_model extends CI_Model {
+class Client_suggestion_model extends CI_Model {
 
   public function __construct() {
 
@@ -13,15 +13,12 @@ class Suggestion_model extends CI_Model {
     return $last_id;
   }
   
-  public function get_all($client_id) {		
-	//$this->db->order_by("id", "desc");
+  public function get_all($user_id,$client_id) {		
+	$this->db->order_by("id", "desc");
 	//$this->db->where('suggestion.user_id', $user_id);
-	$this->db->select('suggestion.*,users.username,store.name as store_name');
-	$this->db->from('suggestion');
-    $this->db->join('users', 'suggestion.user_id = users.id', 'left');
-	$this->db->join('store', 'suggestion.store = store.id', 'left');
-	$this->db->where('suggestion.client_id',$client_id);
-	$query = $this->db->get();
+	//$this->db->where('suggestion.client_id',$client_id);
+    $query = $this->db->get('suggestion');
+	
     return $query->result();
   }
   
