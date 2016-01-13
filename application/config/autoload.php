@@ -52,7 +52,7 @@ $autoload['packages'] = array();
 |	$autoload['libraries'] = array('database', 'session', 'xmlrpc');
 */
 
-$autoload['libraries'] = array('database', 'session','csvimport','template','form_validation','upload','excel');
+$autoload['libraries'] = array('database', 'session','csvimport','template','form_validation','excel');
 
 
 /*
@@ -64,7 +64,7 @@ $autoload['libraries'] = array('database', 'session','csvimport','template','for
 |	$autoload['helper'] = array('url', 'file');
 */
 
-$autoload['helper'] = array('url','file','form','cms');
+$autoload['helper'] = array('url','file','form','cms','string');
 
 
 /*
