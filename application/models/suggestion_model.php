@@ -12,14 +12,18 @@ class Suggestion_model extends CI_Model {
     $last_id = $this->db->insert_id();
     return $last_id;
   }
-  
+  public function get_status_list() {
+    $query = $this->db->get('suggestion_status');
+    return $query->result();
+  }
   public function get_all($client_id) {		
 	//$this->db->order_by("id", "desc");
 	//$this->db->where('suggestion.user_id', $user_id);
-	$this->db->select('suggestion.*,users.username,store.name as store_name');
+	$this->db->select('suggestion.*,users.username,store.name as store_name,suggestion_status.name as suggestion_status');
 	$this->db->from('suggestion');
     $this->db->join('users', 'suggestion.user_id = users.id', 'left');
 	$this->db->join('store', 'suggestion.store = store.id', 'left');
+	$this->db->join('suggestion_status', 'suggestion.status = suggestion_status.id', 'left');
 	$this->db->where('suggestion.client_id',$client_id);
 	$query = $this->db->get();
     return $query->result();
@@ -36,7 +40,7 @@ class Suggestion_model extends CI_Model {
   }
 
   public function update_records($id) {
-
+/*
         $editData = array(
             'name' => $this->input->post('name'),
             'suggestion_type' => $this->input->post('suggestion_type'),
@@ -45,9 +49,13 @@ class Suggestion_model extends CI_Model {
             'description' => $this->input->post('description'),
             'store' => $this->input->post('store'),
             'contact_info' => $this->input->post('contact_info'),
-        );
-    $this->db->where('id', $id);
-    return $this->db->update('suggestion', $editData);
+        ); */
+		
+		$editData = array(
+		'status' => $this->input->post('status'),
+		);
+		$this->db->where('id', $id);
+		return $this->db->update('suggestion', $editData);
   }
 
   public function delete_records($id) {
@@ -61,14 +69,19 @@ class Suggestion_model extends CI_Model {
     return $query->result();
   }
   
-  public function get_store_list() {    
+  public function get_store_list() { 
+
+	/*
     if(!empty($this->session->userdata('client_id'))){
       $user_id=$this->session->userdata('client_id');
       $this->db->where('is_deleted', '0');
       $this->db->where('user_id', $user_id);
       $query = $this->db->get('store');
       return $query->result();
-    }
+    }*/
+		$this->db->where('is_deleted', '0');
+		$query = $this->db->get('store');
+		return $query->result();
   }
   
   public function get_problem_list() {

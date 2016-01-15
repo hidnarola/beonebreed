@@ -65,7 +65,7 @@
                         <i class='icon-save'></i>
                         Save
                       </button>
-                      <a class='btn' type='submit' href="<?php echo site_url('user/'); ?>">Cancel</a>
+                      <a class='btn' type='submit' href="<?php echo site_url('news/'); ?>">Cancel</a>
                     </div>
                   </div>
                   <div class="clearfix"></div>

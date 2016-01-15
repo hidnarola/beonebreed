@@ -14,11 +14,17 @@ class Client_suggestion_model extends CI_Model {
   }
   
   public function get_all($user_id,$client_id) {		
-	$this->db->order_by("id", "desc");
+	//$this->db->order_by("id", "desc");
 	//$this->db->where('suggestion.user_id', $user_id);
 	//$this->db->where('suggestion.client_id',$client_id);
-    $query = $this->db->get('suggestion');
 	
+	
+	$this->db->select('suggestion.*,store.name as store_name,suggestion_status.name as suggestion_status,users.username');
+	$this->db->from('suggestion');
+    $this->db->join('store', 'suggestion.store = store.id', 'left');
+	$this->db->join('suggestion_status', 'suggestion.status = suggestion_status.id', 'left');
+	$this->db->join('users', 'suggestion.user_id = users.id', 'left');
+    $query = $this->db->get();
     return $query->result();
   }
   
@@ -58,11 +64,12 @@ class Client_suggestion_model extends CI_Model {
     return $query->result();
   }
   
-  public function get_store_list() {    
+  public function get_store_list() { 
+  
     if(!empty($this->session->userdata('client_id'))){
-      $user_id=$this->session->userdata('client_id');
+      $client_id=$this->session->userdata('client_id');
       $this->db->where('is_deleted', '0');
-      $this->db->where('user_id', $user_id);
+      $this->db->where('client_id', $client_id);
       $query = $this->db->get('store');
       return $query->result();
     }

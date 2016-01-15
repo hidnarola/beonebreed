@@ -14,7 +14,7 @@ class Store_model extends CI_Model {
   }
 
   public function get_all_store($client_id=0) {
-    $this->db->where('user_id',$client_id);
+    $this->db->where('client_id',$client_id);
     $this->db->where('is_deleted', '0');
     $query = $this->db->get('store');
     return $query->result();

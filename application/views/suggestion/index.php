@@ -5,7 +5,10 @@
 		  <div class='page-header'>
 			<h1 class='pull-left'>
 			  <i class='icon-trello'></i>
-			  <span>Idea</span>
+			  <span>Idea <?php if (!empty($client_name['username'])) {
+						echo ucfirst($client_name['username']);
+					} ?>
+			</span>
 			</h1>
 			<div class='pull-right'>
         
@@ -72,14 +75,13 @@
           </td>
 					<td><?php echo $u_key->store_name; ?> </td>
 					<td><?php echo $u_key->username; ?></td>
-					<td> </td>
-					
+					<td><?php echo $u_key->suggestion_status; ?> </td>
 					
 					<td>
 					   <div class='text-left'>
 						<a class='btn btn-primary btn-xs' href='<?php echo site_url('suggestion/edit/'.$u_key->id.'/'.$client_id) ?>'>
-						  <i class='icon-list'></i>
-						  View
+						  <i class='icon-edit'></i>
+						  Edit
 						</a>
 						<!--
 						<a class='btn btn-danger btn-xs' href='<?php echo site_url('suggestion/delete/'.$u_key->id) ?>' onclick="if(!confirm('Are you sure want to delete')){return false;}">

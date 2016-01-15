@@ -37,7 +37,7 @@
             'telephone' => $this->input->post('telephone'),
             'contact' => $this->input->post('contact'),
             'fax' => $this->input->post('fax'),
-            'user_id' =>$id,
+            'client_id' =>$id,
         );
         if ($this->store_model->add_records($data, TRUE)) {
           $this->session->set_flashdata('msg', 'Your record has been successfully added');

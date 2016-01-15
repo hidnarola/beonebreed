@@ -17,7 +17,7 @@ class	Client_user_model	extends	CI_Model	{
 		$this->db->select('users.*,store.id as store_id,store.name as store_name');
 		$this->db->from('users');
 		$this->db->where('user_type',	'4');
-		$this->db->where('client_id',	$client_id);
+		$this->db->where('users.client_id',	$client_id);
 		$this->db->where('users.is_deleted',	'0');
 		$this->db->join('store', 'users.store_id = store.id', 'left');
 		$query = $this->db->get();

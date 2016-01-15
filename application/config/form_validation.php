@@ -195,8 +195,15 @@ $config = array(
             'rules' => 'required'
         ),
     ),
-				
-				'client_user' => array(
+	'edit_suggestion' => array(
+        array(
+            'field' => 'status',
+            'label' => 'Status',
+            'rules' => 'required'
+        ),
+								
+    ),			
+	'client_user' => array(
         array(
             'field' => 'username',
             'label' => 'username',

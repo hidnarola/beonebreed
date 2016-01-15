@@ -13,16 +13,6 @@ class User_model extends CI_Model {
         }
        
         public function get_all_user(){
-									
-									/*
-            $this->db->select('users.*,user_group.name');
-            $this->db->from('users');
-            $this->db->join('user_group', 'user_group.id = users.user_group_id','left');
-            $this->db->where('is_deleted','0');
-            $this->db->where('user_type','1');
-            $query = $this->db->get();
-            return $query->result(); */
-									
 		  $user_type = array('1', '2');
 		  $this->db->where_in('user_type', $user_type);
           $this->db->where('is_deleted','0');

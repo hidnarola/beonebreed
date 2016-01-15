@@ -34,7 +34,7 @@
 			    <div class='step-content'>
 				<hr class='hr-normal'>
 				<!-- inserting add project form -->	
-				<form class="form" style="margin-bottom: 0;" method="post" action="" accept-charset="UTF-8" enctype="multipart/form-data">   
+				<form class="form" style="margin-bottom: 0;" method="post" action="" accept-charset="UTF-8" enctype="multipart/form-data" id="suggestion_form">   
 				    <div style="display:inline-block;float:left;width:45%" class='box-content'>
 					<div class='form-group'>
 					    <label for='inputText'>Name</label><span style="color:red">*</span>
@@ -111,7 +111,7 @@
 										<div class='form-group'>
 										    <label for='inputText'>Store</label><span style="color:red">*</span>
 										    <select class="form-control js-example-data-array-selected1 store" name="store" >
-											<option value="">Select Store</option>
+											<!--<option value="">Select Store</option>-->
 											<?php
 											if (!empty($store_list)) {
 											    foreach ($store_list as $k => $v) {
@@ -138,9 +138,32 @@
 												    ?></textarea>
 
 											    </div> 
+												<div class='form-group'>
+													<label for='inputText'>Status</label>
+													<select class="form-control js-example-data-array-selected1" name="status" id="status">
+													
+													<?php
+													if (!empty($status_list)) {
+														foreach ($status_list as $k => $v) {
+														if ($v->id == $quality['status']) {
+															?>
+															<option value="<?php echo $v->id; ?>" selected><?php echo ucfirst($v->name); ?></option>
+														<?php } else {
+															?>
+															<option value="<?php echo $v->id; ?>" ><?php echo ucfirst($v->name); ?></option>
+															<?php
+														}
+														}
+													}
+													?>		
+													</select>
+												</div>
 											    <div class='text-right form-actions form-actions-padding-sm form-actions-padding-md form-actions-padding-lg' style='margin-bottom: 0;'>
-												
-												<a class='btn' type='submit' href="<?php echo site_url('suggestion/index/'.$client_id); ?>">Back</a>
+												<button class='btn btn-success' type='submit' id="submit_button">
+													<i class='icon-save'></i>
+													Save
+												  </button>
+												<a class='btn' type='submit' href="<?php echo site_url('suggestion/index/'.$client_id); ?>">Cancel</a>
 											    </div>
 											    </div>
 											    <div class="clearfix"></div>
@@ -507,10 +530,14 @@
 
 					$(document).ready(function() {
 					
-					
+						/*
 					    $('input[type="text"], input[type="checkbox"], select').prop("disabled", true);
 					    $("#contact_info").attr("disabled", "disabled");
 					    $("#comment").attr("disabled", "disabled");
+						*/
+						$('#suggestion_form').find('input, textarea, button, select').attr('disabled', 'disabled');
+						$("#status").attr("disabled",false);
+					    $("#submit_button").attr("disabled",false);
 					    $(".fancybox").fancybox({
 						width: 1200,
 						height: 900,

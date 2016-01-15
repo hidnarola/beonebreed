@@ -38,7 +38,7 @@
 							<div class="media">
 								<div class="media-left media-middle">
 										<a href="javascript:void(0);">
-												<img src="<?php echo site_url('uploads/'.$u_key->name);?>" />
+												<img src="<?php if(!empty($u_key->name)) { echo site_url('uploads/'.$u_key->name); }else{ echo site_url('uploads/no_image_available.jpg');}?>" />
 										</a>
 								</div>
 								<div class="media-body">

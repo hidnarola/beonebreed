@@ -113,25 +113,24 @@
 								    <span style="color:red"><?php echo form_error('problem_type'); ?><span>
 								    </div>
 								    <div class='form-group'>
-								    <label for='inputText'>Status</label>
-								    <select class="form-control js-example-data-array-selected1" name="status" id="status">
-									
-									<?php
-									if (!empty($status_list)) {
-									    foreach ($status_list as $k => $v) {
-										if ($v->id == $quality['status']) {
-										    ?>
-	    									<option value="<?php echo $v->id; ?>" selected><?php echo ucfirst($v->name); ?></option>
-										<?php } else {
-										    ?>
-	    									<option value="<?php echo $v->id; ?>" ><?php echo ucfirst($v->name); ?></option>
-										    <?php
+										<label for='inputText'>Status</label>
+										<select class="form-control js-example-data-array-selected1" name="status" id="status">
+										
+										<?php
+										if (!empty($status_list)) {
+											foreach ($status_list as $k => $v) {
+											if ($v->id == $quality['status']) {
+												?>
+												<option value="<?php echo $v->id; ?>" selected><?php echo ucfirst($v->name); ?></option>
+											<?php } else {
+												?>
+												<option value="<?php echo $v->id; ?>" ><?php echo ucfirst($v->name); ?></option>
+												<?php
+											}
+											}
 										}
-									    }
-									}
-									?>		
-								    </select>
-								   
+										?>		
+										</select>
 								    </div>
 
 									    </div>

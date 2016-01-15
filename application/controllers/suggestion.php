@@ -8,6 +8,7 @@ class Suggestion extends CI_Controller {
     $this->load->helper('url');
     $this->load->helper('form');
     $this->load->model('suggestion_model');
+	$this->load->model('quality_model');
     $this->load->database();
     //$this->load->library('pagination');
     $this->load->library('form_validation');
@@ -23,6 +24,8 @@ class Suggestion extends CI_Controller {
 	//$user_id=$this->session->userdata('id');
 	$data['client_id']=$client_id;
     $data['suggestion_list'] = $this->suggestion_model->get_all($client_id);
+	$data['client_name']=$this->quality_model->get_client_name($client_id);
+	$data['client_id']=$client_id;
     $this->template->load('admin_default', 'suggestion/index', $data);
   }
 
@@ -86,7 +89,7 @@ class Suggestion extends CI_Controller {
   }
 
   public function edit($id = 0, $client_id=0) {
-    if ($this->form_validation->run('suggestion') == FALSE) {
+    if ($this->form_validation->run('edit_suggestion') == FALSE) {
       $data['product_list'] = $this->suggestion_model->get_product_list();
       $data['store_list'] = $this->suggestion_model->get_store_list();
       $data['suggestion_type'] = $this->suggestion_model->get_suggestion_type();
@@ -95,6 +98,7 @@ class Suggestion extends CI_Controller {
       $data['notes'] = $this->suggestion_model->get_suggestion_notes($id);
       $data['external_link'] = $this->suggestion_model->get_suggestion_external_com($id);
 	  $data['client_id'] = $client_id ;
+	  $data['status_list'] = $this->suggestion_model->get_status_list();
 
       $this->template->load('admin_default', 'suggestion/edit', $data);
     } else {
@@ -104,7 +108,7 @@ class Suggestion extends CI_Controller {
         } else {
           $this->session->set_flashdata('err_msg', 'Oops!Something Wrong!');
         }
-        redirect('suggestion/');
+		redirect('suggestion/index/'.$client_id);
       }
     }
   }

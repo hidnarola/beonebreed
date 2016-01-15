@@ -17,13 +17,15 @@
         $controller=$this->router->fetch_class();
         $actions=$this->router->fetch_method();
        
-         if($controller=='project' && ($actions=='index' || $actions=='archieve_projects')){  
-            $design="display:block";
+         if($controller=='project'){  
+             $design="display:block";
              $setting="display:none";
              $sub_user_setting="display:none";
              $sub_setting="display:none";
              $store_setting="display:none";
              $news_setting="display:none";
+			 $quality_setting="display:none";
+			 $idea_setting="display:none";
         }else if($controller=='category' || $controller=='project_type'){
             $setting="display:block";
             //$sub_setting="display:none";
@@ -32,6 +34,8 @@
             $sub_user_setting="display:none";
             $store_setting="display:none";
             $news_setting="display:none";
+			$quality_setting="display:none";
+			$idea_setting="display:none";
         }else if($controller=='user'){
             $setting="display:block";
             $design="display:none";
@@ -39,6 +43,8 @@
             $sub_user_setting="display:block";
             $store_setting="display:none";
             $news_setting="display:none";
+			$quality_setting="display:none";
+			$idea_setting="display:none";
             //$sub_setting="display:none";
         }else if($controller=='client'){          
             $setting="display:block";
@@ -47,6 +53,8 @@
             $sub_user_setting="display:none";
             $store_setting="display:block";
             $news_setting="display:none";
+			$quality_setting="display:none";
+			$idea_setting="display:none";
             //$sub_setting="display:none";
         }else if($controller=='news'){
           
@@ -56,16 +64,41 @@
             $sub_user_setting="display:none";
             $store_setting="display:none";
             $news_setting="display:block";
+			$quality_setting="display:none";
+			$idea_setting="display:none";
             
             //$sub_setting="display:none";
-        }else{    
+        }else if($controller=='quality'){
+          
+            $setting="display:none";
+            $design="display:none";
+            $sub_setting="display:none";
+            $sub_user_setting="display:none";
+            $store_setting="display:none";
+            $news_setting="display:none";
+			$quality_setting="display:block";
+			$idea_setting="display:none";
+            
+            //$sub_setting="display:none";
+        }else if($controller=='suggestion'){    
           $setting="display:none";
           $design="display:none";
           $sub_setting="display:none";
           $sub_user_setting="display:none";
           $store_setting="display:none";
           $news_setting="display:none";
-        }
+		  $quality_setting="display:none";
+		  $idea_setting="display:block";
+        }else{
+			  $setting="display:none";
+			  $design="display:none";
+			  $sub_setting="display:none";
+			  $sub_user_setting="display:none";
+			  $store_setting="display:none";
+			  $news_setting="display:none";
+			  $quality_setting="display:none";
+			  $idea_setting="display:none";
+		}
         
         
 ?>
@@ -289,14 +322,14 @@
               </a>
                  
               <ul class='nav nav-stacked' style="<?php echo $design; ?>">
-                  <?php if($controller=='project' && $actions=='index' ){$project="active";}else{$project="";}  ?>
+                  <?php if($controller=='project' && ($actions=='index' || $actions=='add' || $actions=='edit') ){$project="active";}else{$project="";}  ?>
                 <li class='<?php echo $project; ?>'>
                   <a href='<?php echo site_url('project/') ?>'>
                     <i class='icon-caret-right'></i>
                     <span>Manage Project</span>
                   </a>
                 </li>
-                <?php if($controller=='project' && $actions=='archieve_projects' ){$project_archieve="active";}else{$project_archieve="";}  ?>
+                <?php if($controller=='project' && ($actions=='archieve_projects' || $actions=='view_archieve') ){$project_archieve="active";}else{$project_archieve="";}  ?>
                 <li class='<?php echo $project_archieve; ?>'>
                   <a href='<?php echo site_url('project/archieve_projects') ?>'>
                     <i class='icon-caret-right'></i>
@@ -329,7 +362,8 @@
               </a>
                  
               <ul class='nav nav-stacked' style="<?php echo $news_setting;?>">
-                <li >
+			  <?php if($controller=='news'){$news="active";}else{$news="";}  ?>
+                <li class="<?php echo $news; ?>">
                   <a href='<?php echo site_url('news/') ?>'>
                     <i class='icon-caret-right'></i>
                     <span>News</span>
@@ -362,29 +396,38 @@
                 
               </ul>
             </li>
-	    <li class='' style="<?php echo $display_setting;?>">
+			
+			
+	    <li class='' >
             <a class="dropdown-collapse" href="#"><i class='icon-bookmark'></i>
               <span>Quality</span>
               <i class='icon-angle-down angle-down'></i>
               </a>
-                <ul class='nav nav-stacked' style="">
+                <ul class='nav nav-stacked' style="<?php echo $quality_setting; ?>">
                     <li>
                        <a class="dropdown-collapse" href="#"><i class='icon-foursquare'></i>
                           <span>Store Report</span>
                           <i class='icon-angle-down angle-down'></i>
                         </a> 
-                      <ul class='nav nav-stacked' style="">
+                      <ul class='nav nav-stacked' style="<?php echo $quality_setting; ?>">
 							
 					  <?php
+							$url_id=$this->uri->segment('4');
+							if(empty($url_id)){
+								$url_id=$this->uri->segment('3');
+							}
 						  if(!empty($result)){   
-							  foreach($result as $key=>$val){ ?>
-								  <li class=''>
-									  <a href='quality/index/<?php echo $val->id; ?>'>
-										<i class='icon-caret-right'></i>
-										<span><?php echo ucfirst($val->username); ?></span>
-									  </a>
-									</li>	
-							<?php  }
+							  foreach($result as $key=>$val){ 
+							  if($url_id==$val->id) {$status="active"; }else{ $status="";}
+							  
+					  ?>
+						  <li class='<?php echo $status; ?>'>
+							  <a href='quality/index/<?php echo $val->id; ?>'>
+								<i class='icon-caret-right'></i>
+								<span><?php echo ucfirst($val->username); ?></span>
+							  </a>
+							</li>	
+					<?php  }
 						  }
 						?>
 					</ul>
@@ -393,23 +436,29 @@
               </ul>
             </li>
 			
-			<li class='' style="<?php echo $display_setting;?>">
+			<li class=''>
             <a class="dropdown-collapse" href="#"><i class='icon-trello'></i>
               <span>Idea</span>
               <i class='icon-angle-down angle-down'></i>
               </a>
-                <ul class='nav nav-stacked' style="">
+                <ul class='nav nav-stacked <?php if($controller == 'suggestion'){ echo 'in'; }?>' >
                     <li>
                        <a class="dropdown-collapse" href="#"><i class='icon-asterisk'></i>
                           <span>Store Idea</span>
                           <i class='icon-angle-down angle-down'></i>
                         </a> 
-                      <ul class='nav nav-stacked' style="">
+                      <ul class='nav nav-stacked <?php if($controller == 'suggestion'){ echo 'in'; }?>' >
 							
 					  <?php
-						  if(!empty($result)){   
-							  foreach($result as $key=>$val){ ?>
-								  <li class=''>
+						  if(!empty($result)){ 
+							$url_id=$this->uri->segment('4');
+							if(empty($url_id)){
+								$url_id=$this->uri->segment('3');
+							}
+							  foreach($result as $key=>$val){ 
+								if($url_id==$val->id) {$status="active"; }else{ $status="";}
+							  ?>
+								  <li class='<?php echo $status; ?>'>
 									  <a href='suggestion/index/<?php echo $val->id; ?>'>
 										<i class='icon-caret-right'></i>
 										<span><?php echo ucfirst($val->username); ?></span>

@@ -66,7 +66,7 @@
 				    </tr>
 				</thead>
 				<tbody>
-<?php foreach ($quality_list as $u_key) { ?>
+				<?php foreach ($quality_list as $u_key) { ?>
     				    <tr>
     					<td><?php echo $u_key->id; ?> </td>
     					<td><?php echo $u_key->product_name; ?> </td>

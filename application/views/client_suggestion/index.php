@@ -70,9 +70,9 @@
               echo $date->format('d F Y');
             ?> 
           </td>
-					<td><?php echo $u_key->store; ?> </td>
-					<td></td>
-					<td><?php //echo $u_key->user_id; ?> </td>
+					<td><?php echo $u_key->store_name; ?> </td>
+					<td><?php echo $u_key->username; ?></td>
+					<td><?php echo $u_key->suggestion_status; ?> </td>
 					
 					
 					<td>

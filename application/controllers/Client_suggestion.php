@@ -21,7 +21,6 @@ class Client_suggestion extends CI_Controller {
 	$client_id=$this->session->userdata('client_id');
 	$user_id=$this->session->userdata('id');
     $data['suggestion_list'] = $this->client_suggestion_model->get_all($user_id,$client_id);
-	
     $this->template->load('mondou_default', 'client_suggestion/index', $data);
   }
 
@@ -55,7 +54,7 @@ class Client_suggestion extends CI_Controller {
             'description' => $this->input->post('description'),
             'store' => $this->input->post('store'),
             'contact_info' => $this->input->post('contact_info'),
-            'status' => '0',
+            'status' => '1',
             'user_id' => $user_id,
 			'client_id' => $client_id,
             'created_date	' => date("Y-m-d H:i:s")

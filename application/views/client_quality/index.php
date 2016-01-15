@@ -74,8 +74,8 @@
           </td>
 					<td><?php echo $u_key->product_name; ?> </td>
 					<td><?php echo $u_key->store_name; ?> </td>
-					<td><?php //echo $u_key->user_id; ?> </td>
-					<td> </td>
+					<td><?php echo $u_key->username; ?> </td>
+					<td><?php echo $u_key->report_status; ?> </td>
 					
 					<td>
 					   <div class='text-left'>
