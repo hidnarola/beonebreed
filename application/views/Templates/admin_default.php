@@ -12,12 +12,15 @@
       }
   }
 
-  session_start();
+        session_start();
         
         $controller=$this->router->fetch_class();
         $actions=$this->router->fetch_method();
        
-         if($controller=='project'){  
+
+
+        if($controller=='project' && ($actions=='index' || $actions=='archieve_projects')){  
+
              $design="display:block";
              $setting="display:none";
              $sub_user_setting="display:none";
@@ -120,13 +123,12 @@
     <link href="assets/stylesheets/plugins/bootstrap_daterangepicker/bootstrap-daterangepicker.css" media="all" rel="stylesheet" type="text/css" />
     <link href="assets/stylesheets/plugins/fullcalendar/fullcalendar.css" media="all" rel="stylesheet" type="text/css" />
     <link href="assets/stylesheets/plugins/common/bootstrap-wysihtml5.css" media="all" rel="stylesheet" type="text/css" />
-	 <link href="assets/stylesheets/plugins/datatables/bootstrap-datatable.css" media="all" rel="stylesheet" type="text/css" />
-	 <link href="assets/stylesheets/plugins/bootstrap_daterangepicker/bootstrap-daterangepicker.css" media="all" rel="stylesheet" type="text/css" />
+	<link href="assets/stylesheets/plugins/datatables/bootstrap-datatable.css" media="all" rel="stylesheet" type="text/css" />
+	<link href="assets/stylesheets/plugins/bootstrap_daterangepicker/bootstrap-daterangepicker.css" media="all" rel="stylesheet" type="text/css" />
     <link href="assets/stylesheets/plugins/bootstrap_datetimepicker/bootstrap-datetimepicker.min.css" media="all" rel="stylesheet" type="text/css" />
 	<link href="assets/stylesheets/plugins/fuelux/wizard.css" media="all" rel="stylesheet" type="text/css" />
-	
-        
-            <link href='assets/images/meta_icons/favicon.ico' rel='shortcut icon' type='image/x-icon'>
+
+    <link href='assets/images/meta_icons/favicon.ico' rel='shortcut icon' type='image/x-icon'>
     <link href='assets/images/meta_icons/apple-touch-icon.png' rel='apple-touch-icon-precomposed'>
     <link href='assets/images/meta_icons/apple-touch-icon-57x57.png' rel='apple-touch-icon-precomposed' sizes='57x57'>
     <link href='assets/images/meta_icons/apple-touch-icon-72x72.png' rel='apple-touch-icon-precomposed' sizes='72x72'>
@@ -134,15 +136,14 @@
     <link href='assets/images/meta_icons/apple-touch-icon-144x144.png' rel='apple-touch-icon-precomposed' sizes='144x144'>
 
 	<link href="assets/stylesheets/plugins/tabdrop/tabdrop.css" media="all" rel="stylesheet" type="text/css" />
-        <link href="assets/stylesheets/plugins/jgrowl/jquery.jgrowl.min.css" media="all" rel="stylesheet" type="text/css" />
-        <link href="assets/stylesheets/jquery/jquery_ui.css" media="all" rel="stylesheet" type="text/css" />
-        
-	
+    <link href="assets/stylesheets/plugins/jgrowl/jquery.jgrowl.min.css" media="all" rel="stylesheet" type="text/css" />
+    <link href="assets/stylesheets/jquery/jquery_ui.css" media="all" rel="stylesheet" type="text/css" />
+    
 
-	 <script src="assets/javascripts/jquery/jquery.min.js" type="text/javascript"></script>
-	  <!--<script src="assets/javascripts/bootstrap/bootstrap.js" type="text/javascript"></script>-->
+	<script src="assets/javascripts/jquery/jquery.min.js" type="text/javascript"></script>
+	<!--<script src="assets/javascripts/bootstrap/bootstrap.js" type="text/javascript"></script>-->
 	 
-	  <link href="assets/stylesheets/plugins/jquery_fileupload/jquery.fileupload-ui.css" media="all" rel="stylesheet" type="text/css" />
+	<link href="assets/stylesheets/plugins/jquery_fileupload/jquery.fileupload-ui.css" media="all" rel="stylesheet" type="text/css" />
     <!-- / END - page related stylesheets [optional] -->
     <!-- / bootstrap [required] -->
     <link href="assets/stylesheets/bootstrap/bootstrap.css" media="all" rel="stylesheet" type="text/css" />
@@ -154,16 +155,16 @@
     <link href="assets/stylesheets/demo.css" media="all" rel="stylesheet" type="text/css" />
 	<link rel="stylesheet" href="assets/stylesheets/toastr.min.css" type="text/css" />
 	<link rel="stylesheet" href="assets/stylesheets/custom_theme.css" type="text/css" />
-  <!-- Add fancyBox -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css" type="text/css" media="screen" />
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script>
+    <!-- Add fancyBox -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css" type="text/css" media="screen" />
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script>
 
-<script type="text/javascript" src="assets/javascripts/jquery.tokeninput.js"></script>
-<link rel="stylesheet" href="assets/stylesheets/token-input.css" type="text/css" />
-<link rel="stylesheet" href="assets/stylesheets/token-input-facebook.css" type="text/css" />
+    <script type="text/javascript" src="assets/javascripts/jquery.tokeninput.js"></script>
+    <link rel="stylesheet" href="assets/stylesheets/token-input.css" type="text/css" />
+    <link rel="stylesheet" href="assets/stylesheets/token-input-facebook.css" type="text/css" />
 
-<link href="css/smoothness/jquery-ui-1.9.0.custom.css" rel="stylesheet">
-<link href="assets/stylesheets/plugins/select2/select2.css" media="all" rel="stylesheet" type="text/css" />
+    <link href="css/smoothness/jquery-ui-1.9.0.custom.css" rel="stylesheet">
+    <link href="assets/stylesheets/plugins/select2/select2.css" media="all" rel="stylesheet" type="text/css" />
     <link href="assets/stylesheets/plugins/bootstrap_colorpicker/bootstrap-colorpicker.css" media="all" rel="stylesheet" type="text/css" />
     <link href="assets/stylesheets/plugins/bootstrap_daterangepicker/bootstrap-daterangepicker.css" media="all" rel="stylesheet" type="text/css" />
     <link href="assets/stylesheets/plugins/bootstrap_datetimepicker/bootstrap-datetimepicker.min.css" media="all" rel="stylesheet" type="text/css" />
@@ -473,12 +474,12 @@
               </ul>
             </li>
 	    
-            <li class='' style="<?php echo $display_setting;?>">
-            <a class="dropdown-collapse" href="#"><i class='icon-cog'></i>
+            <li class='<?php if($controller == 'product_brand'){ echo 'active'; }?>' style="<?php echo $display_setting;?>">
+             <a class="dropdown-collapse" href="#"><i class='icon-cog'></i>
               <span>Settings</span>
               <i class='icon-angle-down angle-down'></i>
               </a>
-                <ul class='nav nav-stacked' style="<?php echo $setting; ?>">
+                <ul class=' <?php if($controller == 'product_brand'){ echo 'in'; }?> nav nav-stacked' style="<?php echo $setting; ?>">
                     <li>
                        <a class="dropdown-collapse" href="#"><i class='icon-file-text'></i>
                           <span>Design</span>
@@ -523,9 +524,18 @@
                     <i class='icon-user'></i>
                     <span>Client</span>
                   </a>
-              </li>
+                 </li>
+
+                 <li class='<?php echo $client; ?>'>
+                  <a href='<?php echo site_url('product_brand/') ?>'>
+                    <i class='icon-user'></i>
+                    <span>Product Brand</span>
+                  </a>
+                 </li>
                     
-                </li>
+            </li>
+
+
               </ul>
             </li>
             
@@ -676,7 +686,7 @@
       }
     </script>
     <script src="assets/javascripts/plugins/bootstrap_daterangepicker/bootstrap-daterangepicker.js" type="text/javascript"></script>
-	 <script src="assets/javascripts/plugins/bootstrap_datetimepicker/bootstrap-datetimepicker.js" type="text/javascript"></script>	
+	<script src="assets/javascripts/plugins/bootstrap_datetimepicker/bootstrap-datetimepicker.js" type="text/javascript"></script>	
     <script src="assets/javascripts/plugins/common/moment.min.js" type="text/javascript"></script>
     <script src="assets/javascripts/plugins/bootbox/bootbox.min.js" type="text/javascript"></script>
     <script src="assets/javascripts/plugins/slimscroll/jquery.slimscroll.min.js" type="text/javascript"></script>
@@ -685,11 +695,11 @@
     <script src="assets/javascripts/plugins/common/bootstrap-wysihtml5.js" type="text/javascript"></script>
     <script src="assets/javascripts/plugins/fullcalendar/fullcalendar.min.js" type="text/javascript"></script>
     <script src="assets/javascripts/plugins/bootbox/bootbox.min.js" type="text/javascript"></script>
-	<script src="assets/javascripts/plugins/datatables/jquery.dataTables.min.js" type="text/javascript"></script>
+	  <script src="assets/javascripts/plugins/datatables/jquery.dataTables.min.js" type="text/javascript"></script>
     <script src="assets/javascripts/plugins/datatables/jquery.dataTables.columnFilter.js" type="text/javascript"></script>
     <script src="assets/javascripts/plugins/datatables/dataTables.overrides.js" type="text/javascript"></script>
-	<script src="assets/javascripts/toastr.min.js"></script>
-	<script src="assets/javascripts/plugins/fileupload/tmpl.min.js" type="text/javascript"></script>
+	  <script src="assets/javascripts/toastr.min.js"></script>
+	  <script src="assets/javascripts/plugins/fileupload/tmpl.min.js" type="text/javascript"></script>
     <script src="assets/javascripts/plugins/fileupload/load-image.min.js" type="text/javascript"></script>
     <script src="assets/javascripts/plugins/fileupload/canvas-to-blob.min.js" type="text/javascript"></script>
     <script src="assets/javascripts/plugins/fileupload/jquery.iframe-transport.min.js" type="text/javascript"></script>
@@ -698,13 +708,15 @@
     <script src="assets/javascripts/plugins/fileupload/jquery.fileupload-ui.min.js" type="text/javascript"></script>
     <script src="assets/javascripts/plugins/fileupload/jquery.fileupload-init.js" type="text/javascript"></script>
     <script src="assets/javascripts/plugins/fuelux/wizard.js" type="text/javascript"></script>
-     <script src="assets/javascripts/plugins/tabdrop/bootstrap-tabdrop.js" type="text/javascript"></script>
+    <script src="assets/javascripts/plugins/tabdrop/bootstrap-tabdrop.js" type="text/javascript"></script>
     <script src="assets/javascripts/plugins/bootbox/bootbox.min.js" type="text/javascript"></script>
     <script src="assets/javascripts/plugins/jgrowl/jquery.jgrowl.min.js" type="text/javascript"></script>
     <script src="assets/javascripts/plugins/typeahead/typeahead.js" type="text/javascript"></script>
     <script src="assets/javascripts/plugins/timeago/jquery.timeago.js" type="text/javascript"></script>
     <script src="assets/javascripts/plugins/nestable/jquery.nestable.js" type="text/javascript"></script>
-         
+    
+    
+    <!-- / END - page related files and scripts [optional] -->       
     <script>
       (function() {
         var cal, calendarDate, d, m, y;
