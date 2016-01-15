@@ -10,15 +10,13 @@ class Products extends CI_Controller {
 	}
 
 	public function manage_product(){
-		$this->template->load('admin_default', '');
-	}
 
-	public function add(){
+		$data['categories'] = $this->category_model->get_all_category(1);																	
+		$data['brands'] = $this->product_brand_model->get();
 
-	}
-
-	public function edit(){
-		
+		// p($data);
+		// die();
+		$this->template->load('admin_default', 'products/manage_products',$data);
 	}
 
 }

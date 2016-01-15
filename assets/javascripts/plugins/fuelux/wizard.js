@@ -135,7 +135,7 @@
 
     $.fn.wizard = function (option, value) {
         var methodReturn;
-
+        
         var $set = this.each(function () {
             var $this = $(this);
             var data = $this.data('wizard');

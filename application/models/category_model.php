@@ -13,9 +13,13 @@ class Category_model extends CI_Model {
             return $id;
         }
        
-        public function get_all_category(){
+        public function get_all_category($is_array = false){
             $query = $this->db->get('categories');
-            return $query->result();
+            if($is_array == true){
+              return $query->result_array();
+            }else{
+              return $query->result();
+            }
         }
     
         public function get($id){
