@@ -1,71 +1,163 @@
 <div class='row' id='content-wrapper'>
-	<div class='col-xs-12'>
+    <div class='col-xs-12'>
 
-		<div class='page-header page-header-with-buttons'>
-			<h1 class='col-sm-12 pull-left'>
-				<i class='icon-dashboard'></i>
-				<span>Dashboard</span>
-			</h1>
-
-
-		</div>
-
-		<div class="row">
-							
-
-			<div class="col-xs-6">
-				<!--
-				<div class="box">
-					<div class="box bordered-box orange-border" style="margin-bottom:0;">
-						<div class="box-header orange-background">
-							<div class="title">News2</div>
-
-						</div>
-					<div class="box-content">
-					</div>
-				</div>
-			</div>-->
-								</div>
-
-			<div class="col-xs-6">
-				<div class="box">
-					<div class="box bordered-box orange-border" style="margin-bottom:0;">
-						<div class="box-header orange-background">
-							<div class="title">News</div>
-
-						</div>
-					</div>
-					<div class="box-content">
-
-						<!-- media list -->
-						<div class="media_list">
-							<div class="media">
-								<div class="media-left media-middle">
-									<a href="#">
-										<img src="http://clientapp.narolainfotech.com/HD/beonebreed/uploads/screenshot-073.png">
-									</a>
-								</div>
-								<div class="media-body">
-									<h4 class="media-heading">testing </h4>
-									<p>
-										testing testing 
-									</p>
-								</div>
-								<div class="media-right">
-									<a class="inline-block remove_item text-error"><i class="icon-remove-circle"></i></a>
-									<a class="inline-block text-warning"><i class="icon-edit"></i></a>
-
-								</div>
-							</div>
-							
-						</div>
-						<!-- media list -->
+	<div class='page-header page-header-with-buttons'>
+	    <h1 class='col-sm-12 pull-left'>
+		<i class='icon-dashboard'></i>
+		<span>Dashboard</span>
+	    </h1>
 
 
-					</div>
-				</div>
-			</div>
-			
-		</div>
 	</div>
+	<div class="row">
+	    <div class="col-xs-6">
+		
+	    </div>
+	    <div class="col-xs-6">
+		<div class="box">
+		    <div class="box bordered-box orange-border" style="margin-bottom:0;">
+			<div class="box-header orange-background">
+			    <div class="title">News</div>
+
+			</div>
+		    </div>
+		    <div class="box-content">
+
+			<!-- media list -->
+			<div class='box'>
+				<div class='row'>
+				    <div class='chat'>
+					<div class='col-sm-12'>
+					    <div class='box'>
+						<div class='box-content box-no-padding'>
+						    <div class='scrollable' data-scrollable-height='600' data-scrollable-start='bottom'>
+							<ul class='list-unstyled list-hover list-striped'>
+							    <?php foreach ($news_list as $u_key) { ?>
+    							    <li class='message'>
+    								<div class='avatar'>
+    								    <img alt='Avatar' height='23' src='<?php
+									if (!empty($u_key['name'])) {
+									    echo site_url('uploads/' . $u_key['name']);
+									} else {
+									    echo site_url('uploads/no_image_available.jpg');
+									}
+									?>' width='23'>
+    								</div>
+    								<div class='name-and-time'>
+    								    <div class='name pull-left'>
+    									<small>
+    									    <a class="text-contrast" href="javascript:void(0);"><h4><?php echo $u_key['title']; ?></h4></a>
+    									</small>
+    									<small>
+										<?php
+										echo $u_key['time_ago'];
+										?> 
+    									</small>
+    								    </div>
+
+    								    <div class='time pull-right'>
+    									<small class='date pull-right text-muted'>									
+    									    <a class="inline-block text-warning" href='<?php echo site_url('dashboard/edit/' . $u_key['id']); ?>' ><i class="icon-edit"></i></a>
+    									    <a class="inline-block remove_item text-error" href='<?php echo site_url('dashboard/delete/' . $u_key['id']); ?>' onclick="if (!confirm('Are you sure want to delete')) {
+    											return false;
+    										    }"><i class="icon-remove-circle"></i></a>
+    									</small>
+    								    </div>
+    								</div>
+    								<div class='body'>
+									<?php echo $u_key['description']; ?> 
+    								</div>
+    							    </li>	
+								<?php
+								if (!empty($u_key['id'])) {
+								    $CI = & get_instance();
+								    $CI->load->model('news_model');
+								    $result = $CI->news_model->get_comments($u_key['id']);
+								    foreach ($result as $key => $val) {
+									$result[$key]['time_ago'] = time_elapsed_string(strtotime($val['created_date']));
+								    }
+								    foreach ($result as $key) {
+									?>
+
+	    							    <!-- comment start -->
+	    							    <li class='message' style='margin-left:5%'>
+	    								<div class='name-and-time'>
+	    								    <div class='name pull-left'>
+	    									<small>
+	    									    <a class="text-contrast" href="javascript:void(0);"><h4><?php echo $key['username']; ?></h4></a>
+	    									</small>
+	    									<small>
+											<?php
+											echo $key['time_ago'];
+											?> 
+	    									</small>
+	    								    </div>
+	    								</div>
+	    								<div class='body'>
+	    <?php echo $key['comment']; ?> 
+	    								</div>		
+	    							    </li>
+
+	    							    <!-- comment section ends -->
+
+								    <?php
+								    }
+								}
+								?>
+    							    <span id="append_comment_<?php echo $u_key['id']; ?>">
+    							    </span>
+    							    <form>
+    								<div class='form-group'>
+    								    <input class='form-control' id="comment_<?php echo $u_key['id']; ?>" placeholder='Comment' type='text' name="comment_<?php echo $u_key['id']; ?>">
+    								    <input type="hidden" name="news_id" id="news_id" value="<?php echo $u_key['id']; ?>">
+    								    <button class='btn btn-success save_post' type='button' data-id="<?php echo $u_key['id']; ?>"  id="upload_comment_<?php echo $u_key['id']; ?>">
+    									<i class='icon-save'></i>
+    									Post
+    								    </button>
+    								</div>
+    							    </form>	
+<?php } ?>	
+							</ul>
+						    </div>
+						</div>
+					    </div>
+					</div>
+				    </div>
+				</div>
+			    </div>
+			</div>
+
+
+		    </div>
+		</div>
+	    </div>
+
+	</div>
+    </div>
 </div>
+<script type="text/javascript">
+
+$(document).on("click", ".save_post", function() {
+    var id = $(this).attr('data-id');
+    var comment = $("#comment_" + id).val();
+    if(comment==''){
+	return false;
+    }
+    $.ajax({
+	url: '<?php echo site_url('comment/add'); ?>',
+	type: 'post',
+	dataType: 'json',
+	data: {news_id: id, news_comment: comment},
+	success: function(response) {
+	    if (response.status == 'success') {
+
+		$("#comment_" + id).val('');
+		$("#append_comment_" + id).before('<li class=message style=margin-left:5%><div class=name-and-time><div class=name pull-left><small><a class=text-contrast href=javascript:void(0);><h4>' + response.username + '</h4></a></small><small>Just Now</small></div></div><div class="body">' + response.comment + '</div></li>');
+	    }
+	}
+    });
+});
+
+
+
+</script>

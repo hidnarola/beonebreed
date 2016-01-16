@@ -158,11 +158,11 @@
     <!-- Add fancyBox -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css" type="text/css" media="screen" />
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script>
-
+	
     <script type="text/javascript" src="assets/javascripts/jquery.tokeninput.js"></script>
     <link rel="stylesheet" href="assets/stylesheets/token-input.css" type="text/css" />
     <link rel="stylesheet" href="assets/stylesheets/token-input-facebook.css" type="text/css" />
-
+	<script src="assets/javascripts/plugins/timeago/jquery.timeago.js" type="text/javascript"></script>
     <link href="css/smoothness/jquery-ui-1.9.0.custom.css" rel="stylesheet">
     <link href="assets/stylesheets/plugins/select2/select2.css" media="all" rel="stylesheet" type="text/css" />
     <link href="assets/stylesheets/plugins/bootstrap_colorpicker/bootstrap-colorpicker.css" media="all" rel="stylesheet" type="text/css" />
