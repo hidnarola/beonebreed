@@ -35,7 +35,7 @@
         <div class='box-header orange-background'>
           <div class='title'> Products </div>
           <div class="pull-right">
-            <a class="btn btn-success" href="<?php echo base_url().'products/manage_product'; ?>">
+            <a class="btn btn-success" href="<?php echo base_url().'products/add'; ?>">
                 <i class='icon-plus'></i>
                 Add Product  
               </a>
