@@ -5,7 +5,7 @@
 		  <div class='page-header'>
 			<h1 class='pull-left'>
 			  <i class='icon-bookmark'></i>
-			  <span>QUALITÉ</span>
+			  <span><?=lang('quality_heading')?></span>
 			</h1>
 			<div class='pull-right'>
 			 
@@ -25,8 +25,8 @@
 	<div class='col-sm-12'>
 	  <div class='box bordered-box orange-border' style='margin-bottom:0;'>
 		<div class='box-header orange-background'>
-		  <div class='title'>Report</div>
-                        <a href="<?php echo site_url('Client_quality/add') ?>" class="btn btn-primary pull-right">New</a>
+		  <div class='title'><?=lang('quality_sub_heading')?></div>
+                        <a href="<?php echo site_url('Client_quality/add') ?>" class="btn btn-primary pull-right"><?=lang('quality_create')?></a>
 		  </div>
 		
 		<div class='box-content box-no-padding'>
@@ -36,28 +36,28 @@
 				<thead>
 				  <tr>
 					<th>
-					 Id
+					 <?=lang('quality_id')?>
 					</th>
 					<th>
-					  Title
+					  <?=lang('quality_title')?>
 					</th>
 					<th>
-					  Date
+					  <?=lang('quality_Date')?>
 					</th>
 					<th>
-					  Product
+					  <?=lang('quality_product')?>
 					</th>
 					<th>
-					  Store
+					  <?=lang('quality_store')?>
 					</th>
 					<th>
-					  User
+					  <?=lang('quality_user')?>
 					</th>
 					<th>
-					  Status
+					  <?=lang('quality_status')?>
 					</th>
 					<th>
-					  Action
+					  <?=lang('action')?>
 					</th>
 				  </tr>
 				</thead>

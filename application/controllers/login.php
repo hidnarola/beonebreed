@@ -9,20 +9,29 @@ class Login extends CI_Controller {
 	$this->load->helper('url');
 	$this->load->helper('form');
 	$this->load->model('login_model');
+	//$this->load->helper('language');
+	//$this->load->helper('url');
+	// load language file
+	//$this->lang->load('about');
+
     }
-
-
-
-
     public function index($user = null) {
+	
+	//$this->load->helper('language');
+	// load language file
+	//$this->lang->load('about');
 	$data = array();
 	$data['company_logo'] = '';
 	if (!empty($_POST)) {
+	
+		
 	    $username = $this->input->post('username');
 	    $password = md5($this->input->post('password'));
 
 	    $result = $this->login_model->login($username, $password, $user);
+		
 	    if ($result) {
+			
 		$user_type = $result[0]->user_type;
 		if ($user_type == 1 || $user_type == 2) {
 		    $newdata = array(
@@ -51,6 +60,7 @@ class Login extends CI_Controller {
 		}
 		$this->session->set_userdata($newdata);
 		if ($user_type == 1 || $user_type == 2) {
+		echo "heloo1";
 		    redirect('dashboard');
 		} else if ($user_type == 3) {
 		    redirect('client_news');
