@@ -44,7 +44,44 @@ class Products extends CI_Controller {
 		echo json_encode($random_barcode);
 	}
 
-	
+	/**
+	* function admin_form_tab_1() for save Admin Tab-1 Form Data
+	*
+	* @return string
+	* @author Virendra patel - Spark id -vpa
+	**/	
+	public function admin_form_tab_1(){
+
+		$barcode_id = $this->input->post('barcode_id');	
+		$brand_id = $this->input->post('brand_name');
+		$cat_short_name = $this->input->post('category');
+		$description = $this->input->post('description');
+		$product_id = $this->input->post('product_id');
+		$product_name = $this->input->post('product_name');
+		$product_code = $this->input->post('prod_code');
+
+		$category_data = $this->products_model->getfromtable('categories',array('short_name'=>$cat_short_name));
+		
+		$cat_id = $category_data['id'];
+		
+		$data_admin_part_1 = array(		
+									'product_name'=>$product_name,
+									'category_id'=>$cat_id,
+									'brand_id'=>$brand_id,
+									'product_code'=>$product_code,
+									'description'=>$description,
+									'barcode_id'=>$barcode_id
+								);
+
+		if(!empty($product_id)){
+			$this->products_model->update($product_id,$data_admin_part_1);
+		}else{
+			$product_id = $this->products_model->insert($data_admin_part_1);
+		}
+				
+		echo json_encode(array('product_id'=>$product_id));
+	}
+
 
 	// ------------------------------ // END ADMIN TAB FORM ------------------------------------------
 }

@@ -147,8 +147,19 @@ class Products_model extends CI_Model {
 		}else{
 			return $this->db->get()->$method();
 		}
-		
 	}	
+
+	public function getfromtable($table,$id){
+		
+		$this->db->from($table);
+
+		if(is_array($id)){
+			$this->db->where($id);
+		}else{
+			$this->db->where('id',$id);
+		}		
+		return $this->db->get('bar_code')->row_array();
+	}
 
 }
 

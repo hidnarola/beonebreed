@@ -16,8 +16,6 @@
         
         $controller=$this->router->fetch_class();
         $actions=$this->router->fetch_method();
-       
-
 
         if($controller=='project' && ($actions=='index' || $actions=='archieve_projects')){  
 
@@ -141,6 +139,14 @@
     
 
 	<script src="assets/javascripts/jquery/jquery.min.js" type="text/javascript"></script>
+  
+    <!-- FAkeLoader JS & CSS START -->
+    <link href="assets/stylesheets/demo_fakeloader.css" media="all" rel="stylesheet" type="text/css" />  
+    <link href="assets/stylesheets/fakeLoader.css" media="all" rel="stylesheet" type="text/css" />  
+    <script src="assets/javascripts/fakeLoader.js" type="text/javascript"></script>
+    <script src="assets/javascripts/fakeLoader.min.js" type="text/javascript"></script>
+    <!--  ===== END ======= -->
+
 	<!--<script src="assets/javascripts/bootstrap/bootstrap.js" type="text/javascript"></script>-->
 	 
 	<link href="assets/stylesheets/plugins/jquery_fileupload/jquery.fileupload-ui.css" media="all" rel="stylesheet" type="text/css" />
@@ -163,7 +169,7 @@
     <link rel="stylesheet" href="assets/stylesheets/token-input.css" type="text/css" />
     <link rel="stylesheet" href="assets/stylesheets/token-input-facebook.css" type="text/css" />
 	<script src="assets/javascripts/plugins/timeago/jquery.timeago.js" type="text/javascript"></script>
-    <link href="css/smoothness/jquery-ui-1.9.0.custom.css" rel="stylesheet">
+    <!-- <link href="css/smoothness/jquery-ui-1.9.0.custom.css" rel="stylesheet"> -->
     <link href="assets/stylesheets/plugins/select2/select2.css" media="all" rel="stylesheet" type="text/css" />
     <link href="assets/stylesheets/plugins/bootstrap_colorpicker/bootstrap-colorpicker.css" media="all" rel="stylesheet" type="text/css" />
     <link href="assets/stylesheets/plugins/bootstrap_daterangepicker/bootstrap-daterangepicker.css" media="all" rel="stylesheet" type="text/css" />
@@ -175,8 +181,10 @@
       <script src="assets/javascripts/ie/respond.min.js" type="text/javascript"></script>
     <![endif]-->
   </head>
-  <body class='contrast-banana '>
+  <body class='contrast-banana' >
+    <div id="fakeLoader"></div>
     <header>
+        
       <nav class='navbar navbar-default'>
 	
         <a class='navbar-brand' href='index.html'>
@@ -695,11 +703,11 @@
     <script src="assets/javascripts/plugins/common/bootstrap-wysihtml5.js" type="text/javascript"></script>
     <script src="assets/javascripts/plugins/fullcalendar/fullcalendar.min.js" type="text/javascript"></script>
     <script src="assets/javascripts/plugins/bootbox/bootbox.min.js" type="text/javascript"></script>
-	  <script src="assets/javascripts/plugins/datatables/jquery.dataTables.min.js" type="text/javascript"></script>
+	<script src="assets/javascripts/plugins/datatables/jquery.dataTables.min.js" type="text/javascript"></script>
     <script src="assets/javascripts/plugins/datatables/jquery.dataTables.columnFilter.js" type="text/javascript"></script>
     <script src="assets/javascripts/plugins/datatables/dataTables.overrides.js" type="text/javascript"></script>
-	  <script src="assets/javascripts/toastr.min.js"></script>
-	  <script src="assets/javascripts/plugins/fileupload/tmpl.min.js" type="text/javascript"></script>
+	<script src="assets/javascripts/toastr.min.js"></script>
+	<script src="assets/javascripts/plugins/fileupload/tmpl.min.js" type="text/javascript"></script>
     <script src="assets/javascripts/plugins/fileupload/load-image.min.js" type="text/javascript"></script>
     <script src="assets/javascripts/plugins/fileupload/canvas-to-blob.min.js" type="text/javascript"></script>
     <script src="assets/javascripts/plugins/fileupload/jquery.iframe-transport.min.js" type="text/javascript"></script>
@@ -715,9 +723,13 @@
     <script src="assets/javascripts/plugins/timeago/jquery.timeago.js" type="text/javascript"></script>
     <script src="assets/javascripts/plugins/nestable/jquery.nestable.js" type="text/javascript"></script>
     
+
+
     
     <!-- / END - page related files and scripts [optional] -->       
     <script>
+     
+
       (function() {
         var cal, calendarDate, d, m, y;
       
