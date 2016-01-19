@@ -48,7 +48,7 @@ $unique_random_id=random_string('numeric',7);
                      <div class='form-group'>
                         <label for='inputText'><?=lang('quality_product')?></label><span style="color:red">*</span>
                         <select class="form-control js-example-data-array-selected1" name="product" >
-                          <option value="">Select Product</option>
+                          <option value=""><?=lang('select_product')?></option>
                           <?php
                           if (!empty($product_list)) {
                             foreach ($product_list as $k => $v) {
@@ -75,12 +75,12 @@ $unique_random_id=random_string('numeric',7);
                     <div class='form-group'>
                       <label for='inputText'><?=lang('quality_problem_type')?></label><span style="color:red">*</span>
                       <select class="form-control js-example-data-array-selected1" name="problem_type" >
-                          <option value="">Select Problem Type</option>
+                          <option value=""><?=lang('select_type')?></option>
                           <?php
                           if (!empty($problem_list)) {
                             foreach ($problem_list as $k => $v) {
                               ?>
-                              <option value="<?php echo $v->id; ?>"><?php echo ucfirst($v->name); ?></option>
+                              <option value="<?php echo $v->id; ?>"><?=lang(ucfirst($v->name))?></option>
 
                               <?php
                             }
@@ -95,7 +95,7 @@ $unique_random_id=random_string('numeric',7);
                      <div class='form-group'>
                         <label for='inputText'><?=lang('quality_store')?></label><span style="color:red">*</span>
                         <select class="form-control js-example-data-array-selected1 store" name="store" >
-                          <option value="">Select Store</option>
+                          <option value=""><?=lang('select_store')?></option>
                           <?php
                           if (!empty($store_list)) {
                             foreach ($store_list as $k => $v) {
@@ -133,9 +133,9 @@ $unique_random_id=random_string('numeric',7);
                     <div class='text-right form-actions form-actions-padding-sm form-actions-padding-md form-actions-padding-lg' style='margin-bottom: 0;'>
                       <button class='btn btn-success' type='submit'>
                         <i class='icon-save'></i>
-                        Save
+                       <?=lang('Save')?>
                       </button>
-                      <a class='btn' type='submit' href="<?php echo site_url('client_quality/'); ?>">Cancel</a>
+                      <a class='btn' type='submit' href="<?php echo site_url('client_quality/'); ?>"><?=lang('Cancel')?></a>
                     </div>
                   </div>
                   <div class="clearfix"></div>

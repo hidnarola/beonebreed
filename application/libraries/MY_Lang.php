@@ -15,11 +15,11 @@ class MY_Lang extends CI_Lang {
 		'en' => 'english',
 		'fr' => 'french'
 	);
-       
-           
+
 	// special URIs (not localized)
 	var $special = array (
-		"login","dashboard","project","news","products","barcode","quality","suggestion","user","client","product_brand");
+		""
+	);
 	
 	// where to redirect if no language in URI
 	var $default_uri = ''; 

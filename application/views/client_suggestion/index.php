@@ -5,7 +5,7 @@
 		  <div class='page-header'>
 			<h1 class='pull-left'>
 			  <i class='icon-trello'></i>
-			  <span>Manage Idea/Suggestion</span>
+			  <span><?=lang('idea_heading')?></span>
 			</h1>
 			<div class='pull-right'>
         
@@ -26,8 +26,8 @@
 	<div class='col-sm-12'>
 	  <div class='box bordered-box orange-border' style='margin-bottom:0;'>
 		<div class='box-header orange-background'>
-		  <div class='title'>Idea/Suggestion</div>
-                        <a href="<?php echo site_url('client_suggestion/add') ?>" class="btn btn-primary pull-right">New</a>
+		  <div class='title'><?=lang('idea_sub_heading')?></div>
+                        <a href="<?php echo site_url('client_suggestion/add') ?>" class="btn btn-primary pull-right"><?=lang('idea_create')?></a>
 		  </div>
 		</div>
 		<div class='box-content box-no-padding'>
@@ -37,25 +37,25 @@
 				<thead>
 				  <tr>
 					<th>
-					 Id
+					 <?=lang('idea_id')?>
 					</th>
 					<th>
-					  Subject
-					</th>
-          <th>
-					  Date
+					  <?=lang('idea_Subject')?>
 					</th>
 					<th>
-					  #Store
+					  <?=lang('idea_Date')?>
 					</th>
 					<th>
-					  User
+					 <?=lang('idea_store')?>
 					</th>
 					<th>
-					  Status
+					  <?=lang('idea_user')?>
 					</th>
 					<th>
-					  Action
+					  <?=lang('idea_status')?>
+					</th>
+					<th>
+					  <?=lang('action')?>
 					</th>
 				  </tr>
 				</thead>
@@ -65,21 +65,21 @@
 					<td><?php echo $u_key->id; ?> </td>
 					<td><?php echo $u_key->subject; ?> </td>
 					<td>
-            <?php 
-              $date = new DateTime($u_key->created_date);
-              echo $date->format('d F Y');
-            ?> 
-          </td>
+                                            <?php 
+                                              $date = new DateTime($u_key->created_date);
+                                              echo $date->format('d F Y');
+                                            ?> 
+                                        </td>
 					<td><?php echo $u_key->store_name; ?> </td>
 					<td><?php echo $u_key->username; ?></td>
-					<td><?php echo $u_key->suggestion_status; ?> </td>
+					<td><?=lang($u_key->suggestion_status)?></td>
 					
 					
 					<td>
 					   <div class='text-left'>
 						<a class='btn btn-primary btn-xs' href='<?php echo site_url('client_suggestion/edit/'.$u_key->id) ?>'>
 						  <i class='icon-list'></i>
-						  View
+						  <?=lang('View')?>
 						</a>
 						<!--
 						<a class='btn btn-danger btn-xs' href='<?php echo site_url('client_suggestion/delete/'.$u_key->id) ?>' onclick="if(!confirm('Are you sure want to delete')){return false;}">

@@ -53,8 +53,8 @@ $route['^en/(.+)$'] = "$1";
 foreach( $result as $row )
 {
     //$route[ $row->username ] = 'login/index/'.$row->username;
-	$route[ 'fr/'.$row->username ] = 'login/index/'.$row->username;
-	$route[ 'en/'.$row->username ] = 'login/index/'.$row->username;
+    $route[ 'fr/'.$row->username ] = 'login/index/'.$row->username;
+    $route[ 'en/'.$row->username ] = 'login/index/'.$row->username;
 }
 
 

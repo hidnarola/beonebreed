@@ -75,13 +75,13 @@
 					<td><?php echo $u_key->product_name; ?> </td>
 					<td><?php echo $u_key->store_name; ?> </td>
 					<td><?php echo $u_key->username; ?> </td>
-					<td><?php echo $u_key->report_status; ?> </td>
+					<td><?=lang($u_key->report_status)?></td>
 					
 					<td>
 					   <div class='text-left'>
 						<a class='btn btn-primary btn-xs' href='<?php echo site_url('client_quality/edit/'.$u_key->id) ?>'>
 						  <i class='icon-list'></i>
-						  View
+						  <?=lang('View')?>
 						</a>
 							
 						<!--			

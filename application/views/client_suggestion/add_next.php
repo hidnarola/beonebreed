@@ -4,7 +4,7 @@
           <div class='page-header'>
               <h1 class='pull-left'>
                   <i class='icon-bookmark'></i>
-                  <span>Manage Idea/Suggestion</span>
+                  <span><?=lang('idea_heading')?></span>
               </h1>
           </div>
       </div>
@@ -14,7 +14,7 @@
       <div class='box'>
         <div class='box-header orange-background'>
           <div class='title'>
-            Add Idea/Suggestion
+            <?=lang('idea_sub_heading')?> 
           </div>
         </div>
                 <!--strat of tabs -->
@@ -72,7 +72,7 @@
                                                 </div>
                                                 <button class='btn btn-success' type='button' data-target="#myuploadModal" data-toggle="modal">
                                                     <i class='icon-save'></i>
-                                                    Add
+                                                    <?=lang('Add')?>
                                                 </button>
                                             </div>
                                         </div>
@@ -93,14 +93,14 @@
                                     </div> 
                                     <div class='box-content'>		
                                         <div class='form-group'>
-                                            <label for='inputText'>Upload</label><span style="color:red">*</span>
+                                            <label for='inputText'><?=lang('upload')?></label><span style="color:red">*</span>
                                             <input type="file" class="form_input_contact" name="file" id="file"/>
                                         </div>
                                         <span style="color:red" id="file_err_msg"><span>
                                       </div> 
                                       <div class="modal-footer" style="border-top: 1px solid #fff;">
-                                          <button type="button" class="btn btn-success" id="upload_form_data">Save</button>
-                                          <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                                          <button type="button" class="btn btn-success" id="upload_form_data"><?=lang('Save')?></button>
+                                          <button type="button" class="btn btn-default" data-dismiss="modal"><?=lang('Cancel')?></button>
 
                                       </div>
                                     </div>
@@ -125,7 +125,7 @@
                                                      <a href="" class="btn btn-success my_preview_download"><i class="icon-download bounce"></i>&nbsp;Download</a>
                                                    </div>
                                                    <div class="modal-footer">
-                                                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                     <button type="button" class="btn btn-default" data-dismiss="modal"><?=lang('close')?></button>
                                                    </div>
                                                  </div>
 
@@ -146,7 +146,7 @@
 
                                                     </div>
                                                     <div class="modal-footer">
-                                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                        <button type="button" class="btn btn-default" data-dismiss="modal"><?=lang('close')?></button>
                                                     </div>
                                                 </div>
 
@@ -178,7 +178,7 @@
                                           <div class='' style='margin-bottom: 0;'>
                                               <input  type='hidden' name='hdn_project_id' id="hdn_project_id" class="hdn_project_id" value="<?php if (!empty($last_project_id)) {echo $last_project_id;} ?>">
                                               <div class='form-group'>
-                                                  <label for='inputText'>Title</label><span style="color:red">*</span>
+                                                  <label for='inputText'><?=lang('title')?></label><span style="color:red">*</span>
                                                   <input class='form-control'   type='text' name='notes_name' id="notes_title">
                                                   <span style="color:red" id="notes_err_msg"></span>
                                               </div>
@@ -186,7 +186,7 @@
                                                   <label for="comment">Description:</label>
                                                   <textarea class="form-control" rows="5" id="comment" name="description"></textarea>
                                               </div>
-                                                  <button type="button" class="btn btn-success" id="notes_form_data">Save</button>
+                                                  <button type="button" class="btn btn-success" id="notes_form_data"><?=lang('Save')?></button>
                                               </div>
                                           </div>
                                       </div>
@@ -220,7 +220,7 @@
                                             <div class='' style='margin-bottom: 0;'>
                                                 <input  type='hidden' name='hdn_project_id' id="hdn_project_id" class="hdn_project_id" value="<?php if (!empty($last_project_id)) {echo $last_project_id;} ?>">
                                             <div class='form-group'>
-                                                <label for='inputText'>Title</label><span style="color:red">*</span>
+                                                <label for='inputText'><?=lang('title')?></label><span style="color:red">*</span>
                                                 <input class='form-control' placeholder='Title' type='text' name='external_com' id="external_com">
                                                 <span style="color:red" id="link_err_msg"></span>
                                             </div>
@@ -229,7 +229,7 @@
                                               <textarea class="form-control" rows="5" id="comment" name="description"></textarea>
                                               <span style="color:red" id="link_err_msg"></span>
                                             </div>
-                                            <button type="button" class="btn btn-success" id="external_form_data">Save</button>
+                                            <button type="button" class="btn btn-success" id="external_form_data"><?=lang('Save')?></button>
                                             </div>
                                         </div>
                                     </div>
@@ -247,7 +247,7 @@
 
                                       </div>
                                       <div class="modal-footer">
-                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                        <button type="button" class="btn btn-default" data-dismiss="modal"><?=lang('close')?></button>
                                       </div>
                                     </div>
 
@@ -261,7 +261,7 @@
                   <!-- end form -->
                   </div>
           <div class='text-left finish-btn container'>
-              <a href="<?php echo site_url('client_suggestion') ?>" class="btn btn-primary">Finish</a> 
+              <a href="<?php echo site_url('client_suggestion') ?>" class="btn btn-primary"><?=lang('Finish')?></a> 
           </div>
         </div>
 

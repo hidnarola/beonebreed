@@ -17,6 +17,7 @@ class Login extends CI_Controller {
     }
     public function index($user = null) {
 	
+        
 	//$this->load->helper('language');
 	// load language file
 	//$this->lang->load('about');
@@ -29,6 +30,8 @@ class Login extends CI_Controller {
 	    $password = md5($this->input->post('password'));
 
 	    $result = $this->login_model->login($username, $password, $user);
+            
+            
 		
 	    if ($result) {
 			
@@ -60,7 +63,7 @@ class Login extends CI_Controller {
 		}
 		$this->session->set_userdata($newdata);
 		if ($user_type == 1 || $user_type == 2) {
-		echo "heloo1";
+		
 		    redirect('dashboard');
 		} else if ($user_type == 3) {
 		    redirect('client_news');

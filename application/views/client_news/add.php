@@ -19,6 +19,7 @@
         <div class='box bordered-box orange-border'>
           <div class='box-header orange-background'>
             <div class="title">Add News</div>
+            
           </div>
           <div class='box-content box-padding'>
             <div class='fuelux'>

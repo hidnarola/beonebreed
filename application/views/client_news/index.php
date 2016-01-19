@@ -126,11 +126,11 @@
 
     								<form>
     								    <div class='form-group'>
-    									<input class='form-control' id="comment_<?php echo $u_key['id']; ?>" placeholder='Comment' type='text' name="comment_<?php echo $u_key['id']; ?>">
+    									<input class='form-control' id="comment_<?php echo $u_key['id']; ?>" placeholder='<?=lang('comment')?>' type='text' name="comment_<?php echo $u_key['id']; ?>">
     									<input type="hidden" name="news_id" id="news_id" value="<?php echo $u_key['id']; ?>">
     									<button class='btn btn-success save_post' type='button' data-id="<?php echo $u_key['id']; ?>"  id="upload_comment_<?php echo $u_key['id']; ?>">
     									    <i class='icon-save'></i>
-    									    Post
+    									   <?=lang('Post')?>
     									</button>
     								    </div>
     								</form>	

@@ -168,7 +168,7 @@
 
                                                           <div class='text-right form-actions form-actions-padding-sm form-actions-padding-md form-actions-padding-lg' style='margin-bottom: 0;'>
                                                            
-                                                            <a class='btn' type='submit' href="<?php echo site_url('client_quality/'); ?>">Back</a>
+                                                            <a class='btn' type='submit' href="<?php echo site_url('client_quality/'); ?>"><?=lang('Back')?></a>
                                                           </div>
                                                           </div>
                                                           <div class="clearfix"></div>

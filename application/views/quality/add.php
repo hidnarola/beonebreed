@@ -1,6 +1,6 @@
 <?php
-				$this->load->helper('string');
-				$unique_random_id=random_string('numeric',7);
+	$this->load->helper('string');
+	$unique_random_id=random_string('numeric',7);
 ?>
 <div class='row' id='content-wrapper'>
   <div class='col-xs-12'>

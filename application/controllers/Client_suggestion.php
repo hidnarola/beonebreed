@@ -18,8 +18,9 @@ class Client_suggestion extends CI_Controller {
   }
 
   public function index() {
-	$client_id=$this->session->userdata('client_id');
-	$user_id=$this->session->userdata('id');
+      
+    $client_id=$this->session->userdata('client_id');
+    $user_id=$this->session->userdata('id');
     $data['suggestion_list'] = $this->client_suggestion_model->get_all($user_id,$client_id);
     $this->template->load('mondou_default', 'client_suggestion/index', $data);
   }
@@ -61,7 +62,7 @@ class Client_suggestion extends CI_Controller {
         );
         $id = $this->client_suggestion_model->add_records($data, TRUE);
         if (!empty($id)) {
-          redirect('client_suggestion/add_next/' . $id);
+          redirect('add_next/' . $id);
         }
 
         /*
@@ -76,6 +77,7 @@ class Client_suggestion extends CI_Controller {
   }
 
   public function add_next($id = 0) {
+    
     $data['last_project_id'] = $id;
     $data['attachment'] = $this->client_suggestion_model->get_suggestion_attachment($id);
     $data['notes'] = $this->client_suggestion_model->get_suggestion_notes($id);
