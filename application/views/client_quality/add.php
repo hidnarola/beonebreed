@@ -1,6 +1,6 @@
 <?php
-				$this->load->helper('string');
-				$unique_random_id=random_string('numeric',7);
+$this->load->helper('string');
+$unique_random_id=random_string('numeric',7);
 ?>
 <div class='row' id='content-wrapper'>
   <div class='col-xs-12'>
@@ -9,7 +9,7 @@
         <div class='page-header'>
           <h1 class='pull-left'>
             <i class='icon-bookmark'></i>
-            <span>QUALITÉ</span>
+            <span><?=lang('quality_heading')?></span>
           </h1>
           <div class='pull-right'>
 
@@ -21,7 +21,7 @@
       <div class='col-sm-12'>
         <div class='box bordered-box orange-border'>
           <div class='box-header orange-background'>
-            <div class="title">Report:	<?php echo $unique_random_id; ?></div>
+            <div class="title"><?=lang('quality_sub_heading')?>:<?php echo $unique_random_id; ?></div>
           </div>
           <div class='box-content box-padding'>
             <div class='fuelux'>
@@ -40,13 +40,13 @@
                 <form class="form" style="margin-bottom: 0;" method="post" action="" accept-charset="UTF-8" enctype="multipart/form-data">   
                   <div style="display:inline-block;float:left;width:45%" class='box-content'>
                     <div class='form-group'>
-                        <label for='inputText'>Name</label><span style="color:red">*</span>
+                        <label for='inputText'><?=lang('quality_name')?></label><span style="color:red">*</span>
                         <input class='form-control' id='inputText' placeholder='Name' type='text' name='name' >
 																								<input class='form-control' id='inputT' type='hidden' name='id' value="<?php echo $unique_random_id; ?>" >
                         <span style="color:red"><?php echo form_error('name'); ?><span>
                     </div>
                      <div class='form-group'>
-                        <label for='inputText'>Product</label><span style="color:red">*</span>
+                        <label for='inputText'><?=lang('quality_product')?></label><span style="color:red">*</span>
                         <select class="form-control js-example-data-array-selected1" name="product" >
                           <option value="">Select Product</option>
                           <?php
@@ -63,17 +63,17 @@
                         <span style="color:red"><?php echo form_error('product'); ?><span>
                     </div>
                     <div class='form-group'>
-                        <label for='inputText'>Title</label>
+                        <label for='inputText'><?=lang('quality_title')?></label>
                         <input class='form-control' id='inputText' placeholder='Title' type='text' name='title' >
                         
                     </div>
                      <div class='form-group'>
-                        <label for='inputText'>Description</label>
+                        <label for='inputText'><?=lang('quality_desc')?></label>
                         <textarea class="form-control" rows="5" id="comment" name="description"></textarea>
                         
                     </div>
                     <div class='form-group'>
-                      <label for='inputText'>Problem Type</label><span style="color:red">*</span>
+                      <label for='inputText'><?=lang('quality_problem_type')?></label><span style="color:red">*</span>
                       <select class="form-control js-example-data-array-selected1" name="problem_type" >
                           <option value="">Select Problem Type</option>
                           <?php
@@ -93,7 +93,7 @@
                   </div>
                   <div style="display:inline-block;float:right;width:50%" class='box-content'>
                      <div class='form-group'>
-                        <label for='inputText'>Store</label><span style="color:red">*</span>
+                        <label for='inputText'><?=lang('quality_store')?></label><span style="color:red">*</span>
                         <select class="form-control js-example-data-array-selected1 store" name="store" >
                           <option value="">Select Store</option>
                           <?php
@@ -110,7 +110,7 @@
                          <span style="color:red"><?php echo form_error('store'); ?><span>
                     </div>
                      <div class='form-group'>
-                        <label for='inputText'>Contact Info</label><span style="color:red">*</span>
+                        <label for='inputText'><?=lang('quality_contact_info')?></label><span style="color:red">*</span>
                         <textarea class="form-control" rows="5" id="contact_info" name="contact_info"></textarea>
                        
                     </div>
@@ -120,12 +120,12 @@
                        <!-- <span style="color:red"><?php //echo form_error('name'); ?><span>-->
                     </div>
                      <div class='form-group'>
-                        <label for='inputText'>Qty In Store</label><span style="color:red">*</span>
+                        <label for='inputText'><?=lang('quality_in_store')?></label><span style="color:red">*</span>
                         <input class='form-control store' id='inputText' placeholder='Qty In Store' type='text' name='qty_in_store' >
                         <span style="color:red"><?php echo form_error('qty_in_store'); ?><span>
                     </div>
                      <div class='form-group'>
-                        <label for='inputText'>Qty Defect</label><span style="color:red">*</span>
+                        <label for='inputText'><?=lang('quality_defect')?></label><span style="color:red">*</span>
                         <input class='form-control' id='inputText' placeholder='Qty Defect' type='text' name='qty_defect' >
                         <span style="color:red"><?php echo form_error('qty_in_store'); ?><span>
                     </div>

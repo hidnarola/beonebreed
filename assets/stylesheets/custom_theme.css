@@ -224,6 +224,7 @@
     display: inline-block;
     
 }
+
 .padding-l-0{
   padding-left: 0;
 }
@@ -292,6 +293,69 @@
   .border-left::after {
     border-left: none;
   }
+
+#notes_desc p {
+    word-wrap: break-word;
+}
+
+
+.chat ul.commnet-list  > li .avatar {
+	float: left;
+    height: 83px;
+    left: auto;
+    margin-right: 10px;
+    position: inherit;
+    top: auto;
+    width: 83px
+}
+.chat ul.commnet-list  > li .avatar img{
+	border-radius:50%;
+	border:2px solid #ddd;
+	height:83px;
+	width:83px;
+}
+.commnet-wrapper {
+    margin-left: 15px;
+	margin-top: 25px;
+}
+.chat ul.commnet-list  > li:nth-child(odd) {
+ 
+}
+.chat ul.commnet-list  > li:nth-child(even) {
+          background-color: #F3F3F3;
+}
+.chat ul.commnet-list  > li {
+    border-bottom: 1px solid #dddddd;
+    padding: 10px;
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 25px;
+}
+.chat ul.commnet-list form input[type="text"]{
+	padding-left: 12px;
+    padding-top: 12px;
+    padding-bottom: 12px;
+    height: 45px;
+    line-height: 45px;
+    border-bottom: 1px solid #d0d0d0;
+    border-left: 1px solid #d0d0d0;
+}
+.chat ul.commnet-list .form-group{
+ margin-bottom: 15px;
+    margin-top: 15px;
+	}
+.chat ul.commnet-list form button{
+	 top: 15px;
+}
+.commnet-wrapper > .message small > a h4 {
+    color: #565656;
+    font-size: 13px;
+    font-weight: normal;
+    margin-bottom: 2px;
+}
+.commnet-wrapper .message {
+    margin-bottom: 15px;
+>>>>>>> 4ef4826047062cead6cab7bdadea6962240a0cd3
 }
 /* Scroll down indicator (bouncing) */
 @-webkit-keyframes bounce {
@@ -327,3 +391,6 @@
     -ms-transform: translateY(-15px);
     -o-transform: translateY(-15px);
     transform: translateY(-15px); } }
+
+
+	
