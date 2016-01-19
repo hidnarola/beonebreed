@@ -121,10 +121,10 @@
     <link href="assets/stylesheets/plugins/bootstrap_daterangepicker/bootstrap-daterangepicker.css" media="all" rel="stylesheet" type="text/css" />
     <link href="assets/stylesheets/plugins/fullcalendar/fullcalendar.css" media="all" rel="stylesheet" type="text/css" />
     <link href="assets/stylesheets/plugins/common/bootstrap-wysihtml5.css" media="all" rel="stylesheet" type="text/css" />
-	<link href="assets/stylesheets/plugins/datatables/bootstrap-datatable.css" media="all" rel="stylesheet" type="text/css" />
-	<link href="assets/stylesheets/plugins/bootstrap_daterangepicker/bootstrap-daterangepicker.css" media="all" rel="stylesheet" type="text/css" />
+	  <link href="assets/stylesheets/plugins/datatables/bootstrap-datatable.css" media="all" rel="stylesheet" type="text/css" />
+	  <link href="assets/stylesheets/plugins/bootstrap_daterangepicker/bootstrap-daterangepicker.css" media="all" rel="stylesheet" type="text/css" />
     <link href="assets/stylesheets/plugins/bootstrap_datetimepicker/bootstrap-datetimepicker.min.css" media="all" rel="stylesheet" type="text/css" />
-	<link href="assets/stylesheets/plugins/fuelux/wizard.css" media="all" rel="stylesheet" type="text/css" />
+	  <link href="assets/stylesheets/plugins/fuelux/wizard.css" media="all" rel="stylesheet" type="text/css" />
 
     <link href='assets/images/meta_icons/favicon.ico' rel='shortcut icon' type='image/x-icon'>
     <link href='assets/images/meta_icons/apple-touch-icon.png' rel='apple-touch-icon-precomposed'>
@@ -133,12 +133,11 @@
     <link href='assets/images/meta_icons/apple-touch-icon-114x114.png' rel='apple-touch-icon-precomposed' sizes='114x114'>
     <link href='assets/images/meta_icons/apple-touch-icon-144x144.png' rel='apple-touch-icon-precomposed' sizes='144x144'>
 
-	<link href="assets/stylesheets/plugins/tabdrop/tabdrop.css" media="all" rel="stylesheet" type="text/css" />
+	  <link href="assets/stylesheets/plugins/tabdrop/tabdrop.css" media="all" rel="stylesheet" type="text/css" />
     <link href="assets/stylesheets/plugins/jgrowl/jquery.jgrowl.min.css" media="all" rel="stylesheet" type="text/css" />
     <link href="assets/stylesheets/jquery/jquery_ui.css" media="all" rel="stylesheet" type="text/css" />
     
-
-	<script src="assets/javascripts/jquery/jquery.min.js" type="text/javascript"></script>
+    <script src="assets/javascripts/jquery/jquery.min.js" type="text/javascript"></script>
   
     <!-- FAkeLoader JS & CSS START -->
     <link href="assets/stylesheets/demo_fakeloader.css" media="all" rel="stylesheet" type="text/css" />  
@@ -588,6 +587,9 @@
     <script src="assets/javascripts/theme.js" type="text/javascript"></script>
     <!-- / demo file [not required!] -->
     <script src="assets/javascripts/demo.js" type="text/javascript"></script>
+    <!-- For Bootstrap Switch  -->
+    <script src="assets/javascripts/plugins/bootstrap_switch/bootstrapSwitch.min.js" type="text/javascript"></script>
+
     <!-- / START - page related files and scripts [optional] -->
     <script src="assets/javascripts/plugins/flot/excanvas.js" type="text/javascript"></script>
     <script src="assets/javascripts/plugins/flot/flot.min.js" type="text/javascript"></script>

@@ -1,4 +1,4 @@
-                    <div class='box'>
+<!--                     <div class='box'>
                         <div class='box-content box-padding'>
                             <div class='fuelux'>
                                 <div class='wizard'>
@@ -19,6 +19,6 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
 
 <p>Marketing</p>

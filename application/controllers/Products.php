@@ -82,6 +82,31 @@ class Products extends CI_Controller {
 		echo json_encode(array('product_id'=>$product_id));
 	}
 
+	/**
+	* function admin_form_tab_2() for save Admin Tab-2 Form Data
+	*
+	* @return string
+	* @author Virendra patel - Spark id -vpa
+	**/	
+	public function admin_form_tab_2(){
+
+		p($_POST);
+	}
+
+ 	
+ 	// Generate UPC NO  
+	public function upc_get(){
+		$odd_sum = $even_sum = 0;
+		for ($i = 1; $i < 12; $i++) {
+			$digits[$i] = rand(0,9);
+			if($i % 2 == 0)
+				$even_sum += $digits[$i];
+			else
+				$odd_sum += $digits[$i];
+		}
+		$digits[$i] = 10 - ((3 * $odd_sum + $even_sum) % 10);
+		echo implode('',$digits);
+	}
 
 	// ------------------------------ // END ADMIN TAB FORM ------------------------------------------
 }

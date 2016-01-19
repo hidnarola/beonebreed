@@ -224,6 +224,75 @@
     display: inline-block;
     
 }
+.padding-l-0{
+  padding-left: 0;
+}
+.input-sub {
+    margin-bottom: 0;
+    padding-top: 5px;
+}
+.border-left{
+  position: relative;
+}
+.border-left::after {
+    border-left: 1px solid #ddd;
+    content: "";
+    height: 100%;
+    left: -50px;
+    position: absolute;
+    top: 0;
+    width: 1px;
+}
+.border-right{
+  position: relative;
+}
+.border-right::after {
+    border-right: 1px solid #ddd;
+    content: "";
+    height: 100%;
+    right: 50px;
+    top: 10px;
+    position: absolute;
+  
+    width: 1px;
+}
+.control-label.check-box-margin {
+    margin-left: 15px;
+    margin-top: 10px;
+}
+.check-list-number {
+    background-color: #49bf67;
+    border: 2px solid #49bf67;
+    border-radius: 50%;
+    color: #fff;
+    display: inline-block;
+    font-weight: bold;
+    height: 20px;
+    line-height: 16px;
+    text-align: center;
+    width: 20px;
+}
+.check-list .control-label {
+    margin-bottom: 15px;
+    margin-left: 10px;
+}
+.spinner7 {
+    height: 30px;
+    left: 50%;
+    position: absolute;
+    text-align: center;
+    top: 50%;
+    width: 90px;
+}
+#fakeLoader{
+  background-color:rgba(0,0,0,0.5) !important;
+
+}
+@media(max-width: 767px){
+  .border-left::after {
+    border-left: none;
+  }
+}
 /* Scroll down indicator (bouncing) */
 @-webkit-keyframes bounce {
   0%, 20%, 50%, 80%, 100% {

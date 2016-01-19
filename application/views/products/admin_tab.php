@@ -138,7 +138,7 @@
                     <div class="col-sm-6">
                         <h4> RETAIL UNIT DIMENSION </h4>
                         <br/>
-                        <div class='form-group col-sm-4 text-center'>
+                        <div class='form-group col-sm-4 text-left'>
                             <div class='controls'>
                                 <label class='control-label' >LENGTH</label>
                             </div>    
@@ -149,8 +149,13 @@
                                    placeholder='Length' type='text' >       
                           </div>
                         </div>
+                        <div class='form-group col-sm-4 padding-l-0'>
+                          <div class='controls'>
+                            <p class="input-sub">CM</p>
+                          </div>
+                        </div>
                         <div class="clearfix"></div>
-                        <div class='form-group col-sm-4 text-center'>
+                        <div class='form-group col-sm-4 text-left'>
                             <div class='controls'>
                                 <label class='control-label' >WIDTH</label>
                             </div>    
@@ -161,8 +166,13 @@
                                    placeholder='Width' type='text' >       
                           </div>
                         </div>
+                        <div class='form-group col-sm-4 padding-l-0'>
+                          <div class='controls'>
+                            <p class="input-sub">CM</p>
+                          </div>
+                        </div>
                         <div class="clearfix"></div>
-                        <div class='form-group col-sm-4 text-center'>
+                        <div class='form-group col-sm-4 text-left'>
                             <div class='controls'>
                                 <label class='control-label' >HEIGHT</label>
                             </div>    
@@ -173,34 +183,49 @@
                                    placeholder='Height' type='text' >       
                           </div>
                         </div>
+                        <div class='form-group col-sm-4 padding-l-0'>
+                          <div class='controls'>
+                            <p class="input-sub">CM</p>
+                          </div>
+                        </div>
                         <div class="clearfix"></div>
-                        <div class='form-group col-sm-4 text-center'>
+                        <div class='form-group col-sm-4 text-left'>
                             <div class='controls'>
                                 <label class='control-label' >GROSS WEIGHT</label>
                             </div>    
                         </div>    
                         <div class='form-group col-sm-4'>
                           <div class='controls'>
-                            <input class='form-control' id='gross_weight' name="gross_weight" 
+                            <input class='form-control' id='gross_weight' name="r_gross_weight" 
                                    placeholder='Gross Weight' type='text' >       
                           </div>
                         </div>
+                        <div class='form-group col-sm-4 padding-l-0'>
+                          <div class='controls'>
+                            <p class="input-sub">KG</p>
+                          </div>
+                        </div>
                         <div class="clearfix"></div>
-                        <div class='form-group col-sm-4 text-center'>
+                        <div class='form-group col-sm-4 text-left'>
                             <div class='controls'>
                                 <label class='control-label' >NET WEIGHT</label>
                             </div>    
                         </div>    
                         <div class='form-group col-sm-4'>
                           <div class='controls'>
-                            <input class='form-control' id='net_weight' name="net_weight" 
+                            <input class='form-control' id='net_weight' name="r_net_weight" 
                                    placeholder='Net Weight' type='text' >       
                           </div>
                         </div>
+                        <div class='form-group col-sm-4 padding-l-0'>
+                          <div class='controls'>
+                            <p class="input-sub">KG</p>
+                          </div>
+                        </div>
                         <div class="clearfix"></div>
-                        <div class='form-group col-sm-4 text-center'>
+                        <div class='form-group col-sm-4 text-left'>
                             <div class='controls'>
-                                <label class='control-label' >DM3</label>
+                                <label class='control-label' > </label>
                             </div>    
                         </div>    
                         <div class='form-group col-sm-4'>
@@ -209,81 +234,146 @@
                                    placeholder='DM3 Retail' type='text' >       
                           </div>
                         </div>
+                        <div class='form-group col-sm-4 padding-l-0'>
+                          <div class='controls'>
+                            <p class="input-sub">DM3</p>
+                          </div>
+                        </div>
                         <div class="clearfix"></div>
+                        <span class="color_red error_retail"></span>
                     </div>
 
-                    <div class="col-sm-6">
+                    <div class="col-sm-6 border-left">
                         <h4> MASTERCASE DIMENSION (CMA) </h4>
                         <br/>
-                        <div class='form-group col-sm-4 text-center'>
+                        <div class='form-group col-sm-2 text-left'>
+                            <div class='controls'>
+                                <label class='control-label' >UPC</label>
+                            </div>    
+                        </div> 
+                        <div class='form-group col-sm-6'>
+                          <div class='controls'>
+                            <input class='form-control' id='m_upc' readonly name="m_upc" 
+                                   placeholder='UPC' type='text' >       
+                          </div>
+                        </div>
+                         <div class='form-group col-sm-4 padding-l-0'>
+                          <div class='controls'>
+                                <a onclick="event.preventDefault(); m_upc_get()" class="btn btn-g-bar-code btn-success">G</a>
+                          </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <div class='form-group col-sm-4 text-left'>
                             <div class='controls'>
                                 <label class='control-label' >LENGTH</label>
                             </div>    
                         </div>    
                         <div class='form-group col-sm-4'>
                           <div class='controls'>
-                            <input class='form-control' id='' name="length" 
+                            <input class='form-control' id='m_length' onkeyup="dm3_mastercase()" name="m_length" 
                                    placeholder='Length' type='text' >       
                           </div>
                         </div>
+                        <div class='form-group col-sm-4 padding-l-0'>
+                          <div class='controls'>
+                            <p class="input-sub">CM</p>
+                          </div>
+                        </div>
                         <div class="clearfix"></div>
-                        <div class='form-group col-sm-4 text-center'>
+                        <div class='form-group col-sm-4 text-left'>
                             <div class='controls'>
                                 <label class='control-label' >WIDTH</label>
                             </div>    
                         </div>    
                         <div class='form-group col-sm-4'>
                           <div class='controls'>
-                            <input class='form-control' id='' name="width" 
+                            <input class='form-control' id='m_width' onkeyup="dm3_mastercase()" name="m_width" 
                                    placeholder='Width' type='text' >       
                           </div>
                         </div>
+                        <div class='form-group col-sm-4 padding-l-0'>
+                          <div class='controls'>
+                            <p class="input-sub">CM</p>
+                          </div>
+                        </div>
                         <div class="clearfix"></div>
-                        <div class='form-group col-sm-4 text-center'>
+                        <div class='form-group col-sm-4 text-left'>
                             <div class='controls'>
                                 <label class='control-label' >HEIGHT</label>
                             </div>    
                         </div>    
                         <div class='form-group col-sm-4'>
                           <div class='controls'>
-                            <input class='form-control' id='' name="height" 
+                            <input class='form-control' id='m_height' onkeyup="dm3_mastercase()" name="m_height" 
                                    placeholder='Height' type='text' >       
                           </div>
                         </div>
+                        <div class='form-group col-sm-4 padding-l-0'>
+                          <div class='controls'>
+                            <p class="input-sub">CM</p>
+                          </div>
+                        </div>
                         <div class="clearfix"></div>
-                        <div class='form-group col-sm-4 text-center'>
+                        <div class='form-group col-sm-4 text-left'>
                             <div class='controls'>
                                 <label class='control-label' >GROSS WEIGHT</label>
                             </div>    
                         </div>    
                         <div class='form-group col-sm-4'>
                           <div class='controls'>
-                            <input class='form-control' id='gross_weight' name="gross_weight" 
+                            <input class='form-control' id='m_gross_weight' name="m_gross_weight" 
                                    placeholder='Gross Weight' type='text' >       
                           </div>
                         </div>
+                        <div class='form-group col-sm-4 padding-l-0'>
+                          <div class='controls'>
+                            <p class="input-sub">KG</p>
+                          </div>
+                        </div>
                         <div class="clearfix"></div>
-                        <div class='form-group col-sm-4 text-center'>
+                        <div class='form-group col-sm-4 text-left'>
                             <div class='controls'>
                                 <label class='control-label' >NET WEIGHT</label>
                             </div>    
                         </div>    
                         <div class='form-group col-sm-4'>
                           <div class='controls'>
-                            <input class='form-control' id='net_weight' name="net_weight" 
+                            <input class='form-control' id='m_net_weight' name="m_net_weight" 
                                    placeholder='Net Weight' type='text' >       
                           </div>
                         </div>
+                        <div class='form-group col-sm-4 padding-l-0'>
+                          <div class='controls'>
+                            <p class="input-sub">KG</p>
+                          </div>
+                        </div>
                         <div class="clearfix"></div>
-                        <div class='form-group col-sm-4 text-center'>
+                        <div class='form-group col-sm-4 text-left'>
                             <div class='controls'>
-                                <label class='control-label' >DM3</label>
+                                <label class='control-label' > </label>
                             </div>    
                         </div>    
                         <div class='form-group col-sm-4'>
                           <div class='controls'>
-                            <input class='form-control' id='dm3_retail' name="dm3_retail" 
-                                   placeholder='DM3 Retail' type='text' >       
+                            <input class='form-control' id='dm3_master' readonly name="dm3_master" 
+                                   placeholder='DM3 Mastercase' type='text' >       
+                          </div>
+                        </div>
+                        <div class='form-group col-sm-4 padding-l-0'>
+                          <div class='controls'>
+                            <p class="input-sub">DM3</p>
+                          </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <div class='form-group col-sm-4 text-left'>
+                            <div class='controls'>
+                                <label class='control-label'> NO OF PC IN CASE </label>
+                            </div>    
+                        </div>    
+                        <div class='form-group col-sm-4'>
+                          <div class='controls'>
+                            <input class='form-control' id='no_pc_master' name="no_pc_master" 
+                                   placeholder=' No Of PC in CASE' type='text' >       
                           </div>
                         </div>
                         <div class="clearfix"></div>
@@ -291,162 +381,316 @@
                 </div>    
 
                 <div class="col-sm-12">
-                    <div class="col-sm-6">
+                    <div class="col-sm-6 ">
                         <h4> INNERCASE DIMENSION (CIN) </h4>
                         <br/>
-                        <div class='form-group col-sm-4 text-center'>
+                        <div class='form-group col-sm-2 text-left'>
+                            <div class='controls'>
+                                <label class='control-label' >UPC</label>
+                            </div>    
+                        </div> 
+                        <div class='form-group col-sm-6'>
+                          <div class='controls'>
+                            <input class='form-control' id='i_upc' readonly name="i_upc" 
+                                   placeholder='UPC' type='text' >       
+                          </div>
+                        </div>
+                         <div class='form-group col-sm-4 padding-l-0'>
+                          <div class='controls'>
+                                <a onclick="event.preventDefault(); i_upc_get()" class="btn btn-g-bar-code btn-success">G</a>
+                          </div>
+                        </div>
+                        <div class="clearfix"></div>
+
+                        <div class='form-group col-sm-4 text-left'>
                             <div class='controls'>
                                 <label class='control-label' >LENGTH</label>
                             </div>    
                         </div>    
                         <div class='form-group col-sm-4'>
                           <div class='controls'>
-                            <input class='form-control' id='' name="length" 
+                            <input class='form-control' onkeyup="dm3_inner_func()" id='i_length' name="i_length" 
                                    placeholder='Length' type='text' >       
                           </div>
                         </div>
+                        <div class='form-group col-sm-4 padding-l-0'>
+                          <div class='controls'>
+                            <p class="input-sub">CM</p>
+                          </div>
+                        </div>
                         <div class="clearfix"></div>
-                        <div class='form-group col-sm-4 text-center'>
+                        <div class='form-group col-sm-4 text-left'>
                             <div class='controls'>
                                 <label class='control-label' >WIDTH</label>
                             </div>    
                         </div>    
                         <div class='form-group col-sm-4'>
                           <div class='controls'>
-                            <input class='form-control' id='' name="width" 
+                            <input class='form-control'onkeyup="dm3_inner_func()" id='i_width' name="i_width" 
                                    placeholder='Width' type='text' >       
                           </div>
                         </div>
+                        <div class='form-group col-sm-4 padding-l-0'>
+                          <div class='controls'>
+                            <p class="input-sub">CM</p>
+                          </div>
+                        </div>
                         <div class="clearfix"></div>
-                        <div class='form-group col-sm-4 text-center'>
+                        <div class='form-group col-sm-4 text-left'>
                             <div class='controls'>
                                 <label class='control-label' >HEIGHT</label>
                             </div>    
                         </div>    
                         <div class='form-group col-sm-4'>
                           <div class='controls'>
-                            <input class='form-control' id='' name="height" 
+                            <input class='form-control' onkeyup="dm3_inner_func()" id='i_height' name="i_height" 
                                    placeholder='Height' type='text' >       
                           </div>
                         </div>
+                        <div class='form-group col-sm-4 padding-l-0'>
+                          <div class='controls'>
+                            <p class="input-sub">CM</p>
+                          </div>
+                        </div>
                         <div class="clearfix"></div>
-                        <div class='form-group col-sm-4 text-center'>
+                        <div class='form-group col-sm-4 text-left'>
                             <div class='controls'>
                                 <label class='control-label' >GROSS WEIGHT</label>
                             </div>    
                         </div>    
                         <div class='form-group col-sm-4'>
                           <div class='controls'>
-                            <input class='form-control' id='gross_weight' name="gross_weight" 
+                            <input class='form-control' id='i_gross_weight' name="i_gross_weight" 
                                    placeholder='Gross Weight' type='text' >       
                           </div>
                         </div>
+                        <div class='form-group col-sm-4 padding-l-0'>
+                          <div class='controls'>
+                            <p class="input-sub">KG</p>
+                          </div>
+                        </div>
                         <div class="clearfix"></div>
-                        <div class='form-group col-sm-4 text-center'>
+                        <div class='form-group col-sm-4 text-left'>
                             <div class='controls'>
                                 <label class='control-label' >NET WEIGHT</label>
                             </div>    
                         </div>    
                         <div class='form-group col-sm-4'>
                           <div class='controls'>
-                            <input class='form-control' id='net_weight' name="net_weight" 
+                            <input class='form-control' id='i_net_weight' name="i_net_weight" 
                                    placeholder='Net Weight' type='text' >       
                           </div>
                         </div>
+                        <div class='form-group col-sm-4 padding-l-0'>
+                          <div class='controls'>
+                            <p class="input-sub">KG</p>
+                          </div>
+                        </div>
                         <div class="clearfix"></div>
-                        <div class='form-group col-sm-4 text-center'>
+                        <div class='form-group col-sm-4 text-left'>
                             <div class='controls'>
-                                <label class='control-label' >DM3</label>
+                                <label class='control-label' > </label>
                             </div>    
                         </div>    
                         <div class='form-group col-sm-4'>
                           <div class='controls'>
-                            <input class='form-control' id='dm3_retail' name="dm3_retail" 
-                                   placeholder='DM3 Retail' type='text' >       
+                            <input class='form-control' id='dm3_inner' readonly name="dm3_inner" 
+                                   placeholder='DM3 INNER' type='text' >       
+                          </div>
+                        </div>
+                        <div class='form-group col-sm-4 padding-l-0'>
+                          <div class='controls'>
+                            <p class="input-sub">DM3</p>
+                          </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <div class='form-group col-sm-4 text-left'>
+                            <div class='controls'>
+                                <label class='control-label'> NO OF PC IN CASE </label>
+                            </div>    
+                        </div>    
+                        <div class='form-group col-sm-4'>
+                          <div class='controls'>
+                            <input class='form-control' id='no_pc_inner' name="no_pc_inner" 
+                                   placeholder='No Of PC in INNER CASE' type='text' >       
                           </div>
                         </div>
                         <div class="clearfix"></div>
                     </div>
 
-                    <div class="col-sm-6">
+                    <div class="col-sm-6 border-left">
                         <h4> PALLET DIMENSION (PAL) </h4>
                         <br/>
-                        <div class='form-group col-sm-4 text-center'>
+
+                        <div class='form-group col-sm-2 text-left'>
+                            <div class='controls'>
+                                <label class='control-label' >UPC</label>
+                            </div>    
+                        </div> 
+                        <div class='form-group col-sm-6'>
+                          <div class='controls'>
+                            <input class='form-control' id='p_upc' readonly name="p_upc" 
+                                   placeholder='UPC' type='text' >       
+                          </div>
+                        </div>
+                         <div class='form-group col-sm-4 padding-l-0'>
+                          <div class='controls'>
+                                <a onclick="event.preventDefault(); p_upc_get()" class="btn btn-g-bar-code btn-success">G</a>
+                          </div>
+                        </div>
+                        <div class="clearfix"></div>
+
+                        <div class='form-group col-sm-4 text-left'>
                             <div class='controls'>
                                 <label class='control-label' >LENGTH</label>
                             </div>    
                         </div>    
                         <div class='form-group col-sm-4'>
                           <div class='controls'>
-                            <input class='form-control' id='' name="length" 
+                            <input class='form-control' onkeyup="dm3_pallet_func()" id='p_length' name="p_length" 
                                    placeholder='Length' type='text' >       
                           </div>
                         </div>
+                        <div class='form-group col-sm-4 padding-l-0'>
+                          <div class='controls'>
+                            <p class="input-sub">CM</p>
+                          </div>
+                        </div>
                         <div class="clearfix"></div>
-                        <div class='form-group col-sm-4 text-center'>
+                        <div class='form-group col-sm-4 text-left'>
                             <div class='controls'>
                                 <label class='control-label' >WIDTH</label>
                             </div>    
                         </div>    
                         <div class='form-group col-sm-4'>
                           <div class='controls'>
-                            <input class='form-control' id='' name="width" 
+                            <input class='form-control' onkeyup="dm3_pallet_func()" id='p_width' name="p_width" 
                                    placeholder='Width' type='text' >       
                           </div>
                         </div>
+                        <div class='form-group col-sm-4 padding-l-0'>
+                          <div class='controls'>
+                            <p class="input-sub">CM</p>
+                          </div>
+                        </div>
                         <div class="clearfix"></div>
-                        <div class='form-group col-sm-4 text-center'>
+                        <div class='form-group col-sm-4 text-left'>
                             <div class='controls'>
                                 <label class='control-label' >HEIGHT</label>
                             </div>    
                         </div>    
                         <div class='form-group col-sm-4'>
                           <div class='controls'>
-                            <input class='form-control' id='' name="height" 
+                            <input class='form-control' onkeyup="dm3_pallet_func()" id='p_height' name="p_height" 
                                    placeholder='Height' type='text' >       
                           </div>
                         </div>
+                        <div class='form-group col-sm-4 padding-l-0'>
+                          <div class='controls'>
+                            <p class="input-sub">CM</p>
+                          </div>
+                        </div>
                         <div class="clearfix"></div>
-                        <div class='form-group col-sm-4 text-center'>
+                        <div class='form-group col-sm-4 text-left'>
                             <div class='controls'>
                                 <label class='control-label' >GROSS WEIGHT</label>
                             </div>    
                         </div>    
                         <div class='form-group col-sm-4'>
                           <div class='controls'>
-                            <input class='form-control' id='gross_weight' name="gross_weight" 
+                            <input class='form-control' id='p_gross_weight' name="p_gross_weight" 
                                    placeholder='Gross Weight' type='text' >       
                           </div>
                         </div>
+                        <div class='form-group col-sm-4 padding-l-0'>
+                          <div class='controls'>
+                            <p class="input-sub">KG</p>
+                          </div>
+                        </div>
                         <div class="clearfix"></div>
-                        <div class='form-group col-sm-4 text-center'>
+                        <div class='form-group col-sm-4 text-left'>
                             <div class='controls'>
                                 <label class='control-label' >NET WEIGHT</label>
                             </div>    
                         </div>    
                         <div class='form-group col-sm-4'>
                           <div class='controls'>
-                            <input class='form-control' id='net_weight' name="net_weight" 
+                            <input class='form-control' id='p_net_weight' name="p_net_weight" 
                                    placeholder='Net Weight' type='text' >       
                           </div>
                         </div>
+                        <div class='form-group col-sm-4 padding-l-0'>
+                          <div class='controls'>
+                            <p class="input-sub">KG</p>
+                          </div>
+                        </div>
                         <div class="clearfix"></div>
-                        <div class='form-group col-sm-4 text-center'>
+                        <div class='form-group col-sm-4 text-left'>
                             <div class='controls'>
-                                <label class='control-label' >DM3</label>
+                                <label class='control-label' ></label>
                             </div>    
                         </div>    
                         <div class='form-group col-sm-4'>
                           <div class='controls'>
-                            <input class='form-control' id='dm3_retail' name="dm3_retail" 
+                            <input class='form-control' id='dm3_pallet' name="dm3_pallet" 
                                    placeholder='DM3 Retail' type='text' >       
                           </div>
                         </div>
-                        <div class="clearfix"></div>                        
+                        <div class='form-group col-sm-4 padding-l-0'>
+                          <div class='controls'>
+                            <p class="input-sub">DM3</p>
+                          </div>
+                        </div>
+                        <div class="clearfix"></div>   
+                        <div class='form-group col-sm-4 text-left'>
+                            <div class='controls'>
+                                <label class='control-label' > CASE/ROW</label>
+                            </div>    
+                        </div>    
+                        <div class='form-group col-sm-4'>
+                          <div class='controls'>
+                            <input class='form-control' id='p_case_row' onkeyup="cma_per_pal()" name="p_case_row" 
+                                   placeholder=' CASE/ROW ' type='text' >       
+                          </div>
+                        </div>
+                        <div class="clearfix"></div>        
+                        <div class='form-group col-sm-4 text-left'>
+                            <div class='controls'>
+                                <label class='control-label' > # of ROWS </label>
+                            </div>    
+                        </div>    
+                        <div class='form-group col-sm-4'>
+                          <div class='controls'>
+                            <input class='form-control' id='p_no_of_row' onkeyup="cma_per_pal()" name="p_no_of_row" 
+                                   placeholder='# of ROWS' type='text' >       
+                          </div>
+                        </div>
+                        <div class="clearfix"></div>
+
+                        <div class='form-group col-sm-4 text-left'>
+                            <div class='controls'>
+                                <label class='control-label' > CMA PER PAL </label>
+                            </div>    
+                        </div>    
+                        <div class='form-group col-sm-4'>
+                          <div class='controls'>
+                            <input class='form-control' id='p_cma_per_pal' readonly name="p_cma_per_pal" 
+                                   placeholder='CMA PER PAL' type='text' >       
+                          </div>
+                        </div>
+                        <div class="clearfix"></div>
                     </div>
                 </div>    
                 
                 <div class="col-sm-12">
+                    <div class='form-group col-sm-4 text-left'>
+                            <div class='controls'>
+                                <label class='control-label check-box-margin'>
+                                    <input type="checkbox" name="" id=""> <span>PART 2 COMPLETED (33%)</span>
+                                </label>
+                            </div>    
+                        </div>
+                    
                     <div class='form-group pull-right'>
                         <div class='controls'>
                             <input type="hidden" name="" id="" value="">
@@ -479,15 +723,15 @@
                       </div>
                     </div>
                     <div class='form-group'>
-                      <label class='control-label' for='product_name'>HS CODE</label>
+                      <label class='control-label' for='product_name'>MRSP INTERNTIONAL</label>
                       <div class='controls'>
                         <input class='form-control' id='hs_code' name="hs_code" 
-                               placeholder='Please enter HS CODE' type='text' onkeyup="$('.error_hs_code').addClass('hide');">
+                               placeholder='Please MRSP INTERNATIONAL' type='text' onkeyup="$('.error_hs_code').addClass('hide');">
                         <span class="color_red hide error_hs_code" >Plese Enter HS CODE </span>
                       </div>
                     </div>
-                    
                 </div>
+                
                 <div class="col-sm-6">
                     <div class='form-group'>
                       <label class='control-label' for='product_name'>HS CODE</label>
@@ -498,30 +742,66 @@
                       </div>
                     </div>
                     <div class='form-group'>
-                      <label class='control-label' for='product_name'>HS CODE</label>
+                      <label class='control-label' for='product_name'>COUNTRY OF ORIGIN</label>
                       <div class='controls'>
                         <input class='form-control' id='hs_code' name="hs_code" 
-                               placeholder='Please enter HS CODE' type='text' onkeyup="$('.error_hs_code').addClass('hide');">
+                               placeholder='Please enter Country of origin' type='text' onkeyup="$('.error_hs_code').addClass('hide');">
                         <span class="color_red hide error_hs_code" >Plese Enter HS CODE </span>
                       </div>
                     </div>
                     <div class="clearfix"></div>
-                    <br/>
-                    <div>
-                        <input type="checkbox" name="complete_admin_part_1" id="complete_admin_part_1" > Part-3 Completed (34%)
-                        <span class="color_red error_admin_part_1 hide">Please Check this checkbox for procced further.</span>
-                    </div>    
-                    <div class='form-group pull-right'>
 
-                      <div class='controls'>
-                        <input type="hidden" name="" id="" value="">
-                        <a class="btn btn-success" onclick="validate_admin_part_3()" >
-                            <i class='icon-save'></i> Save
-                        </a>
-                        <a href="" class="btn btn-default" >Cancel</a>
-                      </div>
+                </div> 
+
+                <div class="clearfix"></div>
+               <div class="col-sm-12">
+                    <h4> CHECK LIST </h4>
+                    <div class="row check-list">
+                        <div class="col-sm-6">
+                            <span class="check-list-number">1</span>
+                            <label class='control-label'>HAVE YOU SENT THE UPC CODE TO THE SUPPLIER ?</label>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class='make-switch switch' data-off-label='&lt;i class="icon-remove"&gt;&lt;/i&gt;' data-on-label='&lt;i class="icon-ok"&gt;&lt;/i&gt;'>
+                              <input type='checkbox'>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <div class="col-sm-6">
+                            <span class="check-list-number">2</span>
+                            <label class='control-label'>HAVE YOU CREATED THE PRODUCT IN OUR ERP (ACOMBA) ?</label>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class='make-switch switch' data-off-label='&lt;i class="icon-remove"&gt;&lt;/i&gt;' data-on-label='&lt;i class="icon-ok"&gt;&lt;/i&gt;'>
+                              <input   type='checkbox'>
+                            </div>
+                        </div>
                     </div>
-                </div>    
+                </div>
+                    
+                <div class="col-sm-6">
+                   
+                </div>
+                <div class="col-sm-6">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <input type="checkbox" name="complete_admin_part_1" id="complete_admin_part_1" > Part-3 Completed (34%)
+                            <span class="color_red error_admin_part_3 hide">Please Check this checkbox for procced further.</span>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class='form-group pull-right'>
+                                <div class='controls'>
+                                <input type="hidden" name="" id="" value="">
+                                <a class="btn btn-success" onclick="validate_admin_part_3()" >
+                                    <i class='icon-save'></i> Save
+                                </a>
+                                <a href="" class="btn btn-default" >Cancel</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>        
+                    <div class="clearfix"></div>
+                </div>   
             </div>                                                
         </form> 
         <!--  =========== //END TAB-3 ===============  -->
@@ -531,11 +811,36 @@
 
 <script type="text/javascript">
 
+    //Check Value is an Integer
+    function isInt(n) {
+       return n % 1 === 0;
+    }
+
+    function isNumber(n) {
+      return !isNaN(parseFloat(n)) && isFinite(n);
+    }
+
+    // validation for Checkbox weather it is checked or not? 
+    function validate(field_name) {
+        if (document.getElementById(field_name).checked) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
 //------------------- ADMIN PART 1 START ---------------------/
 
     // For generate UPC and EAN number     
     function generate_upc_ean(){
         
+        $("#fakeLoader").attr('style',''); // Remove Style Attribute for reuse
+        $("#fakeLoader").fakeLoader({
+            timeToHide:300,
+            bgColor:"#2ecc71",
+            spinner:"spinner7"
+        }); // Fakeloader plugin
+
         $('.error_generate').addClass('hide');
         var cat_id = $('#category').val();
 
@@ -551,20 +856,6 @@
                 $('#barcode_id').val(data.id);
             }
         });
-    }
-
-    //Check Value is an Integer
-    function isInt(n) {
-       return n % 1 === 0;
-    }
-
-    // validation for Checkbox weather it is checked or not? 
-    function validate(field_name) {
-        if (document.getElementById(field_name).checked) {
-            return true;
-        } else {
-            return false;
-        }
     }
 
     function validate_admin_part_1(){
@@ -597,7 +888,7 @@
                 spinner:"spinner7"
             }); // Fakeloader plugin
             
-           $.ajax({
+            $.ajax({
                url: '<?php echo base_url()."products/admin_form_tab_1"; ?>',
                type: 'POST',
                dataType: 'json',
@@ -608,26 +899,139 @@
                     $('#generate_barcode').attr('disabled',true);
                     $('#percentage_complete').html('33%');
                }
-           });
-           
+            });
         }
     }
 
+//------------------- //ADMIN PART 1 END ---------------------/
+
+//------------------- ADMIN PART 2 START ---------------------/
+    
     function dm3_retail_func(){
+        
         var r_length=1;
         var r_width=1;
         var r_height=1;
-       
-        r_length = parseFloat($('#r_length').val()); // set like if blank then 1
-        r_width = parseFloat($('#r_width').val());  
-        r_height = parseFloat($('#r_height').val()); 
+
+        if($('#r_length').val() == '' && $('#r_width').val() == '' && $('#r_height').val() == '' ){ $('#dm3_retail').val(''); return false; }
+        
+        if($('#r_length').val() != ''){ r_length = parseFloat($('#r_length').val()); }
+        if($('#r_width').val() != ''){ r_width = parseFloat($('#r_width').val()); }
+        if($('#r_height').val() != ''){ r_height = parseFloat($('#r_height').val());}
         
         var r_dm3 = parseFloat(r_length*r_width*r_height)/1000;
 
         $('#dm3_retail').val(r_dm3);
     }
 
-//------------------- //ADMIN PART 1 END ---------------------/
+    function dm3_mastercase(){
 
+        var m_length=1;
+        var m_width=1;
+        var m_height=1;
+
+        if($('#m_length').val() == '' && $('#m_width').val() == '' && $('#m_height').val() == '' ){ $('#dm3_master').val(''); return false; }
+        
+        if($('#m_length').val() != ''){ m_length = parseFloat($('#m_length').val()); }
+        if($('#m_width').val() != ''){ m_width = parseFloat($('#m_width').val()); }
+        if($('#m_height').val() != ''){ m_height = parseFloat($('#m_height').val());}
+        
+        var m_dm3 = parseFloat(m_length*m_width*m_height)/1000;
+
+        $('#dm3_master').val(m_dm3);
+    }
+
+    function dm3_inner_func(){
+        var i_length=1;
+        var i_width=1;
+        var i_height=1;
+
+        if($('#i_length').val() == '' && $('#i_width').val() == '' && $('#i_height').val() == '' ){ $('#dm3_inner').val(''); return false; }
+        
+        if($('#i_length').val() != ''){ i_length = parseFloat($('#i_length').val()); }
+        if($('#i_width').val() != ''){ i_width = parseFloat($('#i_width').val()); }
+        if($('#i_height').val() != ''){ i_height = parseFloat($('#i_height').val());}
+        
+        var i_dm3 = parseFloat(i_length*i_width*i_height)/1000;
+
+        $('#dm3_inner').val(i_dm3);
+    }
+
+    function dm3_pallet_func(){
+        var p_length=1;
+        var p_width=1;
+        var p_height=1;
+
+        if($('#p_length').val() == '' && $('#p_width').val() == '' && $('#p_height').val() == '' ){ $('#dm3_pallet').val(''); return false; }
+        
+        if($('#p_length').val() != ''){ p_length = parseFloat($('#p_length').val()); }
+        if($('#p_width').val() != ''){ p_width = parseFloat($('#p_width').val()); }
+        if($('#p_height').val() != ''){ p_height = parseFloat($('#p_height').val());}
+        
+        var p_dm3 = parseFloat(p_length*p_width*p_height)/1000;
+
+        $('#dm3_pallet').val(p_dm3);
+    }
+
+    function m_upc_get(){
+        $.ajax({
+            url: '<?php echo base_url()."products/upc_get"; ?>',
+            type: 'GET',
+            success:function(data){
+                $('#m_upc').val(data);
+            }
+        });        
+    }
+
+    function i_upc_get(){
+        $.ajax({
+            url: '<?php echo base_url()."products/upc_get"; ?>',
+            type: 'GET',
+            success:function(data){
+                $('#i_upc').val(data);
+            }
+        });        
+    }
+
+    function p_upc_get(){
+        $.ajax({
+            url: '<?php echo base_url()."products/upc_get"; ?>',
+            type: 'GET',
+            success:function(data){
+                $('#p_upc').val(data);
+            }
+        });
+    }
+
+    function cma_per_pal(){
+        var p_case_row = 1;
+        var p_no_of_row = 1;
+
+        if( $('#p_case_row').val() != '') { p_case_row = $('#p_case_row').val(); }
+        if( $('#p_no_of_row').val() != '') { p_no_of_row = $('#p_no_of_row').val(); }
+
+        if($('#p_case_row').val() == '' && $('#p_no_of_row').val() ){ $('#p_cma_per_pal').val(''); return false; }
+        var res = parseFloat(p_case_row*p_no_of_row);
+
+        p_cma_per_pal = $('#p_cma_per_pal').val(res);        
+    }
+
+    function validate_admin_part_2(){
+        var product_id = $('#product_id').val();
+        if(product_id == ''){
+            //$(function(){ bootbox.alert('Please create product in Part-1.'); return false; });
+        }
+
+        var error_cnt = 0;
+        var dm3_retail = $('#dm3_retail').val();
+        var gross_weight = $('#gross_weight').val();
+        var net_weight = $('#net_weight').val();
+        var error_retail = $('.error_retail').html();    
+        if(dm3_retail != ''){ if(isNumber(dm3_retail) == false){  error_cnt++; }  }
+        if(gross_weight != ''){ if(isNumber(gross_weight) == false){  error_cnt++; }  }
+        if(net_weight != ''){ if(isNumber(net_weight) == false){ error_cnt++; }  }
+    }
+
+//------------------- //ADMIN PART 2 END ---------------------/
     
 </script>
