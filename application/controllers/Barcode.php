@@ -142,6 +142,7 @@ class Barcode extends CI_Controller {
 				$path = $_SERVER['DOCUMENT_ROOT'].'/uploads/barcode/'.$file_name;
 				$data = $this->csvimport->get_array($path, "", TRUE);
 
+				p($data,true);
 				if(!empty($data)){
 					foreach($data as $d){	
 
@@ -162,13 +163,13 @@ class Barcode extends CI_Controller {
 												'ean'=>$ean,
 												'description'=>$description
 											);
-							$this->barcode_model->insert($data_barcode);									
+							// $this->barcode_model->insert($data_barcode);									
 						}
 					}
 				}
 
-				$this->session->set_flashdata('success', 'Barcode has been imported successfully.');
-				redirect('barcode');
+				// $this->session->set_flashdata('success', 'Barcode has been imported successfully.');
+				// redirect('barcode');
 			}
 		}
 		

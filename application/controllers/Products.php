@@ -3,6 +3,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Products extends CI_Controller {
 
+	public function __construct(){
+		parent::__construct();
+		
+	}
+
 	public function index(){
 		
 		// $data['barcodes'] = $this->barcode_model->get_all();
@@ -93,6 +98,18 @@ class Products extends CI_Controller {
 		p($_POST);
 	}
 
+	/**
+	* function admin_form_tab_2() for save Admin Tab-2 Form Data
+	*
+	* @return string
+	* @author Virendra patel - Spark id -vpa
+	**/	
+	public function admin_form_tab_3(){
+
+		p($_POST);
+	}
+
+
  	
  	// Generate UPC NO  
 	public function upc_get(){
@@ -109,6 +126,34 @@ class Products extends CI_Controller {
 	}
 
 	// ------------------------------ // END ADMIN TAB FORM ------------------------------------------
+
+
+	// ------------------------------ START ATTACHMENT TAB FORM ------------------------------------------
+
+	public function product_attachment(){
+		
+		echo $product_id = $this->input->post('product_id');
+
+		die();
+
+		$config['upload_path'] = './uploads/products/';
+		$config['allowed_types'] = '*';
+		
+		$this->load->library('upload', $config);
+		
+		if ( ! $this->upload->do_upload('prod_attachment')){
+			$error = array('error' => $this->upload->display_errors());
+			
+		}else{
+			$data = array('upload_data' => $this->upload->data());
+			p($data);
+			
+		}
+
+	}
+
+	// ------------------------------ // END ATTACHMENT TAB FORM ------------------------------------------
+
 }
 
 /* End of file Products.php */

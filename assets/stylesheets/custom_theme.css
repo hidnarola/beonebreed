@@ -289,6 +289,66 @@
   background-color:rgba(0,0,0,0.5) !important;
 
 }
+.complete-level-ul{
+
+}
+.complete-level .complete-level-ul li {
+    display: inline-block;
+    width: 18%;
+}
+.complete-level .complete-level-ul li span{
+  display: block;
+}
+.complete-level .complete-level-ul li span{
+  
+  height: 20px;
+  width: 100%;
+  text-align: center;
+  font-size: 15px;
+}
+.complete-level .complete-level-ul li span:first-child{
+  border: 1px solid #ddd;
+}
+.complete-level .complete-level-ul li.active span:first-child{
+  background-color: #73ad21;
+}
+.complete-level .complete-level-ul li.active span{
+  font-weight: bold;
+}
+.complete-level .complete-level-ul ul {
+    padding: 0;
+}
+.inline-block.complete-level-ul {
+    display: inline-block;
+      vertical-align: top;
+    width: 85%;
+}
+.complete-level-action{ 
+      width: 10%;
+      display: inline-block;
+      vertical-align: top;
+    }
+.complete-level-action h1{
+  margin: 0;
+}
+
+
+    .color_red{
+        color:red;
+    }
+    .color_grey,.gray-bg{
+        background-color: #888;
+        color:#fff;
+        padding:10px;
+        font-weight: bold;
+    }
+    .hr-normal{
+        margin-top: 10px !important;
+        margin-bottom: 10px !important;
+    }
+    .margin-bottom-10{
+      margin-bottom: 10px;
+    }
 @media(max-width: 767px){
   .border-left::after {
     border-left: none;
@@ -355,7 +415,8 @@
 }
 .commnet-wrapper .message {
     margin-bottom: 15px;
->>>>>>> 4ef4826047062cead6cab7bdadea6962240a0cd3
+
+}
 }
 /* Scroll down indicator (bouncing) */
 @-webkit-keyframes bounce {

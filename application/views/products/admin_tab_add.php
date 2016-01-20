@@ -1,29 +1,28 @@
-<div class='box'>
-    <div class='box-content box-padding'>
-        <div class='fuelux'>
-            <div class='wizard'>
-              <ul class='steps'>
-                <li class='active'>
-                  <span class='step'>Part - 1</span>
-                </li>
-                <li data-target='#step2'>
-                  <span class='step'>Part - 2</span>
-                </li>
-                <li data-target='#step3'>
-                  <span class='step'>Part - 3</span>
-                </li>
-              </ul>
-              <div class='actions'>
-                <h1 id="percentage_complete"> 0% </h1>
-              </div>
-            </div>
-        </div>
+<div class="complete-level">
+    <h5>COMPLETE LEVEL</h5>
+    <div class="inline-block complete-level-ul"> 
+        <ul>
+            <li class="part_1_admin">
+                <span></span>
+                <span>PART 1</span>
+            </li>
+            <li>
+                <span></span>
+                <span>PART 2</span>
+            </li>
+            <li>
+                <span></span>
+                <span>PART 3</span>
+            </li>
+        </ul>
+    </div>
+    <div class="inline-block complete-level-action">
+        <h1 class="percentage_complete_admin"> 0% </h1>
     </div>
 </div>
 
 <div class='row'>
     <div class='col-sm-12'>
-        <hr class='hr-normal'>
         <!--  =========== ADMIN TAB PART 1 START ===============  -->
         <form class="form" style="margin-bottom: 0;" method="post" action="#" accept-charset="UTF-8" id="admin_part_1">
             <div class="row">
@@ -867,10 +866,8 @@
         var upc = $('#upc').val();
         var ean = $('#ean').val();
         var prod_code = $('#prod_code').val();
-        var complete_admin_part_1 = validate('complete_admin_part_1');
+        var complete_admin_part_1 = validate('complete_admin_part_1');        
 
-        
-        
         var form_data = $("#admin_part_1").serializeArray();
 
         if(product_name == ''){ $('.error_product_name').removeClass('hide'); error_cnt++; }else{ $('.error_product_name').addClass('hide'); }
@@ -897,7 +894,8 @@
                     $('#product_id').val(data.product_id);
                     $('#complete_admin_part_1').attr('disabled',true);
                     $('#generate_barcode').attr('disabled',true);
-                    $('#percentage_complete').html('33%');
+                    $('.percentage_complete_admin').html('33%');
+                    $('.part_1_admin').addClass('active');
                }
             });
         }
@@ -983,6 +981,7 @@
         });        
     }
 
+    //To Generate UPC number for Inner Case
     function i_upc_get(){
         $.ajax({
             url: '<?php echo base_url()."products/upc_get"; ?>',
@@ -993,6 +992,7 @@
         });        
     }
 
+    //To Generate UPC number for Pallet
     function p_upc_get(){
         $.ajax({
             url: '<?php echo base_url()."products/upc_get"; ?>',
@@ -1003,6 +1003,7 @@
         });
     }
 
+    //To Generate UPC number for Pallet Case
     function cma_per_pal(){
         var p_case_row = 1;
         var p_no_of_row = 1;
