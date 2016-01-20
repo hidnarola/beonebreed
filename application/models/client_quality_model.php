@@ -14,14 +14,17 @@ class Client_quality_model extends CI_Model {
   }
 
   public function get_all() {
+    if (!empty($this->session->userdata('client_id'))) {
+        $client_id = $this->session->userdata('client_id');
+     }  
     $this->db->select('quality.*,product.name as product_name,store.name as store_name,report_status.name as report_status,users.username');
     $this->db->from('quality');
     $this->db->join('product', 'quality.product = product.id', 'left');
     $this->db->join('store', 'quality.store = store.id', 'left');
-	$this->db->join('report_status', 'quality.status = report_status.id', 'left');
-	$this->db->join('users', 'quality.user_id = users.id', 'left');
-	//$this->db->where('quality.user_id', $user_id);
-	//$this->db->where('quality.client_id',$client_id);
+    $this->db->join('report_status', 'quality.status = report_status.id', 'left');
+    $this->db->join('users', 'quality.user_id = users.id', 'left');
+    //$this->db->where('quality.user_id', $user_id);
+    $this->db->where('quality.client_id',$client_id);
     $query = $this->db->get();
     return $query->result();
   }

@@ -39,12 +39,12 @@
                     
                      <div class='form-group'>
                         <label for='inputText'>Username</label><span style="color:red">*</span>
-                        <input class='form-control' id='inputText' placeholder='Username' type='text' name='username' >
+                        <input class='form-control' id='inputText' placeholder='Username' type='text' name='username' value="<?php echo set_value('username');?>">
                         <span style="color:red"><?php echo form_error('username'); ?><span>
                     </div>
                      <div class='form-group'>
                         <label for='inputText'>Email</label><span style="color:red">*</span>
-                        <input class='form-control' id='inputText' placeholder='Email' type='text' name='email' >
+                        <input class='form-control' id='inputText' placeholder='Email' type='text' name='email' value="<?php echo set_value('email');?>">
                         <span style="color:red"><?php echo form_error('email'); ?><span>
                     </div>
 																			 <div class='form-group'>
@@ -55,7 +55,7 @@
                           if (!empty($store_list)) {
                             foreach ($store_list as $k => $v) {
                               ?>
-                              <option value="<?php echo $v->id; ?>"><?php echo ucfirst($v->name); ?></option>
+                              <option value="<?php echo $v->id; ?>" <?php echo set_select('store',$v->id); ?>><?php echo ucfirst($v->name); ?></option>
 
                               <?php
                             }

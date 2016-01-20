@@ -1,4 +1,3 @@
-
 <div class='row' id='content-wrapper'>
   <div class='col-xs-12'>
     <div class='row'>
@@ -39,7 +38,7 @@
                     
                     <div class='form-group'>
                       <label for='inputText'>Name</label><span style="color:red">*</span>
-                      <input class='form-control' id='inputText' placeholder='Name' type='text' name='name'>
+                      <input class='form-control' id='inputText' placeholder='Name' type='text' name='name' value="<?php echo set_value('name');?>">
                       <span style="color:red"><?php echo form_error('name'); ?><span> 
                           
                     </div>
@@ -50,7 +49,7 @@
 
                     <div class='form-group'>
                       <label for='inputText'>Telephone</label>
-                      <input class='form-control' id='inputText' placeholder='Telephone' type='text' name='telephone'>
+                      <input class='form-control' id='inputText' placeholder='Telephone' type='text' name='telephone' value="<?php echo set_value('telephone');?>">
                     </div>
                   </div>
 
@@ -62,7 +61,7 @@
                     </div>
                     <div class='form-group'>
                       <label for='inputText'>Fax</label>
-                      <input class='form-control' id='inputText' placeholder='Fax' type='text' name='fax'>
+                      <input class='form-control' id='inputText' placeholder='Fax' type='text' name='fax' value="<?php echo set_value('fax');?>">
                     </div> 
                     <div class='text-right form-actions form-actions-padding-sm form-actions-padding-md form-actions-padding-lg' style='margin-bottom: 0;'>
                       <button class='btn btn-success' type='submit'>

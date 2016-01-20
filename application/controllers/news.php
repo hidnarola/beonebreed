@@ -14,7 +14,7 @@ class News extends CI_Controller {
 	$this->load->helper('time_ago_helper');
 
 	if (!$this->session->userdata('admin_logged_in')) {
-	    redirect('/login');
+	    redirect('login');
 	}
     }
 

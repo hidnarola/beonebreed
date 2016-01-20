@@ -11,11 +11,11 @@ class Client_quality extends CI_Controller {
     $this->load->database();
     $this->load->library('form_validation');
       if (!$this->session->userdata('client_user_logged_in')) {
-      redirect('/login');
+      redirect('login');
       } 
   }
   public function index() {
-	$data['quality_list']=$this->client_quality_model->get_all();
+    $data['quality_list']=$this->client_quality_model->get_all();
     $this->template->load('mondou_default', 'client_quality/index', $data);
   }
 
@@ -66,13 +66,6 @@ class Client_quality extends CI_Controller {
         if (!empty($id)) {
           redirect('client_quality/add_next/' . $id);
         }
-        /*
-          if ($this->client_quality_model->add_records($data, TRUE)) {
-          $this->session->set_flashdata('msg', 'Your record has been successfully added');
-          } else {
-          $this->session->set_flashdata('err_msg', 'Oops!Something Wrong!');
-          }
-          redirect('mondou/mondou/'); */
       }
     }
   }

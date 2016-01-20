@@ -15,7 +15,7 @@ class Suggestion extends CI_Controller {
     
       if (!$this->session->userdata('admin_logged_in'))
 			{ 
-				redirect('/login');
+				redirect('login');
 			}
   }
 

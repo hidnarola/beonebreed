@@ -17,6 +17,11 @@ $lang['Finished'] = "Fini";
 $lang['View'] = "vue";
 $lang['close'] = "Pre&#768;s";
 $lang['title'] = "Titre";
+$lang['sign_out'] = "se de&#769connecter";
+$lang['Sign in'] = "se connecter";
+$lang['Username'] = "le nom d'utilisateur";
+$lang['Password'] = "Mot de passe";
+
 
 
 

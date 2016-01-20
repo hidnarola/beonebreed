@@ -39,19 +39,18 @@
                     
                      <div class='form-group'>
                         <label for='inputText'>Username</label><span style="color:red">*</span>
-                        <input class='form-control' id='inputText' placeholder='Username' type='text' name='username' >
+                        <input class='form-control' id='inputText' placeholder='Username' type='text' name='username' value="<?php echo set_value('username');?>" >
                         <span style="color:red"><?php echo form_error('username'); ?><span>
                     </div>
                      <div class='form-group'>
                         <label for='inputText'>Email</label><span style="color:red">*</span>
-                        <input class='form-control' id='inputText' placeholder='Email' type='text' name='email' >
+                        <input class='form-control' id='inputText' placeholder='Email' type='text' name='email' value="<?php echo set_value('email');?>">
                         <span style="color:red"><?php echo form_error('email'); ?><span>
                     </div>
-																			<div class='form-group'>
-																							<label for='inputText'>Upload</label>
-																							<input type="file" class="form_input_contact" name="file" id="file" accept="image/*"/>
-																							
-																			</div>
+                        <div class='form-group'>
+                            <label for='inputText'>Upload</label>
+                            <input type="file" class="form_input_contact" name="file" id="file" accept="image/*"/>
+                        </div>
                   </div>
 
                   <div style="display:inline-block;float:right;width:50%" class='box-content'>

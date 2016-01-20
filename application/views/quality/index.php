@@ -80,7 +80,7 @@
     					<td><?php echo $u_key->store_name; ?> </td>
 
     					<td> <?php echo $u_key->report_status; ?> </td>
-    					<td><?php echo $u_key->description; ?> </td>
+    					<td><?php echo substr($u_key->description, 0,80); ?> </td>
 						
     					<td>
     					    <div class='text-left'>
@@ -163,7 +163,7 @@
     					<td><?php echo $u_key->store_name; ?> </td>
 
     					<td> Case Closed</td>
-    					<td><?php echo $u_key->description; ?> </td>
+    					<td><?php echo substr($u_key->description, 0,80); ?></td>
 
     					<td>
     					    <div class='text-left'>

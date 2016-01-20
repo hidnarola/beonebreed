@@ -17,6 +17,26 @@ $config = array(
             'label' => 'Estimate Days',
             'rules' => 'numeric'
         ),
+        array(
+            'field' => 'category_id',
+            'label' => 'category_id',
+            'rules' => 'trim'
+        ),
+        array(
+            'field' => 'priority',
+            'label' => 'priority',
+            'rules' => 'trim'
+        ),
+        array(
+            'field' => 'project_manager',
+            'label' => 'project_manager',
+            'rules' => 'trim'
+        ),
+        array(
+            'field' => 'quick_notes',
+            'label' => 'quick_notes',
+            'rules' => 'trim'
+        ),
     ),
     'faq' => array(
         array(
@@ -43,6 +63,12 @@ $config = array(
             'label' => 'Action',
             'rules' => 'required'
         ),
+        array(
+            'field' => 'complete_level',
+            'label' => 'Complete Level',
+            'rules' => 'numeric'
+        ),
+        
     ),
     'type' => array(
         array(
@@ -96,11 +122,11 @@ $config = array(
             'label' => 'Email',
             'rules' => 'required|valid_email|is_unique[users.email]'
         ),
-         array(
+        array(
             'field' => 'password_confirm',
             'label' => 'Password Confirm',
             'rules' => 'required'
-        ),        
+        ),
     ),
     'edit_user' => array(
         array(
@@ -112,33 +138,38 @@ $config = array(
             'field' => 'email',
             'label' => 'Email',
             'rules' => 'required|valid_email'
-        ),     
+        ),
     ),
     'store' => array(
         array(
             'field' => 'name',
             'label' => 'Name',
             'rules' => 'required'
-        ),    
+        ),
     ),
     'news' => array(
         array(
             'field' => 'title',
             'label' => 'Title',
             'rules' => 'required'
-        ), 
+        ),
         array(
             'field' => 'description',
-            'label' => 'Description',
+            'label' => 'description',
             'rules' => 'required'
         ),
+        array(
+            'field' => 'client_visibility',
+            'label' => 'client_visibility',
+            'rules' => 'trim'
+        ),
     ),
-				'edit_news' => array(
+    'edit_news' => array(
         array(
             'field' => 'client_visibility',
             'label' => 'Visibility',
             'rules' => 'required'
-        ), 
+        ),
     ),
     'quality' => array(
         array(
@@ -150,17 +181,17 @@ $config = array(
             'field' => 'product',
             'label' => 'Product',
             'rules' => 'required'
-        ), 
+        ),
         array(
             'field' => 'problem_type',
             'label' => 'Problem Type',
             'rules' => 'required'
-        ), 
+        ),
         array(
             'field' => 'store',
             'label' => 'Store',
             'rules' => 'required'
-        ), 
+        ),
         array(
             'field' => 'qty_in_store',
             'label' => 'Qty In Store',
@@ -171,6 +202,26 @@ $config = array(
             'label' => 'Qty Defect',
             'rules' => 'required'
         ),
+        array(
+            'field' => 'description',
+            'label' => 'description',
+            'rules' => 'trim'
+        ),
+        array(
+            'field' => 'title',
+            'label' => 'title',
+            'rules' => 'trim'
+        ),
+        array(
+            'field' => 'ds',
+            'label' => 'ds',
+            'rules' => 'trim'
+        ),
+        array(
+            'field' => 'contact_info',
+            'label' => 'contact_info',
+            'rules' => 'trim'
+        ),
     ),
     'suggestion' => array(
         array(
@@ -178,32 +229,45 @@ $config = array(
             'label' => 'Name',
             'rules' => 'required'
         ),
-								
-								array(
+        array(
             'field' => 'store',
             'label' => 'Store',
             'rules' => 'required'
         ),
-								 array(
+        array(
             'field' => 'product',
             'label' => 'Product',
             'rules' => 'required'
         ),
-								array(
+        array(
             'field' => 'suggestion_type',
             'label' => 'Type',
             'rules' => 'required'
         ),
+        array(
+            'field' => 'subject',
+            'label' => 'subject',
+            'rules' => 'trim'
+        ),
+        array(
+            'field' => 'description',
+            'label' => 'description',
+            'rules' => 'trim'
+        ),
+        array(
+            'field' => 'contact_info',
+            'label' => 'contact_info',
+            'rules' => 'trim'
+        ),
     ),
-	'edit_suggestion' => array(
+    'edit_suggestion' => array(
         array(
             'field' => 'status',
             'label' => 'Status',
             'rules' => 'required'
         ),
-								
-    ),			
-	'client_user' => array(
+    ),
+    'client_user' => array(
         array(
             'field' => 'username',
             'label' => 'username',
@@ -224,13 +288,13 @@ $config = array(
             'label' => 'Password Confirm',
             'rules' => 'required'
         ),
-								array(
+        array(
             'field' => 'store',
             'label' => 'Store',
             'rules' => 'required'
         ),
     ),
-	'edit_client_user' => array(
+    'edit_client_user' => array(
         array(
             'field' => 'username',
             'label' => 'username',
@@ -240,14 +304,14 @@ $config = array(
             'field' => 'email',
             'label' => 'Email',
             'rules' => 'required|valid_email'
-        ), 
-		array(
+        ),
+        array(
             'field' => 'store',
             'label' => 'Store',
             'rules' => 'required'
         ),
     ),
-	'admin_quality' => array(
+    'admin_quality' => array(
         array(
             'field' => 'status',
             'label' => 'status',

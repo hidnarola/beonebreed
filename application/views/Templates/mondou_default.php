@@ -327,7 +327,7 @@ if (!empty($this->session->userdata('client_username'))) {
                                         <a href='<?php echo site_url('login/logout') ?>'>
 <?php } ?>			
                                         <i class='icon-signout'></i>
-                                        Sign out
+                                        <?=lang('sign_out')?>
                                     </a>
                             </li>
                         </ul>
@@ -899,8 +899,11 @@ if (!empty($this->session->userdata('client_username'))) {
             });
             $(document).ready(function() {
                 $(".js-example-data-array-selected").select2();
+                setTimeout(function() {
+                        $('.alert').fadeOut('fast');
+                }, 3000);
             });
-
+            
             /*        
              $("#select2-tags").select2({  
              tags: ["today", "tomorrow", "toyota"],
