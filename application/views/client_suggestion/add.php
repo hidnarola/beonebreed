@@ -38,7 +38,7 @@
                   <div style="display:inline-block;float:left;width:45%" class='box-content'>
                     <div class='form-group'>
                         <label for='inputText'><?=lang('idea_name')?></label><span style="color:red">*</span>
-                        <input class='form-control' id='inputText' placeholder='Name' type='text' name='name' >
+                        <input class='form-control' id='inputText' placeholder='Name' type='text' name='name' value="<?php echo set_value('name');?>">
                         <span style="color:red"><?php echo form_error('name'); ?><span>
                     </div>
                     <div class='form-group'>
@@ -49,7 +49,7 @@
                           if (!empty($suggestion_type)) {
                             foreach ($suggestion_type as $k => $v) {
                               ?>
-                              <option value="<?php echo $v->id; ?>"><?=lang($v->name)?></option>
+                              <option value="<?php echo $v->id; ?>" <?php echo set_select('suggestion_type',$v->id); ?> ><?=lang($v->name)?></option>
 
                               <?php
                             }
@@ -66,7 +66,7 @@
                           if (!empty($product_list)) {
                             foreach ($product_list as $k => $v) {
                               ?>
-                              <option value="<?php echo $v->id; ?>"><?php echo ucfirst($v->name); ?></option>
+                              <option value="<?php echo $v->id; ?>" <?php echo set_select('product',$v->id); ?> ><?php echo ucfirst($v->name); ?></option>
 
                               <?php
                             }
@@ -77,12 +77,12 @@
                     </div>
                     <div class='form-group'>
                         <label for='inputText'><?=lang('idea_Subject')?></label>
-                        <input class='form-control' id='inputText' placeholder='Title' type='text' name='subject' >
+                        <input class='form-control' id='inputText' placeholder='Title' type='text' name='subject' value="<?php echo set_value('subject');?>">
                         
                     </div>
                      <div class='form-group'>
                         <label for='inputText'><?=lang('idea_desc')?></label>
-                        <textarea class="form-control" rows="5" id="comment" name="description"></textarea>
+                        <textarea class="form-control" rows="5" id="comment" name="description"><?php echo set_value('description');?></textarea>
                         
                     </div> 
                   </div>
@@ -95,7 +95,7 @@
                           if (!empty($store_list)) {
                             foreach ($store_list as $k => $v) {
                               ?>
-                              <option value="<?php echo $v->id; ?>"><?php echo ucfirst($v->name); ?></option>
+                              <option value="<?php echo $v->id; ?>" <?php echo set_select('store',$v->id); ?>><?php echo ucfirst($v->name); ?></option>
 
                               <?php
                             }
@@ -106,7 +106,7 @@
                     </div>
                      <div class='form-group'>
                         <label for='inputText'><?=lang('idea_contact_info')?></label>
-                        <textarea class="form-control" rows="5" id="contact_info" name="contact_info"></textarea>
+                        <textarea class="form-control" rows="5" id="contact_info" name="contact_info"><?php echo set_value('contact_info');?></textarea>
                        
                     </div> 
                     <div class='text-right form-actions form-actions-padding-sm form-actions-padding-md form-actions-padding-lg' style='margin-bottom: 0;'>

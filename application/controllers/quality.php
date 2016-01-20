@@ -12,7 +12,7 @@ class Quality extends CI_Controller {
     //$this->load->library('pagination');
     $this->load->library('form_validation');
       if (!$this->session->userdata('admin_logged_in')) {
-      redirect('/login');
+      redirect('login');
       } 
   }
   public function index($client_id=0) {

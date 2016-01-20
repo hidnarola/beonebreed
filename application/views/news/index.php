@@ -59,7 +59,7 @@
 									} else {
 									    echo site_url('uploads/no_image_available.jpg');
 									}
-									?>' >
+									?>' width="23">
     								</div>
     								<div class='name-and-time'>
     								    <div class='name pull-left'>
@@ -78,6 +78,8 @@
     								<div class='body'>
 									<?php echo $u_key['description']; ?> 
     								</div>
+                                                                <a class="inline-block text-warning" href='<?php echo site_url('news/edit/'.$u_key['id']); ?>' ><i class="icon-edit"></i></a>
+                                                                <a class="inline-block remove_item text-error" href='<?php echo site_url('news/delete/'.$u_key['id']); ?>' onclick="if(!confirm('Are you sure want to delete')){return false;}"><i class="icon-remove-circle"></i></a>
     								<div class="clearfix"></div>
     								<div class="commnet-wrapper item-b">
 									<?php

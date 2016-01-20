@@ -1,30 +1,21 @@
-<?php
-
-class Store_model extends CI_Model {
-
+<?php class Store_model extends CI_Model {
   public function __construct() {
-
     $this->load->database();
   }
-
   public function add_records($data) {
-
     $id = $this->db->insert('store', $data);
     return $id;
   }
-
   public function get_all_store($client_id=0) {
     $this->db->where('client_id',$client_id);
     $this->db->where('is_deleted', '0');
     $query = $this->db->get('store');
     return $query->result();
   }
-
   public function get($id) {
     $query = $this->db->get_where('store', array('id' => $id));
     return $query->row_array();
   }
-
   public function update_records($id,$client_id) {
     $data = array(
         'name' => $this->input->post('name'),
@@ -36,7 +27,6 @@ class Store_model extends CI_Model {
     $this->db->where('id', $id);
     return $this->db->update('store', $data);
   }
-
   public function delete_records($id) {
     $data = array(
         'is_deleted' => '1',
@@ -66,12 +56,10 @@ class Store_model extends CI_Model {
     $delimiter = ",";
     //$newline = "\r\n";
     $filename = "store.csv";
-    $query = "SELECT name,user_id,address,telephone,contact,fax FROM store where is_deleted='0'";
+    $query = "SELECT name,client_id,address,telephone,contact,fax FROM store where is_deleted='0'";
     $result = $this->db->query($query);
     $data = $this->dbutil->csv_from_result($result, $delimiter);
     force_download($filename, $data);
   }
 
-}
-
-?>
+}?>

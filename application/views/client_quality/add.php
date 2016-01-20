@@ -41,7 +41,7 @@ $unique_random_id=random_string('numeric',7);
                   <div style="display:inline-block;float:left;width:45%" class='box-content'>
                     <div class='form-group'>
                         <label for='inputText'><?=lang('quality_name')?></label><span style="color:red">*</span>
-                        <input class='form-control' id='inputText' placeholder='Name' type='text' name='name' >
+                        <input class='form-control' id='inputText' placeholder='Name' type='text' name='name' value="<?php echo set_value('name');?>">
 																								<input class='form-control' id='inputT' type='hidden' name='id' value="<?php echo $unique_random_id; ?>" >
                         <span style="color:red"><?php echo form_error('name'); ?><span>
                     </div>
@@ -53,7 +53,7 @@ $unique_random_id=random_string('numeric',7);
                           if (!empty($product_list)) {
                             foreach ($product_list as $k => $v) {
                               ?>
-                              <option value="<?php echo $v->id; ?>"><?php echo ucfirst($v->name); ?></option>
+                              <option value="<?php echo $v->id; ?>" <?php echo set_select('product',$v->id); ?> ><?php echo ucfirst($v->name); ?></option>
 
                               <?php
                             }
@@ -64,12 +64,12 @@ $unique_random_id=random_string('numeric',7);
                     </div>
                     <div class='form-group'>
                         <label for='inputText'><?=lang('quality_title')?></label>
-                        <input class='form-control' id='inputText' placeholder='Title' type='text' name='title' >
+                        <input class='form-control' id='inputText' placeholder='Title' type='text' name='title' value='<?php echo set_value('title');?>' >
                         
                     </div>
                      <div class='form-group'>
                         <label for='inputText'><?=lang('quality_desc')?></label>
-                        <textarea class="form-control" rows="5" id="comment" name="description"></textarea>
+                        <textarea class="form-control" rows="5" id="comment" name="description"><?php echo set_value('description');?></textarea>
                         
                     </div>
                     <div class='form-group'>
@@ -80,7 +80,7 @@ $unique_random_id=random_string('numeric',7);
                           if (!empty($problem_list)) {
                             foreach ($problem_list as $k => $v) {
                               ?>
-                              <option value="<?php echo $v->id; ?>"><?=lang(ucfirst($v->name))?></option>
+                              <option value="<?php echo $v->id; ?>" <?php echo set_select('problem_type',$v->id); ?>><?=lang(ucfirst($v->name))?></option>
 
                               <?php
                             }
@@ -100,7 +100,7 @@ $unique_random_id=random_string('numeric',7);
                           if (!empty($store_list)) {
                             foreach ($store_list as $k => $v) {
                               ?>
-                              <option value="<?php echo $v->id; ?>"><?php echo ucfirst($v->name); ?></option>
+                              <option value="<?php echo $v->id; ?>" <?php echo set_select('store',$v->id); ?>><?php echo ucfirst($v->name); ?></option>
 
                               <?php
                             }
@@ -111,22 +111,22 @@ $unique_random_id=random_string('numeric',7);
                     </div>
                      <div class='form-group'>
                         <label for='inputText'><?=lang('quality_contact_info')?></label><span style="color:red">*</span>
-                        <textarea class="form-control" rows="5" id="contact_info" name="contact_info"></textarea>
+                        <textarea class="form-control" rows="5" id="contact_info" name="contact_info" ><?php echo set_value('contact_info');?></textarea>
                        
                     </div>
                      <div class='form-group'>
                         <label for='inputText'>#Ds</label>
-                        <input class='form-control' id='inputText' placeholder='#Ds' type='text' name='ds' >
+                        <input class='form-control' id='inputText' placeholder='#Ds' type='text' name='ds' value="<?php echo set_value('ds');?>">
                        <!-- <span style="color:red"><?php //echo form_error('name'); ?><span>-->
                     </div>
                      <div class='form-group'>
                         <label for='inputText'><?=lang('quality_in_store')?></label><span style="color:red">*</span>
-                        <input class='form-control store' id='inputText' placeholder='Qty In Store' type='text' name='qty_in_store' >
+                        <input class='form-control store' id='inputText' placeholder='Qty In Store' type='text' name='qty_in_store' value="<?php echo set_value('qty_in_store');?>">
                         <span style="color:red"><?php echo form_error('qty_in_store'); ?><span>
                     </div>
                      <div class='form-group'>
                         <label for='inputText'><?=lang('quality_defect')?></label><span style="color:red">*</span>
-                        <input class='form-control' id='inputText' placeholder='Qty Defect' type='text' name='qty_defect' >
+                        <input class='form-control' id='inputText' placeholder='Qty Defect' type='text' name='qty_defect' value="<?php echo set_value('qty_defect');?>">
                         <span style="color:red"><?php echo form_error('qty_in_store'); ?><span>
                     </div>
                      

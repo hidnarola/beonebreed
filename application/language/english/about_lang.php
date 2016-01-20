@@ -19,6 +19,11 @@ $lang['View'] = "View";
 $lang['Add'] = "Add";
 $lang['title'] = "Title";
 $lang['upload'] = "Upload";
+$lang['sign_out'] = "Sign Out";
+$lang['Sign in'] = "Sign in";
+$lang['Username'] = "Username";
+$lang['Password'] = "Password";
+
 
 
 

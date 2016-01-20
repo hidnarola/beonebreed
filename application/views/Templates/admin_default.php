@@ -1078,7 +1078,11 @@
             });
         });
         $(document).ready(function() {
-          $(".js-example-data-array-selected").select2();
+			setTimeout(function() {
+				$('.alert').fadeOut('fast');
+			}, 3000);
+			
+            $(".js-example-data-array-selected").select2();
         });
         
 /*        

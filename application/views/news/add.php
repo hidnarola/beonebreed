@@ -38,12 +38,12 @@
                   <div style="display:inline-block;float:left;width:45%" class='box-content'>
                     <div class='form-group'>
                         <label for='inputText'>Title</label><span style="color:red">*</span>
-                        <input class='form-control' id='inputText' placeholder='Title' type='text' name='title' >
+                        <input class='form-control' id='inputText' placeholder='Title' type='text' name='title' value="<?php echo set_value('title');?>">
                         <span style="color:red"><?php echo form_error('title'); ?><span>
                     </div>
                      <div class='form-group'>
                         <label for='inputText'>Description</label><span style="color:red">*</span>
-                        <textarea class="form-control" rows="5" id="comment" name="description"></textarea>
+                        <textarea class="form-control" rows="5" id="comment" name="description"><?php echo set_value('description');?></textarea>
                         <span style="color:red"><?php echo form_error('description'); ?><span>
                     </div>
                   </div>
@@ -56,8 +56,8 @@
                       <label for='inputText'>Client</label>
                       <select class="form-control" name="client_visibility" >								
                         <option value="">Select Visibility</option>		
-                        <option value="1">Yes</option>
-                        <option value="0">No</option>
+                        <option value="1" <?php echo set_select('client_visibility',"1"); ?>>Yes</option>
+                        <option value="0" <?php echo set_select('client_visibility',"0"); ?>>No</option>
                       </select>	
                     </div>
                     <div class='text-right form-actions form-actions-padding-sm form-actions-padding-md form-actions-padding-lg' style='margin-bottom: 0;'>

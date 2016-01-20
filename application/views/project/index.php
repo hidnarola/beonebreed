@@ -138,7 +138,7 @@
                         ?> 
                       </td>
                       <td><?php echo $u_key->project_manager; ?> </td>
-                      <td style="width:auto"><p class="fixed_width"><?php echo $u_key->quick_notes; ?></p> </td>
+                      <td style="width:auto"><p class="fixed_width"><?php echo substr($u_key->quick_notes, 0,80); ?></p> </td>
 
                       <td>
 

@@ -37,7 +37,7 @@
                   <div style="display:inline-block;float:left;width:45%" class='box-content'>
                     <div class='form-group'>
                         <label for='inputText'>Project Name</label><span style="color:red">*</span>
-                        <input class='form-control' id='inputText' placeholder='Project Name' type='text' name='name' >
+                        <input class='form-control' id='inputText' placeholder='Project Name' type='text' name='name' value="<?php echo set_value('name');?>">
                         <span style="color:red"><?php echo form_error('name'); ?><span>
                     </div>
                     <div class='form-group'>
@@ -48,7 +48,7 @@
                         if (!empty($categories)) {
                           foreach ($categories as $k => $v) {
                             ?>
-                            <option value="<?php echo $v->id; ?>"><?php echo ucfirst($v->name); ?></option>
+                            <option value="<?php echo $v->id; ?>"<?php echo set_select('category_id',$v->id); ?>><?php echo ucfirst($v->name); ?></option>
 
                             <?php
                           }
@@ -60,15 +60,15 @@
                       <label for='inputText'>Priority</label>
                       <select class="form-control" name="priority" >								
                         <option value="">Select Priority</option>		
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>							
+                        <option value="1" <?php echo set_select('priority',1); ?>>1</option>
+                        <option value="2" <?php echo set_select('priority',2); ?>>2</option>
+                        <option value="3" <?php echo set_select('priority',3); ?>>3</option>							
                       </select>	
                     </div>    
                   
                     <div class="form-group">
                       <label for="comment">Quick Notes:</label>
-                      <textarea class="form-control" rows="5" id="comment" name="quick_notes"></textarea>
+                      <textarea class="form-control" rows="5" id="comment" name="quick_notes"><?php echo set_value('quick_notes');?></textarea>
                     </div>
                   </div>
 
@@ -81,7 +81,7 @@
                           if (!empty($project_type)) {
                             foreach ($project_type as $k => $v) {
                               ?>
-                              <option value="<?php echo $v->id; ?>"><?php echo ucfirst($v->type); ?></option>
+                              <option value="<?php echo $v->id; ?>" <?php echo set_select('project_type_id',$v->id); ?>><?php echo ucfirst($v->type); ?></option>
 
                               <?php
                             }
@@ -92,7 +92,7 @@
                     </div>
                     <div class='form-group'>
                       <label for='inputText'>Estimate Days</label>
-                      <input class='form-control' id='inputText' placeholder='Estimate Days' type='text' name='estimated_days' >
+                      <input class='form-control' id='inputText' placeholder='Estimate Days' type='text' name='estimated_days' value="<?php echo set_value('estimated_days');?>">
                       <span style="color:red"><?php echo form_error('estimated_days'); ?><span>
                     </div>
                     <div class='form-group'>
@@ -104,7 +104,7 @@
                           if (!empty($project_manager)) {
                             foreach ($project_manager as $k => $v) {
                               ?>
-                              <option value="<?php echo $v->username; ?>"><?php echo ucfirst($v->username); ?></option>
+                              <option value="<?php echo $v->username; ?>" <?php echo set_select('project_manager',$v->username); ?>><?php echo ucfirst($v->username); ?></option>
 
                               <?php
                             }

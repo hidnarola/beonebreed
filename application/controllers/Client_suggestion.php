@@ -13,12 +13,11 @@ class Client_suggestion extends CI_Controller {
     $this->load->library('form_validation');
     
       if (!$this->session->userdata('client_user_logged_in')) {
-      redirect('/login');
+      redirect('login');
       } 
   }
 
-  public function index() {
-      
+  public function index() {   
     $client_id=$this->session->userdata('client_id');
     $user_id=$this->session->userdata('id');
     $data['suggestion_list'] = $this->client_suggestion_model->get_all($user_id,$client_id);
@@ -62,7 +61,7 @@ class Client_suggestion extends CI_Controller {
         );
         $id = $this->client_suggestion_model->add_records($data, TRUE);
         if (!empty($id)) {
-          redirect('add_next/' . $id);
+          redirect('client_suggestion/add_next/' . $id);
         }
 
         /*

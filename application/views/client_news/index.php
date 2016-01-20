@@ -60,7 +60,7 @@
 									} else {
 									    echo site_url('uploads/no_image_available.jpg');
 									}
-									?>' >
+									?>' height="23" width="23">
     								</div>
     								<div class='name-and-time'>
     								    <div class='name pull-left'>

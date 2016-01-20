@@ -88,7 +88,7 @@
               echo $days; 
           ?>
           </td>
-					<td><?php echo $u_key->quick_notes; ?> </td>
+					<td><?php echo substr($u_key->quick_notes, 0,80); ?></td>
                                         <td> 
                                             <div class='text-left'>
 						<a class='btn btn-primary btn-xs' href='<?php echo site_url('project/view_archieve/'.$u_key->id) ?>'>

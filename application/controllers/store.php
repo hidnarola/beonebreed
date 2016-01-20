@@ -1,5 +1,4 @@
 <?php class Store extends CI_Controller {
-
   public function __construct() {
     parent::__construct();
     $this->load->library('template');
@@ -11,7 +10,7 @@
     $this->load->library('form_validation');
     $this->load->library('csvimport');
     if (!$this->session->userdata('admin_logged_in')) {
-      redirect('/login');
+      redirect('login');
     }
   }
   public function index($client_id=0) {
@@ -74,12 +73,10 @@
     }
     redirect('store/index/'.$client_id);
   }
-
   public function export_to_csv($id = 0) {
     $this->store_model->ExportCsv();
   }
   public function importcsv($client_id=0) {
-
     $config['upload_path'] = './uploads/';
     $config['allowed_types'] = '*';
     $this->load->library('upload', $config);
@@ -95,7 +92,7 @@
         if ($this->csvimport->get_array($file_path)) {
           $csv_array = $this->csvimport->get_array($file_path);
           
-          if(!isset($csv_array['0']['name']) || !isset($csv_array['0']['user_id']) || !isset($csv_array['0']['address']) || !isset($csv_array['0']['telephone']) || !isset($csv_array['0']['contact']) || !isset($csv_array['0']['fax'])){
+          if(!isset($csv_array['0']['name']) || !isset($csv_array['0']['client_id']) || !isset($csv_array['0']['address']) || !isset($csv_array['0']['telephone']) || !isset($csv_array['0']['contact']) || !isset($csv_array['0']['fax'])){
             $this->session->set_flashdata('err_msg', 'Please Select file with appropriate field names');
             redirect('store/index/'.$client_id);exit;
           }
@@ -106,7 +103,7 @@
               'telephone' => $row['telephone'],
               'contact' => $row['contact'],
               'fax' => $row['fax'],
-               'user_id' => $row['user_id'],    
+               'client_id' => $row['client_id'],    
               );
               if($this->store_model->add_records($insert_data)){
                  $this->session->set_flashdata('msg', 'Your record has been successfully imported'); 
