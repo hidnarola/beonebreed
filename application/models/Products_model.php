@@ -161,11 +161,25 @@ class Products_model extends CI_Model {
 		return $this->db->get('bar_code')->row_array();
 	}
 
+	// ---------------------------------------------------------------------------------------------------------
+
 	/* For Insert into Attachment tab with product Data */
 	public function insert_into($table,$data){
 		$this->db->insert($table,$data);
 		$id = $this->db->insert_id(); // fetch last inserted id in table
 		return $id;
+	}
+
+	public function update_into($table,$id = null,$data){
+
+        if(is_array($id)){
+        	$this->db->where($id);
+        }else{
+        	$this->db->where('id',$id);
+        }
+		$this->db->update($table,$data);
+		$update_id = $this->db->affected_rows(); // fetch affected rown in table.
+		return $update_id;
 	}
 
 }

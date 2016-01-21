@@ -98,8 +98,6 @@
 
    $('.other_tabs').click(function(event){
         var product_id = $('#product_id').val();
-
-        console.log('Here'+product_id);
         event.preventDefault();
         // return false;
    });

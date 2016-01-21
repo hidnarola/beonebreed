@@ -23,7 +23,7 @@ class Products extends CI_Controller {
 	}
 
 
-	
+
 
 	// ------------------------------- START ADMIN TAB FORM -----------------------------------------
 
@@ -98,7 +98,111 @@ class Products extends CI_Controller {
 	**/	
 	public function admin_form_tab_2(){
 
-		p($_POST);
+		//For Retail
+		$r_length = $this->input->post('r_length');
+		$r_width = $this->input->post('r_width');
+		$r_height = $this->input->post('r_height');
+		$r_gross_weight = $this->input->post('r_gross_weight');
+		$r_net_weight = $this->input->post('r_net_weight');
+		$dm3_retail = $this->input->post('dm3_retail');
+		$product_id = $this->input->post('product_id');
+		$product_retail_id = $this->input->post('product_retail_id'); // Retail ID from dimension Table
+
+		$data_retail = array(
+							'product_id'=>$product_id,
+							'dimension_id'=>'1',
+							'length'=>$r_length,
+							'width'=>$r_width,
+							'height'=>$r_height,
+							'gross_weight'=>$r_gross_weight,
+							'net_weight'=>$r_net_weight,
+							'dm3'=>$dm3_retail		
+							);
+
+		// If Id find then UPDATE otherwise insert
+		if(!empty($product_retail_id)){
+			$this->products_model->update_into('dimension',$product_retail_id,$data_retail);	
+		}else{			
+			$product_retail_id = $this->products_model->insert_into('dimension',$data_retail);
+		}
+
+		// ------------------------------------------------------------------------
+
+		$m_upc = $this->input->post('m_upc');
+		$m_length = $this->input->post('m_length');
+		$m_width = $this->input->post('m_width');
+		$m_height = $this->input->post('m_height');
+		$m_gross_weight = $this->input->post('m_gross_weight');
+		$m_net_weight = $this->input->post('m_net_weight');
+		$dm3_master = $this->input->post('dm3_master');
+		$no_pc_master = $this->input->post('no_pc_master');
+		$product_master_id = $this->input->post('product_master_id'); // MasterCase ID from dimension Table
+
+		$data_master = array(	
+							'product_id'=>$product_id,
+							'dimension_id'=>'2',
+							'length'=>$m_length,
+							'width'=>$m_width,
+							'height'=>$m_height,
+							'gross_weight'=>$m_gross_weight,
+							'net_weight'=>$m_net_weight,
+							'dm3'=>$dm3_master,
+							'no_of_pc_case'=>$no_pc_master,
+							'upc'=>$m_upc			
+							);
+
+		// If Id find then UPDATE otherwise insert
+		if(!empty($product_master_id)){
+			$this->products_model->update_into('dimension',$product_master_id,$data_master);	
+		}else{			
+			$product_master_id = $this->products_model->insert_into('dimension',$data_master);
+		}
+
+		// ------------------------------------------------------------------------
+
+		$p_upc = $this->input->post('p_upc');
+		$p_length = $this->input->post('p_length');
+		$p_width = $this->input->post('p_width');
+		$p_height = $this->input->post('p_height');
+		$p_gross_weight = $this->input->post('p_gross_weight');
+		$p_net_weight = $this->input->post('p_net_weight');
+		$dm3_pallet = $this->input->post('dm3_pallet');
+		$p_case_row = $this->input->post('p_case_row');
+		$p_no_of_row = $this->input->post('p_no_of_row');
+		$p_cma_per_pal = $this->input->post('p_cma_per_pal');
+		$product_pallet_id = $this->input->post('product_pallet_id');
+
+		$data_pallet =  array(	
+							'product_id'=>$product_id,
+							'dimension_id'=>'4',
+							'length'=>$p_length,
+							'width'=>$p_width,
+							'height'=>$p_height,
+							'gross_weight'=>$p_gross_weight,
+							'net_weight'=>$p_net_weight,
+							'dm3'=>$dm3_pallet,
+							'upc'=>$p_upc,
+							'case_row'=>$p_case_row,
+							'no_of_rows'=>$p_no_of_row,
+							'cma_per_pal'=>$p_cma_per_pal			
+							);
+
+		// If Id find then UPDATE otherwise insert
+		if(!empty($product_pallet_id)){
+			$this->products_model->update_into('dimension',$product_pallet_id,$data_pallet);	
+		}else{			
+			$product_pallet_id = $this->products_model->insert_into('dimension',$data_pallet);
+		}
+
+		echo json_encode(
+					array(
+						'product_retail_id'=>$product_retail_id,
+						'product_master_id'=>$product_master_id,
+						'product_pallet_id'=>$product_pallet_id,
+						'qry'=>$this->db->last_query()
+						)
+				);
+
 	}
 
 	/**
