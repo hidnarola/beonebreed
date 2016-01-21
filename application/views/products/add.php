@@ -76,6 +76,8 @@
                                 <div class='tab-pane ' id='tab3'>
                                     <!-- ====== Attachment TAB Partial View Start ====== -->
                                     <?php $this->load->view('products/attachment_tab_add'); ?>
+                                    <?php $this->load->view('products/notes_tab_add'); ?>
+                                    
                                     <!-- ====== END ====== -->
                                 </div>
                                 <div class='tab-pane' id='tab4'>
@@ -98,10 +100,9 @@
 
    $('.other_tabs').click(function(event){
         var product_id = $('#product_id').val();
-
-        console.log('Here'+product_id);
-        event.preventDefault();
-        // return false;
+       $('#attach_project_id').val(product_id);
+       $('#notes_project_id').val(product_id);
+        
    });
 
 </script>

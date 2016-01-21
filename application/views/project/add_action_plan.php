@@ -42,6 +42,7 @@
             <div class='form-group'>
               <label for='inputText'>Complete Level</label>
               <input class='form-control' id='inputText' placeholder='Complete Level' type='text' name='complete_level'>
+			  <span style="color:red"><?php echo form_error('complete_level'); ?><span>
             </div>
 											<div>
 																	<label for='inputText'>Target Date</label>

@@ -127,6 +127,22 @@ $config = array(
             'label' => 'Password Confirm',
             'rules' => 'required'
         ),
+        array(
+            'field' => 'role',
+            'label' => 'role',
+            'rules' => 'trim'
+        ),
+        array(
+            'field' => 'department',
+            'label' => 'department',
+            'rules' => 'trim'
+        ),
+        array(
+            'field' => 'language',
+            'label' => 'language',
+            'rules' => 'trim'
+        ),
+        
     ),
     'edit_user' => array(
         array(
@@ -143,8 +159,28 @@ $config = array(
     'store' => array(
         array(
             'field' => 'name',
-            'label' => 'Name',
+            'label' => 'name',
             'rules' => 'required'
+        ),
+        array(
+            'field' => 'fax',
+            'label' => 'Fax',
+            'rules' => 'numeric'
+        ),
+        array(
+            'field' => 'address',
+            'label' => 'address',
+            'rules' => 'trim'
+        ),
+        array(
+            'field' => 'contact',
+            'label' => 'Contact',
+            'rules' => 'trim'
+        ),
+        array(
+            'field' => 'telephone',
+            'label' => 'telephone',
+            'rules' => 'trim'
         ),
     ),
     'news' => array(

@@ -49,19 +49,21 @@
 
                     <div class='form-group'>
                       <label for='inputText'>Telephone</label>
-                      <input class='form-control' id='inputText' placeholder='Telephone' type='text' name='telephone' value="<?php if(!empty($store['telephone'])) {echo $store['telephone'];} ?>">
+                      <input class='form-control' id='inputText' placeholder='Telephone' type='text' data-mask='999 999 999 999' name='telephone' value="<?php if(!empty($store['telephone'])) {echo $store['telephone'];} ?>">
+                      <span style="color:red"><?php echo form_error('telephone'); ?><span>
                     </div>
                   </div>
 
                   <div style="display:inline-block;float:right;width:50%" class='box-content'>
 
                      <div class='form-group'>
-                      <label for='inputText'>Contact</label>
+                      <label for='inputText'>Contact Info</label>
                       <textarea class="form-control" rows="5" id="comment" name="contact"><?php if(!empty($store['contact'])) {echo $store['contact'];} ?></textarea>
                     </div>
                     <div class='form-group'>
                       <label for='inputText'>Fax</label>
                       <input class='form-control' id='inputText' placeholder='Fax' type='text' name='fax' value="<?php if(!empty($store['fax'])) {echo $store['fax'];} ?>">
+                      <span style="color:red"><?php echo form_error('fax'); ?><span>
                     </div> 
                     <div class='text-right form-actions form-actions-padding-sm form-actions-padding-md form-actions-padding-lg' style='margin-bottom: 0;'>
                       <button class='btn btn-success' type='submit'>

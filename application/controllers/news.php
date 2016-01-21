@@ -73,7 +73,7 @@ class News extends CI_Controller {
 		    }
 
 
-		    $this->session->set_flashdata('msg', 'Your record has been successfully added');
+		    $this->session->set_flashdata('msg', 'News has been successfully added');
 		} else {
 		    $this->session->set_flashdata('err_msg', 'Oops!Something Wrong!');
 		}
@@ -83,25 +83,24 @@ class News extends CI_Controller {
     }
 
     public function edit($id = 0) {
-
-	if ($this->form_validation->run('edit_news') == FALSE) {
-	    $data['new'] = $this->news_model->get($id);
-	    $this->template->load('admin_default', 'news/edit', $data);
-	} else {
-	    if (!empty($_POST)) {
-		if ($this->news_model->update_records($id, TRUE)) {
-		    $this->session->set_flashdata('msg', 'Your record has been successfully updated');
-		} else {
-		    $this->session->set_flashdata('err_msg', 'Oops!Something Wrong!');
-		}
-		redirect('news/');
-	    }
-	}
+        if ($this->form_validation->run('edit_news') == FALSE) {
+            $data['new'] = $this->news_model->get($id);
+            $this->template->load('admin_default', 'news/edit', $data);
+        } else {
+            if (!empty($_POST)) {
+            if ($this->news_model->update_records($id, TRUE)) {
+                $this->session->set_flashdata('msg', 'News visibility has been successfully changed');
+            } else {
+                $this->session->set_flashdata('err_msg', 'Oops!Something Wrong!');
+            }
+            redirect('news/');
+            }
+        }
     }
 
     public function delete($id = 0) {
 	if ($this->news_model->delete_records($id, TRUE)) {
-	    $this->session->set_flashdata('msg', 'Your record has been successfully deleted');
+	    $this->session->set_flashdata('msg', 'News has been successfully deleted');
 	} else {
 	    $this->session->set_flashdata('err_msg', 'Oops!Something Wrong!');
 	}

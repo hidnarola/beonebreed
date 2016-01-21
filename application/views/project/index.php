@@ -1,4 +1,3 @@
-
 <div class='row' id='content-wrapper'>
   <div class='col-xs-12'>
     <div class='row'>
@@ -8,13 +7,6 @@
             <i class='icon-table'></i>
             <span>Manage Project</span>
           </h1>
-          <!--
-            <h4 class='pull-right text-center right_side_link_w_icon'>
-                <a href="http://clientapp.narolainfotech.com/HD/beonebreed/project/archieve_projects" class="" style="">
-                    <i class="icon-archive" style=" border: none;"></i> <br>
-                        <span style="border: none;">Archieve</span>
-                 </a>
-            </h4>-->
         </div>
       </div>
     </div>

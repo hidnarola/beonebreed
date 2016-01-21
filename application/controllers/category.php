@@ -36,7 +36,7 @@ class Category extends CI_Controller{
                 );
 
                 if($this->category_model->add_records($data,TRUE)){
-                  $this->session->set_flashdata('msg', 'Your record has been successfully added');
+                  $this->session->set_flashdata('msg', 'Your Project Category has been successfully added');
                 }else{
                   $this->session->set_flashdata('err_msg', 'Oops!Something Wrong!');
                 }
@@ -55,7 +55,7 @@ class Category extends CI_Controller{
             
         if(!empty($_POST)){
             if($this->category_model->update_records($id,TRUE)){
-              $this->session->set_flashdata('msg', 'Your record has been successfully updated');
+              $this->session->set_flashdata('msg', 'Your Project Category has been successfully updated');
 
             }else{
               $this->session->set_flashdata('err_msg', 'Oops!Something Wrong!');
@@ -67,7 +67,7 @@ class Category extends CI_Controller{
 	
 	 public function delete($id=0){
         if($this->category_model->delete_records($id,TRUE)){ 
-            $this->session->set_flashdata('msg', 'Your record has been successfully deleted');          
+            $this->session->set_flashdata('msg', 'Your Project Category has been successfully deleted');          
         }else{
            $this->session->set_flashdata('err_msg', 'Oops!Something Wrong!');
         }

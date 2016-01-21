@@ -316,7 +316,6 @@
         uploadForm();
     });
     $(document).on("click", "#notes_form_data", function() {
-
         noteForm();
     });
 

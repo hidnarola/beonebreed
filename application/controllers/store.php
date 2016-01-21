@@ -39,7 +39,7 @@
             'client_id' =>$id,
         );
         if ($this->store_model->add_records($data, TRUE)) {
-          $this->session->set_flashdata('msg', 'Your record has been successfully added');
+          $this->session->set_flashdata('msg', 'Store has been successfully added');
         } else {
           $this->session->set_flashdata('err_msg', 'Oops!Something Wrong!');
         }
@@ -56,7 +56,7 @@
     } else {
       if (!empty($_POST)) {
         if ($this->store_model->update_records($id,$client_id,TRUE)) {
-          $this->session->set_flashdata('msg', 'Your record has been successfully updated');
+          $this->session->set_flashdata('msg', 'Store has been successfully updated');
         } else {
           $this->session->set_flashdata('err_msg', 'Oops!Something Wrong!');
         }
@@ -67,7 +67,7 @@
 
   public function delete($id = 0,$client_id=0) {
     if ($this->store_model->delete_records($id, TRUE)) {
-      $this->session->set_flashdata('msg', 'Your record has been successfully deleted');
+      $this->session->set_flashdata('msg', 'Store has been successfully deleted');
     } else {
       $this->session->set_flashdata('err_msg', 'Oops!Something Wrong!');
     }
@@ -106,7 +106,7 @@
                'client_id' => $row['client_id'],    
               );
               if($this->store_model->add_records($insert_data)){
-                 $this->session->set_flashdata('msg', 'Your record has been successfully imported'); 
+                 $this->session->set_flashdata('msg', 'Your Store record has been successfully imported'); 
               }else{
                 $this->session->set_flashdata('err_msg', 'Oops!Something Wrong!');   
               } 

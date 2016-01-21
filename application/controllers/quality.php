@@ -186,7 +186,7 @@ class Quality extends CI_Controller {
     } else {
       if (!empty($_POST)) {
         if ($this->quality_model->update_records($id, TRUE)) {
-          $this->session->set_flashdata('msg', 'Your record has been successfully updated');
+          $this->session->set_flashdata('msg', 'Report status has been successfully updated');
         } else {
           $this->session->set_flashdata('err_msg', 'Oops!Something Wrong!');
         }
@@ -198,7 +198,7 @@ class Quality extends CI_Controller {
   public function delete($id = 0) {
 
     if ($this->quality_model->delete_records($id, TRUE)) {
-      $this->session->set_flashdata('msg', 'Your record has been successfully deleted');
+      $this->session->set_flashdata('msg', 'Report has been successfully deleted');
     } else {
       $this->session->set_flashdata('err_msg', 'Oops!Something Wrong!');
     }

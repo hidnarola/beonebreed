@@ -31,7 +31,7 @@ class Project_type extends CI_Controller {
         );
 
         if ($this->project_type_model->add_records($data, TRUE)) {
-          $this->session->set_flashdata('msg', 'Your record has been successfully added');
+          $this->session->set_flashdata('msg', 'Project Type has been successfully added');
         } else {
           $this->session->set_flashdata('err_msg', 'Oops!Something Wrong!');
         }
@@ -47,7 +47,7 @@ class Project_type extends CI_Controller {
     } else {
       if (!empty($_POST)) {
         if ($this->project_type_model->update_records($id, TRUE)) {
-          $this->session->set_flashdata('msg', 'Your record has been successfully updated');
+          $this->session->set_flashdata('msg', 'Project Type has been successfully updated');
         } else {
           $this->session->set_flashdata('err_msg', 'Oops!Something Wrong!');
         }
@@ -58,7 +58,7 @@ class Project_type extends CI_Controller {
 
   public function delete($id = 0) {
     if ($this->project_type_model->delete_records($id, TRUE)) {
-      $this->session->set_flashdata('msg', 'Your record has been successfully deleted');
+      $this->session->set_flashdata('msg', 'Project Type has been successfully deleted');
     } else {
       $this->session->set_flashdata('err_msg', 'Oops!Something Wrong!');
     }

@@ -31,13 +31,8 @@
             <?php if($this->session->flashdata('err_msg')):echo $this->session->flashdata('err_msg');endif; ?>  
          </div>
            <?php } ?>
-    
-    
-	
-	<br/> 
+    	<br/> 
 
-
-  
   <div class='col-sm-12 text-right'>
     <button class='btn btn-danger inline-block margin-b-10' type='button' data-target="#myuploadModal" data-toggle="modal">
       <i class='icon-save'></i>
@@ -74,7 +69,10 @@
 					  Fax
 					</th>
            <th>
-					  Contact
+					  Contact Info
+					</th>
+                     <th>
+					  Action
 					</th>
 				  </tr>
 				</thead>
@@ -86,6 +84,7 @@
 					<td><?php echo $u_key->telephone; ?> </td>
           <td><?php echo $u_key->fax; ?> </td>
           <td><?php echo $u_key->contact; ?> </td>
+                    
 					<td>
 					   <div class='text-left'>
 						<a class='btn btn-primary btn-xs' href='<?php echo site_url('store/edit/'.$u_key->id.'/'.$client_id) ?>'>
@@ -104,12 +103,7 @@
 			  </table>
 			</div>
 		  </div>
-		</div>
-				</div>
-	  </div>
-	</div>
-  </div>
-  <!-- attachment bootstrap upload container start-->
+                    <!-- attachment bootstrap upload container start-->
 <div class="container">
   <form class="form" action="<?php echo site_url("store/importcsv/".$client_id); ?>" style="margin-bottom: 0;" method="post" action="#" accept-charset="UTF-8" id="project_upload_form" enctype="multipart/form-data">
       <!-- Modal -->
@@ -141,6 +135,11 @@
         </form>
       </div>
           <!-- attachemnt bootstrap container end -->
+		</div>
+				</div>
+	  </div>
+	</div>
+  </div>
 </div>
 <script>
   

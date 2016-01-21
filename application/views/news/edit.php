@@ -31,19 +31,27 @@
                   </button>
                 </div>
               </div>
+               <?php 
+               
+                $option_array=array('0'=>'No','1'=>'Yes');
+                
+               ?> 
               <div class='step-content'>
                 <hr class='hr-normal'>
                 <!-- inserting add project form -->	
                 <form class="form" style="margin-bottom: 0;" method="post" action="" accept-charset="UTF-8" >   
           
                   <div class='box-content'>
-
                      <div class='form-group'>
                       <label for='inputText'>Client</label>
-                      <select class="form-control" name="client_visibility" >								
-                        <option value="">Select Visibility</option>		
-                        <option value="1">Yes</option>
-                        <option value="0">No</option>
+                      <select class="form-control" name="client_visibility" > 
+                          <?php foreach($option_array as $key=>$val){ 
+                              
+                              if($new['visible_to_client']==$key){ $status="selected";}else{$status="";}
+                              
+                            ?>
+                            <option value="<?php echo $key; ?>" <?php echo $status;?>><?php echo $val; ?></option>	
+                          <?php } ?>
                       </select>	
                     </div>
                     <div class='text-right form-actions form-actions-padding-sm form-actions-padding-md form-actions-padding-lg' style='margin-bottom: 0;'>

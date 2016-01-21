@@ -162,9 +162,9 @@ class Client extends CI_Controller {
         $this->email->subject($subject);
         $this->email->message($message);
         if ($this->email->send()) {
-            $this->session->set_flashdata('msg', 'User have been successfully created and account details have been sent');
+            $this->session->set_flashdata('msg', 'User have been successfully created and account details have been sent to your email');
         } else {
-            $this->session->set_flashdata('msg', 'Your record has been successfully added');
+            $this->session->set_flashdata('msg', 'Your User has been successfully added');
         }
         redirect('client');
     }
@@ -176,7 +176,7 @@ class Client extends CI_Controller {
         } else {
             if (!empty($_POST)) {
                 if ($this->client_model->update_records($id, TRUE)) {
-                    $this->session->set_flashdata('msg', 'Your record has been successfully updated');
+                    $this->session->set_flashdata('msg', 'Client has been successfully updated');
                 } else {
                     $this->session->set_flashdata('err_msg', 'Oops!Something Wrong!');
                 }
@@ -187,7 +187,7 @@ class Client extends CI_Controller {
 
     public function delete($id = 0) {
         if ($this->client_model->delete_records($id, TRUE)) {
-            $this->session->set_flashdata('msg', 'Your record has been successfully deleted');
+            $this->session->set_flashdata('msg', 'Client has been successfully deleted');
         } else {
             $this->session->set_flashdata('err_msg', 'Oops!Something Wrong!');
         }

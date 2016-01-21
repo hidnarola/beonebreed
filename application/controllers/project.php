@@ -98,7 +98,6 @@ class Project extends CI_Controller {
 
   public function project_upload_form() {
   
-  
     $config['upload_path'] = './uploads/';
     //$config['max_size']	= '5';
     //$config['max_width']  = '1024';

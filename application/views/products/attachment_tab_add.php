@@ -13,10 +13,10 @@
                 <div class='form-group'>
                   <label class='control-label' for='product_name'>Attachments</label>
                   <div class='controls'>
-                        <input type="file" name="prod_attachment" id="prod_attachment" onchange="$('.error_upload').addClass('hide'); " >
+                        <input type="file" name="file" id="prod_attachment" onchange="$('.error_upload').addClass('hide'); " >
                   </div>
                 </div>   
-                <input type="hidden" name="product_id" value="1">
+                <input type="hidden" name="product_id" value="" id="attach_project_id">
                 <span class="color_red error_upload hide">Please Select file to upload</span>
             </form>    
           </div>
@@ -27,6 +27,32 @@
         </div>
     </div>
 </div>
+
+<!-- download popup conatiner-->
+<div class="container">
+<!-- Modal -->
+     <div class="modal fade" id="my_preview_form" role="dialog">
+       <div class="modal-dialog">
+
+         <!-- Modal content-->
+         <div class="modal-content">
+           <div class="modal-header">
+             <button type="button" class="close" data-dismiss="modal">&times;</button>
+             <h4 class="modal-title"><h3 class="download_filename"> </h3></h4>
+           </div>
+           <div class="modal-body">
+             <a href="" class="btn btn-success my_preview_download"><i class="icon-download bounce"></i>&nbsp;Download</a>
+           </div>
+           <div class="modal-footer">
+             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+           </div>
+         </div>
+
+       </div>
+     </div>
+   </div>
+                                       
+<!-- end of popup container -->
 
 
 <!-- =========================================================== -->
@@ -41,14 +67,22 @@
                     <div class='form-group'>
                       <label class='control-label' for='product_name'>Attachments</label>
                       <div class='controls'>
-                        
                         <div class="col-md-6">
-                            <ul id="attachment" class="tab-ul"> 
-                                <li style="list-style:none">
-                                    <input type="checkbox" name="chk[]" id="chk_attachment" class="chk_attachment" value="">
-                                    <a class="fancybox" href='' ></a>
-                                </li>
-                            </ul>
+                            <!--start-->
+                            <div class='' style='margin-bottom: 0;'>
+                                <div class="attachment_wrapper">
+                                    <ul id="attachment" class="tab-ul">
+
+                                       
+                                    </ul>
+                                </div>
+                                <!--
+                                <button class='btn btn-success' type='button' data-target="#myuploadModal" data-toggle="modal">
+                                    <i class='icon-save'></i>
+                                    Add
+                                </button>-->
+                            </div>
+                            <!--end-->
                         </div> 
 
                       </div>
@@ -66,7 +100,7 @@
                             Open Modal
                         </button> -->
 
-                        <a href="" class="btn btn-default" >Cancel</a>
+                       
                       </div>
                     </div>
                 </div>
@@ -81,6 +115,21 @@
 
 
 <script type="text/javascript">
+    
+    $(document).ready(function() { 
+      $(".fancybox").fancybox({
+          width  : 1200,
+          height : 900,
+          type   :'iframe'
+      });
+    });
+    $(document).on('click', '.no_preview', function() {
+        var filename=$(this).text();
+        $(".my_preview_download").attr("href", "uploads/products/"+filename);
+        $(".download_filename").text(filename);
+        $('#my_preview_form').modal('show');
+        return false;
+    });
     function attachment_file(){
 
         var product_id = $('#product_id').val();
@@ -105,9 +154,31 @@
                dataType: 'json',
                data: data,
                contentType: false,
-               success:function(data){
-                    alert(data);
-               }
+               success:function(response){
+                    
+                     if (response.status == 'success') {
+                        $('#myModal').modal('hide');
+                        $('#response_msg').append('<span style=color:green; id=msgs>' + response.msg + '</span>');
+                        var filename=response.file_name;
+                        var ext1 = filename.split('.').pop();
+                        var ext = ext1.toLowerCase();
+
+                        if(ext=='pdf' || ext=='jpg' || ext=='png' || ext=='gif'){
+
+                          var classname='fancybox';
+                        }else{
+                          var classname='no_preview';
+                        }
+
+                        $('#attachment').append('<li style=list-style-type:none;><a  class='+classname+'  href=uploads/products/' + response.file_name + '>' + response.file_name + '</a></li>');
+
+                        //$('#attachment').append('<li style=list-style-type:none;><a class=fancybox target=_blank href=uploads/' + response.file_name + '>' + response.file_name + '</a></li>');
+                        $('#attachment_tab')[0].reset();
+                } else {
+
+                    $("#file_err_msg").append(response.msg);
+                }
+              }
            });
            
         }else{
@@ -115,3 +186,4 @@
         }
     }
 </script>
+ 

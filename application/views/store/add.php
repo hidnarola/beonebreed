@@ -44,24 +44,26 @@
                     </div>
                      <div class='form-group'>
                       <label for='inputText'>Address</label>
-                      <textarea class="form-control" rows="5" id="comment" name="address"></textarea>
+                      <textarea class="form-control" rows="5" id="comment" name="address"><?php echo set_value('address');?></textarea>
                     </div>
 
                     <div class='form-group'>
                       <label for='inputText'>Telephone</label>
-                      <input class='form-control' id='inputText' placeholder='Telephone' type='text' name='telephone' value="<?php echo set_value('telephone');?>">
+                      <input class='form-control' id='inputText' placeholder='Telephone' type='text' data-mask='999 999 999 999' name='telephone' value="<?php echo set_value('telephone');?>">
+                       <span style="color:red"><?php echo form_error('telephone'); ?><span> 
                     </div>
                   </div>
 
                   <div style="display:inline-block;float:right;width:50%" class='box-content'>
 
                      <div class='form-group'>
-                      <label for='inputText'>Contact</label>
-                      <textarea class="form-control" rows="5" id="comment" name="contact"></textarea>
+                      <label for='inputText'>Contact Info</label>
+                      <textarea class="form-control" rows="5" id="comment" name="contact"><?php echo set_value('contact');?></textarea>
                     </div>
                     <div class='form-group'>
                       <label for='inputText'>Fax</label>
-                      <input class='form-control' id='inputText' placeholder='Fax' type='text' name='fax' value="<?php echo set_value('fax');?>">
+                      <input class='form-control' id='inputText' placeholder='Fax' type='text' name='fax' value="<?php echo set_value('fax');?>" >
+                      <span style="color:red"><?php echo form_error('fax'); ?><span>
                     </div> 
                     <div class='text-right form-actions form-actions-padding-sm form-actions-padding-md form-actions-padding-lg' style='margin-bottom: 0;'>
                       <button class='btn btn-success' type='submit'>

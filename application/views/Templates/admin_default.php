@@ -175,6 +175,7 @@
     <link href="assets/stylesheets/plugins/bootstrap_datetimepicker/bootstrap-datetimepicker.min.css" media="all" rel="stylesheet" type="text/css" />
     <link href="assets/stylesheets/plugins/bootstrap_switch/bootstrap-switch.css" media="all" rel="stylesheet" type="text/css" />
     <link href="assets/stylesheets/plugins/common/bootstrap-wysihtml5.css" media="all" rel="stylesheet" type="text/css" />
+    <script src="assets/javascripts/plugins/input_mask/bootstrap-inputmask.min.js" type="text/javascript"></script>
     <!--[if lt IE 9]>
       <script src="assets/javascripts/ie/html5shiv.js" type="text/javascript"></script>
       <script src="assets/javascripts/ie/respond.min.js" type="text/javascript"></script>

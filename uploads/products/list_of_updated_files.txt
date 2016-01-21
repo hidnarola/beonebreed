@@ -1,0 +1,9 @@
+studied about curl and Api in php.
+
+Studied abot paypal plugins and other useful plugins in cakephp
+
+
+studied about vrndor files in cakephp
+
+
+implemented some practicals in cakephp

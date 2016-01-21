@@ -44,7 +44,7 @@
                         if (!empty($language)) {
                           foreach ($language as $k => $v) {
                             ?>
-                            <option value="<?php echo $v->id; ?>"><?php echo ucfirst($v->name); ?></option>
+                            <option value="<?php echo $v->id; ?>" <?php echo set_select('language',$v->id); ?>><?php echo ucfirst($v->name); ?></option>
 
                             <?php
                           }
@@ -65,7 +65,7 @@
                         if (!empty($role_list)) {
                           foreach ($role_list as $k => $v) {
                             ?>
-                            <option value="<?php echo $v->id; ?>"><?php echo ucfirst($v->name); ?></option>
+                            <option value="<?php echo $v->id; ?>" <?php echo set_select('role',$v->id); ?>><?php echo ucfirst($v->name); ?></option>
 
                             <?php
                           }
@@ -81,7 +81,7 @@
                         if (!empty($department_list)) {
                           foreach ($department_list as $k => $v) {
                             ?>
-                            <option value="<?php echo $v->id; ?>"><?php echo ucfirst($v->name); ?></option>
+                            <option value="<?php echo $v->id; ?>" <?php echo set_select('department',$v->id); ?>><?php echo ucfirst($v->name); ?></option>
 
                             <?php
                           }

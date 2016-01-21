@@ -167,7 +167,21 @@ class Products_model extends CI_Model {
 		$id = $this->db->insert_id(); // fetch last inserted id in table
 		return $id;
 	}
-
+    
+    /* For inserting attachment data */
+	public function insert_attachment($data){
+		$id = $this->db->insert('products_attachments', $data);
+        $last_id = $this->db->insert_id();
+        return $last_id;
+	}
+    
+    //for inserting notes
+    public function add_notes_records($data){
+		$id = $this->db->insert('products_notes', $data);
+        $last_id = $this->db->insert_id();
+        return $last_id;
+	}
+    
 }
 
 /* End of file Products_model.php */
