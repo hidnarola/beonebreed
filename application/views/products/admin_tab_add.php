@@ -6,7 +6,7 @@
                 <span></span>
                 <span>PART 1</span>
             </li>
-            <li>
+            <li class="part_2_admin">
                 <span></span>
                 <span>PART 2</span>
             </li>
@@ -535,7 +535,7 @@
                         </div>
                          <div class='form-group col-sm-4 padding-l-0'>
                           <div class='controls'>
-                                <a onclick="event.preventDefault(); p_upc_get()" class="btn btn-g-bar-code btn-success">G</a>
+                                <a onclick="event.preventDefault(); p_upc_get();$('.error_pallet').html('');" class="btn btn-g-bar-code btn-success">G</a>
                           </div>
                         </div>
                         <div class="clearfix"></div>
@@ -598,7 +598,7 @@
                         </div>    
                         <div class='form-group col-sm-4'>
                           <div class='controls'>
-                            <input class='form-control' id='p_gross_weight' name="p_gross_weight" 
+                            <input class='form-control' id='p_gross_weight' onkeyup="$('.error_pallet').html('');" name="p_gross_weight" 
                                    placeholder='Gross Weight' type='text' >       
                           </div>
                         </div>
@@ -615,7 +615,7 @@
                         </div>    
                         <div class='form-group col-sm-4'>
                           <div class='controls'>
-                            <input class='form-control' id='p_net_weight' name="p_net_weight" 
+                            <input class='form-control' id='p_net_weight' onkeyup="$('.error_pallet').html('');" name="p_net_weight" 
                                    placeholder='Net Weight' type='text' >       
                           </div>
                         </div>
@@ -649,7 +649,7 @@
                         </div>    
                         <div class='form-group col-sm-4'>
                           <div class='controls'>
-                            <input class='form-control' id='p_case_row' onkeyup="cma_per_pal()" name="p_case_row" 
+                            <input class='form-control' id='p_case_row' onkeyup="cma_per_pal();" name="p_case_row" 
                                    placeholder=' CASE/ROW ' type='text' >       
                           </div>
                         </div>
@@ -697,6 +697,9 @@
                     <div class='form-group pull-right'>
                         <div class='controls'>
                             <input type="hidden" name="" id="" value="">
+                            <input type="hidden" name="product_retail_id" id="product_retail_id">
+                            <input type="hidden" name="product_master_id" id="product_master_id">
+                            <input type="hidden" name="product_pallet_id" id="product_pallet_id">
                             <a class="btn btn-success" onclick="validate_admin_part_2()" >
                                 <i class='icon-save'></i> Save
                             </a>
@@ -962,6 +965,8 @@
     }
 
     function dm3_pallet_func(){
+
+        $('.error_pallet').html('');
         var p_length=1;
         var p_width=1;
         var p_height=1;
@@ -1011,6 +1016,9 @@
 
     //To Generate UPC number for Pallet Case
     function cma_per_pal(){
+
+        $('.error_pallet').html('');
+
         var p_case_row = 1;
         var p_no_of_row = 1;
 
@@ -1027,7 +1035,8 @@
         var product_id = $('#product_id').val();
         if(product_id == ''){
             //uncommetn below line for validate Part-1 Required Part
-            //$(function(){ bootbox.alert('Please create product in Part-1.'); return false; });
+            $(function(){ bootbox.alert('Please create product in Part-1.');  });
+            return false;
         }
 
         var error_cnt = 0;
@@ -1098,11 +1107,47 @@
         }else{ error_pallet_str += '<p> DM3 is required.</p>'; error_cnt++; }
 
         if(p_cma_per_pal != ''){ if(isNumber(p_cma_per_pal) == false){ error_pallet_str += '<p> CMA per PAL should be Number.</p>'; error_cnt++; }  
-        }else{ error_pallet_str += '<p> CMA per PAL is required.</p>'; error_cnt++; }
+        }else{ error_pallet_str += '<p> CMA PER PAL is required.</p>'; error_cnt++; }
 
         $('.error_pallet').html(error_pallet_str);
 
         if(complete_admin_part_2 == false){ $('.error_admin_part_2').removeClass('hide'); error_cnt++; }else{ $('.error_admin_part_2').addClass('hide');}
+
+
+        if(error_cnt != '0'){
+            return false;
+        }else{
+
+            $("#fakeLoader").attr('style',''); // Remove Style Attribute for reuse
+            $("#fakeLoader").fakeLoader({
+                timeToHide:1200,
+                bgColor:"#2ecc71",
+                spinner:"spinner7"
+            }); // Fakeloader plugin
+            
+            var form_data = $("#admin_part_2").serializeArray();
+            
+            form_data.push({name:"product_id",value:product_id}); 
+
+            $.ajax({
+               url: '<?php echo base_url()."products/admin_form_tab_2"; ?>',
+               type: 'POST',
+               dataType: 'json',
+               data: form_data,
+               success:function(data){
+                    
+                    $('#product_retail_id').val(data.product_retail_id);
+                    $('#product_master_id').val(data.product_master_id);
+                    $('#product_pallet_id').val(data.product_pallet_id);
+                    $('#complete_admin_part_2').attr('disabled',true);
+                    $('.percentage_complete_admin').html('66%');
+                    $('.part_2_admin').addClass('active');
+                        
+                    return false;
+                    
+               }
+            });
+        }
         // Pallet Dimension Validation [END]        
     }
 
