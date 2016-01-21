@@ -195,7 +195,7 @@
                         </div>    
                         <div class='form-group col-sm-4'>
                           <div class='controls'>
-                            <input class='form-control' id='gross_weight' name="r_gross_weight" 
+                            <input class='form-control' id='r_gross_weight' onkeyup="$('.error_retail').html('');" name="r_gross_weight" 
                                    placeholder='Gross Weight' type='text' >       
                           </div>
                         </div>
@@ -212,7 +212,7 @@
                         </div>    
                         <div class='form-group col-sm-4'>
                           <div class='controls'>
-                            <input class='form-control' id='net_weight' name="r_net_weight" 
+                            <input class='form-control' id='r_net_weight' onkeyup="$('.error_retail').html('');" name="r_net_weight" 
                                    placeholder='Net Weight' type='text' >       
                           </div>
                         </div>
@@ -258,7 +258,7 @@
                         </div>
                          <div class='form-group col-sm-4 padding-l-0'>
                           <div class='controls'>
-                                <a onclick="event.preventDefault(); m_upc_get()" class="btn btn-g-bar-code btn-success">G</a>
+                                <a onclick="event.preventDefault(); m_upc_get(); $('.error_master_case').html('');" class="btn btn-g-bar-code btn-success">G</a>
                           </div>
                         </div>
                         <div class="clearfix"></div>
@@ -269,7 +269,7 @@
                         </div>    
                         <div class='form-group col-sm-4'>
                           <div class='controls'>
-                            <input class='form-control' id='m_length' onkeyup="dm3_mastercase()" name="m_length" 
+                            <input class='form-control' id='m_length' onkeyup="dm3_mastercase();" name="m_length" 
                                    placeholder='Length' type='text' >       
                           </div>
                         </div>
@@ -320,7 +320,7 @@
                         </div>    
                         <div class='form-group col-sm-4'>
                           <div class='controls'>
-                            <input class='form-control' id='m_gross_weight' name="m_gross_weight" 
+                            <input class='form-control' id='m_gross_weight' onkeyup="$('.error_master_case').html('');" name="m_gross_weight" 
                                    placeholder='Gross Weight' type='text' >       
                           </div>
                         </div>
@@ -337,7 +337,7 @@
                         </div>    
                         <div class='form-group col-sm-4'>
                           <div class='controls'>
-                            <input class='form-control' id='m_net_weight' name="m_net_weight" 
+                            <input class='form-control' id='m_net_weight' onkeyup="$('.error_master_case').html('');" name="m_net_weight" 
                                    placeholder='Net Weight' type='text' >       
                           </div>
                         </div>
@@ -371,11 +371,12 @@
                         </div>    
                         <div class='form-group col-sm-4'>
                           <div class='controls'>
-                            <input class='form-control' id='no_pc_master' name="no_pc_master" 
+                            <input class='form-control' id='no_pc_master' onkeyup="$('.error_master_case').html('');" name="no_pc_master" 
                                    placeholder=' No Of PC in CASE' type='text' >       
                           </div>
                         </div>
                         <div class="clearfix"></div>
+                        <span class="color_red error_master_case"></span>
                     </div>
                 </div>    
 
@@ -631,8 +632,8 @@
                         </div>    
                         <div class='form-group col-sm-4'>
                           <div class='controls'>
-                            <input class='form-control' id='dm3_pallet' name="dm3_pallet" 
-                                   placeholder='DM3 Retail' type='text' >       
+                            <input class='form-control' id='dm3_pallet' readonly name="dm3_pallet" 
+                                   placeholder='DM3 Pallet' type='text' >       
                           </div>
                         </div>
                         <div class='form-group col-sm-4 padding-l-0'>
@@ -678,6 +679,7 @@
                           </div>
                         </div>
                         <div class="clearfix"></div>
+                        <span class="color_red error_pallet"></span>
                     </div>
                 </div>    
                 
@@ -685,8 +687,10 @@
                     <div class='form-group col-sm-4 text-left'>
                             <div class='controls'>
                                 <label class='control-label check-box-margin'>
-                                    <input type="checkbox" name="" id=""> <span>PART 2 COMPLETED (33%)</span>
+                                    <input type="checkbox" name="complete_admin_part_2" id="complete_admin_part_2"> <span>PART 2 COMPLETED (33%)</span>
                                 </label>
+                                <br/>
+                                <span class="hide  color_red error_admin_part_2">Plese Check this checkbox to proceed further.</span>
                             </div>    
                         </div>
                     
@@ -820,7 +824,7 @@
     }
 
     // validation for Checkbox weather it is checked or not? 
-    function validate(field_name) {
+    function validate_checkbox(field_name) {
         if (document.getElementById(field_name).checked) {
             return true;
         } else {
@@ -866,7 +870,7 @@
         var upc = $('#upc').val();
         var ean = $('#ean').val();
         var prod_code = $('#prod_code').val();
-        var complete_admin_part_1 = validate('complete_admin_part_1');        
+        var complete_admin_part_1 = validate_checkbox('complete_admin_part_1');        
 
         var form_data = $("#admin_part_1").serializeArray();
 
@@ -907,6 +911,8 @@
     
     function dm3_retail_func(){
         
+        $('.error_retail').html(''); // Empty the Error in Error Retail class
+
         var r_length=1;
         var r_width=1;
         var r_height=1;
@@ -1020,17 +1026,84 @@
     function validate_admin_part_2(){
         var product_id = $('#product_id').val();
         if(product_id == ''){
+            //uncommetn below line for validate Part-1 Required Part
             //$(function(){ bootbox.alert('Please create product in Part-1.'); return false; });
         }
 
         var error_cnt = 0;
+        var complete_admin_part_2 = validate_checkbox('complete_admin_part_2');    
+
+        // Retail Unit Dimension Validation [STRAT]
         var dm3_retail = $('#dm3_retail').val();
-        var gross_weight = $('#gross_weight').val();
-        var net_weight = $('#net_weight').val();
-        var error_retail = $('.error_retail').html();    
-        if(dm3_retail != ''){ if(isNumber(dm3_retail) == false){  error_cnt++; }  }
-        if(gross_weight != ''){ if(isNumber(gross_weight) == false){  error_cnt++; }  }
-        if(net_weight != ''){ if(isNumber(net_weight) == false){ error_cnt++; }  }
+        var r_gross_weight = $('#r_gross_weight').val();
+        var r_net_weight = $('#r_net_weight').val();
+        var error_retail_str = '';
+
+        if(dm3_retail != ''){ if(isNumber(dm3_retail) == false){ error_retail_str += '<p> DM3 should be Number.</p>'; error_cnt++; }  
+        }else{ error_retail_str += '<p> DM3 is Required.</p>'; error_cnt++; }
+
+        if(r_gross_weight != ''){ if(isNumber(r_gross_weight) == false){ error_retail_str += '<p> Gross Weight should be Number.</p>'; error_cnt++; }  
+        }else{ error_retail_str += '<p> Gross Weight is required.</p>'; error_cnt++; }
+
+        if(r_net_weight != ''){ if(isNumber(r_net_weight) == false){ error_retail_str += '<p> Net Weight should be Number.</p>'; error_cnt++; }  
+        }else{ error_retail_str += '<p> Net Weight is required.</p>'; error_cnt++; }
+
+        $('.error_retail').html(error_retail_str); // Append Retail Error String to error_retail Class        
+        // Retail Unit Dimension Validation [END]
+
+        // MasterCase Dimension Validation [START]
+        var m_upc = $('#m_upc').val();
+        var dm3_master = $('#dm3_master').val();
+        var m_gross_weight = $('#m_gross_weight').val();
+        var m_net_weight = $('#m_net_weight').val();
+        var no_pc_master = $('#no_pc_master').val();
+        var error_master_str = '';
+
+        if(m_upc == ''){ error_master_str += '<p> UPC is Required.</p>'; error_cnt++; }  
+
+        if(m_gross_weight != ''){ if(isNumber(m_gross_weight) == false){ error_master_str += '<p> Gross Weight should be Number.</p>'; error_cnt++; }  
+        }else{ error_master_str += '<p> Gross Weight is required.</p>'; error_cnt++; }
+
+        if(m_net_weight != ''){ if(isNumber(m_net_weight) == false){ error_master_str += '<p> Net Weight should be Number.</p>'; error_cnt++; }  
+        }else{ error_master_str += '<p> Net Weight is required.</p>'; error_cnt++; }
+
+        if(dm3_master != ''){ if(isNumber(dm3_master) == false){ error_master_str += '<p>DM3 should be Number.</p>'; error_cnt++; }  
+        }else{ error_master_str += '<p> DM3 is required.</p>'; error_cnt++; }
+
+        if(no_pc_master != ''){ if(isNumber(no_pc_master) == false){ error_master_str += '<p> No of PC in CASE should be Number.</p>'; error_cnt++; }  
+        }else{ error_master_str += '<p> No of PC in CASE is required.</p>'; error_cnt++; }
+
+        $('.error_master_case').html(error_master_str); // Append Retail Error String to error_retail Class      
+
+        // MasterCase Dimension Validation [END]
+
+        // Pallet Dimension Validation [START]        
+        
+        var p_upc = $('#p_upc').val();    
+        var p_gross_weight = $('#p_gross_weight').val();
+        var p_net_weight = $('#p_net_weight').val();
+        var dm3_pallet = $('#dm3_pallet').val();
+        var p_cma_per_pal = $('#p_cma_per_pal').val();
+        var error_pallet_str = '';
+
+        if(p_upc == ''){ error_pallet_str += '<p> UPC is Required.</p>'; error_cnt++; }  
+
+        if(p_gross_weight != ''){ if(isNumber(p_gross_weight) == false){ error_pallet_str += '<p> Gross Weight should be Number.</p>'; error_cnt++; }  
+        }else{ error_pallet_str += '<p> Gross Weight is required.</p>'; error_cnt++; }
+
+        if(p_net_weight != ''){ if(isNumber(p_net_weight) == false){ error_pallet_str += '<p> Net Weight should be Number.</p>'; error_cnt++; }  
+        }else{ error_pallet_str += '<p> Net Weight is required.</p>'; error_cnt++; }
+
+        if(dm3_pallet != ''){ if(isNumber(dm3_pallet) == false){ error_pallet_str += '<p> DM3 should be Number.</p>'; error_cnt++; }  
+        }else{ error_pallet_str += '<p> DM3 is required.</p>'; error_cnt++; }
+
+        if(p_cma_per_pal != ''){ if(isNumber(p_cma_per_pal) == false){ error_pallet_str += '<p> CMA per PAL should be Number.</p>'; error_cnt++; }  
+        }else{ error_pallet_str += '<p> CMA per PAL is required.</p>'; error_cnt++; }
+
+        $('.error_pallet').html(error_pallet_str);
+
+        if(complete_admin_part_2 == false){ $('.error_admin_part_2').removeClass('hide'); error_cnt++; }else{ $('.error_admin_part_2').addClass('hide');}
+        // Pallet Dimension Validation [END]        
     }
 
 //------------------- //ADMIN PART 2 END ---------------------/

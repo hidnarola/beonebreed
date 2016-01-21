@@ -22,6 +22,9 @@ class Products extends CI_Controller {
 		$this->template->load('admin_default', 'products/add',$data);
 	}
 
+
+	
+
 	// ------------------------------- START ADMIN TAB FORM -----------------------------------------
 
 	/**
