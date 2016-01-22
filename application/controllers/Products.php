@@ -4,6 +4,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Products extends CI_Controller {
 
+
     public function __construct() {
         parent::__construct();
     }
@@ -327,6 +328,323 @@ class Products extends CI_Controller {
     }
 
     // ------------------------------ // END ATTACHMENT TAB FORM ------------------------------------------
+
+	public function __construct(){
+		parent::__construct();
+		
+	}
+
+	public function index(){
+		
+		// $data['barcodes'] = $this->barcode_model->get_all();
+		$this->template->load('admin_default', 'products/index');	
+	}
+
+	public function add(){
+
+		$data['categories'] = $this->category_model->get_all_category(1);																	
+		$data['brands'] = $this->product_brand_model->get();
+
+		$this->template->load('admin_default', 'products/add',$data);
+	}
+
+	// ------------------------------- START ADMIN TAB FORM -----------------------------------------
+
+	/**
+	 * function generate_upc_ean for generate product code which is unassigned to any product
+	 * Formula for generate product code is short name of category follwed by last 4 number of UPC number
+	 *
+	 * @return String
+	 * @author Virendra
+	 **/
+	
+	public function generate_upc_ean(){
+
+		$cat_id = $this->input->post('cat_id');
+		
+		//get all bracode which is not assigned
+		$barcodes = $this->barcode_model->get_all(array('id NOT IN (SELECT barcode_id from products_new)'=>null));		
+		
+		//slice string into last 4 number 
+		$random_barcode = $barcodes[array_rand($barcodes)];
+		$last_four_characters = substr($random_barcode['upc'],8);			
+		$product_code = $cat_id.$last_four_characters;
+
+		$random_barcode['product_code'] = $product_code;
+
+		echo json_encode($random_barcode);
+	}
+
+	// ------------------------------------------------------------------------
+
+	/**
+	* function admin_form_tab_1() for save Admin Tab-1 Form Data
+	*
+	* @return string
+	* @author Virendra patel - Spark id -vpa
+	**/	
+	public function admin_form_tab_1(){
+
+		$barcode_id = $this->input->post('barcode_id');	
+		$brand_id = $this->input->post('brand_name');
+		$cat_short_name = $this->input->post('category');
+		$description = $this->input->post('description');
+		$product_id = $this->input->post('product_id');
+		$product_name = $this->input->post('product_name');
+		$product_code = $this->input->post('prod_code');
+
+		$category_data = $this->products_model->getfromtable('categories',array('short_name'=>$cat_short_name));
+		
+		$cat_id = $category_data['id'];
+		
+		$data_admin_part_1 = array(		
+									'product_name'=>$product_name,
+									'category_id'=>$cat_id,
+									'brand_id'=>$brand_id,
+									'product_code'=>$product_code,
+									'description'=>$description,
+									'barcode_id'=>$barcode_id
+								);
+
+		if(!empty($product_id)){
+			$this->products_model->update($product_id,$data_admin_part_1);
+		}else{
+			$product_id = $this->products_model->insert($data_admin_part_1);
+		}
+				
+		echo json_encode(array('product_id'=>$product_id));
+	}
+
+	// ------------------------------------------------------------------------
+
+	/**
+	* function admin_form_tab_2() for save Admin Tab-2 Form Data
+	*
+	* @return string
+	* @author Virendra patel - Spark id -vpa
+	**/	
+	public function admin_form_tab_2(){
+
+		//For Retail
+		$r_length = $this->input->post('r_length');
+		$r_width = $this->input->post('r_width');
+		$r_height = $this->input->post('r_height');
+		$r_gross_weight = $this->input->post('r_gross_weight');
+		$r_net_weight = $this->input->post('r_net_weight');
+		$dm3_retail = $this->input->post('dm3_retail');
+		$product_id = $this->input->post('product_id');
+		$product_retail_id = $this->input->post('product_retail_id'); // Retail ID from dimension Table
+
+		$data_retail = array(
+							'product_id'=>$product_id,
+							'dimension_id'=>'1',
+							'length'=>$r_length,
+							'width'=>$r_width,
+							'height'=>$r_height,
+							'gross_weight'=>$r_gross_weight,
+							'net_weight'=>$r_net_weight,
+							'dm3'=>$dm3_retail		
+							);
+
+		// If Id find then UPDATE otherwise insert
+		if(!empty($product_retail_id)){
+			$this->products_model->update_into('dimension',$product_retail_id,$data_retail);	
+		}else{			
+			$product_retail_id = $this->products_model->insert_into('dimension',$data_retail);
+		}
+
+		// ------------------------------------------------------------------------
+
+		$m_upc = $this->input->post('m_upc');
+		$m_length = $this->input->post('m_length');
+		$m_width = $this->input->post('m_width');
+		$m_height = $this->input->post('m_height');
+		$m_gross_weight = $this->input->post('m_gross_weight');
+		$m_net_weight = $this->input->post('m_net_weight');
+		$dm3_master = $this->input->post('dm3_master');
+		$no_pc_master = $this->input->post('no_pc_master');
+		$product_master_id = $this->input->post('product_master_id'); // MasterCase ID from dimension Table
+
+		$data_master = array(	
+							'product_id'=>$product_id,
+							'dimension_id'=>'2',
+							'length'=>$m_length,
+							'width'=>$m_width,
+							'height'=>$m_height,
+							'gross_weight'=>$m_gross_weight,
+							'net_weight'=>$m_net_weight,
+							'dm3'=>$dm3_master,
+							'no_of_pc_case'=>$no_pc_master,
+							'upc'=>$m_upc			
+							);
+
+		// If Id find then UPDATE otherwise insert
+		if(!empty($product_master_id)){
+			$this->products_model->update_into('dimension',$product_master_id,$data_master);	
+		}else{			
+			$product_master_id = $this->products_model->insert_into('dimension',$data_master);
+		}
+
+		// ------------------------------------------------------------------------
+
+		$i_upc = $this->input->post('i_upc');
+		$i_length = $this->input->post('i_length');
+		$i_width = $this->input->post('i_width');
+		$i_height = $this->input->post('i_height');
+		$i_gross_weight = $this->input->post('i_gross_weight');
+		$i_net_weight = $this->input->post('i_net_weight');
+		$dm3_inner = $this->input->post('dm3_inner');
+		$no_pc_inner = $this->input->post('no_pc_inner');
+		$product_inner_id = $this->input->post('product_inner_id'); // InnerCase ID from dimension Table
+
+		if(!empty($i_upc)){
+			
+			$data_inner = array(	
+							'product_id'=>$product_id,
+							'dimension_id'=>'3',
+							'length'=>$i_length,
+							'width'=>$i_width,
+							'height'=>$i_height,
+							'gross_weight'=>$i_gross_weight,
+							'net_weight'=>$i_net_weight,
+							'dm3'=>$dm3_inner,
+							'no_of_pc_case'=>$no_pc_inner,
+							'upc'=>$i_upc			
+							);
+
+			if(!empty($product_inner_id)){
+				$this->products_model->update_into('dimension',$product_inner_id,$data_inner);	
+			}else{
+				$product_inner_id = $this->products_model->insert_into('dimension',$data_inner);
+			}
+		}
+
+		// ------------------------------------------------------------------------
+
+		$p_upc = $this->input->post('p_upc');
+		$p_length = $this->input->post('p_length');
+		$p_width = $this->input->post('p_width');
+		$p_height = $this->input->post('p_height');
+		$p_gross_weight = $this->input->post('p_gross_weight');
+		$p_net_weight = $this->input->post('p_net_weight');
+		$dm3_pallet = $this->input->post('dm3_pallet');
+		$p_case_row = $this->input->post('p_case_row');
+		$p_no_of_row = $this->input->post('p_no_of_row');
+		$p_cma_per_pal = $this->input->post('p_cma_per_pal');
+		$product_pallet_id = $this->input->post('product_pallet_id');
+
+		$data_pallet =  array(	
+							'product_id'=>$product_id,
+							'dimension_id'=>'4',
+							'length'=>$p_length,
+							'width'=>$p_width,
+							'height'=>$p_height,
+							'gross_weight'=>$p_gross_weight,
+							'net_weight'=>$p_net_weight,
+							'dm3'=>$dm3_pallet,
+							'upc'=>$p_upc,
+							'case_row'=>$p_case_row,
+							'no_of_rows'=>$p_no_of_row,
+							'cma_per_pal'=>$p_cma_per_pal			
+							);
+
+		// If Id find then UPDATE otherwise insert
+		if(!empty($product_pallet_id)){
+			$this->products_model->update_into('dimension',$product_pallet_id,$data_pallet);	
+		}else{			
+			$product_pallet_id = $this->products_model->insert_into('dimension',$data_pallet);
+		}
+
+		echo json_encode(
+					array(
+						'product_retail_id'=>$product_retail_id,
+						'product_master_id'=>$product_master_id,
+						'product_pallet_id'=>$product_pallet_id,
+						'product_inner_id'=>$product_inner_id,
+						'qry'=>$this->db->last_query()
+						)
+				);
+	}
+
+	// ------------------------------------------------------------------------
+
+	/**
+	* function admin_form_tab_3() for save Admin Tab-3 Form Data
+	*
+	* @return string
+	* @author Virendra patel - Spark id -vpa
+	**/	
+	public function admin_form_tab_3(){
+
+		$switch_11 = $this->input->post('switch_11'); // HAVE YOU SENT THE UPC CODE TO THE SUPPLIER ?
+		$switch_12 = $this->input->post('switch_12'); // HAVE YOU CREATED THE PRODUCT IN OUR ERP (ACOMBA) ?
+		$note_13 = $this->input->post('mrsp_canada');
+		$note_14 = $this->input->post('hs_code');
+		$note_15 = $this->input->post('mrsp_international');
+		$note_16 = $this->input->post('country_origin');
+		$product_id = $this->input->post('product_id');
+
+		$q11 = $this->input->post('q11');
+		$q12 = $this->input->post('q12');
+		$q13 = $this->input->post('q13');
+		$q14 = $this->input->post('q14');
+		$q15 = $this->input->post('q15');
+		$q16 = $this->input->post('q16');
+
+		if(!empty($q11)){
+
+		}else{
+			$data_q11 = array('question_id'=>$q11,'product_id'=>$product_id);
+		}
+
+	}
+
+	// ------------------------------------------------------------------------
+
+ 	// Generate Random UPC NO  
+	public function upc_get(){
+		$odd_sum = $even_sum = 0;
+		for ($i = 1; $i < 12; $i++) {
+			$digits[$i] = rand(0,9);
+			if($i % 2 == 0)
+				$even_sum += $digits[$i];
+			else
+				$odd_sum += $digits[$i];
+		}
+		$digits[$i] = 10 - ((3 * $odd_sum + $even_sum) % 10);
+		echo implode('',$digits);
+	}
+
+	// ------------------------------ // END ADMIN TAB FORM ------------------------------------------
+
+
+	// ------------------------------ START ATTACHMENT TAB FORM ------------------------------------------
+
+	public function product_attachment(){
+		
+		echo $product_id = $this->input->post('product_id');
+
+		die();
+
+		$config['upload_path'] = './uploads/products/';
+		$config['allowed_types'] = '*';
+		
+		$this->load->library('upload', $config);
+		
+		if ( ! $this->upload->do_upload('prod_attachment')){
+			$error = array('error' => $this->upload->display_errors());
+			
+		}else{
+			$data = array('upload_data' => $this->upload->data());
+			p($data);
+			
+		}
+
+	}
+
+	// ------------------------------ // END ATTACHMENT TAB FORM ------------------------------------------
+
+
 }
 
 /* End of file Products.php */

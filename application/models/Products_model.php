@@ -102,20 +102,19 @@ class Products_model extends CI_Model {
 			}
 		}
 		
-		
 		/* Check fourth parameter is passed and process 4th param. */
 		if(!empty($options) && is_array($options)){
 			$check_key = array('group_by','order_by');
 			foreach ($options as $key => $value) {
-					if(in_array($key, $check_key)){
-						if(is_array($value)){
-							foreach($value as $k => $v){
-								$this->db->$key($v);
-							}
-						}else{
-							$this->db->$key($value);
+				if(in_array($key, $check_key)){
+					if(is_array($value)){
+						foreach($value as $k => $v){
+							$this->db->$key($v);
 						}
+					}else{
+						$this->db->$key($value);
 					}
+				}
 			}
 		}
 
@@ -170,6 +169,7 @@ class Products_model extends CI_Model {
 		return $id;
 	}
 
+
     /* For inserting attachment data */
 	public function insert_attachment($data){
 		$id = $this->db->insert('products_attachments', $data);
@@ -197,6 +197,7 @@ class Products_model extends CI_Model {
 		$update_id = $this->db->affected_rows(); // fetch affected rown in table.
 		return $update_id;
 	}
+
     
     
     public function get_question_part_3(){
@@ -214,6 +215,7 @@ class Products_model extends CI_Model {
         $id=$this->db->insert('product_question', $data);
         return $id;
 	}   
+
 }
 
 /* End of file Products_model.php */

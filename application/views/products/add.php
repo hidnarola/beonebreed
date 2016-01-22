@@ -101,9 +101,16 @@
    $('.other_tabs').click(function(event){
         var product_id = $('#product_id').val();
 
+
        $('#attach_project_id').val(product_id);
        $('#notes_project_id').val(product_id);
 
+        event.preventDefault();
+        // return false;
+
+
+       $('#attach_project_id').val(product_id);
+       $('#notes_project_id').val(product_id);
         event.preventDefault();
         // return false;
 
