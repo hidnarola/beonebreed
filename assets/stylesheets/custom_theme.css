@@ -438,6 +438,10 @@
     margin-bottom: 15px;
 
 }
+p.notes {
+    word-wrap: break-word;
+} 
+
 }
 /* Scroll down indicator (bouncing) */
 @-webkit-keyframes bounce {

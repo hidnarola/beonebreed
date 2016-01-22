@@ -31,8 +31,8 @@
 
 <div class="row">
     <div class="col-sm-12">
-        <form class="form" style="margin-bottom: 0;" method="post" action="#">
-            <div class="box-main-scroll">
+            <div class="box-main-scroll">   
+              <form class="form" style="margin-bottom: 0;" method="post" action="#">
                 <div class="box col-sm-12">
                     <div class="box-header gray-bg">
                         PART - 1 
@@ -257,8 +257,10 @@
                         </div>
                     </div> <!-- END of box-content -->
                 </div>
-
-                <!-- part -2  -->
+              </form>
+              <!-- End of part1 -->  
+                <!-- Strat of part -2  -->
+               <form class="form" style="margin-bottom: 0;" method="post" action="#">
                 <div class="box col-sm-12">
                     <div class="box-header gray-bg">
                         PART 2 SELLING POINTS
@@ -386,9 +388,175 @@
                         <div class="clearfix"></div>
                     </div>
                 </div>
+            </form>
 
                 <!-- //part -2  -->
-            </div>
+                
+               <!-- part -3 start -->
+             <form class="form" style="margin-bottom: 0;" method="post" action="#" accept-charset="UTF-8" id="marketting_part_3">
+                 <input type="hidden" name="hdn_marketting_part_3" id="hdn_marketting_part_3" value="1">
+                <div class="row">
+                    <div class="col-sm-12 pull-left"> 
+                        <span class="">
+                            <h3 class="color_grey"> PART - 3 </h3>
+                        </span>
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="col-sm-12">
+                        <h4> CHECKLIST PACKAGING </h4>
+						<?php 
+                            $i=1;
+                            foreach($question_list_3 as $u_key) { ?>	
+							<div class="row check-list">
+								<div class="col-sm-6">
+									<span class="check-list-number"><?php echo $i; ?></span>
+									<label class='control-label'><?php echo $u_key->question; ?></label>
+ 								</div>
+								<div class="col-sm-4">
+									<div class='make-switch switch' data-off-label='&lt;i class="icon-remove"&gt;&lt;/i&gt;' data-on-label='&lt;i class="icon-ok"&gt;&lt;/i&gt;'>
+									  <input type='hidden' name='check_list[<?php echo $u_key->id;?>]'>
+									  <input type='checkbox' name='check_list[<?php echo $u_key->id;?>]'>
+									</div>
+								</div>
+								<div class="clearfix"></div>
+							</div>
+                            <?php if($u_key->description_required=="yes"){ ?>
+                                <div class="row check-list">
+                                    <div class="col-sm-6">
+                                        <label class='control-label'><?php echo $u_key->description_label; ?></label>
+                                    </div>
+          
+                                    <div class="col-sm-4">
+                                        <input type='hidden' name='txt_list[<?php echo $u_key->id;?>]' >
+                                        <input class='form-control'  type='text' name='txt_list[<?php echo $u_key->id;?>]'>
+                                    </div>
+
+                                    <div class="clearfix"></div>
+                                </div>
+          
+                            <?php } $i++; } ?>	
+                    </div>
+
+                    <div class="col-sm-6">
+
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <input type="checkbox" name="marketting_step_3" id="marketting_step_3" > Part-3 Completed (34%)
+                                <span class="color_red error_admin_part_3 hide">Please Check this checkbox for procced further.</span>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class='form-group pull-right'>
+                                    <div class='controls'>
+                                    <input type="hidden" name="" id="" value="">
+                                    <!--
+                                    <a class="btn btn-success" onclick="validate_admin_part_3()" >
+                                        <i class='icon-save'></i> Save
+                                    </a> -->
+                                    <a class="btn btn-success" onclick="validate_marketting_part()" >
+                                        <i class='icon-save'></i> Save
+                                    </a>
+                                    <a href="" class="btn btn-default" >Cancel</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>        
+                        <div class="clearfix"></div>
+                    </div>   
+                </div>                                                
         </form>
-    </div>
+               <!-- part 3 end -->
+               
+               <!-- part 4 start -->
+               
+        <form class="form" style="margin-bottom: 0;" method="post" action="#" accept-charset="UTF-8" id="admin_part_3">
+           <div class="row">
+               <div class="col-sm-12 pull-left"> 
+                   <span class="">
+                       <h3 class="color_grey"> PART - 4 </h3>
+                   </span>
+               </div>
+               <div class="clearfix"></div>
+               <div class="col-sm-12">
+                   <h4> CHECKLIST PRODUCT IMAGE </h4>
+                   <?php 
+                       $k=1;
+                       foreach($question_list_4 as $u_key) { ?>	
+                       <div class="row check-list">
+                           <div class="col-sm-6">
+                               <span class="check-list-number"><?php echo $k; ?></span>
+                               <label class='control-label'><?php echo $u_key->question; ?></label>
+                           </div>
+                           <div class="col-sm-4">
+                               <div class='make-switch switch' data-off-label='&lt;i class="icon-remove"&gt;&lt;/i&gt;' data-on-label='&lt;i class="icon-ok"&gt;&lt;/i&gt;'>
+                                 <input type='checkbox'>
+                               </div>
+                           </div>
+                           <div class="clearfix"></div>
+                       </div>
+                   <?php $k++; } ?>	
+               </div>
+
+               <div class="col-sm-6">
+
+               </div>
+               <div class="col-sm-6">
+                   <div class="row">
+                       <div class="col-sm-6">
+                           <input type="checkbox" name="complete_admin_part_1" id="complete_admin_part_1" > Part-4 Completed (80%)
+                           <span class="color_red error_admin_part_3 hide">Please Check this checkbox for procced further.</span>
+                       </div>
+                       <div class="col-sm-6">
+                           <div class='form-group pull-right'>
+                               <div class='controls'>
+                               <input type="hidden" name="" id="" value="">
+                               <a class="btn btn-success" onclick="validate_admin_part_4()" >
+                                   <i class='icon-save'></i> Save
+                               </a>
+                               <a href="" class="btn btn-default" >Cancel</a>
+                               </div>
+                           </div>
+                       </div>
+                   </div>        
+                   <div class="clearfix"></div>
+               </div>   
+           </div>                                                
+    </form>
+               
+               
+               
+               <!-- part 4 ends -->
+            </div>
+     </div>
 </div>
+
+<script type="text/javascript">
+    
+    function validate_marketting_part(){
+        
+      
+        if($("#marketting_step_3").is(':checked')){
+            var data = new FormData($("#marketting_part_3")[0]);
+            $.ajax({
+                url: '<?php echo base_url()."products/marketting_part_3"; ?>',
+                processData: false, 
+                type: 'post',
+                dataType: 'json',
+                data: data,
+                contentType: false,
+               success:function(response){
+                    if(response.status=="success"){
+                        $("#marketting_step_3").prop('disabled', true);
+                    }
+               }
+            });
+        }else{
+        
+            return false;
+            $("#error_admin_part_3").removeClass("hide");
+           
+        } 
+   }
+   
+</script>

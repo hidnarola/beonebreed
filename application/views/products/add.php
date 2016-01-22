@@ -100,14 +100,13 @@
 
    $('.other_tabs').click(function(event){
         var product_id = $('#product_id').val();
-<<<<<<< HEAD
+
        $('#attach_project_id').val(product_id);
        $('#notes_project_id').val(product_id);
-        
-=======
+
         event.preventDefault();
         // return false;
->>>>>>> 7a6bc2c49fdd5de8ec190fdd2d6fe0b880f4a9b0
+
    });
 
 </script>

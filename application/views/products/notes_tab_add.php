@@ -93,6 +93,29 @@
                                     Add
                                 </button>-->
                             </div>
+                            <!-- bootstrap container for notes information -->
+                                <div id="my_notes_description" class="modal fade" role="dialog">
+                                    <div class="modal-dialog">
+                                        <!-- Modal content-->
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                <h4 class="modal-title">Notes</h4>
+                                            </div>
+                                            <div class="modal-body" id="notes_desc1">
+                                                <p id="notes_desc" class="notes">
+                                                    
+                                                    
+                                                </p>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            <!-- bootstrap container for notes information ends -->
                             <!--end-->
                         </div> 
 
@@ -141,6 +164,14 @@
         $('#my_preview_form').modal('show');
         return false;
     });
+    
+    $(document).on('click', '.notes_link', function() {
+
+        var data = $(this).attr("data-desc");
+        $('#notes_desc').text(data);
+        $('#my_notes_description').modal('show');
+    });
+    
     function notes_file(){
 
         var product_id = $('#product_id').val();

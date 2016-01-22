@@ -315,7 +315,12 @@ class Project_model extends CI_Model {
     $this->db->where('id', $id);
     return $this->db->delete('projects');
   }
-
+  
+  public function insert_attachment($data){
+		$id = $this->db->insert('products_attachments', $data);
+        $last_id = $this->db->insert_id();
+        return $last_id;
+	}
 }
 ?>
 

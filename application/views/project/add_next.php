@@ -134,7 +134,7 @@
 
                                            </div>
                                         <!-- bootstrap container for notes information -->
-                    <div id="my_notes_description" class="modal fade" role="dialog">
+                                        <div id="my_notes_description" class="modal fade" role="dialog">
                                             <div class="modal-dialog">
                                                 <!-- Modal content-->
                                                 <div class="modal-content">

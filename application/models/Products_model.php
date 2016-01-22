@@ -169,8 +169,7 @@ class Products_model extends CI_Model {
 		$id = $this->db->insert_id(); // fetch last inserted id in table
 		return $id;
 	}
-<<<<<<< HEAD:application/models/Products_model _old..php
-    
+
     /* For inserting attachment data */
 	public function insert_attachment($data){
 		$id = $this->db->insert('products_attachments', $data);
@@ -185,7 +184,7 @@ class Products_model extends CI_Model {
         return $last_id;
 	}
     
-=======
+
 
 	public function update_into($table,$id = null,$data){
 
@@ -198,8 +197,23 @@ class Products_model extends CI_Model {
 		$update_id = $this->db->affected_rows(); // fetch affected rown in table.
 		return $update_id;
 	}
-
->>>>>>> 7a6bc2c49fdd5de8ec190fdd2d6fe0b880f4a9b0:application/models/Products_model.php
+    
+    
+    public function get_question_part_3(){
+        $this->db->where('part','3');
+        $query = $this->db->get('question_master');
+        return $query->result();
+	}
+    
+    public function get_question_part_4(){
+        $this->db->where('part','4');
+        $query = $this->db->get('question_master');
+        return $query->result();
+	}
+    public function add_question_ans($data){
+        $id=$this->db->insert('product_question', $data);
+        return $id;
+	}   
 }
 
 /* End of file Products_model.php */
