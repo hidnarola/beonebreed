@@ -397,7 +397,7 @@
                         </div>
                          <div class='form-group col-sm-4 padding-l-0'>
                           <div class='controls'>
-                                <a onclick="event.preventDefault(); i_upc_get()" class="btn btn-g-bar-code btn-success">G</a>
+                                <a onclick="event.preventDefault(); i_upc_get();$('.error_innercase').html('');" class="btn btn-g-bar-code btn-success">G</a>
                           </div>
                         </div>
                         <div class="clearfix"></div>
@@ -460,7 +460,7 @@
                         </div>    
                         <div class='form-group col-sm-4'>
                           <div class='controls'>
-                            <input class='form-control' id='i_gross_weight' name="i_gross_weight" 
+                            <input class='form-control' id='i_gross_weight' onkeyup="$('.error_innercase').html('');" name="i_gross_weight" 
                                    placeholder='Gross Weight' type='text' >       
                           </div>
                         </div>
@@ -477,7 +477,7 @@
                         </div>    
                         <div class='form-group col-sm-4'>
                           <div class='controls'>
-                            <input class='form-control' id='i_net_weight' name="i_net_weight" 
+                            <input class='form-control' id='i_net_weight' onkeyup="$('.error_innercase').html('');" name="i_net_weight" 
                                    placeholder='Net Weight' type='text' >       
                           </div>
                         </div>
@@ -511,11 +511,12 @@
                         </div>    
                         <div class='form-group col-sm-4'>
                           <div class='controls'>
-                            <input class='form-control' id='no_pc_inner' name="no_pc_inner" 
+                            <input class='form-control' id='no_pc_inner' onkeyup="$('.error_innercase').html('');" name="no_pc_inner" 
                                    placeholder='No Of PC in INNER CASE' type='text' >       
                           </div>
                         </div>
                         <div class="clearfix"></div>
+                        <span class="color_red error_innercase"></span>
                     </div>
 
                     <div class="col-sm-6 border-left">
@@ -697,6 +698,7 @@
                     <div class='form-group pull-right'>
                         <div class='controls'>
                             <input type="hidden" name="" id="" value="">
+                            <input type="hidden" name="product_inner_id" id="product_inner_id">
                             <input type="hidden" name="product_retail_id" id="product_retail_id">
                             <input type="hidden" name="product_master_id" id="product_master_id">
                             <input type="hidden" name="product_pallet_id" id="product_pallet_id">
@@ -724,43 +726,40 @@
                       <label class='control-label' for='product_name'>MRSP CANADA</label>
                       <div class='controls'>
                         <input class='form-control' id='mrsp_canada' name="mrsp_canada" 
-                               placeholder='Please enter MRSP CANADA' type='text' onkeyup="$('.error_mrsp_canada').addClass('hide');">
+                               placeholder='Please enter MRSP CANADA' type='text' onkeyup="$('.error_mrsp_canada').html('');">
                         <span class="color_red hide error_mrsp_canada" >Plese Enter MRSP CANADA </span>
                       </div>
                     </div>
                     <div class='form-group'>
                       <label class='control-label' for='product_name'>MRSP INTERNTIONAL</label>
                       <div class='controls'>
-                        <input class='form-control' id='hs_code' name="hs_code" 
-                               placeholder='Please MRSP INTERNATIONAL' type='text' onkeyup="$('.error_hs_code').addClass('hide');">
-                        <span class="color_red hide error_hs_code" >Plese Enter HS CODE </span>
+                        <input class='form-control' id='mrsp_international' name="mrsp_international" 
+                               placeholder='Please MRSP INTERNATIONAL' type='text' onkeyup="$('.error_mrsp_international').html('');">
+                        <span class="color_red hide error_mrsp_international" >Plese Enter MRSP INTERNATIONAL </span>
                       </div>
                     </div>
-                </div>
-                
+                </div>                
                 <div class="col-sm-6">
                     <div class='form-group'>
                       <label class='control-label' for='product_name'>HS CODE</label>
                       <div class='controls'>
                         <input class='form-control' id='hs_code' name="hs_code" 
-                               placeholder='Please enter HS CODE' type='text' onkeyup="$('.error_hs_code').addClass('hide');">
+                               placeholder='Please enter HS CODE' type='text' onkeyup="$('.error_hs_code').html('');">
                         <span class="color_red hide error_hs_code" >Plese Enter HS CODE </span>
                       </div>
                     </div>
                     <div class='form-group'>
                       <label class='control-label' for='product_name'>COUNTRY OF ORIGIN</label>
                       <div class='controls'>
-                        <input class='form-control' id='hs_code' name="hs_code" 
-                               placeholder='Please enter Country of origin' type='text' onkeyup="$('.error_hs_code').addClass('hide');">
-                        <span class="color_red hide error_hs_code" >Plese Enter HS CODE </span>
+                        <input class='form-control' id='country_origin' name="country_origin" 
+                               placeholder='Please enter Country of origin' type='text' onkeyup="$('.error_country_origin').html('');">
+                        <span class="color_red hide error_country_origin" > Plese Enter country origin. </span>
                       </div>
                     </div>
                     <div class="clearfix"></div>
-
                 </div> 
-
                 <div class="clearfix"></div>
-               <div class="col-sm-12">
+                <div class="col-sm-12">
                     <h4> CHECK LIST </h4>
                     <div class="row check-list">
                         <div class="col-sm-6">
@@ -769,7 +768,7 @@
                         </div>
                         <div class="col-sm-4">
                             <div class='make-switch switch' data-off-label='&lt;i class="icon-remove"&gt;&lt;/i&gt;' data-on-label='&lt;i class="icon-ok"&gt;&lt;/i&gt;'>
-                              <input type='checkbox'>
+                              <input type='checkbox' name="switch_11" id="11" value="11">
                             </div>
                         </div>
                         <div class="clearfix"></div>
@@ -779,25 +778,28 @@
                         </div>
                         <div class="col-sm-4">
                             <div class='make-switch switch' data-off-label='&lt;i class="icon-remove"&gt;&lt;/i&gt;' data-on-label='&lt;i class="icon-ok"&gt;&lt;/i&gt;'>
-                              <input   type='checkbox'>
+                              <input type='checkbox' name="switch_12" id="12" value="12" >
                             </div>
                         </div>
                     </div>
-                </div>
-                    
-                <div class="col-sm-6">
-                   
+                </div>                    
+                <div class="col-sm-6">                   
                 </div>
                 <div class="col-sm-6">
                     <div class="row">
                         <div class="col-sm-6">
-                            <input type="checkbox" name="complete_admin_part_1" id="complete_admin_part_1" > Part-3 Completed (34%)
+                            <input type="checkbox" name="complete_admin_part_3" id="complete_admin_part_3" > Part-3 Completed (34%)
                             <span class="color_red error_admin_part_3 hide">Please Check this checkbox for procced further.</span>
                         </div>
                         <div class="col-sm-6">
                             <div class='form-group pull-right'>
                                 <div class='controls'>
-                                <input type="hidden" name="" id="" value="">
+                                <input type="hidden" name="q11" id="q11" >
+                                <input type="hidden" name="q12" id="q12" >
+                                <input type="hidden" name="q13" id="q13" >
+                                <input type="hidden" name="q14" id="q14" >
+                                <input type="hidden" name="q15" id="q15" >
+                                <input type="hidden" name="q16" id="q16" >
                                 <a class="btn btn-success" onclick="validate_admin_part_3()" >
                                     <i class='icon-save'></i> Save
                                 </a>
@@ -813,6 +815,8 @@
         <!--  =========== //END TAB-3 ===============  -->
     </div>
 </div>
+
+
 
 
 <script type="text/javascript">
@@ -933,9 +937,11 @@
 
     function dm3_mastercase(){
 
-        var m_length=1;
-        var m_width=1;
-        var m_height=1;
+        $('.error_master_case').html('');
+
+        var m_length;
+        var m_width;
+        var m_height;
 
         if($('#m_length').val() == '' && $('#m_width').val() == '' && $('#m_height').val() == '' ){ $('#dm3_master').val(''); return false; }
         
@@ -949,9 +955,12 @@
     }
 
     function dm3_inner_func(){
-        var i_length=1;
-        var i_width=1;
-        var i_height=1;
+
+        $('.error_innercase').html('');
+
+        var i_length;
+        var i_width;
+        var i_height;
 
         if($('#i_length').val() == '' && $('#i_width').val() == '' && $('#i_height').val() == '' ){ $('#dm3_inner').val(''); return false; }
         
@@ -967,9 +976,9 @@
     function dm3_pallet_func(){
 
         $('.error_pallet').html('');
-        var p_length=1;
-        var p_width=1;
-        var p_height=1;
+        var p_length;
+        var p_width;
+        var p_height;
 
         if($('#p_length').val() == '' && $('#p_width').val() == '' && $('#p_height').val() == '' ){ $('#dm3_pallet').val(''); return false; }
         
@@ -1035,8 +1044,8 @@
         var product_id = $('#product_id').val();
         if(product_id == ''){
             //uncommetn below line for validate Part-1 Required Part
-            $(function(){ bootbox.alert('Please create product in Part-1.');  });
-            return false;
+            // $(function(){ bootbox.alert('Please create product in Part-1.');  });
+            // return false;
         }
 
         var error_cnt = 0;
@@ -1083,11 +1092,42 @@
         }else{ error_master_str += '<p> No of PC in CASE is required.</p>'; error_cnt++; }
 
         $('.error_master_case').html(error_master_str); // Append Retail Error String to error_retail Class      
-
         // MasterCase Dimension Validation [END]
 
-        // Pallet Dimension Validation [START]        
-        
+
+        // InnerCase Dimentsion Valdiation [START]
+
+        var i_upc = $('#i_upc').val(); //*
+        var i_length = $('#i_length').val();
+        var i_width = $('#i_width').val();
+        var i_height = $('#i_height').val();
+        var i_gross_weight = $('#i_gross_weight').val();
+        var i_net_weight = $('#i_net_weight').val(); //*
+        var dm3_inner = $('#dm3_inner').val(); //*
+        var no_pc_inner = $('#no_pc_inner').val(); //*
+        var error_inner_str = '';
+
+        if(i_upc != '' || i_gross_weight != '' || i_net_weight != '' || dm3_inner != '' || no_pc_inner != '') {
+            if(i_upc == ''){ error_inner_str += '<p> UPC is Required.</p>'; error_cnt++; }
+
+            if(i_gross_weight != ''){ if(isNumber(i_gross_weight) == false){ error_inner_str += '<p> Gross Weight should be Number.</p>'; error_cnt++; }  
+            }else{ error_inner_str += '<p> Gross Weight is required.</p>'; error_cnt++; }
+
+            if(i_net_weight != ''){ if(isNumber(i_net_weight) == false){ error_inner_str += '<p> Net Weight should be Number.</p>'; error_cnt++; }  
+            }else{ error_inner_str += '<p> Net Weight is required.</p>'; error_cnt++; }
+
+            if(dm3_inner != ''){ if(isNumber(dm3_inner) == false){ error_inner_str += '<p> DM3 should be Number.</p>'; error_cnt++; }  
+            }else{ error_inner_str += '<p> DM3 is required.</p>'; error_cnt++; }
+
+            if(no_pc_inner != ''){ if(isNumber(no_pc_inner) == false){ error_inner_str += '<p> No of PC Inner should be Number.</p>'; error_cnt++; }  
+            }else{ error_inner_str += '<p> No of PC Inner is required.</p>'; error_cnt++; }            
+        }
+
+        $('.error_innercase').html(error_inner_str);
+
+        // InnerCase Dimentsion Valdiation [END]
+
+        // Pallet Dimension Validation [START]                
         var p_upc = $('#p_upc').val();    
         var p_gross_weight = $('#p_gross_weight').val();
         var p_net_weight = $('#p_net_weight').val();
@@ -1126,7 +1166,7 @@
             }); // Fakeloader plugin
             
             var form_data = $("#admin_part_2").serializeArray();
-            
+                
             form_data.push({name:"product_id",value:product_id}); 
 
             $.ajax({
@@ -1139,6 +1179,7 @@
                     $('#product_retail_id').val(data.product_retail_id);
                     $('#product_master_id').val(data.product_master_id);
                     $('#product_pallet_id').val(data.product_pallet_id);
+                    $('#product_inner_id').val(data.product_inner_id);
                     $('#complete_admin_part_2').attr('disabled',true);
                     $('.percentage_complete_admin').html('66%');
                     $('.part_2_admin').addClass('active');
@@ -1152,5 +1193,75 @@
     }
 
 //------------------- //ADMIN PART 2 END ---------------------/
+
+//------------------- ADMIN PART 3 START ---------------------/
+    
+    function validate_admin_part_3(){
+        var product_id = $('#product_id').val();
+        if(product_id == ''){
+            //uncommetn below line for validate Part-1 Required Part
+            // $(function(){ bootbox.alert('Please create product in Part-1.');  });
+            // return false;
+        }
+
+        var error_cnt = 0;
+        var mrsp_canada = $('#mrsp_canada').val();
+        var hs_code = $('#hs_code').val();
+        var mrsp_international = $('#mrsp_international').val();
+        var country_origin = $('#country_origin').val();
+        var complete_admin_part_3 = validate_checkbox('complete_admin_part_3');  
+
+        if(mrsp_canada == ''){ $('.error_mrsp_canada').removeClass('hide'); error_cnt++; 
+        }else{ $('.error_mrsp_canada').addClass('hide'); }
+
+        if(hs_code == ''){ $('.error_hs_code').removeClass('hide'); error_cnt++; 
+        }else{ $('.error_hs_code').addClass('hide'); }
+
+        if(mrsp_international == ''){ $('.error_mrsp_international').removeClass('hide'); error_cnt++; 
+        }else{ $('.error_mrsp_international').addClass('hide'); }
+
+        if(country_origin == ''){ $('.error_country_origin').removeClass('hide'); error_cnt++; 
+        }else{ $('.error_country_origin').addClass('hide'); }
+
+        if(complete_admin_part_3 == false){ $('.error_admin_part_1').removeClass('hide'); error_cnt++; 
+        }else{ $('.error_admin_part_1').addClass('hide'); }
+
+        console.log(error_cnt);
+
+        if(error_cnt != '0'){
+            return false;
+        }else{
+
+            $("#fakeLoader").attr('style',''); // Remove Style Attribute for reuse
+            $("#fakeLoader").fakeLoader({
+                timeToHide:1200,
+                bgColor:"#2ecc71",
+                spinner:"spinner7"
+            }); // Fakeloader plugin
+            
+            var form_data = $("#admin_part_3").serializeArray();
+            form_data.push({name:"product_id",value:product_id}); 
+            
+            $.ajax({
+               url: '<?php echo base_url()."products/admin_form_tab_3"; ?>',
+               type: 'POST',
+               dataType: 'json',
+               data: form_data,
+               success:function(data){
+
+                    $('.11').attr('checked',false);
+                    return false;
+                    $('#product_id').val(data.product_id);
+                    $('#complete_admin_part_1').attr('disabled',true);
+                    $('#generate_barcode').attr('disabled',true);
+                    $('.percentage_complete_admin').html('33%');
+                    $('.part_1_admin').addClass('active');
+               }
+            });
+        }
+
+    }
+
+//------------------- //ADMIN PART 3 END ---------------------/
     
 </script>

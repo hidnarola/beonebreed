@@ -22,9 +22,6 @@ class Products extends CI_Controller {
 		$this->template->load('admin_default', 'products/add',$data);
 	}
 
-
-
-
 	// ------------------------------- START ADMIN TAB FORM -----------------------------------------
 
 	/**
@@ -51,6 +48,8 @@ class Products extends CI_Controller {
 
 		echo json_encode($random_barcode);
 	}
+
+	// ------------------------------------------------------------------------
 
 	/**
 	* function admin_form_tab_1() for save Admin Tab-1 Form Data
@@ -89,6 +88,8 @@ class Products extends CI_Controller {
 				
 		echo json_encode(array('product_id'=>$product_id));
 	}
+
+	// ------------------------------------------------------------------------
 
 	/**
 	* function admin_form_tab_2() for save Admin Tab-2 Form Data
@@ -160,6 +161,40 @@ class Products extends CI_Controller {
 
 		// ------------------------------------------------------------------------
 
+		$i_upc = $this->input->post('i_upc');
+		$i_length = $this->input->post('i_length');
+		$i_width = $this->input->post('i_width');
+		$i_height = $this->input->post('i_height');
+		$i_gross_weight = $this->input->post('i_gross_weight');
+		$i_net_weight = $this->input->post('i_net_weight');
+		$dm3_inner = $this->input->post('dm3_inner');
+		$no_pc_inner = $this->input->post('no_pc_inner');
+		$product_inner_id = $this->input->post('product_inner_id'); // InnerCase ID from dimension Table
+
+		if(!empty($i_upc)){
+			
+			$data_inner = array(	
+							'product_id'=>$product_id,
+							'dimension_id'=>'3',
+							'length'=>$i_length,
+							'width'=>$i_width,
+							'height'=>$i_height,
+							'gross_weight'=>$i_gross_weight,
+							'net_weight'=>$i_net_weight,
+							'dm3'=>$dm3_inner,
+							'no_of_pc_case'=>$no_pc_inner,
+							'upc'=>$i_upc			
+							);
+
+			if(!empty($product_inner_id)){
+				$this->products_model->update_into('dimension',$product_inner_id,$data_inner);	
+			}else{
+				$product_inner_id = $this->products_model->insert_into('dimension',$data_inner);
+			}
+		}
+
+		// ------------------------------------------------------------------------
+
 		$p_upc = $this->input->post('p_upc');
 		$p_length = $this->input->post('p_length');
 		$p_width = $this->input->post('p_width');
@@ -199,26 +234,48 @@ class Products extends CI_Controller {
 						'product_retail_id'=>$product_retail_id,
 						'product_master_id'=>$product_master_id,
 						'product_pallet_id'=>$product_pallet_id,
+						'product_inner_id'=>$product_inner_id,
 						'qry'=>$this->db->last_query()
 						)
 				);
-
 	}
 
+	// ------------------------------------------------------------------------
+
 	/**
-	* function admin_form_tab_2() for save Admin Tab-2 Form Data
+	* function admin_form_tab_3() for save Admin Tab-3 Form Data
 	*
 	* @return string
 	* @author Virendra patel - Spark id -vpa
 	**/	
 	public function admin_form_tab_3(){
 
-		p($_POST);
+		$switch_11 = $this->input->post('switch_11'); // HAVE YOU SENT THE UPC CODE TO THE SUPPLIER ?
+		$switch_12 = $this->input->post('switch_12'); // HAVE YOU CREATED THE PRODUCT IN OUR ERP (ACOMBA) ?
+		$note_13 = $this->input->post('mrsp_canada');
+		$note_14 = $this->input->post('hs_code');
+		$note_15 = $this->input->post('mrsp_international');
+		$note_16 = $this->input->post('country_origin');
+		$product_id = $this->input->post('product_id');
+
+		$q11 = $this->input->post('q11');
+		$q12 = $this->input->post('q12');
+		$q13 = $this->input->post('q13');
+		$q14 = $this->input->post('q14');
+		$q15 = $this->input->post('q15');
+		$q16 = $this->input->post('q16');
+
+		if(!empty($q11)){
+
+		}else{
+			$data_q11 = array('question_id'=>$q11,'product_id'=>$product_id);
+		}
+
 	}
 
+	// ------------------------------------------------------------------------
 
- 	
- 	// Generate UPC NO  
+ 	// Generate Random UPC NO  
 	public function upc_get(){
 		$odd_sum = $even_sum = 0;
 		for ($i = 1; $i < 12; $i++) {
