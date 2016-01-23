@@ -370,6 +370,15 @@
     box-shadow: inset);
     
 }
+.label-left .control-label{
+  text-align: left;
+}
+.mar-b-20{
+  margin-bottom: 20px;
+}
+.details_main{
+  margin-bottom: 10px;
+}
 @media(max-width: 767px){
   .border-left::after {
     border-left: none;
@@ -378,6 +387,7 @@
 #notes_desc p {
     word-wrap: break-word;
 }
+
 
 
 .chat ul.commnet-list  > li .avatar {

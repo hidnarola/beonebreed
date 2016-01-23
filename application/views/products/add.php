@@ -49,7 +49,7 @@
                                     Attachments
                                   </a>
                                 </li>
-                                <li>
+                                <li class="">
                                   <a data-toggle='tab' class="other_tabs" href='#tab4'>
                                     <i class='icon-ok text-blue'></i>
                                     Production
@@ -80,8 +80,8 @@
                                     
                                     <!-- ====== END ====== -->
                                 </div>
-                                <div class='tab-pane' id='tab4'>
-                                  <p>Production</p>
+                                <div class='tab-pane ' id='tab4'>
+                                    <?php $this->load->view('products/production_tab_add'); ?>
                                 </div>
                                 <div class='tab-pane' id='tab5'>
                                   <p></p>
