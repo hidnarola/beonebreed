@@ -2,30 +2,30 @@
     <h5>COMPLETE LEVEL</h5>
     <div class="inline-block complete-level-ul"> 
         <ul>
-            <li class="active">
+            <li class="part_1_marketting">
                 <span></span>
                 <span>PART 1</span>
             </li>
-            <li>
+            <li class="part_2_marketting">
                 <span></span>
                 <span>PART 2</span>
             </li>
-            <li>
+            <li class="part_3_marketting">
                 <span></span>
                 <span>PART 3</span>
             </li>
-            <li>
+            <li class="part_4_marketting">
                 <span></span>
                 <span>PART 4</span>
             </li>
-            <li>
+            <li class="part_5_marketting">
                 <span></span>
                 <span>PART 5</span>
             </li>
         </ul>
     </div>
     <div class="inline-block complete-level-action">
-        <h1> 0% </h1>
+        <h1 class="marketting_load_percentage"> 0% </h1>
     </div>
 </div>
 
@@ -394,7 +394,8 @@
                 
                <!-- part -3 start -->
              <form class="form" style="margin-bottom: 0;" method="post" action="#" accept-charset="UTF-8" id="marketting_part_3">
-                 <input type="hidden" name="hdn_marketting_part_3" id="hdn_marketting_part_3" value="1">
+                  <input type="hidden" name="update_marketting" id="update_marketting" value="">
+                 <input type="hidden" name="hdn_marketting_part_3" id="hdn_marketting_part_3" value="">
                 <div class="row">
                     <div class="col-sm-12 pull-left"> 
                         <span class="">
@@ -470,7 +471,9 @@
                
                <!-- part 4 start -->
                
-        <form class="form" style="margin-bottom: 0;" method="post" action="#" accept-charset="UTF-8" id="admin_part_3">
+        <form class="form" style="margin-bottom: 0;" method="post" action="#" accept-charset="UTF-8" id="marketting_part_4">
+            <input type="hidden" name="update_marketting_part_4" id="update_marketting_part_4" value="">
+            <input type="hidden" name="hdn_marketting_part_4" id="hdn_marketting_part_4" value="">
            <div class="row">
                <div class="col-sm-12 pull-left"> 
                    <span class="">
@@ -489,9 +492,10 @@
                                <label class='control-label'><?php echo $u_key->question; ?></label>
                            </div>
                            <div class="col-sm-4">
-                               <div class='make-switch switch' data-off-label='&lt;i class="icon-remove"&gt;&lt;/i&gt;' data-on-label='&lt;i class="icon-ok"&gt;&lt;/i&gt;'>
-                                 <input type='checkbox'>
-                               </div>
+                                <div class='make-switch switch' data-off-label='&lt;i class="icon-remove"&gt;&lt;/i&gt;' data-on-label='&lt;i class="icon-ok"&gt;&lt;/i&gt;'>
+                                   <input type='hidden' name='check_list[<?php echo $u_key->id;?>]'>
+                                   <input type='checkbox' name='check_list[<?php echo $u_key->id;?>]'>
+                                </div>
                            </div>
                            <div class="clearfix"></div>
                        </div>
@@ -504,14 +508,14 @@
                <div class="col-sm-6">
                    <div class="row">
                        <div class="col-sm-6">
-                           <input type="checkbox" name="complete_admin_part_1" id="complete_admin_part_1" > Part-4 Completed (80%)
-                           <span class="color_red error_admin_part_3 hide">Please Check this checkbox for procced further.</span>
+                           <input type="checkbox" name="complete_admin_part_1" id="marketting_step_4" > Part-4 Completed (80%)
+                           <span class="color_red error_admin_part_3 hide color_red4">Please Check this checkbox for procced further.</span>
                        </div>
                        <div class="col-sm-6">
                            <div class='form-group pull-right'>
                                <div class='controls'>
                                <input type="hidden" name="" id="" value="">
-                               <a class="btn btn-success" onclick="validate_admin_part_4()" >
+                               <a class="btn btn-success" onclick="validate_marketting_part_4()" >
                                    <i class='icon-save'></i> Save
                                </a>
                                <a href="" class="btn btn-default" >Cancel</a>
@@ -535,9 +539,17 @@
     
     function validate_marketting_part(){
         
-      
-        if($("#marketting_step_3").is(':checked')){
-            var data = new FormData($("#marketting_part_3")[0]);
+        if(!$("#marketting_step_3").is(':checked')){
+            $( ".color_red" ).removeClass( "hide");
+            return false;
+        }
+        $("#fakeLoader").attr('style',''); // Remove Style Attribute for reuse
+            $("#fakeLoader").fakeLoader({
+                timeToHide:1200,
+                bgColor:"#2ecc71",
+                spinner:"spinner7"
+            }); // Fakeloader plugin
+        var data = new FormData($("#marketting_part_3")[0]);
             $.ajax({
                 url: '<?php echo base_url()."products/marketting_part_3"; ?>',
                 processData: false, 
@@ -548,15 +560,50 @@
                success:function(response){
                     if(response.status=="success"){
                         $("#marketting_step_3").prop('disabled', true);
+                        $( ".color_red" ).addClass( "hide");
+                        $('.marketting_load_percentage').html('34%');
+                        $('.part_3_marketting').addClass('active');
+                        $('#update_marketting').val('update');
                     }
                }
             });
-        }else{
+       
+   }
+   
+   
+   function validate_marketting_part_4(){
         
+        if(!$("#marketting_step_4").is(':checked')){
+            $( ".color_red4" ).removeClass( "hide");
             return false;
-            $("#error_admin_part_3").removeClass("hide");
-           
-        } 
+        }
+        $("#fakeLoader").attr('style',''); // Remove Style Attribute for reuse
+            $("#fakeLoader").fakeLoader({
+                timeToHide:1200,
+                bgColor:"#2ecc71",
+                spinner:"spinner7"
+            }); // Fakeloader plugin
+        var data = new FormData($("#marketting_part_4")[0]);
+            $.ajax({
+                url: '<?php echo base_url()."products/marketting_part_4"; ?>',
+                processData: false, 
+                type: 'post',
+                dataType: 'json',
+                data: data,
+                contentType: false,
+               success:function(response){
+                    if(response.status=="success"){
+                        $("#marketting_step_4").prop('disabled', true);
+                        $( ".color_red" ).addClass( "hide");
+                        $('.marketting_load_percentage').html('80%');
+                        $('.part_3_marketting').addClass('active');
+                        $('.part_4_marketting').addClass('active');
+                       
+                        $('#update_marketting_part_4').val('update');
+                    }
+               }
+            });
+       
    }
    
 </script>
