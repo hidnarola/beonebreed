@@ -789,17 +789,18 @@
                     <div class="row">
                         <div class="col-sm-6">
                             <input type="checkbox" name="complete_admin_part_3" id="complete_admin_part_3" > Part-3 Completed (34%)
+                            <br/>
                             <span class="color_red error_admin_part_3 hide">Please Check this checkbox for procced further.</span>
                         </div>
                         <div class="col-sm-6">
                             <div class='form-group pull-right'>
                                 <div class='controls'>
-                                <input type="hidden" name="q11" id="q11" >
-                                <input type="hidden" name="q12" id="q12" >
-                                <input type="hidden" name="q13" id="q13" >
-                                <input type="hidden" name="q14" id="q14" >
-                                <input type="hidden" name="q15" id="q15" >
-                                <input type="hidden" name="q16" id="q16" >
+                                <input type="hidden" name="id_11" id="id_11" >
+                                <input type="hidden" name="id_12" id="id_12" >
+                                <input type="hidden" name="id_13" id="id_13" >
+                                <input type="hidden" name="id_14" id="id_14" >
+                                <input type="hidden" name="id_15" id="id_15" >
+                                <input type="hidden" name="id_16" id="id_16" >
                                 <a class="btn btn-success" onclick="validate_admin_part_3()" >
                                     <i class='icon-save'></i> Save
                                 </a>
@@ -1223,10 +1224,8 @@
         if(country_origin == ''){ $('.error_country_origin').removeClass('hide'); error_cnt++; 
         }else{ $('.error_country_origin').addClass('hide'); }
 
-        if(complete_admin_part_3 == false){ $('.error_admin_part_1').removeClass('hide'); error_cnt++; 
-        }else{ $('.error_admin_part_1').addClass('hide'); }
-
-        console.log(error_cnt);
+        if(complete_admin_part_3 == false){ $('.error_admin_part_3').removeClass('hide'); error_cnt++; 
+        }else{ $('.error_admin_part_3').addClass('hide'); }
 
         if(error_cnt != '0'){
             return false;
@@ -1240,7 +1239,7 @@
             }); // Fakeloader plugin
             
             var form_data = $("#admin_part_3").serializeArray();
-            form_data.push({name:"product_id",value:product_id}); 
+            form_data.push({name:"product_id",value:product_id});
             
             $.ajax({
                url: '<?php echo base_url()."products/admin_form_tab_3"; ?>',
@@ -1249,7 +1248,6 @@
                data: form_data,
                success:function(data){
 
-                    $('.11').attr('checked',false);
                     return false;
                     $('#product_id').val(data.product_id);
                     $('#complete_admin_part_1').attr('disabled',true);
