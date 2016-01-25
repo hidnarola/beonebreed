@@ -31,13 +31,13 @@
                       <div class='col-sm-12'>
                         <div class='tabbable'>
                             <ul class='nav nav-tabs'>
-                                <li class="active" >
+                                <li class="" >
                                   <a data-toggle='tab' href='#tab1'>
                                     <i class='icon-gears text-blue'></i>
                                     Admin
                                   </a>
                                 </li>
-                                <li class="">
+                                <li class="active">
                                   <a data-toggle='tab' class="other_tabs" href='#tab2' >
                                     <i class='icon-bullhorn text-red'></i>
                                     Marketing
@@ -63,12 +63,12 @@
                                 </li>
                             </ul>
                             <div class='tab-content'>
-                                <div class='tab-pane active' id='tab1'>
+                                <div class='tab-pane ' id='tab1'>
                                     <!-- ====== Admin TAB Partial View Start ====== -->
                                     <?php $this->load->view('products/admin_tab_add'); ?>
                                     <!-- ====== END ====== -->
                                 </div>
-                                <div class='tab-pane ' id='tab2'>
+                                <div class='tab-pane active' id='tab2'>
                                     <!-- ====== Marketing TAB Partial View Start ====== -->
                                     <?php $this->load->view('products/marketing_tab_add'); ?>
                                     <!-- ====== END ====== -->

@@ -1,3 +1,7 @@
+<!-- 
+    Admin Tab Part-3 
+    Question Id's = 11-16
+ -->
 <div class="complete-level">
     <h5>COMPLETE LEVEL</h5>
     <div class="inline-block complete-level-ul"> 
@@ -1201,8 +1205,8 @@
         var product_id = $('#product_id').val();
         if(product_id == ''){
             //uncommetn below line for validate Part-1 Required Part
-            // $(function(){ bootbox.alert('Please create product in Part-1.');  });
-            // return false;
+            $(function(){ bootbox.alert('Please create product in Part-1.');  });
+            return false;
         }
 
         var error_cnt = 0;
@@ -1247,13 +1251,16 @@
                dataType: 'json',
                data: form_data,
                success:function(data){
-
+                    $('#id_11').val(data.id_11);
+                    $('#id_12').val(data.id_12);
+                    $('#id_13').val(data.id_13);
+                    $('#id_14').val(data.id_14);
+                    $('#id_15').val(data.id_15);
+                    $('#id_16').val(data.id_16);
+                    $('#complete_admin_part_3').attr('disabled',true); // Disable Checkbox
+                    $('.percentage_complete_admin').html('100%'); // Update Percentage for product update
+                    $('.part_3_admin').addClass('active'); 
                     return false;
-                    $('#product_id').val(data.product_id);
-                    $('#complete_admin_part_1').attr('disabled',true);
-                    $('#generate_barcode').attr('disabled',true);
-                    $('.percentage_complete_admin').html('33%');
-                    $('.part_3_admin').addClass('active');
                }
             });
         }
