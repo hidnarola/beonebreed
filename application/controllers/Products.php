@@ -25,9 +25,6 @@ class Products extends CI_Controller {
     }
 
     // ------------------------------- START ADMIN TAB FORM -----------------------------------------
-
-    
-
     
     /**
      * function admin_form_tab_1() for save Admin Tab-1 Form Data
@@ -74,6 +71,7 @@ class Products extends CI_Controller {
  
 
     // ------------------------------ // END ADMIN TAB FORM ------------------------------------------
+
     // ------------------------------ START ATTACHMENT TAB FORM ------------------------------------------
     public function product_notes() {
 
