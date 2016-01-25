@@ -14,6 +14,7 @@
     }
   }
   public function index($client_id=0) {
+    echo 'here';
     $data['client_id']=$client_id;
     $data['store_list'] = $this->store_model->get_all_store($client_id);
     $this->template->load('admin_default', 'store/index', $data);
