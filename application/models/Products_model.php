@@ -201,20 +201,40 @@ class Products_model extends CI_Model {
     
     
     public function get_question_part_3(){
+        
         $this->db->where('part','3');
+        $this->db->where('tab','marketting');
         $query = $this->db->get('question_master');
         return $query->result();
 	}
     
     public function get_question_part_4(){
         $this->db->where('part','4');
+        $this->db->where('tab','marketting');
         $query = $this->db->get('question_master');
         return $query->result();
 	}
-    public function add_question_ans($data){
+    public function add_question_ans_3($data){
         $id=$this->db->insert('product_question', $data);
         return $id;
-	}   
+	} 
+    public function update_question_ans_3($data,$question_id,$product_id){
+        
+        $this->db->where('question_id',$question_id);
+        $this->db->where('product_id',$product_id);
+        return $this->db->update('product_question', $data);
+	}
+    public function update_question_ans_4($data,$question_id,$product_id){
+        
+        $this->db->where('question_id',$question_id);
+        $this->db->where('product_id',$product_id);
+        return $this->db->update('product_question', $data);
+	} 
+    public function add_question_ans_4($data){
+        $id=$this->db->insert('product_question', $data);
+        return $id;
+	}
+
 
 }
 

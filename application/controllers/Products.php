@@ -27,14 +27,20 @@ class Products extends CI_Controller {
     // ------------------------------- START ADMIN TAB FORM -----------------------------------------
     
     /**
-     * function admin_form_tab_1() for save Admin Tab-1 Form Data
+     * function marketting_part_3() for save Marketting Tab-3 Form Data
      *
      * @return string
-     * @author Virendra patel - Spark id -vpa
+     * @author Aneel Yadav - Spark id -ay
      * */
     public function marketting_part_3() {
+        
         $switch_ans = $_POST['check_list'];
         $switch_txt_description = $_POST['txt_list'];
+        if(!empty($this->input->post('hdn_marketting_part_3'))){
+           $product_id=$this->input->post('hdn_marketting_part_3');
+        }else{
+            $product_id='';
+        }
         foreach ($switch_ans as $key => $val) {
             if (empty($val)) {
                 $switch_ans[$key] = 0;
@@ -42,7 +48,6 @@ class Products extends CI_Controller {
                 $switch_ans[$key] = 1;
             }
         }
-
         foreach ($switch_ans as $key => $val) {
             if (!empty($switch_txt_description[$key])) {
                 $notes = $switch_txt_description[$key];
@@ -51,18 +56,78 @@ class Products extends CI_Controller {
             }
             $data = array(
                 'question_id' => $key,
-                'product_id' => '1',
+                'product_id' =>$product_id,
                 'answer' => $val,
                 'notes' => $notes,
             );
-            if ($this->products_model->add_question_ans($data, TRUE)) {
-                $response = array('status' => 'success');
-                
-            } else {
-                $response = array('status' => 'fail');
-                
+            if(!empty($_POST['update_marketting'])){
+                $result=$this->products_model->update_question_ans_3($data,$key,$product_id);
+                if ($result) {
+                    $response = array('status' => 'success');
+                } else {
+                    $response = array('status' => 'fail');
+                }   
+            }else{
+                $result=$this->products_model->add_question_ans_3($data, TRUE);
+                if ($result) {
+                    $response = array('status' => 'success');
+                } else {
+                    $response = array('status' => 'fail');
+                }
             }
-            
+        }
+        
+        echo json_encode($response);die();
+    }
+    
+     /**
+     * function marketting_part_3() for save Marketting Tab-3 Form Data
+     *
+     * @return string
+     * @author Aneel Yadav - Spark id -ay
+     * */
+    public function marketting_part_4() {
+        $switch_ans = $_POST['check_list'];
+         if(!empty($this->input->post('hdn_marketting_part_4'))){
+           $product_id=$this->input->post('hdn_marketting_part_4');
+        }else{
+            $product_id='';
+        }
+        
+        foreach ($switch_ans as $key => $val) {
+            if (empty($val)) {
+                $switch_ans[$key] = 0;
+            } else {
+                $switch_ans[$key] = 1;
+            }
+        }
+        foreach ($switch_ans as $key => $val) {
+            if (!empty($switch_txt_description[$key])) {
+                $notes = $switch_txt_description[$key];
+            } else {
+                $notes = '';
+            }
+            $data = array(
+                'question_id' => $key,
+                'product_id' =>$product_id,
+                'answer' => $val,
+                'notes' => $notes,
+            );
+            if(!empty($_POST['update_marketting_part_4'])){
+                $result=$this->products_model->update_question_ans_4($data,$key,$product_id);
+                if ($result) {
+                    $response = array('status' => 'success');
+                } else {
+                    $response = array('status' => 'fail');
+                }   
+            }else{
+                $result=$this->products_model->add_question_ans_4($data, TRUE);
+                if ($result) {
+                    $response = array('status' => 'success');
+                } else {
+                    $response = array('status' => 'fail');
+                }
+            }
         }
         echo json_encode($response);die();
     }
@@ -132,6 +197,26 @@ class Products extends CI_Controller {
 
     // ------------------------------ // END ATTACHMENT TAB FORM ------------------------------------------
 
+/*
+	public function __construct(){
+		parent::__construct();
+		
+	}
+
+	public function index(){
+		
+		// $data['barcodes'] = $this->barcode_model->get_all();
+		$this->template->load('admin_default', 'products/index');	
+	}
+
+	public function add(){
+
+		$data['categories'] = $this->category_model->get_all_category(1);																	
+		$data['brands'] = $this->product_brand_model->get();
+
+		$this->template->load('admin_default', 'products/add',$data);
+	}
+
 
 	// ------------------------------- START ADMIN TAB FORM -----------------------------------------
 
@@ -142,7 +227,7 @@ class Products extends CI_Controller {
 	 * @return String
 	 * @author Virendra
 	 **/
-	
+	/*
 	public function generate_upc_ean(){
 
 		$cat_id = $this->input->post('cat_id');
@@ -168,6 +253,7 @@ class Products extends CI_Controller {
 	* @return string
 	* @author Virendra patel - Spark id -vpa
 	**/	
+    /*
 	public function admin_form_tab_1(){
 
 		$barcode_id = $this->input->post('barcode_id');	
@@ -207,7 +293,8 @@ class Products extends CI_Controller {
 	*
 	* @return string
 	* @author Virendra patel - Spark id -vpa
-	**/	
+	**/
+    /*
 	public function admin_form_tab_2(){
 
 		//For Retail
@@ -359,6 +446,8 @@ class Products extends CI_Controller {
 	* @return string
 	* @author Virendra patel - Spark id -vpa
 	**/	
+    
+    /*
 	public function admin_form_tab_3(){
 
 		$switch_11 = $this->input->post('switch_11'); // HAVE YOU SENT THE UPC CODE TO THE SUPPLIER ?
@@ -444,6 +533,7 @@ class Products extends CI_Controller {
 
 
 }
-
+*/
+}    
 /* End of file Products.php */
 /* Location: ./application/controllers/Products.php */

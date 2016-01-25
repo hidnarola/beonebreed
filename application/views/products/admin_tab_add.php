@@ -10,7 +10,7 @@
                 <span></span>
                 <span>PART 2</span>
             </li>
-            <li>
+            <li class="part_3_admin">
                 <span></span>
                 <span>PART 3</span>
             </li>
@@ -1253,7 +1253,7 @@
                     $('#complete_admin_part_1').attr('disabled',true);
                     $('#generate_barcode').attr('disabled',true);
                     $('.percentage_complete_admin').html('33%');
-                    $('.part_1_admin').addClass('active');
+                    $('.part_3_admin').addClass('active');
                }
             });
         }
