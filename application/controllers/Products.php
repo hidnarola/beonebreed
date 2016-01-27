@@ -19,6 +19,8 @@ class Products extends CI_Controller {
         $data['brands'] = $this->product_brand_model->get();
         $data['question_list_3'] = $this->products_model->get_question_part_3();
         $data['question_list_4'] = $this->products_model->get_question_part_4();
+        $data['suppliers'] = $this->products_model->getfrom('suppliers');
+
         $this->template->load('admin_default', 'products/add', $data);
     }
 
@@ -420,8 +422,7 @@ class Products extends CI_Controller {
 	* @return string
 	* @author Virendra patel - Spark id -vpa
 	**/	
-    
-    
+   
 	public function admin_form_tab_3(){
 
 		$switch_11 = $this->input->post('switch_11'); // HAVE YOU SENT THE UPC CODE TO THE SUPPLIER ?
@@ -537,8 +538,17 @@ class Products extends CI_Controller {
 
 	
 	public function production_add_more_tab_1(){
-		$str = $this->load->view('products/ajax_view/production_tab_part_1', null, TRUE);
+		$data['suppliers'] = $this->products_model->getfrom('suppliers');
+		$data['cnt'] = $this->input->post('new_cnt');
+		$str = $this->load->view('products/ajax_view/production_tab_part_1', $data, TRUE);
 		echo json_encode(array('add_more'=>$str));	
+	}
+
+	public function fetch_supplier_data(){
+		$id = $this->input->post('supplier_id');
+		$supplier = array();
+		$supplier = $this->products_model->getfrom('suppliers',false,array('where'=>array('id'=>$id)),array('single'=>true));
+		echo json_encode($supplier);
 	}
 
 

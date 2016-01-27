@@ -39,32 +39,42 @@
             </div>
         </div>
         <span class="span_production_tab_1">
-            <div class="row">
-                <div class="col-sm-6">
-                    <div class="form-group">
+
+            <div class="row prod_row_1">
+                <div class="col-sm-12">    
+                    <h3 style="margin: 0 0 15px;">Supplier 1</h3>
+                </div> 
+                <div class="col-sm-6"><div class="form-group">
                       <label class="control-label" for="supplier_name_1">Supplier Name</label>
                       <div class="controls">
-                        <input class="form-control" id="supplier_name_1" name="supplier_name_1" placeholder="Supplier name" 
-                               type="text" onkeyup="$('.error_supplier_name_1').addClass('hide');">
+                        <select name="supplier_1" id="supplier_1" class="form-control" onchange="fetch_supplier_data(this)" >
+                            <option value="" selected disabled>Select Supplier</option>
+                        <?php 
+                            if(!empty($suppliers)) { 
+                                foreach($suppliers as $supplier) {
+                        ?>
+                            <option value="<?php echo $supplier['id']; ?>"><?php echo $supplier['supplier_name']; ?></option>        
+                        <?php } } ?>
+                        </select>
                         <span class="color_red hide error_supplier_name_1">Plese Enter Supplier Name </span>
                       </div>
                     </div>
                     <div class="form-group">
                       <label class="control-label" for="country_1">Country</label>
                       <div class="controls">
-                        <input class="form-control" id="country_1" name="country_1" placeholder="Country name" type="text" >
+                        <input class="form-control" id="country_1" readonly placeholder="Country name" type="text" >
                       </div>
                     </div>
                     <div class="form-group">
                       <label class="control-label" for="tel_no_1">Tel No</label>
                       <div class="controls">
-                        <input class="form-control" id="tel_no_1" name="tel_no_1" placeholder="Telephone No" type="text" >
+                        <input class="form-control" id="tel_no_1" readonly placeholder="Telephone No" type="text" >
                       </div>
                     </div>
                     <div class="form-group">
                       <label class="control-label" for="address_1">Address</label>
                       <div class="controls">
-                        <textarea name="address_1" id="address_1" cols="30" rows="5" class="form-control"></textarea>
+                        <textarea id="address_1" cols="30" rows="5" readonly class="form-control"></textarea>
                       </div>
                     </div>
                 </div>
@@ -72,24 +82,25 @@
                     <div class="form-group">
                       <label class="control-label" for="contact_name_1">Contact Name</label>
                       <div class="controls">
-                        <input class="form-control" name="contact_name_1" id="contact_name_1" placeholder="Contact Name" type="text">
+                        <input class="form-control"  id="contact_name_1" readonly placeholder="Contact Name" type="text">
                       </div>
                     </div>
                     <div class="form-group">
                       <label class="control-label" for="contact_email_1">Contact Email</label>
                       <div class="controls">
-                        <input class="form-control" name="contact_email_1" id="contact_email_1" placeholder="Contact Email" type="text">
+                        <input class="form-control"  id="contact_email_1" readonly placeholder="Contact Email" type="text">
                       </div>
                     </div>
                     <div class="form-group">
                       <label class="control-label" for="product_cost_1">Product Cost</label>
                       <div class="controls">
-                        <input class="form-control " name="product_cost_1" id="product_cost_1" placeholder="Product Cost" type="text">
+                        <input class="form-control" name="product_cost_1" id="product_cost_1" placeholder="Product Cost" type="text">
                       </div>
                     </div>
                     <div class="clearfix"></div>                    
                 </div>    
             </div>
+
         </span> 
         <div class="row">
             <div class="col-sm-6 col-sm-offset-6">
@@ -285,17 +296,63 @@
 
 <script type="text/javascript"> 
     
+    //Production Tab-1 Add More Functionality
     function add_production_part_1(){
+
         var production_part_1_count = $('#production_part_1_count').val();
+        var new_cnt = parseInt(production_part_1_count)+1;
+
+        //Allow only 3 Suppliers to Add
+        if(new_cnt == '4'){
+            $(function(){
+                bootbox.alert('Can not add more than 3 Supplier');
+            });
+            return false;
+        }else{
+            $("#fakeLoader").attr('style',''); // Remove Style Attribute for reuse
+            $("#fakeLoader").fakeLoader({
+                timeToHide:1200,
+                bgColor:"#2ecc71",
+                spinner:"spinner7"
+            }); // Fakeloader plugin
+        }
+
+        $('#production_part_1_count').val(new_cnt);
+
         $.ajax({
             url: '<?php echo base_url()."products/production_add_more_tab_1"; ?>',
             type: 'POST',
             dataType: 'json',
-            data: {production_part_1_count: production_part_1_count},
+            data: {new_cnt: new_cnt},
             success:function(data){
                 $('.span_production_tab_1').append(data.add_more);
             }
         });        
+    }
+
+    function fetch_supplier_data(data){
+        supplier_id = data.value;
+        if(supplier_id == ''){
+            return false;
+        }
+
+        var myid = data.id;
+        myid = myid.replace('supplier_','');
+        
+        $.ajax({
+            url: '<?php echo base_url()."products/fetch_supplier_data";?>',
+            type: 'POST',
+            dataType: 'json',
+            data: {supplier_id: supplier_id},
+            success:function(data){
+                $('#country_'+myid).val(data.country);
+                $('#tel_no_'+myid).val(data.tel_no);
+                $('#address_'+myid).val(data.address);
+                $('#contact_name_'+myid).val(data.contact_name);
+                $('#contact_email_'+myid).val(data.contact_email);
+            }
+        });
+
     }    
     
 </script>

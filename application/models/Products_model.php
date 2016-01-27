@@ -347,7 +347,6 @@ class Products_model extends CI_Model {
         return $id;
 	}
 
-
 }
 
 /* End of file Products_model.php */

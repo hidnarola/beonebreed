@@ -34,15 +34,15 @@
             <div class='scrollable-area'>
               <table class='data-table table table-bordered table-striped' style='margin-bottom:0;'>
                 <thead>
-                  <tr>
-                    <th>
-                      ID
+                  <tr>                    
+                    <th class="text-center">
+                      Potential Level
                     </th>
                     <th>
-                      Supplier NAME
+                      Supplier Name
                     </th>
                     <th>
-                      CREATED DATE
+                      Created Date
                     </th>
                     <th>
                       Action
@@ -55,12 +55,12 @@
                     foreach ($suppliers as $supplier) { 
                 ?>
                     <tr>
-                      <td><?php echo $brand['id']; ?></td>
-                      <td><?php echo $brand['brand_name']; ?></td>
-                      <td><?php echo $brand['created_date']; ?></td>                        
+                      <td class="text-center"><?php echo $supplier['potential_level']; ?></td>
+                      <td><?php echo $supplier['supplier_name']; ?></td>
+                      <td><?php echo $supplier['created_date']; ?></td>                        
                       <td>
                         <div class='text-left'>
-                          <a class='btn btn-primary btn-xs' href="<?php echo base_url().'product_brand/edit/'.$brand['id']; ?>">
+                          <a class='btn btn-primary btn-xs' href="<?php echo base_url().'suppliers/edit/'.$supplier['id']; ?>">
                             <i class='icon-edit'></i>
                             Edit
                           </a>
@@ -84,5 +84,5 @@
 <script type="text/javascript">
   
   
-  
+
 </script>
