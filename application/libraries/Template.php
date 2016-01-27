@@ -11,6 +11,7 @@
 
         function load($tpl_view, $body_view = null, $data = null) 
 		{
+           
 		    if ( ! is_null( $body_view ) ) 
 		    {
 		        if ( file_exists( APPPATH.'views/'.$tpl_view.'/'.$body_view ) ) 
@@ -50,6 +51,6 @@
 		        }
 		    }
 		     
-		    $this->ci->load->view('templates/'.$tpl_view, $data);
+		    $this->ci->load->view('Templates/'.$tpl_view, $data);
 }
     }

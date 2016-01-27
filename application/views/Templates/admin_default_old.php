@@ -1,6 +1,5 @@
 <?php
 
-/*
   $CI =& get_instance();
   $CI->load->model('client_model');
   $result = $CI->client_model->get_all_client();
@@ -12,20 +11,7 @@
 		$client_array[$key]=$val->username;
       }
   }
-*/
-        require_once( BASEPATH .'database/DB.php' );
-        $db =& DB();
-        $db->where('user_type',	'3');
-        $db->where('is_deleted','0');
-        $query = $db->get( 'users' );
-        $result = $query->result();
-        
-        /*
-        $this->db->where('user_type',	'3');
-		$this->db->where('is_deleted',	'0');
-		$query	=	$this->db->get('users');*/
-		//return	$query->result();
-        
+
         session_start();
         
         $controller=$this->router->fetch_class();
@@ -299,7 +285,7 @@
           <li class='dropdown dark user-menu'>
             <a class='dropdown-toggle' data-toggle='dropdown' href='#'>
               <!--<img width="23" height="23" alt="Mila Kunis" src="assets/images/avatar.jpg" />-->
-              <span class='user-name'><?php if($this->session->userdata('username')){ echo $this->session->userdata('username');} ?></span>
+              <span class='user-name'><?php if(!empty($this->session->userdata('username'))){ echo $this->session->userdata('username');} ?></span>
               <b class='caret'></b>
             </a>
             <ul class='dropdown-menu'>
@@ -365,9 +351,8 @@
             
             <?php 
             
-           
-                
-                if($this->session->userdata('user_type')){
+            
+                if(!empty($this->session->userdata('user_type'))){
 																	
 				  $user_type=$this->session->userdata('user_type');	
                   if($user_type==1){

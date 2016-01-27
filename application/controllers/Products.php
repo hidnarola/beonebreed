@@ -9,9 +9,7 @@ class Products extends CI_Controller {
         parent::__construct();
     }
 
-    public function index() {
-
-        // $data['barcodes'] = $this->barcode_model->get_all();
+	public function index() {
         $this->template->load('admin_default', 'products/index');
     }
 
@@ -25,9 +23,6 @@ class Products extends CI_Controller {
     }
 
     // ------------------------------- START ADMIN TAB FORM -----------------------------------------
-
-    
-
     
     /**
      * function marketting_part_3() for save Marketting Tab-3 Form Data
@@ -39,7 +34,7 @@ class Products extends CI_Controller {
         
         $switch_ans = $_POST['check_list'];
         $switch_txt_description = $_POST['txt_list'];
-        if(!empty($this->input->post('hdn_marketting_part_3'))){
+        if($this->input->post('hdn_marketting_part_3')!=''){
            $product_id=$this->input->post('hdn_marketting_part_3');
         }else{
             $product_id='';
@@ -83,15 +78,15 @@ class Products extends CI_Controller {
         echo json_encode($response);die();
     }
     
-     /**
+    /**
      * function marketting_part_3() for save Marketting Tab-3 Form Data
      *
      * @return string
      * @author Aneel Yadav - Spark id -ay
-     * */
+    **/
     public function marketting_part_4() {
         $switch_ans = $_POST['check_list'];
-         if(!empty($this->input->post('hdn_marketting_part_4'))){
+         if($this->input->post('hdn_marketting_part_4')!=''){
            $product_id=$this->input->post('hdn_marketting_part_4');
         }else{
             $product_id='';
@@ -135,10 +130,8 @@ class Products extends CI_Controller {
         echo json_encode($response);die();
     }
 
-    
- 
-
     // ------------------------------ // END ADMIN TAB FORM ------------------------------------------
+
     // ------------------------------ START ATTACHMENT TAB FORM ------------------------------------------
     public function product_notes() {
 
@@ -199,27 +192,6 @@ class Products extends CI_Controller {
 
     // ------------------------------ // END ATTACHMENT TAB FORM ------------------------------------------
 
-/*
-	public function __construct(){
-		parent::__construct();
-		
-	}
-
-	public function index(){
-		
-		// $data['barcodes'] = $this->barcode_model->get_all();
-		$this->template->load('admin_default', 'products/index');	
-	}
-
-	public function add(){
-
-		$data['categories'] = $this->category_model->get_all_category(1);																	
-		$data['brands'] = $this->product_brand_model->get();
-
-		$this->template->load('admin_default', 'products/add',$data);
-	}
-
-
 	// ------------------------------- START ADMIN TAB FORM -----------------------------------------
 
 	/**
@@ -229,7 +201,7 @@ class Products extends CI_Controller {
 	 * @return String
 	 * @author Virendra
 	 **/
-	/*
+	
 	public function generate_upc_ean(){
 
 		$cat_id = $this->input->post('cat_id');
@@ -255,7 +227,7 @@ class Products extends CI_Controller {
 	* @return string
 	* @author Virendra patel - Spark id -vpa
 	**/	
-    /*
+    
 	public function admin_form_tab_1(){
 
 		$barcode_id = $this->input->post('barcode_id');	
@@ -296,7 +268,7 @@ class Products extends CI_Controller {
 	* @return string
 	* @author Virendra patel - Spark id -vpa
 	**/
-    /*
+    
 	public function admin_form_tab_2(){
 
 		//For Retail
@@ -449,7 +421,7 @@ class Products extends CI_Controller {
 	* @author Virendra patel - Spark id -vpa
 	**/	
     
-    /*
+    
 	public function admin_form_tab_3(){
 
 		$switch_11 = $this->input->post('switch_11'); // HAVE YOU SENT THE UPC CODE TO THE SUPPLIER ?
@@ -467,7 +439,36 @@ class Products extends CI_Controller {
 		$id_15 = $this->input->post('id_15');
 		$id_16 = $this->input->post('id_16');
 
-		if(!empty($id_11)){
+		//If Id Found then Update otherwise Insert data
+		if(!empty($id_11) || !empty($id_12) || !empty($id_13) || !empty($id_14) || !empty($id_15) || !empty($id_16)){
+			
+			if(!empty($switch_11)){
+                $data_q11 = array('question_id'=>'11','product_id'=>$product_id,'answer'=>'1');
+                $this->products_model->update_into('product_question',$id_11,$data_q11);
+            }else{
+                $data_q11 = array('question_id'=>'11','product_id'=>$product_id,'answer'=>'0');
+                $this->products_model->update_into('product_question',$id_11,$data_q11);
+            }
+
+            if(!empty($switch_12)){
+                $data_q12 = array('question_id'=>'12','product_id'=>$product_id,'answer'=>'1');
+                $this->products_model->update_into('product_question',$id_12,$data_q12);
+            }else{
+                $data_q12 = array('question_id'=>'12','product_id'=>$product_id,'answer'=>'0');
+                $this->products_model->update_into('product_question',$id_12,$data_q12);
+            }
+
+            $data_q13 = array('question_id'=>'13','product_id'=>$product_id,'notes'=>$note_13);
+            $this->products_model->update_into('product_question',$id_13,$data_q13);
+
+            $data_q14 = array('question_id'=>'14','product_id'=>$product_id,'notes'=>$note_14);
+            $this->products_model->update_into('product_question',$id_14,$data_q14);
+            
+            $data_q15 = array('question_id'=>'15','product_id'=>$product_id,'notes'=>$note_15);
+            $this->products_model->update_into('product_question',$id_15,$data_q15);
+
+            $data_q16 = array('question_id'=>'16','product_id'=>$product_id,'notes'=>$note_16);
+            $this->products_model->update_into('product_question',$id_16,$data_q16);
 
 		}else{
 
@@ -512,7 +513,6 @@ class Products extends CI_Controller {
                         'qry'=>$this->db->last_query()
                         )
                 );
-
 	}
 
 	// ------------------------------------------------------------------------
@@ -533,9 +533,21 @@ class Products extends CI_Controller {
 
 	// ------------------------------ // END ADMIN TAB FORM ------------------------------------------
 
+	// ------------------------------ START PRODUCTION TAB FORM ------------------------------------------
+
+	public function production_form_tab_1(){
+
+	}
+
+	public function production_add_more_tab_1(){
+		$str = $this->load->view('products/ajax_view/production_tab_part_1', null, TRUE);
+		echo json_encode(array('add_more'=>$str));	
+	}
+
+	// ------------------------------ // END PRODUCTION TAB FORM ------------------------------------------
 
 }
-*/
-}    
+
+
 /* End of file Products.php */
 /* Location: ./application/controllers/Products.php */

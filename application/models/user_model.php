@@ -27,17 +27,17 @@ class User_model extends CI_Model {
         
         public function update_records($id){
           
-          if (!empty($this->input->post('language'))) {
+          if ($this->input->post('language')!='') {
             $language = $this->input->post('language');
           } else {
             $language = 0;
           }
-          if (!empty($this->input->post('role'))) {
+          if ($this->input->post('role')!='') {
             $role = $this->input->post('role');
           } else {
             $role = 0;
           }
-          if (!empty($this->input->post('department'))) {
+          if ($this->input->post('department')!='') {
             $department = $this->input->post('department');
           } else {
             $department = 0;

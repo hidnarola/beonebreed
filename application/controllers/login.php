@@ -73,9 +73,9 @@ class Login extends CI_Controller {
     public function logout() {
         $user_type = $this->session->userdata('user_type');
         $user_name = $this->session->userdata('username');
-        if (!empty($this->session->userdata('client_id'))) {
-            $client_id = $this->session->userdata('client_id');
-        }
+//        if (!empty($this->session->userdata('client_id'))) {
+//            $client_id = $this->session->userdata('client_id');
+//        }
         if ($user_type == 1 || $user_type == 2) {
             $newdata = array(
                 'id' => '',

@@ -9,7 +9,7 @@
     //$this->load->library('pagination');
     $this->load->library('form_validation');
     $this->load->library('csvimport');
-    if (!$this->session->userdata('admin_logged_in')) {
+    if ($this->session->userdata('admin_logged_in')=='') {
       redirect('login');
     }
   }

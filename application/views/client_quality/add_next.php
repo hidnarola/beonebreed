@@ -261,7 +261,7 @@
                   <!-- end form -->
                   </div>
           <div class='text-left finish-btn container'>
-              <a href="<?php echo site_url('Client_quality') ?>" class="btn btn-primary"><?=lang('Finish')?></a> 
+              <a href="<?php echo site_url('client_quality') ?>" class="btn btn-primary"><?=lang('Finish')?></a> 
           </div>
         </div>
 

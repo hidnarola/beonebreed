@@ -5,7 +5,7 @@
 		<div class='page-header'>
 		    <h1 class='pull-left'>
 			<i class='icon-bookmark'></i>
-			<span>Quality <?php if (!empty($client_name['username'])) {
+			<span>Quality <?php if ($client_name['username']=='') {
 						echo ucfirst($client_name['username']);
 					} ?>
 			</span>
@@ -16,14 +16,16 @@
 		</div>
 	    </div>
 	</div>
-<?php if (!empty($this->session->flashdata('msg'))) { ?>
+<?php if ($this->session->flashdata('msg')!='') { ?>
     	<div class='alert alert-success alert-dismissable'>
     	    <a class="close" data-dismiss="alert" href="#">&times;</a>
     	    <i class='icon-ok-sign'></i>
-	    <?php if ($this->session->flashdata('msg')):echo $this->session->flashdata('msg');
-	    endif; ?>  
+		<?php
+		if ($this->session->flashdata('msg')):echo $this->session->flashdata('msg');
+		endif;
+		?>  
     	</div>
-<?php } ?>
+	<?php } ?>
 
 	<br/>    
 	<div class='col-sm-12'>

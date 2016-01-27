@@ -13,7 +13,7 @@
 		  </div>
 		</div>
 	  </div>
-	  <?php  if(!empty($this->session->flashdata('msg'))){ ?>
+	  <?php  if($this->session->flashdata('msg')!=''){ ?>
             <div class='alert alert-success alert-dismissable'>
                        <a class="close" data-dismiss="alert" href="#">&times;</a>
            <i class='icon-ok-sign'></i>
@@ -54,11 +54,11 @@
 					
 					<td>
 					   <div class='text-left'>
-						<a class='btn btn-primary btn-xs' href='<?php echo site_url('Project_type/edit/'.$u_key->id) ?>'>
+						<a class='btn btn-primary btn-xs' href='<?php echo site_url('project_type/edit/'.$u_key->id) ?>'>
 						  <i class='icon-edit'></i>
 						  Edit
 						</a>
-						<a class='btn btn-danger btn-xs' href='<?php echo site_url('Project_type/delete/'.$u_key->id) ?>' onclick="if(!confirm('Are you sure want to delete')){return false;}">
+						<a class='btn btn-danger btn-xs' href='<?php echo site_url('project_type/delete/'.$u_key->id) ?>' onclick="if(!confirm('Are you sure want to delete')){return false;}">
 						  <i class='icon-remove'></i>Delete
 						</a>
 					  </div>

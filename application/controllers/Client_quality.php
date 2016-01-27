@@ -10,7 +10,7 @@ class Client_quality extends CI_Controller {
     $this->load->model('client_quality_model');
     $this->load->database();
     $this->load->library('form_validation');
-      if (!$this->session->userdata('client_user_logged_in')) {
+      if ($this->session->userdata('client_user_logged_in')=='') {
       redirect('login');
       } 
   }
@@ -29,23 +29,23 @@ class Client_quality extends CI_Controller {
     } else {
       if (!empty($_POST)) {
 
-        if (!empty($this->session->userdata('client_id'))) {
+        if ($this->session->userdata('client_id')!='') {
           $client_id = $this->session->userdata('client_id');
         } else {
           $client_id = 0;
         }
-		if (!empty($this->session->userdata('id'))) {
+		if ($this->session->userdata('id')!='') {
           $user_id = $this->session->userdata('id');
         } else {
           $user_id = 0;
         }
-        if (!empty($this->input->post('ds'))) {
+        if ($this->input->post('ds')!='') {
           $ds = $this->input->post('ds');
         } else {
           $ds = 0;
         }
         $data = array(
-												'id' => $this->input->post('id'),
+			'id' => $this->input->post('id'),
             'name' => $this->input->post('name'),
             'store' => $this->input->post('store'),
             'product' => $this->input->post('product'),

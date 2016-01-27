@@ -12,9 +12,9 @@ class Client_suggestion extends CI_Controller {
     //$this->load->library('pagination');
     $this->load->library('form_validation');
     
-      if (!$this->session->userdata('client_user_logged_in')) {
+    if ($this->session->userdata('client_user_logged_in')=='') {
       redirect('login');
-      } 
+    } 
   }
 
   public function index() {   
@@ -31,16 +31,14 @@ class Client_suggestion extends CI_Controller {
       $data['suggestion_type'] = $this->client_suggestion_model->get_suggestion_type();
       $this->template->load('mondou_default', 'client_suggestion/add', $data);
     } else {
-
-
       if (!empty($_POST)) {
 
-        if (!empty($this->session->userdata('client_id'))) {
+        if ($this->session->userdata('client_id')!='') {
           $client_id = $this->session->userdata('client_id');
         } else {
           $client_id = 0;
         }
-		if (!empty($this->session->userdata('id'))) {
+		if ($this->session->userdata('id')!='') {
           $user_id = $this->session->userdata('id');
         } else {
           $user_id = 0;
@@ -90,7 +88,7 @@ class Client_suggestion extends CI_Controller {
       $data['store_list'] = $this->client_suggestion_model->get_store_list();
       $data['suggestion_type'] = $this->client_suggestion_model->get_suggestion_type();
       $data['suggestion'] = $this->client_suggestion_model->get($id);
-		$data['attachment'] = $this->client_suggestion_model->get_suggestion_attachment($id);
+      $data['attachment'] = $this->client_suggestion_model->get_suggestion_attachment($id);
       $data['notes'] = $this->client_suggestion_model->get_suggestion_notes($id);
       $data['external_link'] = $this->client_suggestion_model->get_suggestion_external_com($id);
 

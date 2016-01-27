@@ -524,13 +524,124 @@
                        </div>
                    </div>        
                    <div class="clearfix"></div>
-               </div>   
+               </div>  
+
+
            </div>                                                
     </form>
-               
-               
-               
-               <!-- part 4 ends -->
+             <!-- part 4 ends -->
+
+
+
+             <!-- part 5 start -->
+<form class="form" style="margin-bottom: 0;" method="post" action="#" accept-charset="UTF-8" id="">
+             <div class="row">
+               <div class="col-sm-12 pull-left"> 
+                   <span class="">
+                       <h3 class="color_grey"> PART - 4 </h3>
+                   </span>
+               </div>
+                 <div class="clearfix"></div>
+                <div class="col-sm-6">
+                    
+                    <div class="part-five-block">
+                        <label class='control-label' for='product_name'>COST</label>
+                        <div class='controls margin-bottom-10'>
+                            <input class='form-control' id='product_name' name="product_name" 
+                            type='text' onkeyup="$('.error_product_name').addClass('hide');">
+                            <span class="color_red hide error_product_name" >Plese Enter Product name </span>
+                        </div>
+
+                        <label class='control-label' for='product_name'>SUPPLIER NAME</label>
+                        <div class='controls margin-bottom-10'>
+                            <input class='form-control' id='product_name' name="product_name" 
+                            type='text' onkeyup="$('.error_product_name').addClass('hide');">
+                            <span class="color_red hide error_product_name" >Plese Enter Product name </span>
+                        </div>
+
+                        <label class='control-label' for='product_name'>UPC</label>
+                        <div class='controls margin-bottom-10'>
+                            <input class='form-control' id='product_name' name="product_name" 
+                            type='text' onkeyup="$('.error_product_name').addClass('hide');">
+                            <span class="color_red hide error_product_name" >Plese Enter Product name </span>
+                        </div>
+                        <div class="pull-right">
+                            
+                            <a href="#" class="btn btn-success">GENERATE</a>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+
+                </div>
+
+
+                <div class="col-sm-6">
+
+                    <div class="part-five-block">
+                        <label class='control-label' for='product_name'>COST</label>
+                        <div class='controls margin-bottom-10'>
+                            <input class='form-control' id='product_name' name="product_name" 
+                            type='text' onkeyup="$('.error_product_name').addClass('hide');">
+                            <span class="color_red hide error_product_name" >Plese Enter Product name </span>
+                        </div>
+
+                        <label class='control-label' for='product_name'>SUPPLIER NAME</label>
+                        <div class='controls margin-bottom-10'>
+                            <input class='form-control' id='product_name' name="product_name" 
+                            type='text' onkeyup="$('.error_product_name').addClass('hide');">
+                            <span class="color_red hide error_product_name" >Plese Enter Product name </span>
+                        </div>
+
+                        <label class='control-label' for='product_name'>UPC</label>
+                        <div class='controls margin-bottom-10'>
+                            <input class='form-control' id='product_name' name="product_name" 
+                            type='text' onkeyup="$('.error_product_name').addClass('hide');">
+                            <span class="color_red hide error_product_name" >Plese Enter Product name </span>
+                        </div>
+                        <div class="pull-right">
+                            
+                            <a href="#" class="btn btn-success">GENERATE</a>
+                        </div>
+                        <div class="clearfix"></div>
+
+                    </div>
+
+                </div>
+                
+                <div class="col-sm-6">
+                    <label class='control-label' for='product_name'>UPC</label>
+                    <div class='controls margin-bottom-10'>
+                    <textarea class='form-control' id='product_name' name="product_name" 
+                    type='text' onkeyup="$('.error_product_name').addClass('hide');"></textarea>
+                    <span class="color_red hide error_product_name" >Plese Enter Product name </span>
+                  </div>
+                </div>
+                <div class="col-sm-6">
+
+                    <div class="row part-five-top-margin">
+                       <div class="col-sm-6">
+                           <input type="checkbox" name="complete_admin_part_1" id="marketting_step_4" > Part-4 Completed (80%)
+                           <span class="color_red error_admin_part_3 hide color_red4">Please Check this checkbox for procced further.</span>
+                       </div>
+                       <div class="col-sm-6">
+                           <div class='form-group pull-right'>
+                               <div class='controls'>
+                               <input type="hidden" name="" id="" value="">
+                               <a class="btn btn-success" onclick="validate_marketting_part_4()" >
+                                   <i class='icon-save'></i> Save
+                               </a>
+                               <a href="" class="btn btn-default" >Cancel</a>
+                               </div>
+                           </div>
+                       </div>
+                   </div>
+                </div>
+
+
+             </div>
+             <!-- part 5 ends -->
+</form>
+
             </div>
      </div>
 </div>

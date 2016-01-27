@@ -20,7 +20,7 @@ if ($controller == 'client_news') {
     $suggestion = "";
 }
 
-if (!empty($this->session->userdata('client_username'))) {
+if ($this->session->userdata('client_username')!='') {
     $client_username = $this->session->userdata('client_username');
 } else {
     $client_username = '';
@@ -299,7 +299,7 @@ if (!empty($this->session->userdata('client_username'))) {
                     <li class='dropdown dark user-menu'>
                         <a class='dropdown-toggle' data-toggle='dropdown' href='#'>
                           <!--<img width="23" height="23" alt="Mila Kunis" src="assets/images/avatar.jpg" />-->
-                            <span class='user-name'><?php if (!empty($this->session->userdata('username'))) {
+                            <span class='user-name'><?php if ($this->session->userdata('username')!='') {
     echo $this->session->userdata('username');
 } ?></span>
                             <b class='caret'></b>
