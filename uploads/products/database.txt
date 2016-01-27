@@ -1,0 +1,77 @@
+tbl_category
+	cat_id(PK)
+	cat_name
+	
+tbl_company
+	company_id(PK)
+	company_name
+	company_image
+	category_id(FK)
+	
+tbl_product
+	product_id(PK)
+	product_name
+	product_price
+	product_image
+	product_thumb1
+	product_thumb2
+	product_thumb3
+	product_thumb4
+	product_thumb5
+	product_qty
+	product_short_desc
+	product_long_desc
+	date_time
+	company_id(FK)
+	status
+	
+tbl_user
+	user_id(PK)
+	user_mail
+	user_password
+	
+tbl_blog
+	blog_id(PK)
+	blog_title
+	blog_data
+	blog_image
+	blog_log
+	
+tbl_newsletter
+	newsletter_id(PK)
+	newsletter_mail
+	newsletter_log
+	
+tbl_terms
+	terms_id(PK)
+	terms_data
+	
+tbl_contact_us
+	contact_id(PK)
+	contact_name
+	contact_email
+	contact_title
+	contact_message
+	contact_log
+	
+tbl_faq
+	faq_id(PK)
+	faq_question
+	faq_answer
+	faq_log
+	
+tbl_bill
+	bill_id(PK)
+	user_id(FK)
+	product_id(FK)
+	product_price
+	qty
+	bill_log
+	
+tbl_order
+	order_id(PK)
+	bill_id(FK)
+	bill_name
+	bill_mobile
+	bill_address
+	

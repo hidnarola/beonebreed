@@ -7,6 +7,7 @@ class Products extends CI_Controller {
 
     public function __construct() {
         parent::__construct();
+        
     }
 
 	public function index() {
@@ -544,6 +545,32 @@ class Products extends CI_Controller {
 
 	// ------------------------------ // END PRODUCTION TAB FORM ------------------------------------------
 
+        
+        public function delete_selected_attachemnt() {
+     
+            $data_append='';
+            if (!empty($_POST['ids'])) {
+              $ids = $_POST['ids'];
+              $this->db->where_in('id', $ids);
+              if ($this->db->delete('products_attachments')) {
+                
+                $data['product_attachment'] = $this->products_model->get_product_attachment_id($_POST['pid']);
+                
+                
+                foreach($data['product_attachment'] as $temp){
+                    $data_append.="<li style=list-style-type:none;><input type=checkbox name=chk[] id=chk_attachment class=chk_notes value=.$temp->id.><a  class='no_preview'  href=uploads/products/.$temp->attachment.>.$temp->attachment.</a></li>"; 
+                }
+                //exit();
+                $response = array('data1' =>$data_append,'status' => 'success');
+              } else {
+                $response = array('status' => 'fail');
+              }
+            }
+            
+            echo json_encode($response);
+            
+            die();
+          }
 }
 
 

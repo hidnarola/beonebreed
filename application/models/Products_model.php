@@ -347,6 +347,12 @@ class Products_model extends CI_Model {
         return $id;
 	}
 
+   public function get_product_attachment_id($data){
+        $query = $this->db->where('product_id',$data)->get('products_attachments');
+	return $query->result();   
+        
+      
+   }
 
 }
 

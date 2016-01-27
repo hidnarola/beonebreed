@@ -913,10 +913,10 @@
 
                     $('#myexternalModal').modal('hide');
                     //$("#external_links").append($("<li style=list-style-type:none;>").text(response.link_name));
-                     $('#external_links').append('<li style=list-style-type:none;><input type=checkbox name=chk[] id="chk_attachment" class=chk_external_link value='+response.link_id+'><a data-desc="' + response.link_desc + '" class="external_link_data" id="' + response.link_id + '" href="javascript::void(0)">' + response.link_name + '</a><span style=margin-left:60px>'+response.dates1+'</span></li>');
+                     $('#external_links').append('<li style=list-style-type:none;><a data-desc="' + response.link_desc + '" class="external_link_data" id="' + response.link_id + '" href="javascript::void(0)">' + response.link_name + '</a><span style=margin-left:60px>'+response.dates1+'</span></li>');
                     $('#project_external_form')[0].reset();
                     $("#expand_external_form").css("display", "none");
-                    $('#external_link_div').show();
+                    $('#external_link_div').show();<input type=checkbox name=chk[] id="chk_attachment" class=chk_external_link value='+response.link_id+'>
                     //location.reload();
 
                 } else {
@@ -951,6 +951,7 @@
             success: function(response) {
 
                 if (response.status == 'success') {
+                    
                     $('#project_notes_form')[0].reset();
                     $('#mynoteModal').modal('hide');
                     //$("#notes").append($("<li style=list-style-type:none;>").text(response.notes_name));
