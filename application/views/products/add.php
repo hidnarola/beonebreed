@@ -31,7 +31,7 @@
                       <div class='col-sm-12'>
                         <div class='tabbable'>
                             <ul class='nav nav-tabs'>
-                                <li class="active" >
+                                <li class="" >
                                   <a data-toggle='tab' href='#tab1'>
                                     <i class='icon-gears text-blue'></i>
                                     Admin
@@ -49,7 +49,7 @@
                                     Attachments
                                   </a>
                                 </li>
-                                <li class="">
+                                <li class="active">
                                   <a data-toggle='tab' class="other_tabs" href='#tab4'>
                                     <i class='icon-ok text-blue'></i>
                                     Production
@@ -63,7 +63,7 @@
                                 </li>
                             </ul>
                             <div class='tab-content'>
-                                <div class='tab-pane active' id='tab1'>
+                                <div class='tab-pane ' id='tab1'>
                                     <!-- ====== Admin TAB Partial View Start ====== -->
                                     <?php $this->load->view('products/admin_tab_add'); ?>
                                     <!-- ====== END ====== -->
@@ -80,7 +80,7 @@
                                     
                                     <!-- ====== END ====== -->
                                 </div>
-                                <div class='tab-pane ' id='tab4'>
+                                <div class='tab-pane active' id='tab4'>
                                     <?php $this->load->view('products/production_tab_add'); ?>
                                 </div>
                                 <div class='tab-pane' id='tab5'>

@@ -535,14 +535,12 @@ class Products extends CI_Controller {
 
 	// ------------------------------ START PRODUCTION TAB FORM ------------------------------------------
 
-	public function production_form_tab_1(){
-
-	}
-
+	
 	public function production_add_more_tab_1(){
 		$str = $this->load->view('products/ajax_view/production_tab_part_1', null, TRUE);
 		echo json_encode(array('add_more'=>$str));	
 	}
+
 
 	// ------------------------------ // END PRODUCTION TAB FORM ------------------------------------------
 
