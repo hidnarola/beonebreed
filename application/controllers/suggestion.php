@@ -12,8 +12,8 @@ class Suggestion extends CI_Controller {
         $this->load->database();
         //$this->load->library('pagination');
         $this->load->library('form_validation');
-
-        if (!$this->session->userdata('admin_logged_in')) {
+        
+        if ($this->session->userdata('admin_logged_in')=='') {
             redirect('login');
         }
     }
@@ -39,12 +39,12 @@ class Suggestion extends CI_Controller {
 
             if (!empty($_POST)) {
 
-                if (!empty($this->session->userdata('client_id'))) {
+                if ($this->session->userdata('client_id')!='') {
                     $client_id = $this->session->userdata('client_id');
                 } else {
                     $client_id = 0;
                 }
-                if (!empty($this->session->userdata('id'))) {
+                if ($this->session->userdata('id')!='') {
                     $user_id = $this->session->userdata('id');
                 } else {
                     $user_id = 0;
@@ -258,5 +258,6 @@ class Suggestion extends CI_Controller {
         echo json_encode($response);
         die();
     }
+    
 
 }

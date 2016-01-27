@@ -12,7 +12,7 @@ class Client_news extends CI_Controller {
 	//$this->load->library('pagination');
 	$this->load->library('form_validation');
 	$this->load->helper('time_ago_helper');
-	if (!$this->session->userdata('client_user_logged_in')) {
+	if ($this->session->userdata('client_user_logged_in')=='') {
 	    redirect('login');
 	}
     }

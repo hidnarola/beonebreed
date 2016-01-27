@@ -38,12 +38,13 @@ class News extends CI_Controller {
 	    $this->template->load('admin_default', 'news/add');
 	} else {
 	    if (!empty($_POST)) {
-
+/*
 		if (!empty($this->input->post('client_visibility'))) {
 		    $visibility = $this->input->post('client_visibility');
 		} else {
 		    $visibility = 0;
-		}
+		}*/
+            $visibility = 0;
 		$data = array(
 		    'title' => $this->input->post('title'),
 		    'description' => $this->input->post('description'),
@@ -107,4 +108,5 @@ class News extends CI_Controller {
 	redirect('news/');
     }
 
+    
 }

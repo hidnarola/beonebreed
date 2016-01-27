@@ -6,32 +6,24 @@
         <div class='page-header'>
           <h1 class='pull-left'>
             <i class='icon-table'></i>
-            <span>Manage Products</span>
+            <span>Manage Suppliers</span>
           </h1>
           
           <div class='pull-right'>  
-            <!-- <a href="<?php echo base_url().'barcode/import'; ?>" class="btn btn-success">Import UPC EAN Codes</a> -->
-            <a class="btn btn-info">Export</a>
+            <a href="<?php echo base_url().'suppliers/add'; ?>" class="btn btn-success">Add Supplier</a>
           </div>
 
         </div>
       </div>
     </div>
 
- 
+    <?php echo myflash_message('success','success'); echo myflash_message('error'); ?>
 
     <div class="clearfix">	</div>
-    <br/>
     <div class='col-sm-12'>
       <div class='box bordered-box orange-border' style='margin-bottom:0;'>
         <div class='box-header orange-background'>
-          <div class='title'> Products </div>
-          <div class="pull-right">
-            <a class="btn btn-success" href="<?php echo base_url().'products/add'; ?>">
-                <i class='icon-plus'></i>
-                Add Product  
-              </a>
-          </div>
+          <div class='title'> Product Supplier </div>
           <div class='actions'>
             <a class="btn box-collapse btn-xs btn-link" href="#">
             </a>
@@ -47,19 +39,10 @@
                       ID
                     </th>
                     <th>
-                      Product
+                      Supplier NAME
                     </th>
                     <th>
-                      Type
-                    </th>
-                    <th>
-                      Code
-                    </th>
-                    <th>
-                      Size
-                    </th>
-                    <th>
-                      UPC
+                      CREATED DATE
                     </th>
                     <th>
                       Action
@@ -68,19 +51,16 @@
                 </thead>
                 <tbody>
                 <?php 
-                    if(!empty($barcodes)) {
-                    foreach ($barcodes as $barcode) { 
+                    if(!empty($suppliers)) {
+                    foreach ($suppliers as $supplier) { 
                 ?>
                     <tr>
-                      <td><?php echo $barcode['id']; ?></td>
-                      <td><?php echo $barcode['upc']; ?></td>
-                      <td><?php echo $barcode['ean']; ?></td>
-                      <td><?php echo $barcode['description']; ?></td>
-                      <td><?php echo $barcode['created_date']; ?></td>                        
-                      <td><?php echo $barcode['modified_date']; ?></td>                        
+                      <td><?php echo $brand['id']; ?></td>
+                      <td><?php echo $brand['brand_name']; ?></td>
+                      <td><?php echo $brand['created_date']; ?></td>                        
                       <td>
                         <div class='text-left'>
-                          <a class='btn btn-primary btn-xs' href="<?php echo base_url().'barcode/edit/'.$barcode['id']; ?>">
+                          <a class='btn btn-primary btn-xs' href="<?php echo base_url().'product_brand/edit/'.$brand['id']; ?>">
                             <i class='icon-edit'></i>
                             Edit
                           </a>

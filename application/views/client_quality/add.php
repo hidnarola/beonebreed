@@ -152,8 +152,7 @@ $unique_random_id=random_string('numeric',7);
   
 <script type="text/javascript">
 
-  $(".store").change(function(){  
-    
+  $(".store").change(function(){    
     var store_id=$('.store').val();
     if(store_id!=''){
       $.ajax({

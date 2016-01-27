@@ -14,7 +14,7 @@ class Client_quality_model extends CI_Model {
   }
 
   public function get_all() {
-    if (!empty($this->session->userdata('client_id'))) {
+    if ($this->session->userdata('client_id')!='') {
         $client_id = $this->session->userdata('client_id');
      }  
     $this->db->select('quality.*,product.name as product_name,store.name as store_name,report_status.name as report_status,users.username');
@@ -70,7 +70,7 @@ class Client_quality_model extends CI_Model {
   }
 
   public function get_store_list() {
-    if (!empty($this->session->userdata('client_id'))) {
+    if ($this->session->userdata('client_id')!='') {
       $user_id = $this->session->userdata('client_id');
     } else {
       $user_id = 0;

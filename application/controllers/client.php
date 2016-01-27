@@ -11,13 +11,12 @@ class Client extends CI_Controller {
         $this->load->database();
         //$this->load->library('pagination');
         $this->load->library('form_validation');
-        if (!$this->session->userdata('admin_logged_in')) {
+        if ($this->session->userdata('admin_logged_in')=='') {
             redirect('/login');
         }
     }
 
     public function index() {
-
         $data['client_list'] = $this->client_model->get_all_client();
         $this->template->load('admin_default', 'client/index', $data);
     }

@@ -11,7 +11,7 @@ class User extends CI_Controller {
         $this->load->database();
         //$this->load->library('pagination');
         $this->load->library('form_validation');
-        if (!$this->session->userdata('admin_logged_in')) {
+        if ($this->session->userdata('admin_logged_in')=='') {
             redirect('login');
         }
     }
@@ -31,18 +31,18 @@ class User extends CI_Controller {
         } else {
             if (!empty($_POST)) {
 
-                if (!empty($this->input->post('language'))) {
+                if ($this->input->post('language')!='') {
 
                     $language = $this->input->post('language');
                 } else {
                     $language = 0;
                 }
-                if (!empty($this->input->post('role'))) {
+                if ($this->input->post('role')!='') {
                     $role = $this->input->post('role');
                 } else {
                     $role = 0;
                 }
-                if (!empty($this->input->post('department'))) {
+                if ($this->input->post('department')!='') {
                     $department = $this->input->post('department');
                 } else {
                     $department = 0;

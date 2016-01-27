@@ -9,9 +9,7 @@ class Products extends CI_Controller {
         parent::__construct();
     }
 
-    public function index() {
-
-        // $data['barcodes'] = $this->barcode_model->get_all();
+	public function index() {
         $this->template->load('admin_default', 'products/index');
     }
 
@@ -36,7 +34,7 @@ class Products extends CI_Controller {
         
         $switch_ans = $_POST['check_list'];
         $switch_txt_description = $_POST['txt_list'];
-        if(!empty($this->input->post('hdn_marketting_part_3'))){
+        if($this->input->post('hdn_marketting_part_3')!=''){
            $product_id=$this->input->post('hdn_marketting_part_3');
         }else{
             $product_id='';
@@ -88,7 +86,7 @@ class Products extends CI_Controller {
     **/
     public function marketting_part_4() {
         $switch_ans = $_POST['check_list'];
-         if(!empty($this->input->post('hdn_marketting_part_4'))){
+         if($this->input->post('hdn_marketting_part_4')!=''){
            $product_id=$this->input->post('hdn_marketting_part_4');
         }else{
             $product_id='';
@@ -131,8 +129,6 @@ class Products extends CI_Controller {
         }
         echo json_encode($response);die();
     }
-
-    
 
     // ------------------------------ // END ADMIN TAB FORM ------------------------------------------
 
@@ -536,6 +532,16 @@ class Products extends CI_Controller {
 
 	// ------------------------------ // END ADMIN TAB FORM ------------------------------------------
 
+	// ------------------------------ START PRODUCTION TAB FORM ------------------------------------------
+
+	
+	public function production_add_more_tab_1(){
+		$str = $this->load->view('products/ajax_view/production_tab_part_1', null, TRUE);
+		echo json_encode(array('add_more'=>$str));	
+	}
+
+
+	// ------------------------------ // END PRODUCTION TAB FORM ------------------------------------------
 
 }
 

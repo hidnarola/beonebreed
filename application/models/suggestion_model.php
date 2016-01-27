@@ -17,8 +17,7 @@ class Suggestion_model extends CI_Model {
     return $query->result();
   }
   public function get_all($client_id) {		
-	//$this->db->order_by("id", "desc");
-	//$this->db->where('suggestion.user_id', $user_id);
+	
 	$this->db->select('suggestion.*,users.username,store.name as store_name,suggestion_status.name as suggestion_status');
 	$this->db->from('suggestion');
     $this->db->join('users', 'suggestion.user_id = users.id', 'left');
@@ -40,17 +39,7 @@ class Suggestion_model extends CI_Model {
   }
 
   public function update_records($id) {
-/*
-        $editData = array(
-            'name' => $this->input->post('name'),
-            'suggestion_type' => $this->input->post('suggestion_type'),
-            'product' =>$this->input->post('product'),
-            'subject' => $this->input->post('subject'),
-            'description' => $this->input->post('description'),
-            'store' => $this->input->post('store'),
-            'contact_info' => $this->input->post('contact_info'),
-        ); */
-		
+
 		$editData = array(
 		'status' => $this->input->post('status'),
 		);
@@ -71,14 +60,7 @@ class Suggestion_model extends CI_Model {
   
   public function get_store_list() { 
 
-	/*
-    if(!empty($this->session->userdata('client_id'))){
-      $user_id=$this->session->userdata('client_id');
-      $this->db->where('is_deleted', '0');
-      $this->db->where('user_id', $user_id);
-      $query = $this->db->get('store');
-      return $query->result();
-    }*/
+	
 		$this->db->where('is_deleted', '0');
 		$query = $this->db->get('store');
 		return $query->result();

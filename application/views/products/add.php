@@ -37,7 +37,7 @@
                                     Admin
                                   </a>
                                 </li>
-                                <li class="active">
+                                <li class="">
                                   <a data-toggle='tab' class="other_tabs" href='#tab2' >
                                     <i class='icon-bullhorn text-red'></i>
                                     Marketing
@@ -49,7 +49,7 @@
                                     Attachments
                                   </a>
                                 </li>
-                                <li class="">
+                                <li class="active">
                                   <a data-toggle='tab' class="other_tabs" href='#tab4'>
                                     <i class='icon-ok text-blue'></i>
                                     Production
@@ -68,7 +68,7 @@
                                     <?php $this->load->view('products/admin_tab_add'); ?>
                                     <!-- ====== END ====== -->
                                 </div>
-                                <div class='tab-pane active' id='tab2'>
+                                <div class='tab-pane ' id='tab2'>
                                     <!-- ====== Marketing TAB Partial View Start ====== -->
                                     <?php $this->load->view('products/marketing_tab_add'); ?>
                                     <!-- ====== END ====== -->
@@ -80,11 +80,11 @@
                                     
                                     <!-- ====== END ====== -->
                                 </div>
-                                <div class='tab-pane ' id='tab4'>
+                                <div class='tab-pane active' id='tab4'>
                                     <?php $this->load->view('products/production_tab_add'); ?>
                                 </div>
                                 <div class='tab-pane' id='tab5'>
-                                  <p></p>
+                                  <p>Hello</p>
                                 </div>
                             </div>
                         </div>
@@ -99,23 +99,16 @@
 <script type="text/javascript">
 
    $('.other_tabs').click(function(event){
-        var product_id = $('#product_id').val();
-
-
-       $('#attach_project_id').val(product_id);
-       $('#notes_project_id').val(product_id);
-
-        event.preventDefault();
-        // return false;
-
+       
+       var product_id = $('#product_id').val();
 
        $('#attach_project_id').val(product_id);
        $('#notes_project_id').val(product_id);
        $('#hdn_marketting_part_3').val(product_id);
        $('#hdn_marketting_part_4').val(product_id);
        
-        event.preventDefault();
-        // return false;
+       event.preventDefault();
+       // return false;
 
    });
 

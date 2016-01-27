@@ -10,7 +10,7 @@ class Project extends CI_Controller {
     $this->load->database();
     $this->load->model('project_model');
     $this->load->library('form_validation');
-    if (!$this->session->userdata('admin_logged_in')) {
+    if ($this->session->userdata('admin_logged_in')=='') {
       redirect('/login');
     }
   }
@@ -39,28 +39,28 @@ class Project extends CI_Controller {
 
       if (!empty($_POST)) {
 
-        if (empty($this->input->post('category_id'))) {
+        if ($this->input->post('category_id')=='') {
           $category_id = 0;
         } else {
           $category_id = $this->input->post('category_id');
         }
 
-        if (empty($this->input->post('estimated_days'))) {
+        if ($this->input->post('estimated_days')=='') {
           $estimated_days = 0;
         } else {
           $estimated_days = $this->input->post('estimated_days');
         }
-        if (empty($this->input->post('priority'))) {
+        if ($this->input->post('priority')=='') {
           $priority = 0;
         } else {
           $priority = $this->input->post('priority');
         }
-        if (empty($this->input->post('project_manager'))) {
+        if ($this->input->post('project_manager')=='') {
           $project_manager = '';
         } else {
           $project_manager = $this->input->post('project_manager');
         }
-        if (empty($this->input->post('quick_notes'))) {
+        if ($this->input->post('quick_notes')=='') {
           $quick_notes = '';
         } else {
           $quick_notes = $this->input->post('quick_notes');
@@ -330,12 +330,12 @@ class Project extends CI_Controller {
     } else {
       if (!empty($_POST)) {
 							
-							if (empty($this->input->post('target_date'))) {
+							if ($this->input->post('target_date')=='') {
 									$target_date = '0000-00-00 00:00:00';
 							} else {
 									$target_date = $this->input->post('target_date');
 							}
-							if (empty($this->input->post('notes'))) {
+							if ($this->input->post('notes')=='') {
 									$notes = '';
 							} else {
 									$notes = $this->input->post('notes');
@@ -371,12 +371,12 @@ class Project extends CI_Controller {
     } else {
       if (!empty($_POST)) {
 
-        if (empty($this->input->post('total_time'))) {
+        if ($this->input->post('total_time')=='') {
           $total_time = 0;
         } else {
           $total_time = $this->input->post('total_time');
         }
-        if (empty($this->input->post('speciality_date'))) {
+        if ($this->input->post('speciality_date')=='') {
           $speciality_date ='0000-00-00 00:00:00';
         } else {
           $speciality_date = $this->input->post('speciality_date');

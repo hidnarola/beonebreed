@@ -171,7 +171,7 @@ class Project_model extends CI_Model {
 
   public function update_records($id = 0) {
    
-    if (empty($this->input->post('category_id'))) {
+    if ($this->input->post('category_id')=='') {
 
       $category_id = 0;
     } else {
@@ -179,27 +179,27 @@ class Project_model extends CI_Model {
       $category_id = $this->input->post('category_id');
     }
 
-    if (empty($this->input->post('estimated_days'))) {
+    if ($this->input->post('estimated_days')=='') {
 
       $estimated_days = 0;
     } else {
 
       $estimated_days = $this->input->post('estimated_days');
     }
-    if (empty($this->input->post('priority'))) {
+    if ($this->input->post('priority')=='') {
 
       $priority = 0;
     } else {
 
       $priority = $this->input->post('priority');
     }
-    if (empty($this->input->post('project_manager'))) {
+    if ($this->input->post('project_manager')=='') {
 
       $project_manager = '';
     } else {
       $project_manager = $this->input->post('project_manager');
     }
-    if (empty($this->input->post('quick_notes'))) {
+    if ($this->input->post('quick_notes')=='') {
 
       $quick_notes = '';
     } else {
@@ -255,12 +255,12 @@ class Project_model extends CI_Model {
 
   public function update_action_plan($id = 0) {
 			
-				if (empty($this->input->post('target_date'))) {
+				if ($this->input->post('target_date')=='') {
 							$target_date = '0000-00-00 00:00:00';
 					} else {
 							$target_date = $this->input->post('target_date');
 				}
-				if (empty($this->input->post('notes'))) {
+				if ($this->input->post('notes')=='') {
 						$notes = '';
 				} else {
 						$notes = $this->input->post('notes');
@@ -279,12 +279,12 @@ class Project_model extends CI_Model {
 
   public function update_timesheet($id = 0) {
     
-    if(!empty($this->input->post('total_time'))){   
+    if($this->input->post('total_time')!=''){   
       $total_time=$this->input->post('total_time');
     }else{
       $total_time=0;
     }
-    if (empty($this->input->post('speciality_date'))) {
+    if ($this->input->post('speciality_date')=='') {
       $speciality_date ='0000-00-00 00:00:00';
         } else {
       $speciality_date = $this->input->post('speciality_date');

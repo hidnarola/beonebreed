@@ -13,7 +13,7 @@
 		  </div>
 		</div>
 	  </div>
-	  <?php  if(!empty($this->session->flashdata('msg'))){ ?>
+	  <?php  if($this->session->flashdata('msg')!=''){ ?>
             <div class='alert alert-success alert-dismissable'>
                        <a class="close" data-dismiss="alert" href="#">&times;</a>
            <i class='icon-ok-sign'></i>
@@ -26,7 +26,7 @@
 	  <div class='box bordered-box orange-border' style='margin-bottom:0;'>
 		<div class='box-header orange-background'>
 		  <div class='title'><?=lang('quality_sub_heading')?></div>
-                        <a href="<?php echo site_url('Client_quality/add') ?>" class="btn btn-primary pull-right"><?=lang('quality_create')?></a>
+                        <a href="<?php echo site_url('client_quality/add') ?>" class="btn btn-primary pull-right"><?=lang('quality_create')?></a>
 		  </div>
 		
 		<div class='box-content box-no-padding'>

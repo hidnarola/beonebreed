@@ -19,12 +19,12 @@ class Comment extends CI_Controller {
 
     public function add() {
 
-	if (!empty($this->session->userdata('id'))) {
+	if ($this->session->userdata('id')!='') {
 	    $user_id = $this->session->userdata('id');
 	} else {
 	    $user_id = 0;
 	}
-	if (!empty($this->session->userdata('id'))) {
+	if ($this->session->userdata('id')!='') {
 	    $user_name = $this->session->userdata('username');
 	} else {
 	    $user_name = '';
