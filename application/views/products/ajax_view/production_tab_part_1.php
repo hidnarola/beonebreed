@@ -1,49 +1,59 @@
-<div class="row">
+<div class="row prod_row_<?php echo $cnt; ?>">
+    <div class="col-sm-12">    
+        <h3 style="margin: 0 0 15px;">Supplier <?php echo $cnt; ?></h3>
+    </div> 
     <div class="col-sm-6">
         <div class="form-group">
-          <label class="control-label" for="supplier_name_1">Supplier Name</label>
+          <label class="control-label" for="supplier_name_<?php echo $cnt; ?>">Supplier Name</label>
           <div class="controls">
-            <input class="form-control" id="supplier_name_1" name="supplier_name_1" placeholder="Supplier name" 
-                   type="text">
-            <span class="color_red hide error_supplier_name_1">Plese Enter Supplier Name </span>
+            <select name="supplier_<?php echo $cnt; ?>" id="supplier_<?php echo $cnt; ?>" onchange="fetch_supplier_data(this)" class="form-control" onchange="">
+                <option value="" selected disabled>Select Supplier</option>
+            <?php 
+                if(!empty($suppliers)) { 
+                    foreach($suppliers as $supplier) {
+            ?>
+                <option value="<?php echo $supplier['id']; ?>"><?php echo $supplier['supplier_name']; ?></option>        
+            <?php } } ?>
+            </select>
+            <span class="color_red hide error_supplier_name_<?php echo $cnt; ?>">Plese Enter Supplier Name </span>
           </div>
         </div>
         <div class="form-group">
-          <label class="control-label" for="country_1">Country</label>
+          <label class="control-label" for="country_<?php echo $cnt; ?>">Country</label>
           <div class="controls">
-            <input class="form-control" id="country_1" name="country_1" placeholder="Country name" type="text" >
+            <input class="form-control" id="country_<?php echo $cnt; ?>" readonly placeholder="Country name" type="text" >
           </div>
         </div>
         <div class="form-group">
-          <label class="control-label" for="tel_no_1">Tel No</label>
+          <label class="control-label" for="tel_no_<?php echo $cnt; ?>">Tel No</label>
           <div class="controls">
-            <input class="form-control" id="tel_no_1" name="tel_no_1" placeholder="Telephone No" type="text" >
+            <input class="form-control" id="tel_no_<?php echo $cnt; ?>" readonly placeholder="Telephone No" type="text" >
           </div>
         </div>
         <div class="form-group">
-          <label class="control-label" for="address_1">Address</label>
+          <label class="control-label" for="address_<?php echo $cnt; ?>">Address</label>
           <div class="controls">
-            <textarea name="address_1" id="address_1" cols="30" rows="5" class="form-control"></textarea>
+            <textarea id="address_<?php echo $cnt; ?>" cols="30" rows="5" readonly class="form-control"></textarea>
           </div>
         </div>
     </div>
     <div class="col-sm-6">
         <div class="form-group">
-          <label class="control-label" for="contact_name_1">Contact Name</label>
+          <label class="control-label" for="contact_name_<?php echo $cnt; ?>">Contact Name</label>
           <div class="controls">
-            <input class="form-control" name="contact_name_1" id="contact_name_1" placeholder="Contact Name" type="text">
+            <input class="form-control"  id="contact_name_<?php echo $cnt; ?>" readonly placeholder="Contact Name" type="text">
           </div>
         </div>
         <div class="form-group">
-          <label class="control-label" for="contact_email_1">Contact Email</label>
+          <label class="control-label" for="contact_email_<?php echo $cnt; ?>">Contact Email</label>
           <div class="controls">
-            <input class="form-control" name="contact_email_1" id="contact_email_1" placeholder="Contact Email" type="text">
+            <input class="form-control"  id="contact_email_<?php echo $cnt; ?>" readonly placeholder="Contact Email" type="text">
           </div>
         </div>
         <div class="form-group">
-          <label class="control-label" for="product_cost_1">Product Cost</label>
+          <label class="control-label" for="product_cost_<?php echo $cnt; ?>">Product Cost</label>
           <div class="controls">
-            <input class="form-control " name="product_cost_1" id="product_cost_1" placeholder="Product Cost" type="text">
+            <input class="form-control" name="product_cost_<?php echo $cnt; ?>" id="product_cost_<?php echo $cnt; ?>" placeholder="Product Cost" type="text">
           </div>
         </div>
         <div class="clearfix"></div>                    

@@ -5,7 +5,7 @@
         <div class='page-header'>
           <h1 class='pull-left'>
             <i class='icon-user'></i>
-            <span>Add Supplier</span>
+            <span>Edit Supplier</span>
           </h1>          
           <div class='pull-right'>
             
@@ -17,7 +17,7 @@
       <div class='col-sm-12'>
         <div class='box bordered-box orange-border'>
           <div class='box-header orange-background'>
-            <div class="title">Add Supplier</div>
+            <div class="title">Edit Supplier</div>
           </div>
           <div class='box-content box-padding'>
             <div class='fuelux'>
@@ -30,38 +30,38 @@
                     <div class='form-group'>
                         <label for='s_name'>Supplier Name</label><span style="color:red">*</span>
                         <input class='form-control' id='s_name' placeholder='Supplier Name' 
-                               type='text' value="<?php echo set_value('supplier_name'); ?>" name='supplier_name'>
+                               type='text' value="<?php echo $supplier['supplier_name']; ?>" name='supplier_name'>
                         <span style="color:red"><?php echo form_error('supplier_name'); ?><span>
                     </div>
 
                     <div class='form-group'>
                         <label for='c_name'>Contact Name</label><span style="color:red">*</span>
                         <input class='form-control' id='c_name' placeholder='Contact Name' 
-                               type='text' value="<?php echo set_value('contact_name'); ?>" name='contact_name'>
+                               type='text' value="<?php echo $supplier['contact_name']; ?>" name='contact_name'>
                         <span style="color:red"><?php echo form_error('contact_name'); ?><span>
                     </div>
 
                     <div class='form-group'>
                         <label for='country_id'>Country</label><span style="color:red">*</span>
                         <input class='form-control' id='country_id' placeholder='Country' 
-                               type='text' value="<?php echo set_value('country'); ?>" name='country'>
+                               type='text' value="<?php echo $supplier['country']; ?>" name='country'>
                         <span style="color:red"><?php echo form_error('country'); ?><span>
                     </div>
                     
                     <div class='form-group'>
                         <label for='c_email'>Contact Email</label><span style="color:red">*</span>
                         <input class='form-control' id='c_email' placeholder='Contact Email' 
-                               type='text' value="<?php echo set_value('contact_email'); ?>" name='contact_email'>
+                               type='text' value="<?php echo $supplier['contact_email']; ?>" name='contact_email'>
                         <span style="color:red"><?php echo form_error('contact_email'); ?><span>
                     </div>
 
                     <div class='form-group'>
                         <label for='tel_no'>Tel No</label><span style="color:red">*</span>
                         <input class='form-control' id='tel_no' placeholder='Tel No' 
-                               type='text' value="<?php echo set_value('tel_no'); ?>" name='tel_no'>
+                               type='text' value="<?php echo $supplier['tel_no']; ?>" name='tel_no'>
                         <span style="color:red"><?php echo form_error('tel_no'); ?><span>
                     </div>
-
+                    
                     <div class='form-group'>
                         <label for='tel_no'>Potential Level</label><span style="color:red">*</span>
                         <select name="potential_level" id="potential_level" class="form-control">
@@ -74,7 +74,7 @@
                     <div class='form-group'>
                         <label for='address_id'>Address</label><span style="color:red">*</span>
                         <textarea name="supplier_address" id="address_id" 
-                                 cols="30" rows="10" class="form-control"><?php echo set_value('supplier_address'); ?></textarea>
+                                 cols="30" rows="10" class="form-control"><?php echo $supplier['address']; ?></textarea>
                         <span style="color:red"><?php echo form_error('supplier_address'); ?><span>
                     </div>
 
@@ -99,4 +99,8 @@
   </div>
  </div>
 </div>
+
+<script type="text/javascript">
+    $('#potential_level').val('<?php echo $supplier["potential_level"]; ?>');
+</script>
        

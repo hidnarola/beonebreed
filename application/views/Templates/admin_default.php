@@ -135,10 +135,10 @@
     <link href="assets/stylesheets/plugins/bootstrap_daterangepicker/bootstrap-daterangepicker.css" media="all" rel="stylesheet" type="text/css" />
     <link href="assets/stylesheets/plugins/fullcalendar/fullcalendar.css" media="all" rel="stylesheet" type="text/css" />
     <link href="assets/stylesheets/plugins/common/bootstrap-wysihtml5.css" media="all" rel="stylesheet" type="text/css" />
-	  <link href="assets/stylesheets/plugins/datatables/bootstrap-datatable.css" media="all" rel="stylesheet" type="text/css" />
-	  <link href="assets/stylesheets/plugins/bootstrap_daterangepicker/bootstrap-daterangepicker.css" media="all" rel="stylesheet" type="text/css" />
+	<link href="assets/stylesheets/plugins/datatables/bootstrap-datatable.css" media="all" rel="stylesheet" type="text/css" />
+	<link href="assets/stylesheets/plugins/bootstrap_daterangepicker/bootstrap-daterangepicker.css" media="all" rel="stylesheet" type="text/css" />
     <link href="assets/stylesheets/plugins/bootstrap_datetimepicker/bootstrap-datetimepicker.min.css" media="all" rel="stylesheet" type="text/css" />
-	  <link href="assets/stylesheets/plugins/fuelux/wizard.css" media="all" rel="stylesheet" type="text/css" />
+    <link href="assets/stylesheets/plugins/fuelux/wizard.css" media="all" rel="stylesheet" type="text/css" />
 
     <link href='assets/images/meta_icons/favicon.ico' rel='shortcut icon' type='image/x-icon'>
     <link href='assets/images/meta_icons/apple-touch-icon.png' rel='apple-touch-icon-precomposed'>
@@ -396,14 +396,14 @@
               </ul>
             </li>
 
-            <li class="<?php if($controller == 'barcode' || $controller == 'products' ){ echo 'active'; }?>">
+            <li class="<?php if($controller == 'barcode' || $controller == 'products' || $controller == 'suppliers' ){ echo 'active'; }?>">
               <a class='dropdown-collapse' href='#'>
                 <i class='icon-trello'></i>
                 <span>Products</span>
                 <i class='icon-angle-down angle-down'></i>
               </a>
                  
-              <ul class='<?php if($controller == 'barcode' || $controller == 'products'){ echo 'in'; }?> nav nav-stacked '>
+              <ul class='<?php if($controller == 'barcode' || $controller == 'products' || $controller == 'suppliers'){ echo 'in'; }?> nav nav-stacked '>
                 <li class="">
                   <a href='<?php echo site_url('products') ?>'>
                     <i class='icon-caret-right'></i>
@@ -414,6 +414,12 @@
                   <a href='<?php echo site_url('barcode') ?>'>
                     <i class='icon-caret-right'></i>
                     <span>Barcode</span>
+                  </a>
+                </li>
+                <li class="">
+                  <a href='<?php echo site_url('suppliers') ?>'>
+                    <i class='icon-caret-right'></i>
+                    <span>Suppliers</span>
                   </a>
                 </li>
 
@@ -1100,6 +1106,7 @@
 			
             $(".js-example-data-array-selected").select2();
         });
+        
         
 /*        
 $("#select2-tags").select2({  
