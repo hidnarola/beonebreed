@@ -10,7 +10,6 @@
         </div>
       </div>
     </div>
-
     <?php if (!empty($this->session->flashdata('msg'))) { ?>
       <div class='alert alert-success alert-dismissable'>
         <a class="close" data-dismiss="alert" href="#">&times;</a>

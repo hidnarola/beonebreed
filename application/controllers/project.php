@@ -16,7 +16,6 @@ class Project extends CI_Controller {
   }
 
   public function index() {
-
     $data['inprogress_list'] = $this->project_model->get_all_inprogress_project();
     $data['idea_list'] = $this->project_model->get_all_idea_project();
     $this->template->load('admin_default', 'project/index', $data);
