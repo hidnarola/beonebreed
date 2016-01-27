@@ -44,6 +44,7 @@
               </div>
             </div>
           </div>
+          
           <?php echo $body;?>
           <div class='login-container-footer'>
             <div class='container'>

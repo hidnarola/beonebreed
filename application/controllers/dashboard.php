@@ -17,6 +17,7 @@ class Dashboard extends CI_Controller {
 
     public function index() {
 	$news_list = $this->news_model->get_all();
+
 	foreach ($news_list as $key => $val) {
 	    $news_list[$key]['time_ago'] = time_elapsed_string(strtotime($val['created_date']));
 	}

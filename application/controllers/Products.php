@@ -210,7 +210,6 @@ class Products extends CI_Controller {
 		
 		//get all bracode which is not assigned
 		$barcodes = $this->barcode_model->get_all(array('id NOT IN (SELECT barcode_id from products_new)'=>null));		
-		
 		//slice string into last 4 number 
 		$random_barcode = $barcodes[array_rand($barcodes)];
 		$last_four_characters = substr($random_barcode['upc'],8);			
