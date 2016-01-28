@@ -20,7 +20,7 @@ class Products extends CI_Controller {
         $data['question_list_3'] = $this->products_model->get_question_part_3();
         $data['question_list_4'] = $this->products_model->get_question_part_4();
         $data['suppliers'] = $this->products_model->getfrom('suppliers');
-
+        
         $this->template->load('admin_default', 'products/add', $data);
     }
 

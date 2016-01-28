@@ -46,26 +46,16 @@
           </div>
           
           <?php echo $body;?>
+          
           <div class='login-container-footer'>
             <div class='container'>
               <div class='row'>
                 <div class='col-sm-12'>
-																	<div class='text-center'>
-			<?php if($company_logo != ''){	?>
-			
-			<img width="200" height="200" src="<?php echo site_url('uploads/company_logo/'.$company_logo);?>" />
-			
-			<?php } ?>
-			<!--<a href='forgot_password.html'>Forgot your password?</a>-->
-		  </div>
-				<!--
-                  <div class='text-center'>
-                    <a href='sign_up.html'>
-                      <i class='icon-user'></i>
-                     
-                      <strong>Sign up</strong>
-                    </a>
-                  </div>-->
+		          <div class='text-center'>
+			        <?php if($company_logo != ''){	?>
+            			<img width="200" height="200" src="<?php echo site_url('uploads/company_logo/'.$company_logo);?>" />			
+			        <?php } ?>
+		          </div>
                 </div>
               </div>
             </div>
