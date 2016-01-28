@@ -16,7 +16,7 @@
                             <div class='form-group'>
                                 <label for='inputText'>Title</label><span style="color:red">*</span>
                                 <input class='form-control'   type='text' name='notes_name' id="notes_title">
-                                 <input type="hidden" name="product_id" value="" id="notes_project_id">
+                                 <input type="hidden" name="product_id" value="" id="notes_product_id">
                                 <span style="color:red" id="notes_err_msg"></span>
                             </div>
                             <div class="form-group">
@@ -34,7 +34,7 @@
             <a class="btn btn-success" onclick="noteForm()"> Save </a>
             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
           </div>
-           </form>    
+          </form>    
         </div>
     </div>
 </div>
@@ -129,6 +129,10 @@
                         <a class="btn btn-success" onclick="notes_file()" >
                             <i class='icon-save'></i> ADD
                         </a>
+                        <button class='btn btn-danger' type='button' id="delete_my_external_link_notes">
+                          <i class='icon-save'></i>
+                          Remove
+                        </button>
 
                         <!-- <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">
                             Open Modal
@@ -173,24 +177,23 @@
     });
     
     function notes_file(){
-
         var product_id = $('#product_id').val();
         if(product_id == ''){
-            // $(function(){ bootbox.alert('Please create product in Part-1.');  });
-            // return false;
+            $(function(){ bootbox.alert('Please create product in Part-1.');  });
+            return false;
         }
-
         $('#my_notes').modal('show');
         return false;
     }
-
+    
+    
+    
     function noteForm() {
-
-        var data = new FormData($("#project_notes_form")[0]);
+        var product_id = $('#product_id').val();
+        var form_data = new FormData($("#project_notes_form")[0]);
+        form_data.append("product_id", product_id);
         $('#notes_err_msg').text('');
         var notes_title = $('#notes_title').val();
-
-
         if (notes_title == '') {
             $('#notes_err_msg').text('please enter notes title');
             $("#notes_name").focus();
@@ -202,7 +205,7 @@
             processData: false,
             type: 'post',
             dataType: 'json',
-            data: data,
+            data: form_data,
             contentType: false,
             success: function(response) {
 
@@ -211,8 +214,8 @@
                     $('#my_notes').modal('hide');
                     //var description = response.notes_name;
                     var d = new Date("d F Y",response.dates1);
-                    $('#notes').append('<li style=list-style-type:none;><a data-desc="' + response.desc + '" class="notes_link" id="' + response.id + '" href="javascript::void(0)">' + response.notes_name + '</a><span style=margin-left:60px>'+response.dates1+'</span></li>');
-
+                    $('#notes').append('<li style=list-style-type:none;><input type=checkbox name=chk[] id="chk_attachment" class=chk_notes value='+response.id+'><a data-desc="' + response.desc + '" class="notes_link" id="' + response.id + '" href="javascript::void(0)">' + response.notes_name + '</a><span style=margin-left:60px>'+response.dates1+'</span></li>');
+                    
                     // $('#notes').append(response.list);
 
                     //$("#notes").append($("<li style=list-style-type:none;>").text(response.notes_name));
@@ -225,5 +228,34 @@
 
         return false;
     }
+    
+    $('#delete_my_external_link_notes').click(function() {
+        var prod_id = $('#notes_product_id').val();
+        var cek_id = new Array();
+        $('#chk_attachment:checked').each(function() {
+            cek_id.push($(this).val());// an array of selected values
+        });
+        if (cek_id.length == 0) {
+            alert("Please select atleast one checkbox");
+        } else {
+            
+            if (confirm("Are you sure you want to delete this?")) {
+                $.ajax({
+                    url: '<?php echo base_url() . "products/delete_selected_notes"; ?>',
+                    type: 'post',
+                    data: {ids: cek_id,pid: prod_id},
+                    dataType: 'json',
+                    success: function(data) {
+                        if (data.status == 'success') {
+                            $('#notes').html(data.notes_data);
+                        }
+                    }
+                });
+            } else {
+                return false;
+            }
+
+        }
+    });
 </script>
  

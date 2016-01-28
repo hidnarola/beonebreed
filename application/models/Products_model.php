@@ -346,14 +346,41 @@ class Products_model extends CI_Model {
         $id=$this->db->insert('product_question', $data);
         return $id;
 	}
-
-
-   public function get_product_attachment_id($data){
+       
+    /**
+	 * This returns attachment_data as per paricular product_id
+	 *
+	 * @param  $data as integer
+	 * @return  return object
+    */    
+    public function get_product_attachment_id($data){
         $query = $this->db->where('product_id',$data)->get('products_attachments');
 	return $query->result();   
-        
-      
-   }
+    }
+   
+    
+    /**
+	 * This returns notesdata as per paricular product_id
+	 *
+	 * @param  $data as integer
+	 * @return  return object
+    */
+    public function get_product_notes_id($data){
+        $query = $this->db->where('product_id',$data)->get('products_notes');
+	return $query->result();   
+    }
+    
+    public function deletefrom($table,$id = null){
+         if(is_array($id)){
+             $this->db->where($id);
+         }else{
+            $this->db->where('id',$id);
+         }
+         
+         $this->db->delete($table);
+         return '1';
+    }
+   
    
 }
 

@@ -11,8 +11,6 @@
       </div>
     </div>
 
-    <?php if (!empty($this->session->flashdata('msg'))) { ?>
-
 
     <?php if ($this->session->flashdata('msg')!='') { ?>
 
@@ -251,8 +249,3 @@
     <!--end of idea project -->
   </div>
 </div>
-<script type="text/javascript">
-  
-  
-  
-</script>
