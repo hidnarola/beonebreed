@@ -3,21 +3,21 @@
 class Dashboard extends CI_Controller {
 
     public function __construct() {
-	parent::__construct();
-	$this->load->library('template');
-	$this->load->helper('url');
-	$this->load->helper('form');
-	$this->load->database();
-	$this->load->model('news_model');
-	$this->load->helper('time_ago_helper');
-	if (!$this->session->userdata('admin_logged_in')) {
-	    redirect('login');
-        }
+		parent::__construct();
+		$this->load->library('template');
+		$this->load->helper('url');
+		$this->load->helper('form');
+		$this->load->database();
+		$this->load->model('news_model');
+		$this->load->helper('time_ago_helper');
+		
+		if (!$this->session->userdata('admin_logged_in')) {
+		    redirect('login');
+	    }
     }
 
     public function index() {
 	$news_list = $this->news_model->get_all();
-
 	foreach ($news_list as $key => $val) {
 	    $news_list[$key]['time_ago'] = time_elapsed_string(strtotime($val['created_date']));
 	}
@@ -42,12 +42,12 @@ class Dashboard extends CI_Controller {
     }
 
     public function delete($id = 0) {
-	if ($this->news_model->delete_records($id, TRUE)) {
-	    $this->session->set_flashdata('msg', 'Your record has been successfully deleted');
-	} else {
-	    $this->session->set_flashdata('err_msg', 'Oops!Something Wrong!');
-	}
-	redirect('dashboard/');
+		if ($this->news_model->delete_records($id, TRUE)) {
+		    $this->session->set_flashdata('msg', 'Your record has been successfully deleted');
+		} else {
+		    $this->session->set_flashdata('err_msg', 'Oops!Something Wrong!');
+		}
+		redirect('dashboard/');
     }
 
 }

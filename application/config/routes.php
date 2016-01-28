@@ -39,7 +39,7 @@
 */
 
 
-$route['default_controller'] = "dashboard";
+$route['default_controller'] = "login";
 $route['404_override'] = '';
 //$route['mondou'] = "client_login";
 require_once( BASEPATH .'database/DB.php' );

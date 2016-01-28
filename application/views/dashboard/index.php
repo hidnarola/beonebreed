@@ -6,8 +6,6 @@
 		<i class='icon-dashboard'></i>
 		<span>Dashboard</span>
 	    </h1>
-
-
 	</div>
 	<div class="row">
 	    <div class="col-xs-6">
@@ -133,12 +131,7 @@
 				</div>
 			    </div>
 			</div>
-		    </div>
-
-
-
-
-
+		   </div>
 		</div>
 	    </div>
 	    </div>
