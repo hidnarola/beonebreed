@@ -95,6 +95,10 @@
                         <a class="btn btn-success" onclick="attachment_file()" >
                             <i class='icon-save'></i> ADD
                         </a>
+                        <button class='btn btn-danger' type='button' id="delete_my_external_link">
+                          <i class='icon-save'></i>
+                          Remove
+                      </button>
 
                         <!-- <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">
                             Open Modal
@@ -125,11 +129,47 @@
     });
     $(document).on('click', '.no_preview', function() {
         var filename=$(this).text();
-        $(".my_preview_download").attr("href", "uploads/products/"+filename);
+      $(".my_preview_download").attr("href", "uploads/products/"+filename);
         $(".download_filename").text(filename);
         $('#my_preview_form').modal('show');
+        
         return false;
     });
+    
+    
+     $('#delete_my_external_link').click(function() {
+        var prod_id = $('#attach_project_id').val();
+        var cek_id = new Array();
+        $('#chk_attachment:checked').each(function() {
+            cek_id.push($(this).val());// an array of selected values
+        });
+        if (cek_id.length == 0) {
+            alert("Please select atleast one checkbox");
+        } else {
+            
+            if (confirm("Are you sure you want to delete this?")) {
+                $.ajax({
+                    url: '<?php echo base_url() . "products/delete_selected_attachemnt"; ?>',
+                    type: 'post',
+                    data: {ids: cek_id,pid: prod_id},
+                    dataType: 'json',
+                    success: function(data) {
+                         $('#attachment').html(data.data1);
+
+                        if (data.status == 'success') {
+                          
+                            $('#attachment').append(data.data1);
+                        }
+                    }
+                });
+            } else {
+                return false;
+            }
+
+        }
+    });
+
+    
     function attachment_file(){
 
         var product_id = $('#product_id').val();
@@ -169,8 +209,7 @@
                         }else{
                           var classname='no_preview';
                         }
-
-                        $('#attachment').append('<li style=list-style-type:none;><a  class='+classname+'  href=uploads/products/' + response.file_name + '>' + response.file_name + '</a></li>');
+                        $('#attachment').append('<li style=list-style-type:none;><input type=checkbox name=chk[] id="chk_attachment" class=chk_notes value='+response.id+'><a  class='+classname+'  href=uploads/products/' + response.file_name + '>' + response.file_name + '</a></li>');
 
                         //$('#attachment').append('<li style=list-style-type:none;><a class=fancybox target=_blank href=uploads/' + response.file_name + '>' + response.file_name + '</a></li>');
                         $('#attachment_tab')[0].reset();
