@@ -135,10 +135,10 @@
     <link href="assets/stylesheets/plugins/bootstrap_daterangepicker/bootstrap-daterangepicker.css" media="all" rel="stylesheet" type="text/css" />
     <link href="assets/stylesheets/plugins/fullcalendar/fullcalendar.css" media="all" rel="stylesheet" type="text/css" />
     <link href="assets/stylesheets/plugins/common/bootstrap-wysihtml5.css" media="all" rel="stylesheet" type="text/css" />
-	<link href="assets/stylesheets/plugins/datatables/bootstrap-datatable.css" media="all" rel="stylesheet" type="text/css" />
-	<link href="assets/stylesheets/plugins/bootstrap_daterangepicker/bootstrap-daterangepicker.css" media="all" rel="stylesheet" type="text/css" />
+	  <link href="assets/stylesheets/plugins/datatables/bootstrap-datatable.css" media="all" rel="stylesheet" type="text/css" />
+	  <link href="assets/stylesheets/plugins/bootstrap_daterangepicker/bootstrap-daterangepicker.css" media="all" rel="stylesheet" type="text/css" />
     <link href="assets/stylesheets/plugins/bootstrap_datetimepicker/bootstrap-datetimepicker.min.css" media="all" rel="stylesheet" type="text/css" />
-    <link href="assets/stylesheets/plugins/fuelux/wizard.css" media="all" rel="stylesheet" type="text/css" />
+	  <link href="assets/stylesheets/plugins/fuelux/wizard.css" media="all" rel="stylesheet" type="text/css" />
 
     <link href='assets/images/meta_icons/favicon.ico' rel='shortcut icon' type='image/x-icon'>
     <link href='assets/images/meta_icons/apple-touch-icon.png' rel='apple-touch-icon-precomposed'>
@@ -147,7 +147,7 @@
     <link href='assets/images/meta_icons/apple-touch-icon-114x114.png' rel='apple-touch-icon-precomposed' sizes='114x114'>
     <link href='assets/images/meta_icons/apple-touch-icon-144x144.png' rel='apple-touch-icon-precomposed' sizes='144x144'>
 
-	<link href="assets/stylesheets/plugins/tabdrop/tabdrop.css" media="all" rel="stylesheet" type="text/css" />
+	  <link href="assets/stylesheets/plugins/tabdrop/tabdrop.css" media="all" rel="stylesheet" type="text/css" />
     <link href="assets/stylesheets/plugins/jgrowl/jquery.jgrowl.min.css" media="all" rel="stylesheet" type="text/css" />
     <link href="assets/stylesheets/jquery/jquery_ui.css" media="all" rel="stylesheet" type="text/css" />
     
@@ -396,7 +396,7 @@
               </ul>
             </li>
 
-            <li class="<?php if($controller == 'barcode' || $controller == 'products' || $controller == 'suppliers' ){ echo 'active'; }?>">
+            <li class="<?php if($controller == 'barcode' || $controller == 'products'  || $controller == 'suppliers' ){ echo 'active'; }?>">
               <a class='dropdown-collapse' href='#'>
                 <i class='icon-trello'></i>
                 <span>Products</span>
@@ -416,6 +416,7 @@
                     <span>Barcode</span>
                   </a>
                 </li>
+
                 <li class="">
                   <a href='<?php echo site_url('suppliers') ?>'>
                     <i class='icon-caret-right'></i>
@@ -1106,7 +1107,6 @@
 			
             $(".js-example-data-array-selected").select2();
         });
-        
         
 /*        
 $("#select2-tags").select2({  

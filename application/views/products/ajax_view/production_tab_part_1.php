@@ -6,7 +6,8 @@
         <div class="form-group">
           <label class="control-label" for="supplier_name_<?php echo $cnt; ?>">Supplier Name</label>
           <div class="controls">
-            <select name="supplier_<?php echo $cnt; ?>" id="supplier_<?php echo $cnt; ?>" onchange="fetch_supplier_data(this)" class="form-control" onchange="">
+            <select name="supplier_<?php echo $cnt; ?>" id="supplier_<?php echo $cnt; ?>" 
+                    onchange="$('.error_supplier_name_<?php echo $cnt;?>').html('');fetch_supplier_data(this)" class="form-control" onchange="">
                 <option value="" selected disabled>Select Supplier</option>
             <?php 
                 if(!empty($suppliers)) { 
@@ -15,7 +16,7 @@
                 <option value="<?php echo $supplier['id']; ?>"><?php echo $supplier['supplier_name']; ?></option>        
             <?php } } ?>
             </select>
-            <span class="color_red hide error_supplier_name_<?php echo $cnt; ?>">Plese Enter Supplier Name </span>
+            <span class="color_red error_supplier_name_<?php echo $cnt; ?>"></span>
           </div>
         </div>
         <div class="form-group">
@@ -55,7 +56,9 @@
           <div class="controls">
             <input class="form-control" name="product_cost_<?php echo $cnt; ?>" id="product_cost_<?php echo $cnt; ?>" placeholder="Product Cost" type="text">
           </div>
+          <span class="color_red error_product_cost_<?php echo $cnt; ?>"> </span>
         </div>
         <div class="clearfix"></div>                    
+        <input type="hidden" name="production_supplier_<?php echo $cnt; ?>" id="production_supplier_<?php echo $cnt; ?>" value="">
     </div>    
 </div>

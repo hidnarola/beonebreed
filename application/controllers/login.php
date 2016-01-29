@@ -19,7 +19,7 @@ class Login extends CI_Controller {
         $where_in_array = array('3','4');
         $all_db_users = $this->login_model->getfrom('users',false,array('where'=>array('is_deleted'=>'0'),'where_in'=>array('user_type'=>$where_in_array)) );
 
-        $all_users = array('bob');
+        $all_users = array("",'bob');
 
         if(!empty($all_db_users)){
             foreach($all_db_users as $db_user){
