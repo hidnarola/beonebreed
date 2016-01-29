@@ -536,7 +536,6 @@ class Products extends CI_Controller {
 
 	// ------------------------------ START PRODUCTION TAB FORM ------------------------------------------
 
-	
 	public function production_add_more_tab_1(){
 		$data['suppliers'] = $this->products_model->getfrom('suppliers');
 		$data['cnt'] = $this->input->post('new_cnt');
@@ -551,11 +550,38 @@ class Products extends CI_Controller {
 		echo json_encode($supplier);
 	}
 
+	public function production_form_tab_1(){
+		
+		$production_part_1_count = (int)$this->input->post('production_part_1_count');
+
+		for($i = 1;$i<=$production_part_1_count;$i++){
+			// $prod_$i;
+		}
+		// for($i=1; $i<=$production_part_1_count; $i++){
+
+		// 	$production_hidden_.$i = $this->input->post('production_supplier_'.$i); // Hidden Id
+		// 	$product_id = $this->input->post('product_id'); 
+		// 	$product_cost = $this->input->post('product_cost_'.$i);
+		// 	$supplier_id = $this->input->post('supplier_'.$i);
+
+		// 	$prod_data = array('product_id'=>$product_id,'product_cost'=>$product_cost,'supplier_id'=>$supplier_id);
+
+		// 	if(!empty($production_hidden)){
+		// 		//$this->products_model->update_into('products_suppliers',$production_hidden_.$i,$prod_data);
+		// 	}else{
+		// 		//$this->products_model->insert_into('products_suppliers',$prod_data);
+		// 	}
+		// }
+
+		die('Here');
+
+	}	
+
 
 	// ------------------------------ // END PRODUCTION TAB FORM ------------------------------------------
 
         
-        public function delete_selected_attachemnt() {
+    public function delete_selected_attachemnt() {
      
             $data_append='';
             if (!empty($_POST['ids'])) {

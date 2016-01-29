@@ -11,9 +11,6 @@
       </div>
     </div>
 
-    <?php if (!empty($this->session->flashdata('msg'))) { ?>
-
-
     <?php if ($this->session->flashdata('msg')!='') { ?>
 
       <div class='alert alert-success alert-dismissable'>

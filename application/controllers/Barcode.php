@@ -142,7 +142,7 @@ class Barcode extends CI_Controller {
 				$path = $_SERVER['DOCUMENT_ROOT'].'/uploads/barcode/'.$file_name;
 				$data = $this->csvimport->get_array($path, "", TRUE);
 
-				p($data,true);
+				 
 				if(!empty($data)){
 					foreach($data as $d){	
 

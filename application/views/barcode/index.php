@@ -18,15 +18,7 @@
       </div>
     </div>
 
-    <?php if (!empty($this->session->flashdata('msg'))) { ?>
-      <div class='alert alert-success alert-dismissable'>
-        <a class="close" data-dismiss="alert" href="#">&times;</a>
-        <i class='icon-ok-sign'></i>
-        <?php if ($this->session->flashdata('msg')):echo $this->session->flashdata('msg');
-        endif;
-        ?>  
-      </div>
-<?php } ?>  
+     
       <?php echo myflash_message('success','success'); echo myflash_message('error'); ?>
     <div class="clearfix">	</div>
     <br/>

@@ -1,5 +1,6 @@
 <?php
 
+/*
   $CI =& get_instance();
   $CI->load->model('client_model');
   $result = $CI->client_model->get_all_client();
@@ -11,7 +12,20 @@
 		$client_array[$key]=$val->username;
       }
   }
-
+*/
+        require_once( BASEPATH .'database/DB.php' );
+        $db =& DB();
+        $db->where('user_type',	'3');
+        $db->where('is_deleted','0');
+        $query = $db->get( 'users' );
+        $result = $query->result();
+        
+        /*
+        $this->db->where('user_type',	'3');
+		$this->db->where('is_deleted',	'0');
+		$query	=	$this->db->get('users');*/
+		//return	$query->result();
+        
         session_start();
         
         $controller=$this->router->fetch_class();
@@ -121,10 +135,10 @@
     <link href="assets/stylesheets/plugins/bootstrap_daterangepicker/bootstrap-daterangepicker.css" media="all" rel="stylesheet" type="text/css" />
     <link href="assets/stylesheets/plugins/fullcalendar/fullcalendar.css" media="all" rel="stylesheet" type="text/css" />
     <link href="assets/stylesheets/plugins/common/bootstrap-wysihtml5.css" media="all" rel="stylesheet" type="text/css" />
-	  <link href="assets/stylesheets/plugins/datatables/bootstrap-datatable.css" media="all" rel="stylesheet" type="text/css" />
-	  <link href="assets/stylesheets/plugins/bootstrap_daterangepicker/bootstrap-daterangepicker.css" media="all" rel="stylesheet" type="text/css" />
+	<link href="assets/stylesheets/plugins/datatables/bootstrap-datatable.css" media="all" rel="stylesheet" type="text/css" />
+	<link href="assets/stylesheets/plugins/bootstrap_daterangepicker/bootstrap-daterangepicker.css" media="all" rel="stylesheet" type="text/css" />
     <link href="assets/stylesheets/plugins/bootstrap_datetimepicker/bootstrap-datetimepicker.min.css" media="all" rel="stylesheet" type="text/css" />
-	  <link href="assets/stylesheets/plugins/fuelux/wizard.css" media="all" rel="stylesheet" type="text/css" />
+    <link href="assets/stylesheets/plugins/fuelux/wizard.css" media="all" rel="stylesheet" type="text/css" />
 
     <link href='assets/images/meta_icons/favicon.ico' rel='shortcut icon' type='image/x-icon'>
     <link href='assets/images/meta_icons/apple-touch-icon.png' rel='apple-touch-icon-precomposed'>
@@ -133,7 +147,7 @@
     <link href='assets/images/meta_icons/apple-touch-icon-114x114.png' rel='apple-touch-icon-precomposed' sizes='114x114'>
     <link href='assets/images/meta_icons/apple-touch-icon-144x144.png' rel='apple-touch-icon-precomposed' sizes='144x144'>
 
-	  <link href="assets/stylesheets/plugins/tabdrop/tabdrop.css" media="all" rel="stylesheet" type="text/css" />
+	<link href="assets/stylesheets/plugins/tabdrop/tabdrop.css" media="all" rel="stylesheet" type="text/css" />
     <link href="assets/stylesheets/plugins/jgrowl/jquery.jgrowl.min.css" media="all" rel="stylesheet" type="text/css" />
     <link href="assets/stylesheets/jquery/jquery_ui.css" media="all" rel="stylesheet" type="text/css" />
     
@@ -285,7 +299,7 @@
           <li class='dropdown dark user-menu'>
             <a class='dropdown-toggle' data-toggle='dropdown' href='#'>
               <!--<img width="23" height="23" alt="Mila Kunis" src="assets/images/avatar.jpg" />-->
-              <span class='user-name'><?php if(!empty($this->session->userdata('username'))){ echo $this->session->userdata('username');} ?></span>
+              <span class='user-name'><?php if($this->session->userdata('username')){ echo $this->session->userdata('username');} ?></span>
               <b class='caret'></b>
             </a>
             <ul class='dropdown-menu'>
@@ -351,8 +365,9 @@
             
             <?php 
             
-            
-                if(!empty($this->session->userdata('user_type'))){
+           
+                
+                if($this->session->userdata('user_type')){
 																	
 				  $user_type=$this->session->userdata('user_type');	
                   if($user_type==1){
@@ -381,14 +396,14 @@
               </ul>
             </li>
 
-            <li class="<?php if($controller == 'barcode' || $controller == 'products' ){ echo 'active'; }?>">
+            <li class="<?php if($controller == 'barcode' || $controller == 'products' || $controller == 'suppliers' ){ echo 'active'; }?>">
               <a class='dropdown-collapse' href='#'>
                 <i class='icon-trello'></i>
                 <span>Products</span>
                 <i class='icon-angle-down angle-down'></i>
               </a>
                  
-              <ul class='<?php if($controller == 'barcode' || $controller == 'products'){ echo 'in'; }?> nav nav-stacked '>
+              <ul class='<?php if($controller == 'barcode' || $controller == 'products' || $controller == 'suppliers'){ echo 'in'; }?> nav nav-stacked '>
                 <li class="">
                   <a href='<?php echo site_url('products') ?>'>
                     <i class='icon-caret-right'></i>
@@ -399,6 +414,12 @@
                   <a href='<?php echo site_url('barcode') ?>'>
                     <i class='icon-caret-right'></i>
                     <span>Barcode</span>
+                  </a>
+                </li>
+                <li class="">
+                  <a href='<?php echo site_url('suppliers') ?>'>
+                    <i class='icon-caret-right'></i>
+                    <span>Suppliers</span>
                   </a>
                 </li>
 
@@ -1085,6 +1106,7 @@
 			
             $(".js-example-data-array-selected").select2();
         });
+        
         
 /*        
 $("#select2-tags").select2({  
