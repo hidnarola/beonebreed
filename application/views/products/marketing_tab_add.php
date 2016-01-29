@@ -860,6 +860,10 @@
                 <div class="clearfix"></div>
                 <div class="col-sm-6">    
                     <div class="part-five-block">
+                        <h5> DISPLAY USED </h5>
+                        <div class='make-switch switch' data-off-label='&lt;i class="icon-remove"&gt;&lt;/i&gt;' data-on-label='&lt;i class="icon-ok"&gt;&lt;/i&gt;'>
+                            <input type='checkbox' name="" id="" value="">
+                        </div>
                         <label class='control-label' for='marketing_part5_cost1'>COST</label>
                         <div class='controls margin-bottom-10'>
                             <input class='form-control' id='marketing_part5_cost1' name="marketing_part5_cost1" 
@@ -891,6 +895,11 @@
 
                 <div class="col-sm-6">
                     <div class="part-five-block">
+                        <h5> PLV IN STORE USED </h5>
+                        
+                        <div class='make-switch switch' data-off-label='&lt;i class="icon-remove"&gt;&lt;/i&gt;' data-on-label='&lt;i class="icon-ok"&gt;&lt;/i&gt;'>
+                            <input type='checkbox' name="" id="" value="">
+                        </div>
                         <label class='control-label' for='marketing_part5_cost2'>COST</label>
                         <div class='controls margin-bottom-10'>
                             <input class='form-control' id='marketing_part5_cost2' name="marketing_part5_cost2" 
