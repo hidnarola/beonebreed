@@ -21,7 +21,7 @@ class Products extends CI_Controller {
         $data['question_list_3'] = $this->products_model->get_question_part_3();
         $data['question_list_4'] = $this->products_model->get_question_part_4();
         $data['suppliers'] = $this->products_model->getfrom('suppliers');
-        
+
         $this->template->load('admin_default', 'products/add', $data);
     }
 
@@ -707,6 +707,8 @@ class Products extends CI_Controller {
         
         // ------------------------------- START MARKETING TAB FORM -----------------------------------------
 
+
+	
 	/**
      * fucntion marketing_part1 uses to save data about product title,highlight,paragraph highlight,introduction
 	 *
@@ -994,6 +996,155 @@ class Products extends CI_Controller {
                 );
 	}
 
+
+	/**
+     * fucntion production_part3
+	 *
+	 * @return array
+	 * @author Parth Viramgama - pav
+	 **/
+	public function production_part3(){
+		$product_id = $this->input->post('product_id');
+		$production_part3_notes1 = $this->input->post('production_part3_notes1');
+		$production_part3_notes2 = $this->input->post('production_part3_notes2');
+		$production_part3_switch1 = $this->input->post('production_part3_switch1');
+		$production_part3_switch2 = $this->input->post('production_part3_switch2');
+		$production_part3_switch3 = $this->input->post('production_part3_switch3');
+		$production_part3_switch4 = $this->input->post('production_part3_switch4');
+		$production_part3_switch5 = $this->input->post('production_part3_switch5');
+		$production_part3_switch6 = $this->input->post('production_part3_switch6');
+
+		$production_part3_h1 = $this->input->post('production_part3_h1');
+		$production_part3_h2 = $this->input->post('production_part3_h2');
+		$production_part3_h3 = $this->input->post('production_part3_h3');
+		$production_part3_h4 = $this->input->post('production_part3_h4');
+		$production_part3_h5 = $this->input->post('production_part3_h5');
+		$production_part3_h6 = $this->input->post('production_part3_h6');
+		$production_part3_h7 = $this->input->post('production_part3_h7');
+
+		if(!empty($production_part3_h1) || !empty($production_part3_h2) || !empty($production_part3_h3) || 
+			!empty($production_part3_h4) || !empty($production_part3_h5) || !empty($production_part3_h6) ||
+			!empty($production_part3_h7)){
+			
+			if(!empty($production_part3_switch1)){
+                $production_part3_q1 = array('question_id'=>'17','product_id'=>$product_id,'answer'=>'1','notes'=>$production_part3_notes1);
+                $this->products_model->update_into('product_question',$production_part3_h1,$production_part3_q1);
+            }else{
+               	$production_part3_q1 = array('question_id'=>'17','product_id'=>$product_id,'answer'=>'0','notes'=>$production_part3_notes1);
+                $this->products_model->update_into('product_question',$production_part3_h1,$production_part3_q1);
+            }
+
+            if(!empty($production_part3_switch2)){
+                $production_part3_q2 = array('question_id'=>'18','product_id'=>$product_id,'answer'=>'1');
+                $this->products_model->update_into('product_question',$production_part3_h2,$production_part3_q2);
+            }else{
+               	$production_part3_q2 = array('question_id'=>'18','product_id'=>$product_id,'answer'=>'0');
+                $this->products_model->update_into('product_question',$production_part3_h2,$production_part3_q2);
+            }
+
+            if(!empty($production_part3_switch3)){
+                $production_part3_q3 = array('question_id'=>'19','product_id'=>$product_id,'answer'=>'1');
+                $this->products_model->update_into('product_question',$production_part3_h3,$production_part3_q3);
+            }else{
+               	$production_part3_q3 = array('question_id'=>'19','product_id'=>$product_id,'answer'=>'0');
+                $this->products_model->update_into('product_question',$production_part3_h3,$production_part3_q3);
+            }
+
+            if(!empty($production_part3_switch4)){
+                $production_part3_q4 = array('question_id'=>'20','product_id'=>$product_id,'answer'=>'1');
+                $this->products_model->update_into('product_question',$production_part3_h4,$production_part3_q4);
+            }else{
+               	$production_part3_q4 = array('question_id'=>'20','product_id'=>$product_id,'answer'=>'0');
+                $this->products_model->update_into('product_question',$production_part3_h4,$production_part3_q4);
+            }
+
+            if(!empty($production_part3_switch5)){
+                $production_part3_q5 = array('question_id'=>'21','product_id'=>$product_id,'answer'=>'1');
+                $this->products_model->update_into('product_question',$production_part3_h5,$production_part3_q5);
+            }else{
+               	$production_part3_q5 = array('question_id'=>'21','product_id'=>$product_id,'answer'=>'0');
+                $this->products_model->update_into('product_question',$production_part3_h5,$production_part3_q5);
+            }
+
+            if(!empty($production_part3_switch6)){
+                $production_part3_q6 = array('question_id'=>'22','product_id'=>$product_id,'answer'=>'1');
+                $this->products_model->update_into('product_question',$production_part3_h6,$production_part3_q6);
+            }else{
+               	$production_part3_q6 = array('question_id'=>'22','product_id'=>$product_id,'answer'=>'0');
+                $this->products_model->update_into('product_question',$production_part3_h6,$production_part3_q6);
+            }
+
+            $production_part3_q7 = array('question_id'=>'23','product_id'=>$product_id,'notes'=>$production_part3_notes2);
+            $this->products_model->update_into('product_question',$production_part3_h7,$production_part3_q7);
+
+		}else{
+			if(!empty($production_part3_switch1)){
+                $production_part3_q1 = array('question_id'=>'17','product_id'=>$product_id,'answer'=>'1','notes'=>$production_part3_notes1);
+                $production_part3_h1 = $this->products_model->insert_into('product_question',$production_part3_q1);
+            }else{
+               	$production_part3_q1 = array('question_id'=>'17','product_id'=>$product_id,'answer'=>'0','notes'=>$production_part3_notes1);
+                $production_part3_h1 = $this->products_model->insert_into('product_question',$production_part3_q1);
+            }
+
+            if(!empty($production_part3_switch2)){
+                $production_part3_q2 = array('question_id'=>'18','product_id'=>$product_id,'answer'=>'1');
+                $production_part3_h2 = $this->products_model->insert_into('product_question',$production_part3_q2);
+            }else{
+               	$production_part3_q2 = array('question_id'=>'18','product_id'=>$product_id,'answer'=>'0');
+                $production_part3_h2 = $this->products_model->insert_into('product_question',$production_part3_q2);
+            }
+
+            if(!empty($production_part3_switch3)){
+                $production_part3_q3 = array('question_id'=>'19','product_id'=>$product_id,'answer'=>'1');
+                $production_part3_h3 = $this->products_model->insert_into('product_question',$production_part3_q3);
+            }else{
+               	$production_part3_q3 = array('question_id'=>'19','product_id'=>$product_id,'answer'=>'0');
+                $production_part3_h3 = $this->products_model->insert_into('product_question',$production_part3_q3);
+            }
+
+            if(!empty($production_part3_switch4)){
+                $production_part3_q4 = array('question_id'=>'20','product_id'=>$product_id,'answer'=>'1');
+                $production_part3_h4 = $this->products_model->insert_into('product_question',$production_part3_q4);
+            }else{
+               	$production_part3_q4 = array('question_id'=>'20','product_id'=>$product_id,'answer'=>'0');
+                $production_part3_h4 = $this->products_model->insert_into('product_question',$production_part3_q4);
+            }
+
+            if(!empty($production_part3_switch5)){
+                $production_part3_q5 = array('question_id'=>'21','product_id'=>$product_id,'answer'=>'1');
+                $production_part3_h5 = $this->products_model->insert_into('product_question',$production_part3_q5);
+            }else{
+               	$production_part3_q5 = array('question_id'=>'21','product_id'=>$product_id,'answer'=>'0');
+                $production_part3_h5 = $this->products_model->insert_into('product_question',$production_part3_q5);
+            }
+
+            if(!empty($production_part3_switch6)){
+                $production_part3_q6 = array('question_id'=>'22','product_id'=>$product_id,'answer'=>'1');
+                $production_part3_h6 = $this->products_model->insert_into('product_question',$production_part3_q6);
+            }else{
+               	$production_part3_q6 = array('question_id'=>'22','product_id'=>$product_id,'answer'=>'0');
+                $production_part3_h6 = $this->products_model->insert_into('product_question',$production_part3_q6);
+            }
+
+            $production_part3_q7 = array('question_id'=>'23','product_id'=>$product_id,'notes'=>$production_part3_notes2);
+            $production_part3_h7 = $this->products_model->insert_into('product_question',$production_part3_q7);
+
+
+            echo json_encode(
+                    array(
+                        'production_part3_1'=>$production_part3_h1,
+                        'production_part3_2'=>$production_part3_h2,
+                        'production_part3_3'=>$production_part3_h3,
+                        'production_part3_4'=>$production_part3_h4,
+                        'production_part3_5'=>$production_part3_h5,
+                        'production_part3_6'=>$production_part3_h6,
+                        'production_part3_7'=>$production_part3_h7,
+                        'status'=>'success',
+                        'qry'=>$this->db->last_query()
+                        )
+                );
+		}
+	}
 }
         
 
