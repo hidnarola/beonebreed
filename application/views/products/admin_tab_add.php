@@ -1046,8 +1046,8 @@
         var product_id = $('#product_id').val();
         if(product_id == ''){
             //uncommetn below line for validate Part-1 Required Part
-            //$(function(){ bootbox.alert('Please create product in Part-1.');  });
-            //return false;
+            $(function(){ bootbox.alert('Please create product in Part-1.');  });
+            return false;
         }
 
         var error_cnt = 0;

@@ -370,9 +370,8 @@
         var product_id = $('#product_id').val();
         if(product_id == ''){
             //uncommetn below line for validate Part-1 Required Part
-            // $(function(){ bootbox.alert('Please create product in Part-1.');  });
-            // return false;
-            product_id = 1;
+            $(function(){ bootbox.alert('Please create product in Part-1.');  });
+            return false;
         }
 
         var production_part_1_count = $('#production_part_1_count').val();
@@ -414,6 +413,12 @@
                dataType: 'json',
                data: form_data,
                success:function(data){
+                    var prod_new_id;
+                    for (var i = 0; i < data.res.length; i++) {
+                        prod_new_id = i+1;
+                        $('#production_supplier_'+prod_new_id).val(data.res[i]);
+                        console.log(data.res[i]);
+                    }
                     return false;
                     $('#product_id').val(data.product_id);
                     $('#complete_admin_part_1').attr('disabled',true);
