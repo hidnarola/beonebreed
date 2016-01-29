@@ -36,7 +36,7 @@ class Login extends CI_Controller {
         }
 
         if(in_array($user, $all_users) == false){
-            show_404();
+            //show_404();
         }
     
         if (!empty($_POST)) {

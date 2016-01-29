@@ -566,10 +566,11 @@ class Products extends CI_Controller {
               //changes
               if ($this->db->delete('products_attachments')) {
                 $data['product_attachment'] = $this->products_model->get_product_attachment_id($_POST['pid']);
-//                p($data,true);
                 foreach($data['product_attachment'] as $temp){
                     $data_append.="<li style=list-style-type:none;><input type='checkbox' name='chk[]' id='chk_attachment' class='chk_notes' value=".$temp->id."><a  class='no_preview'  href=uploads/products/".$temp->attachment.">".$temp->attachment."</a></li>"; 
+                	//$data_append.="hi";
                 }
+                // print_r($data['product_attachment']);
                 $response = array('data1' => $data_append,'status' => 'success');
               } else {
                 $response = array('status' => 'fail');
@@ -607,65 +608,67 @@ class Products extends CI_Controller {
         // ------------------------------- START MARKETING TAB FORM -----------------------------------------
 
 	/**
-         * fucntion marketing_part1 uses to save data about product title,highlight,paragraph highlight,introduction
+     * fucntion marketing_part1 uses to save data about product title,highlight,paragraph highlight,introduction
 	 *
-	 * @return String
+	 * @return array
 	 * @author Parth Viramgama - pav
 	 **/
 	
 	public function marketing_part1(){
-                $product_id = $this->input->post('product_id');
+
+        $product_id = $this->input->post('product_id');
                 
 		$product_name_en = $this->input->post('product_name_en');
-                $product_name_fr = $this->input->post('product_name_fr');
+        $product_name_fr = $this->input->post('product_name_fr');
                 
 		$product_highlight1_en = $this->input->post('product_highlight1_en');
-                $product_highlight1_fr = $this->input->post('product_highlight1_fr');
+        $product_highlight1_fr = $this->input->post('product_highlight1_fr');
                 
-                $product_highlight2_en = $this->input->post('product_highlight2_en');
-                $product_highlight2_fr = $this->input->post('product_highlight2_fr');
+        $product_highlight2_en = $this->input->post('product_highlight2_en');
+        $product_highlight2_fr = $this->input->post('product_highlight2_fr');
                 
-                $product_highlight3_en = $this->input->post('product_highlight3_en');
-                $product_highlight3_fr = $this->input->post('product_highlight3_fr');
+        $product_highlight3_en = $this->input->post('product_highlight3_en');
+        $product_highlight3_fr = $this->input->post('product_highlight3_fr');
 		
-                $product_paragraph_en = $this->input->post('product_paragraph_en');
-                $product_paragraph_fr = $this->input->post('product_paragraph_fr');
+        $product_paragraph_en = $this->input->post('product_paragraph_en');
+        $product_paragraph_fr = $this->input->post('product_paragraph_fr');
                 
-                $product_introduction_en = $this->input->post('product_introduction_en');
-                $product_introduction_fr = $this->input->post('product_introduction_fr');
+        $product_introduction_en = $this->input->post('product_introduction_en');
+        $product_introduction_fr = $this->input->post('product_introduction_fr');
                 
                 
-                $marketing_part1_1 = $this->input->post('marketing_part1_1');
+        $marketing_part1_1 = $this->input->post('marketing_part1_1');
 		$marketing_part1_2 = $this->input->post('marketing_part1_2');
 		$marketing_part1_3 = $this->input->post('marketing_part1_3');
 		$marketing_part1_4 = $this->input->post('marketing_part1_4');
 		$marketing_part1_5 = $this->input->post('marketing_part1_5');
 		$marketing_part1_6 = $this->input->post('marketing_part1_6');
                 
-                $test_var ='';
+           
                 
 		if(!empty($marketing_part1_1) || !empty($marketing_part1_2) || !empty($marketing_part1_3) || 
-                    !empty($marketing_part1_4) || !empty($marketing_part1_5) || !empty($marketing_part1_6)){
-                    $test_var = 'IF';
-                    $marketing_part1_title = array('product_id'=>$product_id,'en_title'=>$product_name_en,'fr_title'=>$product_name_fr,'part'=>'title');
-                     $this->products_model->update_into('products_marketing_part_1',$marketing_part1_1,$marketing_part1_title);
+           !empty($marketing_part1_4) || !empty($marketing_part1_5) || !empty($marketing_part1_6)){
+            
+            $modified_date = date("Y-m-d H:i:s");
+
+                    $marketing_part1_title = array('product_id'=>$product_id,'en_title'=>$product_name_en,'fr_title'=>$product_name_fr,'part'=>'title','modified_date'=>$modified_date);
+                    $this->products_model->update_into('products_marketing_part_1',$marketing_part1_1,$marketing_part1_title);
                     
-                    $marketing_part1_highlight1 = array('product_id'=>$product_id,'en_title'=>$product_highlight1_en,'fr_title'=>$product_highlight1_fr,'part'=>'highlight');
-                     $this->products_model->update_into('products_marketing_part_1',$marketing_part1_2,$marketing_part1_highlight1);
+                    $marketing_part1_highlight1 = array('product_id'=>$product_id,'en_title'=>$product_highlight1_en,'fr_title'=>$product_highlight1_fr,'part'=>'highlight','modified_date'=>$modified_date);
+                    $this->products_model->update_into('products_marketing_part_1',$marketing_part1_2,$marketing_part1_highlight1);
                    
-                    $marketing_part1_highlight2 = array('product_id'=>$product_id,'en_title'=>$product_highlight2_en,'fr_title'=>$product_highlight2_fr,'part'=>'highlight');
-                     $this->products_model->update_into('products_marketing_part_1',$marketing_part1_3,$marketing_part1_highlight2);
+                    $marketing_part1_highlight2 = array('product_id'=>$product_id,'en_title'=>$product_highlight2_en,'fr_title'=>$product_highlight2_fr,'part'=>'highlight','modified_date'=>$modified_date);
+                    $this->products_model->update_into('products_marketing_part_1',$marketing_part1_3,$marketing_part1_highlight2);
                     
-                    $marketing_part1_highlight3 = array('product_id'=>$product_id,'en_title'=>$product_highlight3_en,'fr_title'=>$product_highlight3_fr,'part'=>'highlight');
-                     $this->products_model->update_into('products_marketing_part_1',$marketing_part1_4,$marketing_part1_highlight3);
+                    $marketing_part1_highlight3 = array('product_id'=>$product_id,'en_title'=>$product_highlight3_en,'fr_title'=>$product_highlight3_fr,'part'=>'highlight','modified_date'=>$modified_date);
+                    $this->products_model->update_into('products_marketing_part_1',$marketing_part1_4,$marketing_part1_highlight3);
                     
-                    $marketing_part1_paragraph = array('product_id'=>$product_id,'en_title'=>$product_paragraph_en,'fr_title'=>$product_paragraph_fr,'part'=>'paragraph');
-                      $this->products_model->update_into('products_marketing_part_1',$marketing_part1_5,$marketing_part1_paragraph);
+                    $marketing_part1_paragraph = array('product_id'=>$product_id,'en_title'=>$product_paragraph_en,'fr_title'=>$product_paragraph_fr,'part'=>'paragraph','modified_date'=>$modified_date);
+                    $this->products_model->update_into('products_marketing_part_1',$marketing_part1_5,$marketing_part1_paragraph);
                     
-                    $marketing_part1_introduction = array('product_id'=>$product_id,'en_title'=>$product_introduction_en,'fr_title'=>$product_introduction_fr,'part'=>'introduction');
-                     $this->products_model->update_into('products_marketing_part_1',$marketing_part1_6,$marketing_part1_introduction);
+                    $marketing_part1_introduction = array('product_id'=>$product_id,'en_title'=>$product_introduction_en,'fr_title'=>$product_introduction_fr,'part'=>'introduction','modified_date'=>$modified_date);
+                    $this->products_model->update_into('products_marketing_part_1',$marketing_part1_6,$marketing_part1_introduction);
                 }else{
-                    $test_var = 'ELSE';
                     $marketing_part1_title = array('product_id'=>$product_id,'en_title'=>$product_name_en,'fr_title'=>$product_name_fr,'part'=>'title');
                     $marketing_part1_1 = $this->products_model->insert_into('products_marketing_part_1',$marketing_part1_title);
                     
@@ -694,12 +697,203 @@ class Products extends CI_Controller {
                       'marketing_part1_5'=>$marketing_part1_5,
                       'marketing_part1_6'=>$marketing_part1_6,
                       'status'=>'success',
-                      'qry'=>$this->db->last_query(),
-                       'test_var'=>$test_var
-                        )
+                      'qry'=>$this->db->last_query()
+                    )
                 );
 	}
-        //----------------------------------------------------------------------------------------------------------------
+
+    //----------------------------------------------------------------------------------------------------------------
+
+	/**
+    * fucntion marketing_part2 uses to save data about title and its description.
+	*
+	* @return array
+	* @author Parth Viramgama - pav
+	**/
+	
+	public function marketing_part2(){
+    	$product_id = $this->input->post('product_id');
+                
+		$marketing_part2_en_title1 = $this->input->post('marketing_part2_en_title1');
+        $marketing_part2_en_desc1 = $this->input->post('marketing_part2_en_desc1');
+        $marketing_part2_fr_title1 = $this->input->post('marketing_part2_fr_title1');
+        $marketing_part2_fr_desc1 = $this->input->post('marketing_part2_fr_desc1');
+		
+		$marketing_part2_en_title2 = $this->input->post('marketing_part2_en_title2');
+        $marketing_part2_en_desc2 = $this->input->post('marketing_part2_en_desc2');
+        $marketing_part2_fr_title2 = $this->input->post('marketing_part2_fr_title2');
+        $marketing_part2_fr_desc2 = $this->input->post('marketing_part2_fr_desc2');
+        
+        $marketing_part2_en_title3 = $this->input->post('marketing_part2_en_title3');
+        $marketing_part2_en_desc3 = $this->input->post('marketing_part2_en_desc3');
+        $marketing_part2_fr_title3 = $this->input->post('marketing_part2_fr_title3');
+        $marketing_part2_fr_desc3 = $this->input->post('marketing_part2_fr_desc3');
+
+        $marketing_part2_en_title4 = $this->input->post('marketing_part2_en_title4');
+        $marketing_part2_en_desc4 = $this->input->post('marketing_part2_en_desc4');
+        $marketing_part2_fr_title4 = $this->input->post('marketing_part2_fr_title4');
+        $marketing_part2_fr_desc4 = $this->input->post('marketing_part2_fr_desc4');
+
+        $marketing_part2_en_title5 = $this->input->post('marketing_part2_en_title5');
+        $marketing_part2_en_desc5 = $this->input->post('marketing_part2_en_desc5');
+        $marketing_part2_fr_title5 = $this->input->post('marketing_part2_fr_title5');
+        $marketing_part2_fr_desc5 = $this->input->post('marketing_part2_fr_desc5');
+
+        $marketing_part2_en_title6 = $this->input->post('marketing_part2_en_title6');
+        $marketing_part2_en_desc6 = $this->input->post('marketing_part2_en_desc6');
+        $marketing_part2_fr_title6 = $this->input->post('marketing_part2_fr_title6');
+        $marketing_part2_fr_desc6 = $this->input->post('marketing_part2_fr_desc6');
+
+        $marketing_part2_en_title7 = $this->input->post('marketing_part2_en_title7');
+        $marketing_part2_en_desc7 = $this->input->post('marketing_part2_en_desc7');
+        $marketing_part2_fr_title7 = $this->input->post('marketing_part2_fr_title7');
+        $marketing_part2_fr_desc7 = $this->input->post('marketing_part2_fr_desc7');
+
+        $marketing_part2_en_title8 = $this->input->post('marketing_part2_en_title8');
+        $marketing_part2_en_desc8 = $this->input->post('marketing_part2_en_desc8');
+        $marketing_part2_fr_title8 = $this->input->post('marketing_part2_fr_title8');
+        $marketing_part2_fr_desc8 = $this->input->post('marketing_part2_fr_desc8');  
+
+        $marketing_part2_1 = $this->input->post('marketing_part2_1');
+		$marketing_part2_2 = $this->input->post('marketing_part2_2');
+		$marketing_part2_3 = $this->input->post('marketing_part2_3');
+		$marketing_part2_4 = $this->input->post('marketing_part2_4');
+		$marketing_part2_5 = $this->input->post('marketing_part2_5');
+		$marketing_part2_6 = $this->input->post('marketing_part2_6');
+		$marketing_part2_7 = $this->input->post('marketing_part2_7');
+		$marketing_part2_8 = $this->input->post('marketing_part2_8');
+                
+           
+                
+		if(!empty($marketing_part2_1) || !empty($marketing_part2_2) || !empty($marketing_part2_3) || !empty($marketing_part2_4) ||
+           !empty($marketing_part2_5) || !empty($marketing_part2_6) || !empty($marketing_part2_7) || !empty($marketing_part2_8)){
+        	$modified_date = date("Y-m-d H:i:s");
+			
+			$marketing_part2_title1 = array('product_id'=>$product_id,'en_title'=>$marketing_part2_en_title1,'fr_title'=>$marketing_part2_fr_title1,'en_description'=>$marketing_part2_en_desc1,'fr_description'=>$marketing_part2_fr_desc1,'modified_date'=>$modified_date);
+            $this->products_model->update_into('products_marketing_part_2',$marketing_part2_1,$marketing_part2_title1);
+
+            $marketing_part2_title2 = array('product_id'=>$product_id,'en_title'=>$marketing_part2_en_title2,'fr_title'=>$marketing_part2_fr_title2,'en_description'=>$marketing_part2_en_desc2,'fr_description'=>$marketing_part2_fr_desc2,'modified_date'=>$modified_date);
+            $this->products_model->update_into('products_marketing_part_2',$marketing_part2_2,$marketing_part2_title2);
+
+            $marketing_part2_title3 = array('product_id'=>$product_id,'en_title'=>$marketing_part2_en_title3,'fr_title'=>$marketing_part2_fr_title3,'en_description'=>$marketing_part2_en_desc3,'fr_description'=>$marketing_part2_fr_desc3,'modified_date'=>$modified_date);
+            $this->products_model->update_into('products_marketing_part_2',$marketing_part2_3,$marketing_part2_title3);
+
+            if(!empty($marketing_part2_4)){
+            	$marketing_part2_title4 = array('product_id'=>$product_id,'en_title'=>$marketing_part2_en_title4,'fr_title'=>$marketing_part2_fr_title4,'en_description'=>$marketing_part2_en_desc4,'fr_description'=>$marketing_part2_fr_desc4,'modified_date'=>$modified_date);
+            	$this->products_model->update_into('products_marketing_part_2',$marketing_part2_4,$marketing_part2_title4);
+        	}
+
+        	if(!empty($marketing_part2_5)){
+            	$marketing_part2_title5 = array('product_id'=>$product_id,'en_title'=>$marketing_part2_en_title5,'fr_title'=>$marketing_part2_fr_title5,'en_description'=>$marketing_part2_en_desc5,'fr_description'=>$marketing_part2_fr_desc5,'modified_date'=>$modified_date);
+            	$this->products_model->update_into('products_marketing_part_2',$marketing_part2_5,$marketing_part2_title5);
+            }
+
+            if(!empty($marketing_part2_6)){
+            	$marketing_part2_title6 = array('product_id'=>$product_id,'en_title'=>$marketing_part2_en_title6,'fr_title'=>$marketing_part2_fr_title6,'en_description'=>$marketing_part2_en_desc6,'fr_description'=>$marketing_part2_fr_desc6,'modified_date'=>$modified_date);
+            	$this->products_model->update_into('products_marketing_part_2',$marketing_part2_6,$marketing_part2_title6);
+            }
+
+            if(!empty($marketing_part2_7)){
+            	$marketing_part2_title7 = array('product_id'=>$product_id,'en_title'=>$marketing_part2_en_title7,'fr_title'=>$marketing_part2_fr_title7,'en_description'=>$marketing_part2_en_desc7,'fr_description'=>$marketing_part2_fr_desc7,'modified_date'=>$modified_date);
+            	$this->products_model->update_into('products_marketing_part_2',$marketing_part2_7,$marketing_part2_title7);
+            }
+
+            if(!empty($marketing_part2_8)){
+            	$marketing_part2_title8 = array('product_id'=>$product_id,'en_title'=>$marketing_part2_en_title8,'fr_title'=>$marketing_part2_fr_title8,'en_description'=>$marketing_part2_en_desc8,'fr_description'=>$marketing_part2_fr_desc8,'modified_date'=>$modified_date);
+            	$this->products_model->update_into('products_marketing_part_2',$marketing_part2_8,$marketing_part2_title8);
+            }
+
+        }else{
+        	$marketing_part2_title1 = array('product_id'=>$product_id,'en_title'=>$marketing_part2_en_title1,'fr_title'=>$marketing_part2_fr_title1,'en_description'=>$marketing_part2_en_desc1,'fr_description'=>$marketing_part2_fr_desc1);
+            $marketing_part2_1 = $this->products_model->insert_into('products_marketing_part_2',$marketing_part2_title1);
+
+            $marketing_part2_title2 = array('product_id'=>$product_id,'en_title'=>$marketing_part2_en_title2,'fr_title'=>$marketing_part2_fr_title2,'en_description'=>$marketing_part2_en_desc2,'fr_description'=>$marketing_part2_fr_desc2);
+            $marketing_part2_2 = $this->products_model->insert_into('products_marketing_part_2',$marketing_part2_title2);
+
+            $marketing_part2_title3 = array('product_id'=>$product_id,'en_title'=>$marketing_part2_en_title3,'fr_title'=>$marketing_part2_fr_title3,'en_description'=>$marketing_part2_en_desc3,'fr_description'=>$marketing_part2_fr_desc3);
+            $marketing_part2_3 = $this->products_model->insert_into('products_marketing_part_2',$marketing_part2_title3);
+
+            //if(!empty($marketing_part2_en_title4) && !empty($marketing_part2_fr_title4) && !empty($marketing_part2_en_desc4) && !empty($marketing_part2_fr_desc4)){
+            	$marketing_part2_title4 = array('product_id'=>$product_id,'en_title'=>$marketing_part2_en_title4,'fr_title'=>$marketing_part2_fr_title4,'en_description'=>$marketing_part2_en_desc4,'fr_description'=>$marketing_part2_fr_desc4);
+            	$marketing_part2_4 = $this->products_model->insert_into('products_marketing_part_2',$marketing_part2_title4);
+        	//}
+
+        	//if(!empty($marketing_part2_en_title5) && !empty($marketing_part2_fr_title5) && !empty($marketing_part2_en_desc5) && !empty($marketing_part2_fr_desc5)){
+            	$marketing_part2_title5 = array('product_id'=>$product_id,'en_title'=>$marketing_part2_en_title5,'fr_title'=>$marketing_part2_fr_title5,'en_description'=>$marketing_part2_en_desc5,'fr_description'=>$marketing_part2_fr_desc5);
+            	$marketing_part2_5 = $this->products_model->insert_into('products_marketing_part_2',$marketing_part2_title5);
+            //}
+
+            //if(!empty($marketing_part2_en_title6) && !empty($marketing_part2_fr_title6) && !empty($marketing_part2_en_desc6) && !empty($marketing_part2_fr_desc6)){
+            	$marketing_part2_title6 = array('product_id'=>$product_id,'en_title'=>$marketing_part2_en_title6,'fr_title'=>$marketing_part2_fr_title6,'en_description'=>$marketing_part2_en_desc6,'fr_description'=>$marketing_part2_fr_desc6);
+            	$marketing_part2_6 = $this->products_model->insert_into('products_marketing_part_2',$marketing_part2_title6);
+            //}
+
+            //if(!empty($marketing_part2_en_title7) && !empty($marketing_part2_fr_title7) && !empty($marketing_part2_en_desc7) && !empty($marketing_part2_fr_desc7)){
+            	$marketing_part2_title7 = array('product_id'=>$product_id,'en_title'=>$marketing_part2_en_title7,'fr_title'=>$marketing_part2_fr_title7,'en_description'=>$marketing_part2_en_desc7,'fr_description'=>$marketing_part2_fr_desc7);
+            	$marketing_part2_7 = $this->products_model->insert_into('products_marketing_part_2',$marketing_part2_title7);
+            //}
+
+            //if(!empty($marketing_part2_en_title8) && !empty($marketing_part2_fr_title8) && !empty($marketing_part2_en_desc8) && !empty($marketing_part2_fr_desc8)){
+            	$marketing_part2_title8 = array('product_id'=>$product_id,'en_title'=>$marketing_part2_en_title8,'fr_title'=>$marketing_part2_fr_title8,'en_description'=>$marketing_part2_en_desc8,'fr_description'=>$marketing_part2_fr_desc8);
+            	$marketing_part2_8 = $this->products_model->insert_into('products_marketing_part_2',$marketing_part2_title8);
+            //}
+        }
+                
+        echo json_encode(
+            array(
+                'marketing_part2_1'=>$marketing_part2_1,
+                'marketing_part2_2'=>$marketing_part2_2,
+                'marketing_part2_3'=>$marketing_part2_3,
+                'marketing_part2_4'=>$marketing_part2_4,
+                'marketing_part2_5'=>$marketing_part2_5,
+                'marketing_part2_6'=>$marketing_part2_6,
+                'marketing_part2_7'=>$marketing_part2_7,
+                'marketing_part2_8'=>$marketing_part2_8,
+                'status'=>'success',
+                'qry'=>$this->db->last_query()
+                    )
+                );
+	}
+
+    //----------------------------------------------------------------------------------------------------------------
+
+	/**
+    * fucntion marketing_part3 uses to save data like cost,supplier name,generated UPC Code,Notes
+	*
+	* @return array
+	* @author Parth Viramgama - pav
+	**/
+	public function marketing_part5(){
+		$product_id = $this->input->post('product_id');
+
+		$marketing_part5_cost1 = $this->input->post('marketing_part5_cost1');
+		$marketing_part5_supplier1 = $this->input->post('marketing_part5_supplier1');
+		$marketing_part5_upc1 = $this->input->post('marketing_part5_upc1');
+		$marketing_part5_cost2 = $this->input->post('marketing_part5_cost2');
+		$marketing_part5_supplier2 = $this->input->post('marketing_part5_supplier2');
+		$marketing_part5_upc2 = $this->input->post('marketing_part5_upc2');
+		$marketing_part5_notes1 = $this->input->post('marketing_part5_notes1');
+
+		$marketing_part5_1 = $this->input->post('marketing_part5_1');
+		echo $marketing_part5_1;
+		if(!empty($marketing_part5_1)){
+			$modified_date = date("Y-m-d H:i:s");
+			$marketing_part5_data = array('product_id'=>$product_id,'cost1'=>$marketing_part5_cost1,'supplier1'=>$marketing_part5_supplier1,'upc1'=>$marketing_part5_upc1,'cost2'=>$marketing_part5_cost2,'supplier2'=>$marketing_part5_supplier2,'upc2'=>$marketing_part5_upc2,'notes1'=>$marketing_part5_notes1,'modified_date'=>$modified_date);
+            $this->products_model->update_into('products_marketing_part_5',$marketing_part5_1,$marketing_part5_data);
+		}else{
+			 $marketing_part5_data = array('product_id'=>$product_id,'cost1'=>$marketing_part5_cost1,'supplier1'=>$marketing_part5_supplier1,'upc1'=>$marketing_part5_upc1,'cost2'=>$marketing_part5_cost2,'supplier2'=>$marketing_part5_supplier2,'upc2'=>$marketing_part5_upc2,'notes1'=>$marketing_part5_notes1);
+             $marketing_part5_1 = $this->products_model->insert_into('products_marketing_part_5',$marketing_part5_data);
+		}
+
+		echo json_encode(
+                    array(
+                      'marketing_part5_1'=>$marketing_part5_1,
+                      'status'=>'success',
+                      'qry'=>$this->db->last_query()
+                    )
+                );
+	}
+
 }
         
 

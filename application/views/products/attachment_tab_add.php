@@ -16,7 +16,7 @@
                         <input type="file" name="file" id="prod_attachment" onchange="$('.error_upload').addClass('hide'); " >
                   </div>
                 </div>   
-                <input type="hidden" name="product_id" value="1" id="attach_product_id">
+                <!-- <input type="hidden" name="product_id" value="" id="attach_product_id"> -->
                 <span class="color_red error_upload hide">Please Select file to upload</span>
             </form>    
           </div>
@@ -91,7 +91,7 @@
 
                       <div class='controls'>
                         <input type="hidden" name="barcode_id" id="barcode_id" value="">
-                        <input type='hidden' name="product_id" id="product_id" >
+                        <!-- <input type='hidden' name="product_id" id="product_id" > -->
                         <a class="btn btn-success" onclick="attachment_file()" >
                             <i class='icon-save'></i> ADD
                         </a>
@@ -188,7 +188,7 @@
     }
     
     $('#delete_my_external_link').click(function() {
-        var prod_id = $('#attach_product_id').val();
+        var prod_id = $('#product_id').val();
         var cek_id = new Array();
         $('#chk_attachment:checked').each(function() {
             cek_id.push($(this).val());// an array of selected values
