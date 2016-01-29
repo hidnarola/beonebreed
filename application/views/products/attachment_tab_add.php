@@ -16,7 +16,7 @@
                         <input type="file" name="file" id="prod_attachment" onchange="$('.error_upload').addClass('hide'); " >
                   </div>
                 </div>   
-                <input type="hidden" name="product_id" value="" id="attach_project_id">
+                <input type="hidden" name="product_id" value="1" id="attach_product_id">
                 <span class="color_red error_upload hide">Please Select file to upload</span>
             </form>    
           </div>
@@ -98,7 +98,7 @@
                         <button class='btn btn-danger' type='button' id="delete_my_external_link">
                           <i class='icon-save'></i>
                           Remove
-                      </button>
+                        </button>
 
                         <!-- <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">
                             Open Modal
@@ -136,9 +136,64 @@
         return false;
     });
     
+    function attachment_file(){
+        var product_id = $('#product_id').val();
+        if(product_id == ''){
+ 
+            $(function(){ bootbox.alert('Please create product in Part-1.');  });
+            return false;
+ 
+        }
+        $('#myModal').modal('show');
+  
+    }
+
+    function attachment_upload(){
+        if(document.getElementById("prod_attachment").value != "") {
+           var product_id = $('#product_id').val();
+      
+           var form_data = new FormData($("#attachment_form")[0]);
+           //form_data.push({name:"product_id",value:product_id});
+           form_data.append("product_id", product_id);
+           $.ajax({
+               url: '<?php echo base_url()."products/product_attachment"; ?>',
+               processData: false, 
+               type: 'post',
+               dataType: 'json',
+               data: form_data,
+               contentType: false,
+               success:function(response){
+                     if (response.status == 'success') {
+                        $('#myModal').modal('hide');
+                        $('#response_msg').append('<span style=color:green; id=msgs>' + response.msg + '</span>');
+                        var filename=response.file_name;
+                        var ext1 = filename.split('.').pop();
+                        var ext = ext1.toLowerCase();
+
+                        if(ext=='pdf' || ext=='jpg' || ext=='png' || ext=='gif'){
+                          var classname='fancybox';
+                        }else{
+                          var classname='no_preview';
+                        }
+ 
+                       
+                        $('#attachment').append('<li style=list-style-type:none;><input type=checkbox name=chk[] id="chk_attachment" class=chk_notes value='+response.id+'><a  class='+classname+'  href=uploads/products/' + response.file_name + '>' + response.file_name + '</a></li>');   
+ 
+                        $('#attachment_tab')[0].reset();
+                } else {
+
+                    $("#file_err_msg").append(response.msg);
+                }
+              }
+           });
+           
+        }else{
+            $('.error_upload').removeClass('hide');
+        }
+    }
     
-     $('#delete_my_external_link').click(function() {
-        var prod_id = $('#attach_project_id').val();
+    $('#delete_my_external_link').click(function() {
+        var prod_id = $('#attach_product_id').val();
         var cek_id = new Array();
         $('#chk_attachment:checked').each(function() {
             cek_id.push($(this).val());// an array of selected values
@@ -154,11 +209,8 @@
                     data: {ids: cek_id,pid: prod_id},
                     dataType: 'json',
                     success: function(data) {
-                         $('#attachment').html(data.data1);
-
                         if (data.status == 'success') {
-                          
-                            $('#attachment').append(data.data1);
+                            $('#attachment').html(data.data1);
                         }
                     }
                 });
@@ -168,61 +220,5 @@
 
         }
     });
-
-    
-    function attachment_file(){
-
-        var product_id = $('#product_id').val();
-        if(product_id == ''){
-            $(function(){ bootbox.alert('Please create product in Part-1.');  });
-            return false;
-        }
-
-        $('#myModal').modal('show');
-        return false;
-    }
-
-    function attachment_upload(){
-        if(document.getElementById("prod_attachment").value != "") {
-
-           var data = new FormData($("#attachment_form")[0]);
-
-           $.ajax({
-               url: '<?php echo base_url()."products/product_attachment"; ?>',
-               processData: false, 
-               type: 'post',
-               dataType: 'json',
-               data: data,
-               contentType: false,
-               success:function(response){
-                    
-                     if (response.status == 'success') {
-                        $('#myModal').modal('hide');
-                        $('#response_msg').append('<span style=color:green; id=msgs>' + response.msg + '</span>');
-                        var filename=response.file_name;
-                        var ext1 = filename.split('.').pop();
-                        var ext = ext1.toLowerCase();
-
-                        if(ext=='pdf' || ext=='jpg' || ext=='png' || ext=='gif'){
-
-                          var classname='fancybox';
-                        }else{
-                          var classname='no_preview';
-                        }
-                        $('#attachment').html('<li style=list-style-type:none;><input type=checkbox name=chk[] id="chk_attachment" class=chk_notes value='+response.id+'><a  class='+classname+'  href=uploads/products/' + response.file_name + '>' + response.file_name + '</a></li>');
-
-                        //$('#attachment').append('<li style=list-style-type:none;><a class=fancybox target=_blank href=uploads/' + response.file_name + '>' + response.file_name + '</a></li>');
-                        $('#attachment_tab')[0].reset();
-                } else {
-
-                    $("#file_err_msg").append(response.msg);
-                }
-              }
-           });
-           
-        }else{
-            $('.error_upload').removeClass('hide');
-        }
-    }
 </script>
  

@@ -10,7 +10,8 @@
         </div>
       </div>
     </div>
-
+ 
+ 
     <?php if ($this->session->flashdata('msg')!='') { ?>
 
       <div class='alert alert-success alert-dismissable'>
@@ -248,8 +249,3 @@
     <!--end of idea project -->
   </div>
 </div>
-<script type="text/javascript">
-  
-  
-  
-</script>
