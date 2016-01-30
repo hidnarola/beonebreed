@@ -258,7 +258,25 @@ class Products extends CI_Controller {
 		}else{
 			$product_id = $this->products_model->insert($data_admin_part_1);
 		}
-				
+		
+		// ------------------------------------------------------------------------
+
+		$decode_json = array();
+		$product_new_data = $this->products_model->getfrom('products_new',false,
+							array('where'=>array('id'=>$product_id)),array('single'=>true));
+		
+		if($product_new_data['admin_tab_complete'] != ''){
+			$decode_json = json_decode($product_new_data['admin_tab_complete'],true);
+			$decode_json['part_1'] = '33';
+		}else{
+			$decode_json['part_1'] = '33';
+		}
+
+		$encode_json = json_encode($decode_json);
+		$this->products_model->update_into('products_new',$product_id,array('admin_tab_complete'=>$encode_json));
+		
+		// ------------------------------------------------------------------------
+
 		echo json_encode(array('product_id'=>$product_id));
 	}
 
@@ -403,6 +421,24 @@ class Products extends CI_Controller {
 			$product_pallet_id = $this->products_model->insert_into('dimension',$data_pallet);
 		}
 
+		// ------------------------------------------------------------------------
+
+		$decode_json = array();
+		$product_new_data = $this->products_model->getfrom('products_new',false,
+							array('where'=>array('id'=>$product_id)),array('single'=>true));
+		
+		if($product_new_data['admin_tab_complete'] != ''){
+			$decode_json = json_decode($product_new_data['admin_tab_complete'],true);
+			$decode_json['part_2'] = '33';
+		}else{
+			$decode_json['part_2'] = '33';
+		}
+
+		$encode_json = json_encode($decode_json);
+		$this->products_model->update_into('products_new',$product_id,array('admin_tab_complete'=>$encode_json));
+		
+		// ------------------------------------------------------------------------
+
 		echo json_encode(
 					array(
 						'product_retail_id'=>$product_retail_id,
@@ -503,6 +539,24 @@ class Products extends CI_Controller {
 
 		}
 
+		// ------------------------------------------------------------------------
+
+		$decode_json = array();
+		$product_new_data = $this->products_model->getfrom('products_new',false,
+							array('where'=>array('id'=>$product_id)),array('single'=>true));
+		
+		if($product_new_data['admin_tab_complete'] != ''){
+			$decode_json = json_decode($product_new_data['admin_tab_complete'],true);
+			$decode_json['part_3'] = '34';
+		}else{
+			$decode_json['part_3'] = '34';
+		}
+
+		$encode_json = json_encode($decode_json);
+		$this->products_model->update_into('products_new',$product_id,array('admin_tab_complete'=>$encode_json));
+		
+		// ------------------------------------------------------------------------
+
         echo json_encode(
                     array(
                         'id_11'=>$id_11,
@@ -553,28 +607,44 @@ class Products extends CI_Controller {
 	public function production_form_tab_1(){
 		
 		$production_part_1_count = (int)$this->input->post('production_part_1_count');
-
-		for($i = 1;$i<=$production_part_1_count;$i++){
-			// $prod_$i;
+		
+		$product_id = $this->input->post('product_id');
+		$decode_json = array();
+		$product_new_data = $this->products_model->getfrom('products_new',false,
+							array('where'=>array('id'=>$product_id)),array('single'=>true));
+		
+		if($product_new_data['production_complete'] != ''){
+			$decode_json = json_decode($product_new_data['production_complete'],true);
+			$decode_json['part_1'] = '20';
+		}else{
+			$decode_json['part_1'] = '20';
 		}
-		// for($i=1; $i<=$production_part_1_count; $i++){
 
-		// 	$production_hidden_.$i = $this->input->post('production_supplier_'.$i); // Hidden Id
-		// 	$product_id = $this->input->post('product_id'); 
-		// 	$product_cost = $this->input->post('product_cost_'.$i);
-		// 	$supplier_id = $this->input->post('supplier_'.$i);
+		$encode_json = json_encode($decode_json);
+		$this->products_model->update_into('products_new',$product_id,array('production_complete'=>$encode_json));
 
-		// 	$prod_data = array('product_id'=>$product_id,'product_cost'=>$product_cost,'supplier_id'=>$supplier_id);
+		$prod_array = array();
 
-		// 	if(!empty($production_hidden)){
-		// 		//$this->products_model->update_into('products_suppliers',$production_hidden_.$i,$prod_data);
-		// 	}else{
-		// 		//$this->products_model->insert_into('products_suppliers',$prod_data);
-		// 	}
-		// }
+		for ($i=1; $i <=$production_part_1_count; $i++) { 
 
-		die('Here');
+			$production_hidden = $this->input->post('production_supplier_'.$i); // Hidden Id
+			$product_cost = $this->input->post('product_cost_'.$i);
+			$supplier_id = $this->input->post('supplier_'.$i);
 
+			$prod_data = array('product_id'=>$product_id,'product_cost'=>$product_cost,'supplier_id'=>$supplier_id);
+
+			$production_hidden_id = $this->input->post('production_supplier_'.$i); // Hidden Id
+
+			if(!empty($production_hidden_id)){
+				array_push($prod_array, $production_hidden_id);
+				$this->products_model->update_into('products_suppliers',$production_hidden_id,$prod_data);
+			}else{
+				$last_id = $this->products_model->insert_into('products_suppliers',$prod_data);
+				array_push($prod_array, $last_id);
+			}
+		}
+
+		echo json_encode(array('res'=>$prod_array));
 	}	
 
 
