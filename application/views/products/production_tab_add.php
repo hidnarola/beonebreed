@@ -108,7 +108,7 @@
             <div class="col-sm-6 col-sm-offset-6">
                 <div class="controls pull-right mar-b-20">
                     <a onclick="add_production_part_1()" class="btn btn-success">ADD</a>
-                    <a onclick="add_production_part_1()" class="btn btn-danger">REMOVE</a>
+                    <a onclick="remove_production_part_1()" class="btn btn-danger">REMOVE</a>
                 </div>
 
                 <div class="clearfix"></div>
@@ -261,6 +261,28 @@
         });        
     }
 
+    // Production Tab-1 Remoce Supplier & Update Functionality Start
+    function remove_production_part_1(){
+
+        var new_cnt = $('#production_part_1_count').val();
+        var production_supplier = '';
+
+        if(new_cnt > 1){
+            production_supplier =  $('#production_supplier_'+new_cnt).val();    
+            if(production_supplier != ''){
+                $('.prod_row_'+new_cnt).remove();
+                $.post( "<?php echo base_url().'products/prod_part_1_delete'; ?>", { 'production_supplier': production_supplier } );
+                new_cnt = new_cnt-1;
+                $('#production_part_1_count').val(new_cnt);    
+            }else{
+                $('.prod_row_'+new_cnt).remove();
+                new_cnt = new_cnt-1;
+                $('#production_part_1_count').val(new_cnt);    
+            }
+        }
+
+    }
+
     function fetch_supplier_data(data){
 
         $("#fakeLoader").attr('style',''); // Remove Style Attribute for reuse
@@ -356,7 +378,6 @@
             });
 
         }    
-
     }
 
     // Production Tab-1 Add More & Save Functionality END

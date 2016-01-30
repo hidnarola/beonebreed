@@ -268,8 +268,12 @@ class Products extends CI_Controller {
 		if($product_new_data['admin_tab_complete'] != ''){
 			$decode_json = json_decode($product_new_data['admin_tab_complete'],true);
 			$decode_json['part_1'] = '33';
+			$complete_bar_no = array_sum(array($decode_json['part_1'],$decode_json['part_2'],$decode_json['part_3']));
 		}else{
 			$decode_json['part_1'] = '33';
+			$decode_json['part_2'] = '0';
+			$decode_json['part_3'] = '0';
+			$complete_bar_no = '33';
 		}
 
 		$encode_json = json_encode($decode_json);
@@ -277,7 +281,7 @@ class Products extends CI_Controller {
 		
 		// ------------------------------------------------------------------------
 
-		echo json_encode(array('product_id'=>$product_id));
+		echo json_encode(array('product_id'=>$product_id,'complete_bar_no'=>$complete_bar_no));
 	}
 
 	// ------------------------------------------------------------------------
@@ -430,6 +434,7 @@ class Products extends CI_Controller {
 		if($product_new_data['admin_tab_complete'] != ''){
 			$decode_json = json_decode($product_new_data['admin_tab_complete'],true);
 			$decode_json['part_2'] = '33';
+			$complete_bar_no = array_sum(array($decode_json['part_1'],$decode_json['part_2'],$decode_json['part_3']));
 		}else{
 			$decode_json['part_2'] = '33';
 		}
@@ -445,6 +450,7 @@ class Products extends CI_Controller {
 						'product_master_id'=>$product_master_id,
 						'product_pallet_id'=>$product_pallet_id,
 						'product_inner_id'=>$product_inner_id,
+						'complete_bar_no'=>$complete_bar_no,
 						'qry'=>$this->db->last_query()
 						)
 				);
@@ -548,6 +554,7 @@ class Products extends CI_Controller {
 		if($product_new_data['admin_tab_complete'] != ''){
 			$decode_json = json_decode($product_new_data['admin_tab_complete'],true);
 			$decode_json['part_3'] = '34';
+			$complete_bar_no = array_sum(array($decode_json['part_1'],$decode_json['part_2'],$decode_json['part_3']));
 		}else{
 			$decode_json['part_3'] = '34';
 		}
@@ -565,6 +572,7 @@ class Products extends CI_Controller {
                         'id_14'=>$id_14,
                         'id_15'=>$id_15,
                         'id_16'=>$id_16,
+                        'complete_bar_no'=>$complete_bar_no,
                         'qry'=>$this->db->last_query()
                         )
                 );
@@ -647,6 +655,10 @@ class Products extends CI_Controller {
 		echo json_encode(array('res'=>$prod_array));
 	}	
 
+	public function prod_part_1_delete(){
+		$id = $this->input->post('production_supplier');
+		$this->products_model->deletefrom('products_suppliers',$id);
+	}
 
 	// ------------------------------ // END PRODUCTION TAB FORM ------------------------------------------
 

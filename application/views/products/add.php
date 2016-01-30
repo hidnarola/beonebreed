@@ -76,15 +76,14 @@
                                 <div class='tab-pane ' id='tab3'>
                                     <!-- ====== Attachment TAB Partial View Start ====== -->
                                     <?php $this->load->view('products/attachment_tab_add'); ?>
-                                    <?php $this->load->view('products/notes_tab_add'); ?>
-                                    
+                                    <?php $this->load->view('products/notes_tab_add'); ?>                                    
                                     <!-- ====== END ====== -->
                                 </div>
                                 <div class='tab-pane active' id='tab4'>
                                     <?php $this->load->view('products/production_tab_add'); ?>
                                 </div>
                                 <div class='tab-pane' id='tab5'>
-                                  <p>Hello</p>
+                                  <p>Quality Tab</p>
                                 </div>
                             </div>
                         </div>

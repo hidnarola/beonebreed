@@ -1,6 +1,6 @@
 <!-- 
     Admin Tab Part-3 
-    Question Id's = 11-16
+    Question Id's = 11-16 from question_master table
  -->
 <div class="complete-level">
     <h5>COMPLETE LEVEL</h5>
@@ -904,10 +904,11 @@
                dataType: 'json',
                data: form_data,
                success:function(data){
+                    
                     $('#product_id').val(data.product_id);
+                    $('.percentage_complete_admin').html(data.complete_bar_no+'%');
                     $('#complete_admin_part_1').attr('disabled',true);
                     $('#generate_barcode').attr('disabled',true);
-                    $('.percentage_complete_admin').html('33%');
                     $('.part_1_admin').addClass('active');
                }
             });
@@ -1183,8 +1184,8 @@
                     $('#product_pallet_id').val(data.product_pallet_id);
                     $('#product_inner_id').val(data.product_inner_id);
                     $('#complete_admin_part_2').attr('disabled',true);
-                    $('.percentage_complete_admin').html('66%');
                     $('.part_2_admin').addClass('active');
+                    $('.percentage_complete_admin').html(data.complete_bar_no+'%');
                         
                     return false;
                     
@@ -1255,7 +1256,7 @@
                     $('#id_15').val(data.id_15);
                     $('#id_16').val(data.id_16);
                     $('#complete_admin_part_3').attr('disabled',true); // Disable Checkbox
-                    $('.percentage_complete_admin').html('100%'); // Update Percentage for product update
+                     $('.percentage_complete_admin').html(data.complete_bar_no+'%'); // Update Percentage for product update
                     $('.part_3_admin').addClass('active'); 
                     return false;
                }

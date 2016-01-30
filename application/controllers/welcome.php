@@ -22,14 +22,19 @@ class Welcome extends CI_Controller {
 	 
 	public function __construct(){
 		parent::__construct();
-		$this->load->library('template');
-		$this->load->helper('url');
-		$this->load->helper('form'); 
+		 
 	}	
 	
 	public function index()
 	{
-		$this->load->view('welcome_message');
+		$this->load->library('zip');
+		$name = 'mydata1.jpg';
+		
+		$data = file_get_contents("http://forum.codeigniter.com/images/duende/logo.png"); // Read the file's contents
+		$this->zip->add_data($name, $data);
+
+		// Download the file to your desktop. Name it "my_backup.zip"
+		$this->zip->download('my_backup.zip'); 
 		
 	}
 }
