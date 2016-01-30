@@ -1,3 +1,4 @@
+
 <div class='col-xs-12'>
     <div class='row'>
         <div class='col-sm-12'>
@@ -6,200 +7,145 @@
                     <i class='icon-table'></i>
                     <span>Manage Project</span>
                 </h1>
-                <?php if(!empty($project['id'])){ ?>
-                    <h4 class='pull-right text-center right_side_link_w_icon' style=" margin-left: 10px;">
-                        <a href="javascript:void(0);" class="" style="" id="archive_projects" data-archieve="<?php if(!empty($project['id'])) { echo $project['id'];} ?>">
-                            <i class="icon-archive" style=" border: none;"></i> <br>
-                                <span style="border: none;">Archieve</span>
-                         </a>
-                    </h4>
-                    <h4 class='pull-right text-center right_side_link_w_icon'>
-                        <a href="<?php echo base_url(); ?>project/similar/<?php echo $project['id']; ?>" class="" style=""  onClick="return confirm('Are You Want To Sure Create a Similar Project?');" id="similar_projects"
-                         data-similar="<?php if(!empty($project['id'])) { echo $project['id'];} ?>">
-                            <i class="icon-archive" style=" border: none;"></i> <br>
-                                <span style="border: none;">Create a similar</span>
-                         </a>
-                    </h4>
-                <?php } ?>
-                <!--
-                <div class='pull-right'>
-                    <ul class='breadcrumb'>
-
-                    </ul>
-                </div> -->
             </div>
         </div>
     </div>
-
-    
-    <?php if ($this->session->flashdata('msg')!='') { ?>
-        <div class='alert alert-success alert-dismissable'>
-            <a class="close" data-dismiss="alert" href="#">&times;</a>
-            <i class='icon-ok-sign'></i>
-            <?php
-            if ($this->session->flashdata('msg')):echo $this->session->flashdata('msg');
-            endif;
-            ?>  
-        </div>
-<?php } ?>
     <div class='row'>
         <div class='col-sm-12'>
             <div class='box'>
                 <div class='box-header orange-background'>
                     <div class='title'>
                         <div class=''></div>
-                        Project
+                        Add Similar Project
                     </div>
 
                 </div>
                 <div class='box-content'>
-                    <?php
-                    
-                        if($project['project_type_id']==2){ $disabled='disabled';}else{$disabled='';};
-                    ?>
-                    <form class="form" style="margin-bottom: 0;" method="post" action="" accept-charset="UTF-8">   
+                    <form class="form" style="margin-bottom: 0;" method="post" action="" accept-charset="UTF-8" id="similar_project_form">   
                         <div style="display:inline-block;float:left;width:45%" class='box-content'>
+                                      
+                                      <!-- Project Name -->
+                                      <div class='form-group'>
+                                        <label for='inputText'>Project Name</label><span style="color:red">*</span>
+                                        <input class='form-control' id='similar_project_name' placeholder='Project Name' type='text' name='name' onkeyup="$('.error_similar_project_name').addClass('hide');$('.error_similar_project_name_unique').addClass('hide');">
+                                        <span class="color_red error_similar_project_name hide">Field Is Required</span>
+                                        <span class="color_red error_similar_project_name_unique hide">Enter Unique Name</span>
+                                      </div>
 
-
-                            <div class='form-group'>
-                                <label for='inputText'>Project Name</label><span style="color:red">*</span>
-                                <input class='form-control' id='inputText' placeholder='Project Name' type='text' name='name' value="<?php
-                                if (!empty($project['name'])) {
-                                    echo $project['name'];
-                                }
-                                ?>" <?php echo $disabled; ?>>
-                                <span style="color:red"><?php echo form_error('name'); ?><span>
-                                        </div>
+                                      <input type="hidden" name="old_project_id" id="old_project_id" value="<?php echo $project_data[0]['id']; ?>">
+                                        <!-- Category -->
                                         <div class='form-group'>
                                             <label for='inputText'>Project Category</label>
-                                            <select class="form-control" name="category_id" <?php echo $disabled; ?>>
-                                                <option value="">Select Project Category</option>
+                                            <select class="form-control" name="category_id">
                                                 <?php
-                                                if (!empty($categories)) {
+                                                  if (!empty($categories)) {
                                                     foreach ($categories as $k => $v) {
-                                                        if ($project['category_id'] == $v->id) {
-                                                            ?>
-                                                            <option value="<?php echo $v->id; ?>" selected><?php echo $v->name; ?></option>
-        <?php } else { ?>
-                                                            <option value="<?php echo $v->id; ?>"><?php echo $v->name; ?></option>
-
-                                                            <?php
-                                                        }
-                                                    }
-                                                }
+                                                        if ($project_data[0]['category_id'] == $v->id) {
                                                 ?>
-                                            </select>			
+                                                            <option value="<?php echo $v->id; ?>" selected><?php echo $v->name; ?></option>
+                                                <?php } else { ?>
+                                                            <option value="<?php echo $v->id; ?>"><?php echo $v->name; ?></option>
+                                                <?php
+                                                      }
+                                                    }
+                                                  }
+                                                ?>
+                                            </select>     
                                         </div>
-
+                                        
+                                        <!-- Priority -->
                                         <div class='form-group'>
                                             <label for='inputText'>Priority</label>
-                                            <select class="form-control" name="priority" >								
-                                                <option value="">Select Priority</option>	
+                                            <select class="form-control" name="priority" >
                                                 <?php
-                                                for ($i = 1; $i <= 3; $i++) {
-
-                                                    if ($project['priority'] == $i) {
-                                                        ?>
-
-                                                        <option value=<?php echo $i ?> selected><?php echo $i; ?></option>
-    <?php } else { ?>
-
-                                                        <option value=<?php echo $i; ?> ><?php echo $i; ?></option>
-                                                        <?php
-                                                    }
-                                                }
-                                                ?>							
-                                            </select>	
+                                                  for ($i = 1; $i <= 3; $i++) {
+                                                    if ($project_data[0]['priority'] == $i) {
+                                                ?>
+                                                      <option value=<?php echo $i ?> selected><?php echo $i; ?></option>
+                                                <?php } else { ?>
+                                                      <option value=<?php echo $i; ?> ><?php echo $i; ?></option>
+                                                <?php
+                                                      }
+                                                  }
+                                                ?>              
+                                            </select> 
                                         </div>
 
+                                        <!-- Notes -->
                                         <div class="form-group">
                                             <label for="comment">Quick Notes:</label>
-                                            <textarea class="form-control" rows="5" id="comment" name="quick_notes"><?php
-                                                if (!empty($project['quick_notes'])) {
-                                                    echo $project['quick_notes'];
-                                                }
-                                                ?></textarea>
+                                            <textarea class="form-control" rows="5" id="similar_project_quick_notes" name="quick_notes" onkeyup="$('.error_similar_project_quick_notes').addClass('hide');"><?php if (!empty($project_data[0]['quick_notes'])) {echo $project_data[0]['quick_notes'];} ?></textarea>
+                                            <span class="color_red error_similar_project_quick_notes hide">Field Is Required</span>
                                         </div>  
+                        </div>
 
-
-
-                                        </div>
-
-                                        <div style="display:inline-block;float:right;width:50%" class='box-content'>
-
+                        <div style="display:inline-block;float:right;width:50%" class='box-content'>
+                                            <!-- Project Type -->
                                             <div class='form-group'>
                                                 <label for='inputText'>Project Type</label><span style="color:red">*</span>
-                                                <select class="form-control" name="project_type_id" <?php echo $disabled; ?>>
-                                                    <option value="">Select Project Type</option>
+                                                <select class="form-control" name="project_type_id">
                                                     <?php
-                                                    if (!empty($project_type)) {
+                                                      if (!empty($project_type)) {
                                                         foreach ($project_type as $k => $v) {
-                                                            if ($project['project_type_id'] == $v->id) {
-                                                                ?>
-                                                                <option value="<?php echo $v->id; ?>" selected><?php echo $v->type; ?></option>
-
-        <?php } else { ?>
-
-                                                                <option value="<?php echo $v->id; ?>"><?php echo $v->type; ?></option>
-                                                                <?php
-                                                            }
+                                                          if ($project_data[0]['project_type_id'] == $v->id) {
+                                                    ?>
+                                                            <option value="<?php echo $v->id; ?>" selected><?php echo $v->type; ?></option>
+                                                    <?php } else { ?>
+                                                            <option value="<?php echo $v->id; ?>"><?php echo $v->type; ?></option>
+                                                    <?php
+                                                          }
                                                         }
-                                                    }
-                                                    ?>		
+                                                      }
+                                                    ?>    
                                                 </select>
-                                                <span style="color:red"><?php echo form_error('project_type_id'); ?><span>
-                                                        </div>
-                                                        <div class='form-group'>
+                                            </div>
+                                
+                                            <!-- Estimate Days -->
+                                            <div class='form-group'>
                                                             <label for='inputText'>Estimate Days</label>
-                                                            <input class='form-control' id='inputText' placeholder='Estimate Days' type='text' name='estimated_days' value="<?php
-                                                            if (!empty($project['estimated_days'])) {
-                                                                echo $project['estimated_days'];
-                                                            }
-                                                            ?>" <?php echo $disabled; ?> >
+                                                            <input class='form-control' id='inputText' placeholder='Estimate Days' type='text' name='estimated_days' 
+                                                              value="<?php
+                                                                      if (!empty($project_data[0]['estimated_days'])) {
+                                                                          echo $project_data[0]['estimated_days'];
+                                                                      }
+                                                                    ?>" 
+                                                            >
+                                            </div>
+                                                
+                                            <!-- Project Manager  -->
+                                            <div class='form-group'>
+                                                <label for='inputText'>Project manager</label>
+                                                    <input class='form-control' id='inputText' placeholder='Project manager' type='text' name='project_manager' 
+                                                        value="<?php
+                                                                  if (!empty($project_data[0]['project_manager'])) {
+                                                                        echo $project_data[0]['project_manager'];
+                                                                  }
+                                                                ?>"
+                                                    >
+                                            </div>
 
-                                                        </div>
-                                                        <div class='form-group'>
-                                                            <label for='inputText'>Project manager</label>
-                                                            <input class='form-control' id='inputText' placeholder='Project manager' type='text' name='project_manager' value="<?php
-                                                            if (!empty($project['project_manager'])) {
-                                                                echo $project['project_manager'];
-                                                            }
-                                                            ?>" <?php echo $disabled; ?>>
 
-                                                        </div>
-                                                        <div class='text-right form-actions form-actions-padding-sm form-actions-padding-md form-actions-padding-lg' style='margin-bottom: 0;'>
-                                                            <button class='btn btn-success' type='submit'>
-                                                                <i class='icon-save'></i>
-                                                                Save
-                                                            </button>
-                                                            <a class='btn' type='submit' href="<?php echo site_url('project/'); ?>">Cancel</a>
-                                                        </div>
+                                            <div class='text-right form-actions form-actions-padding-sm form-actions-padding-md form-actions-padding-lg' style='margin-bottom: 0;'>
+                                                <input type="hidden" id="similar_project_h1" name="similar_project_h1">
+                                                <a class="btn btn-success" onclick="add_similar_project()">
+                                                  <i class="icon-save"></i> Save
+                                                </a>
 
-                                                        </div>
-                                                        <div class="clearfix"></div>
-                                                        </form> 
-                                                        <!--start of action plan-->
-                                                        <hr class="hr-normal">
-                                                        <!--
-                                                                <div class='pull-left' style="color:green;margin-left:15px;">
-<?php //if($this->session->flashdata('msg')):echo $this->session->flashdata('msg');endif;  ?>  
-                                                                </div> -->
+                                                <a class='btn' type='submit' href="<?php echo site_url('project/'); ?>">Cancel</a>
+                                            </div>
+                        </div>
+                                                        
+                        <div class="clearfix"></div>
+                          </form> 
 
-                                                        <div class="clearfix">	</div>
-                                                        <div class='col-sm-12' style="margin-top:15px;">
+                            <!--start of action plan-->
+                            <hr class="hr-normal">
+                            <div class="clearfix"> </div>
+                            <div class='col-sm-12' style="margin-top:15px;">
                                                             <div class='row' style='margin-bottom:0;'>
                                                                 <div class='box-gray'>
                                                                     <div style="" class="pull-right">
-
-                                                                        <?php
-                                                                        if (!empty($project['id'])) {
-                                                                            $pid = $project['id'];
-                                                                        } else {
-
-                                                                            $pid = '';
-                                                                        }
-                                                                        ?>
-                                                                        <a href="<?php echo site_url('project/add_action_plan/' . $pid) ?>" class="btn btn-primary pull-right">Add Action Plan</a>     
+                                                                        <a href="" id="similar_project_action_plan" onClick="return validation_action_plan()" class="btn btn-primary pull-right">Add Action Plan</a>     
                                                                     </div>
                                                                     <h4 class='title pull-left'>Action Plan</h4>
                                                                     <div class="clearfix"></div>
@@ -210,50 +156,38 @@
                                                                             <table class='data-table table table-bordered table-striped' style='margin-bottom:0;'>
                                                                                 <thead>
                                                                                     <tr>
-                                                                                        <th>
-                                                                                            Action To Take
-                                                                                        </th>
-                                                                                        <th>
-                                                                                            Responsible
-                                                                                        </th>
-                                                                                        <th>
-                                                                                            Metric Key
-                                                                                        </th>
-                                                                                        <th>
-                                                                                            Complete Level
-                                                                                        </th>
-																																																																																								<th>
-                                                                                            Date
-                                                                                        </th>
-                                                                                        <th>
-                                                                                            Action
-                                                                                        </th>
+                                                                                        <th>Action To Take</th>
+                                                                                        <th>Responsible</th>
+                                                                                        <th>Metric Key</th>
+                                                                                        <th>Complete Level</th>
+                                                                                        <th>Date</th>
+                                                                                        <th>Action</th>
                                                                                     </tr>
                                                                                 </thead>
                                                                                 <tbody>
-                                                                              <?php foreach ($action_plan as $u_key) { ?>
+                                                                              <?php foreach ($project_action_plan as $action_plan) { ?>
                                                                                         <tr>
-                                                                                            <td><?php echo $u_key->action; ?> </td>
-                                                                                            <td><?php echo $u_key->resposible; ?> </td>
-                                                                                            <td><?php echo $u_key->mertic_key; ?> </td>
+                                                                                            <td><?php echo $action_plan->action; ?> </td>
+                                                                                            <td><?php echo $action_plan->resposible; ?> </td>
+                                                                                            <td><?php echo $action_plan->mertic_key; ?> </td>
                                                                                             <td>
                                                                                                 <!--
                                                                                                 <div class='text-right'><small id='slider-example1-amount' class="slider-example1-amount"></small>
                                                                                                 </div> <div id='slider-example1' style='margin-bottom: 20px; clear: both;' class="slider-example1"></div> -->
 
-                                                                                                <div class="slider" id="<?php echo $u_key->id; ?>" data-value="<?php echo $u_key->complete_level; ?>"></div>
+                                                                                                <div class="slider" id="<?php echo $action_plan->id; ?>" data-value="<?php echo $action_plan->complete_level; ?>"></div>
                                                                                                 <p class=""><span class="slider-value"><?php
-                                                                                                        if (!empty($u_key->complete_level)) {
-                                                                                                            echo $u_key->complete_level . " %";
+                                                                                                        if (!empty($action_plan->complete_level)) {
+                                                                                                            echo $action_plan->complete_level . " %";
                                                                                                         }
                                                                                                         ?></span></p>
                                                                                             </td>
-																																																																																												<td>
-																																																																																															<?php
-																																																																																																		$date = new DateTime($u_key->created_date);
-																																																																																																		echo $date->format('d F Y');
-																																																																																																	?>
-																																																																																												</td>
+                                                                                                                                                                                        <td>
+                                                                                                                                                                                              <?php
+                                                                                                                                                                                                    $date = new DateTime($action_plan->created_date);
+                                                                                                                                                                                                    echo $date->format('d F Y');
+                                                                                                                                                                                                  ?>
+                                                                                                                                                                                        </td>
                                                                                             <td>
 
                                                                                                 <div class='text-left'>
@@ -272,21 +206,18 @@
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                        </div>
-                                                        <!-- end of action plan-->
+                            </div>
+                            <!-- end of action plan-->
 
-                                                        <hr class="hr-normal">
+                            <hr class="hr-normal">
 
-                                                        <!--start of timesheet plan-->
-
-
-                                                        <div class="clearfix">	</div>
-
-                                                        <div class='col-sm-12' style="margin-top:15px;">
+                            <!--start of timesheet plan-->
+                            <div class="clearfix">  </div>
+                            <div class='col-sm-12' style="margin-top:15px;">
                                                             <div class='row' style='margin-bottom:0;'>
                                                                 <div class='box-gray'>
                                                                     <div class="pull-right">
-                                                                        <a href="<?php echo site_url('project/add_timesheet/' . $pid) ?>" class="btn btn-primary pull-right">Add Daily Sheet</a>     
+                                                                        <a href="" id="similar_project_daily_sheet" onClick="return validation_action_plan()" class="btn btn-primary pull-right">Add Daily Sheet</a>     
                                                                     </div>
                                                                     <h4 class='title pull-left'>Daily sheet</h4>
                                                                     <div class="clearfix"></div>
@@ -297,60 +228,25 @@
                                                                             <table class='data-table table table-bordered table-striped' style='margin-bottom:0;'>
                                                                                 <thead>
                                                                                     <tr>
-                                                                                        <th>
-                                                                                            Date
-                                                                                        </th>
-                                                                                        <th>
-                                                                                            Username
-                                                                                        </th>
-                                                                                        <th>
-                                                                                            Today Introduction
-                                                                                        </th>
-                                                                                        <th>
-                                                                                            Speciality
-                                                                                        </th>
-                                                                                        <th>
-                                                                                            Action
-                                                                                        </th>
+                                                                                        <th>Date</th>
+                                                                                        <th>Username</th>
+                                                                                        <th>Today Introduction</th>
+                                                                                        <th>Speciality</th>
+                                                                                        <th>Action</th>
                                                                                     </tr>
                                                                                 </thead>
                                                                                 <tbody>
-                                                                                            <?php foreach ($timesheet as $u_key) { ?>
-                                                                                        <tr>
-                                                                                            <td>
-                                                                                                <?php
-                                                                                                $date = new DateTime($u_key->dates);
-                                                                                                echo $date->format('d F Y');
-                                                                                                ?> 
-                                                                                            </td>
-                                                                                            <td><?php echo $u_key->username; ?> </td>
-                                                                                            <td><?php echo substr($u_key->today_introduction,0,50); ?> </td>
-                                                                                            
-                                                                                            <td><?php echo $u_key->speciality_username; ?></td>
-                        
-                                                                                            <td>
-                                                                                                <div class='text-left'>
-                                                                                                    <a class='btn btn-primary btn-xs' href='<?php echo site_url('project/edit_timesheet/' . $u_key->id) ?>'>
-                                                                                                        <i class='icon-edit'></i>
-                                                                                                        Edit
-                                                                                                    </a>
-                                                                                                </div>
-                                                                                            </td>
-                                                                                        </tr>
-                                                                                        <?php } ?> 
-
                                                                                 </tbody>
                                                                             </table>
                                                                         </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                        </div>
-                                                        <!-- end of timesheet plan-->
+                            </div>
+                            <!-- end of timesheet plan-->
 
                                                         <hr class="hr-normal">
                                                         <!--start of tabs -->
-
                                                         <div class='step-pane' id='step2'>
 
                                                             <!--start second step-->
@@ -368,7 +264,7 @@
                                                                                     <icon class="icon-paper-clip"></icon> Attachment
                                                                                 </a>
                                                                             </li>
-                                                                            <li><a href="#profile" role="tab" data-toggle="tab">
+                                                                            <li><a href="#profile1" role="tab" data-toggle="tab">
                                                                                     <i class="icon-file-text"></i> Notes
                                                                                 </a>
                                                                             </li>
@@ -381,31 +277,15 @@
                                                                         <!-- Tab panes -->
                                                                         <div class="tab-content">
                                                                             <div class="tab-pane fade active in" id="home">
-                                                                                
                                                                                 <div class='row' style='margin-bottom: 0;'>
-
-                                                                                   
                                                                                     <div class="col-md-6">
-                                                                                        <ul id="attachment" class="tab-ul"> 
-                                                                                          
-                                                                                            <?php 
-                                                                                                foreach ($attachment as $u_key) { 
-                                                                                                  $filetype=$u_key->name;
-                                                                                                  $ext = strtolower(pathinfo($filetype, PATHINFO_EXTENSION));
-                                                                                                  if($ext=='pdf' || $ext=='gif' || $ext=='jpg' || $ext=='png'){
-                                                                                              ?>
-                                                                                                <li style="list-style:none"><input type="checkbox" name="chk[]" id="chk_attachment" class="chk_attachment" value="<?php echo $u_key->id; ?>"><a class="fancybox" href='uploads/<?php echo $u_key->name; ?>' ><?php echo $u_key->name; ?></a></li>
-                                                                                                 
-                                                                                                <?php }  else { ?>
-                                                                                                    
-                                                                                                  <li style="list-style:none"><input type="checkbox" name="chk[]" id="chk_attachment" class="chk_attachment" value="<?php echo $u_key->id; ?>"><a class="no_preview" href='uploads/<?php echo $u_key->name; ?>' ><?php echo $u_key->name; ?></a></li>
-                                                                                                  
-                                                                                               <?php  }} ?> 
-                                                                                        </ul>
-                                                                                    </div> 
-
-                                                                                   
+                                                                                        <div class="attachment_wrapper">
+                                                                                            <ul id="attachment" class="tab-ul">
+                                                                                            </ul>
+                                                                                        </div>
+                                                                                    </div>
                                                                                 </div>
+
                                                                                 <div class='' style='margin-bottom: 0;'>
                                                                                     <button class='btn btn-success' type='button' data-target="#myuploadModal" data-toggle="modal">
                                                                                         <i class='icon-save'></i>
@@ -420,7 +300,6 @@
                                                                             </div>
                                                                           
                                                                           <!-- preview download bootstrap files-->
-                                                                          
                                                                           <div class="container">
                                                                          <!-- Modal -->
                                                                               <div class="modal fade" id="my_preview_form" role="dialog">
@@ -462,53 +341,74 @@
                                                                                     <!-- Modal -->
                                                                                     <div class="modal fade" id="myuploadModal" role="dialog">
                                                                                         <div class="modal-dialog">
-                                                                                            <input  type='hidden' name='hdn_project_id' id="hdn_project_id" class="hdn_project_id" value="<?php
-                                                                                               if (!empty($project['id'])) {
-                                                                                                        echo $project['id'];
-                                                                                                    }
-                                                                                                    ?>">
-                                                                                            <!-- Modal content-->
                                                                                             <div class="modal-content">
                                                                                                 <div class="modal-header">
                                                                                                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                                                                                                     <h4 class="modal-title">Attachment</h4>
                                                                                                 </div> 
-                                                                                                <div class='box-content'>		
+                                                                                                <div class='box-content'>   
                                                                                                     <div class='form-group'>
                                                                                                         <label for='inputText'>Upload</label><span style="color:red">*</span>
                                                                                                         <input type="file" class="form_input_contact" name="file" id="file"/>
-
                                                                                                     </div>
                                                                                                     <span style="color:red" id="file_err_msg"><span>
-                                                                                                            </div> 
-                                                                                                            <div class="modal-footer" style="border-top: 1px solid #fff;">
-                                                                                                                <button type="button" class="btn btn-success" id="upload_form_data">Save</button>
-                                                                                                                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                                                                                                </div> 
+                                                                                                <div class="modal-footer" style="border-top: 1px solid #fff;">
+                                                                                                    <input type="button" class="btn btn-success" id="upload_form_data" onClick="uploadForm()" value="Save">
+                                                                                                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                                                                                                </div>
+                                                                                            </div>
 
-                                                                                                            </div>
-                                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </form>                                
+                                                                            </div>
 
-                                                                                                            </div>
-                                                                                                            </div>
-                                                                                                            </form>
-                                                                                                            </div>
+                                                                            <div class="container">
+                                                                                <form class="form" style="margin-bottom: 0;" method="post" action="#" accept-charset="UTF-8" id="project_upload_form" enctype="multipart/form-data">
+                                                                                    <!-- Modal -->
+                                                                                    <div class="modal fade" id="myuploadModal1" role="profile1">
+                                                                                        <div class="modal-dialog">
+                                                                                            <div class="modal-content">
+                                                                                                <div class="modal-header">
+                                                                                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                                                                    <h4 class="modal-title">Notes</h4>
+                                                                                                </div> 
+                                                                                                <div class='box-content'>   
+                                                                                                    <div class='form-group'>
+                                                                                                        <label for='inputText'>Upload</label><span style="color:red">*</span>
+                                                                                                        <input type="file" class="form_input_contact" name="file" id="file"/>
+                                                                                                    </div>
+                                                                                                    <span style="color:red" id="file_err_msg"><span>
+                                                                                                </div> 
+                                                                                                <div class="modal-footer" style="border-top: 1px solid #fff;">
+                                                                                                    <input type="button" class="btn btn-success" id="upload_form_data" onClick="uploadForm()" value="Save">
+                                                                                                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                                                                                                </div>
+                                                                                            </div>
+
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </form>                                
+                                                                            </div>
+                                                                            
 
                                                                                                             <!-- bootstrap container end -->
                                                                                                             <div class="tab-pane fade" id="profile"> 
                                                                                                                 <div class="tab-pane fade active in" id="home">
                                                                                                                                                        <div class='row' style='margin-bottom: 0;' id="notes_div_form">
                                                                                                                         <div class="col-md-6">
-                                                                                                                            <ul id="notes" class="tab-ul">
+                                                                                                                            <!-- <ul id="notes" class="tab-ul">
                                                                                                                                 <?php foreach ($notes as $u_key) { ?>
                                                                                                                                     
                                                                                                                                     <li style="list-style:none"><input type="checkbox" name="chk[]" id="chk_attachment" class="chk_notes" value="<?php echo $u_key->id; ?>"><a href="javascript:void(0)"  data-desc="<?php echo $u_key->description; ?>" class="notes_link" id="<?php echo $u_key->id; ?>"><?php echo $u_key->name; ?></a><span style="margin-left: 60px;"><?php $date = new DateTime($u_key->created_date); echo $date->format('d F Y'); ?></span></li>
 
 <?php } ?> 
-                                                                                                                            </ul>
+                                                                                                                            </ul> -->
                                                                                                                         </div>
                                                                                                                     </div>
                                                                                                                     <div class="">
-                                                                                                                        <button class='btn btn-success' type='button' id="expand_notes">
+                                                                                                                        <button class='btn btn-success' type='button' data-target="#myuploadModal1" data-toggle="modal">
                                                                                                                             <i class='icon-save'></i>
                                                                                                                             Add
                                                                                                                         </button>
@@ -520,11 +420,7 @@
                                                                                                                     <hr>
                                                                                                                     <form class="form" style="margin-bottom: 0;" method="post" action="#" accept-charset="UTF-8" id="project_notes_form" >
                                                                                                                         <div class='' style='margin-bottom: 0;display:none' id="expand_notes_form">
-                                                                                                                            <input  type='hidden' name='hdn_project_id' id="hdn_project_id" class="hdn_project_id" value="<?php
-                                                                                                                                    if (!empty($project['id'])) {
-                                                                                                                                        echo $project['id'];
-                                                                                                                                    }
-                                                                                                                                    ?>">
+                                                                                                                            
                                                                                                                             <div class='form-group'>
                                                                                                                                 <label for='inputText'>Title</label><span style="color:red">*</span>
                                                                                                                                 <input class='form-control'   type='text' name='notes_name' id="notes_title">
@@ -568,7 +464,7 @@
                                                                                                                     <div class='row' style='margin-bottom: 0;' id="external_link_div">
                                                                                                                         <div class="col-md-6">
                                                                                                                           <!--<a class="fancybox" href="uploads/Users1.pdf">Open pdf</a>-->
-                                                                                                                            <ul id="external_links" class="tab-ul">
+                                                                                                                           <!--  <ul id="external_links" class="tab-ul">
 
                                                                                                                                 <?php foreach ($external_link as $u_key) { ?>
                                                                                                                                     
@@ -576,7 +472,7 @@
 
 <?php } ?> 
 
-                                                                                                                            </ul>
+                                                                                                                            </ul> -->
                                                                                                                         </div>
                                                                                                                     </div>
                                                                                                                     <div class="">
@@ -592,11 +488,6 @@
                                                                                                                     <hr>
                                                                                                                     <form class="form" style="margin-bottom: 0;" method="post" action="#" accept-charset="UTF-8" id="project_external_form" >  
                                                                                                                         <div class='' style='margin-bottom: 0;display:none' id="expand_external_form">
-                                                                                                                            <input  type='hidden' name='hdn_project_id' id="hdn_project_id" class="hdn_project_id" value="<?php
-                                                                                                                                    if (!empty($project['id'])) {
-                                                                                                                                        echo $project['id'];
-                                                                                                                                    }
-                                                                                                                                    ?>">
                                                                                                                              <div class='form-group'>
                                                                                                                                 <label for='inputText'>Title</label><span style="color:red">*</span>
                                                                                                                                 <input class='form-control' placeholder='Title' type='text' name='external_com' id="external_com">
@@ -640,7 +531,7 @@
                                                                                                             </div>
                                                                                                             </div>
                                                                                                             </div>
-                                                                                                            </div>	
+                                                                                                            </div>  
                                                                                                             <!-- end form -->
                                                                                                             </div>
 
@@ -713,10 +604,10 @@
 
         submitForm();
     });
-    $(document).on("click", "#upload_form_data", function() {
+    // $(document).on("click", "#upload_form_data", function() {
 
-        uploadForm();
-    });
+    //     uploadForm();
+    // });
     $(document).on("click", "#notes_form_data", function() {
 
         noteForm();
@@ -976,9 +867,93 @@
 
         return false;
     }
-    function uploadForm() {
 
-        $('#file_err_msg').text('');
+    function submitForm() {
+
+        var data = new FormData($("#project_add_form")[0]);
+        $.ajax({
+            url: '<?php echo site_url('project/add'); ?>',
+            processData: false,
+            type: 'post',
+            dataType: 'json',
+            data: data,
+            contentType: false,
+            success: function(response) {
+
+                if (response.status == 'success') {
+
+                    $('#response_msg').append('<span style=color:green; id=msgs>' + response.msg + '</span>');
+                } else {
+                    $('#response_msg').append('<span style=color:red; id=msgs>' + response.msg + '</span>');
+                }
+            }
+        });
+
+        return false;
+    }
+
+   
+
+    //$("#slider-example1-amount").text("$" + $("#slider-example1").slider("value"));
+</script> 
+<script type="text/javascript">
+    function add_similar_project(){
+      var error_cnt = 0;
+      var old_project_id = $('#old_project_id').val();
+
+      var similar_project_quick_notes = $('#similar_project_quick_notes').val();
+      var similar_project_name = $('#similar_project_name').val();
+
+      var form_data = $("#similar_project_form").serializeArray();
+      form_data.push({name:"old_project_id",value:old_project_id});
+
+       if(similar_project_name === ''){ $('.error_similar_project_name').removeClass('hide'); error_cnt++; }else{ $('.error_similar_project_name').addClass('hide'); }
+       if(similar_project_quick_notes === ''){ $('.error_similar_project_quick_notes').removeClass('hide'); error_cnt++; }else{ $('.error_similar_project_quick_notes').addClass('hide'); }
+
+      if(error_cnt != '0'){
+              return false;
+      }else{
+
+              $("#fakeLoader").attr('style',''); // Remove Style Attribute for reuse
+              $("#fakeLoader").fakeLoader({
+                  timeToHide:1200,
+                  bgColor:"#2ecc71",
+                  spinner:"spinner7"
+              }); // Fakeloader plugin
+        $.ajax({
+          url: '<?php echo base_url()."project/add_similar_project"; ?>',
+                   type: 'POST',
+                   dataType: 'json',
+                   data: form_data,
+                   success:function(data){
+                        if(data.status=="success"){
+                            $('#similar_project_h1').val(data.project_id);
+                            $('#similar_project_action_plan').attr('href',"<?php echo base_url().'project/add_action_plan/'; ?>"+data.project_id);
+                            $('#similar_project_daily_sheet').attr('href',"<?php echo base_url().'project/add_timesheet/'; ?>"+data.project_id);
+                            //$('input[type="submit"]').attr('disabled','disabled');
+                            return false;
+                        }
+                        if(data.status=="unsuccess"){
+                          $('.error_similar_project_name_unique').removeClass('hide'); error_cnt++; }else{ $('.error_similar_project_name_unique').addClass('hide'); 
+                        }
+
+                   }
+                });
+      }
+    }
+
+    function validation_action_plan(){
+      var project_id = $('#similar_project_h1').val();
+      if(project_id == ''){
+            //uncommetn below line for validate Part-1 Required Part
+            $(function(){ bootbox.alert('Please create project first.');  });
+            return false;
+      }
+    }
+
+    function uploadForm(){
+      var project_id = $('#similar_project_h1').val();
+      $('#file_err_msg').text('');
         var file = $('#file').val();
         if (file == '') {
             $('#file_err_msg').text('please upload some attachment');
@@ -986,9 +961,9 @@
             return false;
         }
         var data = new FormData($("#project_upload_form")[0]);
-        $('#response_msg').html('');
+        data.append("project_id", project_id);
         $.ajax({
-            url: '<?php echo site_url('project/project_upload_form'); ?>',
+            url: '<?php echo site_url('project/add_similar_project_attachment'); ?>',
             processData: false,
             type: 'post',
             dataType: 'json',
@@ -1023,47 +998,7 @@
 
         return false;
     }
-    function submitForm() {
 
-        var project_name = $('#name').val();
-        $('#response_msg').html('');
-        $('#type_err_msg').text('');
-        $('#name_err_msg').text('');
-        var project_type = $('#project_type_id').val();
-        if (project_name == '') {
-            $('#name_err_msg').text('please enter project name');
-            $("#name").focus();
-            return false;
-        }
-        if (project_type == '') {
+</script>
 
-            $('#type_err_msg').text('please enter project type');
-            $("#project_type_id").focus();
-            return false;
-        }
-        var data = new FormData($("#project_add_form")[0]);
-        $.ajax({
-            url: '<?php echo site_url('project/add'); ?>',
-            processData: false,
-            type: 'post',
-            dataType: 'json',
-            data: data,
-            contentType: false,
-            success: function(response) {
-
-                if (response.status == 'success') {
-
-                    $('#response_msg').append('<span style=color:green; id=msgs>' + response.msg + '</span>');
-                } else {
-                    $('#response_msg').append('<span style=color:red; id=msgs>' + response.msg + '</span>');
-                }
-            }
-        });
-
-        return false;
-    }
-
-
-    //$("#slider-example1-amount").text("$" + $("#slider-example1").slider("value"));
-</script>	
 

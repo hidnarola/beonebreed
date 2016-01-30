@@ -860,10 +860,11 @@
                 <div class="clearfix"></div>
                 <div class="col-sm-6">    
                     <div class="part-five-block">
-                        <h5> DISPLAY USED </h5>
-                        <div class='make-switch switch' data-off-label='&lt;i class="icon-remove"&gt;&lt;/i&gt;' data-on-label='&lt;i class="icon-ok"&gt;&lt;/i&gt;'>
-                            <input type='checkbox' name="" id="" value="">
+                        <font style="font-size:15px;font-weight:bold;color:black">DISPLAY USED </font>&nbsp;
+                        <div class='make-switch  pull-right switch' data-off-label='&lt;i class="icon-remove"&gt;&lt;/i&gt;' data-on-label='&lt;i class="icon-ok"&gt;&lt;/i&gt;'>
+                            <input type='checkbox' name="marketing_part5_switch1" id="marketing_part5_switch1" value="display_used">
                         </div>
+                        <br /><br />
                         <label class='control-label' for='marketing_part5_cost1'>COST</label>
                         <div class='controls margin-bottom-10'>
                             <input class='form-control' id='marketing_part5_cost1' name="marketing_part5_cost1" 
@@ -895,11 +896,12 @@
 
                 <div class="col-sm-6">
                     <div class="part-five-block">
-                        <h5> PLV IN STORE USED </h5>
+                        <font style="font-size:15px;font-weight:bold;color:black">PLV IN STORE USED</font>&nbsp;
                         
-                        <div class='make-switch switch' data-off-label='&lt;i class="icon-remove"&gt;&lt;/i&gt;' data-on-label='&lt;i class="icon-ok"&gt;&lt;/i&gt;'>
-                            <input type='checkbox' name="" id="" value="">
+                        <div class='make-switch pull-right switch' data-off-label='&lt;i class="icon-remove"&gt;&lt;/i&gt;' data-on-label='&lt;i class="icon-ok"&gt;&lt;/i&gt;'>
+                            <input type='checkbox' name="marketing_part5_switch2" id="marketing_part5_switch2" value="plv_used">
                         </div>
+                        <br /><br />
                         <label class='control-label' for='marketing_part5_cost2'>COST</label>
                         <div class='controls margin-bottom-10'>
                             <input class='form-control' id='marketing_part5_cost2' name="marketing_part5_cost2" 
@@ -1217,7 +1219,7 @@
     function validate_marketing_part_5(){
         var error_cnt = 0;
         var product_id = $('#product_id').val();
-
+       
         var marketing_part5_cost1 = $('#marketing_part5_cost1').val();
         var marketing_part5_supplier1 = $('#marketing_part5_supplier1').val();
         var marketing_part5_upc1 = $('#marketing_part5_upc1').val();
@@ -1272,7 +1274,6 @@
                success:function(data){
                    if(data.status=="success"){
                     $('#marketing_part5_1').val(data.marketing_part5_1);
-                    alert(document.getElementById('marketing_part5_1').value);
                     $('#chkbox_marketing_part5').attr('disabled',true); // Disable Checkbox
                     $('.marketting_load_percentage').html('20%'); // Update Percentage for product update
                     $('.part_5_marketting').addClass('active'); 

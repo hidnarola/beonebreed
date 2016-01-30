@@ -28,13 +28,11 @@ class Project extends CI_Controller {
 
   public function add() {
 
-    if ($this->form_validation->run('project') == FALSE) {
-        
+    if ($this->form_validation->run('project') == FALSE) {    
       $data['project_type'] = $this->project_model->get_all_types();
       $data['categories'] = $this->project_model->get_caregory();
       $data['project_manager'] = $this->project_model->get_project_manager();
       $this->template->load('admin_default', 'project/add', $data);
-
     }else{
 
       if (!empty($_POST)) {
@@ -363,47 +361,47 @@ class Project extends CI_Controller {
 
   //adding timesheet data
 
-  public function add_timesheet($id = 0) {
+    public function add_timesheet($id = 0) {
 
-    if ($this->form_validation->run('timesheet') == FALSE) {
-      $data['project_id'] = $id;
-      $this->template->load('admin_default', 'project/add_timesheet', $data);
-    } else {
-      if (!empty($_POST)) {
+        if ($this->form_validation->run('timesheet') == FALSE) {
+          $data['project_id'] = $id;
+          $this->template->load('admin_default', 'project/add_timesheet', $data);
+        } else {
+          if (!empty($_POST)) {
 
-        if ($this->input->post('total_time')=='') {
-          $total_time = 0;
-        } else {
-          $total_time = $this->input->post('total_time');
+            if ($this->input->post('total_time')=='') {
+              $total_time = 0;
+            } else {
+              $total_time = $this->input->post('total_time');
+            }
+            if ($this->input->post('speciality_date')=='') {
+              $speciality_date ='0000-00-00 00:00:00';
+            } else {
+              $speciality_date = $this->input->post('speciality_date');
+            }
+            
+            $data = array(
+                'username' => $this->input->post('username'),
+                'total_time' => $total_time,
+                'dates' => $this->input->post('dates'),
+                'today_introduction' => $this->input->post('today_introduction'),
+                'today_research_report' => $this->input->post('today_research_report'),
+                'speciality_date' => $speciality_date,
+                'speciality_username' => $this->input->post('speciality_username'),
+                'speciality' => $this->input->post('speciality'),
+                'company_name' => $this->input->post('company_name'),
+                'subject_discussion' => $this->input->post('Subject_discussion'),
+                'Contact_info' => $this->input->post('contact_info'),
+                'project_id' => $id,
+            );
+            
+            $timesheet_id = $this->project_model->add_timesheet($data, TRUE);
+            if (!empty($id)) {
+              redirect('project/add_next_timesheet/' .$timesheet_id);
+            }
+          }
         }
-        if ($this->input->post('speciality_date')=='') {
-          $speciality_date ='0000-00-00 00:00:00';
-        } else {
-          $speciality_date = $this->input->post('speciality_date');
-        }
-        
-        $data = array(
-            'username' => $this->input->post('username'),
-            'total_time' => $total_time,
-            'dates' => $this->input->post('dates'),
-            'today_introduction' => $this->input->post('today_introduction'),
-            'today_research_report' => $this->input->post('today_research_report'),
-            'speciality_date' => $speciality_date,
-            'speciality_username' => $this->input->post('speciality_username'),
-            'speciality' => $this->input->post('speciality'),
-            'company_name' => $this->input->post('company_name'),
-            'subject_discussion' => $this->input->post('Subject_discussion'),
-            'Contact_info' => $this->input->post('contact_info'),
-            'project_id' => $id,
-        );
-        
-        $timesheet_id = $this->project_model->add_timesheet($data, TRUE);
-        if (!empty($id)) {
-          redirect('project/add_next_timesheet/' .$timesheet_id);
-        }
-      }
     }
-  }
   
   public function  add_next_timesheet($timesheet_id = 0) {
     
@@ -628,9 +626,105 @@ class Project extends CI_Controller {
         $username['id']=$row->id;
         $username['name']=$row->username;
     }
-      echo json_encode($username);exit;
-      
-     
+      echo json_encode($username);exit;     
   }
 
+  public function similar($id){
+    $data['project_data'] = $this->project_model->get_all_projects_by_id($id);
+    $data['project_action_plan'] = $this->project_model->get_all_actionplan_by_projects_id($id);
+    $data['project_type'] = $this->project_model->get_all_types();
+    $data['categories'] = $this->project_model->get_caregory();
+    $data['notes'] = $this->project_model->get_project_notes($id);
+    $this->template->load('admin_default','project/similar',$data);
+  }
+
+  public function add_similar_project(){
+        $old_project_id =  $this->input->post('old_project_id');
+
+        $project_name = $this->input->post('name');
+        $cnt = $this->project_model->get_all_project_data_by_name($project_name);
+        if($cnt==0){
+            $category_id = $this->input->post('category_id');
+            $priority =  $this->input->post('priority');
+            $quick_notes = $this->input->post('quick_notes');
+            $project_type_id = $this->input->post('project_type_id');
+            $estimated_days = $this->input->post('estimated_days');
+            $project_manager = $this->input->post('project_manager');
+
+            $data = array(
+                    'name' => $project_name,
+                    'project_type_id' => $project_type_id,
+                    'category_id' => $category_id,
+                    'estimated_days' => $estimated_days,
+                    'priority' => $priority,
+                    'project_manager' => $project_manager,
+                    'quick_notes' => $quick_notes,
+                    'created_date'=> date("Y-m-d H:i:s")
+                );
+
+            $id = $this->project_model->add_records($data, TRUE);
+            $data['old_action_plan'] = $this->project_model->get_all_actionplan_by_projects_id($old_project_id);
+            
+            foreach($data['old_action_plan'] as $temp){
+              $data1 = array(
+                'project_id' => $id,
+                'action' => $temp->action,
+                'resposible' => $temp->resposible,
+                'mertic_key' => $temp->mertic_key,
+                'complete_level' => $temp->complete_level,
+                'notes' => $temp->notes,
+                'created_date'=> date("Y-m-d H:i:s"),
+                'target_date' => $temp->target_date
+               );
+              $temp_id = $this->project_model->add_action_plan($data1);
+            }
+
+            echo json_encode(
+                        array(
+                          'project_id'=>$id,
+                          'status'=>'success'
+                        )
+            );
+            die();
+        }else{
+            echo json_encode(
+                array(
+                    'status'=>'unsuccess'
+                    )
+            );
+            die();
+        }
+  }   
+
+  public function add_similar_project_attachment() {
+
+    $config['upload_path'] = './uploads/';
+    $config['allowed_types'] = '*';
+    $this->load->library('upload', $config);
+
+    if ($_FILES['file']['name']) {
+      if (!$this->upload->do_upload('file')) {
+        $response = array('status' => 'fail', 'msg' => $this->upload->display_errors());
+        echo json_encode($response);
+        die();
+      } else {
+        $upload_data = array('uploads' => $this->upload->data('file'));
+      }
+    }
+    $data_upload = array(
+        'project_id' => $this->input->post('similar_project_h1'),
+        'name' => $upload_data['uploads']['file_name'],
+    );
+    $last_inserted_id = $this->project_model->add_attachemnt($data_upload, TRUE);
+    
+    if (!empty($last_inserted_id)) {
+      $response = array('status' => 'success', 'msg' => 'Your file has been successfully added', 'file_name' => $upload_data['uploads']['file_name'], 'id' => $last_inserted_id);
+      echo json_encode($response);
+      die();
+    } else {
+      $response = array('status' => 'fail', 'msg' => 'Oops!Something Wrong!');
+      echo json_encode($response);
+      die();
+    }
+  } 
 }

@@ -5,7 +5,7 @@ $config = array(
         array(
             'field' => 'name',
             'label' => 'Project Name',
-            'rules' => 'required'
+            'rules' => 'required|is_unique[projects.name]'
         ),
         array(
             'field' => 'project_type_id',
@@ -38,6 +38,20 @@ $config = array(
             'rules' => 'trim'
         ),
     ),
+    
+    'similar_project' => array(
+        array(
+            'field' => 'name',
+            'label' => 'Project Name',
+            'rules' => 'required|is_unique[projects.name]'
+        ),
+        array(
+            'field' => 'quick_notes',
+            'label' => 'quick_notes',
+            'rules' => 'trim'
+        ),
+    ),
+
     'faq' => array(
         array(
             'field' => 'heading',

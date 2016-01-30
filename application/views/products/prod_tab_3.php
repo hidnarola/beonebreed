@@ -146,144 +146,147 @@
 <!--  =========== //PRODUCTION TAB PART 3 END ===============  -->
 
 <!--  =========== PRODUCTION TAB PART 4 START ===============  -->
-
-    <div class="row">
-        <div class="col-sm-12 pull-left"> 
-            <span class="">
-                <h3 class="color_grey"> PART - 4</h3>
-            </span>
+    <form method="post" id="production_part4" name="production_part4">
+        <div class="row">
+            <div class="col-sm-12 pull-left"> 
+                <span class="">
+                    <h3 class="color_grey"> PART - 4</h3>
+                </span>
+            </div>
         </div>
-    </div>
 
-    <div class="row">
-        <div class="form-horizontal label-left">
-            <div class="col-sm-12">    
-                <h3 style="margin: 0 0 15px;">MARKINGS FOR THE MASTER BOX</h3>
-            </div>      
+        <div class="row">
+            <div class="form-horizontal label-left">
+                <div class="col-sm-12">    
+                    <h3 style="margin: 0 0 15px;">MARKINGS FOR THE MASTER BOX</h3>
+                </div>      
 
-            <div class="label_main">   
-                <div class="col-sm-9">
-                    <p><span class="check-list-number">1</span> MASTER BOX MARKINGS SENT TO THE SUPPLIER</p>     
+                <div class="label_main">   
+                    <div class="col-sm-9">
+                        <p><span class="check-list-number">1</span> MASTER BOX MARKINGS SENT TO THE SUPPLIER</p>     
+                    </div>
+                    <div class="col-sm-3">
+                        <div class='make-switch switch' data-off-label='&lt;i class="icon-remove"&gt;&lt;/i&gt;' data-on-label='&lt;i class="icon-ok"&gt;&lt;/i&gt;'>
+                            <input type='checkbox' name="production_part4_switch1" id="production_part4_switch1" value="24">
+                        </div>
+                    </div>
                 </div>
-                <div class="col-sm-3">
-                    <div class='make-switch switch' data-off-label='&lt;i class="icon-remove"&gt;&lt;/i&gt;' data-on-label='&lt;i class="icon-ok"&gt;&lt;/i&gt;'>
-                        <input type='checkbox' name="switch_11" id="11" value="11">
+                    
+                <div class="label_main">   
+                    <div class="col-sm-9">
+                        <p><span class="check-list-number">2</span> File saved to the server</p>     
+                    </div>
+                    <div class="col-sm-3">
+                        <div class='make-switch switch' data-off-label='&lt;i class="icon-remove"&gt;&lt;/i&gt;' data-on-label='&lt;i class="icon-ok"&gt;&lt;/i&gt;'>
+                            <input type='checkbox' name="production_part4_switch2" id="production_part4_switch2" value="25">
+                        </div>
                     </div>
                 </div>
             </div>
-                
-            <div class="label_main">   
-                <div class="col-sm-9">
-                    <p><span class="check-list-number">2</span> File saved to the server</p>     
-                </div>
-                <div class="col-sm-3">
-                    <div class='make-switch switch' data-off-label='&lt;i class="icon-remove"&gt;&lt;/i&gt;' data-on-label='&lt;i class="icon-ok"&gt;&lt;/i&gt;'>
-                        <input type='checkbox' name="switch_11" id="11" value="11">
+        </div>    
+
+        <div class="row">
+            <div class="col-sm-6 col-sm-offset-6">
+                <div class="clearfix"></div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <input type="checkbox" name="chkbox_production_part4" id="chkbox_production_part4"> Part-4 Completed (20%)
+                        <br>
+                        <span class="color_red error_production_part4 hide">Please Check this checkbox to procced further.</span>
                     </div>
-                </div>
+                    <div class="col-sm-6">
+                        <div class="form-group pull-right">
+                          <div class="controls">
+                            <input type="hidden" name="production_part4_h1" id="production_part4_h1">
+                            <input type="hidden" name="production_part4_h2" id="production_part4_h2">
+                            <a class="btn btn-success" onclick="validate_production_part_4()">
+                                <i class="icon-save"></i> Save
+                            </a>
+                            <a href="" class="btn btn-default">Cancel</a>
+                          </div>
+                        </div>
+                    </div>
+                </div>    
             </div>
         </div>
-    </div>    
-
-    <div class="row">
-        <div class="col-sm-6 col-sm-offset-6">
-            <div class="clearfix"></div>
-            <div class="row">
-                <div class="col-sm-6">
-                    <input type="checkbox" name="complete_admin_part_1" id="complete_admin_part_1"> Part-4 Completed (20%)
-                    <br>
-                    <span class="color_red error_admin_part_1 hide">Please Check this checkbox to procced further.</span>
-                </div>
-                <div class="col-sm-6">
-                    <div class="form-group pull-right">
-                      <div class="controls">
-                        <input type="hidden" name="barcode_id" id="barcode_id" value="">
-                        <input type="hidden" name="product_id" id="product_id">
-                        <a class="btn btn-success" onclick="validate_admin_part_1()">
-                            <i class="icon-save"></i> Save
-                        </a>
-                        <a href="" class="btn btn-default">Cancel</a>
-                      </div>
-                    </div>
-                </div>
-            </div>    
-        </div>
-    </div>
+    </form>
 <!--  =========== //PRODUCTION TAB PART 4 END ===============  -->
 
 <!--  =========== PRODUCTION TAB PART 5 START ===============  -->
-
-    <div class="row">
-        <div class="col-sm-12 pull-left"> 
-            <span class="">
-                <h3 class="color_grey"> PART - 5</h3>
-            </span>
+    <form method="post" id="production_part5">
+        <div class="row">
+            <div class="col-sm-12 pull-left"> 
+                <span class="">
+                    <h3 class="color_grey"> PART - 5</h3>
+                </span>
+            </div>
         </div>
-    </div>
 
-    <div class="row">
-        <div class="form-horizontal label-left">
-            <div class="col-sm-12">    
-                <h3 style="margin: 0 0 15px;">FIRST INSPECTION</h3>
-            </div>      
+        <div class="row">
+            <div class="form-horizontal label-left">
+                <div class="col-sm-12">    
+                    <h3 style="margin: 0 0 15px;">FIRST INSPECTION</h3>
+                </div>      
 
-            <div class="label_main">   
-                <div class="col-sm-9">
-                    <p><span class="check-list-number">1</span> DOCUMENTATION FOR THE INSPECTOR (WHAT TO INSPECT ?)</p>     
-                </div>
-                <div class="col-sm-3">
-                    <div class='make-switch switch' data-off-label='&lt;i class="icon-remove"&gt;&lt;/i&gt;' data-on-label='&lt;i class="icon-ok"&gt;&lt;/i&gt;'>
-                        <input type='checkbox' name="switch_11" id="11" value="11">
+                <div class="label_main">   
+                    <div class="col-sm-9">
+                        <p><span class="check-list-number">1</span> DOCUMENTATION FOR THE INSPECTOR (WHAT TO INSPECT ?)</p>     
+                    </div>
+                    <div class="col-sm-3">
+                        <div class='make-switch switch' data-off-label='&lt;i class="icon-remove"&gt;&lt;/i&gt;' data-on-label='&lt;i class="icon-ok"&gt;&lt;/i&gt;'>
+                            <input type='checkbox' name="production_part5_switch1" id="production_part5_switch1" value="26">
+                        </div>
                     </div>
                 </div>
-            </div>
-            
-             <div class="details_main">
-                <label class="col-md-1 col-sm-2">Notes</label>
-                <div class="col-sm-5">
-                   <textarea name="description" id="description" cols="30" rows="5" class="form-control"></textarea> 
-                </div>
-                <div class="clearfix"></div>
-            </div>
-
                 
-            <div class="label_main">   
-                <div class="col-sm-9">
-                    <p><span class="check-list-number">2</span> DOCUMENTATION SENT TO THE INSPECTOR</p>     
+                 <div class="details_main">
+                    <label class="col-md-1 col-sm-2">Notes</label>
+                    <div class="col-sm-5">
+                        <textarea cols="30" rows="5" class="form-control" name="production_part5_notes1" id="production_part5_notes1" onkeyup="$('.error_production_part5_notes1').addClass('hide');"></textarea> 
+                        <span class="color_red error_production_part5_notes1 hide">Field Is Required</span>
+                    </div>
+                    <div class="clearfix"></div>
                 </div>
-                <div class="col-sm-3">
-                    <div class='make-switch switch' data-off-label='&lt;i class="icon-remove"&gt;&lt;/i&gt;' data-on-label='&lt;i class="icon-ok"&gt;&lt;/i&gt;'>
-                        <input type='checkbox' name="switch_11" id="11" value="11">
+
+                    
+                <div class="label_main">   
+                    <div class="col-sm-9">
+                        <p><span class="check-list-number">2</span> DOCUMENTATION SENT TO THE INSPECTOR</p>     
+                    </div>
+                    <div class="col-sm-3">
+                        <div class='make-switch switch' data-off-label='&lt;i class="icon-remove"&gt;&lt;/i&gt;' data-on-label='&lt;i class="icon-ok"&gt;&lt;/i&gt;'>
+                            <input type='checkbox' name="production_part5_switch2" id="production_part5_switch2" value="27">
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </div>    
+        </div>    
 
-    <div class="row">
-        <div class="col-sm-6 col-sm-offset-6">
-            <div class="clearfix"></div>
-            <div class="row">
-                <div class="col-sm-6">
-                    <input type="checkbox" name="complete_admin_part_1" id="complete_admin_part_1"> Part-5 Completed (20%)
-                    <br>
-                    <span class="color_red error_admin_part_1 hide">Please Check this checkbox to procced further.</span>
-                </div>
-                <div class="col-sm-6">
-                    <div class="form-group pull-right">
-                      <div class="controls">
-                        <input type="hidden" name="barcode_id" id="barcode_id" value="">
-                        <input type="hidden" name="product_id" id="product_id">
-                        <a class="btn btn-success" onclick="validate_admin_part_1()">
-                            <i class="icon-save"></i> Save
-                        </a>
-                        <a href="" class="btn btn-default">Cancel</a>
-                      </div>
+        <div class="row">
+            <div class="col-sm-6 col-sm-offset-6">
+                <div class="clearfix"></div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <input type="checkbox" name="chkbox_production_part5" id="chkbox_production_part5"> Part-5 Completed (20%)
+                        <br>
+                        <span class="color_red error_production_part5 hide">Please Check this checkbox to procced further</span>
                     </div>
-                </div>
-            </div>    
+                    <div class="col-sm-6">
+                        <div class="form-group pull-right">
+                          <div class="controls">
+                            <input type="hidden" name="production_part5_h1" id="production_part5_h1">
+                            <input type="hidden" name="production_part5_h2" id="production_part5_h2">
+                            <a class="btn btn-success" onclick="validate_production_part_5()">
+                                <i class="icon-save"></i> Save
+                            </a>
+                            <a href="" class="btn btn-default">Cancel</a>
+                          </div>
+                        </div>
+                    </div>
+                </div>    
+            </div>
         </div>
-    </div>
+    </form>
 <!--  =========== //PRODUCTION TAB PART 5 END ===============  -->
 
 <script type="text/javascript">
@@ -293,7 +296,7 @@
     function validate_production_part_3(){
         var error_cnt = 0;
         var product_id = $('#product_id').val();
-        product_id='1';
+        
         var production_part3_notes1 = $('#production_part3_notes1').val();
         var production_part3_notes2 = $('#production_part3_notes2').val();
         var complete_production_part3 = validate_checkbox('chkbox_production_part3');
@@ -347,4 +350,106 @@
         }   
     }
     //----------------------------------------------------------------------
+
+     // production_part_4 Add More & Save Functionality Start
+    /*  By Parth Viramgama pav */
+    function validate_production_part_4(){
+        var error_cnt = 0;
+        var product_id = $('#product_id').val();
+   
+        var complete_production_part4 = validate_checkbox('chkbox_production_part4');
+
+        if(product_id == ''){
+            //uncommetn below line for validate Part-1 Required Part
+            $(function(){ bootbox.alert('Please create product in Part-1.');  });
+            return false;
+        }
+
+        if(complete_production_part4 === false){ $('.error_production_part4').removeClass('hide'); error_cnt++; }else{ $('.error_production_part4').addClass('hide'); }
+
+        if(error_cnt != '0'){
+            return false;
+        }else{
+
+            $("#fakeLoader").attr('style',''); // Remove Style Attribute for reuse
+            $("#fakeLoader").fakeLoader({
+                timeToHide:1200,
+                bgColor:"#2ecc71",
+                spinner:"spinner7"
+            }); // Fakeloader plugin
+            
+            var form_data = $("#production_part4").serializeArray();
+            form_data.push({name:"product_id",value:product_id});
+            
+            $.ajax({
+               url: '<?php echo base_url()."products/production_part4"; ?>',
+               type: 'POST',
+               dataType: 'json',
+               data: form_data,
+               success:function(data){
+                    if(data.status=="success"){
+                        $('#production_part4_h1').val(data.production_part4_1);
+                        $('#production_part4_h2').val(data.production_part4_2);
+                        //alert(document.getElementById('production_part3_h1').value);
+                        $('#chkbox_production_part4').attr('disabled',true); // Disable Checkbox
+                        $('.percentage_complete_production').html('60%'); // Update Percentage for product update
+                        $('.part_4_production').addClass('active'); 
+                        return false;
+                    }
+               }
+            });
+        }  
+    }
+    //----------------------------------------------------------------------
+
+     // production_part_5 Add More & Save Functionality Start
+    /*  By Parth Viramgama pav */
+    function validate_production_part_5(){
+        var error_cnt = 0; 
+        var product_id = $('#product_id').val();
+        var production_part5_notes1 = $('#production_part5_notes1').val();
+        var complete_production_part5 = validate_checkbox('chkbox_production_part5');
+
+        if(product_id == ''){
+            //uncommetn below line for validate Part-1 Required Part
+            $(function(){ bootbox.alert('Please create product in Part-1.');  });
+            return false;
+        }
+
+        if(production_part5_notes1 === ''){ $('.error_production_part5_notes1').removeClass('hide'); error_cnt++; }else{ $('.error_production_part5_notes1').addClass('hide'); }
+        if(complete_production_part5 === false){ $('.error_production_part5').removeClass('hide'); error_cnt++; }else{ $('.error_production_part5').addClass('hide'); }
+    
+        if(error_cnt != '0'){
+            return false;
+        }else{
+
+            $("#fakeLoader").attr('style',''); // Remove Style Attribute for reuse
+            $("#fakeLoader").fakeLoader({
+                timeToHide:1200,
+                bgColor:"#2ecc71",
+                spinner:"spinner7"
+            }); // Fakeloader plugin
+            
+            var form_data = $("#production_part5").serializeArray();
+            form_data.push({name:"product_id",value:product_id});
+            
+            $.ajax({
+               url: '<?php echo base_url()."products/production_part5"; ?>',
+               type: 'POST',
+               dataType: 'json',
+               data: form_data,
+               success:function(data){
+                    if(data.status=="success"){
+                        $('#production_part5_h1').val(data.production_part5_1);
+                        $('#production_part5_h2').val(data.production_part5_2);
+                        $('#chkbox_production_part5').attr('disabled',true); // Disable Checkbox
+                        $('.percentage_complete_production').html('100%'); // Update Percentage for product update
+                        $('.part_5_production').addClass('active'); 
+                        return false;
+                    }
+               }
+            });
+        }  
+    }
+    //----------------------------------------------------------------------    
 </script>

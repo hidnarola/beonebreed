@@ -972,7 +972,7 @@ class Products extends CI_Controller {
     //----------------------------------------------------------------------------------------------------------------
 
 	/**
-    * fucntion marketing_part3 uses to save data like cost,supplier name,generated UPC Code,Notes
+    * fucntion marketing_part5 uses to save data like cost,supplier name,generated UPC Code,Notes
 	*
 	* @return array
 	* @author Parth Viramgama - pav
@@ -980,23 +980,48 @@ class Products extends CI_Controller {
 	public function marketing_part5(){
 		$product_id = $this->input->post('product_id');
 
+		$marketing_part5_switch1 = $this->input->post('marketing_part5_switch1'); 
 		$marketing_part5_cost1 = $this->input->post('marketing_part5_cost1');
 		$marketing_part5_supplier1 = $this->input->post('marketing_part5_supplier1');
 		$marketing_part5_upc1 = $this->input->post('marketing_part5_upc1');
+
+		$marketing_part5_switch2 = $this->input->post('marketing_part5_switch2');
 		$marketing_part5_cost2 = $this->input->post('marketing_part5_cost2');
 		$marketing_part5_supplier2 = $this->input->post('marketing_part5_supplier2');
 		$marketing_part5_upc2 = $this->input->post('marketing_part5_upc2');
 		$marketing_part5_notes1 = $this->input->post('marketing_part5_notes1');
 
 		$marketing_part5_1 = $this->input->post('marketing_part5_1');
-		echo $marketing_part5_1;
+
 		if(!empty($marketing_part5_1)){
 			$modified_date = date("Y-m-d H:i:s");
-			$marketing_part5_data = array('product_id'=>$product_id,'cost1'=>$marketing_part5_cost1,'supplier1'=>$marketing_part5_supplier1,'upc1'=>$marketing_part5_upc1,'cost2'=>$marketing_part5_cost2,'supplier2'=>$marketing_part5_supplier2,'upc2'=>$marketing_part5_upc2,'notes1'=>$marketing_part5_notes1,'modified_date'=>$modified_date);
-            $this->products_model->update_into('products_marketing_part_5',$marketing_part5_1,$marketing_part5_data);
+			if(!empty($marketing_part5_switch1) && !empty($marketing_part5_switch2)){
+			 		$marketing_part5_data = array('product_id'=>$product_id,'display_used'=>'1','cost1'=>$marketing_part5_cost1,'supplier1'=>$marketing_part5_supplier1,'upc1'=>$marketing_part5_upc1,'plv_store_used'=>'1','cost2'=>$marketing_part5_cost2,'supplier2'=>$marketing_part5_supplier2,'upc2'=>$marketing_part5_upc2,'notes1'=>$marketing_part5_notes1,'modified_date'=>$modified_date);
+            		$this->products_model->update_into('products_marketing_part_5',$marketing_part5_1,$marketing_part5_data);
+			}else if(!empty($marketing_part5_switch1) && empty($marketing_part5_switch2)){
+			 		$marketing_part5_data = array('product_id'=>$product_id,'display_used'=>'1','cost1'=>$marketing_part5_cost1,'supplier1'=>$marketing_part5_supplier1,'upc1'=>$marketing_part5_upc1,'plv_store_used'=>'0','cost2'=>$marketing_part5_cost2,'supplier2'=>$marketing_part5_supplier2,'upc2'=>$marketing_part5_upc2,'notes1'=>$marketing_part5_notes1,'modified_date'=>$modified_date);
+            		$this->products_model->update_into('products_marketing_part_5',$marketing_part5_1,$marketing_part5_data);
+			}else if(empty($marketing_part5_switch1) && !empty($marketing_part5_switch2)){
+			 		$marketing_part5_data = array('product_id'=>$product_id,'display_used'=>'0','cost1'=>$marketing_part5_cost1,'supplier1'=>$marketing_part5_supplier1,'upc1'=>$marketing_part5_upc1,'plv_store_used'=>'1','cost2'=>$marketing_part5_cost2,'supplier2'=>$marketing_part5_supplier2,'upc2'=>$marketing_part5_upc2,'notes1'=>$marketing_part5_notes1,'modified_date'=>$modified_date);
+            		$this->products_model->update_into('products_marketing_part_5',$marketing_part5_1,$marketing_part5_data);
+			}else if(empty($marketing_part5_switch1) && empty($marketing_part5_switch2)){
+			 		$marketing_part5_data = array('product_id'=>$product_id,'display_used'=>'0','cost1'=>$marketing_part5_cost1,'supplier1'=>$marketing_part5_supplier1,'upc1'=>$marketing_part5_upc1,'plv_store_used'=>'0','cost2'=>$marketing_part5_cost2,'supplier2'=>$marketing_part5_supplier2,'upc2'=>$marketing_part5_upc2,'notes1'=>$marketing_part5_notes1,'modified_date'=>$modified_date);
+            		$this->products_model->update_into('products_marketing_part_5',$marketing_part5_1,$marketing_part5_data);
+			}
 		}else{
-			 $marketing_part5_data = array('product_id'=>$product_id,'cost1'=>$marketing_part5_cost1,'supplier1'=>$marketing_part5_supplier1,'upc1'=>$marketing_part5_upc1,'cost2'=>$marketing_part5_cost2,'supplier2'=>$marketing_part5_supplier2,'upc2'=>$marketing_part5_upc2,'notes1'=>$marketing_part5_notes1);
-             $marketing_part5_1 = $this->products_model->insert_into('products_marketing_part_5',$marketing_part5_data);
+			if(!empty($marketing_part5_switch1) && !empty($marketing_part5_switch2)){
+			 		$marketing_part5_data = array('product_id'=>$product_id,'display_used'=>'1','cost1'=>$marketing_part5_cost1,'supplier1'=>$marketing_part5_supplier1,'upc1'=>$marketing_part5_upc1,'plv_store_used'=>'1','cost2'=>$marketing_part5_cost2,'supplier2'=>$marketing_part5_supplier2,'upc2'=>$marketing_part5_upc2,'notes1'=>$marketing_part5_notes1);
+            		$marketing_part5_1 = $this->products_model->insert_into('products_marketing_part_5',$marketing_part5_data);
+			}else if(!empty($marketing_part5_switch1) && empty($marketing_part5_switch2)){
+			 		$marketing_part5_data = array('product_id'=>$product_id,'display_used'=>'1','cost1'=>$marketing_part5_cost1,'supplier1'=>$marketing_part5_supplier1,'upc1'=>$marketing_part5_upc1,'plv_store_used'=>'0','cost2'=>$marketing_part5_cost2,'supplier2'=>$marketing_part5_supplier2,'upc2'=>$marketing_part5_upc2,'notes1'=>$marketing_part5_notes1);
+            		$marketing_part5_1 = $this->products_model->insert_into('products_marketing_part_5',$marketing_part5_data);
+			}else if(empty($marketing_part5_switch1) && !empty($marketing_part5_switch2)){
+			 		$marketing_part5_data = array('product_id'=>$product_id,'display_used'=>'0','cost1'=>$marketing_part5_cost1,'supplier1'=>$marketing_part5_supplier1,'upc1'=>$marketing_part5_upc1,'plv_store_used'=>'1','cost2'=>$marketing_part5_cost2,'supplier2'=>$marketing_part5_supplier2,'upc2'=>$marketing_part5_upc2,'notes1'=>$marketing_part5_notes1);
+            		$marketing_part5_1 = $this->products_model->insert_into('products_marketing_part_5',$marketing_part5_data);
+			}else if(empty($marketing_part5_switch1) && empty($marketing_part5_switch2)){
+			 		$marketing_part5_data = array('product_id'=>$product_id,'display_used'=>'0','cost1'=>$marketing_part5_cost1,'supplier1'=>$marketing_part5_supplier1,'upc1'=>$marketing_part5_upc1,'plv_store_used'=>'0','cost2'=>$marketing_part5_cost2,'supplier2'=>$marketing_part5_supplier2,'upc2'=>$marketing_part5_upc2,'notes1'=>$marketing_part5_notes1);
+            		$marketing_part5_1 = $this->products_model->insert_into('products_marketing_part_5',$marketing_part5_data);
+			}
 		}
 
 		echo json_encode(
@@ -1008,9 +1033,10 @@ class Products extends CI_Controller {
                 );
 	}
 
-
+	//----------------------------------------------------------------------------------------------------------------
+	
 	/**
-     * fucntion production_part3
+     * fucntion production_part3 used to save PERMANENT MARKINGS AND LABELS Details.
 	 *
 	 * @return array
 	 * @author Parth Viramgama - pav
@@ -1157,6 +1183,130 @@ class Products extends CI_Controller {
                 );
 		}
 	}
+
+	//----------------------------------------------------------------------------------------------------------------
+	
+	/**
+     * fucntion production_part4 used to save MARKINGS FOR THE MASTER BOX details
+	 *
+	 * @return array
+	 * @author Parth Viramgama - pav
+	 **/
+	public function production_part4(){
+		$product_id = $this->input->post('product_id');
+		$production_part4_switch1 = $this->input->post('production_part4_switch1');
+		$production_part4_switch2 = $this->input->post('production_part4_switch2');
+
+		$production_part4_h1 = $this->input->post('production_part4_h1');
+		$production_part4_h2 = $this->input->post('production_part4_h2');
+
+		if(!empty($production_part4_h1) || !empty($production_part4_h2)){
+
+			if(!empty($production_part4_switch1)){
+                $production_part4_q1 = array('question_id'=>'24','product_id'=>$product_id,'answer'=>'1');
+                $this->products_model->update_into('product_question',$production_part4_h1,$production_part4_q1);
+            }else{
+               	$production_part4_q1 = array('question_id'=>'24','product_id'=>$product_id,'answer'=>'0');
+                $this->products_model->update_into('product_question',$production_part4_h1,$production_part4_q1);
+            }
+
+            if(!empty($production_part4_switch2)){
+                $production_part4_q2 = array('question_id'=>'25','product_id'=>$product_id,'answer'=>'1');
+                $this->products_model->update_into('product_question',$production_part4_h2,$production_part4_q2);
+            }else{
+               	$production_part4_q2 = array('question_id'=>'25','product_id'=>$product_id,'answer'=>'0');
+                $this->products_model->update_into('product_question',$production_part4_h2,$production_part4_q2);
+            }
+
+		}else{
+			if(!empty($production_part4_switch1)){
+                $production_part4_q1 = array('question_id'=>'24','product_id'=>$product_id,'answer'=>'1');
+                $production_part4_h1 = $this->products_model->insert_into('product_question',$production_part4_q1);
+            }else{
+               	$production_part4_q1 = array('question_id'=>'24','product_id'=>$product_id,'answer'=>'0');
+                $production_part4_h1 = $this->products_model->insert_into('product_question',$production_part4_q1);
+            }
+
+            if(!empty($production_part4_switch2)){
+                $production_part4_q2 = array('question_id'=>'25','product_id'=>$product_id,'answer'=>'1');
+                $production_part4_h2 = $this->products_model->insert_into('product_question',$production_part4_q2);
+            }else{
+               	$production_part4_q2 = array('question_id'=>'25','product_id'=>$product_id,'answer'=>'0');
+                $production_part4_h2 = $this->products_model->insert_into('product_question',$production_part4_q2);
+            }
+
+            echo json_encode(
+                    array(
+                        'production_part4_1'=>$production_part4_h1,
+                        'production_part4_2'=>$production_part4_h2,
+                        'status'=>'success',
+                        'qry'=>$this->db->last_query()
+                        )
+                );
+		}
+	}
+
+	//----------------------------------------------------------------------------------------------------------------
+
+	/**
+     * fucntion production_part4 used to save FIRST INSPECTION details
+	 *
+	 * @return array
+	 * @author Parth Viramgama - pav
+	 **/
+	public function production_part5(){
+		$product_id = $this->input->post('product_id');
+		$production_part5_notes1 = $this->input->post('production_part5_notes1');
+		$production_part5_switch1 = $this->input->post('production_part5_switch1');
+		$production_part5_switch2 = $this->input->post('production_part5_switch2');
+
+		$production_part5_h1 = $this->input->post('production_part5_h1');
+		$production_part5_h2 = $this->input->post('production_part5_h2');
+
+		if(!empty($production_part5_h1) || !empty($productio_part5_h2)){
+			if(!empty($production_part5_switch1)){
+				$production_part5_q1 = array('question_id'=>'26','product_id'=>$product_id,'answer'=>'1','notes'=>$production_part5_notes1);
+                $this->products_model->update_into('product_question',$production_part5_h1,$production_part5_q1);
+			}else{
+				$production_part5_q1 = array('question_id'=>'26','product_id'=>$product_id,'answer'=>'0','notes'=>$production_part5_notes1);
+                $this->products_model->update_into('product_question',$production_part5_h1,$production_part5_q1);
+			}
+
+			if(!empty($production_part5_switch2)){
+				$production_part5_q2 = array('question_id'=>'27','product_id'=>$product_id,'answer'=>'1');
+                $this->products_model->update_into('product_question',$production_part5_h2,$production_part5_q2);
+			}else{
+				$production_part5_q2 = array('question_id'=>'27','product_id'=>$product_id,'answer'=>'0');
+                $this->products_model->update_into('product_question',$production_part5_h2,$production_part5_q2);
+			}
+		}else{
+			if(!empty($production_part5_switch1)){
+				$production_part5_q1 = array('question_id'=>'26','product_id'=>$product_id,'answer'=>'1','notes'=>$production_part5_notes1);
+                $production_part5_h1 = $this->products_model->insert_into('product_question',$production_part5_q1);
+			}else{
+				$production_part5_q1 = array('question_id'=>'26','product_id'=>$product_id,'answer'=>'0','notes'=>$production_part5_notes1);
+                $production_part5_h1 = $this->products_model->insert_into('product_question',$production_part5_q1);
+			}
+
+			if(!empty($production_part5_switch2)){
+				$production_part5_q2 = array('question_id'=>'27','product_id'=>$product_id,'answer'=>'1');
+                $production_part5_h2 = $this->products_model->insert_into('product_question',$production_part5_q2);
+			}else{
+				$production_part5_q2 = array('question_id'=>'27','product_id'=>$product_id,'answer'=>'0');
+                $production_part5_h2 = $this->products_model->insert_into('product_question',$production_part5_q2);
+			}
+		}
+
+		echo json_encode(
+                   array(
+                        'production_part5_1'=>$production_part5_h1,
+                        'production_part5_2'=>$production_part5_h2,
+                        'status'=>'success',
+                        'qry'=>$this->db->last_query()
+                        )
+        );
+	}
+	//----------------------------------------------------------------------------------------------------------------
 }
         
 
