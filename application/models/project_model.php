@@ -321,6 +321,26 @@ class Project_model extends CI_Model {
         $last_id = $this->db->insert_id();
         return $last_id;
 	}
+
+
+
+  public function get_all_projects_by_id($id){
+    $query = $this->db->get_where('projects',array('id'=>$id));
+    return $query->result_array();
+  }
+
+  public function get_all_actionplan_by_projects_id($id){
+    $query = $this->db->get_where('project_actionplan',array('project_id'=>$id));
+    return $query->result();
+  }
+
+  public function get_all_project_data_by_name($proj_name){
+    $query = $this->db->get_where('projects',array('name'=> $proj_name));
+    return $query->num_rows();
+  }
+
+
+
 }
 ?>
 

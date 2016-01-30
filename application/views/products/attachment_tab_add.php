@@ -175,8 +175,7 @@
                         }else{
                           var classname='no_preview';
                         }
- 
-                       
+
                         $('#attachment').append('<li style=list-style-type:none;><input type=checkbox name=chk[] id="chk_attachment" class=chk_notes value='+response.id+'><a  class='+classname+'  href=uploads/products/' + response.file_name + '>' + response.file_name + '</a></li>');   
  
                         $('#attachment_tab')[0].reset();
