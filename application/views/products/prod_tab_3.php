@@ -341,7 +341,7 @@
                         $('#production_part3_h7').val(data.production_part3_7);
                         //alert(document.getElementById('production_part3_h1').value);
                         $('#chkbox_production_part3').attr('disabled',true); // Disable Checkbox
-                        $('.percentage_complete_admin').html('60%'); // Update Percentage for product update
+                        $('.percentage_complete_production').html(data.complete_bar_no+'%'); // Update Percentage for product update
                         $('.part_3_production').addClass('active'); 
                         return false;
                     }
@@ -390,9 +390,9 @@
                     if(data.status=="success"){
                         $('#production_part4_h1').val(data.production_part4_1);
                         $('#production_part4_h2').val(data.production_part4_2);
-                        //alert(document.getElementById('production_part3_h1').value);
+                        
                         $('#chkbox_production_part4').attr('disabled',true); // Disable Checkbox
-                        $('.percentage_complete_production').html('60%'); // Update Percentage for product update
+                        $('.percentage_complete_production').html(data.complete_bar_no+'%'); // Update Percentage for product update
                         $('.part_4_production').addClass('active'); 
                         return false;
                     }
@@ -443,7 +443,7 @@
                         $('#production_part5_h1').val(data.production_part5_1);
                         $('#production_part5_h2').val(data.production_part5_2);
                         $('#chkbox_production_part5').attr('disabled',true); // Disable Checkbox
-                        $('.percentage_complete_production').html('100%'); // Update Percentage for product update
+                        $('.percentage_complete_production').html(data.complete_bar_no+'%'); // Update Percentage for product update
                         $('.part_5_production').addClass('active'); 
                         return false;
                     }

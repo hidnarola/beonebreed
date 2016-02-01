@@ -120,12 +120,12 @@
 <!DOCTYPE html>
 <html>
   <head>
-  <base href="<?php echo base_url(); ?>">
+    <base href="<?php echo base_url(); ?>">
     <title>Dashboard | </title>
     <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
     <meta content='text/html;charset=utf-8' http-equiv='content-type'>
     <meta content='Flat administration template for Twitter Bootstrap. Twitter Bootstrap 3 template with Ruby on Rails support.' name='description'>
-    <link href='assets/images/meta_icons/favicon.ico' rel='shortcut icon' type='image/x-icon'>
+    <link href='assets/images/meta_icons/favicon.png' rel='shortcut icon' type='image/x-icon'>
     <link href='assets/images/meta_icons/apple-touch-icon.png' rel='apple-touch-icon-precomposed'>
     <link href='assets/images/meta_icons/apple-touch-icon-57x57.png' rel='apple-touch-icon-precomposed' sizes='57x57'>
     <link href='assets/images/meta_icons/apple-touch-icon-72x72.png' rel='apple-touch-icon-precomposed' sizes='72x72'>
@@ -140,7 +140,7 @@
     <link href="assets/stylesheets/plugins/bootstrap_datetimepicker/bootstrap-datetimepicker.min.css" media="all" rel="stylesheet" type="text/css" />
 	  <link href="assets/stylesheets/plugins/fuelux/wizard.css" media="all" rel="stylesheet" type="text/css" />
 
-    <link href='assets/images/meta_icons/favicon.ico' rel='shortcut icon' type='image/x-icon'>
+    <!-- <link href='assets/images/meta_icons/favicon.ico' rel='shortcut icon' type='image/x-icon'> -->
     <link href='assets/images/meta_icons/apple-touch-icon.png' rel='apple-touch-icon-precomposed'>
     <link href='assets/images/meta_icons/apple-touch-icon-57x57.png' rel='apple-touch-icon-precomposed' sizes='57x57'>
     <link href='assets/images/meta_icons/apple-touch-icon-72x72.png' rel='apple-touch-icon-precomposed' sizes='72x72'>
@@ -162,7 +162,7 @@
 
 	<!--<script src="assets/javascripts/bootstrap/bootstrap.js" type="text/javascript"></script>-->
 	 
-	<link href="assets/stylesheets/plugins/jquery_fileupload/jquery.fileupload-ui.css" media="all" rel="stylesheet" type="text/css" />
+	  <link href="assets/stylesheets/plugins/jquery_fileupload/jquery.fileupload-ui.css" media="all" rel="stylesheet" type="text/css" />
     <!-- / END - page related stylesheets [optional] -->
     <!-- / bootstrap [required] -->
     <link href="assets/stylesheets/bootstrap/bootstrap.css" media="all" rel="stylesheet" type="text/css" />
@@ -172,8 +172,8 @@
     <link href="assets/stylesheets/theme-colors.css" media="all" rel="stylesheet" type="text/css" />
     <!-- / demo file [not required!] -->
     <link href="assets/stylesheets/demo.css" media="all" rel="stylesheet" type="text/css" />
-	<link rel="stylesheet" href="assets/stylesheets/toastr.min.css" type="text/css" />
-	<link rel="stylesheet" href="assets/stylesheets/custom_theme.css" type="text/css" />
+	  <link rel="stylesheet" href="assets/stylesheets/toastr.min.css" type="text/css" />
+	  <link rel="stylesheet" href="assets/stylesheets/custom_theme.css" type="text/css" />
     <!-- Add fancyBox -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css" type="text/css" media="screen" />
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script>
@@ -181,7 +181,7 @@
     <script type="text/javascript" src="assets/javascripts/jquery.tokeninput.js"></script>
     <link rel="stylesheet" href="assets/stylesheets/token-input.css" type="text/css" />
     <link rel="stylesheet" href="assets/stylesheets/token-input-facebook.css" type="text/css" />
-	<script src="assets/javascripts/plugins/timeago/jquery.timeago.js" type="text/javascript"></script>
+	  <script src="assets/javascripts/plugins/timeago/jquery.timeago.js" type="text/javascript"></script>
     <!-- <link href="css/smoothness/jquery-ui-1.9.0.custom.css" rel="stylesheet"> -->
     <link href="assets/stylesheets/plugins/select2/select2.css" media="all" rel="stylesheet" type="text/css" />
     <link href="assets/stylesheets/plugins/bootstrap_colorpicker/bootstrap-colorpicker.css" media="all" rel="stylesheet" type="text/css" />
@@ -201,120 +201,14 @@
         
       <nav class='navbar navbar-default'>
 	
-        <a class='navbar-brand' href='index.html'>
+        <a class='navbar-brand' href='<?php echo base_url();?>'>
           <!-- <img width="81" height="21" class="logo" alt="Flatty" src="assets/images/logo.png" />
           <img  width="21" height="21" class="logo-xs" alt="Flatty" src="assets/images/logo_xs.png" /> -->
-		  <img  width="96" height="30" class="" alt="Flatty" src="assets/images/BOB-logo.png" />
+		    <img  width="96" height="30" class="" alt="Flatty" src="assets/images/BOB-logo.png" />
         </a>
         <a class='toggle-nav btn pull-left' href='#'>
           <i class='icon-reorder'></i>
         </a> 
-        <ul class='nav'>
-          <li class='dropdown light only-icon'>
-		 
-            <ul class='dropdown-menu color-settings'>
-			
-              <li class='divider'></li>
-			
-            </ul>
-          </li>
-		  
-          <li class='dropdown medium only-icon widget'>
-           
-            <ul class='dropdown-menu'>
-              <li>
-                <a href='#'>
-                  <div class='widget-body'>
-                    <div class='pull-left icon'>
-                      <i class='icon-user text-success'></i>
-                    </div>
-                    <div class='pull-left text'>
-                      John Doe signed up
-                      <small class='text-muted'>just now</small>
-                    </div>
-                  </div>
-                </a>
-              </li>
-              <li class='divider'></li>
-              <li>
-                <a href='#'>
-                  <div class='widget-body'>
-                    <div class='pull-left icon'>
-                      <i class='icon-inbox text-error'></i>
-                    </div>
-                    <div class='pull-left text'>
-                      New Order #002
-                      <small class='text-muted'>3 minutes ago</small>
-                    </div>
-                  </div>
-                </a>
-              </li>
-              <li class='divider'></li>
-              <li>
-                <a href='#'>
-                  <div class='widget-body'>
-                    <div class='pull-left icon'>
-                      <i class='icon-comment text-warning'></i>
-                    </div>
-                    <div class='pull-left text'>
-                      America Leannon commented Flatty with veeery long text.
-                      <small class='text-muted'>1 hour ago</small>
-                    </div>
-                  </div>
-                </a>
-              </li>
-              <li class='divider'></li>
-              <li>
-                <a href='#'>
-                  <div class='widget-body'>
-                    <div class='pull-left icon'>
-                      <i class='icon-user text-success'></i>
-                    </div>
-                    <div class='pull-left text'>
-                      Jane Doe signed up
-                      <small class='text-muted'>last week</small>
-                    </div>
-                  </div>
-                </a>
-              </li>
-              <li class='divider'></li>
-              <li>
-                <a href='#'>
-                  <div class='widget-body'>
-                    <div class='pull-left icon'>
-                      <i class='icon-inbox text-error'></i>
-                    </div>
-                    <div class='pull-left text'>
-                      New Order #001
-                      <small class='text-muted'>1 year ago</small>
-                    </div>
-                  </div>
-                </a>
-              </li>
-              <li class='widget-footer'>
-                <a href='#'>All notifications</a>
-              </li>
-            </ul>
-          </li>
-          <li class='dropdown dark user-menu'>
-            <a class='dropdown-toggle' data-toggle='dropdown' href='#'>
-              <!--<img width="23" height="23" alt="Mila Kunis" src="assets/images/avatar.jpg" />-->
-              <span class='user-name'><?php if($this->session->userdata('username')){ echo $this->session->userdata('username');} ?></span>
-              <b class='caret'></b>
-            </a>
-            <ul class='dropdown-menu'>
-             
-             
-              <li>
-                <a href='<?php echo site_url('login/logout') ?>'>
-                  <i class='icon-signout'></i>
-                  Sign out
-                </a>
-              </li>
-            </ul>
-          </li>
-        </ul>
-		
       </nav>
     </header>
     <div id='wrapper'>
@@ -380,7 +274,7 @@
               ?>
             <li class="">
               <a class='dropdown-collapse' href='#'>
-                <i class='icon-trello'></i>
+                <i class="icon-bullhorn"></i>
                 <span>Marketing</span>
                 <i class='icon-angle-down angle-down'></i>
               </a>
@@ -398,7 +292,7 @@
 
             <li class="<?php if($controller == 'barcode' || $controller == 'products'  || $controller == 'suppliers' ){ echo 'active'; }?>">
               <a class='dropdown-collapse' href='#'>
-                <i class='icon-trello'></i>
+               <i class="icon-gears"></i>
                 <span>Products</span>
                 <i class='icon-angle-down angle-down'></i>
               </a>
@@ -430,7 +324,7 @@
 			
 			
 	    <li class='' >
-            <a class="dropdown-collapse" href="#"><i class='icon-bookmark'></i>
+            <a class="dropdown-collapse" href="#"><i class="icon-upload-alt"></i></i>
               <span>Quality</span>
               <i class='icon-angle-down angle-down'></i>
               </a>
