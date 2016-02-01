@@ -323,24 +323,30 @@ class Project_model extends CI_Model {
 	}
 
 
-
+  //  get_all_projects_by_id used to fetch projects rable data by id.
+  /*  By Parth Viramgama pav */
   public function get_all_projects_by_id($id){
     $query = $this->db->get_where('projects',array('id'=>$id));
     return $query->result_array();
   }
 
+  /**  get_all_actionplan_by_project_id function used to fetch data from 
+       project_actionplan table by project id.
+  /*  By Parth Viramgama pav */
   public function get_all_actionplan_by_projects_id($id){
     $query = $this->db->get_where('project_actionplan',array('project_id'=>$id));
     return $query->result();
   }
 
+  /**  get_all_project_data_by_name function used to fetch data from 
+       projects table by project name.
+      @param  $proj_name as string
+      @return  return integer
+  /*  By Parth Viramgama pav */
   public function get_all_project_data_by_name($proj_name){
     $query = $this->db->get_where('projects',array('name'=> $proj_name));
     return $query->num_rows();
   }
-
-
-
 }
 ?>
 

@@ -11,7 +11,9 @@ class Products extends CI_Controller {
     }
 
 	public function index() {
-        $this->template->load('admin_default', 'products/index');
+		$data['products_new'] = $this->products_model->get_all_products();
+		
+        $this->template->load('admin_default', 'products/index',$data);
     }
 
     public function add() {
@@ -160,14 +162,12 @@ class Products extends CI_Controller {
     }
 
     public function product_attachment() {
-
         $config['upload_path'] = './uploads/products/';
         $config['allowed_types'] = '*';
         $this->load->library('upload', $config);
-
+        $tab = "attachments";
         if ($_FILES['file']['name']) {
             if (!$this->upload->do_upload('file')) {
-                //$error = array('error' => $this->upload->display_errors());
                 $response = array('status' => 'fail', 'msg' => $this->upload->display_errors());
                 echo json_encode($response);
                 die();
@@ -175,10 +175,10 @@ class Products extends CI_Controller {
                 $upload_data = array('uploads' => $this->upload->data('file'));
             }
         }
-        
         $data_upload = array(
             'product_id' => $this->input->post('product_id'),
             'attachment' => $upload_data['uploads']['file_name'],
+        	'tab' => $tab
         );
 
         $last_inserted_id = $this->products_model->insert_attachment($data_upload, TRUE);
@@ -648,6 +648,7 @@ class Products extends CI_Controller {
 	}	
 
 
+
 	// ------------------------------ // END PRODUCTION TAB FORM ------------------------------------------
 
         
@@ -657,15 +658,14 @@ class Products extends CI_Controller {
         // ------------------------------ START PRODUCT ATTCHMENT AND NOTES ------------------------------------------
          
         public function delete_selected_attachemnt() {
- 
             $data_append='';
             if (!empty($_POST['ids'])) {
               $ids = $_POST['ids'];
               $this->db->where_in('id', $ids);
-              
+              $tab = "attachment";
               //changes
               if ($this->db->delete('products_attachments')) {
-                $data['product_attachment'] = $this->products_model->get_product_attachment_id($_POST['pid']);
+                $data['product_attachment'] = $this->products_model->get_product_attachment_id($_POST['pid'],$tab);
                 foreach($data['product_attachment'] as $temp){
                     $data_append.="<li style=list-style-type:none;><input type='checkbox' name='chk[]' id='chk_attachment' class='chk_notes' value=".$temp->id."><a  class='no_preview'  href=uploads/products/".$temp->attachment.">".$temp->attachment."</a></li>"; 
                 	//$data_append.="hi";
@@ -694,6 +694,28 @@ class Products extends CI_Controller {
                     $notes_data_append.="<li style=list-style-type:none;><input type='checkbox' name='chk[]'' id='chk_attachment' class='chk_notes' value=".$temp->id."><a data-desc=".$temp->description." class='notes_link' id=".$temp->id." href='javascript::void(0)'>".$temp->notes."</a><span style='margin-left:60px'>".$temp->created_date."</span></li>";
                 }
                 $response = array('notes_data' => $notes_data_append,'status' => 'success');
+              } else {
+                $response = array('status' => 'fail');
+              }
+            }
+            
+            echo json_encode($response);    
+            die();
+        }
+
+        public function delete_production_tab_selected_attachemnt(){
+        	$data_append='';
+            if (!empty($_POST['ids'])) {
+              $ids = $_POST['ids'];
+              $tab = "production";
+              $this->db->where_in('id', $ids);
+              if ($this->db->delete('products_attachments')) {
+                $data['product_attachment'] = $this->products_model->get_product_attachment_id($_POST['pid'],$tab);
+              
+                foreach($data['product_attachment'] as $temp){
+                    $data_append.="<li style=list-style-type:none;><input type='checkbox' name='chk[]' id='chk_production_attachment' class='chk_notes' value=".$temp->id."><a  class='no_preview'  href=uploads/products/".$temp->attachment.">".$temp->attachment."</a></li>"; 
+                }
+                $response = array('data1' => $data_append,'status' => 'success');
               } else {
                 $response = array('status' => 'fail');
               }

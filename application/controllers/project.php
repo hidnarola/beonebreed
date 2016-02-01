@@ -167,8 +167,8 @@ class Project extends CI_Controller {
     }
   }
 
+  //adding notes in project notes
   public function project_add_notes() {
-    //adding notes in project notes
     $data_notes = array(
         'project_id' => $this->input->post('hdn_project_id'),
         'name' => $this->input->post('notes_name'),
@@ -203,7 +203,6 @@ class Project extends CI_Controller {
   }
 
   //adding link in project notes
-
   public function project_add_links() {
     $data_link = array(
         'project_id' => $this->input->post('hdn_project_id'),
@@ -223,103 +222,22 @@ class Project extends CI_Controller {
     }
   }
 
+
   public function project_archieve() {
-
-
-    //adding notes in project notes	
     $project_id = $this->input->post('id');
     if ($this->project_model->update_project_status($project_id)) {
-      $response = array('status' => 'success', 'msg' => 'Project has been successfully archieved');
-      echo json_encode($response);
-      die();
+      redirect('project');
+      // $response = array('status' => 'success', 'msg' => 'Project has been successfully archieved');
+      // echo json_encode($response);
+      // die();
     } else {
-
-      $response = array('status' => 'fail', 'msg' => 'Oops!Something Wrong!');
-      echo json_encode($response);
-      die();
+      // $response = array('status' => 'fail', 'msg' => 'Oops!Something Wrong!');
+      // echo json_encode($response);
+      // die();
     }
   }
 
-  /*
-    public function adds(){
-
-
-    if ($this->form_validation->run('project') == FALSE){
-    $data['project_type'] = $this->project_model->get_all_types();
-    $data['categories'] = $this->project_model->get_caregory();
-    $this->template->load('admin_default','project/add',$data);
-    }else{
-
-    if(!empty($_POST)){
-    $data=array(
-    'name'=>$this->input->post('name'),
-    'project_type_id'=>$this->input->post('project_type_id'),
-    'category_id'=>$this->input->post('category_id'),
-    'estimated_days'=>$this->input->post('estimated_days'),
-    'priority'=>$this->input->post('priority'),
-    'project_manager'=>$this->input->post('project_manager'),
-    'quick_notes'=>$this->input->post('quick_notes'),
-    );
-
-    $project_id=$this->project_model->add_records($data,TRUE);
-    if($project_id){
-
-    //adding notes in project notes
-    $data_notes=array(
-    'project_id'=>$project_id,
-    'name'=>$this->input->post('notes_name'),
-    'description'=>$this->input->post('description'),
-    );
-    $this->project_model->add_notes_records($data_notes,TRUE);
-
-    //adding link in project notes
-
-    $data_link=array(
-    'project_id'=>$project_id,
-    'name'=>$this->input->post('external_link'),
-    );
-    $this->project_model->add_external_link($data_link,TRUE);
-
-
-
-    //uploading attachment
-
-    $config['upload_path'] = './uploads/';
-    //$config['max_size']	= '100';
-    //$config['max_width']  = '1024';
-    //$config['max_height']  = '768';
-    $config['allowed_types'] = '*';
-    $this->load->library('upload', $config);
-
-    if ($_FILES['file']['name']) {
-    if (!$this->upload->do_upload('file')) {
-    $error = array('error' => $this->upload->display_errors());
-
-    } else {
-    $upload_data = array('uploads' => $this->upload->data('file'));
-    }
-    }
-
-    $data_upload = array(
-    'project_id' => $project_id,
-    'name' => $upload_data['uploads']['file_name'],
-    );
-
-    $this->project_model->add_attachemnt($data_upload,TRUE);
-
-
-    $this->session->set_flashdata('msg', 'Your record has been successfully added');
-    }else{
-    $this->session->set_flashdata('err_msg', 'Oops!Something Wrong!');
-    }
-    redirect('project');
-
-    }
-    }
-    } */
-
   //adding action plan
-
   public function add_action_plan($id = 0) {
 
     if ($this->form_validation->run('action_plan') == FALSE) {
@@ -360,8 +278,7 @@ class Project extends CI_Controller {
   }
 
   //adding timesheet data
-
-    public function add_timesheet($id = 0) {
+  public function add_timesheet($id = 0) {
 
         if ($this->form_validation->run('timesheet') == FALSE) {
           $data['project_id'] = $id;
@@ -401,7 +318,7 @@ class Project extends CI_Controller {
             }
           }
         }
-    }
+  }
   
   public function  add_next_timesheet($timesheet_id = 0) {
     
@@ -411,6 +328,7 @@ class Project extends CI_Controller {
     $data['attachment'] = $this->project_model->get_timesheet_attachment($timesheet_id);
     $this->template->load('admin_default', 'project/add_next_timesheet',$data);
   }
+
   public function edit_action_plan($id = 0) {
 
     if ($this->form_validation->run('action_plan') == FALSE) {
@@ -558,10 +476,15 @@ class Project extends CI_Controller {
   public function delete_selected_attachemnt() {
 
     if (!empty($_POST['ids'])) {
+      $data_append ='';
       $ids = $_POST['ids'];
       $this->db->where_in('id', $ids);
       if ($this->db->delete('project_attachments')) {
-        $response = array('status' => 'success');
+          $data['project_attachment'] = $this->project_model->get_project_attachment($_POST['pid']);
+          foreach($data['project_attachment'] as $temp){
+                    $data_append.="<li style=list-style-type:none;><input type='checkbox' name='chk[]' id='chk_attachment' class='chk_notes' value=".$temp->id."><a  class='no_preview'  href=uploads/products/".$temp->name.">".$temp->name."</a></li>"; 
+                }
+         $response = array('data1' => $data_append,'status' => 'success');
       } else {
         $response = array('status' => 'fail');
       }
@@ -590,10 +513,15 @@ class Project extends CI_Controller {
   public function delete_selected_notes() {
 
     if (!empty($_POST['ids'])) {
+      $data_append ='';
       $ids = $_POST['ids'];
       $this->db->where_in('id', $ids);
       if ($this->db->delete('project_notes')) {
-        $response = array('status' => 'success');
+         $data['project_notes'] = $this->project_model->get_project_notes($_POST['project_id']);
+          foreach($data['project_notes'] as $temp){
+                    $data_append.="<li style=list-style-type:none;><input type='checkbox' name='chk[]' id='chk_notes' class='chk_notes' value=".$temp->id."><a data-desc=".$temp->description." class='notes_link' id=".$temp->id." href='javascript::void(0)'>".$temp->name."</a><span style=margin-left:60px></span></li>"; 
+                }
+         $response = array('data1' => $data_append,'status' => 'success');
       } else {
         $response = array('status' => 'fail');
       }
@@ -606,10 +534,17 @@ class Project extends CI_Controller {
   public function delete_selected_link() {
 
     if (!empty($_POST['ids'])) {
+      $data_append='';
       $ids = $_POST['ids'];
       $this->db->where_in('id', $ids);
       if ($this->db->delete('project_external_notes')) {
-        $response = array('status' => 'success');
+       
+        $data['project_external'] = $this->project_model->get_project_external_link($_POST['pid']);
+
+          foreach($data['project_external'] as $temp){
+                    $data_append.="<li style=list-style-type:none;><input type='checkbox' name='chk[]' id='chk_external' class='chk_external' value=".$temp->id."><a data-desc=".$temp->description." class='chk_external`' id=".$temp->id." href='javascript::void(0)'>".$temp->name."</a><span style=margin-left:60px></span></li>"; 
+                }
+         $response = array('data1' => $data_append,'status' => 'success');
       } else {
         $response = array('status' => 'fail');
       }
@@ -629,6 +564,8 @@ class Project extends CI_Controller {
       echo json_encode($username);exit;     
   }
 
+  //  similar function used to load similar.php view.
+  /*  By Parth Viramgama pav */
   public function similar($id){
     $data['project_data'] = $this->project_model->get_all_projects_by_id($id);
     $data['project_action_plan'] = $this->project_model->get_all_actionplan_by_projects_id($id);
@@ -638,6 +575,8 @@ class Project extends CI_Controller {
     $this->template->load('admin_default','project/similar',$data);
   }
 
+  //  add_similar_prject gives functionlity to create new project as old project.
+  /*  By Parth Viramgama pav */
   public function add_similar_project(){
         $old_project_id =  $this->input->post('old_project_id');
 
@@ -696,6 +635,8 @@ class Project extends CI_Controller {
         }
   }   
 
+  //  add_similar_project_attachment function used to upload attachment .
+  /*  By Parth Viramgama pav */
   public function add_similar_project_attachment() {
 
     $config['upload_path'] = './uploads/';
@@ -712,11 +653,11 @@ class Project extends CI_Controller {
       }
     }
     $data_upload = array(
-        'project_id' => $this->input->post('similar_project_h1'),
+        'project_id' => $this->input->post('project_id'),
         'name' => $upload_data['uploads']['file_name'],
     );
     $last_inserted_id = $this->project_model->add_attachemnt($data_upload, TRUE);
-    
+   
     if (!empty($last_inserted_id)) {
       $response = array('status' => 'success', 'msg' => 'Your file has been successfully added', 'file_name' => $upload_data['uploads']['file_name'], 'id' => $last_inserted_id);
       echo json_encode($response);
@@ -727,4 +668,52 @@ class Project extends CI_Controller {
       die();
     }
   } 
+
+  //  add_similar_project_notes function used to upload project's notes.
+  /*  By Parth Viramgama pav */
+  public function add_similar_project_notes(){
+    $notes_li_append ='';
+    $project_id = $this->input->post('project_id');
+    $notes_title = $this->input->post('notes_title');
+    $notes_desc = $this->input->post('notes_desc');
+    $data = array(
+      'project_id' => $project_id,
+      'name' => $notes_title,
+      'description' => $notes_desc,
+      );
+    $id = $this->project_model->add_notes_records($data);
+
+    $response =array(
+      'status' => 'success',
+      'id' => $id,
+      'title' => $notes_title,
+      'desc' => $notes_desc
+      );
+    echo json_encode($response);
+    die();
+  }
+
+  //  add_similar_project_external function used to upload project's external com.
+  /*  By Parth Viramgama pav */
+  public function add_similar_project_external(){
+    $external_li_append ='';
+    $project_id = $this->input->post('project_id');
+    $external_title = $this->input->post('external_title');
+    $external_desc = $this->input->post('external_desc');
+    $data = array(
+      'project_id' => $project_id,
+      'name' => $external_title,
+      'description' => $external_desc,
+      );
+    $id = $this->project_model->add_external_link($data);
+
+    $response =array(
+      'status' => 'success',
+      'id' => $id,
+      'title' => $external_title,
+      'desc' => $external_desc
+      );
+    echo json_encode($response);
+    die();
+  }
 }

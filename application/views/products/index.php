@@ -50,44 +50,37 @@
                       Product
                     </th>
                     <th>
-                      Type
+                      Barcode-Id
                     </th>
                     <th>
-                      Code
+                      Product-Code
                     </th>
-                    <th>
+                    <!-- <th>
                       Size
-                    </th>
-                    <th>
+                    </th> -->
+                    <!-- <th>
                       UPC
-                    </th>
+                    </th> -->
                     <th>
                       Action
                     </th>
                   </tr>
                 </thead>
                 <tbody>
-                <?php 
-                    if(!empty($barcodes)) {
-                    foreach ($barcodes as $barcode) { 
-                ?>
-                    <tr>
-                      <td><?php echo $barcode['id']; ?></td>
-                      <td><?php echo $barcode['upc']; ?></td>
-                      <td><?php echo $barcode['ean']; ?></td>
-                      <td><?php echo $barcode['description']; ?></td>
-                      <td><?php echo $barcode['created_date']; ?></td>                        
-                      <td><?php echo $barcode['modified_date']; ?></td>                        
-                      <td>
-                        <div class='text-left'>
-                          <a class='btn btn-primary btn-xs' href="<?php echo base_url().'barcode/edit/'.$barcode['id']; ?>">
-                            <i class='icon-edit'></i>
-                            Edit
-                          </a>
-                        </div>
-                      </td>
-                    </tr>
-                <?php } } ?> 
+                  <?php
+                    foreach($products_new as $prod){
+                  ?>
+                      <tr>
+                        <td><?php echo $prod->id; ?></td>
+                        <td><?php echo $prod->product_name; ?></td>
+                        <td><?php echo $prod->barcode_id; ?></td>
+                        <td><?php echo $prod->product_code; ?></td>
+                        <td><a class="btn btn-default"><i class="icon-edit"></i>Edit </a> </td>
+                      </tr>
+                  <?php
+                    }
+                  ?>
+
 
                 </tbody>
               </table>
@@ -102,7 +95,5 @@
   </div>
 </div>
 <script type="text/javascript">
-  
-  
-  
+
 </script>

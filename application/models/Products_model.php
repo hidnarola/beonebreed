@@ -297,7 +297,6 @@ class Products_model extends CI_Model {
 	}
     
 
-
 	public function update_into($table,$id = null,$data){
 
         if(is_array($id)){
@@ -310,7 +309,6 @@ class Products_model extends CI_Model {
 		return $update_id;
 	}
 
-    
     
     public function get_question_part_3(){
         
@@ -353,8 +351,8 @@ class Products_model extends CI_Model {
 	 * @param  $data as integer
 	 * @return  return object
     */    
-    public function get_product_attachment_id($data){
-        $query = $this->db->where('product_id',$data)->get('products_attachments');
+    public function get_product_attachment_id($data,$tab){
+        $query = $this->db->where(array('product_id'=>$data,'tab'=>$tab))->get('products_attachments');
 	return $query->result();   
     }
    
@@ -380,7 +378,29 @@ class Products_model extends CI_Model {
          $this->db->delete($table);
          return '1';
     }
-   
+
+    /**
+	 * This returns all products data
+	 *
+	 * @param  $data as none
+	 * @return  return object
+    */
+    public function get_all_products(){
+    	$query = $this->db->get('products_new');
+    	return $query->result();
+
+     // 	$query_type = $this->db->get('products_new');
+    	// $category_type = $query_type->row_array();
+    	// $category_type_id = $category_type['category_id'];
+
+    	// $query = $this->db->get_where('categories', array('id' => $category_type_id));
+    	// return $query->result();
+    }
+
+    public function get_all_category_by_product(){
+    	$query = $this->db->get('categories');
+    	return $query->result();
+    }
    
 }
 
