@@ -30,10 +30,9 @@
 
 <!-- download popup conatiner-->
 <div class="container">
-<!-- Modal -->
+    <!-- Modal -->
      <div class="modal fade" id="my_preview_form" role="dialog">
        <div class="modal-dialog">
-
          <!-- Modal content-->
          <div class="modal-content">
            <div class="modal-header">
@@ -50,7 +49,7 @@
 
        </div>
      </div>
-   </div>
+</div>
                                        
 <!-- end of popup container -->
 
@@ -58,9 +57,10 @@
 <!-- =========================================================== -->
 <br/>
 <br/>
+<!--  =========== ATTACHMENT START ===============  -->
 <div class='row'>
     <div class='col-sm-12'>
-        <!--  =========== ATTACHMENT START ===============  -->
+        
         <form class="form" style="margin-bottom: 0;" method="post" action="#" accept-charset="UTF-8" id="attachment_tab">
             <div class="row">
                 <div class="col-sm-6">
@@ -116,7 +116,7 @@
         </form>
     </div>
 </div>
-
+<!--  =========== ATTACHMENT END ===============  -->
 
 <script type="text/javascript">
     
@@ -145,7 +145,6 @@
  
         }
         $('#myModal').modal('show');
-  
     }
 
     function attachment_upload(){
@@ -177,7 +176,6 @@
                         }
 
                         $('#attachment').append('<li style=list-style-type:none;><input type=checkbox name=chk[] id="chk_attachment" class=chk_notes value='+response.id+'><a  class='+classname+'  href=uploads/products/' + response.file_name + '>' + response.file_name + '</a></li>');   
- 
                         $('#attachment_tab')[0].reset();
                 } else {
 

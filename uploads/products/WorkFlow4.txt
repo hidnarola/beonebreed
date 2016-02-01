@@ -1,0 +1,60 @@
+06/01/2016
+	1)Create manage_faqs.php,addfaqs.php,editfaqs.php,deletefaqs.php
+		-complete Insert,Update,Delete in the above page
+	
+	2)Give the house's find functionality in all the pages(searching using user given details).
+		-Advanced searching.
+		-Display data using above searching method in list.php,list1.php,list2.php.
+
+	3)Pagination has been done in manage_caregories.php.
+	
+	4)Create contact.php for user.
+		-Given proper validation for mobile,email,field required etc.
+	
+	5)Insert user Email in database for new joining with email validation.
+	
+	6)Display data of latest offer and special offer in all the user side pages.
+
+07/01/2016
+	1)Pagination has been done in all the pages
+		-details.php, list.php, list1.php, list2.php, manage_categories.php, manage_offer.php
+
+	2)Give proper validation in all the pages
+		-details.php, list.php, list1.php, list2.php, manage_categories.php, manage_offer.php
+
+	3)Set All the links in header,footer,sidebar,newsletters column.
+
+08/01/2016	
+	1)Give proper validation in all the pages
+		-addcategories.php, addoffer.php
+
+	2)Display Newsletters on Admin Side with delete option
+
+	3)Searching option on admin side
+		-search offer in manage_offer.php
+		-search categories in manage_categories.php
+
+	4)Complete Demo Project with all funtionality
+		-searching,CRUD operation,login(session),javascript,ajax.
+
+----------------------------------CodeIgnitor--------------------------------
+09/01/2016
+	1)Attend Codeignitor Session.
+	2)Learn PHP Codeignitor
+		-Librabries
+		-Helper
+	3)Read User Guide.
+	4)Create Demo with form validation(Number,Required Field,Password,Mobile)
+		-Insert Data in Database
+
+11/01/2016
+	1)Complete CRUD operation in some demo.
+	2)Give pagination functionality.
+	3)Try Cart Library
+	
+12/01/2016
+	1)Insert,Update,Delete using shopping cart library.
+	2)Create Captcha in Registration Form and also using session in codeignitor.
+	3)Learn email library.
+	4)File Upload.
+	5)Create demo for Jquery ajax in Codeignitor.

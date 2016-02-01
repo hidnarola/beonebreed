@@ -21,7 +21,8 @@
 
                 </div>
                 <div class='box-content'>
-                    <form class="form" style="margin-bottom: 0;" method="post" action="" accept-charset="UTF-8" id="similar_project_form">   
+                    <form class="form" style="margin-bottom: 0;" method="post" action="" accept-charset="UTF-8" id="similar_project_form">
+
                         <div style="display:inline-block;float:left;width:45%" class='box-content'>
                                       
                                       <!-- Project Name -->
@@ -126,7 +127,7 @@
 
 
                                             <div class='text-right form-actions form-actions-padding-sm form-actions-padding-md form-actions-padding-lg' style='margin-bottom: 0;'>
-                                                <input type="hidden" id="similar_project_h1" name="similar_project_h1">
+                                                <input type="text" id="similar_project_h1" name="similar_project_h1">
                                                 <a class="btn btn-success" onclick="add_similar_project()">
                                                   <i class="icon-save"></i> Save
                                                 </a>
@@ -136,85 +137,78 @@
                         </div>
                                                         
                         <div class="clearfix"></div>
-                          </form> 
+                    </form> 
 
-                            <!--start of action plan-->
-                            <hr class="hr-normal">
-                            <div class="clearfix"> </div>
-                            <div class='col-sm-12' style="margin-top:15px;">
-                                                            <div class='row' style='margin-bottom:0;'>
-                                                                <div class='box-gray'>
-                                                                    <div style="" class="pull-right">
-                                                                        <a href="" id="similar_project_action_plan" onClick="return validation_action_plan()" class="btn btn-primary pull-right">Add Action Plan</a>     
-                                                                    </div>
-                                                                    <h4 class='title pull-left'>Action Plan</h4>
-                                                                    <div class="clearfix"></div>
-                                                                </div>
-                                                                <div class='box-content box-no-padding'>
-                                                                    <div class='responsive-table'>
-                                                                        <div class='scrollable-area'>
-                                                                            <table class='data-table table table-bordered table-striped' style='margin-bottom:0;'>
-                                                                                <thead>
-                                                                                    <tr>
-                                                                                        <th>Action To Take</th>
-                                                                                        <th>Responsible</th>
-                                                                                        <th>Metric Key</th>
-                                                                                        <th>Complete Level</th>
-                                                                                        <th>Date</th>
-                                                                                        <th>Action</th>
-                                                                                    </tr>
-                                                                                </thead>
-                                                                                <tbody>
-                                                                              <?php foreach ($project_action_plan as $action_plan) { ?>
-                                                                                        <tr>
-                                                                                            <td><?php echo $action_plan->action; ?> </td>
-                                                                                            <td><?php echo $action_plan->resposible; ?> </td>
-                                                                                            <td><?php echo $action_plan->mertic_key; ?> </td>
-                                                                                            <td>
-                                                                                                <!--
-                                                                                                <div class='text-right'><small id='slider-example1-amount' class="slider-example1-amount"></small>
-                                                                                                </div> <div id='slider-example1' style='margin-bottom: 20px; clear: both;' class="slider-example1"></div> -->
+                    <!--start of action plan-->
+                    <hr class="hr-normal">
+                    <div class="clearfix"> </div>
 
-                                                                                                <div class="slider" id="<?php echo $action_plan->id; ?>" data-value="<?php echo $action_plan->complete_level; ?>"></div>
-                                                                                                <p class=""><span class="slider-value"><?php
-                                                                                                        if (!empty($action_plan->complete_level)) {
-                                                                                                            echo $action_plan->complete_level . " %";
-                                                                                                        }
-                                                                                                        ?></span></p>
-                                                                                            </td>
-                                                                                                                                                                                        <td>
-                                                                                                                                                                                              <?php
-                                                                                                                                                                                                    $date = new DateTime($action_plan->created_date);
-                                                                                                                                                                                                    echo $date->format('d F Y');
-                                                                                                                                                                                                  ?>
-                                                                                                                                                                                        </td>
-                                                                                            <td>
-
-                                                                                                <div class='text-left'>
-                                                                                                    <a class='btn btn-primary btn-xs' href='<?php echo site_url('project/edit_action_plan/' . $u_key->id) ?>'>
-                                                                                                        <i class='icon-edit'></i>
-                                                                                                        Edit
-                                                                                                    </a>
-                                                                                                </div>
-                                                                                            </td>  
-                                                                                        </tr>
-                                                                                    <?php } ?> 
-
-                                                                                </tbody>
-                                                                            </table>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
+                    <div class='col-sm-12' style="margin-top:15px;">
+                      <div class='row' style='margin-bottom:0;'>
+                        <div class='box-gray'>
+                          <div style="" class="pull-right">
+                            <a href="" id="similar_project_action_plan" onClick="return validation_action_plan()" class="btn btn-primary pull-right">Add Action Plan</a>     
+                          </div>
+                          <h4 class='title pull-left'>Action Plan</h4>
+                          <div class="clearfix"></div>
+                        </div>
+                        <div class='box-content box-no-padding'>
+                            <div class='responsive-table'>
+                                <div class='scrollable-area'>
+                                    <table class='data-table table table-bordered table-striped' style='margin-bottom:0;'>
+                                        <thead>
+                                            <tr>
+                                                <th>Action To Take</th>
+                                                <th>Responsible</th>
+                                                <th>Metric Key</th>
+                                                <th>Complete Level</th>
+                                                <th>Date</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                          <?php foreach ($project_action_plan as $action_plan) { ?>
+                                            <tr>
+                                                <td><?php echo $action_plan->action; ?> </td>
+                                                <td><?php echo $action_plan->resposible; ?> </td>
+                                                <td><?php echo $action_plan->mertic_key; ?> </td>
+                                                <td>
+                                                  <div class="slider" id="<?php echo $action_plan->id; ?>" data-value="<?php echo $action_plan->complete_level; ?>"></div>
+                                                  <p class=""><span class="slider-value">
+                                                    <?php
+                                                       if(!empty($action_plan->complete_level)) {
+                                                            echo $action_plan->complete_level . " %";
+                                                        }
+                                                     ?></span>
+                                                  </p>
+                                                </td>
+                                                <td>
+                                                  <div class='text-left'>
+                                                    <a class='btn btn-primary btn-xs' href='<?php echo site_url('project/edit_action_plan/' . $u_key->id) ?>'>
+                                                        <i class='icon-edit'></i>
+                                                        Edit
+                                                    </a>
+                                                  </div>
+                                                </td>  
+                                            </tr>
+                                                <?php } ?> 
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
-                            <!-- end of action plan-->
+                        </div>
+                      </div>
+                    </div>
+                    <!-- end of action plan-->
 
-                            <hr class="hr-normal">
+                    <hr class="hr-normal">
 
-                            <!--start of timesheet plan-->
-                            <div class="clearfix">  </div>
-                            <div class='col-sm-12' style="margin-top:15px;">
-                                                            <div class='row' style='margin-bottom:0;'>
+
+                    <!--start of timesheet plan-->
+                    <div class="clearfix">  </div>
+
+                    <div class='col-sm-12' style="margin-top:15px;">
+                      <div class='row' style='margin-bottom:0;'>
                                                                 <div class='box-gray'>
                                                                     <div class="pull-right">
                                                                         <a href="" id="similar_project_daily_sheet" onClick="return validation_action_plan()" class="btn btn-primary pull-right">Add Daily Sheet</a>     
@@ -241,308 +235,256 @@
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                            </div>
+                      </div>
+                    </div>
+                    <!-- end of timesheet plan-->
+
+                    <hr class="hr-normal">
+                    
+                    <!--start of tabs -->
+                    <div class='step-pane' id='step2'>
+
+                    <!--start second step-->
+
+                    <div class="col-sm-12">
+                      <div class="row">
+                        <div class="">
+                          <ul class="nav nav-tabs" role="tablist">
+                            <li class="active"><a href="#home" role="tab" data-toggle="tab"><icon class="icon-paper-clip"></icon> Attachment</a></li>
+                            <li><a href="#profile" role="tab" data-toggle="tab"><i class="icon-file-text"></i> Notes</a></li>
+                            <li><a href="#external" role="tab" data-toggle="tab"><i class="icon-external-link"></i> External Com</a></li>
+                          </ul>
+
+                          <!-- Tab panes -->
+                          <div class="tab-content">
+                            <div class="tab-pane fade active in" id="home">
+                              <div class='row' style='margin-bottom: 0;'>
+                                  <div class="col-md-6">
+                                    <ul id="attachment" class="tab-ul"> 
+
+                                    </ul>
+                                  </div> 
+                              </div>
+                              <div class='' style='margin-bottom: 0;'>
+                                <button class='btn btn-success' type='button' data-target="#myuploadModal" data-toggle="modal">
+                                  <i class='icon-save'></i>Add
+                                </button>
+                                <button class='btn btn-danger' type='button' id="delete_my_upload">
+                                  <i class='icon-save'></i>Remove
+                                </button>
+                              </div> 
                             </div>
-                            <!-- end of timesheet plan-->
 
-                                                        <hr class="hr-normal">
-                                                        <!--start of tabs -->
-                                                        <div class='step-pane' id='step2'>
+                            <!-- preview download bootstrap files-->
+                            <div class="container">
+                                      <div class="modal fade" id="my_preview_form" role="dialog">
+                                        <div class="modal-dialog">
+                                          <div class="modal-content">
+                                            <div class="modal-header">
+                                              <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                <h4 class="modal-title"><h3 class="download_filename"> </h3></h4>
+                                            </div>
+                                            <div class="modal-body">
+                                              <a href="" class="btn btn-success my_preview_download"><i class="icon-download bounce"></i>&nbsp;Download</a>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
+                            </div>
 
-                                                            <!--start second step-->
+                            <div class="container">
+                                <form class="form" style="margin-bottom: 0;" method="post" action="#" accept-charset="UTF-8" id="project_upload_form" enctype="multipart/form-data">
+                                    <div class="modal fade" id="myuploadModal" role="dialog">
+                                        <div class="modal-dialog">      
+                                          <!-- Modal content-->
+                                          <div class="modal-content">
+                                            <div class="modal-header">
+                                              <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                              <h4 class="modal-title">Attachment</h4>
+                                            </div>
 
-                                                            <div class="col-sm-12">
-                                                                <div class="row">
-                                                                    <div class="">
-                                                                        <h3 class="title font-s-0">Timesheet</h3>
-                                                                        <!-- Nav tabs -->
+                                            <div class='box-content'>   
+                                              <div class='form-group'>
+                                                <label for='inputText'>Upload</label><span style="color:red">*</span>
+                                                <input type="file" class="form_input_contact" name="file" id="file"/>
+                                              </div>
+                                              <span style="color:red" id="file_err_msg"><span>
+                                            </div>
+
+                                            <div class="modal-footer" style="border-top: 1px solid #fff;">
+                                              <button type="button" class="btn btn-success" id="upload_form_data" onClick="uploadForm()">Save</button>
+                                              <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                                            </div>
+
+                                          </div>
+
+                                    </div>
+                                          </div>
+                                </form>
+                            </div>
+
+                                          <!-- bootstrap container end -->
+                                          <div class="tab-pane fade" id="profile"> 
+                                              <div class="tab-pane fade active in" id="home">
+                                                <div class='row' style='margin-bottom: 0;' id="notes_div_form">
+                                                    <div class="col-md-6">
+                                                      <ul id="notes" class="tab-ul">
+                                                          
+                                                      </ul>
+                                                    </div>
+                                                </div>
+
+                                                <div class="">
+                                                    <button class='btn btn-success' type='button' id="expand_notes" data-target="#expand_notes_form">
+                                                        <i class='icon-save'></i>
+                                                        Add
+                                                    </button>
+                                                    <button class='btn btn-danger' type='button' id="delete_my_upload_notes">
+                                                        <i class='icon-save'></i>
+                                                        Remove
+                                                    </button>
+                                                </div>
+                                                <hr>
+                                                <form class="form" style="margin-bottom: 0;" method="post" action="#" accept-charset="UTF-8" id="project_notes_form" >
+                                                    <div class='' style='margin-bottom: 0;display:none' id="expand_notes_form">
+                                                                    <div class='form-group'>
+                                                                      <label for='notes_title'>Title</label><span style="color:red">*</span>
+                                                                      <input class='form-control'  type='text' name='notes_title' id="notes_title" onkeyup="$('.error_notes_title').addClass('hide');" >
+                                                                      <span class="color_red error_notes_title hide">Field Is Required</span>
                                                                     </div>
-                                                                    <div class="">
-                                                                        <ul class="nav nav-tabs" role="tablist">
-                                                                            <li class="active">
-                                                                                <a href="#home" role="tab" data-toggle="tab">
-                                                                                    <icon class="icon-paper-clip"></icon> Attachment
-                                                                                </a>
-                                                                            </li>
-                                                                            <li><a href="#profile1" role="tab" data-toggle="tab">
-                                                                                    <i class="icon-file-text"></i> Notes
-                                                                                </a>
-                                                                            </li>
-                                                                            <li><a href="#external" role="tab" data-toggle="tab">
-                                                                                    <i class="icon-external-link"></i> External Com
-                                                                                </a>
-                                                                            </li>
-                                                                        </ul>
+                                                                    <div class="form-group">
+                                                                      <label for="notes_desc">Description:</label>
+                                                                      <textarea class="form-control" rows="5" id="notes_desc" name="notes_desc" onkeyup="$('.error_notes_desc').addClass('hide');"></textarea>
+                                                                      <span class="color_red error_notes_desc hide">Field Is Required</span>
+                                                                    </div>
+                                                            
+                                                                <div class="form-group">
+                                                                    <button type="button" class="btn btn-success" id="notes_form_data" onClick="uploadNotes()">Save</button>
+                                                                </div>
+                                                        </div>
+                                                    </form>
+                                                    
+                                                <!-- bootstrap container for notes information -->
+                                                <div id="my_notes_description" class="modal fade" role="dialog">
+                                                    
+                                                        <div class="modal-dialog">
+                                                            <!-- Modal content-->
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                                    <h4 class="modal-title">Notes</h4>
+                                                                </div>
+                                                                
+                                                                <div class="modal-body" id="modal_notes_desc" class="modal_notes_desc">
+                                                                   
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    
+                                                                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                                                                </div>
+                                                            </div>
+                                    
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                                <!-- bootstrap container for notes information ends -->
 
-                                                                        <!-- Tab panes -->
-                                                                        <div class="tab-content">
-                                                                            <div class="tab-pane fade active in" id="home">
-                                                                                <div class='row' style='margin-bottom: 0;'>
-                                                                                    <div class="col-md-6">
-                                                                                        <div class="attachment_wrapper">
-                                                                                            <ul id="attachment" class="tab-ul">
-                                                                                            </ul>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </div>
-
-                                                                                <div class='' style='margin-bottom: 0;'>
-                                                                                    <button class='btn btn-success' type='button' data-target="#myuploadModal" data-toggle="modal">
-                                                                                        <i class='icon-save'></i>
-                                                                                        Add
-                                                                                    </button>
-                                                                                    <button class='btn btn-danger' type='button' id="delete_my_upload">
-                                                                                        <i class='icon-save'></i>
-                                                                                        Remove
-                                                                                    </button>
-                                                                                </div>
-                                                                                
-                                                                            </div>
-                                                                          
-                                                                          <!-- preview download bootstrap files-->
-                                                                          <div class="container">
-                                                                         <!-- Modal -->
-                                                                              <div class="modal fade" id="my_preview_form" role="dialog">
-                                                                                <div class="modal-dialog">
-
-                                                                                  <!-- Modal content-->
-                                                                                  <div class="modal-content">
-                                                                                    <div class="modal-header">
-                                                                                      <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                                                                      <h4 class="modal-title"><h3 class="download_filename"> </h3></h4>
-                                                                                    </div>
-                                                                                    <!--
-                                                                                    <div class="modal-body">
-                                                                                      <h3 class="download_filename"> </h3>
-                                                                                    </div> -->
-                                                                                    <div class="modal-body">
-                                                                                      <a href="" class="btn btn-success my_preview_download"><i class="icon-download bounce"></i>&nbsp;Download</a>
-                                                                                    </div>
-                                                                                    <div class="modal-footer">
-                                                                                      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                                                                    </div>
-                                                                                  </div>
-
-                                                                                </div>
-                                                                              </div>
-
-                                                                            </div>
-
-                                                                          
-                                                                          
-                                                                          
-                                                                          
-                                                                          <!-- preview download-->
-
-                                                                            <!-- bootstrap upload container start-->
-
-                                                                            <div class="container">
-                                                                                <form class="form" style="margin-bottom: 0;" method="post" action="#" accept-charset="UTF-8" id="project_upload_form" enctype="multipart/form-data">
-                                                                                    <!-- Modal -->
-                                                                                    <div class="modal fade" id="myuploadModal" role="dialog">
-                                                                                        <div class="modal-dialog">
-                                                                                            <div class="modal-content">
-                                                                                                <div class="modal-header">
-                                                                                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                                                                                    <h4 class="modal-title">Attachment</h4>
-                                                                                                </div> 
-                                                                                                <div class='box-content'>   
-                                                                                                    <div class='form-group'>
-                                                                                                        <label for='inputText'>Upload</label><span style="color:red">*</span>
-                                                                                                        <input type="file" class="form_input_contact" name="file" id="file"/>
-                                                                                                    </div>
-                                                                                                    <span style="color:red" id="file_err_msg"><span>
-                                                                                                </div> 
-                                                                                                <div class="modal-footer" style="border-top: 1px solid #fff;">
-                                                                                                    <input type="button" class="btn btn-success" id="upload_form_data" onClick="uploadForm()" value="Save">
-                                                                                                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                                                                                                </div>
-                                                                                            </div>
-
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </form>                                
-                                                                            </div>
-
-                                                                            <div class="container">
-                                                                                <form class="form" style="margin-bottom: 0;" method="post" action="#" accept-charset="UTF-8" id="project_upload_form" enctype="multipart/form-data">
-                                                                                    <!-- Modal -->
-                                                                                    <div class="modal fade" id="myuploadModal1" role="profile1">
-                                                                                        <div class="modal-dialog">
-                                                                                            <div class="modal-content">
-                                                                                                <div class="modal-header">
-                                                                                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                                                                                    <h4 class="modal-title">Notes</h4>
-                                                                                                </div> 
-                                                                                                <div class='box-content'>   
-                                                                                                    <div class='form-group'>
-                                                                                                        <label for='inputText'>Upload</label><span style="color:red">*</span>
-                                                                                                        <input type="file" class="form_input_contact" name="file" id="file"/>
-                                                                                                    </div>
-                                                                                                    <span style="color:red" id="file_err_msg"><span>
-                                                                                                </div> 
-                                                                                                <div class="modal-footer" style="border-top: 1px solid #fff;">
-                                                                                                    <input type="button" class="btn btn-success" id="upload_form_data" onClick="uploadForm()" value="Save">
-                                                                                                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                                                                                                </div>
-                                                                                            </div>
-
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </form>                                
-                                                                            </div>
-                                                                            
-
-                                                                                                            <!-- bootstrap container end -->
-                                                                                                            <div class="tab-pane fade" id="profile"> 
-                                                                                                                <div class="tab-pane fade active in" id="home">
-                                                                                                                                                       <div class='row' style='margin-bottom: 0;' id="notes_div_form">
-                                                                                                                        <div class="col-md-6">
-                                                                                                                            <!-- <ul id="notes" class="tab-ul">
-                                                                                                                                <?php foreach ($notes as $u_key) { ?>
-                                                                                                                                    
-                                                                                                                                    <li style="list-style:none"><input type="checkbox" name="chk[]" id="chk_attachment" class="chk_notes" value="<?php echo $u_key->id; ?>"><a href="javascript:void(0)"  data-desc="<?php echo $u_key->description; ?>" class="notes_link" id="<?php echo $u_key->id; ?>"><?php echo $u_key->name; ?></a><span style="margin-left: 60px;"><?php $date = new DateTime($u_key->created_date); echo $date->format('d F Y'); ?></span></li>
-
-<?php } ?> 
-                                                                                                                            </ul> -->
-                                                                                                                        </div>
-                                                                                                                    </div>
-                                                                                                                    <div class="">
-                                                                                                                        <button class='btn btn-success' type='button' data-target="#myuploadModal1" data-toggle="modal">
-                                                                                                                            <i class='icon-save'></i>
-                                                                                                                            Add
-                                                                                                                        </button>
-                                                                                                                        <button class='btn btn-danger' type='button' id="delete_my_notes">
-                                                                                                                            <i class='icon-save'></i>
-                                                                                                                            Remove
-                                                                                                                        </button>
-                                                                                                                    </div>
-                                                                                                                    <hr>
-                                                                                                                    <form class="form" style="margin-bottom: 0;" method="post" action="#" accept-charset="UTF-8" id="project_notes_form" >
-                                                                                                                        <div class='' style='margin-bottom: 0;display:none' id="expand_notes_form">
-                                                                                                                            
-                                                                                                                            <div class='form-group'>
-                                                                                                                                <label for='inputText'>Title</label><span style="color:red">*</span>
-                                                                                                                                <input class='form-control'   type='text' name='notes_name' id="notes_title">
-                                                                                                                                <span style="color:red" id="notes_err_msg"></span>
-                                                                                                                            </div>
-                                                                                                                            <div class="form-group">
-                                                                                                                                <label for="comment">Description:</label>
-                                                                                                                                <textarea class="form-control" rows="5" id="comment" name="description"></textarea>
-                                                                                                                            </div>
-                                                                                                                            <button type="button" class="btn btn-success" id="notes_form_data">Save</button>
-                                                                                                                            <button type="button" class="btn " id="cancel_notes_form">Cancel</button>
-
-                                                                                                                        </div>
-                                                                                                                    </form>    
-                                                                                 
-                                                                                                                     <!-- bootstrap container for notes information -->
-                                                                                                                    <div id="my_notes_description" class="modal fade" role="dialog">
-                                                                                                                        <div class="modal-dialog">
-                                                                                                                            <!-- Modal content-->
-                                                                                                                            <div class="modal-content">
-                                                                                                                                <div class="modal-header">
-                                                                                                                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                                                                                                                    <h4 class="modal-title">Notes</h4>
-                                                                                                                                </div>
-                                                                                                                                <div class="modal-body" id="notes_desc">
-
-                                                                                                                                </div>
-                                                                                                                                <div class="modal-footer">
-                                                                                                                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                                                                                                                </div>
-                                                                                                                            </div>
-
-                                                                                                                        </div>
-                                                                                                                    </div>
-                                                                                                                    <!-- bootstrap container for notes information ends -->
-
-                                                                                                                </div>
-                                                                                                            </div>
-                                                                                                            <div class="tab-pane fade" id="external">
-                                                                                                                <div class="tab-pane fade active in" id="home">
-                                                                                                                    <div class='row' style='margin-bottom: 0;' id="external_link_div">
-                                                                                                                        <div class="col-md-6">
-                                                                                                                          <!--<a class="fancybox" href="uploads/Users1.pdf">Open pdf</a>-->
-                                                                                                                           <!--  <ul id="external_links" class="tab-ul">
-
-                                                                                                                                <?php foreach ($external_link as $u_key) { ?>
-                                                                                                                                    
-                                                                                                                                    <li style="list-style:none"><input type="checkbox" name="chk[]" id="chk_external_link" class="chk_external_link" value="<?php echo $u_key->id; ?>"><a href="javascript::void(0)" class="external_link_data " data-desc="<?php echo $u_key->description; ?>" ><?php echo $u_key->name; ?></a><span style="margin-left: 60px;"><?php $date = new DateTime($u_key->created_date); echo $date->format('d F Y'); ?></span></li>
-
-<?php } ?> 
-
-                                                                                                                            </ul> -->
-                                                                                                                        </div>
-                                                                                                                    </div>
-                                                                                                                    <div class="">
-                                                                                                                        <button class='btn btn-success' type='button' id="expand_external_links">
-                                                                                                                            <i class='icon-save'></i>
-                                                                                                                            Add
-                                                                                                                        </button>
-                                                                                                                        <button class='btn btn-danger' type='button' id="delete_my_external_link">
-                                                                                                                            <i class='icon-save'></i>
-                                                                                                                            Remove
-                                                                                                                        </button>   
-                                                                                                                    </div>
-                                                                                                                    <hr>
-                                                                                                                    <form class="form" style="margin-bottom: 0;" method="post" action="#" accept-charset="UTF-8" id="project_external_form" >  
-                                                                                                                        <div class='' style='margin-bottom: 0;display:none' id="expand_external_form">
-                                                                                                                             <div class='form-group'>
-                                                                                                                                <label for='inputText'>Title</label><span style="color:red">*</span>
-                                                                                                                                <input class='form-control' placeholder='Title' type='text' name='external_com' id="external_com">
-                                                                                                                                <span style="color:red" id="link_err_msg"></span>
-                                                                                                                            </div>
-                                                                                                                            <div class='form-group'>
-                                                                                                                                <label for='inputText'>Description</label>
-                                                                                                                                <textarea class="form-control" rows="5" id="comment" name="description"></textarea>
-                                                                                                                                <span style="color:red" id="link_err_msg"></span>
-                                                                                                                            </div>       
-                                                                                                                            <button type="button" class="btn btn-success" id="external_form_data">Save</button>
-                                                                                                                            <button type="button" class="btn " id="cancel_external_form">Cancel</button>
-
-                                                                                                                        </div>
-                                                                                                                    </form>    
-                                                                                                                    
-                                                                                                                     <!-- bootstrap container for external notes information -->
-                                                                                                                        <div id="my_external_description" class="modal fade" role="dialog">
-                                                                                                                            <div class="modal-dialog">
-                                                                                                                                <!-- Modal content-->
-                                                                                                                                <div class="modal-content">
-                                                                                                                                    <div class="modal-header">
-                                                                                                                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                                                                                                                        <h4 class="modal-title">External Com</h4>
-                                                                                                                                    </div>
-                                                                                                                                    <div class="modal-body" id="external_desc">
-
-                                                                                                                                    </div>
-                                                                                                                                    <div class="modal-footer">
-                                                                                                                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                                                                                                                    </div>
-                                                                                                                                </div>
-
-                                                                                                                            </div>
-                                                                                                                        </div>
-                                                                                                                        <!-- bootstrap container for notes information ends -->
-
-                                                                                                                </div>
-
-                                                                                                            </div>
-                                                                                                            </div>
-                                                                                                            </div>
-                                                                                                            </div>
-                                                                                                            </div>  
-                                                                                                            <!-- end form -->
-                                                                                                            </div>
+                                              </div>
+                                          </div>
 
 
 
-                                                                                                            </div>
+                                          <div class="tab-pane fade" id="external">
+                                              <div class="tab-pane fade active in" id="home">
+                                                    <div class='row' style='margin-bottom: 0;' id="external_link_div">
+                                                        <div class="col-md-6">
+                                              <!--<a class="fancybox" href="uploads/Users1.pdf">Open pdf</a>-->
+                                                            <ul id="external_links" class="tab-ul">
 
-                                                                                                            </div>
-                                                                                                            </div>
-                                                                                                            </div>
-                                                                                                            </div>
+                                  
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+
+
+                                                <div class="">
+                                                    <button class='btn btn-success' type='button' id="expand_external_links">
+                                                        <i class='icon-save'></i>
+                                                        Add
+                                                    </button>
+                                                    <button class='btn btn-danger' type='button' id="delete_my_external_link">
+                                                        <i class='icon-save'></i>
+                                                        Remove
+                                                    </button>   
+                                                </div> 
+                                                <hr>
+                                                <form style="margin-bottom: 0;" method="post" id="project_external_form" name="project_external_form">  
+                                                    <div class='' style='margin-bottom: 0;display:none' id="expand_external_form">
+        
+                                                  <div class='form-group'>
+                                                      <label for='external_title'>Title</label><span style="color:red">*</span>
+                                                      <input class='form-control' placeholder='Title' type='text' name='external_title' id="external_title" onkeyup="$('.error_external_title').addClass('hide');">
+                                                      <span class="color_red error_external_title hide">Field Is Required</span>
+                                                  </div>
+                                                  <div class='form-group'>
+                                                      <label for='external_desc'>Description</label>
+                                                      <textarea class="form-control" rows="5" id="external_desc" name="external_desc" onkeyup="$('.error_external_desc').addClass('hide');"></textarea>
+                                                      <span class="color_red error_external_desc hide">Field Is Required</span>
+
+                                                  </div>       
+                                                  <button type="button" class="btn btn-success" id="external_form_data" onClick="upload_External_Notes()">Save</button>
+                                                  <button type="button" class="btn" id="cancel_external_form">Cancel</button>
+
+                                                    </div>
+                                                </form>    
+
+                                            <!-- bootstrap container for external notes information -->
+                                            <div id="my_external_description" class="modal fade" role="dialog">
+                                                <div class="modal-dialog">
+                                              <!-- Modal content-->
+                                              <div class="modal-content">
+                                                  <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                <h4 class="modal-title">External Com</h4>
+                                                  </div>
+                                                  <div class="modal-body" id="modal_external_desc">
+
+                                                  </div>
+                                                  <div class="modal-footer">
+                                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                  </div>
+                                              </div>
+
+                                                </div>
+                                            </div>
+                                            <!-- bootstrap container for notes information ends -->
+
+                                              </div>
+
+                                          </div>
+                                          </div>
+                                          </div>
+                                          </div>
+                                          </div>  
+                                          <!-- end form -->
+                                          </div>
+                                          </div>
+                                          </div>
+                                          </div>
+                                          </div>
+
+
+                                          <!-- start of tab panes -->
+
+
+                                          <!--end of tab panes -->
+
+                                          </div>
+                                          </div>
+
 <div class="modal fade" id="confirm_archieve" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -604,19 +546,11 @@
 
         submitForm();
     });
-    // $(document).on("click", "#upload_form_data", function() {
 
-    //     uploadForm();
+    // $(document).on("click", "#external_form_data", function() {
+
+    //     externalForm();
     // });
-    $(document).on("click", "#notes_form_data", function() {
-
-        noteForm();
-    });
-
-    $(document).on("click", "#external_form_data", function() {
-
-        externalForm();
-    });
 
     $(document).on("click", "#expand_notes", function() {
 
@@ -644,13 +578,13 @@
      $(document).on('click', '.notes_link', function() {
 
             var data = $(this).attr("data-desc");
-            $('#notes_desc').text(data);
+            $('#modal_notes_desc').text(data);
             $('#my_notes_description').modal('show');
        });
        $(document).on('click', '.external_link_data', function() {
 
             var data = $(this).attr("data-desc");
-            $('#external_desc').text(data);
+            $('#modal_external_desc').text(data);
             $('#my_external_description').modal('show');
         });
         $(document).on('click', '#archive_projects', function() {
@@ -667,104 +601,6 @@
             return false;
         });
       
-    //deleting notes
-    $('#delete_my_notes').click(function() {
-
-        var cek_id = new Array();
-        $('.chk_notes:checked').each(function() {
-            cek_id.push($(this).val());// an array of selected values
-        });
-        if (cek_id.length == 0) {
-            alert("Please select atleast one checkbox");
-        } else {
-
-            if (confirm("Are you sure you want to delete this?")) {
-                $.ajax({
-                    url: '<?php echo base_url() . "project/delete_selected_notes"; ?>',
-                    type: 'post',
-                    data: {ids: cek_id},
-                    dataType: 'json',
-                    success: function(data) {
-
-                        if (data.status == 'success') {
-
-                            location.reload();
-                        }
-                    }
-                });
-            } else {
-                return false;
-            }
-
-        }
-    });
-
-
-
-    //deleting attachment
-    $('#delete_my_upload').click(function() {
-
-        var cek_id = new Array();
-        $('.chk_attachment:checked').each(function() {
-            cek_id.push($(this).val());// an array of selected values
-        });
-        if (cek_id.length == 0) {
-            alert("Please select atleast one checkbox");
-        } else {
-
-            if (confirm("Are you sure you want to delete this?")) {
-                $.ajax({
-                    url: '<?php echo base_url() . "project/delete_selected_attachemnt"; ?>',
-                    type: 'post',
-                    data: {ids: cek_id},
-                    dataType: 'json',
-                    success: function(data) {
-
-                        if (data.status == 'success') {
-
-                            location.reload();
-                        }
-                    }
-                });
-            } else {
-                return false;
-            }
-
-        }
-    });
-
-    //delete selected link
-    $('#delete_my_external_link').click(function() {
-
-        var cek_id = new Array();
-        $('.chk_external_link:checked').each(function() {
-            cek_id.push($(this).val());// an array of selected values
-        });
-        if (cek_id.length == 0) {
-            alert("Please select atleast one checkbox");
-        } else {
-
-            if (confirm("Are you sure you want to delete this?")) {
-                $.ajax({
-                    url: '<?php echo base_url() . "project/delete_selected_link"; ?>',
-                    type: 'post',
-                    data: {ids: cek_id},
-                    dataType: 'json',
-                    success: function(data) {
-
-                        if (data.status == 'success') {
-
-                            location.reload();
-                        }
-                    }
-                });
-            } else {
-                return false;
-            }
-
-        }
-    });
-
     function archieveProject(id){
         var project_id=id; 
         if (confirm("Are you sure you want to archieve this project?")) {
@@ -784,90 +620,6 @@
          }   
     }
     
-    function externalForm() {
-
-        $('#link_err_msg').text('');
-        var external_link = $('#external_com').val();
-
-        if (external_link == '') {
-            $('#link_err_msg').text('please enter External link');
-            $("#external_com").focus();
-            return false;
-        }
-        var data = new FormData($("#project_external_form")[0]);
-        $('#response_msg').html('');
-        $.ajax({
-            url: '<?php echo site_url('project/project_add_links'); ?>',
-            processData: false,
-            type: 'post',
-            dataType: 'json',
-            data: data,
-            contentType: false,
-            success: function(response) {
-
-                if (response.status == 'success') {
-
-                    $('#myexternalModal').modal('hide');
-                    //$("#external_links").append($("<li style=list-style-type:none;>").text(response.link_name));
-                     $('#external_links').append('<li style=list-style-type:none;><a data-desc="' + response.link_desc + '" class="external_link_data" id="' + response.link_id + '" href="javascript::void(0)">' + response.link_name + '</a><span style=margin-left:60px>'+response.dates1+'</span></li>');
-                    $('#project_external_form')[0].reset();
-                    $("#expand_external_form").css("display", "none");
-                    $('#external_link_div').show();<input type=checkbox name=chk[] id="chk_attachment" class=chk_external_link value='+response.link_id+'>
-                    //location.reload();
-
-                } else {
-
-                }
-            }
-        });
-
-        return false;
-    }
-    function noteForm() {
-
-        $('#notes_err_msg').text('');
-        var notes_title = $('#notes_title').val();
-
-
-        if (notes_title == '') {
-            $('#notes_err_msg').text('please enter notes title');
-            $("#notes_name").focus();
-            return false;
-        }
-
-        var data = new FormData($("#project_notes_form")[0]);
-        $('#response_msg').html('');
-        $.ajax({
-            url: '<?php echo site_url('project/project_add_notes'); ?>',
-            processData: false,
-            type: 'post',
-            dataType: 'json',
-            data: data,
-            contentType: false,
-            success: function(response) {
-
-                if (response.status == 'success') {
-                    
-                    $('#project_notes_form')[0].reset();
-                    $('#mynoteModal').modal('hide');
-                    //$("#notes").append($("<li style=list-style-type:none;>").text(response.notes_name));
-                    //$('#notes').append('<li style=list-style-type:none;></li>');
-                    $('#notes').append('<li style=list-style-type:none;><input type=checkbox name=chk[] id="chk_attachment" class=chk_notes value='+response.id+'><a data-desc="' + response.desc + '" class="notes_link" id="' + response.id + '" href="javascript::void(0)">' + response.notes_name + '</a><span style=margin-left:60px>'+response.dates1+'</span></li>');
-                   $("#expand_notes_form").css("display", "none");
-                   $("#notes_div_form").css("display", "block");
-
-
-                    //location.reload();
-
-                } else {
-
-                }
-            }
-        });
-
-        return false;
-    }
-
     function submitForm() {
 
         var data = new FormData($("#project_add_form")[0]);
@@ -891,12 +643,10 @@
 
         return false;
     }
-
-   
-
-    //$("#slider-example1-amount").text("$" + $("#slider-example1").slider("value"));
 </script> 
+
 <script type="text/javascript">
+
     function add_similar_project(){
       var error_cnt = 0;
       var old_project_id = $('#old_project_id').val();
@@ -975,11 +725,9 @@
 
                     $('#myuploadModal').modal('hide');
                     $('#response_msg').append('<span style=color:green; id=msgs>' + response.msg + '</span>');
-                    //location.reload();
                     var filename=response.file_name;
                     var ext1 = filename.split('.').pop();
                     var ext = ext1.toLowerCase();
-                    
                     if(ext=='pdf' || ext=='jpg' || ext=='png' || ext=='gif'){
                       
                       var classname='fancybox';
@@ -988,17 +736,163 @@
                     }
                    
                     $('#attachment').append('<li style=list-style-type:none;><input type=checkbox name=chk[] id="chk_attachment" class=chk_attachment value='+response.id+'><a  class='+classname+'  href=uploads/' + response.file_name + '>' + response.file_name + '</a></li>');
-                  
-                    //$("#attachment").append($("<input type=checkbox name=checkbox[] value='1'><li style=list-style-type:none;>").text(response.file_name));
                 } else {
                     $('#response_msg').append('<span style=color:red; id=msgs>' + response.msg + '</span>');
                 }
             }
         });
-
         return false;
     }
 
+    $('#delete_my_upload').click(function() {
+        var project_id = $('#similar_project_h1').val();
+        var cek_id = new Array();
+        $('#chk_attachment:checked').each(function() {
+            cek_id.push($(this).val());// an array of selected values
+        });
+        if (cek_id.length == 0) {
+            alert("Please select atleast one checkbox");
+        } else {
+            
+            if (confirm("Are you sure you want to delete this?")) {
+                $.ajax({
+                    url: '<?php echo base_url() . "project/delete_selected_attachemnt"; ?>',
+                    type: 'post',
+                    data: {ids: cek_id,pid: project_id},
+                    dataType: 'json',
+                    success: function(data) {
+                        if (data.status == 'success') {
+                            $('#attachment').html(data.data1);
+                        }
+                    }
+                });
+            } else {
+                return false;
+            }
+
+        }
+    });
+
+    function uploadNotes(){
+        var error_cnt = 0; 
+        var project_id = $('#similar_project_h1').val();
+        var notes_title = $('#notes_title').val();
+        var notes_desc = $('#notes_desc').val();
+        if(notes_title === ''){ $('.error_notes_title').removeClass('hide'); error_cnt++; }else{ $('.error_notes_title').addClass('hide'); }
+        //if(notes_desc === ''){ $('.error_notes_desc').removeClass('hide'); error_cnt++; }else{ $('.error_notes_desc').addClass('hide'); }
+
+        if(error_cnt!=0){
+            return false;
+        }else{    
+            var form_data = $("#project_notes_form").serializeArray();
+            form_data.push({name:"project_id",value:project_id});
+            $.ajax({
+                url: '<?php echo site_url('project/add_similar_project_notes'); ?>',
+                type: 'post',
+                dataType: 'json',
+                data: form_data,
+                success: function(response) {
+                    if(response.status == 'success') {
+                        $('#project_notes_form')[0].reset();
+                        $('#my_notes_description').modal('hide');
+                        $('#notes').append('<li style=list-style-type:none;><input type=checkbox name=chk[] id="chk_notes" class=chk_notes value='+response.id+'><a data-desc="' + response.desc + '" class="notes_link" id="' + response.id + '" href="javascript::void(0)">' + response.title + '</a><span style=margin-left:60px></span></li>');
+                        $("#expand_notes_form").css("display", "none");
+                        $("#notes_div_form").css("display", "block");
+                    }
+                }
+            });
+            return false;
+        }
+    }
+
+    $('#delete_my_upload_notes').click(function() {
+        var project_id = $('#similar_project_h1').val();
+        var cek_id = new Array();
+        $('#chk_notes:checked').each(function() {
+            cek_id.push($(this).val());// an array of selected values
+        });
+        if (cek_id.length == 0) {
+            alert("Please select atleast one checkbox");
+        } else {     
+            if (confirm("Are you sure you want to delete this?")) {
+                $.ajax({
+                    url: '<?php echo base_url() . "project/delete_selected_notes"; ?>',
+                    type: 'post',
+                    data: {ids: cek_id,project_id: project_id},
+                    dataType: 'json',
+                    success: function(data) {
+                        if (data.status == 'success') {
+                            $('#notes').html(data.data1);
+                        }
+                    }
+                });
+            } else {
+                return false;
+            }
+
+        }
+    });
+
+    function upload_External_Notes(){
+        var error_cnt = 0; 
+        var project_id = $('#similar_project_h1').val();
+        var external_title = $('#external_title').val();
+        var external_desc = $('#external_desc').val();
+        if(external_title === ''){ $('.error_external_title').removeClass('hide'); error_cnt++; }else{ $('.error_external_title').addClass('hide'); }
+        //if(notes_desc === ''){ $('.error_notes_desc').removeClass('hide'); error_cnt++; }else{ $('.error_notes_desc').addClass('hide'); }
+        
+        if(error_cnt!=0){
+            return false;
+        }else{    
+            var form_data = $("#project_external_form").serializeArray();
+            form_data.push({name:"project_id",value:project_id});
+            $.ajax({
+                url: '<?php echo site_url('project/add_similar_project_external'); ?>',
+                type: 'post',
+                dataType: 'json',
+                data: form_data,
+                success: function(response) {
+                    if(response.status == 'success') {
+                        $('#project_external_form')[0].reset();
+                        $('#external_links').append('<li style=list-style-type:none;><input type=checkbox name=chk[] id="chk_external" class=chk_external value='+response.id+'><a data-desc="' + response.desc + '" class="external_link_data" id="' + response.id + '" href="javascript::void(0)">' + response.title + '</a><span style=margin-left:60px></span></li>');
+                        //expand_external_form
+                        $("#expand_external_form").css("display", "none");
+                        $("#external_link_div").css("display", "block");
+                    }
+                }
+            });
+            return false;
+        }
+    }
+
+    $('#delete_my_external_link').click(function() {
+        var project_id = $('#similar_project_h1').val();
+        var cek_id = new Array();
+        $('.chk_external:checked').each(function() {
+            cek_id.push($(this).val());// an array of selected values
+        });
+        if (cek_id.length == 0) {
+            alert("Please select atleast one checkbox");
+        } else {
+
+            if (confirm("Are you sure you want to delete this?")) {
+                $.ajax({
+                    url: '<?php echo base_url() . "project/delete_selected_link"; ?>',
+                    type: 'post',
+                    data: {ids: cek_id,pid: project_id},
+                    dataType: 'json',
+                    success: function(data) {
+                        if (data.status == 'success') {
+                            $('#external_links').html(data.data1);
+                        }
+                    }
+                });
+            } else {
+                return false;
+            }
+
+        }
+    });
 </script>
 
 
