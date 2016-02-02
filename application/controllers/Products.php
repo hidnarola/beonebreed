@@ -12,7 +12,9 @@ class Products extends CI_Controller {
 
 	public function index() {
 		$data['products_new'] = $this->products_model->get_all_products();
-		
+		//print_r($data['products_new']);
+		//var_dump($data['products_new']);
+		//exit();
         $this->template->load('admin_default', 'products/index',$data);
     }
 
