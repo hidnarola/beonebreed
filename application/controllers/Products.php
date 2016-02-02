@@ -4,10 +4,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Products extends CI_Controller {
 
-
     public function __construct() {
         parent::__construct();
-        
     }
 
 	public function index() {
@@ -617,8 +615,10 @@ class Products extends CI_Controller {
 	public function production_form_tab_1(){
 		
 		$production_part_1_count = (int)$this->input->post('production_part_1_count');
-		
 		$product_id = $this->input->post('product_id');
+
+		// ------------------------------------------------------------------------
+
 		$decode_json = array();
 		$product_new_data = $this->products_model->getfrom('products_new',false,
 							array('where'=>array('id'=>$product_id)),array('single'=>true));
@@ -626,12 +626,19 @@ class Products extends CI_Controller {
 		if($product_new_data['production_complete'] != ''){
 			$decode_json = json_decode($product_new_data['production_complete'],true);
 			$decode_json['part_1'] = '20';
+			$complete_bar_no = array_sum(array($decode_json['part_1'],$decode_json['part_2'],$decode_json['part_3'],
+										$decode_json['part_4'],$decode_json['part_5']));
 		}else{
-			$decode_json['part_1'] = '20';
+			$decode_json['part_1'] = '20';$decode_json['part_2'] = '0';$decode_json['part_3'] = '0';
+			$decode_json['part_4'] = '0';$decode_json['part_5'] = '0';
+			$complete_bar_no = '20';
 		}
 
 		$encode_json = json_encode($decode_json);
 		$this->products_model->update_into('products_new',$product_id,array('production_complete'=>$encode_json));
+		
+		// ------------------------------------------------------------------------
+
 
 		$prod_array = array();
 
@@ -654,12 +661,17 @@ class Products extends CI_Controller {
 			}
 		}
 
-		echo json_encode(array('res'=>$prod_array));
+		echo json_encode(array('res'=>$prod_array,'complete_bar_no'=>$complete_bar_no));
 	}	
 
 	public function prod_part_1_delete(){
 		$id = $this->input->post('production_supplier');
 		$this->products_model->deletefrom('products_suppliers',$id);
+	}
+
+
+	public function production_form_tab_2(){
+		echo "Hello World";
 	}
 
 
@@ -1191,6 +1203,27 @@ class Products extends CI_Controller {
             $production_part3_q7 = array('question_id'=>'23','product_id'=>$product_id,'notes'=>$production_part3_notes2);
             $production_part3_h7 = $this->products_model->insert_into('product_question',$production_part3_q7);
 
+            // ------------------------------------------------------------------------
+
+			$decode_json = array();
+			$product_new_data = $this->products_model->getfrom('products_new',false,
+								array('where'=>array('id'=>$product_id)),array('single'=>true));
+			
+			if($product_new_data['production_complete'] != ''){
+				$decode_json = json_decode($product_new_data['production_complete'],true);
+				$decode_json['part_3'] = '20';
+				$complete_bar_no = array_sum(array($decode_json['part_1'],$decode_json['part_2'],$decode_json['part_3'],
+											$decode_json['part_4'],$decode_json['part_5']));
+			}else{
+				$decode_json['part_1'] = '0';$decode_json['part_2'] = '0';$decode_json['part_3'] = '20';
+				$decode_json['part_4'] = '0';$decode_json['part_5'] = '0';
+				$complete_bar_no = '20';
+			}
+
+			$encode_json = json_encode($decode_json);
+			$this->products_model->update_into('products_new',$product_id,array('production_complete'=>$encode_json));
+			
+			// ------------------------------------------------------------------------
 
             echo json_encode(
                     array(
@@ -1202,6 +1235,7 @@ class Products extends CI_Controller {
                         'production_part3_6'=>$production_part3_h6,
                         'production_part3_7'=>$production_part3_h7,
                         'status'=>'success',
+                        'complete_bar_no'=>$complete_bar_no,
                         'qry'=>$this->db->last_query()
                         )
                 );
@@ -1259,11 +1293,34 @@ class Products extends CI_Controller {
                 $production_part4_h2 = $this->products_model->insert_into('product_question',$production_part4_q2);
             }
 
+            // ------------------------------------------------------------------------
+
+			$decode_json = array();
+			$product_new_data = $this->products_model->getfrom('products_new',false,
+								array('where'=>array('id'=>$product_id)),array('single'=>true));
+			
+			if($product_new_data['production_complete'] != ''){
+				$decode_json = json_decode($product_new_data['production_complete'],true);
+				$decode_json['part_4'] = '20';
+				$complete_bar_no = array_sum(array($decode_json['part_1'],$decode_json['part_2'],$decode_json['part_3'],
+											$decode_json['part_4'],$decode_json['part_5']));
+			}else{
+				$decode_json['part_1'] = '0';$decode_json['part_2'] = '0';$decode_json['part_3'] = '0';
+				$decode_json['part_4'] = '20';$decode_json['part_5'] = '0';
+				$complete_bar_no = '20';
+			}
+
+			$encode_json = json_encode($decode_json);
+			$this->products_model->update_into('products_new',$product_id,array('production_complete'=>$encode_json));
+			
+			// ------------------------------------------------------------------------
+
             echo json_encode(
                     array(
                         'production_part4_1'=>$production_part4_h1,
                         'production_part4_2'=>$production_part4_h2,
                         'status'=>'success',
+                        'complete_bar_no'=>$complete_bar_no,
                         'qry'=>$this->db->last_query()
                         )
                 );
@@ -1321,11 +1378,34 @@ class Products extends CI_Controller {
 			}
 		}
 
+		// ------------------------------------------------------------------------
+
+			$decode_json = array();
+			$product_new_data = $this->products_model->getfrom('products_new',false,
+								array('where'=>array('id'=>$product_id)),array('single'=>true));
+			
+			if($product_new_data['production_complete'] != ''){
+				$decode_json = json_decode($product_new_data['production_complete'],true);
+				$decode_json['part_5'] = '20';
+				$complete_bar_no = array_sum(array($decode_json['part_1'],$decode_json['part_2'],$decode_json['part_3'],
+											$decode_json['part_4'],$decode_json['part_5']));
+			}else{
+				$decode_json['part_1'] = '0';$decode_json['part_2'] = '0';$decode_json['part_3'] = '0';
+				$decode_json['part_4'] = '0';$decode_json['part_5'] = '20';
+				$complete_bar_no = '20';
+			}
+
+			$encode_json = json_encode($decode_json);
+			$this->products_model->update_into('products_new',$product_id,array('production_complete'=>$encode_json));
+			
+			// ------------------------------------------------------------------------
+
 		echo json_encode(
                    array(
                         'production_part5_1'=>$production_part5_h1,
                         'production_part5_2'=>$production_part5_h2,
                         'status'=>'success',
+                        'complete_bar_no'=>$complete_bar_no, 
                         'qry'=>$this->db->last_query()
                         )
         );

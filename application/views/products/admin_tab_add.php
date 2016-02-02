@@ -136,7 +136,7 @@
                         <h3 class="color_grey"> PART - 2 </h3>
                     </span>
                 </div>
-                
+                                
                 <div class="col-sm-12">
                     <div class="col-sm-6">
                         <h4> RETAIL UNIT DIMENSION </h4>

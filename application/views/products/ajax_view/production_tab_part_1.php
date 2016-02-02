@@ -54,7 +54,7 @@
         <div class="form-group">
           <label class="control-label" for="product_cost_<?php echo $cnt; ?>">Product Cost</label>
           <div class="controls">
-            <input class="form-control" name="product_cost_<?php echo $cnt; ?>" id="product_cost_<?php echo $cnt; ?>" placeholder="Product Cost" type="text">
+            <input class="form-control" name="product_cost_<?php echo $cnt; ?>" onkeyup="$('.error_product_cost_<?php echo $cnt; ?>').html('');" id="product_cost_<?php echo $cnt; ?>" placeholder="Product Cost" type="text">
           </div>
           <span class="color_red error_product_cost_<?php echo $cnt; ?>"> </span>
         </div>
