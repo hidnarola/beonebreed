@@ -386,21 +386,31 @@ class Products_model extends CI_Model {
 	 * @return  return object
     */
     public function get_all_products(){
-    	$query = $this->db->get('products_new');
-    	return $query->result();
-
-     // 	$query_type = $this->db->get('products_new');
-    	// $category_type = $query_type->row_array();
-    	// $category_type_id = $category_type['category_id'];
-
-    	// $query = $this->db->get_where('categories', array('id' => $category_type_id));
-    	// return $query->result();
-    }
-
-    public function get_all_category_by_product(){
-    	$query = $this->db->get('categories');
+    	$this->db->select('products_new.id as p_id,products_new.*,categories.name,bar_code.*');
+    	$this->db->from('products_new');
+    	$this->db->join('categories','products_new.category_id=categories.id');
+    	$this->db->join('bar_code','products_new.barcode_id=bar_code.id');
+    	$query = $this->db->get();
     	return $query->result();
     }
+
+    // public function get_all_category_by_product(){
+    // 	$query = $this->db->get('categories');
+    // 	return $query->result();
+    // }
+
+    public function get_all_products_by_id($pid){
+    	$this->db->select('products_new.id as p_id,products_new.description as p_desc,products_new.*,categories.name,bar_code.id as b_id,bar_code.*,product_brand.*');
+    	$this->db->where('products_new.id',$pid);
+    	$this->db->from('products_new');
+    	$this->db->join('categories','products_new.category_id=categories.id');
+    	$this->db->join('bar_code','products_new.barcode_id=bar_code.id');
+    	$this->db->join('product_brand','products_new.brand_id=product_brand.id');
+    	$query = $this->db->get();
+    	return $query->result_array();
+    }
+
+
    
 }
 

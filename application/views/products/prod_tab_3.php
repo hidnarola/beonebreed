@@ -30,10 +30,8 @@
 
 <!-- download popup conatiner-->
 <div class="container">
-    <!-- Modal -->
      <div class="modal fade" id="my_preview_production_form" role="dialog">
        <div class="modal-dialog">
-         <!-- Modal content-->
          <div class="modal-content">
            <div class="modal-header">
              <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -233,7 +231,7 @@
                             <a class="btn btn-success" onclick="validate_production_part_3()">
                                 <i class="icon-save"></i> Save
                             </a>
-                            <a href="" class="btn btn-default">Cancel</a>
+                            <a href="<?php echo base_url()."products"; ?>" class="btn btn-default">Cancel</a>
                           </div>
                         </div>
                     </div>
@@ -300,7 +298,7 @@
                             <a class="btn btn-success" onclick="validate_production_part_4()">
                                 <i class="icon-save"></i> Save
                             </a>
-                            <a href="" class="btn btn-default">Cancel</a>
+                            <a href="<?php echo base_url()."products"; ?>" class="btn btn-default">Cancel</a>
                           </div>
                         </div>
                     </div>
@@ -377,7 +375,7 @@
                             <a class="btn btn-success" onclick="validate_production_part_5()">
                                 <i class="icon-save"></i> Save
                             </a>
-                            <a href="" class="btn btn-default">Cancel</a>
+                            <a href="<?php echo base_url()."products"; ?>" class="btn btn-default">Cancel</a>
                           </div>
                         </div>
                     </div>
@@ -389,6 +387,7 @@
 
 <script type="text/javascript">
 
+    //----------------------------------------------------------------------
     $(document).ready(function() { 
       $(".fancybox").fancybox({
           width  : 1200,
@@ -405,20 +404,23 @@
         return false;
     });
 
+    // validation Upload Attachments
+    /*  By pav */
     function production_attachment_file(){
         var product_id = $('#product_id').val();
-        product_id='1';
         if(product_id == ''){
             $(function(){ bootbox.alert('Please create product in Part-1.');  });
             return false;
         }
         $('#production_attachment_modal').modal('show');
     }
-
+    //----------------------------------------------------------------------
+    
+    // production_attachment_file Upload Attachments
+    /*  By pav */
     function production_attachment_upload(){
         if(document.getElementById("production_attachment_file").value != "") {
            var product_id = $('#product_id').val();
-            product_id='1';
             var tab='production';
             var form_data = new FormData($("#production_attachment_form")[0]);
             form_data.append("product_id", product_id);
@@ -458,7 +460,6 @@
 
     $('#delete_production_attachment').click(function() {
         var prod_id = $('#product_id').val();
-        product_id='1';
         var cek_id = new Array();
         $('#chk_production_attachment:checked').each(function() {
             cek_id.push($(this).val());// an array of selected values
@@ -485,9 +486,11 @@
 
         }
     });
+    //----------------------------------------------------------------------
+
 
     // production_part_3 Add More & Save Functionality Start
-    /*  By Parth Viramgama pav */
+    /*  By pav */
     function validate_production_part_3(){
         var error_cnt = 0;
         var product_id = $('#product_id').val();
@@ -547,7 +550,7 @@
     //----------------------------------------------------------------------
 
      // production_part_4 Add More & Save Functionality Start
-    /*  By Parth Viramgama pav */
+    /*  By pav */
     function validate_production_part_4(){
         var error_cnt = 0;
         var product_id = $('#product_id').val();
@@ -598,7 +601,7 @@
     //----------------------------------------------------------------------
 
      // production_part_5 Add More & Save Functionality Start
-    /*  By Parth Viramgama pav */
+    /*  By pav */
     function validate_production_part_5(){
         var error_cnt = 0; 
         var product_id = $('#product_id').val();
