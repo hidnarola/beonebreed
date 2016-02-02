@@ -1,8 +1,3 @@
-<style type="text/css">
-
-
-</style>
-
 <div class='row' id='content-wrapper'>
     <div class='col-xs-12'>
       <div class='row'>

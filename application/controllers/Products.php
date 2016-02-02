@@ -10,21 +10,33 @@ class Products extends CI_Controller {
 
 	public function index() {
 		$data['products_new'] = $this->products_model->get_all_products();
-		//print_r($data['products_new']);
-		//var_dump($data['products_new']);
-		//exit();
         $this->template->load('admin_default', 'products/index',$data);
     }
 
     public function add() {
-
         $data['categories'] = $this->category_model->get_all_category(1);
         $data['brands'] = $this->product_brand_model->get();
         $data['question_list_3'] = $this->products_model->get_question_part_3();
         $data['question_list_4'] = $this->products_model->get_question_part_4();
         $data['suppliers'] = $this->products_model->getfrom('suppliers');
-
         $this->template->load('admin_default', 'products/add', $data);
+    }
+
+    /**
+    * function edit() used to update product details.
+	* @author Parth Viramgama - pav
+    * */
+
+    public function edit($pid){
+    	$data['categories'] = $this->category_model->get_all_category(1);
+        $data['brands'] = $this->product_brand_model->get();
+        $data['question_list_3'] = $this->products_model->get_question_part_3();
+        $data['question_list_4'] = $this->products_model->get_question_part_4();
+        $data['suppliers'] = $this->products_model->getfrom('suppliers');
+        $data['products_new'] = $this->products_model->get_all_products_by_id($pid);
+        // var_dump($data['products_new']);
+        // exit();
+        $this->template->load('admin_default', 'products/edit', $data);
     }
 
     // ------------------------------- START ADMIN TAB FORM -----------------------------------------
@@ -237,6 +249,7 @@ class Products extends CI_Controller {
 		$cat_short_name = $this->input->post('category');
 		$description = $this->input->post('description');
 		$product_id = $this->input->post('product_id');
+		
 		$product_name = $this->input->post('product_name');
 		$product_code = $this->input->post('prod_code');
 
@@ -681,22 +694,26 @@ class Products extends CI_Controller {
  
      
  
-        // ------------------------------ START PRODUCT ATTCHMENT AND NOTES ------------------------------------------
-         
+    // ------------------------------ START PRODUCT ATTCHMENT AND NOTES ------------------------------------------
+
+		/**
+		* function delete_selected_attachemnt() used to delete attachments tab attachments.
+		*
+		* @return string
+		* @author pav
+		**/	         
         public function delete_selected_attachemnt() {
             $data_append='';
             if (!empty($_POST['ids'])) {
               $ids = $_POST['ids'];
               $this->db->where_in('id', $ids);
               $tab = "attachment";
-              //changes
               if ($this->db->delete('products_attachments')) {
                 $data['product_attachment'] = $this->products_model->get_product_attachment_id($_POST['pid'],$tab);
                 foreach($data['product_attachment'] as $temp){
                     $data_append.="<li style=list-style-type:none;><input type='checkbox' name='chk[]' id='chk_attachment' class='chk_notes' value=".$temp->id."><a  class='no_preview'  href=uploads/products/".$temp->attachment.">".$temp->attachment."</a></li>"; 
-                	//$data_append.="hi";
+                	
                 }
-                // print_r($data['product_attachment']);
                 $response = array('data1' => $data_append,'status' => 'success');
               } else {
                 $response = array('status' => 'fail');
@@ -707,6 +724,13 @@ class Products extends CI_Controller {
             die();
         }
         
+
+        /**
+		* function delete_selected_notes() used to delete attachments tab notes.
+		*
+		* @return string
+		* @author pav
+		**/	      
         public function delete_selected_notes() {
             $notes_data_append='';
             if (!empty($_POST['ids'])) {
@@ -729,6 +753,12 @@ class Products extends CI_Controller {
             die();
         }
 
+        /**
+		* function delete_production_tab_selected_attachemnt() 
+		*		   used to delete production tab attachments.
+		* @return string
+		* @author pav
+		**/	   
         public function delete_production_tab_selected_attachemnt(){
         	$data_append='';
             if (!empty($_POST['ids'])) {
@@ -751,17 +781,16 @@ class Products extends CI_Controller {
             die();
         }
         
-        // ------------------------------ END PRODUCT ATTCHMENT AND NOTES ------------------------------------------
+    // ------------------------------ END PRODUCT ATTCHMENT AND NOTES ------------------------------------------
         
-        // ------------------------------- START MARKETING TAB FORM -----------------------------------------
 
+    // ------------------------------- START MARKETING TAB FORM -----------------------------------------
 
-	
 	/**
      * fucntion marketing_part1 uses to save data about product title,highlight,paragraph highlight,introduction
 	 *
 	 * @return array
-	 * @author Parth Viramgama - pav
+	 * @author pav
 	 **/
 	
 	public function marketing_part1(){
@@ -858,7 +887,7 @@ class Products extends CI_Controller {
     * fucntion marketing_part2 uses to save data about title and its description.
 	*
 	* @return array
-	* @author Parth Viramgama - pav
+	* @author pav
 	**/
 	
 	public function marketing_part2(){
@@ -1011,7 +1040,7 @@ class Products extends CI_Controller {
     * fucntion marketing_part5 uses to save data like cost,supplier name,generated UPC Code,Notes
 	*
 	* @return array
-	* @author Parth Viramgama - pav
+	* @author pav
 	**/
 	public function marketing_part5(){
 		$product_id = $this->input->post('product_id');
@@ -1075,7 +1104,7 @@ class Products extends CI_Controller {
      * fucntion production_part3 used to save PERMANENT MARKINGS AND LABELS Details.
 	 *
 	 * @return array
-	 * @author Parth Viramgama - pav
+	 * @author pav
 	 **/
 	public function production_part3(){
 		$product_id = $this->input->post('product_id');
@@ -1248,7 +1277,7 @@ class Products extends CI_Controller {
      * fucntion production_part4 used to save MARKINGS FOR THE MASTER BOX details
 	 *
 	 * @return array
-	 * @author Parth Viramgama - pav
+	 * @author pav
 	 **/
 	public function production_part4(){
 		$product_id = $this->input->post('product_id');
@@ -1333,7 +1362,7 @@ class Products extends CI_Controller {
      * fucntion production_part4 used to save FIRST INSPECTION details
 	 *
 	 * @return array
-	 * @author Parth Viramgama - pav
+	 * @author pav
 	 **/
 	public function production_part5(){
 		$product_id = $this->input->post('product_id');

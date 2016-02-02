@@ -68,14 +68,15 @@
                     foreach($products_new as $prod){
                   ?>
                       <tr>
-                        <td><?php echo $prod->id; ?></td>
+                        <!-- changes -->
+                        <td><?php echo $prod->p_id; ?></td>
                         <td><?php echo $prod->product_name; ?></td>
                         <td><?php echo $prod->name; ?></td>
                         <td><?php echo $prod->product_code; ?></td>
                         <td><?php echo $prod->upc; ?></td>      
                         <td>
                           <div>
-                            <a class='btn btn-primary btn-xs' href=''>
+                            <a class='btn btn-primary btn-xs' href='<?php echo base_url()."products/edit/$prod->p_id";?>'>
                               <i class='icon-edit'></i>Edit
                             </a>
                           </div>
