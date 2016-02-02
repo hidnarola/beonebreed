@@ -68,6 +68,7 @@
                 </thead>
                 <tbody>
                   <?php
+                    if(!empty($products_new)) {
                     foreach($products_new as $prod){
                   ?>
                       <tr>
@@ -78,7 +79,7 @@
                         <td><a class="btn btn-default"><i class="icon-edit"></i>Edit </a> </td>
                       </tr>
                   <?php
-                    }
+                    } }
                   ?>
 
 

@@ -229,7 +229,7 @@
                                                                                         <th>
                                                                                             Complete Level
                                                                                         </th>
-																																																																																								<th>
+																						<th>
                                                                                             Date
                                                                                         </th>
                                                                                         <th>
@@ -255,14 +255,13 @@
                                                                                                         }
                                                                                                         ?></span></p>
                                                                                             </td>
-																																																																																												<td>
-																																																																																															<?php
-																																																																																																		$date = new DateTime($u_key->created_date);
-																																																																																																		echo $date->format('d F Y');
-																																																																																																	?>
-																																																																																												</td>
+																							<td>
+																								<?php
+																									$date = new DateTime($u_key->target_date);
+																									echo $date->format('d F Y');
+																								?>
+																							</td>
                                                                                             <td>
-
                                                                                                 <div class='text-left'>
                                                                                                     <a class='btn btn-primary btn-xs' href='<?php echo site_url('project/edit_action_plan/' . $u_key->id) ?>'>
                                                                                                         <i class='icon-edit'></i>

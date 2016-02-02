@@ -174,7 +174,7 @@
                                 <div class="controls">
                                     <div class='make-switch switch' data-off-label='&lt;i class="icon-remove"&gt;&lt;/i&gt;' 
                                          data-on-label='&lt;i class="icon-ok"&gt;&lt;/i&gt;'>
-                                          <input type='checkbox' name="" id="" value="">
+                                          <input type='checkbox' name="is_approve_1" id="is_approve_1" value="">
                                     </div>
                                 </div>
                             </div>
@@ -198,13 +198,14 @@
                             <label class="control-label col-sm-2" for="">IMPROVMENTS NEEDED <br/>(IF ANY)</label>
                             <div class="col-sm-10">
                               <div class="controls">
-                                <input class="form-control"  name="" id="" placeholder="Improvement Needed" type="text">
+                                <input class="form-control"  name="improvement_needed_1" 
+                                       id="improvement_needed_1" placeholder="Improvement Needed" type="text">
                               </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <input type="hidden" name="production_supplier_1" id="production_sample_1" value="">
+                <input type="hidden" name="production_sample_1" id="production_sample_1" value="">
             </div>
         </span>
         <!-- Span For Production Part 2 Div ENDS -->
@@ -300,7 +301,6 @@
                 $('#production_part_1_count').val(new_cnt);    
             }
         }
-
     }
 
     function fetch_supplier_data(data){
