@@ -15,8 +15,10 @@ class Project extends CI_Controller {
     }
 
     public function index() {
+        
         $data['inprogress_list'] = $this->project_model->get_all_inprogress_project();
         $data['idea_list'] = $this->project_model->get_all_idea_project();
+        
         $this->template->load('admin_default', 'project/index', $data);
     }
 
@@ -28,60 +30,45 @@ class Project extends CI_Controller {
     public function add() {
 
         if ($this->form_validation->run('project') == FALSE) {    
+            
             $data['project_type'] = $this->project_model->get_all_types();
             $data['categories'] = $this->project_model->get_caregory();
             $data['project_manager'] = $this->project_model->get_project_manager();
             $this->template->load('admin_default', 'project/add', $data);
+
         }else{
 
-            if (!empty($_POST)) {
+            $category_id = 0;
+            $quick_notes = '';
+            $estimated_days = 0;
+            $priority = 0;
+            $project_manager = '';
 
-                if ($this->input->post('category_id')=='') {
-                  $category_id = 0;
-                } else {
-                  $category_id = $this->input->post('category_id');
-                }
+            $category_id = $this->input->post('category_id');
+            $estimated_days = $this->input->post('estimated_days');
+            $priority = $this->input->post('priority');
+            $project_manager = $this->input->post('project_manager');
+            $quick_notes = $this->input->post('quick_notes');
 
-                if ($this->input->post('estimated_days')=='') {
-                  $estimated_days = 0;
-                } else {
-                  $estimated_days = $this->input->post('estimated_days');
-                }
+            $created_by = $this->session->userdata('id');
+            
+            $data = array(
+                'name' => $this->input->post('name'),
+                'project_type_id' => $this->input->post('project_type_id'),
+                'category_id' => $category_id,
+                'estimated_days' => $estimated_days,
+                'priority' => $priority,
+                'project_manager' => $project_manager,
+                'quick_notes' => $quick_notes,
+                'created_by' => $created_by,
+                'created_date'=>date("Y-m-d H:i:s"),
+            );
 
-                if ($this->input->post('priority')=='') {
-                  $priority = 0;
-                } else {
-                  $priority = $this->input->post('priority');
-                }
+            $id = $this->project_model->add_records($data, TRUE);
 
-                if ($this->input->post('project_manager')=='') {
-                  $project_manager = '';
-                } else {
-                  $project_manager = $this->input->post('project_manager');
-                }
-
-                if ($this->input->post('quick_notes')=='') {
-                  $quick_notes = '';
-                } else {
-                  $quick_notes = $this->input->post('quick_notes');
-                }
-
-                $data = array(
-                    'name' => $this->input->post('name'),
-                    'project_type_id' => $this->input->post('project_type_id'),
-                    'category_id' => $category_id,
-                    'estimated_days' => $estimated_days,
-                    'priority' => $priority,
-                    'project_manager' => $project_manager,
-                    'quick_notes' => $quick_notes,
-                    'created_date'=>date("Y-m-d H:i:s"),
-                );
-
-                $id = $this->project_model->add_records($data, TRUE);
-                if($id){                  
-                    redirect('project/add_next/' . $id);
-                }
-            }
+            if($id){                  
+                redirect('project/add_next/' . $id);
+            }            
         }
     }
 

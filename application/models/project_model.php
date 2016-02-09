@@ -117,8 +117,11 @@ class Project_model extends CI_Model {
     $project_type = $query_type->row_array();
     $project_type_id = $project_type['id'];
 
-    $query = $this->db->get_where('projects', array('project_type_id' => $project_type_id, 'status' => 'active'));
-    return $query->result();
+    $this->db->select('projects.*,projects.id as pid,projects.created_date as p_created_at,users.*');
+    $this->db->join('users', 'users.id = projects.created_by', 'right');
+    $query = $this->db->get_where('projects', array('projects.project_type_id' => $project_type_id, 'projects.status' => 'active'));
+    $d = $query->result();
+    return $d;
   }
 
   //get project types
