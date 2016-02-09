@@ -1,5 +1,4 @@
 <?php
-
 class Client extends CI_Controller {
 
     public function __construct() {
@@ -16,6 +15,8 @@ class Client extends CI_Controller {
         }
     }
 
+
+   
     public function index() {
         $data['client_list'] = $this->client_model->get_all_client();
         $this->template->load('admin_default', 'client/index', $data);
