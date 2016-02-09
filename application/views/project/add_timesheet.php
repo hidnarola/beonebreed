@@ -6,11 +6,25 @@
 			  <i class='icon-table'></i>
 			  <span>Manage Project</span>
 			</h1>
-			<div class='pull-right'>
-			  <ul class='breadcrumb'>
-			  
-			  </ul>
-			</div>
+			<ul class='breadcrumb' style="padding-top: 62px;">
+                    <li class='separator'>
+                    </li>
+                    <li>
+                        <a href='<?php echo site_url('project/') ?>'>Design/Manage Project</a>
+                    </li>
+                    <li class='separator'>
+                        <i class='icon-angle-right'></i>
+                    </li>
+                    <li>
+                        <a href='<?php echo site_url('project/edit/' . $project_id); ?>'>Edit Project</a>
+                    </li>
+                    <li class='separator'>
+                        <i class='icon-angle-right'></i>
+                    </li>
+                    <li>
+                        Add Daily Sheet
+                    </li>
+                </ul>
 		  </div>
 		</div>
 	  </div>

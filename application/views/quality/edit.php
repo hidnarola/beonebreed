@@ -13,9 +13,19 @@
 					} ?>
 			</span>
 		    </h1>
-		    <div class='pull-right'>
-
-		    </div>
+		    <ul class='breadcrumb' style="padding-top: 62px;">
+                        <li class='separator'>
+                        </li>
+                        <li>
+                            <a href="<?php echo site_url('quality/index/'.$client_id); ?>">Quality/Store Report</a>
+                        </li>
+                        <li class='separator'>
+                            <i class='icon-angle-right'></i>
+                        </li>
+                        <li>
+                            Store Report
+                        </li>
+                    </ul>
 		</div>
 	    </div>
 	</div>

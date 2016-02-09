@@ -8,7 +8,13 @@
             <i class='icon-table'></i>
             <span>Production Products</span>
           </h1>
-          
+          <ul class='breadcrumb' style="padding-top: 60px;">
+                        <li class='separator'>
+                        </li>
+                        <li>
+                            Production/Products
+                        </li>
+                    </ul>
           <div class='pull-right'>  
             <!-- <a href="<?php echo base_url().'barcode/import'; ?>" class="btn btn-success">Import UPC EAN Codes</a> -->
 
