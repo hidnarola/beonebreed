@@ -8,9 +8,13 @@
 			<i class='icon-trello'></i>
 			<span>Manage News</span>
 		    </h1>
-		    <div class='pull-right'>
-
-		    </div>
+		    <ul class='breadcrumb' style="padding-top: 62px;">
+                        <li class='separator'>
+                        </li>
+                        <li>
+                            Marketing/News
+                        </li>
+                    </ul>
 		</div>
 	    </div>
 	</div>

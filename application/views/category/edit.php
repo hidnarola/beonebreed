@@ -7,26 +7,19 @@
                       <i class='icon-edit'></i>
                      <span>Category</span>
                     </h1>
-					<!--
-                    <div class='pull-right'>
-                      <ul class='breadcrumb'>
-                        <li>
-                          <a href='index.html'>
-                            <i class='icon-bar-chart'></i>
-                          </a>
-                        </li>
+				<ul class='breadcrumb' style="padding-top: 62px;">
                         <li class='separator'>
-                          <i class='icon-angle-right'></i>
                         </li>
                         <li>
-                          Forms
+                            <a href="<?php echo site_url('category'); ?>">Settings/Design/Project Category</a>
                         </li>
                         <li class='separator'>
-                          <i class='icon-angle-right'></i>
+                            <i class='icon-angle-right'></i>
                         </li>
-                        <li class='active'>Form styles and features</li>
-                      </ul>
-                    </div>-->
+                        <li>
+                            Edit Category
+                        </li>
+                    </ul>
                   </div>
                 </div>
               </div>

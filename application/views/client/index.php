@@ -7,6 +7,13 @@
 			  <i class='icon-user'></i>
 			  <span>Manage Client</span>
 			</h1>
+                      <ul class='breadcrumb' style="padding-top: 62px;">
+                        <li class='separator'>
+                        </li>
+                        <li>
+                            Settings/Client
+                        </li>
+                    </ul>
 			<div class='pull-right'>
 			 
 			</div>

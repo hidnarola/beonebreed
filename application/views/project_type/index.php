@@ -7,9 +7,13 @@
 			  <i class='icon-book'></i>
 			  <span>Manage Project Type</span>
 			</h1>
-			<div class='pull-right'>
-			 
-			</div>
+			<ul class='breadcrumb' style="padding-top: 62px;">
+                        <li class='separator'>
+                        </li>
+                        <li>
+                            Settings/Design/Project Type
+                        </li>
+                    </ul>
 		  </div>
 		</div>
 	  </div>

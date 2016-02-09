@@ -8,6 +8,19 @@
             <i class='icon-user'></i>
             <span>Manage Client</span>
           </h1>
+            <ul class='breadcrumb' style="padding-top: 62px;">
+                <li class='separator'>
+                </li>
+                <li>
+                    <a href="<?php echo site_url('client'); ?>">Settings/Client</a>
+                </li>
+                <li class='separator'>
+                    <i class='icon-angle-right'></i>
+                </li>
+                <li>
+                    Add Client
+                </li>
+            </ul>
           <div class='pull-right'>
 
           </div>
