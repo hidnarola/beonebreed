@@ -19,6 +19,7 @@
         </div>
 
 
+
         <?php if ($this->session->flashdata('msg') != '') { ?>
 
             <div class='alert alert-success alert-dismissable'>
@@ -45,7 +46,6 @@
 
 
                         <a href="<?php echo site_url('project/add') ?>" class="btn btn-primary pull-right">Add Project</a>     
-
                         <a class="btn box-collapse btn-xs btn-link" href="#">
                         </a>
                     </div>
@@ -176,6 +176,7 @@
                     <div class='actions'>
 
 
+
                         <a class="btn box-collapse btn-xs btn-link" href="#">
                         </a>
                     </div>
@@ -254,3 +255,13 @@
         <!--end of idea project -->
     </div>
 </div>
+
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        $(".fancybox").fancybox({
+            openEffect  : 'none',
+            closeEffect : 'none'
+        });
+    });
+</script>
