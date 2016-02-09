@@ -15,22 +15,22 @@ $config = array(
         array(
             'field' => 'estimated_days',
             'label' => 'Estimate Days',
-            'rules' => 'numeric'
+            'rules' => 'required'
         ),
         array(
             'field' => 'category_id',
             'label' => 'category_id',
-            'rules' => 'trim'
+            'rules' => 'trim|required'
         ),
         array(
             'field' => 'priority',
             'label' => 'priority',
-            'rules' => 'trim'
+            'rules' => 'trim|required'
         ),
         array(
             'field' => 'project_manager',
             'label' => 'project_manager',
-            'rules' => 'trim'
+            'rules' => 'trim|required'
         ),
         array(
             'field' => 'quick_notes',
