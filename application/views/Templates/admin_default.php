@@ -1061,8 +1061,36 @@
 			}, 3000);
 			
             $(".js-example-data-array-selected").select2();
+
+    
+    setDataTable($(".for_action_dt"));
+
+    this.setDataTable = function(selector) {
+        if (jQuery().dataTable) {
+            var dt, sdom;
+            if ($(selector).data("pagination-top-bottom") === true) {
+              sdom = "<'row datatables-top'<'col-sm-6'l><'col-sm-6 text-right'pf>r>t<'row datatables-bottom'<'col-sm-6'i><'col-sm-6 text-right'p>>";
+            } else if ($(selector).data("pagination-top") === true) {
+              sdom = "<'row datatables-top'<'col-sm-6'l><'col-sm-6 text-right'pf>r>t<'row datatables-bottom'<'col-sm-6'i><'col-sm-6 text-right'>>";
+            } else {
+              sdom = "<'row datatables-top'<'col-sm-6'l><'col-sm-6 text-right'f>r>t<'row datatables-bottom'<'col-sm-6'i><'col-sm-6 text-right'p>>";
+            }
+            dt = $(selector).DataTable({
+              sDom: sdom,
+              sPaginationType: "bootstrap",
+              "iDisplayLength": $(selector).data("pagination-records") || 10,
+              oLanguage: {
+                sLengthMenu: "_MENU_ records per page"
+              },
+              
+            dt.closest('.dataTables_wrapper').find('div[id$=_filter] input').css("width", "200px");
+            return dt.closest('.dataTables_wrapper').find('input').addClass("form-control input-sm").attr('placeholder', 'Search');
+        }
+    };
+
         });
-        
+    
+    
 /*        
 $("#select2-tags").select2({  
           tags: ["today", "tomorrow", "toyota"],

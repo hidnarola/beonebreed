@@ -96,14 +96,19 @@
     if (jQuery().tabdrop) {
       $('.nav-responsive.nav-pills, .nav-responsive.nav-tabs').tabdrop();
     }
+
     setDataTable($(".data-table"));
+
     setDataTable($(".data-table-column-filter"));
+
     if (jQuery().wysihtml5) {
       $('.wysihtml5').wysihtml5();
     }
+    
     if (jQuery().nestable) {
       $('.dd-nestable').nestable();
     }
+
     if (!$("body").hasClass("fixed-header")) {
       if (jQuery().affix) {
         $('#main-nav.main-nav-fixed').affix({

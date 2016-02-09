@@ -208,7 +208,7 @@
                                                                 <div class='box-content box-no-padding'>
                                                                     <div class='responsive-table'>
                                                                         <div class='scrollable-area'>
-                                                                            <table class='data-table table table-bordered table-striped' style='margin-bottom:0;'>
+                                                                            <table class='for_action_dt table table-bordered table-striped' style='margin-bottom:0;'>
                                                                                 <thead>
                                                                                     <tr>
                                                                                         <th>
@@ -223,7 +223,7 @@
                                                                                         <th>
                                                                                             Complete Level
                                                                                         </th>
-																						<th>
+																						<th class="test_date">
                                                                                             Date
                                                                                         </th>
                                                                                         <th>
@@ -718,6 +718,8 @@
           height : 900,
           type   :'iframe'
       });
+
+
     });
 
     $(document).on("click", "#btn_finish_send", function() {
@@ -883,6 +885,8 @@
 </script>	
 
 <script type="text/javascript">
+
+  
 
     function add_similar_project(){
       var error_cnt = 0;
