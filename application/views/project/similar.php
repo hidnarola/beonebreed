@@ -116,18 +116,24 @@
                                             <!-- Project Manager  -->
                                             <div class='form-group'>
                                                 <label for='inputText'>Project manager</label>
-                                                    <input class='form-control' id='inputText' placeholder='Project manager' type='text' name='project_manager' 
-                                                        value="<?php
-                                                                  if (!empty($project_data[0]['project_manager'])) {
-                                                                        echo $project_data[0]['project_manager'];
-                                                                  }
-                                                                ?>"
-                                                    >
+                                                    <select class="js-example-data-array-selected form-control" name="project_manager">
+                                                        <option value="">Select Project Manager</option>
+                                                          <?php
+                                                          if (!empty($project_manager)) {
+                                                            foreach ($project_manager as $k => $v) {
+                                                              ?>
+                                                              <option value="<?php echo $v->username; ?>" <?php echo set_select('project_manager',$v->username); ?>><?php echo ucfirst($v->username); ?></option>
+
+                                                              <?php
+                                                            }
+                                                          }
+                                                          ?>    
+                                                    </select>
                                             </div>
 
 
                                             <div class='text-right form-actions form-actions-padding-sm form-actions-padding-md form-actions-padding-lg' style='margin-bottom: 0;'>
-                                                <input type="text" id="similar_project_h1" name="similar_project_h1">
+                                                <input type="hidden" id="similar_project_h1" name="similar_project_h1">
                                                 <a class="btn btn-success" onclick="add_similar_project()">
                                                   <i class="icon-save"></i> Save
                                                 </a>
@@ -181,6 +187,12 @@
                                                         }
                                                      ?></span>
                                                   </p>
+                                                </td>
+                                                <td>
+                                                    <?php
+                                                        $date = new DateTime($u_key->target_date);
+                                                        echo $date->format('d F Y');
+                                                    ?>
                                                 </td>
                                                 <td>
                                                   <div class='text-left'>

@@ -28,12 +28,6 @@
                          </a>
                     </h4>
                 <?php } ?>
-                <!--
-                <div class='pull-right'>
-                    <ul class='breadcrumb'>
-
-                    </ul>
-                </div> -->
             </div>
         </div>
     </div>
@@ -42,13 +36,13 @@
     <?php if ($this->session->flashdata('msg')!='') { ?>
         <div class='alert alert-success alert-dismissable'>
             <a class="close" data-dismiss="alert" href="#">&times;</a>
-            <i class='icon-ok-sign'></i>
+                <i class='icon-ok-sign'></i>
             <?php
-            if ($this->session->flashdata('msg')):echo $this->session->flashdata('msg');
-            endif;
+                if ($this->session->flashdata('msg')):echo $this->session->flashdata('msg');
+                endif;
             ?>  
         </div>
-<?php } ?>
+    <?php } ?>
     <div class='row'>
         <div class='col-sm-12'>
             <div class='box'>
@@ -353,6 +347,78 @@
                                                             </div>
                                                         </div>
                                                         <!-- end of timesheet plan-->
+
+
+
+                                                         <hr class="hr-normal">
+
+                                                        <!--start of timesheet plan-->
+
+
+        <div class="clearfix">  </div>
+
+        <div class='col-sm-12' style="margin-top:15px;">
+            <div class='row' style='margin-bottom:0;'>
+                <div class='box-gray'>
+                    <div class="pull-right">
+                        <a href="<?php echo site_url('suppliers/add') ?>" class="btn btn-primary pull-right">Add Supplier
+                        </a>     
+                    </div>
+                    <h4 class='title pull-left'>Suppliers</h4>
+                    <div class="clearfix"></div>
+                </div>
+                <div class='box-content box-no-padding'>
+                    <div class='responsive-table'>
+                        <div class='scrollable-area'>
+                            <table class='data-table table table-bordered table-striped' style='margin-bottom:0;'>
+                                <thead>
+                                     <tr>                    
+                                        <th class="text-center">
+                                          Potential Level
+                                        </th>
+                                        <th>
+                                          Supplier Name
+                                        </th>
+                                        <th>
+                                          Created Date
+                                        </th>
+                                        <th>
+                                          Action
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                       <?php 
+                                            if(!empty($suppliers)) {
+                                            foreach ($suppliers as $supplier) { 
+                                        ?>
+                                            <tr>
+                                              <td class="text-center"><?php echo $supplier['potential_level']; ?></td>
+                                              <td><?php echo $supplier['supplier_name']; ?></td>
+                                              <td><?php echo $supplier['created_date']; ?></td>                        
+                                              <td>
+                                                <div class='text-left'>
+                                                  <a class='btn btn-primary btn-xs' href="<?php echo base_url().'suppliers/edit/'.$supplier['id']; ?>">
+                                                    <i class='icon-edit'></i>
+                                                    Edit
+                                                  </a>
+                                                </div>
+                                              </td>
+                                            </tr>
+                                        <?php } } ?> 
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- end of timesheet plan-->
+
+
+
+
 
                                                         <hr class="hr-normal">
                                                         <!--start of tabs -->
@@ -697,7 +763,6 @@
         });
 
     $(document).on('click', '#archive_projects', function() {
-        alert('hi');
         var id = $(this).attr("data-archieve");
         archieveProject(id);
     });

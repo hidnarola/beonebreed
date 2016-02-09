@@ -355,7 +355,7 @@
         var data = new FormData($("#project_external_form")[0]);
         $('#response_msg').html('');
         $.ajax({
-            url: '<?php echo site_url('Client_quality/quality_add_links'); ?>',
+            url: '<?php echo site_url("client_quality/quality_add_links"); ?>',
             processData: false,
             type: 'post',
             dataType: 'json',
@@ -391,7 +391,7 @@
         }
         $('#response_msg').html('');
         $.ajax({
-            url: '<?php echo site_url('Client_quality/quality_add_notes'); ?>',
+            url: '<?php echo site_url("client_quality/quality_add_notes"); ?>',
             processData: false,
             type: 'post',
             dataType: 'json',

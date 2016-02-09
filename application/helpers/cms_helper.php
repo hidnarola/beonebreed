@@ -23,6 +23,13 @@ function p($data, $is_die = false){
 	die;	
 }
 
+function exists($string) {
+  if ($string != '') {
+    return $string;
+  }
+  return '';
+}
+
 
 /**
  * function will return alert box with alert alert-danger class and mostly used for indivisual error in form validation

@@ -1,88 +1,89 @@
 <?php
-
 class Project extends CI_Controller {
 
-  public function __construct() {
-    parent::__construct();
-    $this->load->library('template');
-    $this->load->helper('url');
-    $this->load->helper('form');
-    $this->load->database();
-    $this->load->model('project_model');
-    $this->load->library('form_validation');
-    if ($this->session->userdata('admin_logged_in')=='') {
-      redirect('/login');
+    public function __construct() {
+        parent::__construct();
+        $this->load->library('template');
+        $this->load->helper('url');
+        $this->load->helper('form');
+        $this->load->database();
+        $this->load->model('project_model');
+        $this->load->library('form_validation');
+        if ($this->session->userdata('admin_logged_in')=='') {
+            redirect('/login');
+        }
     }
-  }
 
-  public function index() {
-    $data['inprogress_list'] = $this->project_model->get_all_inprogress_project();
-    $data['idea_list'] = $this->project_model->get_all_idea_project();
-    $this->template->load('admin_default', 'project/index', $data);
-  }
-
-  public function archieve_projects() {
-    $data['archieve_list'] = $this->project_model->get_all_archieve_project();
-    $this->template->load('admin_default', 'project/archieve', $data);
-  }
-
-  public function add() {
-
-    if ($this->form_validation->run('project') == FALSE) {    
-      $data['project_type'] = $this->project_model->get_all_types();
-      $data['categories'] = $this->project_model->get_caregory();
-      $data['project_manager'] = $this->project_model->get_project_manager();
-      $this->template->load('admin_default', 'project/add', $data);
-    }else{
-
-      if (!empty($_POST)) {
-
-        if ($this->input->post('category_id')=='') {
-          $category_id = 0;
-        } else {
-          $category_id = $this->input->post('category_id');
-        }
-
-        if ($this->input->post('estimated_days')=='') {
-          $estimated_days = 0;
-        } else {
-          $estimated_days = $this->input->post('estimated_days');
-        }
-        if ($this->input->post('priority')=='') {
-          $priority = 0;
-        } else {
-          $priority = $this->input->post('priority');
-        }
-        if ($this->input->post('project_manager')=='') {
-          $project_manager = '';
-        } else {
-          $project_manager = $this->input->post('project_manager');
-        }
-        if ($this->input->post('quick_notes')=='') {
-          $quick_notes = '';
-        } else {
-          $quick_notes = $this->input->post('quick_notes');
-        }
-
-        $data = array(
-            'name' => $this->input->post('name'),
-            'project_type_id' => $this->input->post('project_type_id'),
-            'category_id' => $category_id,
-            'estimated_days' => $estimated_days,
-            'priority' => $priority,
-            'project_manager' => $project_manager,
-            'quick_notes' => $quick_notes,
-            'created_date'=>date("Y-m-d H:i:s"),
-        );
-
-        $id = $this->project_model->add_records($data, TRUE);
-        if ($id) {
-          
-          redirect('project/add_next/' . $id);
-        }
-      }
+    public function index() {
+        $data['inprogress_list'] = $this->project_model->get_all_inprogress_project();
+        $data['idea_list'] = $this->project_model->get_all_idea_project();
+        $this->template->load('admin_default', 'project/index', $data);
     }
-  }
+
+    public function archieve_projects() {
+        $data['archieve_list'] = $this->project_model->get_all_archieve_project();
+        $this->template->load('admin_default', 'project/archieve', $data);
+    }
+
+    public function add() {
+
+        if ($this->form_validation->run('project') == FALSE) {    
+            $data['project_type'] = $this->project_model->get_all_types();
+            $data['categories'] = $this->project_model->get_caregory();
+            $data['project_manager'] = $this->project_model->get_project_manager();
+            $this->template->load('admin_default', 'project/add', $data);
+        }else{
+
+            if (!empty($_POST)) {
+
+                if ($this->input->post('category_id')=='') {
+                  $category_id = 0;
+                } else {
+                  $category_id = $this->input->post('category_id');
+                }
+
+                if ($this->input->post('estimated_days')=='') {
+                  $estimated_days = 0;
+                } else {
+                  $estimated_days = $this->input->post('estimated_days');
+                }
+
+                if ($this->input->post('priority')=='') {
+                  $priority = 0;
+                } else {
+                  $priority = $this->input->post('priority');
+                }
+
+                if ($this->input->post('project_manager')=='') {
+                  $project_manager = '';
+                } else {
+                  $project_manager = $this->input->post('project_manager');
+                }
+
+                if ($this->input->post('quick_notes')=='') {
+                  $quick_notes = '';
+                } else {
+                  $quick_notes = $this->input->post('quick_notes');
+                }
+
+                $data = array(
+                    'name' => $this->input->post('name'),
+                    'project_type_id' => $this->input->post('project_type_id'),
+                    'category_id' => $category_id,
+                    'estimated_days' => $estimated_days,
+                    'priority' => $priority,
+                    'project_manager' => $project_manager,
+                    'quick_notes' => $quick_notes,
+                    'created_date'=>date("Y-m-d H:i:s"),
+                );
+
+                $id = $this->project_model->add_records($data, TRUE);
+                if($id){                  
+                    redirect('project/add_next/' . $id);
+                }
+            }
+        }
+    }
 
   	
   public function add_next($id = 0) {
@@ -399,14 +400,12 @@ class Project extends CI_Controller {
     $data['project_type'] = $this->project_model->get_all_types();
     $data['categories'] = $this->project_model->get_caregory();
     $data['project'] = $this->project_model->get($id);
-
     $data['action_plan'] = $this->project_model->get_action_plan($id);
-
     $data['timesheet'] = $this->project_model->get_timesheet($id);
-
     $data['attachment'] = $this->project_model->get_project_attachment($id);
     $data['notes'] = $this->project_model->get_project_notes($id);
     $data['external_link'] = $this->project_model->get_project_external_link($id);
+    $data['suppliers']  =$this->products_model->getfrom('suppliers');
 
     if (!empty($data['project'])) {
       $this->template->load('admin_default', 'project/edit', $data);
@@ -571,6 +570,7 @@ class Project extends CI_Controller {
     $data['project_action_plan'] = $this->project_model->get_all_actionplan_by_projects_id($id);
     $data['project_type'] = $this->project_model->get_all_types();
     $data['categories'] = $this->project_model->get_caregory();
+    $data['project_manager'] = $this->project_model->get_project_manager();
     $data['notes'] = $this->project_model->get_project_notes($id);
     $this->template->load('admin_default','project/similar',$data);
   }
@@ -716,4 +716,6 @@ class Project extends CI_Controller {
     echo json_encode($response);
     die();
   }
+  
+
 }

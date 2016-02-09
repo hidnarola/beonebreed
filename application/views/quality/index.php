@@ -98,7 +98,7 @@
     					    </div>
     					</td>
     				    </tr>
-<?php } ?> 
+				<?php } ?> 
 
 				</tbody>
 			    </table>

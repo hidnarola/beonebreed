@@ -230,7 +230,7 @@
     }
     
     $('#delete_my_external_link_notes').click(function() {
-        var prod_id = $('#notes_product_id').val();
+        var prod_id = $('#product_id').val();
         var cek_id = new Array();
         $('#chk_attachment:checked').each(function() {
             cek_id.push($(this).val());// an array of selected values

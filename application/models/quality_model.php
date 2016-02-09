@@ -19,14 +19,30 @@ class Quality_model extends CI_Model {
     $this->db->from('quality');
     $this->db->join('product', 'quality.product = product.id', 'left');
     $this->db->join('store', 'quality.store = store.id', 'left');
-	$this->db->join('problem_type', 'quality.problem_type = problem_type.id', 'left');
-	$this->db->join('report_status', 'quality.status = report_status.id', 'left');
-	//$this->db->where('quality.status', $user_id);
-	$this->db->where('quality.client_id',$client_id);
-	$this->db->where_not_in('quality.status','5');
+	  $this->db->join('problem_type', 'quality.problem_type = problem_type.id', 'left');
+	  $this->db->join('report_status', 'quality.status = report_status.id', 'left');
+	  //$this->db->where('quality.status', $user_id);
+	  $this->db->where('quality.client_id',$client_id);
+	  $this->db->where_not_in('quality.status','5');
     $query = $this->db->get();
     return $query->result();
   }
+
+  //For Product Tab Quality Fetch
+  public function product_tab_get_all($pid) {
+  
+    $this->db->select('quality.*,store.name as store_name,problem_type.name as defect_type,report_status.name as report_status');
+    $this->db->from('quality');
+    $this->db->join('store', 'quality.store = store.id', 'left');
+    $this->db->join('problem_type', 'quality.problem_type = problem_type.id', 'left');
+    $this->db->join('report_status', 'quality.status = report_status.id', 'left');
+    //$this->db->where('quality.status', $user_id);
+    $this->db->where('quality.product',$pid);
+    $this->db->where_not_in('quality.status','5');
+    $query = $this->db->get();
+    return $query->result_array();
+  }
+
   public function get_all_completed_report($client_id) {
   
     $this->db->select('quality.*,product.name as product_name,store.name as store_name,problem_type.name as defect_type,report_status.name as report_status');

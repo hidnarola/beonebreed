@@ -281,7 +281,6 @@ class Products_model extends CI_Model {
 		return $id;
 	}
 
-
     /* For inserting attachment data */
 	public function insert_attachment($data){
 		$id = $this->db->insert('products_attachments', $data);
@@ -295,7 +294,6 @@ class Products_model extends CI_Model {
         $last_id = $this->db->insert_id();
         return $last_id;
 	}
-    
 
 	public function update_into($table,$id = null,$data){
 
@@ -308,7 +306,6 @@ class Products_model extends CI_Model {
 		$update_id = $this->db->affected_rows(); // fetch affected rown in table.
 		return $update_id;
 	}
-
     
     public function get_question_part_3(){
         
@@ -324,22 +321,26 @@ class Products_model extends CI_Model {
         $query = $this->db->get('question_master');
         return $query->result();
 	}
+
     public function add_question_ans_3($data){
         $id=$this->db->insert('product_question', $data);
         return $id;
 	} 
+
     public function update_question_ans_3($data,$question_id,$product_id){
         
         $this->db->where('question_id',$question_id);
         $this->db->where('product_id',$product_id);
         return $this->db->update('product_question', $data);
 	}
+
     public function update_question_ans_4($data,$question_id,$product_id){
         
         $this->db->where('question_id',$question_id);
         $this->db->where('product_id',$product_id);
         return $this->db->update('product_question', $data);
 	} 
+
     public function add_question_ans_4($data){
         $id=$this->db->insert('product_question', $data);
         return $id;
@@ -353,7 +354,7 @@ class Products_model extends CI_Model {
     */    
     public function get_product_attachment_id($data,$tab){
         $query = $this->db->where(array('product_id'=>$data,'tab'=>$tab))->get('products_attachments');
-	return $query->result();   
+		return $query->result();   
     }
    
     
@@ -365,7 +366,7 @@ class Products_model extends CI_Model {
     */
     public function get_product_notes_id($data){
         $query = $this->db->where('product_id',$data)->get('products_notes');
-	return $query->result();   
+		return $query->result();   
     }
     
     public function deletefrom($table,$id = null){

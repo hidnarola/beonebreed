@@ -150,7 +150,7 @@
         <!-- Span For Production Part 2 Div START -->
 
         <span class="span_production_tab_2">
-            <div class="row ">
+            <div class="row prod_row2_1">
                 <div class="form-horizontal label-left">
                     <div class="col-sm-12">    
                         <h3 style="margin: 0 0 15px;">Sample 1</h3>
@@ -174,7 +174,7 @@
                                 <div class="controls">
                                     <div class='make-switch switch' data-off-label='&lt;i class="icon-remove"&gt;&lt;/i&gt;' 
                                          data-on-label='&lt;i class="icon-ok"&gt;&lt;/i&gt;'>
-                                          <input type='checkbox' name="is_approve_1" id="is_approve_1" value="">
+                                          <input type='checkbox' name="is_approve_1" id="is_approve_1" value="1">
                                     </div>
                                 </div>
                             </div>
@@ -208,39 +208,37 @@
                 <input type="hidden" name="production_sample_1" id="production_sample_1" value="">
             </div>
         </span>
-        <!-- Span For Production Part 2 Div ENDS -->
-    </form>
-        
-    <div class="row">
-        <div class="col-sm-6 col-sm-offset-6">
-            <div class="controls pull-right mar-b-20">
-                <a onclick="add_production_part_2()" id="" class="btn btn-success">ADD</a>
-                <a onclick="" id="" class="btn btn-danger">REMOVE</a>
-            </div>
-            <div class="clearfix"></div>
-            <div class="row">
-                <div class="col-sm-6">
-                    <input type="checkbox" name="complete_production_part_2" id="complete_production_part_2"> 
-                    Part-2 Completed (20%)
-                    <br>
-                    <span class="color_red error_production_part_2 hide">Please Check this checkbox to procced further.</span>
+        <!-- Span For Production Part 2 Div ENDS -->    
+        <div class="row">
+            <div class="col-sm-6 col-sm-offset-6">
+                <div class="controls pull-right mar-b-20">
+                    <a onclick="add_production_part_2()" id="" class="btn btn-success">ADD</a>
+                    <a onclick="remove_production_part_2()" id="" class="btn btn-danger">REMOVE</a>
                 </div>
-                <div class="col-sm-6">
-                    <div class="form-group pull-right">
-                      <div class="controls">
-                        <input type="hidden" name="production_part_2_count" id="production_part_2_count" value="1">
-                        <input type="hidden" name="" id="">
-                        <a class="btn btn-success" onclick="validate_production_part_2()">
-                            <i class="icon-save"></i> Save
-                        </a>
-                        <a href="" class="btn btn-default">Cancel</a>
-                      </div>
+                <div class="clearfix"></div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <input type="checkbox" name="complete_production_part_2" id="complete_production_part_2"> 
+                        Part-2 Completed (20%)
+                        <br>
+                        <span class="color_red error_production_part_2 hide">Please Check this checkbox to procced further.</span>
                     </div>
-                </div>
-            </div>    
-            
+                    <div class="col-sm-6">
+                        <div class="form-group pull-right">
+                          <div class="controls">
+                            <input type="hidden" name="production_part_2_count" id="production_part_2_count" value="1">
+                            <input type="hidden" name="" id="">
+                            <a class="btn btn-success" onclick="validate_production_part_2()">
+                                <i class="icon-save"></i> Save
+                            </a>
+                            <a href="" class="btn btn-default">Cancel</a>
+                          </div>
+                        </div>
+                    </div>
+                </div>                
+            </div>
         </div>
-    </div>
+    </form>
 <!--  =========== //PRODUCTION TAB PART 2 END ===============  -->
 
 <?php $this->load->view('products/prod_tab_3');?>
@@ -403,11 +401,10 @@
 
     //--------------------------------------------------------------------------------------
 
-    // Production Part-2 Remove Supplier & Update Functionality Start
-
+    // Production Part-2 Remove Sample & Update Functionality Start
     function add_production_part_2(){
-        alert('Hello World');
-        return false;
+        // alert('Hello World');
+        // return false;
         var production_part_2_count = $('#production_part_2_count').val();
         var new_cnt_production = parseInt(production_part_2_count)+1;
 
@@ -435,17 +432,21 @@
             data: {new_cnt: new_cnt_production},
             success:function(data){
                 $('.span_production_tab_2').append(data.add_more);
+                $(document).ready(function() {
+                    $('.datetimepicker').datetimepicker();         
+                    // $('.make-switch')['bootstrapSwitch']();
+                    $('.make-switch-'+data.new_cnt).bootstrapSwitch();
+                });
             }
         });        
     }
-
 
     function validate_production_part_2(){
         var product_id = $('#product_id').val();
         if(product_id == ''){
             //uncommetn below line for validate Part-1 Required Part
-            // $(function(){ bootbox.alert('Please create product in Part-1.');  });
-            // return false;
+            $(function(){ bootbox.alert('Please create product in Part-1.');  });
+            return false;
         }
 
         var production_part_2_count = $('#production_part_2_count').val();
@@ -486,21 +487,43 @@
                dataType: 'json',
                data: form_data,
                success:function(data){
-                    // var prod_new_id;
-                    // for (var i = 0; i < data.res.length; i++) {
-                    //     prod_new_id = i+1;
-                    //     $('#production_supplier_'+prod_new_id).val(data.res[i]);
-                    // }
-                    // $('#complete_production_part_1').attr('disabled',true);
-                    // $('.part_1_production').addClass('active');
-                    // $('.percentage_complete_production').html(data.complete_bar_no+'%');
+                    var prod_new_id;
+                    for (var i = 0; i < data.res.length; i++) {
+                        prod_new_id = i+1;
+                        $('#production_sample_'+prod_new_id).val(data.res[i]);
+                    }
+                    $('#complete_production_part_2').attr('disabled',true);
+                    $('.part_2_production').addClass('active');
+                    $('.percentage_complete_production').html(data.complete_bar_no+'%');
                     return false;
                }
             });
 
         }    
     }
-    // Production Part-2 Add More & Save Functionality END
+
+    // Production Part-1 Remove Supplier & Update Functionality Start
+    function remove_production_part_2(){
+
+        var new_cnt = $('#production_part_2_count').val();
+        var production_sample = '';
+
+        if(new_cnt > 1){
+
+            production_sample =  $('#production_sample_'+new_cnt).val(); // Get Total Value     
+            if(production_sample != ''){
+                $('.prod_row2_'+new_cnt).remove(); // Remove HTML
+                $.post( "<?php echo base_url().'products/prod_part_2_delete'; ?>", 
+                        {'production_sample': production_sample } );
+                new_cnt = new_cnt-1; // Decrease by one
+                $('#production_part_2_count').val(new_cnt);    
+            }else{
+                $('.prod_row2_'+new_cnt).remove(); // Remove HTML
+                new_cnt = new_cnt-1; // Decrease by one
+                $('#production_part_2_count').val(new_cnt);    
+            }
+        }
+    }
 
     $(function(){
         $('#target_datetimepicker').datetimepicker({

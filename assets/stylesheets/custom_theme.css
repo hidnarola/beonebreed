@@ -73,6 +73,20 @@
     border-color: #646469;
     color: #646469;
 }
+
+.my_attachment >  li ,#external_links > li,#notes > li{
+      list-style-type: none;
+       border: 1px solid #cdd2d2;
+    padding: 10px;
+    position: relative;
+    overflow: hidden;
+    border-left: 3px solid #cdd2d2;
+}
+.my_attachment > li:hover, #external_links > li:hover, #notes > li:hover{
+    border-color: #646469;
+    color: #646469;
+}
+
 .right_side_link_w_icon{
     border: 1px solid #ccc;
     padding: 10px;
@@ -287,7 +301,6 @@
 }
 #fakeLoader{
   background-color:rgba(0,0,0,0.5) !important;
-
 }
 .complete-level-ul{
 
@@ -420,6 +433,14 @@
   top: 10px;
   width: 60px;
 }
+
+.progressBlockOuter{ overflow:auto;}
+.progressBlock h3{ background:yellow; padding:10px; margin:0; line-height:100%; font-size: 18px; color:#000; }
+.inner-white-bg{ background:#fff; borde:1px solid #eee; padding:15px;}
+.processBar{ width:100%; display:block; vertical-align:top;  }
+.processBar p{ color:#000; font-size:14px; line-height:100%; padding:0 0 5px; margin:0;     }
+
+
 @media(max-width: 767px){
   .border-left::after {
     border-left: none;
@@ -451,7 +472,6 @@
 	margin-top: 25px;
 }
 .chat ul.commnet-list  > li:nth-child(odd) {
- 
 }
 .chat ul.commnet-list  > li:nth-child(even) {
           background-color: #F3F3F3;

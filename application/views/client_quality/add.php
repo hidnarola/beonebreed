@@ -1,7 +1,8 @@
 <?php
-$this->load->helper('string');
-$unique_random_id=random_string('numeric',7);
+    $this->load->helper('string');
+    $unique_random_id=random_string('numeric',7);
 ?>
+
 <div class='row' id='content-wrapper'>
   <div class='col-xs-12'>
     <div class='row'>
@@ -25,15 +26,6 @@ $unique_random_id=random_string('numeric',7);
           </div>
           <div class='box-content box-padding'>
             <div class='fuelux'>
-              <div class='wizard'>
-                <div class='actions'>
-                  <button class='btn  btn-success' onclick="window.location.href = '<?php echo site_url('project'); ?>'" style="display:none" id="finish" >
-                    <!--disabled="disabled"-->
-                    Finish
-                    <i class='icon-arrow-right'></i>
-                  </button>
-                </div>
-              </div>
               <div class='step-content'>
                 <hr class='hr-normal'>
                 <!-- inserting add project form -->	
@@ -42,19 +34,21 @@ $unique_random_id=random_string('numeric',7);
                     <div class='form-group'>
                         <label for='inputText'><?=lang('quality_name')?></label><span style="color:red">*</span>
                         <input class='form-control' id='inputText' placeholder='Name' type='text' name='name' value="<?php echo set_value('name');?>">
-																								<input class='form-control' id='inputT' type='hidden' name='id' value="<?php echo $unique_random_id; ?>" >
+                        <input id='inputT' type='hidden' name='id' value="<?php echo $unique_random_id; ?>" >
                         <span style="color:red"><?php echo form_error('name'); ?><span>
                     </div>
                      <div class='form-group'>
                         <label for='inputText'><?=lang('quality_product')?></label><span style="color:red">*</span>
-                        <select class="form-control js-example-data-array-selected1" name="product" >
+                        <select class="form-control js-example-data-array-selected1 js-example-data-array-selected" name="product" >
                           <option value=""><?=lang('select_product')?></option>
                           <?php
-                          if (!empty($product_list)) {
-                            foreach ($product_list as $k => $v) {
+                          if (!empty($products)) {
+                            foreach ($products as $product) {
                               ?>
-                              <option value="<?php echo $v->id; ?>" <?php echo set_select('product',$v->id); ?> ><?php echo ucfirst($v->name); ?></option>
-
+                              <option value="<?php echo $product['id'];?>" 
+                                    <?php echo set_select('product',$product['id']);?> >
+                                        <?php echo ucfirst($product['product_name']); ?>
+                                </option>
                               <?php
                             }
                           }
@@ -156,7 +150,7 @@ $unique_random_id=random_string('numeric',7);
     var store_id=$('.store').val();
     if(store_id!=''){
       $.ajax({
-             url: '<?php echo site_url('Client_quality/get_contact_info'); ?>',
+             url: '<?php echo site_url("client_quality/get_contact_info"); ?>',
              type: 'post',
              dataType: 'json',
              data:{id:store_id},

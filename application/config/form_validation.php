@@ -245,12 +245,12 @@ $config = array(
         array(
             'field' => 'qty_in_store',
             'label' => 'Qty In Store',
-            'rules' => 'required'
+            'rules' => 'required|integer'
         ),
         array(
             'field' => 'qty_defect',
             'label' => 'Qty Defect',
-            'rules' => 'required'
+            'rules' => 'required|integer'
         ),
         array(
             'field' => 'description',
@@ -265,7 +265,7 @@ $config = array(
         array(
             'field' => 'ds',
             'label' => 'ds',
-            'rules' => 'trim'
+            'rules' => 'trim|integer'
         ),
         array(
             'field' => 'contact_info',

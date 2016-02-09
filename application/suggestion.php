@@ -33,7 +33,7 @@ class Suggestion extends CI_Controller {
 
       if (!empty($_POST)) {
 
-        if (!empty($this->session->userdata('client_id'))) {
+        if ($this->session->userdata('client_id') != '') {
           $user_id = $this->session->userdata('client_id');
         } else {
           $user_id = 0;

@@ -31,9 +31,9 @@
 
 <div class="row">
     <div class="col-sm-12">
-            <div class="box-main-scroll">
-              <!-- Strat of part - 1  By Parth Viramgama pav-->
-              <form class="form" style="margin-bottom: 0;" method="post" action="#" id="marketing_part1">
+        <div class="box-main-scroll">
+            <!-- Strat of part - 1  By Parth Viramgama pav-->
+            <form class="form" style="margin-bottom: 0;" method="post" action="#" id="marketing_part1">
                 <div class="box col-sm-12">
                     <div class="box-header gray-bg">
                         PART - 1 
@@ -266,455 +266,455 @@
                         </div>
                     </div> <!-- END of box-content -->
                 </div>
-              </form>
+            </form>
               <!-- End of part1 -->  
               
               <!-- Strat of part -2  -->
                <form class="form" style="margin-bottom: 0;" method="post" action="#" id="marketing_part2">
-                <div class="box col-sm-12">
-                    <div class="box-header gray-bg">
-                        PART 2 SELLING POINTS
-                    </div>
-                    <div class="box-content">
-                        
-                        <h5>SELLING POINTS (60 charaters for the tittle and 300 for the body)</h5>
-                        <!-- ROW SELLING POINTS BLOCK 1-->
-                        <div class="row">
-                            <div class="col-md-1">
-                                1
-                            </div>
-                            <div class="col-md-5">
-                                <div class="row">
-                                    <div class="col-md-2">
-                                         <label class='control-label' for='marketing_part2_en_title1'>EN</label>
-                                     </div>
-                                     <div class="col-md-8">
-                                         <div class='controls margin-bottom-10'>
-                                         <input class='form-control' id='marketing_part2_en_title1' name="marketing_part2_en_title1" 
-                                            type='text' onkeyup="$('.error_marketing_part2_en_title1').addClass('hide');">
-                                            <span class="color_red hide error_marketing_part2_en_title1" >Field Is Required </span>
-                                          </div>
-                                          <div class='controls margin-bottom-10'>
-                                            <textarea class='form-control' id='marketing_part2_en_desc1' name="marketing_part2_en_desc1" 
-                                            type='text' onkeyup="$('.error_marketing_part2_en_desc1').addClass('hide');"></textarea>
-                                            <span class="color_red hide error_marketing_part2_en_desc1" >Field Is Required </span>
-                                          </div>
-                                     </div>
-                                </div>
-                               
-                            </div>
-
-                            <div class="col-md-5">
-                                <div class="row">
-                                    <div class="col-md-2">
-                                         <label class='control-label' for='marketing_part2_fr_title1'>FR</label>
-                                     </div>
-                                     <div class="col-md-8">
-                                         <div class='controls margin-bottom-10'>
-                                         <input class='form-control' id='marketing_part2_fr_title1' name="marketing_part2_fr_title1" 
-                                            type='text' onkeyup="$('.error_marketing_part2_fr_title1').addClass('hide');">
-                                            <span class="color_red hide error_marketing_part2_fr_title1" >Field Is Required </span>
-                                          </div>
-                                          <div class='controls margin-bottom-10'>
-                                            <textarea class='form-control' id='marketing_part2_fr_desc1' name="marketing_part2_fr_desc1" 
-                                            type='text' onkeyup="$('.error_marketing_part2_fr_desc1').addClass('hide');"></textarea>
-                                            <span class="color_red hide error_marketing_part2_fr_desc1" >Field Is Required </span>
-                                          </div>
-                                     </div>
-                                </div>
-                               
-                            </div>
+                    <div class="box col-sm-12">
+                        <div class="box-header gray-bg">
+                            PART 2 SELLING POINTS
                         </div>
-                        <br />
-                        <!-- //ROW SELLING POINTS BLOCK 1-->
-                        
-                        <!-- ROW SELLING POINTS BLOCK 2-->
-                        <div class="row">
-                            <div class="col-md-1">
-                                2
-                            </div>
-                            <div class="col-md-5">
-                                <div class="row">
-                                    <div class="col-md-2">
-                                         <label class='control-label' for='marketing_part2_en_title2'>EN</label>
-                                     </div>
-                                     <div class="col-md-8">
-                                         <div class='controls margin-bottom-10'>
-                                         <input class='form-control' id='marketing_part2_en_title2' name="marketing_part2_en_title2" 
-                                            type='text' onkeyup="$('.error_marketing_part2_en_title2').addClass('hide');">
-                                            <span class="color_red hide error_marketing_part2_en_title2" >Field Is Required</span>
-                                          </div>
-                                          <div class='controls margin-bottom-10'>
-                                            <textarea class='form-control' id='marketing_part2_en_desc2' name="marketing_part2_en_desc2" 
-                                            type='text' onkeyup="$('.error_marketing_part2_en_desc2').addClass('hide');"></textarea>
-                                            <span class="color_red hide error_marketing_part2_en_desc2" >Field Is Required </span>
-                                          </div>
-                                     </div>
+                        <div class="box-content">
+                            
+                            <h5>SELLING POINTS (60 charaters for the tittle and 300 for the body)</h5>
+                            <!-- ROW SELLING POINTS BLOCK 1-->
+                            <div class="row">
+                                <div class="col-md-1">
+                                    1
                                 </div>
-                               
-                            </div>
+                                <div class="col-md-5">
+                                    <div class="row">
+                                        <div class="col-md-2">
+                                             <label class='control-label' for='marketing_part2_en_title1'>EN</label>
+                                         </div>
+                                         <div class="col-md-8">
+                                             <div class='controls margin-bottom-10'>
+                                             <input class='form-control' id='marketing_part2_en_title1' name="marketing_part2_en_title1" 
+                                                type='text' onkeyup="$('.error_marketing_part2_en_title1').addClass('hide');">
+                                                <span class="color_red hide error_marketing_part2_en_title1" >Field Is Required </span>
+                                              </div>
+                                              <div class='controls margin-bottom-10'>
+                                                <textarea class='form-control' id='marketing_part2_en_desc1' name="marketing_part2_en_desc1" 
+                                                type='text' onkeyup="$('.error_marketing_part2_en_desc1').addClass('hide');"></textarea>
+                                                <span class="color_red hide error_marketing_part2_en_desc1" >Field Is Required </span>
+                                              </div>
+                                         </div>
+                                    </div>
+                                   
+                                </div>
 
-                            <div class="col-md-5">
-                                <div class="row">
-                                    <div class="col-md-2">
-                                         <label class='control-label' for='marketing_part2_fr_title2'>FR</label>
-                                     </div>
-                                     <div class="col-md-8">
-                                         <div class='controls margin-bottom-10'>
-                                         <input class='form-control' id='marketing_part2_fr_title2' name="marketing_part2_fr_title2" 
-                                            type='text' onkeyup="$('.error_marketing_part2_fr_title2').addClass('hide');">
-                                            <span class="color_red hide error_marketing_part2_fr_title2" >Field Is Required </span>
-                                          </div>
-                                          <div class='controls margin-bottom-10'>
-                                            <textarea class='form-control' id='marketing_part2_fr_desc2' name="marketing_part2_fr_desc2" 
-                                            type='text' onkeyup="$('.error_marketing_part2_fr_desc2').addClass('hide');"></textarea>
-                                            <span class="color_red hide error_marketing_part2_fr_desc2" >Field Is Required </span>
-                                          </div>
-                                     </div>
+                                <div class="col-md-5">
+                                    <div class="row">
+                                        <div class="col-md-2">
+                                             <label class='control-label' for='marketing_part2_fr_title1'>FR</label>
+                                         </div>
+                                         <div class="col-md-8">
+                                             <div class='controls margin-bottom-10'>
+                                             <input class='form-control' id='marketing_part2_fr_title1' name="marketing_part2_fr_title1" 
+                                                type='text' onkeyup="$('.error_marketing_part2_fr_title1').addClass('hide');">
+                                                <span class="color_red hide error_marketing_part2_fr_title1" >Field Is Required </span>
+                                              </div>
+                                              <div class='controls margin-bottom-10'>
+                                                <textarea class='form-control' id='marketing_part2_fr_desc1' name="marketing_part2_fr_desc1" 
+                                                type='text' onkeyup="$('.error_marketing_part2_fr_desc1').addClass('hide');"></textarea>
+                                                <span class="color_red hide error_marketing_part2_fr_desc1" >Field Is Required </span>
+                                              </div>
+                                         </div>
+                                    </div>
+                                   
                                 </div>
-                               
                             </div>
-                        </div>
-                        <br />
-                        <!-- //ROW SELLING POINTS BLOCK 2-->
-                        
-                        <!-- ROW SELLING POINTS BLOCK 3-->
-                        <div class="row">
-                            <div class="col-md-1">
-                                3
-                            </div>
-                            <div class="col-md-5">
-                                <div class="row">
-                                    <div class="col-md-2">
-                                         <label class='control-label' for='marketing_part2_en_title3'>EN</label>
-                                     </div>
-                                     <div class="col-md-8">
-                                         <div class='controls margin-bottom-10'>
-                                         <input class='form-control' id='marketing_part2_en_title3' name="marketing_part2_en_title3" 
-                                            type='text' onkeyup="$('.error_marketing_part2_en_title3').addClass('hide');">
-                                            <span class="color_red hide error_marketing_part2_en_title3" >Field is Required </span>
-                                          </div>
-                                          <div class='controls margin-bottom-10'>
-                                            <textarea class='form-control' id='marketing_part2_en_desc3' name="marketing_part2_en_desc3" 
-                                            type='text' onkeyup="$('.error_marketing_part2_en_desc3').addClass('hide');"></textarea>
-                                            <span class="color_red hide error_marketing_part2_en_desc3" >Field is Required </span>
-                                          </div>
-                                     </div>
+                            <br />
+                            <!-- //ROW SELLING POINTS BLOCK 1-->
+                            
+                            <!-- ROW SELLING POINTS BLOCK 2-->
+                            <div class="row">
+                                <div class="col-md-1">
+                                    2
                                 </div>
-                               
-                            </div>
+                                <div class="col-md-5">
+                                    <div class="row">
+                                        <div class="col-md-2">
+                                             <label class='control-label' for='marketing_part2_en_title2'>EN</label>
+                                         </div>
+                                         <div class="col-md-8">
+                                             <div class='controls margin-bottom-10'>
+                                             <input class='form-control' id='marketing_part2_en_title2' name="marketing_part2_en_title2" 
+                                                type='text' onkeyup="$('.error_marketing_part2_en_title2').addClass('hide');">
+                                                <span class="color_red hide error_marketing_part2_en_title2" >Field Is Required</span>
+                                              </div>
+                                              <div class='controls margin-bottom-10'>
+                                                <textarea class='form-control' id='marketing_part2_en_desc2' name="marketing_part2_en_desc2" 
+                                                type='text' onkeyup="$('.error_marketing_part2_en_desc2').addClass('hide');"></textarea>
+                                                <span class="color_red hide error_marketing_part2_en_desc2" >Field Is Required </span>
+                                              </div>
+                                         </div>
+                                    </div>
+                                   
+                                </div>
 
-                            <div class="col-md-5">
-                                <div class="row">
-                                    <div class="col-md-2">
-                                         <label class='control-label' for='marketing_part2_fr_title3'>FR</label>
-                                     </div>
-                                     <div class="col-md-8">
-                                         <div class='controls margin-bottom-10'>
-                                         <input class='form-control' id='marketing_part2_fr_title3' name="marketing_part2_fr_title3" 
-                                            type='text' onkeyup="$('.error_marketing_part2_fr_title3').addClass('hide');">
-                                            <span class="color_red hide error_marketing_part2_fr_title3" >Field is Required </span>
-                                          </div>
-                                          <div class='controls margin-bottom-10'>
-                                            <textarea class='form-control' id='marketing_part2_fr_desc3' name="marketing_part2_fr_desc3" 
-                                            type='text' onkeyup="$('.error_marketing_part2_fr_desc3').addClass('hide');"></textarea>
-                                            <span class="color_red hide error_marketing_part2_fr_desc3" >Field is Required </span>
-                                          </div>
-                                     </div>
-                                </div>                              
-                            </div>
-                        </div>
-                        <br />
-                        <!-- //ROW SELLING POINTS BLOCK 3-->
-                        
-                        <!-- ROW SELLING POINTS BLOCK 4-->
-                        <div class="row">
-                            <div class="col-md-1">
-                                4
-                            </div>
-                            <div class="col-md-5">
-                                <div class="row">
-                                    <div class="col-md-2">
-                                         <label class='control-label' for='marketing_part2_en_title4'>EN</label>
-                                     </div>
-                                     <div class="col-md-8">
-                                         <div class='controls margin-bottom-10'>
-                                         <input class='form-control' id='marketing_part2_en_title4' name="marketing_part2_en_title4" 
-                                            type='text' onkeyup="$('.error_marketing_part2_en_title4').addClass('hide');">
-                                            <span class="color_red hide error_marketing_part2_en_title4" >Plese Enter Product name </span>
-                                          </div>
-                                          <div class='controls margin-bottom-10'>
-                                            <textarea class='form-control' id='marketing_part2_en_desc4' name="marketing_part2_en_desc4" 
-                                            type='text' onkeyup="$('.error_marketing_part2_en_desc4').addClass('hide');"></textarea>
-                                            <span class="color_red hide error_marketing_part2_en_desc4" >Plese Enter Product name </span>
-                                          </div>
-                                     </div>
+                                <div class="col-md-5">
+                                    <div class="row">
+                                        <div class="col-md-2">
+                                             <label class='control-label' for='marketing_part2_fr_title2'>FR</label>
+                                         </div>
+                                         <div class="col-md-8">
+                                             <div class='controls margin-bottom-10'>
+                                             <input class='form-control' id='marketing_part2_fr_title2' name="marketing_part2_fr_title2" 
+                                                type='text' onkeyup="$('.error_marketing_part2_fr_title2').addClass('hide');">
+                                                <span class="color_red hide error_marketing_part2_fr_title2" >Field Is Required </span>
+                                              </div>
+                                              <div class='controls margin-bottom-10'>
+                                                <textarea class='form-control' id='marketing_part2_fr_desc2' name="marketing_part2_fr_desc2" 
+                                                type='text' onkeyup="$('.error_marketing_part2_fr_desc2').addClass('hide');"></textarea>
+                                                <span class="color_red hide error_marketing_part2_fr_desc2" >Field Is Required </span>
+                                              </div>
+                                         </div>
+                                    </div>
+                                   
                                 </div>
-                               
                             </div>
+                            <br />
+                            <!-- //ROW SELLING POINTS BLOCK 2-->
+                            
+                            <!-- ROW SELLING POINTS BLOCK 3-->
+                            <div class="row">
+                                <div class="col-md-1">
+                                    3
+                                </div>
+                                <div class="col-md-5">
+                                    <div class="row">
+                                        <div class="col-md-2">
+                                             <label class='control-label' for='marketing_part2_en_title3'>EN</label>
+                                         </div>
+                                         <div class="col-md-8">
+                                             <div class='controls margin-bottom-10'>
+                                             <input class='form-control' id='marketing_part2_en_title3' name="marketing_part2_en_title3" 
+                                                type='text' onkeyup="$('.error_marketing_part2_en_title3').addClass('hide');">
+                                                <span class="color_red hide error_marketing_part2_en_title3" >Field is Required </span>
+                                              </div>
+                                              <div class='controls margin-bottom-10'>
+                                                <textarea class='form-control' id='marketing_part2_en_desc3' name="marketing_part2_en_desc3" 
+                                                type='text' onkeyup="$('.error_marketing_part2_en_desc3').addClass('hide');"></textarea>
+                                                <span class="color_red hide error_marketing_part2_en_desc3" >Field is Required </span>
+                                              </div>
+                                         </div>
+                                    </div>
+                                   
+                                </div>
 
-                            <div class="col-md-5">
-                                <div class="row">
-                                    <div class="col-md-2">
-                                         <label class='control-label' for='marketing_part2_fr_title4'>FR</label>
-                                     </div>
-                                     <div class="col-md-8">
-                                         <div class='controls margin-bottom-10'>
-                                         <input class='form-control' id='marketing_part2_fr_title4' name="marketing_part2_fr_title4" 
-                                            type='text' onkeyup="$('.error_marketing_part2_fr_title4').addClass('hide');">
-                                            <span class="color_red hide error_marketing_part2_fr_title4" >Plese Enter Product name </span>
-                                          </div>
-                                          <div class='controls margin-bottom-10'>
-                                            <textarea class='form-control' id='marketing_part2_fr_desc4' name="marketing_part2_fr_desc4" 
-                                            type='text' onkeyup="$('.error_marketing_part2_fr_desc4').addClass('hide');"></textarea>
-                                            <span class="color_red hide error_marketing_part2_fr_desc4" >Plese Enter Product name </span>
-                                          </div>
-                                     </div>
+                                <div class="col-md-5">
+                                    <div class="row">
+                                        <div class="col-md-2">
+                                             <label class='control-label' for='marketing_part2_fr_title3'>FR</label>
+                                         </div>
+                                         <div class="col-md-8">
+                                             <div class='controls margin-bottom-10'>
+                                             <input class='form-control' id='marketing_part2_fr_title3' name="marketing_part2_fr_title3" 
+                                                type='text' onkeyup="$('.error_marketing_part2_fr_title3').addClass('hide');">
+                                                <span class="color_red hide error_marketing_part2_fr_title3" >Field is Required </span>
+                                              </div>
+                                              <div class='controls margin-bottom-10'>
+                                                <textarea class='form-control' id='marketing_part2_fr_desc3' name="marketing_part2_fr_desc3" 
+                                                type='text' onkeyup="$('.error_marketing_part2_fr_desc3').addClass('hide');"></textarea>
+                                                <span class="color_red hide error_marketing_part2_fr_desc3" >Field is Required </span>
+                                              </div>
+                                         </div>
+                                    </div>                              
                                 </div>
-                               
                             </div>
-                        </div>
-                        <br />
-                        <!-- //ROW SELLING POINTS BLOCK 4-->
-                        
-                        <!-- ROW SELLING POINTS BLOCK 5-->
-                        <div class="row">
-                            <div class="col-md-1">
-                                5
-                            </div>
-                            <div class="col-md-5">
-                                <div class="row">
-                                    <div class="col-md-2">
-                                         <label class='control-label' for='marketing_part2_en_title5'>EN</label>
-                                     </div>
-                                     <div class="col-md-8">
-                                         <div class='controls margin-bottom-10'>
-                                         <input class='form-control' id='marketing_part2_en_title5' name="marketing_part2_en_title5" 
-                                            type='text' onkeyup="$('.error_marketing_part2_en_title5').addClass('hide');">
-                                            <span class="color_red hide error_marketing_part2_en_title5" >Plese Enter Product name </span>
-                                          </div>
-                                          <div class='controls margin-bottom-10'>
-                                            <textarea class='form-control' id='marketing_part2_en_desc5' name="marketing_part2_en_desc5" 
-                                            type='text' onkeyup="$('.error_marketing_part2_en_desc5').addClass('hide');"></textarea>
-                                            <span class="color_red hide error_marketing_part2_en_desc5" >Plese Enter Product name </span>
-                                          </div>
-                                     </div>
+                            <br />
+                            <!-- //ROW SELLING POINTS BLOCK 3-->
+                            
+                            <!-- ROW SELLING POINTS BLOCK 4-->
+                            <div class="row">
+                                <div class="col-md-1">
+                                    4
                                 </div>
-                               
-                            </div>
+                                <div class="col-md-5">
+                                    <div class="row">
+                                        <div class="col-md-2">
+                                             <label class='control-label' for='marketing_part2_en_title4'>EN</label>
+                                         </div>
+                                         <div class="col-md-8">
+                                             <div class='controls margin-bottom-10'>
+                                             <input class='form-control' id='marketing_part2_en_title4' name="marketing_part2_en_title4" 
+                                                type='text' onkeyup="$('.error_marketing_part2_en_title4').addClass('hide');">
+                                                <span class="color_red hide error_marketing_part2_en_title4" >Plese Enter Product name </span>
+                                              </div>
+                                              <div class='controls margin-bottom-10'>
+                                                <textarea class='form-control' id='marketing_part2_en_desc4' name="marketing_part2_en_desc4" 
+                                                type='text' onkeyup="$('.error_marketing_part2_en_desc4').addClass('hide');"></textarea>
+                                                <span class="color_red hide error_marketing_part2_en_desc4" >Plese Enter Product name </span>
+                                              </div>
+                                         </div>
+                                    </div>
+                                   
+                                </div>
 
-                            <div class="col-md-5">
-                                <div class="row">
-                                    <div class="col-md-2">
-                                         <label class='control-label' for='marketing_part2_fr_title5'>FR</label>
-                                     </div>
-                                     <div class="col-md-8">
-                                         <div class='controls margin-bottom-10'>
-                                         <input class='form-control' id='marketing_part2_fr_title5' name="marketing_part2_fr_title5" 
-                                            type='text' onkeyup="$('.error_marketing_part2_fr_title5').addClass('hide');">
-                                            <span class="color_red hide error_marketing_part2_fr_title5" >Plese Enter Product name </span>
-                                          </div>
-                                          <div class='controls margin-bottom-10'>
-                                            <textarea class='form-control' id='marketing_part2_fr_desc5' name="marketing_part2_fr_desc5" 
-                                            type='text' onkeyup="$('.error_marketing_part2_fr_desc5').addClass('hide');"></textarea>
-                                            <span class="color_red hide error_marketing_part2_fr_desc5" >Plese Enter Product name </span>
-                                          </div>
-                                     </div>
+                                <div class="col-md-5">
+                                    <div class="row">
+                                        <div class="col-md-2">
+                                             <label class='control-label' for='marketing_part2_fr_title4'>FR</label>
+                                         </div>
+                                         <div class="col-md-8">
+                                             <div class='controls margin-bottom-10'>
+                                             <input class='form-control' id='marketing_part2_fr_title4' name="marketing_part2_fr_title4" 
+                                                type='text' onkeyup="$('.error_marketing_part2_fr_title4').addClass('hide');">
+                                                <span class="color_red hide error_marketing_part2_fr_title4" >Plese Enter Product name </span>
+                                              </div>
+                                              <div class='controls margin-bottom-10'>
+                                                <textarea class='form-control' id='marketing_part2_fr_desc4' name="marketing_part2_fr_desc4" 
+                                                type='text' onkeyup="$('.error_marketing_part2_fr_desc4').addClass('hide');"></textarea>
+                                                <span class="color_red hide error_marketing_part2_fr_desc4" >Plese Enter Product name </span>
+                                              </div>
+                                         </div>
+                                    </div>
+                                   
                                 </div>
-                               
                             </div>
-                        </div>
-                        <br />
-                        <!-- //ROW SELLING POINTS BLOCK 5-->
-                        
-                        <!-- ROW SELLING POINTS BLOCK 6-->
-                        <div class="row">
-                            <div class="col-md-1">
-                                6
-                            </div>
-                            <div class="col-md-5">
-                                <div class="row">
-                                    <div class="col-md-2">
-                                         <label class='control-label' for='marketing_part2_en_title6'>EN</label>
-                                     </div>
-                                     <div class="col-md-8">
-                                         <div class='controls margin-bottom-10'>
-                                         <input class='form-control' id='marketing_part2_en_title6' name="marketing_part2_en_title6" 
-                                            type='text' onkeyup="$('.error_pmarketing_part2_en_title6').addClass('hide');">
-                                            <span class="color_red hide error_marketing_part2_en_title6" >Plese Enter Product name </span>
-                                          </div>
-                                          <div class='controls margin-bottom-10'>
-                                            <textarea class='form-control' id='marketing_part2_en_desc6' name="marketing_part2_en_desc6" 
-                                            type='text' onkeyup="$('.error_marketing_part2_en_desc6').addClass('hide');"></textarea>
-                                            <span class="color_red hide error_marketing_part2_en_desc6" >Plese Enter Product name </span>
-                                          </div>
-                                     </div>
+                            <br />
+                            <!-- //ROW SELLING POINTS BLOCK 4-->
+                            
+                            <!-- ROW SELLING POINTS BLOCK 5-->
+                            <div class="row">
+                                <div class="col-md-1">
+                                    5
                                 </div>
-                               
-                            </div>
+                                <div class="col-md-5">
+                                    <div class="row">
+                                        <div class="col-md-2">
+                                             <label class='control-label' for='marketing_part2_en_title5'>EN</label>
+                                         </div>
+                                         <div class="col-md-8">
+                                             <div class='controls margin-bottom-10'>
+                                             <input class='form-control' id='marketing_part2_en_title5' name="marketing_part2_en_title5" 
+                                                type='text' onkeyup="$('.error_marketing_part2_en_title5').addClass('hide');">
+                                                <span class="color_red hide error_marketing_part2_en_title5" >Plese Enter Product name </span>
+                                              </div>
+                                              <div class='controls margin-bottom-10'>
+                                                <textarea class='form-control' id='marketing_part2_en_desc5' name="marketing_part2_en_desc5" 
+                                                type='text' onkeyup="$('.error_marketing_part2_en_desc5').addClass('hide');"></textarea>
+                                                <span class="color_red hide error_marketing_part2_en_desc5" >Plese Enter Product name </span>
+                                              </div>
+                                         </div>
+                                    </div>
+                                   
+                                </div>
 
-                            <div class="col-md-5">
-                                <div class="row">
-                                    <div class="col-md-2">
-                                         <label class='control-label' for='marketing_part2_fr_title6'>FR</label>
-                                     </div>
-                                     <div class="col-md-8">
-                                         <div class='controls margin-bottom-10'>
-                                         <input class='form-control' id='marketing_part2_fr_title6' name="marketing_part2_fr_title6" 
-                                            type='text' onkeyup="$('.error_marketing_part2_fr_title6').addClass('hide');">
-                                            <span class="color_red hide error_marketing_part2_fr_title6" >Plese Enter Product name </span>
-                                          </div>
-                                          <div class='controls margin-bottom-10'>
-                                            <textarea class='form-control' id='marketing_part2_fr_desc6' name="marketing_part2_fr_desc6" 
-                                            type='text' onkeyup="$('.error_marketing_part2_fr_desc6').addClass('hide');"></textarea>
-                                            <span class="color_red hide error_marketing_part2_fr_desc6" >Plese Enter Product name </span>
-                                          </div>
-                                     </div>
+                                <div class="col-md-5">
+                                    <div class="row">
+                                        <div class="col-md-2">
+                                             <label class='control-label' for='marketing_part2_fr_title5'>FR</label>
+                                         </div>
+                                         <div class="col-md-8">
+                                             <div class='controls margin-bottom-10'>
+                                             <input class='form-control' id='marketing_part2_fr_title5' name="marketing_part2_fr_title5" 
+                                                type='text' onkeyup="$('.error_marketing_part2_fr_title5').addClass('hide');">
+                                                <span class="color_red hide error_marketing_part2_fr_title5" >Plese Enter Product name </span>
+                                              </div>
+                                              <div class='controls margin-bottom-10'>
+                                                <textarea class='form-control' id='marketing_part2_fr_desc5' name="marketing_part2_fr_desc5" 
+                                                type='text' onkeyup="$('.error_marketing_part2_fr_desc5').addClass('hide');"></textarea>
+                                                <span class="color_red hide error_marketing_part2_fr_desc5" >Plese Enter Product name </span>
+                                              </div>
+                                         </div>
+                                    </div>
+                                   
                                 </div>
-                               
                             </div>
-                        </div>
-                        <br />
-                        <!-- //ROW SELLING POINTS BLOCK 6-->
-                        
-                        <!-- ROW SELLING POINTS BLOCK 7-->
-                        <div class="row">
-                            <div class="col-md-1">
-                                7
-                            </div>
-                            <div class="col-md-5">
-                                <div class="row">
-                                    <div class="col-md-2">
-                                         <label class='control-label' for='marketing_part2_en_title7'>EN</label>
-                                     </div>
-                                     <div class="col-md-8">
-                                         <div class='controls margin-bottom-10'>
-                                         <input class='form-control' id='marketing_part2_en_title7' name="marketing_part2_en_title7" 
-                                            type='text' onkeyup="$('.error_marketing_part2_en_title7').addClass('hide');">
-                                            <span class="color_red hide error_marketing_part2_en_title7" >Plese Enter Product name </span>
-                                          </div>
-                                          <div class='controls margin-bottom-10'>
-                                            <textarea class='form-control' id='marketing_part2_en_desc7' name="marketing_part2_en_desc7" 
-                                            type='text' onkeyup="$('.error_marketing_part2_en_desc7').addClass('hide');"></textarea>
-                                            <span class="color_red hide error_marketing_part2_en_desc7" >Plese Enter Product name </span>
-                                          </div>
-                                     </div>
+                            <br />
+                            <!-- //ROW SELLING POINTS BLOCK 5-->
+                            
+                            <!-- ROW SELLING POINTS BLOCK 6-->
+                            <div class="row">
+                                <div class="col-md-1">
+                                    6
                                 </div>
-                               
-                            </div>
+                                <div class="col-md-5">
+                                    <div class="row">
+                                        <div class="col-md-2">
+                                             <label class='control-label' for='marketing_part2_en_title6'>EN</label>
+                                         </div>
+                                         <div class="col-md-8">
+                                             <div class='controls margin-bottom-10'>
+                                             <input class='form-control' id='marketing_part2_en_title6' name="marketing_part2_en_title6" 
+                                                type='text' onkeyup="$('.error_pmarketing_part2_en_title6').addClass('hide');">
+                                                <span class="color_red hide error_marketing_part2_en_title6" >Plese Enter Product name </span>
+                                              </div>
+                                              <div class='controls margin-bottom-10'>
+                                                <textarea class='form-control' id='marketing_part2_en_desc6' name="marketing_part2_en_desc6" 
+                                                type='text' onkeyup="$('.error_marketing_part2_en_desc6').addClass('hide');"></textarea>
+                                                <span class="color_red hide error_marketing_part2_en_desc6" >Plese Enter Product name </span>
+                                              </div>
+                                         </div>
+                                    </div>
+                                   
+                                </div>
 
-                            <div class="col-md-5">
-                                <div class="row">
-                                    <div class="col-md-2">
-                                         <label class='control-label' for='marketing_part2_fr_title7'>FR</label>
-                                     </div>
-                                     <div class="col-md-8">
-                                         <div class='controls margin-bottom-10'>
-                                         <input class='form-control' id='marketing_part2_fr_title7' name="marketing_part2_fr_title7" 
-                                            type='text' onkeyup="$('.error_marketing_part2_fr_title7').addClass('hide');">
-                                            <span class="color_red hide error_marketing_part2_fr_title7" >Plese Enter Product name </span>
-                                          </div>
-                                          <div class='controls margin-bottom-10'>
-                                            <textarea class='form-control' id='marketing_part2_fr_desc7' name="marketing_part2_fr_desc7" 
-                                            type='text' onkeyup="$('.error_marketing_part2_fr_desc7').addClass('hide');"></textarea>
-                                            <span class="color_red hide error_marketing_part2_fr_desc7" >Plese Enter Product name </span>
-                                          </div>
-                                     </div>
+                                <div class="col-md-5">
+                                    <div class="row">
+                                        <div class="col-md-2">
+                                             <label class='control-label' for='marketing_part2_fr_title6'>FR</label>
+                                         </div>
+                                         <div class="col-md-8">
+                                             <div class='controls margin-bottom-10'>
+                                             <input class='form-control' id='marketing_part2_fr_title6' name="marketing_part2_fr_title6" 
+                                                type='text' onkeyup="$('.error_marketing_part2_fr_title6').addClass('hide');">
+                                                <span class="color_red hide error_marketing_part2_fr_title6" >Plese Enter Product name </span>
+                                              </div>
+                                              <div class='controls margin-bottom-10'>
+                                                <textarea class='form-control' id='marketing_part2_fr_desc6' name="marketing_part2_fr_desc6" 
+                                                type='text' onkeyup="$('.error_marketing_part2_fr_desc6').addClass('hide');"></textarea>
+                                                <span class="color_red hide error_marketing_part2_fr_desc6" >Plese Enter Product name </span>
+                                              </div>
+                                         </div>
+                                    </div>
+                                   
                                 </div>
-                               
                             </div>
-                        </div>
-                        <br />
-                        <!-- //ROW SELLING POINTS BLOCK 7-->
-                        
-                        <!-- ROW SELLING POINTS BLOCK 8-->
-                        <div class="row">
-                            <div class="col-md-1">
-                                8
-                            </div>
-                            <div class="col-md-5">
-                                <div class="row">
-                                    <div class="col-md-2">
-                                         <label class='control-label' for='marketing_part2_en_title8'>EN</label>
-                                     </div>
-                                     <div class="col-md-8">
-                                         <div class='controls margin-bottom-10'>
-                                         <input class='form-control' id='marketing_part2_en_title8' name="marketing_part2_en_title8" 
-                                            type='text' onkeyup="$('.error_marketing_part2_en_title8').addClass('hide');">
-                                            <span class="color_red hide error_marketing_part2_en_title8" >Plese Enter Product name </span>
-                                          </div>
-                                          <div class='controls margin-bottom-10'>
-                                            <textarea class='form-control' id='marketing_part2_en_desc8' name="marketing_part2_en_desc8" 
-                                            type='text' onkeyup="$('.error_marketing_part2_en_desc8').addClass('hide');"></textarea>
-                                            <span class="color_red hide error_marketing_part2_en_desc8" >Plese Enter Product name </span>
-                                          </div>
-                                     </div>
+                            <br />
+                            <!-- //ROW SELLING POINTS BLOCK 6-->
+                            
+                            <!-- ROW SELLING POINTS BLOCK 7-->
+                            <div class="row">
+                                <div class="col-md-1">
+                                    7
                                 </div>
-                               
-                            </div>
+                                <div class="col-md-5">
+                                    <div class="row">
+                                        <div class="col-md-2">
+                                             <label class='control-label' for='marketing_part2_en_title7'>EN</label>
+                                         </div>
+                                         <div class="col-md-8">
+                                             <div class='controls margin-bottom-10'>
+                                             <input class='form-control' id='marketing_part2_en_title7' name="marketing_part2_en_title7" 
+                                                type='text' onkeyup="$('.error_marketing_part2_en_title7').addClass('hide');">
+                                                <span class="color_red hide error_marketing_part2_en_title7" >Plese Enter Product name </span>
+                                              </div>
+                                              <div class='controls margin-bottom-10'>
+                                                <textarea class='form-control' id='marketing_part2_en_desc7' name="marketing_part2_en_desc7" 
+                                                type='text' onkeyup="$('.error_marketing_part2_en_desc7').addClass('hide');"></textarea>
+                                                <span class="color_red hide error_marketing_part2_en_desc7" >Plese Enter Product name </span>
+                                              </div>
+                                         </div>
+                                    </div>
+                                   
+                                </div>
 
-                            <div class="col-md-5">
-                                <div class="row">
-                                    <div class="col-md-2">
-                                         <label class='control-label' for='marketing_part2_fr_title8'>FR</label>
-                                     </div>
-                                     <div class="col-md-8">
-                                         <div class='controls margin-bottom-10'>
-                                         <input class='form-control' id='marketing_part2_fr_title8' name="marketing_part2_fr_title8" 
-                                            type='text' onkeyup="$('.error_marketing_part2_fr_title8').addClass('hide');">
-                                            <span class="color_red hide error_marketing_part2_fr_title8" >Plese Enter Product name </span>
-                                          </div>
-                                          <div class='controls margin-bottom-10'>
-                                            <textarea class='form-control' id='marketing_part2_fr_desc8' name="marketing_part2_fr_desc8" 
-                                            type='text' onkeyup="$('.error_marketing_part2_fr_desc8').addClass('hide');"></textarea>
-                                            <span class="color_red hide error_marketing_part2_fr_desc8" >Plese Enter Product name </span>
-                                          </div>
-                                     </div>
+                                <div class="col-md-5">
+                                    <div class="row">
+                                        <div class="col-md-2">
+                                             <label class='control-label' for='marketing_part2_fr_title7'>FR</label>
+                                         </div>
+                                         <div class="col-md-8">
+                                             <div class='controls margin-bottom-10'>
+                                             <input class='form-control' id='marketing_part2_fr_title7' name="marketing_part2_fr_title7" 
+                                                type='text' onkeyup="$('.error_marketing_part2_fr_title7').addClass('hide');">
+                                                <span class="color_red hide error_marketing_part2_fr_title7" >Plese Enter Product name </span>
+                                              </div>
+                                              <div class='controls margin-bottom-10'>
+                                                <textarea class='form-control' id='marketing_part2_fr_desc7' name="marketing_part2_fr_desc7" 
+                                                type='text' onkeyup="$('.error_marketing_part2_fr_desc7').addClass('hide');"></textarea>
+                                                <span class="color_red hide error_marketing_part2_fr_desc7" >Plese Enter Product name </span>
+                                              </div>
+                                         </div>
+                                    </div>
+                                   
                                 </div>
-                               
                             </div>
-                        </div>
-                        <br />
-                        <!-- //ROW SELLING POINTS BLOCK 8-->
+                            <br />
+                            <!-- //ROW SELLING POINTS BLOCK 7-->
+                            
+                            <!-- ROW SELLING POINTS BLOCK 8-->
+                            <div class="row">
+                                <div class="col-md-1">
+                                    8
+                                </div>
+                                <div class="col-md-5">
+                                    <div class="row">
+                                        <div class="col-md-2">
+                                             <label class='control-label' for='marketing_part2_en_title8'>EN</label>
+                                         </div>
+                                         <div class="col-md-8">
+                                             <div class='controls margin-bottom-10'>
+                                             <input class='form-control' id='marketing_part2_en_title8' name="marketing_part2_en_title8" 
+                                                type='text' onkeyup="$('.error_marketing_part2_en_title8').addClass('hide');">
+                                                <span class="color_red hide error_marketing_part2_en_title8" >Plese Enter Product name </span>
+                                              </div>
+                                              <div class='controls margin-bottom-10'>
+                                                <textarea class='form-control' id='marketing_part2_en_desc8' name="marketing_part2_en_desc8" 
+                                                type='text' onkeyup="$('.error_marketing_part2_en_desc8').addClass('hide');"></textarea>
+                                                <span class="color_red hide error_marketing_part2_en_desc8" >Plese Enter Product name </span>
+                                              </div>
+                                         </div>
+                                    </div>
+                                   
+                                </div>
 
-                        <div class="col-sm-8 col-sm-offset-0">
-                                <div class='form-group col-sm-6 text-left'>
+                                <div class="col-md-5">
+                                    <div class="row">
+                                        <div class="col-md-2">
+                                             <label class='control-label' for='marketing_part2_fr_title8'>FR</label>
+                                         </div>
+                                         <div class="col-md-8">
+                                             <div class='controls margin-bottom-10'>
+                                             <input class='form-control' id='marketing_part2_fr_title8' name="marketing_part2_fr_title8" 
+                                                type='text' onkeyup="$('.error_marketing_part2_fr_title8').addClass('hide');">
+                                                <span class="color_red hide error_marketing_part2_fr_title8" >Plese Enter Product name </span>
+                                              </div>
+                                              <div class='controls margin-bottom-10'>
+                                                <textarea class='form-control' id='marketing_part2_fr_desc8' name="marketing_part2_fr_desc8" 
+                                                type='text' onkeyup="$('.error_marketing_part2_fr_desc8').addClass('hide');"></textarea>
+                                                <span class="color_red hide error_marketing_part2_fr_desc8" >Plese Enter Product name </span>
+                                              </div>
+                                         </div>
+                                    </div>
+                                   
+                                </div>
+                            </div>
+                            <br />
+                            <!-- //ROW SELLING POINTS BLOCK 8-->
+
+                            <div class="col-sm-8 col-sm-offset-0">
+                                    <div class='form-group col-sm-6 text-left'>
+                                            <div class='controls'>
+                                                <label class='control-label check-box-margin'>
+                                                    <input type="checkbox" name="chkbox_marketing_part2" id="chkbox_marketing_part2"> <span>PART 2 COMPLETED (20%)</span>
+                                                </label>
+                                            </div>    
+                                            <span class="color_red error_marketing_part2 hide">Please Check this checkbox to procced further.</span>
+                                        </div>
+                                    
+                                    <div class='form-group pull-right'>
                                         <div class='controls'>
-                                            <label class='control-label check-box-margin'>
-                                                <input type="checkbox" name="chkbox_marketing_part2" id="chkbox_marketing_part2"> <span>PART 2 COMPLETED (20%)</span>
-                                            </label>
-                                        </div>    
-                                        <span class="color_red error_marketing_part2 hide">Please Check this checkbox to procced further.</span>
+                                            <input type="hidden" name="marketing_part2_1" id="marketing_part2_1" >
+                                            <input type="hidden" name="marketing_part2_2" id="marketing_part2_2" >
+                                            <input type="hidden" name="marketing_part2_3" id="marketing_part2_3" >
+                                            <input type="hidden" name="marketing_part2_4" id="marketing_part2_4" >
+                                            <input type="hidden" name="marketing_part2_5" id="marketing_part2_5" >
+                                            <input type="hidden" name="marketing_part2_6" id="marketing_part2_6" >
+                                            <input type="hidden" name="marketing_part2_7" id="marketing_part2_7" >
+                                            <input type="hidden" name="marketing_part2_8" id="marketing_part2_8" >
+                                            <a class="btn btn-success" onclick="validate_marketing_part_2()" >
+                                                <i class='icon-save'></i> Save
+                                            </a>
+                                            <a href="" class="btn btn-default" >Cancel</a>
+                                        </div>
                                     </div>
-                                
-                                <div class='form-group pull-right'>
-                                    <div class='controls'>
-                                        <input type="hidden" name="marketing_part2_1" id="marketing_part2_1" >
-                                        <input type="hidden" name="marketing_part2_2" id="marketing_part2_2" >
-                                        <input type="hidden" name="marketing_part2_3" id="marketing_part2_3" >
-                                        <input type="hidden" name="marketing_part2_4" id="marketing_part2_4" >
-                                        <input type="hidden" name="marketing_part2_5" id="marketing_part2_5" >
-                                        <input type="hidden" name="marketing_part2_6" id="marketing_part2_6" >
-                                        <input type="hidden" name="marketing_part2_7" id="marketing_part2_7" >
-                                        <input type="hidden" name="marketing_part2_8" id="marketing_part2_8" >
-                                        <a class="btn btn-success" onclick="validate_marketing_part_2()" >
-                                            <i class='icon-save'></i> Save
-                                        </a>
-                                        <a href="" class="btn btn-default" >Cancel</a>
-                                    </div>
-                                </div>
-                        </div> 
-                        <div class="clearfix"></div>
+                            </div> 
+                            <div class="clearfix"></div>
+                        </div>
                     </div>
-                </div>
-            </form>
+                </form>
               <!-- //part -2  -->
                 
                <!-- part -3 start -->
                 <form class="form" style="margin-bottom: 0;" method="post" action="#" accept-charset="UTF-8" id="marketting_part_3">
                   <input type="hidden" name="update_marketting" id="update_marketting" value="">
                  <input type="hidden" name="hdn_marketting_part_3" id="hdn_marketting_part_3" value="">
-                <div class="row">
+                    <div class="row">
                     <div class="col-sm-12 pull-left"> 
                         <span class="">
                             <h3 class="color_grey"> PART - 3 </h3>
@@ -763,7 +763,7 @@
                         <div class="row">
                             <div class="col-sm-6">
                                 <input type="checkbox" name="marketting_step_3" id="marketting_step_3" > Part-3 Completed (20%)
-                                <span class="color_red error_admin_part_3 hide">Please Check this checkbox for procced further.</span>
+                                <br/><span class="color_red color_red_part_3 error_admin_part_3 hide">Please Check this checkbox for procced further.</span>
                             </div>
                             <div class="col-sm-6">
                                 <div class='form-group pull-right'>
@@ -783,187 +783,187 @@
                         </div>        
                         <div class="clearfix"></div>
                     </div>   
-                </div>                                                
-        </form>
+                    </div>                                                
+                </form>
                <!-- part 3 end -->
                
                <!-- part 4 start -->           
                 <form class="form" style="margin-bottom: 0;" method="post" action="#" accept-charset="UTF-8" id="marketting_part_4">
-            <input type="hidden" name="update_marketting_part_4" id="update_marketting_part_4" value="">
-            <input type="hidden" name="hdn_marketting_part_4" id="hdn_marketting_part_4" value="">
-           <div class="row">
-               <div class="col-sm-12 pull-left"> 
-                   <span class="">
-                       <h3 class="color_grey"> PART - 4 </h3>
-                   </span>
-               </div>
-               <div class="clearfix"></div>
-               <div class="col-sm-12">
-                   <h4> CHECKLIST PRODUCT IMAGE </h4>
-                   <?php 
-                       $k=1;
-                       foreach($question_list_4 as $u_key) { ?>	
-                       <div class="row check-list">
-                           <div class="col-sm-6">
-                               <span class="check-list-number"><?php echo $k; ?></span>
-                               <label class='control-label'><?php echo $u_key->question; ?></label>
-                           </div>
-                           <div class="col-sm-4">
-                                <div class='make-switch switch' data-off-label='&lt;i class="icon-remove"&gt;&lt;/i&gt;' data-on-label='&lt;i class="icon-ok"&gt;&lt;/i&gt;'>
-                                   <input type='hidden' name='check_list[<?php echo $u_key->id;?>]'>
-                                   <input type='checkbox' name='check_list[<?php echo $u_key->id;?>]'>
-                                </div>
-                           </div>
-                           <div class="clearfix"></div>
-                       </div>
-                   <?php $k++; } ?>	
-               </div>
-
-               <div class="col-sm-6">
-
-               </div>
-               <div class="col-sm-6">
+                    <input type="hidden" name="update_marketting_part_4" id="update_marketting_part_4" value="">
+                    <input type="hidden" name="hdn_marketting_part_4" id="hdn_marketting_part_4" value="">
                    <div class="row">
-                       <div class="col-sm-6">
-                           <input type="checkbox" name="complete_admin_part_1" id="marketting_step_4" > Part-4 Completed (20%)
-                           <span class="color_red error_admin_part_3 hide color_red4">Please Check this checkbox for procced further.</span>
+                       <div class="col-sm-12 pull-left"> 
+                           <span class="">
+                               <h3 class="color_grey"> PART - 4 </h3>
+                           </span>
                        </div>
-                       <div class="col-sm-6">
-                           <div class='form-group pull-right'>
-                               <div class='controls'>
-                               <input type="hidden" name="" id="" value="">
-                               <a class="btn btn-success" onclick="validate_marketting_part_4()" >
-                                   <i class='icon-save'></i> Save
-                               </a>
-                               <a href="" class="btn btn-default" >Cancel</a>
+                       <div class="clearfix"></div>
+                       <div class="col-sm-12">
+                           <h4> CHECKLIST PRODUCT IMAGE </h4>
+                           <?php 
+                               $k=1;
+                               foreach($question_list_4 as $u_key) { ?>	
+                               <div class="row check-list">
+                                   <div class="col-sm-6">
+                                       <span class="check-list-number"><?php echo $k; ?></span>
+                                       <label class='control-label'><?php echo $u_key->question; ?></label>
+                                   </div>
+                                   <div class="col-sm-4">
+                                        <div class='make-switch switch' data-off-label='&lt;i class="icon-remove"&gt;&lt;/i&gt;' data-on-label='&lt;i class="icon-ok"&gt;&lt;/i&gt;'>
+                                           <input type='hidden' name='check_list[<?php echo $u_key->id;?>]' >
+                                           <input type='checkbox' name='check_list[<?php echo $u_key->id;?>]' >
+                                        </div>
+                                   </div>
+                                   <div class="clearfix"></div>
                                </div>
-                           </div>
+                           <?php $k++; } ?>	
                        </div>
-                   </div>        
-                   <div class="clearfix"></div>
-               </div>  
+
+                       <div class="col-sm-6">
+
+                       </div>
+                       <div class="col-sm-6">
+                           <div class="row">
+                               <div class="col-sm-6">
+                                   <input type="checkbox" name="complete_admin_part_1" id="marketting_step_4" > Part-4 Completed (20%)
+                                   <span class="color_red error_admin_part_3 hide color_red4">Please Check this checkbox for procced further.</span>
+                               </div>
+                               <div class="col-sm-6">
+                                   <div class='form-group pull-right'>
+                                       <div class='controls'>
+                                       <input type="hidden" name="" id="" value="">
+                                       <a class="btn btn-success" onclick="validate_marketting_part_4()" >
+                                           <i class='icon-save'></i> Save
+                                       </a>
+                                       <a href="" class="btn btn-default" >Cancel</a>
+                                       </div>
+                                   </div>
+                               </div>
+                           </div>        
+                           <div class="clearfix"></div>
+                       </div>  
 
 
-           </div>                                                
-    </form>
+                   </div>                                                
+                 </form>
                <!-- part 4 ends -->
 
                <!-- part 5 start -->
-            <form class="form" style="margin-bottom: 0;" method="post" action="#" accept-charset="UTF-8" id="marketing_part5" name="marketing_part5">
-             <div class="row">
-               <div class="col-sm-12 pull-left"> 
-                   <span class="">
-                       <h3 class="color_grey"> PART - 5 </h3>
-                   </span>
-               </div>
+                <form class="form" style="margin-bottom: 0;" method="post" action="#" accept-charset="UTF-8" id="marketing_part5" name="marketing_part5">
+                 <div class="row">
+                   <div class="col-sm-12 pull-left"> 
+                       <span class="">
+                           <h3 class="color_grey"> PART - 5 </h3>
+                       </span>
+                   </div>
 
-                <div class="clearfix"></div>
-                <div class="col-sm-6">    
-                    <div class="part-five-block">
-                        <font style="font-size:15px;font-weight:bold;color:black">DISPLAY USED </font>&nbsp;
-                        <div class='make-switch  pull-right switch' data-off-label='&lt;i class="icon-remove"&gt;&lt;/i&gt;' data-on-label='&lt;i class="icon-ok"&gt;&lt;/i&gt;'>
-                            <input type='checkbox' name="marketing_part5_switch1" id="marketing_part5_switch1" value="display_used">
-                        </div>
-                        <br /><br />
-                        <label class='control-label' for='marketing_part5_cost1'>COST</label>
-                        <div class='controls margin-bottom-10'>
-                            <input class='form-control' id='marketing_part5_cost1' name="marketing_part5_cost1" 
-                            type='text' onkeyup="$('.error_marketing_part5_cost1').addClass('hide');$('.error_marketing_part5_cost1_num').addClass('hide');">
-                            <span class="color_red hide error_marketing_part5_cost1" >Field Is Required</span>
-                            <span class="color_red hide error_marketing_part5_cost1_num" >Enter Only Number</span>
-                        </div>
+                    <div class="clearfix"></div>
+                    <div class="col-sm-6">    
+                        <div class="part-five-block">
+                            <font style="font-size:15px;font-weight:bold;color:black">DISPLAY USED </font>&nbsp;
+                            <div class='make-switch  pull-right switch' data-off-label='&lt;i class="icon-remove"&gt;&lt;/i&gt;' data-on-label='&lt;i class="icon-ok"&gt;&lt;/i&gt;'>
+                                <input type='checkbox' name="marketing_part5_switch1" id="marketing_part5_switch1" value="display_used">
+                            </div>
+                            <br /><br />
+                            <label class='control-label' for='marketing_part5_cost1'>COST</label>
+                            <div class='controls margin-bottom-10'>
+                                <input class='form-control' id='marketing_part5_cost1' name="marketing_part5_cost1" 
+                                type='text' onkeyup="$('.error_marketing_part5_cost1').addClass('hide');$('.error_marketing_part5_cost1_num').addClass('hide');">
+                                <span class="color_red hide error_marketing_part5_cost1" >Field Is Required</span>
+                                <span class="color_red hide error_marketing_part5_cost1_num" >Enter Only Number</span>
+                            </div>
 
-                        <label class='control-label' for='marketing_part5_supplier1'>SUPPLIER NAME</label>
-                        <div class='controls margin-bottom-10'>
-                            <input class='form-control' id='marketing_part5_supplier1' name="marketing_part5_supplier1" 
-                            type='text' onkeyup="$('.error_marketing_part5_supplier1').addClass('hide');">
-                            <span class="color_red hide error_marketing_part5_supplier1" >Field Is Required</span>
-                        </div>
+                            <label class='control-label' for='marketing_part5_supplier1'>SUPPLIER NAME</label>
+                            <div class='controls margin-bottom-10'>
+                                <input class='form-control' id='marketing_part5_supplier1' name="marketing_part5_supplier1" 
+                                type='text' onkeyup="$('.error_marketing_part5_supplier1').addClass('hide');">
+                                <span class="color_red hide error_marketing_part5_supplier1" >Field Is Required</span>
+                            </div>
 
-                        <label class='control-label' for='marketing_part5_upc1'>UPC</label>
-                        <div class='controls margin-bottom-10'>
-                            <input class='form-control' id='marketing_part5_upc1' name="marketing_part5_upc1" 
-                            type='text' onkeyup="$('.error_marketing_part5_upc1').addClass('hide');" readonly>
-                            <span class="color_red hide error_marketing_part5_upc1" >Please Generate UPC Code </span>
+                            <label class='control-label' for='marketing_part5_upc1'>UPC</label>
+                            <div class='controls margin-bottom-10'>
+                                <input class='form-control' id='marketing_part5_upc1' name="marketing_part5_upc1" 
+                                type='text' onkeyup="$('.error_marketing_part5_upc1').addClass('hide');" readonly>
+                                <span class="color_red hide error_marketing_part5_upc1" >Please Generate UPC Code </span>
+                            </div>
+                            <div class="pull-right">
+                                <a onClick="cost1_upc_get();" class="btn btn-success">GENERATE</a>
+                            </div>
+                            <div class="clearfix"></div>
                         </div>
-                        <div class="pull-right">
-                            <a onClick="cost1_upc_get();" class="btn btn-success">GENERATE</a>
-                        </div>
-                        <div class="clearfix"></div>
                     </div>
-                </div>
 
 
-                <div class="col-sm-6">
-                    <div class="part-five-block">
-                        <font style="font-size:15px;font-weight:bold;color:black">PLV IN STORE USED</font>&nbsp;
-                        
-                        <div class='make-switch pull-right switch' data-off-label='&lt;i class="icon-remove"&gt;&lt;/i&gt;' data-on-label='&lt;i class="icon-ok"&gt;&lt;/i&gt;'>
-                            <input type='checkbox' name="marketing_part5_switch2" id="marketing_part5_switch2" value="plv_used">
-                        </div>
-                        <br /><br />
-                        <label class='control-label' for='marketing_part5_cost2'>COST</label>
-                        <div class='controls margin-bottom-10'>
-                            <input class='form-control' id='marketing_part5_cost2' name="marketing_part5_cost2" 
-                            type='text' onkeyup="$('.error_marketing_part5_cost2').addClass('hide');$('.error_marketing_part5_cost2_num').addClass('hide');">
-                            <span class="color_red hide error_marketing_part5_cost2" >Field Is Required </span>
-                            <span class="color_red hide error_marketing_part5_cost2_num" >Enter Only Number</span>
-                        </div>
+                    <div class="col-sm-6">
+                        <div class="part-five-block">
+                            <font style="font-size:15px;font-weight:bold;color:black">PLV IN STORE USED</font>&nbsp;
+                            
+                            <div class='make-switch pull-right switch' data-off-label='&lt;i class="icon-remove"&gt;&lt;/i&gt;' data-on-label='&lt;i class="icon-ok"&gt;&lt;/i&gt;'>
+                                <input type='checkbox' name="marketing_part5_switch2" id="marketing_part5_switch2" value="plv_used">
+                            </div>
+                            <br /><br />
+                            <label class='control-label' for='marketing_part5_cost2'>COST</label>
+                            <div class='controls margin-bottom-10'>
+                                <input class='form-control' id='marketing_part5_cost2' name="marketing_part5_cost2" 
+                                type='text' onkeyup="$('.error_marketing_part5_cost2').addClass('hide');$('.error_marketing_part5_cost2_num').addClass('hide');">
+                                <span class="color_red hide error_marketing_part5_cost2" >Field Is Required </span>
+                                <span class="color_red hide error_marketing_part5_cost2_num" >Enter Only Number</span>
+                            </div>
 
-                        <label class='control-label' for='marketing_part5_supplier2'>SUPPLIER NAME</label>
-                        <div class='controls margin-bottom-10'>
-                            <input class='form-control' id='marketing_part5_supplier2' name="marketing_part5_supplier2" 
-                            type='text' onkeyup="$('.error_marketing_part5_supplier2').addClass('hide');">
-                            <span class="color_red hide error_marketing_part5_supplier2" >Field Is Required </span>
-                        </div>
+                            <label class='control-label' for='marketing_part5_supplier2'>SUPPLIER NAME</label>
+                            <div class='controls margin-bottom-10'>
+                                <input class='form-control' id='marketing_part5_supplier2' name="marketing_part5_supplier2" 
+                                type='text' onkeyup="$('.error_marketing_part5_supplier2').addClass('hide');">
+                                <span class="color_red hide error_marketing_part5_supplier2" >Field Is Required </span>
+                            </div>
 
-                        <label class='control-label' for='marketing_part5_upc2'>UPC</label>
-                        <div class='controls margin-bottom-10'>
-                            <input class='form-control' id='marketing_part5_upc2' name="marketing_part5_upc2" 
-                            type='text' onkeyup="$('.error_marketing_part5_upc2').addClass('hide');" readonly>
-                            <span class="color_red hide error_marketing_part5_upc2" >Please Generate UPC Code </span>
-                        </div>
-                        <div class="pull-right">
-                            <a onClick="cost2_upc_get();" class="btn btn-success">GENERATE</a>
-                        </div>
-                        <div class="clearfix"></div>
+                            <label class='control-label' for='marketing_part5_upc2'>UPC</label>
+                            <div class='controls margin-bottom-10'>
+                                <input class='form-control' id='marketing_part5_upc2' name="marketing_part5_upc2" 
+                                type='text' onkeyup="$('.error_marketing_part5_upc2').addClass('hide');" readonly>
+                                <span class="color_red hide error_marketing_part5_upc2" >Please Generate UPC Code </span>
+                            </div>
+                            <div class="pull-right">
+                                <a onClick="cost2_upc_get();" class="btn btn-success">GENERATE</a>
+                            </div>
+                            <div class="clearfix"></div>
 
+                        </div>
                     </div>
-                </div>
 
-                <div class="col-sm-6">
-                    <label class='control-label' for='marketing_part5_notes1'>Notes</label>
-                    <div class='controls margin-bottom-10'>
-                    <textarea class='form-control' id='marketing_part5_notes1' name="marketing_part5_notes1" 
-                    type='text' onkeyup="$('.error_marketing_part5_notes1').addClass('hide');"></textarea>
-                    <span class="color_red hide error_marketing_part5_notes1" >Field Is Required </span>
-                  </div>
-                </div>
+                    <div class="col-sm-6">
+                        <label class='control-label' for='marketing_part5_notes1'>Notes</label>
+                        <div class='controls margin-bottom-10'>
+                        <textarea class='form-control' id='marketing_part5_notes1' name="marketing_part5_notes1" 
+                        type='text' onkeyup="$('.error_marketing_part5_notes1').addClass('hide');"></textarea>
+                        <span class="color_red hide error_marketing_part5_notes1" >Field Is Required </span>
+                      </div>
+                    </div>
 
-                <div class="col-sm-6">
-                    <div class="row part-five-top-margin">
-                       <div class="col-sm-6">
-                           <input type="checkbox" name="chkbox_marketing_part5" id="chkbox_marketing_part5" > Part-5 Completed (20%)
-                       </div>
-                       <span class="color_red error_marketing_part5 hide">Check this checkbox to procced further.</span>
-                       <div class="col-sm-6">
-                           <div class='form-group pull-right'>
-                               <div class='controls'>
-                               <input type="hidden" name="marketing_part5_1" id="marketing_part5_1">
-                               <a class="btn btn-success" onclick="validate_marketing_part_5()" >
-                                   <i class='icon-save'></i> Save
-                               </a>
-                               <a href="" class="btn btn-default" >Cancel</a>
+                    <div class="col-sm-6">
+                        <div class="row part-five-top-margin">
+                           <div class="col-sm-6">
+                               <input type="checkbox" name="chkbox_marketing_part5" id="chkbox_marketing_part5" > Part-5 Completed (20%)
+                           </div>
+                           <span class="color_red error_marketing_part5 hide">Check this checkbox to procced further.</span>
+                           <div class="col-sm-6">
+                               <div class='form-group pull-right'>
+                                   <div class='controls'>
+                                   <input type="hidden" name="marketing_part5_1" id="marketing_part5_1">
+                                   <a class="btn btn-success" onclick="validate_marketing_part_5()" >
+                                       <i class='icon-save'></i> Save
+                                   </a>
+                                   <a href="" class="btn btn-default" >Cancel</a>
+                                   </div>
                                </div>
                            </div>
                        </div>
-                   </div>
-                </div>
+                    </div>
 
-             </div>
-             
-            </form>
-            <!-- part 5 ends -->    
+                 </div>
+                 
+                </form>
+                <!-- part 5 ends -->    
             <!-- End of part5 -->  
             </div>
      </div>
@@ -998,7 +998,7 @@
         
         
         if(product_id == ''){
-            //uncommetn below line for validate Part-1 Required Part
+            //uncomment below line for validate Part-1 Required Part
             $(function(){ bootbox.alert('Please create product in Part-1.');  });
             return false;
         }
@@ -1052,7 +1052,7 @@
                     $('#marketing_part1_5').val(data.marketing_part1_5);
                     $('#marketing_part1_6').val(data.marketing_part1_6);
                     $('#chkbox_marketing_part1').attr('disabled',true); // Disable Checkbox
-                    $('.marketting_load_percentage').html('20%'); // Update Percentage for product update
+                    $('.marketting_load_percentage').html(data.complete_bar_no+'%'); // Update Percentage for product update
                     $('.part_1_marketting').addClass('active'); 
                     return false;
                    }
@@ -1138,7 +1138,7 @@
                     $('#marketing_part2_7').val(data.marketing_part2_7);
                     $('#marketing_part2_8').val(data.marketing_part2_8);
                     $('#chkbox_marketing_part2').attr('disabled',true); // Disable Checkbox
-                    $('.marketting_load_percentage').html('40%'); // Update Percentage for product update
+                    $('.marketting_load_percentage').html(data.complete_bar_no+'%'); // Update Percentage for product update
                     $('.part_2_marketting').addClass('active'); 
                     return false;
                    }
@@ -1150,34 +1150,41 @@
 
     function validate_marketting_part(){
         
+        var product_id = $('#product_id').val();
+        if(product_id == ''){
+            //uncommetn below line for validate Part-1 Required Part
+            $(function(){ bootbox.alert('Please create product in Part-1.');  });
+            return false;
+        }
+
         if(!$("#marketting_step_3").is(':checked')){
-            $( ".color_red" ).removeClass( "hide");
+            $( ".color_red_part_3" ).removeClass( "hide");
             return false;
         }
         $("#fakeLoader").attr('style',''); // Remove Style Attribute for reuse
-            $("#fakeLoader").fakeLoader({
-                timeToHide:1200,
-                bgColor:"#2ecc71",
-                spinner:"spinner7"
-            }); // Fakeloader plugin
+        $("#fakeLoader").fakeLoader({
+            timeToHide:1200,
+            bgColor:"#2ecc71",
+            spinner:"spinner7"
+        }); // Fakeloader plugin
         var data = new FormData($("#marketting_part_3")[0]);
-            $.ajax({
-                url: '<?php echo base_url()."products/marketting_part_3"; ?>',
-                processData: false, 
-                type: 'post',
-                dataType: 'json',
-                data: data,
-                contentType: false,
-               success:function(response){
-                    if(response.status=="success"){
-                        $("#marketting_step_3").prop('disabled', true);
-                        $( ".color_red" ).addClass( "hide");
-                        $('.marketting_load_percentage').html('60%');
-                        $('.part_3_marketting').addClass('active');
-                        $('#update_marketting').val('update');
-                    }
-               }
-            });      
+        $.ajax({
+            url: '<?php echo base_url()."products/marketting_part_3"; ?>',
+            processData: false, 
+            type: 'post',
+            dataType: 'json',
+            data: data,
+            contentType: false,
+            success:function(response){
+                if(response.status=="success"){
+                    $("#marketting_step_3").prop('disabled', true);
+                    $( ".color_red" ).addClass( "hide");
+                    $('.marketting_load_percentage').html(response.complete_bar_no+'%');
+                    $('.part_3_marketting').addClass('active');
+                    $('#update_marketting').val('update');
+                }
+           }
+        });      
     }
    
    
@@ -1205,10 +1212,8 @@
                     if(response.status=="success"){
                         $("#marketting_step_4").prop('disabled', true);
                         $( ".color_red" ).addClass( "hide");
-                        $('.marketting_load_percentage').html('80%');
-                        $('.part_3_marketting').addClass('active');
+                        $('.marketting_load_percentage').html(response.complete_bar_no+'%');
                         $('.part_4_marketting').addClass('active');
-                       
                         $('#update_marketting_part_4').val('update');
                     }
                }
@@ -1275,7 +1280,7 @@
                    if(data.status=="success"){
                     $('#marketing_part5_1').val(data.marketing_part5_1);
                     $('#chkbox_marketing_part5').attr('disabled',true); // Disable Checkbox
-                    $('.marketting_load_percentage').html('20%'); // Update Percentage for product update
+                    $('.marketting_load_percentage').html(data.complete_bar_no+'%'); // Update Percentage for product update
                     $('.part_5_marketting').addClass('active'); 
                     return false;
                    }

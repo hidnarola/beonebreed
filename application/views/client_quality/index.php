@@ -67,11 +67,11 @@
 					<td><?php echo $u_key->id; ?> </td>
 					<td><?php echo $u_key->title; ?> </td>
 					<td>
-            <?php 
-              $date = new DateTime($u_key->created_date);
-              echo $date->format('d F Y');
-            ?> 
-          </td>
+			            <?php 
+			              $date = new DateTime($u_key->created_date);
+			              echo $date->format('d F Y');
+			            ?> 
+          			</td>
 					<td><?php echo $u_key->product_name; ?> </td>
 					<td><?php echo $u_key->store_name; ?> </td>
 					<td><?php echo $u_key->username; ?> </td>

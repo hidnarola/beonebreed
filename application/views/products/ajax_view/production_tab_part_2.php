@@ -1,4 +1,5 @@
-<div class="row ">
+<div class="row prod_row2_<?php echo $cnt; ?>">
+<hr style="margin-left:50px;width:90%;"/>
     <div class="form-horizontal label-left">
         <div class="col-sm-12">    
             <h3 style="margin: 0 0 15px;">Sample <?php echo $cnt; ?></h3>
@@ -20,9 +21,9 @@
                 <label class="control-label col-sm-1" >Approved:</label>
                 <div class="col-sm-5">
                     <div class="controls">
-                        <div class='make-switch switch' data-off-label='&lt;i class="icon-remove"&gt;&lt;/i&gt;' 
+                        <div class='make-switch-<?php echo $cnt; ?> switch' data-off-label='&lt;i class="icon-remove"&gt;&lt;/i&gt;' 
                              data-on-label='&lt;i class="icon-ok"&gt;&lt;/i&gt;'>
-                              <input type='checkbox' name="is_approve_<?php echo $cnt; ?>" id="is_approve_<?php echo $cnt; ?>" id="" value="">
+                              <input type='checkbox' name="is_approve_<?php echo $cnt; ?>" id="is_approve_<?php echo $cnt; ?>" value="1">
                         </div>
                     </div>
                 </div>
@@ -54,5 +55,5 @@
             </div>
         </div>
     </div>
-    <input type="hidden" name="production_sample_1" id="production_sample_1" value="">
+    <input type="hidden" name="production_sample_<?php echo $cnt; ?>" id="production_sample_<?php echo $cnt; ?>" value="">
 </div>

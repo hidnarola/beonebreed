@@ -76,11 +76,7 @@
                                        
                                     </ul>
                                 </div>
-                                <!--
-                                <button class='btn btn-success' type='button' data-target="#myuploadModal" data-toggle="modal">
-                                    <i class='icon-save'></i>
-                                    Add
-                                </button>-->
+                                
                             </div>
                             <!--end-->
                         </div> 
@@ -103,8 +99,7 @@
                         <!-- <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">
                             Open Modal
                         </button> -->
-
-                       
+                        
                       </div>
                     </div>
                 </div>
@@ -139,10 +134,8 @@
     function attachment_file(){
         var product_id = $('#product_id').val();
         if(product_id == ''){
- 
             $(function(){ bootbox.alert('Please create product in Part-1.');  });
             return false;
- 
         }
         $('#myModal').modal('show');
     }

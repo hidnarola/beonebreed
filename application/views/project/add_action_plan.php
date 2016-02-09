@@ -79,7 +79,8 @@
 			$('#target_datetimepicker').datetimepicker({
 				pickTime: false,
 				orientation: "auto top",                   
-			});         
+			});    
+           
 	});
         
         

@@ -1,119 +1,101 @@
 <?php
+    require_once( BASEPATH .'database/DB.php' );
+    $db =& DB();
+    $db->where('user_type',	'3');
+    $db->where('is_deleted','0');
+    $query = $db->get( 'users' );
+    $result = $query->result();
 
-/*
-  $CI =& get_instance();
-  $CI->load->model('client_model');
-  $result = $CI->client_model->get_all_client();
+    $u_str = uri_string();
 
-  $client_array=array();
-  
-  if(!empty($result)){   
-      foreach($result as $key=>$val){
-		$client_array[$key]=$val->username;
-      }
-  }
-*/
-        require_once( BASEPATH .'database/DB.php' );
-        $db =& DB();
-        $db->where('user_type',	'3');
-        $db->where('is_deleted','0');
-        $query = $db->get( 'users' );
-        $result = $query->result();
+    session_start();
+    
+    $controller=$this->router->fetch_class();
+    $actions=$this->router->fetch_method();
+
+    if($controller=='project' && ($actions=='index' || $actions=='archieve_projects')){  
+
+         $design="display:block";
+         $setting="display:none";
+         $sub_user_setting="display:none";
+         $sub_setting="display:none";
+         $store_setting="display:none";
+         $news_setting="display:none";
+		 $quality_setting="display:none";
+		 $idea_setting="display:none";
+    }else if($controller=='category' || $controller=='project_type'){
+        $setting="display:block";
+        //$sub_setting="display:none";
+        $design="display:none";
+        $sub_setting="display:block";
+        $sub_user_setting="display:none";
+        $store_setting="display:none";
+        $news_setting="display:none";
+		$quality_setting="display:none";
+		$idea_setting="display:none";
+    }else if($controller=='user'){
+        $setting="display:block";
+        $design="display:none";
+        $sub_setting="display:none";
+        $sub_user_setting="display:block";
+        $store_setting="display:none";
+        $news_setting="display:none";
+		$quality_setting="display:none";
+		$idea_setting="display:none";
+        //$sub_setting="display:none";
+    }else if($controller=='client'){          
+        $setting="display:block";
+        $design="display:none";
+        $sub_setting="display:none";
+        $sub_user_setting="display:none";
+        $store_setting="display:block";
+        $news_setting="display:none";
+		$quality_setting="display:none";
+		$idea_setting="display:none";
+        //$sub_setting="display:none";
+    }else if($controller=='news'){
+      
+        $setting="display:none";
+        $design="display:none";
+        $sub_setting="display:none";
+        $sub_user_setting="display:none";
+        $store_setting="display:none";
+        $news_setting="display:block";
+		$quality_setting="display:none";
+		$idea_setting="display:none";
         
-        /*
-        $this->db->where('user_type',	'3');
-		$this->db->where('is_deleted',	'0');
-		$query	=	$this->db->get('users');*/
-		//return	$query->result();
+        //$sub_setting="display:none";
+    }else if($controller=='quality'){
+      
+        $setting="display:none";
+        $design="display:none";
+        $sub_setting="display:none";
+        $sub_user_setting="display:none";
+        $store_setting="display:none";
+        $news_setting="display:none";
+		$quality_setting="display:block";
+		$idea_setting="display:none";
         
-        session_start();
-        
-        $controller=$this->router->fetch_class();
-        $actions=$this->router->fetch_method();
-
-        if($controller=='project' && ($actions=='index' || $actions=='archieve_projects')){  
-
-             $design="display:block";
-             $setting="display:none";
-             $sub_user_setting="display:none";
-             $sub_setting="display:none";
-             $store_setting="display:none";
-             $news_setting="display:none";
-			 $quality_setting="display:none";
-			 $idea_setting="display:none";
-        }else if($controller=='category' || $controller=='project_type'){
-            $setting="display:block";
-            //$sub_setting="display:none";
-            $design="display:none";
-            $sub_setting="display:block";
-            $sub_user_setting="display:none";
-            $store_setting="display:none";
-            $news_setting="display:none";
-			$quality_setting="display:none";
-			$idea_setting="display:none";
-        }else if($controller=='user'){
-            $setting="display:block";
-            $design="display:none";
-            $sub_setting="display:none";
-            $sub_user_setting="display:block";
-            $store_setting="display:none";
-            $news_setting="display:none";
-			$quality_setting="display:none";
-			$idea_setting="display:none";
-            //$sub_setting="display:none";
-        }else if($controller=='client'){          
-            $setting="display:block";
-            $design="display:none";
-            $sub_setting="display:none";
-            $sub_user_setting="display:none";
-            $store_setting="display:block";
-            $news_setting="display:none";
-			$quality_setting="display:none";
-			$idea_setting="display:none";
-            //$sub_setting="display:none";
-        }else if($controller=='news'){
-          
-            $setting="display:none";
-            $design="display:none";
-            $sub_setting="display:none";
-            $sub_user_setting="display:none";
-            $store_setting="display:none";
-            $news_setting="display:block";
-			$quality_setting="display:none";
-			$idea_setting="display:none";
-            
-            //$sub_setting="display:none";
-        }else if($controller=='quality'){
-          
-            $setting="display:none";
-            $design="display:none";
-            $sub_setting="display:none";
-            $sub_user_setting="display:none";
-            $store_setting="display:none";
-            $news_setting="display:none";
-			$quality_setting="display:block";
-			$idea_setting="display:none";
-            
-            //$sub_setting="display:none";
-        }else if($controller=='suggestion'){    
-          $setting="display:none";
-          $design="display:none";
-          $sub_setting="display:none";
-          $sub_user_setting="display:none";
-          $store_setting="display:none";
-          $news_setting="display:none";
+        //$sub_setting="display:none";
+    }else if($controller=='suggestion'){    
+      $setting="display:none";
+      $design="display:none";
+      $sub_setting="display:none";
+      $sub_user_setting="display:none";
+      $store_setting="display:none";
+      $news_setting="display:none";
+	  $quality_setting="display:none";
+	  $idea_setting="display:block";
+    }else{
+		  $setting="display:none";
+		  $design="display:none";
+		  $sub_setting="display:none";
+		  $sub_user_setting="display:none";
+		  $store_setting="display:none";
+		  $news_setting="display:none";
 		  $quality_setting="display:none";
-		  $idea_setting="display:block";
-        }else{
-			  $setting="display:none";
-			  $design="display:none";
-			  $sub_setting="display:none";
-			  $sub_user_setting="display:none";
-			  $store_setting="display:none";
-			  $news_setting="display:none";
-			  $quality_setting="display:none";
-			  $idea_setting="display:none";
-		}
+		  $idea_setting="display:none";
+	}
         
         
 ?>
@@ -135,10 +117,10 @@
     <link href="assets/stylesheets/plugins/bootstrap_daterangepicker/bootstrap-daterangepicker.css" media="all" rel="stylesheet" type="text/css" />
     <link href="assets/stylesheets/plugins/fullcalendar/fullcalendar.css" media="all" rel="stylesheet" type="text/css" />
     <link href="assets/stylesheets/plugins/common/bootstrap-wysihtml5.css" media="all" rel="stylesheet" type="text/css" />
-	  <link href="assets/stylesheets/plugins/datatables/bootstrap-datatable.css" media="all" rel="stylesheet" type="text/css" />
-	  <link href="assets/stylesheets/plugins/bootstrap_daterangepicker/bootstrap-daterangepicker.css" media="all" rel="stylesheet" type="text/css" />
+	<link href="assets/stylesheets/plugins/datatables/bootstrap-datatable.css" media="all" rel="stylesheet" type="text/css" />
+	<link href="assets/stylesheets/plugins/bootstrap_daterangepicker/bootstrap-daterangepicker.css" media="all" rel="stylesheet" type="text/css" />
     <link href="assets/stylesheets/plugins/bootstrap_datetimepicker/bootstrap-datetimepicker.min.css" media="all" rel="stylesheet" type="text/css" />
-	  <link href="assets/stylesheets/plugins/fuelux/wizard.css" media="all" rel="stylesheet" type="text/css" />
+	<link href="assets/stylesheets/plugins/fuelux/wizard.css" media="all" rel="stylesheet" type="text/css" />
 
     <!-- <link href='assets/images/meta_icons/favicon.ico' rel='shortcut icon' type='image/x-icon'> -->
     <link href='assets/images/meta_icons/apple-touch-icon.png' rel='apple-touch-icon-precomposed'>
@@ -147,10 +129,10 @@
     <link href='assets/images/meta_icons/apple-touch-icon-114x114.png' rel='apple-touch-icon-precomposed' sizes='114x114'>
     <link href='assets/images/meta_icons/apple-touch-icon-144x144.png' rel='apple-touch-icon-precomposed' sizes='144x144'>
 
-	  <link href="assets/stylesheets/plugins/tabdrop/tabdrop.css" media="all" rel="stylesheet" type="text/css" />
+	<link href="assets/stylesheets/plugins/tabdrop/tabdrop.css" media="all" rel="stylesheet" type="text/css" />
     <link href="assets/stylesheets/plugins/jgrowl/jquery.jgrowl.min.css" media="all" rel="stylesheet" type="text/css" />
     <link href="assets/stylesheets/jquery/jquery_ui.css" media="all" rel="stylesheet" type="text/css" />
-    
+
     <script src="assets/javascripts/jquery/jquery.min.js" type="text/javascript"></script>
   
     <!-- FAkeLoader JS & CSS START -->
@@ -162,7 +144,7 @@
 
 	<!--<script src="assets/javascripts/bootstrap/bootstrap.js" type="text/javascript"></script>-->
 	 
-	  <link href="assets/stylesheets/plugins/jquery_fileupload/jquery.fileupload-ui.css" media="all" rel="stylesheet" type="text/css" />
+	<link href="assets/stylesheets/plugins/jquery_fileupload/jquery.fileupload-ui.css" media="all" rel="stylesheet" type="text/css" />
     <!-- / END - page related stylesheets [optional] -->
     <!-- / bootstrap [required] -->
     <link href="assets/stylesheets/bootstrap/bootstrap.css" media="all" rel="stylesheet" type="text/css" />
@@ -172,8 +154,8 @@
     <link href="assets/stylesheets/theme-colors.css" media="all" rel="stylesheet" type="text/css" />
     <!-- / demo file [not required!] -->
     <link href="assets/stylesheets/demo.css" media="all" rel="stylesheet" type="text/css" />
-	  <link rel="stylesheet" href="assets/stylesheets/toastr.min.css" type="text/css" />
-	  <link rel="stylesheet" href="assets/stylesheets/custom_theme.css" type="text/css" />
+	<link rel="stylesheet" href="assets/stylesheets/toastr.min.css" type="text/css" />
+	<link rel="stylesheet" href="assets/stylesheets/custom_theme.css" type="text/css" />
     <!-- Add fancyBox -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css" type="text/css" media="screen" />
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script>
@@ -181,7 +163,8 @@
     <script type="text/javascript" src="assets/javascripts/jquery.tokeninput.js"></script>
     <link rel="stylesheet" href="assets/stylesheets/token-input.css" type="text/css" />
     <link rel="stylesheet" href="assets/stylesheets/token-input-facebook.css" type="text/css" />
-	  <script src="assets/javascripts/plugins/timeago/jquery.timeago.js" type="text/javascript"></script>
+    <script src="assets/javascripts/plugins/timeago/jquery.timeago.js" type="text/javascript"></script>
+
     <!-- <link href="css/smoothness/jquery-ui-1.9.0.custom.css" rel="stylesheet"> -->
     <link href="assets/stylesheets/plugins/select2/select2.css" media="all" rel="stylesheet" type="text/css" />
     <link href="assets/stylesheets/plugins/bootstrap_colorpicker/bootstrap-colorpicker.css" media="all" rel="stylesheet" type="text/css" />
@@ -209,6 +192,31 @@
         <a class='toggle-nav btn pull-left' href='#'>
           <i class='icon-reorder'></i>
         </a> 
+        <ul class='nav'>
+          <li class='dropdown light only-icon'>
+     
+            <ul class='dropdown-menu color-settings'>
+      
+              <li class='divider'></li>
+      
+            </ul>
+          </li>
+
+          <li class='dropdown dark user-menu'>
+            <a class='dropdown-toggle' data-toggle='dropdown' href='#'>
+              <span class='user-name'><?php if($this->session->userdata('username')){ echo $this->session->userdata('username');} ?></span>
+              <b class='caret'></b>
+            </a>
+            <ul class='dropdown-menu'>
+              <li>
+                <a href='<?php echo site_url('login/logout') ?>'>
+                  <i class='icon-signout'></i>
+                  Sign out
+                </a>
+              </li>
+            </ul>
+          </li>
+        </ul>
       </nav>
     </header>
     <div id='wrapper'>
@@ -231,6 +239,24 @@
                 <span>Dashboard</span>
               </a>
             </li>
+            
+            <li class="<?php  if($u_str == 'products/index/admin'){ echo 'active'; }?>">
+              <a class='dropdown-collapse' href='#'>
+               <i class="icon-star"></i>
+                <span>Admin</span>
+                <i class='icon-angle-down angle-down'></i>
+              </a>
+                 
+              <ul class='<?php if($u_str == 'products/index/admin'){ echo 'in'; } ?> nav nav-stacked '>
+                <li class="">
+                  <a href='<?php echo site_url('products/index/admin') ?>'>
+                    <i class='icon-caret-right'></i>
+                    <span>Products</span>
+                  </a>
+                </li>
+              </ul>
+            </li>
+
             <li>
               <a class='dropdown-collapse' href='#'>
                 <i class='icon-file-text'></i>
@@ -287,17 +313,35 @@
                     <span>News</span>
                   </a>
                 </li>
+                <li class="">
+                  <a href='<?php echo site_url('products/index/marketing') ?>'>
+                    <i class='icon-caret-right'></i>
+                    <span>Products</span>
+                  </a>
+                </li>
               </ul>
             </li>
 
-            <li class="<?php if($controller == 'barcode' || $controller == 'products'  || $controller == 'suppliers' ){ echo 'active'; }?>">
+            <li class="<?php
+                        if(in_array($u_str,array('products/index/admin','products/index/marketing','products/index/production')) == false){ 
+                            if( $controller == 'barcode' || $controller == 'products' || 
+                                $controller == 'suppliers' ){ echo 'active'; }
+                        }
+                            ?>">
               <a class='dropdown-collapse' href='#'>
                <i class="icon-gears"></i>
                 <span>Products</span>
                 <i class='icon-angle-down angle-down'></i>
               </a>
                  
-              <ul class='<?php if($controller == 'barcode' || $controller == 'products' || $controller == 'suppliers'){ echo 'in'; }?> nav nav-stacked '>
+                <ul class='<?php  
+                                if(in_array($u_str,array('products/index/admin','products/index/marketing','products/index/production')) == false){
+                                    if($controller == 'barcode' || $controller == 'products' || 
+                                      $controller == 'suppliers'){ echo 'in'; }
+                                }
+                            ?> 
+
+                            nav nav-stacked '>
                 <li class="">
                   <a href='<?php echo site_url('products') ?>'>
                     <i class='icon-caret-right'></i>
@@ -319,6 +363,23 @@
                 </li>
 
                 
+              </ul>
+            </li>
+
+            <li class="<?php  if($u_str == 'products/index/production'){ echo 'active'; }?>">
+              <a class='dropdown-collapse' href='#'>
+               <i class="icon-cloud-upload "></i>
+                <span>Production</span>
+                <i class='icon-angle-down angle-down'></i>
+              </a>
+                 
+              <ul class='<?php if($u_str == 'products/index/production'){ echo 'in'; } ?> nav nav-stacked '>
+                <li class="">
+                  <a href='<?php echo site_url('products/index/production') ?>'>
+                    <i class='icon-caret-right'></i>
+                    <span>Products</span>
+                  </a>
+                </li>
               </ul>
             </li>
 			
@@ -613,7 +674,7 @@
       }
     </script>
     <script src="assets/javascripts/plugins/bootstrap_daterangepicker/bootstrap-daterangepicker.js" type="text/javascript"></script>
-	<script src="assets/javascripts/plugins/bootstrap_datetimepicker/bootstrap-datetimepicker.js" type="text/javascript"></script>	
+	  <script src="assets/javascripts/plugins/bootstrap_datetimepicker/bootstrap-datetimepicker.js" type="text/javascript"></script>	
     <script src="assets/javascripts/plugins/common/moment.min.js" type="text/javascript"></script>
     <script src="assets/javascripts/plugins/bootbox/bootbox.min.js" type="text/javascript"></script>
     <script src="assets/javascripts/plugins/slimscroll/jquery.slimscroll.min.js" type="text/javascript"></script>
@@ -622,11 +683,11 @@
     <script src="assets/javascripts/plugins/common/bootstrap-wysihtml5.js" type="text/javascript"></script>
     <script src="assets/javascripts/plugins/fullcalendar/fullcalendar.min.js" type="text/javascript"></script>
     <script src="assets/javascripts/plugins/bootbox/bootbox.min.js" type="text/javascript"></script>
-	<script src="assets/javascripts/plugins/datatables/jquery.dataTables.min.js" type="text/javascript"></script>
+	  <script src="assets/javascripts/plugins/datatables/jquery.dataTables.min.js" type="text/javascript"></script>
     <script src="assets/javascripts/plugins/datatables/jquery.dataTables.columnFilter.js" type="text/javascript"></script>
     <script src="assets/javascripts/plugins/datatables/dataTables.overrides.js" type="text/javascript"></script>
-	<script src="assets/javascripts/toastr.min.js"></script>
-	<script src="assets/javascripts/plugins/fileupload/tmpl.min.js" type="text/javascript"></script>
+	  <script src="assets/javascripts/toastr.min.js"></script>
+	  <script src="assets/javascripts/plugins/fileupload/tmpl.min.js" type="text/javascript"></script>
     <script src="assets/javascripts/plugins/fileupload/load-image.min.js" type="text/javascript"></script>
     <script src="assets/javascripts/plugins/fileupload/canvas-to-blob.min.js" type="text/javascript"></script>
     <script src="assets/javascripts/plugins/fileupload/jquery.iframe-transport.min.js" type="text/javascript"></script>

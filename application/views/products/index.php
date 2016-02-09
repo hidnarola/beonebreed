@@ -11,15 +11,12 @@
           
           <div class='pull-right'>  
             <!-- <a href="<?php echo base_url().'barcode/import'; ?>" class="btn btn-success">Import UPC EAN Codes</a> -->
-            <a class="btn btn-info">Export</a>
           </div>
 
         </div>
       </div>
     </div>
-
- 
-
+    
     <div class="clearfix">	</div>
     <br/>
     <div class='col-sm-12'>

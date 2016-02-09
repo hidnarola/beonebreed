@@ -135,28 +135,31 @@ class Project_model extends CI_Model {
     return $query->result();
   }
   
-  //get project manager
+    //get project manager
 
-  public function get_project_manager() {
-    $query = $this->db->get('users');
-    return $query->result();
-  }
+    public function get_project_manager() {
+        $type_ids = array('2','4');
+        $this->db->where_in('user_type', $type_ids);
+        $query = $this->db->get_where('users');
+        return $query->result();
+    }
   
-  public function get($id = 0) {
-    $query = $this->db->get_where('projects', array('id' => $id));
-    return $query->row_array();
-  }
-   public function get_project_id($id = 0) {
-    $this->db->select('project_id'); 
-    $query = $this->db->get_where('project_timesheet', array('id' => $id));
-    return $query->row_array();
-  }
+    public function get($id = 0) {
+        $query = $this->db->get_where('projects', array('id' => $id));
+        return $query->row_array();
+    }
+
+    public function get_project_id($id = 0) {
+        $this->db->select('project_id'); 
+        $query = $this->db->get_where('project_timesheet', array('id' => $id));
+        return $query->row_array();
+    }
  
-  public function get_username() { 
-     $this->db->select('username'); 
-     $query = $this->db->get_where('users');
-     return $query->result();
-  }
+    public function get_username() { 
+        $this->db->select('username'); 
+        $query = $this->db->get_where('users');
+        return $query->result();
+    }
   
 
   public function get_action_plan_data($id = 0) {

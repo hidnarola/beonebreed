@@ -60,18 +60,21 @@
                     </div>
                      <div class='form-group'>
                         <label for='inputText'><?=lang('idea_product')?></label><span style="color:red">*</span>
-                        <select class="form-control js-example-data-array-selected" name="product" >
+                        <select class="form-control js-example-data-array-selected1 js-example-data-array-selected" 
+                                name="product" >
                           <option value=""><?=lang('select_product')?></option>
                           <?php
-                          if (!empty($product_list)) {
-                            foreach ($product_list as $k => $v) {
+                          if (!empty($products)) {
+                            foreach ($products as $product) {
                               ?>
-                              <option value="<?php echo $v->id; ?>" <?php echo set_select('product',$v->id); ?> ><?php echo ucfirst($v->name); ?></option>
-
+                              <option value="<?php echo $product['id'];?>" 
+                                    <?php echo set_select('product',$product['id']);?> >
+                                        <?php echo ucfirst($product['product_name']); ?>
+                                </option>
                               <?php
                             }
                           }
-                          ?>		
+                          ?>        
                       </select>
                         <span style="color:red"><?php echo form_error('product'); ?><span>
                     </div>

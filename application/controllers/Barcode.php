@@ -191,11 +191,11 @@ class Barcode extends CI_Controller {
 		$this->excel->getActiveSheet()->setTitle('Barcode');
 		//set cell A1 content with some text
 		$this->excel->getActiveSheet()->setCellValue('A1', 'Number');
-		//set cell A1 content with some text
+		//set cell B1 content with some text
 		$this->excel->getActiveSheet()->setCellValue('B1', 'UPC');
-		//set cell A1 content with some text
+		//set cell C1 content with some text
 		$this->excel->getActiveSheet()->setCellValue('C1', 'EAN');
-		//set cell A1 content with some text
+		//set cell D1 content with some text
 		$this->excel->getActiveSheet()->setCellValue('D1', 'Description');
 
 		$this->excel->getActiveSheet()->getStyle('A1')->getFont()->setBold(true);

@@ -41,7 +41,7 @@ class Client_news extends CI_Controller {
 		    'user_id' => '1',
 		    'visible_to_client' => $this->input->post('client_visibility'),
 		    'comment' => '',
-		    'created_date	' => date("Y-m-d H:i:s")
+		    'created_date' => date("Y-m-d H:i:s")
 		);
 		if ($this->news_model->add_records($data, TRUE)) {
 		    $this->session->set_flashdata('msg', 'Your record has been successfully added');

@@ -62,7 +62,7 @@ class Quality_model extends CI_Model {
   }
   
   public function get_store_list() {    
-    if(!empty($this->session->userdata('client_id'))){
+    if($this->session->userdata('client_id') != '' ){
       $user_id=$this->session->userdata('client_id');
       $this->db->where('is_deleted', '0');
       $this->db->where('user_id', $user_id);

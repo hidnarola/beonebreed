@@ -3,71 +3,67 @@
 class Client_quality extends CI_Controller {
 
   public function __construct() {
-    parent::__construct();
-    $this->load->library('template');
-    $this->load->helper('url');
-    $this->load->helper('form');
-    $this->load->model('client_quality_model');
-    $this->load->database();
-    $this->load->library('form_validation');
-      if ($this->session->userdata('client_user_logged_in')=='') {
-      redirect('login');
-      } 
+        parent::__construct();
+        $this->load->library('template');
+        $this->load->helper('url');
+        $this->load->helper('form');
+        $this->load->model('client_quality_model');
+        $this->load->database();
+        $this->load->library('form_validation');
+        if ($this->session->userdata('client_user_logged_in')=='') {
+            redirect('login');
+        } 
   }
   public function index() {
     $data['quality_list']=$this->client_quality_model->get_all();
     $this->template->load('mondou_default', 'client_quality/index', $data);
   }
 
-  public function add() {
+    public function add() {
+        
+        $data['product_list'] = $this->client_quality_model->get_product_list();
+        //Get All Store where Client Id is storen ID
+        $data['store_list'] = $this->client_quality_model->get_store_list();
+        $data['problem_list'] = $this->client_quality_model->get_problem_list();
 
-    if ($this->form_validation->run('quality') == FALSE) {
-      $data['product_list'] = $this->client_quality_model->get_product_list();
-      $data['store_list'] = $this->client_quality_model->get_store_list();
-      $data['problem_list'] = $this->client_quality_model->get_problem_list();
-      $this->template->load('mondou_default', 'client_quality/add', $data);
-    } else {
-      if (!empty($_POST)) {
+        $data['products'] = $this->products_model->getfrom('products_new');
 
-        if ($this->session->userdata('client_id')!='') {
-          $client_id = $this->session->userdata('client_id');
-        } else {
-          $client_id = 0;
-        }
-		if ($this->session->userdata('id')!='') {
-          $user_id = $this->session->userdata('id');
-        } else {
-          $user_id = 0;
-        }
-        if ($this->input->post('ds')!='') {
-          $ds = $this->input->post('ds');
-        } else {
-          $ds = 0;
-        }
-        $data = array(
-			'id' => $this->input->post('id'),
-            'name' => $this->input->post('name'),
-            'store' => $this->input->post('store'),
-            'product' => $this->input->post('product'),
-            'title' => $this->input->post('title'),
-            'description' => $this->input->post('description'),
-            'problem_type' => $this->input->post('problem_type'),
-            'qty_in_store' => $this->input->post('qty_in_store'),
-            'qty_defect' => $this->input->post('qty_defect'),
-            'ds' => $ds,
-            'contact_info' => $this->input->post('contact_info'),
-            'status' => '1',
-            'user_id' => $user_id,
-			'client_id' => $client_id,
-            'created_date	' => date("Y-m-d H:i:s")
-        );
+        if ($this->form_validation->run('quality') == FALSE) {
+        
+            $this->template->load('mondou_default', 'client_quality/add', $data);
+        }else{
 
-        $id = $this->client_quality_model->add_records($data, TRUE);
-        if (!empty($id)) {
-          redirect('client_quality/add_next/' . $id);
+            $client_id = 0;
+            $ds = 0;
+            $user_id = 0;
+            
+            $client_id = $this->session->userdata('client_id');
+            $user_id = $this->session->userdata('id');
+            $ds = $this->input->post('ds');
+            
+            $data = array(
+    			'id' => $this->input->post('id'),
+                'name' => $this->input->post('name'),
+                'store' => $this->input->post('store'),
+                'product' => $this->input->post('product'),
+                'title' => $this->input->post('title'),
+                'description' => $this->input->post('description'),
+                'problem_type' => $this->input->post('problem_type'),
+                'qty_in_store' => $this->input->post('qty_in_store'),
+                'qty_defect' => $this->input->post('qty_defect'),
+                'ds' => $ds,
+                'contact_info' => $this->input->post('contact_info'),
+                'status' => '1',
+                'user_id' => $user_id,
+    			'client_id' => $client_id,
+                'created_date' => date("Y-m-d H:i:s")
+            );
+            
+            $id = $this->client_quality_model->add_records($data, TRUE);
+            if (!empty($id)) {
+              redirect('client_quality/add_next/' . $id);
+            }
         }
-      }
-    }
   }
 
   public function quality_upload_form() {
@@ -251,5 +247,6 @@ class Client_quality extends CI_Controller {
     echo json_encode($response);
     die();
   }
+
 
 }

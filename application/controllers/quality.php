@@ -2,28 +2,29 @@
 
 class Quality extends CI_Controller {
 
-  public function __construct() {
-    parent::__construct();
-    $this->load->library('template');
-    $this->load->helper('url');
-    $this->load->helper('form');
-    $this->load->model('quality_model');
-    $this->load->database();
-    //$this->load->library('pagination');
-    $this->load->library('form_validation');
-    
-      if ($this->session->userdata('admin_logged_in')=='') {
-      redirect('login');
-      } 
-  }
-  public function index($client_id=0) {
-	$data['quality_list']=$this->quality_model->get_all($client_id);
-	$data['completed_quality_list']=$this->quality_model->get_all_completed_report($client_id);
-	$data['client_name']=$this->quality_model->get_client_name($client_id);
-	$data['client_id']=$client_id;
-    $this->template->load('admin_default', 'quality/index', $data);
-	
-  }
+    public function __construct() {
+        parent::__construct();
+        
+        $this->load->library('template');
+        $this->load->helper('url');
+        $this->load->helper('form');
+        $this->load->model('quality_model');
+        $this->load->database();
+        $this->load->library('form_validation');
+        
+        if ($this->session->userdata('admin_logged_in')=='') {
+            redirect('login');
+        } 
+
+    }
+
+    public function index($client_id=0) {
+    	$data['quality_list']=$this->quality_model->get_all($client_id);
+    	$data['completed_quality_list']=$this->quality_model->get_all_completed_report($client_id);
+    	$data['client_name']=$this->quality_model->get_client_name($client_id);
+    	$data['client_id']=$client_id;
+        $this->template->load('admin_default', 'quality/index', $data);
+    }
 
   public function add() {
 

@@ -63,7 +63,7 @@
                             <!--start-->
                             <div class='' style='margin-bottom: 0;'>
                                 <div class="attachment_wrapper">
-                                    <ul id="production_attachment" class="tab-ul">
+                                    <ul id="production_attachment" class="my_attachment tab-ul">
 
                                     </ul>
                                 </div>

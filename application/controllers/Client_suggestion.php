@@ -2,85 +2,77 @@
 
 class Client_suggestion extends CI_Controller {
 
-  public function __construct() {
-    parent::__construct();
-    $this->load->library('template');
-    $this->load->helper('url');
-    $this->load->helper('form');
-    $this->load->model('client_suggestion_model');
-    $this->load->database();
-    //$this->load->library('pagination');
-    $this->load->library('form_validation');
-    
-    if ($this->session->userdata('client_user_logged_in')=='') {
-      redirect('login');
-    } 
-  }
-
-  public function index() {   
-    $client_id=$this->session->userdata('client_id');
-    $user_id=$this->session->userdata('id');
-    $data['suggestion_list'] = $this->client_suggestion_model->get_all($user_id,$client_id);
-    $this->template->load('mondou_default', 'client_suggestion/index', $data);
-  }
-
-  public function add() {
-    if ($this->form_validation->run('suggestion') == FALSE) {
-      $data['product_list'] = $this->client_suggestion_model->get_product_list();
-      $data['store_list'] = $this->client_suggestion_model->get_store_list();
-      $data['suggestion_type'] = $this->client_suggestion_model->get_suggestion_type();
-      $this->template->load('mondou_default', 'client_suggestion/add', $data);
-    } else {
-      if (!empty($_POST)) {
-
-        if ($this->session->userdata('client_id')!='') {
-          $client_id = $this->session->userdata('client_id');
-        } else {
-          $client_id = 0;
-        }
-		if ($this->session->userdata('id')!='') {
-          $user_id = $this->session->userdata('id');
-        } else {
-          $user_id = 0;
-        }
-
-        $data = array(
-            'name' => $this->input->post('name'),
-            'suggestion_type' => $this->input->post('suggestion_type'),
-            'product' => $this->input->post('product'),
-            'subject' => $this->input->post('subject'),
-            'description' => $this->input->post('description'),
-            'store' => $this->input->post('store'),
-            'contact_info' => $this->input->post('contact_info'),
-            'status' => '1',
-            'user_id' => $user_id,
-			'client_id' => $client_id,
-            'created_date	' => date("Y-m-d H:i:s")
-        );
-        $id = $this->client_suggestion_model->add_records($data, TRUE);
-        if (!empty($id)) {
-          redirect('client_suggestion/add_next/' . $id);
-        }
-
-        /*
-          if ($this->client_suggestion_model->add_records($data, TRUE)) {
-          $this->session->set_flashdata('msg', 'Your record has been successfully added');
-          } else {
-          $this->session->set_flashdata('err_msg', 'Oops!Something Wrong!');
-          }
-          redirect('mondou/suggestion/'); */
-      }
+    public function __construct() {
+        parent::__construct();
+        $this->load->library('template');
+        $this->load->helper('url');
+        $this->load->helper('form');
+        $this->load->model('client_suggestion_model');
+        $this->load->database();
+        //$this->load->library('pagination');
+        $this->load->library('form_validation');
+        
+        if ($this->session->userdata('client_user_logged_in')=='') {
+          redirect('login');
+        } 
     }
-  }
 
-  public function add_next($id = 0) {
+    public function index() {   
+        $client_id=$this->session->userdata('client_id');
+        $user_id=$this->session->userdata('id');
+        $data['suggestion_list'] = $this->client_suggestion_model->get_all($user_id,$client_id);
+        $this->template->load('mondou_default', 'client_suggestion/index', $data);
+    }
+
+    public function add() {
+        
+        $data['products'] = $this->products_model->getfrom('products_new');
+        $data['product_list'] = $this->client_suggestion_model->get_product_list();
+        $data['store_list'] = $this->client_suggestion_model->get_store_list();
+        $data['suggestion_type'] = $this->client_suggestion_model->get_suggestion_type();
+        
+        if ($this->form_validation->run('suggestion') == FALSE) {            
+            $this->template->load('mondou_default', 'client_suggestion/add', $data);
+        }else{
+            
+            $client_id = 0;
+            $user_id = 0;
+            
+            $client_id = $this->session->userdata('client_id');
+            $user_id = $this->session->userdata('id');
+            
+            $data = array(
+                'name' => $this->input->post('name'),
+                'suggestion_type' => $this->input->post('suggestion_type'),
+                'product' => $this->input->post('product'),
+                'subject' => $this->input->post('subject'),
+                'description' => $this->input->post('description'),
+                'store' => $this->input->post('store'),
+                'contact_info' => $this->input->post('contact_info'),
+                'status' => '1',
+                'user_id' => $user_id,
+    			'client_id' => $client_id,
+                'created_date' => date("Y-m-d H:i:s")
+            );
+
+            $id = $this->client_suggestion_model->add_records($data, TRUE);
+            
+            if (!empty($id)) {
+              redirect('client_suggestion/add_next/' . $id);
+            }
+
+        }
+    }
     
-    $data['last_project_id'] = $id;
-    $data['attachment'] = $this->client_suggestion_model->get_suggestion_attachment($id);
-    $data['notes'] = $this->client_suggestion_model->get_suggestion_notes($id);
-    $data['external_link'] = $this->client_suggestion_model->get_suggestion_external_com($id);
-    $this->template->load('mondou_default', 'client_suggestion/add_next', $data);
-  }
+
+    public function add_next($id = 0) {
+        
+        $data['last_project_id'] = $id;
+        $data['attachment'] = $this->client_suggestion_model->get_suggestion_attachment($id);
+        $data['notes'] = $this->client_suggestion_model->get_suggestion_notes($id);
+        $data['external_link'] = $this->client_suggestion_model->get_suggestion_external_com($id);
+        $this->template->load('mondou_default', 'client_suggestion/add_next', $data);
+    }
 
   public function edit($id = 0) {
     if ($this->form_validation->run('suggestion') == FALSE) {
@@ -259,5 +251,6 @@ class Client_suggestion extends CI_Controller {
     echo json_encode($response);
     die();
   }
+
 
 }
