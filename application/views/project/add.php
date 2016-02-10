@@ -108,7 +108,7 @@
                                                     <div class='form-group'>
                                                         <label for='inputText'>Estimate Days</label><span style="color:red">*</span>
                                                         <!--<input class='form-control' id='inputText' placeholder='Estimate Days' type='text' name='estimated_days' value="<?php echo set_value('estimated_days'); ?>">-->
-                                                        <div class='datepicker input-group' id='datepicker'>
+                                                        <div class='estdate input-group' id='datepicker'>
                                                             <input class='form-control ' name='estimated_days' data-format='yyyy-MM-dd' placeholder='Select datepicker' type='text'>
                                                             <span class='input-group-addon'>
                                                                 <span data-date-icon='icon-calendar' data-time-icon='icon-time'></span>
@@ -161,5 +161,5 @@
                                                                 </div>
 
                                                                 <script>
-
+                                                                    
                                                                 </script>

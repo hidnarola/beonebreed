@@ -28,10 +28,10 @@ if (!empty($project['id'])) {
                     <h4 class='pull-right text-center right_side_link_w_icon'>
                         <a href="<?php echo base_url(); ?>project/similar/<?php echo $project['id']; ?>" class="" style=""  onClick="return confirm('Are You Want To Sure Create a Similar Project?');" id="similar_projects"
                            data-similar="<?php
-                       if (!empty($project['id'])) {
-                           echo $project['id'];
-                       }
-                       ?>">
+                           if (!empty($project['id'])) {
+                               echo $project['id'];
+                           }
+                           ?>">
                             <i class="icon-archive" style=" border: none;"></i> <br>
                             <span style="border: none;">Create a similar</span>
                         </a>
@@ -55,16 +55,16 @@ if (!empty($project['id'])) {
     </div>
 
 
-        <?php if ($this->session->flashdata('msg') != '') { ?>
+    <?php if ($this->session->flashdata('msg') != '') { ?>
         <div class='alert alert-success alert-dismissable'>
             <a class="close" data-dismiss="alert" href="#">&times;</a>
             <i class='icon-ok-sign'></i>
-        <?php
-        if ($this->session->flashdata('msg')):echo $this->session->flashdata('msg');
-        endif;
-        ?>  
+            <?php
+            if ($this->session->flashdata('msg')):echo $this->session->flashdata('msg');
+            endif;
+            ?>  
         </div>
-<?php } ?>
+    <?php } ?>
     <div class='row'>
         <div class='col-sm-12'>
             <div class='box'>
@@ -90,10 +90,10 @@ if (!empty($project['id'])) {
                             <div class='form-group'>
                                 <label for='inputText'>Project Name</label><span style="color:red">*</span>
                                 <input class='form-control' id='inputText' placeholder='Project Name' type='text' name='name' value="<?php
-                    if (!empty($project['name'])) {
-                        echo $project['name'];
-                    }
-                    ?>" <?php echo $disabled; ?>>
+                                if (!empty($project['name'])) {
+                                    echo $project['name'];
+                                }
+                                ?>" <?php echo $disabled; ?>>
                                 <span style="color:red"><?php echo form_error('name'); ?><span>
                                         </div>
                                         <div class='form-group'>
@@ -131,20 +131,20 @@ if (!empty($project['id'])) {
                                                     <?php } else { ?>
 
                                                         <option value=<?php echo $i; ?> ><?php echo $i; ?></option>
-        <?php
-    }
-}
-?>							
+                                                        <?php
+                                                    }
+                                                }
+                                                ?>							
                                             </select>	
                                         </div>
 
                                         <div class="form-group">
                                             <label for="comment">Quick Notes:</label>
                                             <textarea class="form-control" rows="5" id="comment" name="quick_notes"><?php
-if (!empty($project['quick_notes'])) {
-    echo $project['quick_notes'];
-}
-?></textarea>
+                                                if (!empty($project['quick_notes'])) {
+                                                    echo $project['quick_notes'];
+                                                }
+                                                ?></textarea>
                                         </div>  
 
 
@@ -178,19 +178,19 @@ if (!empty($project['quick_notes'])) {
                                                         <div class='form-group'>
                                                             <label for='inputText'>Estimate Days</label>
                                                             <input class='form-control' id='inputText' placeholder='Estimate Days' type='text' name='estimated_days' value="<?php
-                                                    if (!empty($project['estimated_days'])) {
-                                                        echo $project['estimated_days'];
-                                                    }
-                                                    ?>" <?php echo $disabled; ?> >
+                                                            if (!empty($project['estimated_days'])) {
+                                                                echo $project['estimated_days'];
+                                                            }
+                                                            ?>" <?php echo $disabled; ?> >
 
                                                         </div>
                                                         <div class='form-group'>
                                                             <label for='inputText'>Project manager</label>
                                                             <input class='form-control' id='inputText' placeholder='Project manager' type='text' name='project_manager' value="<?php
-                                                    if (!empty($project['project_manager'])) {
-                                                        echo $project['project_manager'];
-                                                    }
-                                                    ?>" <?php echo $disabled; ?>>
+                                                            if (!empty($project['project_manager'])) {
+                                                                echo $project['project_manager'];
+                                                            }
+                                                            ?>" <?php echo $disabled; ?>>
 
                                                         </div>
                                                         <div class='text-right form-actions form-actions-padding-sm form-actions-padding-md form-actions-padding-lg' style='margin-bottom: 0;'>
@@ -208,7 +208,7 @@ if (!empty($project['quick_notes'])) {
                                                         <hr class="hr-normal">
                                                         <!--
                                                                 <div class='pull-left' style="color:green;margin-left:15px;">
-<?php //if($this->session->flashdata('msg')):echo $this->session->flashdata('msg');endif;    ?>  
+                                                        <?php //if($this->session->flashdata('msg')):echo $this->session->flashdata('msg');endif;    ?>  
                                                                 </div> -->
 
                                                         <div class="clearfix">	</div>
@@ -257,7 +257,7 @@ if (!empty($project['quick_notes'])) {
                                                                                     </tr>
                                                                                 </thead>
                                                                                 <tbody>
-<?php foreach ($action_plan as $u_key) { ?>
+                                                                                    <?php foreach ($action_plan as $u_key) { ?>
                                                                                         <tr>
                                                                                             <td><?php echo $u_key->action; ?> </td>
                                                                                             <td><?php echo $u_key->resposible; ?> </td>
@@ -269,16 +269,16 @@ if (!empty($project['quick_notes'])) {
 
                                                                                                 <div class="slider" id="<?php echo $u_key->id; ?>" data-value="<?php echo $u_key->complete_level; ?>"></div>
                                                                                                 <p class=""><span class="slider-value"><?php
-                                                                                                    if (!empty($u_key->complete_level)) {
-                                                                                                        echo $u_key->complete_level . " %";
-                                                                                                    }
-    ?></span></p>
+                                                                                                        if (!empty($u_key->complete_level)) {
+                                                                                                            echo $u_key->complete_level . " %";
+                                                                                                        }
+                                                                                                        ?></span></p>
                                                                                             </td>
                                                                                             <td>
-    <?php
-    $date = new DateTime($u_key->target_date);
-    echo $date->format('d F Y');
-    ?>
+                                                                                                <?php
+                                                                                                $date = new DateTime($u_key->target_date);
+                                                                                                echo $date->format('d F Y');
+                                                                                                ?>
                                                                                             </td>
                                                                                             <td>
                                                                                                 <div class='text-left'>
@@ -289,7 +289,7 @@ if (!empty($project['quick_notes'])) {
                                                                                                 </div>
                                                                                             </td>  
                                                                                         </tr>
-<?php } ?> 
+                                                                                    <?php } ?> 
 
                                                                                 </tbody>
                                                                             </table>
@@ -340,13 +340,13 @@ if (!empty($project['quick_notes'])) {
                                                                                     </tr>
                                                                                 </thead>
                                                                                 <tbody>
-                                                                                            <?php foreach ($timesheet as $u_key) { ?>
+                                                                                    <?php foreach ($timesheet as $u_key) { ?>
                                                                                         <tr>
                                                                                             <td>
-    <?php
-    $date = new DateTime($u_key->dates);
-    echo $date->format('d F Y');
-    ?> 
+                                                                                                <?php
+                                                                                                $date = new DateTime($u_key->dates);
+                                                                                                echo $date->format('d F Y');
+                                                                                                ?> 
                                                                                             </td>
                                                                                             <td><?php echo $u_key->username; ?> </td>
                                                                                             <td><?php echo substr($u_key->today_introduction, 0, 50); ?> </td>
@@ -362,7 +362,7 @@ if (!empty($project['quick_notes'])) {
                                                                                                 </div>
                                                                                             </td>
                                                                                         </tr>
-<?php } ?> 
+                                                                                    <?php } ?> 
 
                                                                                 </tbody>
                                                                             </table>
@@ -386,7 +386,7 @@ if (!empty($project['quick_notes'])) {
                                                             <div class='row' style='margin-bottom:0;'>
                                                                 <div class='box-gray'>
                                                                     <div class="pull-right">
-                                                                        <a href="<?php echo site_url('suppliers/add') ?>" class="btn btn-primary pull-right">Add Supplier
+                                                                        <a href="<?php echo site_url('project/add_supplier/' . $pid) ?>" class="btn btn-primary pull-right">Add Supplier
                                                                         </a>     
                                                                     </div>
                                                                     <h4 class='title pull-left'>Suppliers</h4>
@@ -413,26 +413,27 @@ if (!empty($project['quick_notes'])) {
                                                                                     </tr>
                                                                                 </thead>
                                                                                 <tbody>
-<?php
-if (!empty($suppliers)) {
-    foreach ($suppliers as $supplier) {
-        ?>
+                                                                                    <?php
+                                                                                    if (!empty($suppliers)) {
+                                                                                        foreach ($suppliers as $supplier) {
+                                                                                            ?>
                                                                                             <tr>
                                                                                                 <td class="text-center"><?php echo $supplier['potential_level']; ?></td>
                                                                                                 <td><?php echo $supplier['supplier_name']; ?></td>
                                                                                                 <td><?php echo $supplier['created_date']; ?></td>                        
                                                                                                 <td>
                                                                                                     <div class='text-left'>
-                                                                                                        <a class='btn btn-primary btn-xs' href="<?php echo base_url() . 'suppliers/edit/' . $supplier['id']; ?>">
+                                                                                                        <a class='btn btn-primary btn-xs'>
                                                                                                             <i class='icon-edit'></i>
                                                                                                             Edit
                                                                                                         </a>
                                                                                                     </div>
                                                                                                 </td>
                                                                                             </tr>
-    <?php }
-}
-?> 
+                                                                                        <?php
+                                                                                        }
+                                                                                    }
+                                                                                    ?> 
 
                                                                                 </tbody>
                                                                             </table>
@@ -477,13 +478,14 @@ if (!empty($suppliers)) {
                                                                                                     ?>
                                                                                                     <li style="list-style:none"><input type="checkbox" name="chk[]" id="chk_attachment" class="chk_attachment" value="<?php echo $u_key->id; ?>"><a class="fancybox" href='uploads/<?php echo $u_key->name; ?>' ><?php echo $u_key->name; ?></a></li>
 
-                                                                                                <?php } else { ?>
+    <?php } else { ?>
 
                                                                                                     <li style="list-style:none"><input type="checkbox" name="chk[]" id="chk_attachment" class="chk_attachment" value="<?php echo $u_key->id; ?>"><a class="no_preview" href='uploads/<?php echo $u_key->name; ?>' ><?php echo $u_key->name; ?></a></li>
 
-    <?php }
-}
-?> 
+                                                                                                <?php
+                                                                                                }
+                                                                                            }
+                                                                                            ?> 
                                                                                         </ul>
                                                                                     </div> 
                                                                                 </div>
@@ -554,7 +556,7 @@ if (!empty($suppliers)) {
                                                                                                                     <div class='row' style='margin-bottom: 0;' id="notes_div_form">
                                                                                                                         <div class="col-md-6">
                                                                                                                             <ul id="notes" class="tab-ul">
-<?php foreach ($notes as $u_key) { ?>
+                                                                                                                                <?php foreach ($notes as $u_key) { ?>
                                                                                                                                     <li style="list-style:none"><input type="checkbox" name="chk[]" id="chk_notes" class="chk_notes" value="<?php echo $u_key->id; ?>"><a href="javascript:void(0)"  data-desc="<?php echo $u_key->description; ?>" class="notes_link" id="<?php echo $u_key->id; ?>"><?php echo $u_key->name; ?></a><span style="margin-left: 60px;"></span></li>
 <?php } ?> 
                                                                                                                             </ul>
@@ -626,7 +628,7 @@ if (!empty($suppliers)) {
                                                                                                                     <div class='row' style='margin-bottom: 0;' id="external_link_div">
                                                                                                                         <div class="col-md-6">
                                                                                                                             <ul id="external_links" class="tab-ul">
-<?php foreach ($external_link as $u_key) { ?>
+                                                                                                                                <?php foreach ($external_link as $u_key) { ?>
                                                                                                                                     <li style="list-style:none"><input type="checkbox" name="chk[]" id="chk_external" class="chk_external" value="<?php echo $u_key->id; ?>"><a href="javascript::void(0)" class="external_link_data " data-desc="<?php echo $u_key->description; ?>" ><?php echo $u_key->name; ?></a><span style="margin-left: 60px;"></span></li>
 <?php } ?> 
                                                                                                                             </ul>

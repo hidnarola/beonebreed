@@ -792,7 +792,28 @@ if ($controller == 'project' && ($actions == 'index' || $actions == 'archieve_pr
 
 
 
-        <!-- / END - page related files and scripts [optional] -->       
+        <!-- / END - page related files and scripts [optional] -->    
+        <script>
+            $(document).ready(function () {
+                $('#supplier_name').change(function () {
+                    var supp_id = $(this).find('option:selected').val();
+                    $.ajax({
+                        url: '<?php echo base_url() . "products/fetch_supplier_data"; ?>',
+                        type: 'POST',
+                        dataType: 'json',
+                        data: {supplier_id: supp_id},
+                        success: function (data) {
+                            $('#country_id').val(data.country);
+                            $('#tel_no').val(data.tel_no);
+                            $('#potential_level').val(data.potential_level);
+                            $('#address_id').val(data.address);
+                            $('#c_name').val(data.contact_name);
+                            $('#c_email').val(data.contact_email);
+                        }
+                    });
+                });
+            });
+        </script> 
         <script>
 
 

@@ -3,6 +3,11 @@
     display: block;
     margin: 10px auto;
 }
+.projectImage {
+    width: 50px;
+    height: 50px;
+    margin-left: 10px;
+}
 .logo_lg_login img{
 	max-width:230px;
 }

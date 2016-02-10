@@ -174,6 +174,13 @@
             $(".datepicker").datetimepicker({
                 pickTime: false
             });
+            
+            
+            $('.estdate').datetimepicker({
+            autoclose: true,
+            pickTime: false,
+            startDate: new Date()
+        });
 
             $(".timepicker").datetimepicker({
                 pickDate: false

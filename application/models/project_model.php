@@ -67,6 +67,27 @@ class Project_model extends CI_Model {
     $query = $this->db->get_where('project_attachments', array('project_id' => $id));
     return $query->result();
   }
+  
+   public function get_project_attachment_by_image($id) {
+    $query = $this->db->get_where('project_attachments', array('project_id' => $id))->result_array();
+    $cnt = 0;
+    $filename = '';
+    if(!empty($query)) {
+        foreach ($query as $q)
+        {
+             if($cnt == 0){
+            $path = base_url().'uploads/'.$q['name'];
+            $ext = strtolower(pathinfo($path, PATHINFO_EXTENSION));
+               if(in_array($ext, array('jpg','png','gif'))){
+                    
+                    $filename = $q['name'];
+                    $cnt++;
+                } 
+            }
+        }
+    }
+    return $filename;
+  }
 
   public function get_timesheet_attachment($id = 0) {
     $query = $this->db->get_where('timesheet_attachments', array('timesheet_id' => $id));
