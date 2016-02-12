@@ -21,9 +21,10 @@ class Dashboard extends CI_Controller {
 		foreach ($news_list as $key => $val) {
 		    $news_list[$key]['time_ago'] = time_elapsed_string(strtotime($val['created_date']));
 		}
+                $user_id = $this->session->userdata('id');
 		$data['news_list'] = $news_list;
 		$data['products'] = $this->products_model->getfrom('products_new');
-		$data['projects'] = $this->products_model->getfrom('projects',false,array('where'=>array('priority'=>'1')));
+		$data['projects'] = $this->products_model->getfrom('projects',false,array('where'=>array('priority'=>'1','created_by' => $user_id)));
 		
 		$this->template->load('admin_default', 'dashboard/index', $data);
     }

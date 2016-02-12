@@ -71,15 +71,14 @@ class Project_model extends CI_Model {
     public function get_project_attachment_by_image($id) {
         $query = $this->db->get_where('project_attachments', array('project_id' => $id))->result_array();
         $filename = array();
-            foreach ($query as $q) {
-                    $path = base_url() . 'uploads/' . $q['name'];
-                    $ext = strtolower(pathinfo($path, PATHINFO_EXTENSION));
-                    if (in_array($ext, array('jpg', 'png', 'gif'))) {
+        foreach ($query as $q) {
+            $path = base_url() . 'uploads/' . $q['name'];
+            $ext = strtolower(pathinfo($path, PATHINFO_EXTENSION));
+            if (in_array($ext, array('jpg', 'png', 'gif'))) {
 
-                        $filename[] = $q['name'];
-                    }
-                
+                $filename[] = $q['name'];
             }
+        }
         return $filename;
     }
 
@@ -246,7 +245,8 @@ class Project_model extends CI_Model {
                 'quick_notes' => $quick_notes,
             );
         }
-        p($data);exit;
+        p($data);
+        exit;
         $this->db->where('id', $id);
         return $this->db->update('projects', $data);
     }
@@ -326,8 +326,21 @@ class Project_model extends CI_Model {
     }
 
     public function delete_records($id) {
+        $this->delete_records_by_project_id($id);
         $this->db->where('id', $id);
         return $this->db->delete('projects');
+    }
+
+    public function delete_records_by_project_id($id) {
+        $tables = array('project_actionplan', 'project_attachments', 'project_external_notes', 'project_notes', 'project_suppliers', 'project_timesheet');
+        foreach ($tables as $table) {
+            $this->db->where('project_id',$id);
+            $q = $this->db->get($table); 
+            if ( $q->num_rows() > 0 )  {
+                $this->db->where('project_id', $id);
+                $this->db->delete($table);
+            }
+        }
     }
 
     public function delete_selected_records($id) {

@@ -36,7 +36,7 @@
 
 <!--
 <div style="margin-right:15px;">
-<a href="<?php //echo site_url('project/add')            ?>" class="btn btn-primary pull-right">Add Project</a>     
+<a href="<?php //echo site_url('project/add')                 ?>" class="btn btn-primary pull-right">Add Project</a>     
 </div> -->
 <div class="clearfix">	</div>
 <br/>
@@ -157,7 +157,7 @@
                                                     } else {
                                                         echo 'hide';
                                                     }
-                                                    ?>" rel="gallery1" href="<?php echo site_url('uploads/' . $image) ?>" title="<?php echo $image; ?>">
+                                                    ?>" rel="gallery1_<?php echo $u_key['id']; ?>" href="<?php echo site_url('uploads/' . $image) ?>" title="<?php echo $image; ?>">
                                                         <img class="projectImage" src="<?php echo site_url('uploads/' . $image) ?>" alt=""/>
                                                     </a>
                                                     <?php
@@ -217,6 +217,13 @@
                                                     <i class='icon-edit'></i>
                                                     Edit
                                                 </a>
+                                                <?php if ($this->session->userdata('user_type') == 1) { ?>
+                                                    <a class='btn btn-primary btn-xs btn-delete' href='<?php echo site_url('project/delete/' . $u_key['id']) ?>' onClick='return doconfirm(this.href);'>
+                                                        <i class='icon-edit'></i>
+                                                        Delete
+                                                    </a>
+                                                <?php }
+                                                ?>
                                             </div>
                                         </td>
                                     </tr>
@@ -234,7 +241,6 @@
 
             <!--start of idea project -->
 
-            <div class='col-sm-12'>
                 <div class='box bordered-box orange-border' style='margin-bottom:0;'>
                     <div class='box-header orange-background'>
                         <div class='title'>IDEA</div>
@@ -249,7 +255,7 @@
                     <div class='box-content box-no-padding'>
                         <div class='responsive-table'>
                             <div class='scrollable-area'>
-                                <table class='data-table table table-bordered table-striped' style='margin-bottom:0;'>
+                                <table class='data-table table table-bordered' style='margin-bottom:0;'>
                                     <thead>
                                         <tr>
                                             <th>
@@ -290,7 +296,7 @@
                                                                 } else {
                                                                     echo 'hide';
                                                                 }
-                                                                ?>" rel="gallery2" href="<?php echo site_url('uploads/' . $image) ?>" title="<?php echo $image; ?>">
+                                                                ?>" rel="gallery2_<?php echo $u_key['pid']; ?>" href="<?php echo site_url('uploads/' . $image) ?>" title="<?php echo $image; ?>">
                                                                     <img class="projectImage" src="<?php echo site_url('uploads/' . $image) ?>" alt=""/>
                                                                 </a>
                                                                 <?php
@@ -323,6 +329,13 @@
                                                                 <i class='icon-edit'></i>
                                                                 Edit
                                                             </a>
+                                                            <?php if ($this->session->userdata('user_type') == 1) { ?>
+                                                                <a class='btn btn-primary btn-xs btn-delete' href='<?php echo site_url('project/delete/' . $u_key['pid']) ?>' onClick='return doconfirm(href);'>
+                                                                    <i class='icon-edit'></i>
+                                                                    Delete
+                                                                </a>
+                                                            <?php }
+                                                            ?>
                                                         </div>
                                                     </td>
                                                 </tr>
@@ -351,6 +364,29 @@
                         <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
                     </div>
                 </div>
+                <script>
+                    function doconfirm(href)
+                    {
+                        $(function () {
+                            bootbox.confirm('Are you sure you want to delete this record?', function (res) {
+                                if (res)
+                                {
+                                    window.location.href = href;
+                                }
+                            });
+                        });
+
+                        return false;
+//                        if (confirm("Are you sure you want to delete this record?"))
+//                        {
+//                            return true;
+//                        }
+//                        else
+//                        {
+//                            return false;
+//                        }
+                    }
+                </script>
                 <script type="text/javascript">
                     $(document).ready(function () {
                         $(".fancybox").fancybox({

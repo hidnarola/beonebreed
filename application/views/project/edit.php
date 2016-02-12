@@ -47,7 +47,7 @@ if (!empty($project['id'])) {
                         <i class='icon-angle-right'></i>
                     </li>
                     <li>
-                        Edit Project
+                        <?php echo $project['name']; ?>
                     </li>
                 </ul>
             </div>
@@ -249,7 +249,7 @@ if (!empty($project['id'])) {
                                                                 <div class='box-content box-no-padding'>
                                                                     <div class='responsive-table'>
                                                                         <div class='scrollable-area'>
-                                                                            <table class='for_action_dt table table-bordered table-striped' style='margin-bottom:0;'>
+                                                                            <table id="actsort" class='for_action_dt table table-bordered table-striped' style='margin-bottom:0;'>
                                                                                 <thead>
                                                                                     <tr>
                                                                                         <th>
@@ -750,7 +750,12 @@ if (!empty($project['id'])) {
                                                                                                                 </div>
                                                                                                             </div>
 
-
+                                                                                                            <style>
+    
+                                                                                                                .fancybox-inner body {
+                                                                                                                    overflow-x: visible !important; 
+                                                                                                                }
+                                                                                                            </style>
 
 
 
@@ -760,32 +765,39 @@ if (!empty($project['id'])) {
 
                                                                                                             <script>
                                                                                                                 $(document).ready(function () {
-                                                                                                                    $(".fancybox").fancybox({
-//                                                                                                                        width: 1200,
-//                                                                                                                        height: 900,
+                                                                                                                    $('#actsort').dataTable({
+                                                                                                                        "aaSorting": [[4, 'asc']],
+                                                                                                                    });
+                                                                                                                    /* $(".fancybox").fancybox({
+                                                                                                                     //                                                                                                                        width: 1200,
+                                                                                                                     //                                                                                                                        height: 900,
+                                                                                                                     type: 'iframe'
+                                                                                                                     });*/
+                                                                                                                   
+
+                                                                                                                    $('.fancybox').fancybox({
                                                                                                                         type: 'iframe',
-                                                                                                                        scrolling: 'yes',
+                                                                                                                        afterShow: function () {
+                                                                                                                           $('.fancybox-inner body').css('overflow-x','visible !important');
+                                                                                                                        }                                                                                                                       
+
                                                                                                                     });
 
 
                                                                                                                 });
-
                                                                                                                 $(document).on("click", "#btn_finish_send", function () {
 
                                                                                                                     submitForm();
                                                                                                                 });
-
                                                                                                                 $(document).on("click", "#expand_notes", function () {
 
                                                                                                                     $('#expand_notes_form').show();
                                                                                                                     $('#notes_div_form').hide();
-
                                                                                                                 });
                                                                                                                 $(document).on("click", "#expand_external_links", function () {
 
                                                                                                                     $('#expand_external_form').show();
                                                                                                                     $('#external_link_div').hide();
-
                                                                                                                 });
                                                                                                                 $(document).on("click", "#cancel_external_form", function () {
 
@@ -797,21 +809,18 @@ if (!empty($project['id'])) {
                                                                                                                     $('#expand_notes_form').hide();
                                                                                                                     $('#notes_div_form').show();
                                                                                                                 });
-
                                                                                                                 $(document).on('click', '.notes_link', function () {
 
                                                                                                                     var data = $(this).attr("data-desc");
                                                                                                                     $('#modal_notes_desc').text(data);
                                                                                                                     $('#my_notes_description').modal('show');
                                                                                                                 });
-
                                                                                                                 $(document).on('click', '.external_link_data', function () {
 
                                                                                                                     var data = $(this).attr("data-desc");
                                                                                                                     $('#modal_external_desc').text(data);
                                                                                                                     $('#my_external_description').modal('show');
                                                                                                                 });
-
                                                                                                                 $(document).on('click', '#archive_projects', function () {
                                                                                                                     var id = $(this).attr("data-archieve");
                                                                                                                     archieveProject(id);
@@ -823,8 +832,6 @@ if (!empty($project['id'])) {
                                                                                                                     $('#my_preview_form').modal('show');
                                                                                                                     return false;
                                                                                                                 });
-
-
                                                                                                                 function archieveProject(id) {
                                                                                                                     event.preventDefault();
                                                                                                                     var project_id = id;
@@ -849,8 +856,6 @@ if (!empty($project['id'])) {
 
                                                                                                                     $('#notes_err_msg').text('');
                                                                                                                     var notes_title = $('#notes_title').val();
-
-
                                                                                                                     if (notes_title == '') {
                                                                                                                         $('#notes_err_msg').text('please enter notes title');
                                                                                                                         $("#notes_name").focus();
@@ -877,8 +882,6 @@ if (!empty($project['id'])) {
                                                                                                                                 $('#notes').append('<li style=list-style-type:none;><input type=checkbox name=chk[] id="chk_attachment" class=chk_notes value=' + response.id + '><a data-desc="' + response.desc + '" class="notes_link" id="' + response.id + '" href="javascript::void(0)">' + response.notes_name + '</a><span style=margin-left:60px>' + response.dates1 + '</span></li>');
                                                                                                                                 $("#expand_notes_form").css("display", "none");
                                                                                                                                 $("#notes_div_form").css("display", "block");
-
-
                                                                                                                                 //location.reload();
 
                                                                                                                             } else {
@@ -886,7 +889,6 @@ if (!empty($project['id'])) {
                                                                                                                             }
                                                                                                                         }
                                                                                                                     });
-
                                                                                                                     return false;
                                                                                                                 }
 
@@ -926,7 +928,6 @@ if (!empty($project['id'])) {
                                                                                                                             }
                                                                                                                         }
                                                                                                                     });
-
                                                                                                                     return false;
                                                                                                                 }
 
@@ -949,20 +950,14 @@ if (!empty($project['id'])) {
                                                                                                                                 var diffDays = Math.round((end.getTime() - start.getTime()) / (oneDay));
                                                                                                                                 $('#estimated_days_edit').val(diffDays);
                                                                                                                             });
-
                                                                                                                 });
-
-
                                                                                                                 function add_similar_project() {
                                                                                                                     var error_cnt = 0;
                                                                                                                     var old_project_id = $('#old_project_id').val();
-
                                                                                                                     var similar_project_quick_notes = $('#similar_project_quick_notes').val();
                                                                                                                     var similar_project_name = $('#similar_project_name').val();
-
                                                                                                                     var form_data = $("#similar_project_form").serializeArray();
                                                                                                                     form_data.push({name: "old_project_id", value: old_project_id});
-
                                                                                                                     if (similar_project_name === '') {
                                                                                                                         $('.error_similar_project_name').removeClass('hide');
                                                                                                                         error_cnt++;
@@ -1069,7 +1064,7 @@ if (!empty($project['id'])) {
                                                                                                                     var project_id = $('#hdn_project_id').val();
                                                                                                                     var cek_id = new Array();
                                                                                                                     $('#chk_attachment:checked').each(function () {
-                                                                                                                        cek_id.push($(this).val());// an array of selected values
+                                                                                                                        cek_id.push($(this).val()); // an array of selected values
                                                                                                                     });
                                                                                                                     if (cek_id.length == 0) {
                                                                                                                         alert("Please select atleast one checkbox");
@@ -1093,7 +1088,6 @@ if (!empty($project['id'])) {
 
                                                                                                                     }
                                                                                                                 });
-
                                                                                                                 function uploadNotes() {
                                                                                                                     var error_cnt = 0;
                                                                                                                     var project_id = $('#hdn_project_id').val();
@@ -1135,7 +1129,7 @@ if (!empty($project['id'])) {
                                                                                                                     var project_id = $('#hdn_project_id').val();
                                                                                                                     var cek_id = new Array();
                                                                                                                     $('#chk_notes:checked').each(function () {
-                                                                                                                        cek_id.push($(this).val());// an array of selected values
+                                                                                                                        cek_id.push($(this).val()); // an array of selected values
                                                                                                                     });
                                                                                                                     if (cek_id.length == 0) {
                                                                                                                         alert("Please select atleast one checkbox");
@@ -1158,7 +1152,6 @@ if (!empty($project['id'])) {
 
                                                                                                                     }
                                                                                                                 });
-
                                                                                                                 function upload_External_Notes() {
                                                                                                                     var error_cnt = 0;
                                                                                                                     var project_id = $('#hdn_project_id').val();
@@ -1200,7 +1193,7 @@ if (!empty($project['id'])) {
                                                                                                                     var project_id = $('#hdn_project_id').val();
                                                                                                                     var cek_id = new Array();
                                                                                                                     $('.chk_external:checked').each(function () {
-                                                                                                                        cek_id.push($(this).val());// an array of selected values
+                                                                                                                        cek_id.push($(this).val()); // an array of selected values
                                                                                                                     });
                                                                                                                     if (cek_id.length == 0) {
                                                                                                                         alert("Please select atleast one checkbox");

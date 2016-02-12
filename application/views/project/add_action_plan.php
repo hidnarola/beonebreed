@@ -17,7 +17,7 @@
                         <i class='icon-angle-right'></i>
                     </li>
                     <li>
-                        <a href='<?php echo site_url('project/edit/' . $project_id); ?>'>Edit Project</a>
+                        <a href='<?php echo site_url('project/edit/' . $project['id']); ?>'><?php echo $project['name'];?></a>
                     </li>
                     <li class='separator'>
                         <i class='icon-angle-right'></i>
@@ -57,8 +57,8 @@
 
                                     <div class='form-group'>
                                         <label for='inputText'>Complete Level</label><span style="color:red">*</span>
-                                        <input class='form-control' id='inputText' placeholder='Complete Level' type='text' name='complete_level'>
-                                        <span style="color:red"><?php echo form_error('complete_level'); ?><span>
+                                        <input class='form-control' id='complete_level' placeholder='Complete Level' type='text' name='complete_level'>
+                                        <span id="complete_level_msg" style="color:red"><?php echo form_error('complete_level'); ?></span>
                                                 </div>
                                                 <div>
                                                     <label for='inputText'>Target Date</label><span style="color:red">*</span>
@@ -79,7 +79,7 @@
                                                         <i class='icon-save'></i>
                                                         Save
                                                     </button>
-                                                    <a class='btn' type='submit' href="<?php echo site_url('project/edit/' . $project_id); ?>">Cancel</a>
+                                                    <a class='btn' href="<?php echo site_url('project/edit/' . $project['id']); ?>">Cancel</a>
                                                 </div>
 
                                                 </div>
@@ -89,16 +89,21 @@
                                                 </div>
 
                                                 <script type="text/javascript">
-
                                                     $(document).ready(function () {
 
                                                         $('#target_datetimepicker').datetimepicker({
                                                             pickTime: false,
                                                             orientation: "auto top",
                                                         });
-
+                                                        $('#complete_level').keyup(function () {
+                                                           var clvalue = $('#complete_level').val();
+                                                           if(clvalue < 0 || clvalue >100) {
+                                                               $('#complete_level_msg').html('The Complete Level field must contain numbers between 0 to 100.');
+                                                           }
+                                                           else
+                                                           {
+                                                               $('#complete_level_msg').html('');
+                                                           }
+                                                        });
                                                     });
-
-
-
                                                 </script>

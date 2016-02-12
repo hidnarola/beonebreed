@@ -16,7 +16,7 @@
                         <i class='icon-angle-right'></i>
                     </li>
                     <li>
-                        <a href='<?php echo site_url('project/edit/' . $project_id); ?>'>Edit Project</a>
+                        <a href='<?php echo site_url('project/edit/' . $project['id']); ?>'><?php echo $project['name'];?></a>
                     </li>
                     <li class='separator'>
                         <i class='icon-angle-right'></i>
@@ -137,7 +137,7 @@
                                                 <i class='icon-save'></i>
                                                 Next
                                             </button>
-                                           <a class='btn' type='submit' href="<?php echo site_url('project/edit/'.$project_id); ?>">Cancel</a>
+                                           <a class='btn' href="<?php echo site_url('project/edit/'.$project['id']); ?>">Cancel</a>
                                         </div>
                                     </div>
                                     <div class="clearfix"></div>

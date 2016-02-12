@@ -17,7 +17,7 @@
                             <i class='icon-angle-right'></i>
                         </li>
                         <li>
-                            <a href='<?php echo site_url('suppliers/'); ?>'>Edit Project</a>
+                            <a href='<?php echo site_url('project/edit/' . $project['id']); ?>'><?php echo $project['name']; ?></a>
                         </li>
                         <li class='separator'>
                             <i class='icon-angle-right'></i>

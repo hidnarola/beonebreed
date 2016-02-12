@@ -16,7 +16,6 @@ class Project extends CI_Controller {
     }
 
     public function index() {
-
         $data['inprogress_list'] = $this->project_model->get_all_inprogress_project();
         $data['idea_list'] = $this->project_model->get_all_idea_project();
          $inprogress_projects = array();
@@ -277,7 +276,7 @@ class Project extends CI_Controller {
     public function add_action_plan($id = 0) {
 
         if ($this->form_validation->run('action_plan') == FALSE) {
-            $data['project_id'] = $id;
+            $data['project'] = $this->project_model->get($id);
             $this->template->load('admin_default', 'project/add_action_plan', $data);
         } else {
             if (!empty($_POST)) {
@@ -317,7 +316,7 @@ class Project extends CI_Controller {
     public function add_timesheet($id = 0) {
 
         if ($this->form_validation->run('timesheet') == FALSE) {
-            $data['project_id'] = $id;
+            $data['project'] = $this->project_model->get($id);
             $this->template->load('admin_default', 'project/add_timesheet', $data);
         } else {
             if (!empty($_POST)) {
@@ -371,6 +370,7 @@ class Project extends CI_Controller {
 
 
             $data['action_plan'] = $this->project_model->get_action_plan_data($id);
+            $data['project'] = $this->project_model->get($data['action_plan']['project_id']);
 
             $this->template->load('admin_default', 'project/edit_action_plan', $data);
         } else {
@@ -405,6 +405,7 @@ class Project extends CI_Controller {
         $data['attachment'] = $this->project_model->get_timesheet_attachment($id);
         if ($this->form_validation->run('timesheet') == FALSE) {
             $data['timesheet_list'] = $this->project_model->get_timesheet_data($id);
+            $data['project'] = $this->project_model->get($data['timesheet_list']['project_id']);
             $this->template->load('admin_default', 'project/edit_timesheet', $data);
         } else {
             if (!empty($_POST)) {

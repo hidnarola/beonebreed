@@ -156,7 +156,7 @@ if ($controller == 'project' && ($actions == 'index' || $actions == 'archieve_pr
         <link rel="stylesheet" href="assets/stylesheets/custom_theme.css" type="text/css" />
         <!-- Add fancyBox -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css" type="text/css" media="screen" />
-        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script>
+        <script type="text/javascript" src="assets/javascripts/jquery.fancybox.min.js"></script>
 
         <script type="text/javascript" src="assets/javascripts/jquery.tokeninput.js"></script>
         <link rel="stylesheet" href="assets/stylesheets/token-input.css" type="text/css" />
