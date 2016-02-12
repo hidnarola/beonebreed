@@ -44,7 +44,7 @@
                 <div class='box-content box-no-padding'>
                     <div class='responsive-table'>
                         <div class='scrollable-area'>
-                            <table class='data-table table table-bordered table-striped' style='margin-bottom:0;'>
+                            <table class='data-table table table-bordered' style='margin-bottom:0;'>
                                 <thead>
                                     <tr>
                                         <th>
@@ -89,6 +89,9 @@
                                                         $sum = 0;
                                                     }
                                                     ?>
+                                                    <div class='task'>
+                                                        <small class='pull-right'><?php echo $sum; ?>%</small>
+                                                    </div>
                                                     <div class='progress'>
                                                         <div class='progress-bar progress-bar-success' style='width:<?php echo $sum; ?>%;'><?php echo $sum; ?>%</div>
                                                     </div>

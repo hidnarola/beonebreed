@@ -86,7 +86,7 @@ class Products extends CI_Controller {
         // p($data['marketing_part2_data'],true);
         // ------------------------------------------------------------------------
 
-        $data['all_attachment'] = $this->products_model->getfrom('products_attachments',false,array('where'=>array('product_id'=>$pid)));
+        $data['all_attachment'] = $this->products_model->getfrom('products_attachments',false,array('where'=>array('product_id'=>$pid,'tab' => 'attachments')));
         $data['all_notes'] = $this->products_model->getfrom('products_notes',false,array('where'=>array('product_id'=>$pid)));
 
         // ------------------------------------------------------------------------
@@ -105,6 +105,7 @@ class Products extends CI_Controller {
         														  'condition'=>'products_suppliers.supplier_id=suppliers.id') ) ) 
         													);
         $data['data_production_part_2'] = $this->products_model->getfrom('products_sample',false,array('where'=>array('product_id'=>$pid)));                
+        $data['data_production_part_2_all_attachment'] = $this->products_model->getfrom('products_attachments',false,array('where'=>array('product_id'=>$pid,'tab' => 'production')));
         // p($data['data_production_part_1'],true);
         // ------------------------------------------------------------------------
         
@@ -982,7 +983,11 @@ class Products extends CI_Controller {
         $config['upload_path'] = './uploads/products/';
         $config['allowed_types'] = '*';
         $this->load->library('upload', $config);
-        $tab = "attachments";
+        if($this->input->post('tab')) {
+            $tab = $this->input->post('tab');
+        }else {
+             $tab = "attachments";
+        }
         if ($_FILES['file']['name']) {
             if (!$this->upload->do_upload('file')) {
                 $response = array('status' => 'fail', 'msg' => $this->upload->display_errors());

@@ -80,9 +80,13 @@ $config = array(
         array(
             'field' => 'complete_level',
             'label' => 'Complete Level',
-            'rules' => 'numeric'
+            'rules' => 'required|numeric'
         ),
-        
+        array(
+            'field' => 'target_date',
+            'label' => 'target_date',
+            'rules' => 'required'
+        ),
     ),
     'type' => array(
         array(

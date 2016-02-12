@@ -36,7 +36,7 @@
 
 <!--
 <div style="margin-right:15px;">
-<a href="<?php //echo site_url('project/add')         ?>" class="btn btn-primary pull-right">Add Project</a>     
+<a href="<?php //echo site_url('project/add')            ?>" class="btn btn-primary pull-right">Add Project</a>     
 </div> -->
 <div class="clearfix">	</div>
 <br/>
@@ -75,8 +75,9 @@
                                             </li>
                                             <?php
                                         }
-                                    } else {?>
-                                            <li> No Actions found!</li>
+                                    } else {
+                                        ?>
+                                        <li> No Actions found!</li>
                                     <?php }
                                     ?>
                                 </ul>
@@ -138,72 +139,91 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <?php foreach ($inprogress_projects as $u_key) { ?>
-                                <tr>
-                                    <td>
-                                        <?php echo $u_key['id']; ?>
-                                        <?php if (!empty($u_key['image'])) { ?>
-                                            <a class="fancybox" href="<?php echo site_url('uploads/' . $u_key['image']) ?>" title="<?php echo $u_key['image']; ?>">
-                                                <img class="projectImage" src="<?php echo site_url('uploads/' . $u_key['image']) ?>" alt=""/>
-                                            </a>
-                                        <?php } else { ?>
-                                            <a class="fancybox" href="<?php echo site_url('uploads/no_image/no_image_available.jpg') ?>" title="No Image">
-                                                <img class="projectImage" src="<?php echo site_url('uploads/no_image/no_image_available.jpg') ?>" alt=""/>
-                                            </a>
-                                        <?php } ?>
-                                    </td>
-                                    <td>
-                                        <a href="" data-toggle="modal" data-target="#myModal_<?php echo $u_key['id']; ?>">
-                                            <?php echo $u_key['name']; ?>
-                                        </a>
-                                    </td>
-                                    <td>
-                                        <?php
-                                        $date = new DateTime($u_key['created_date']);
-                                        echo $date->format('d F Y');
-                                        ?> 
-                                    </td>
-                                    <td>
-                                        <?php
-                                        if (!empty($u_key['priority'])) {
-                                            echo $u_key['priority'];
-                                        } else {
-                                            echo " ";
-                                        }
-                                        ?>
-                                    </td>
-                                    <td>
-                                        <?php
-                                        if (!empty($u_key['estimated_days'])) {
-                                            $datetime1 = new DateTime($u_key['created_date']);
-                                            $datetime2 = new DateTime();
-                                            $interval = $datetime1->diff($datetime2);
-                                            $days = $interval->format('%a');
-
-                                            $estimate_value = $u_key['estimated_days'];
-                                            $display_day = $estimate_value - $days;
-
-                                            if ($display_day >= 0) {
-                                                echo $display_day;
+                            <?php
+                            if (!empty($inprogress_projects)) {
+                                foreach ($inprogress_projects as $u_key) {
+                                    ?>
+                                    <tr>
+                                        <td>
+                                            <?php echo $u_key['id']; ?>
+                                            <?php
+                                            if (!empty($u_key['image'])) {
+                                                $cnt = 0;
+                                                ?>
+                                                <?php foreach ($u_key['image'] as $image) { ?>
+                                                    <a class="fancybox <?php
+                                                    if ($cnt == 0) {
+                                                        $cnt++;
+                                                    } else {
+                                                        echo 'hide';
+                                                    }
+                                                    ?>" rel="gallery1" href="<?php echo site_url('uploads/' . $image) ?>" title="<?php echo $image; ?>">
+                                                        <img class="projectImage" src="<?php echo site_url('uploads/' . $image) ?>" alt=""/>
+                                                    </a>
+                                                    <?php
+                                                }
                                             } else {
-                                                echo "<span style=color:red>" . $display_day . "</sapn>";
-                                            }
-                                        }
-                                        ?> 
-                                    </td>
-                                    <td><?php echo $u_key['project_manager']; ?> </td>
-                                    <td style="width:auto"><p class="fixed_width"><?php echo substr($u_key['quick_notes'], 0, 80); ?></p> </td>
-
-                                    <td>
-                                        <div class='text-left'>
-                                            <a class='btn btn-primary btn-xs' href='<?php echo site_url('project/edit/' . $u_key['id']) ?>'>
-                                                <i class='icon-edit'></i>
-                                                Edit
+                                                ?>
+                                                <a class="fancybox" href="<?php echo site_url('uploads/no_image/no_image_available.jpg') ?>" title="No Image">
+                                                    <img class="projectImage" src="<?php echo site_url('uploads/no_image/no_image_available.jpg') ?>" alt=""/>
+                                                </a>
+                                            <?php } ?>
+                                        </td>
+                                        <td>
+                                            <a href="" data-toggle="modal" data-target="#myModal_<?php echo $u_key['id']; ?>">
+                                                <?php echo $u_key['name']; ?>
                                             </a>
-                                        </div>
-                                    </td>
-                                </tr>
-                            <?php } ?> 
+                                        </td>
+                                        <td>
+                                            <?php
+                                            $date = new DateTime($u_key['created_date']);
+                                            echo $date->format('d F Y');
+                                            ?> 
+                                        </td>
+                                        <td>
+                                            <?php
+                                            if (!empty($u_key['priority'])) {
+                                                echo $u_key['priority'];
+                                            } else {
+                                                echo " ";
+                                            }
+                                            ?>
+                                        </td>
+                                        <td>
+                                            <?php
+                                            if (!empty($u_key['estimated_days'])) {
+                                                $datetime1 = new DateTime($u_key['created_date']);
+                                                $datetime2 = new DateTime();
+                                                $interval = $datetime1->diff($datetime2);
+                                                $days = $interval->format('%a');
+
+                                                $estimate_value = $u_key['estimated_days'];
+                                                $display_day = $estimate_value - $days;
+
+                                                if ($display_day >= 0) {
+                                                    echo $display_day;
+                                                } else {
+                                                    echo "<span style=color:red>" . $display_day . "</sapn>";
+                                                }
+                                            }
+                                            ?> 
+                                        </td>
+                                        <td><?php echo $u_key['project_manager']; ?> </td>
+                                        <td style="width:auto"><p class="fixed_width"><?php echo substr($u_key['quick_notes'], 0, 80); ?></p> </td>
+
+                                        <td>
+                                            <div class='text-left'>
+                                                <a class='btn btn-primary btn-xs' href='<?php echo site_url('project/edit/' . $u_key['id']) ?>'>
+                                                    <i class='icon-edit'></i>
+                                                    Edit
+                                                </a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <?php
+                                }
+                            }
+                            ?> 
                         </tbody>
                     </table>
 
@@ -253,44 +273,63 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <?php foreach ($idea_projects as $u_key) { ?>
-                                            <tr>
-                                                <td><?php echo $u_key['pid']; ?> 
-                                                    <?php if (!empty($u_key['image'])) { ?>
-                                                        <a class="fancybox" href="<?php echo site_url('uploads/' . $u_key['image']) ?>" title="<?php echo $u_key['image']; ?>">
-                                                            <img class="projectImage" src="<?php echo site_url('uploads/' . $u_key['image']) ?>" alt=""/>
-                                                        </a>
-                                                    <?php } else { ?>
-                                                        <a class="fancybox" href="<?php echo site_url('uploads/no_image/no_image_available.jpg') ?>" title="No Image">
-                                                            <img class="projectImage" src="<?php echo site_url('uploads/no_image/no_image_available.jpg') ?>" alt=""/>
-                                                        </a>
-                                                    <?php } ?>
-                                                </td>
-                                                <td><?php echo $u_key['name']; ?> </td>
-                                                <td>
-                                                    <?php
-                                                    $date = new DateTime($u_key['p_created_at']);
-                                                    echo $date->format('d F Y');
-                                                    ?> 
-                                                </td>
-                                                <td>
-                                                    <?php
-                                                    echo $u_key['username'];
-                                                    ?> 
-                                                </td>
-                                                <td>
-                                                    <p class="fixed_width"> <?php echo $u_key['quick_notes']; ?> </p>
-                                                </td>
-                                                <td>
-                                                    <div class='text-left'>
-                                                        <a class='btn btn-primary btn-xs' href='<?php echo site_url('project/edit/' . $u_key['pid']) ?>'>
-                                                            <i class='icon-edit'></i>
-                                                            Edit
-                                                        </a>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                        <?php } ?> 
+                                        <?php
+                                        if (!empty($idea_projects)) {
+                                            foreach ($idea_projects as $u_key) {
+                                                ?>
+                                                <tr>
+                                                    <td><?php echo $u_key['pid']; ?> 
+                                                        <?php
+                                                        if (!empty($u_key['image'])) {
+                                                            $cnt = 0;
+                                                            ?>
+                                                            <?php foreach ($u_key['image'] as $image) { ?>
+                                                                <a class="fancybox <?php
+                                                                if ($cnt == 0) {
+                                                                    $cnt++;
+                                                                } else {
+                                                                    echo 'hide';
+                                                                }
+                                                                ?>" rel="gallery2" href="<?php echo site_url('uploads/' . $image) ?>" title="<?php echo $image; ?>">
+                                                                    <img class="projectImage" src="<?php echo site_url('uploads/' . $image) ?>" alt=""/>
+                                                                </a>
+                                                                <?php
+                                                            }
+                                                        } else {
+                                                            ?>
+                                                            <a class="fancybox" href="<?php echo site_url('uploads/no_image/no_image_available.jpg') ?>" title="No Image">
+                                                                <img class="projectImage" src="<?php echo site_url('uploads/no_image/no_image_available.jpg') ?>" alt=""/>
+                                                            </a>
+                                                        <?php } ?>
+                                                    </td>
+                                                    <td><?php echo $u_key['name']; ?> </td>
+                                                    <td>
+                                                        <?php
+                                                        $date = new DateTime($u_key['p_created_at']);
+                                                        echo $date->format('d F Y');
+                                                        ?> 
+                                                    </td>
+                                                    <td>
+                                                        <?php
+                                                        echo $u_key['username'];
+                                                        ?> 
+                                                    </td>
+                                                    <td>
+                                                        <p class="fixed_width"> <?php echo $u_key['quick_notes']; ?> </p>
+                                                    </td>
+                                                    <td>
+                                                        <div class='text-left'>
+                                                            <a class='btn btn-primary btn-xs' href='<?php echo site_url('project/edit/' . $u_key['pid']) ?>'>
+                                                                <i class='icon-edit'></i>
+                                                                Edit
+                                                            </a>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <?php
+                                            }
+                                        }
+                                        ?> 
                                     </tbody>
                                 </table>
                             </div>

@@ -104,30 +104,38 @@
                                             <!-- Estimate Days -->
                                             <div class='form-group'>
                                                             <label for='inputText'>Estimate Days</label>
-                                                            <input class='form-control' id='inputText' placeholder='Estimate Days' type='text' name='estimated_days' 
-                                                              value="<?php
-                                                                      if (!empty($project_data[0]['estimated_days'])) {
-                                                                          echo $project_data[0]['estimated_days'];
-                                                                      }
-                                                                    ?>" 
-                                                            >
-                                            </div>
+                                                            <div class='estdate input-group' id='datepicker'>
+                                                            <input class='form-control ' name='estimated_days' data-format='yyyy-MM-dd' placeholder='Select datepicker' type='text' value="<?php
+                                                            if (!empty($project_data[0]['estimated_days'])) {
+                                                                echo $project_data[0]['estimated_days'];
+                                                            }
+                                                            ?>" readonly="">
+                                                            <span class='input-group-addon'>
+                                                                <span data-date-icon='icon-calendar' data-time-icon='icon-time'></span>
+                                                            </span>
+                                                        </div>
+                                                        </div>
                                                 
                                             <!-- Project Manager  -->
                                             <div class='form-group'>
                                                 <label for='inputText'>Project manager</label>
                                                     <select class="js-example-data-array-selected form-control" name="project_manager">
                                                         <option value="">Select Project Manager</option>
-                                                          <?php
-                                                          if (!empty($project_manager)) {
-                                                            foreach ($project_manager as $k => $v) {
-                                                              ?>
-                                                              <option value="<?php echo $v->username; ?>" <?php echo set_select('project_manager',$v->username); ?>><?php echo ucfirst($v->username); ?></option>
+                                                         <?php
+                                                                if (!empty($project_manager)) {
+                                                                    foreach ($project_manager as $k => $v) {
+                                                                        if ($project_data[0]['project_manager'] == $v->username) {
+                                                                            ?>
+                                                                            <option value="<?php echo $v->username; ?>" selected><?php echo $v->username; ?></option>
 
-                                                              <?php
-                                                            }
-                                                          }
-                                                          ?>    
+                                                                        <?php } else { ?>
+
+                                                                            <option value="<?php echo $v->username; ?>"><?php echo $v->username; ?></option>
+                                                                            <?php
+                                                                        }
+                                                                    }
+                                                                }
+                                                                ?>  
                                                     </select>
                                             </div>
 

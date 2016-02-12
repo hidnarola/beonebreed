@@ -19,7 +19,7 @@ class Project extends CI_Controller {
 
         $data['inprogress_list'] = $this->project_model->get_all_inprogress_project();
         $data['idea_list'] = $this->project_model->get_all_idea_project();
-        
+         $inprogress_projects = array();
          if(!empty($data['inprogress_list'])) {
         foreach ($data['inprogress_list'] as $attach) {
             $inprogress_project['id'] = $attach->id;
@@ -34,8 +34,6 @@ class Project extends CI_Controller {
             $inprogress_projects[] = $inprogress_project;
         }
          }
-//        echo "<pre>";
-//        print_r($inprogress_projects);exit;
         $idea_projects = array();
         if(!empty($data['idea_list'])) {
         foreach ($data['idea_list'] as $attachment) {
@@ -60,7 +58,6 @@ class Project extends CI_Controller {
     }
 
     public function add() {
-
         if ($this->form_validation->run('project') == FALSE) {
 
             $data['project_type'] = $this->project_model->get_all_types();
@@ -68,17 +65,13 @@ class Project extends CI_Controller {
             $data['project_manager'] = $this->project_model->get_project_manager();
             $this->template->load('admin_default', 'project/add', $data);
         } else {
-
             $category_id = 0;
             $quick_notes = '';
             $estimated_days = 0;
             $priority = 0;
             $project_manager = '';
 
-            $date1 = date_create("now");
-            $date2 = date_create($this->input->post('estimated_days'));
-            $diff = date_diff($date1, $date2);
-            $estimated_days = $diff->format("%a");
+            $estimated_days = $this->input->post('estimated_days');
 
             $category_id = $this->input->post('category_id');
             $priority = $this->input->post('priority');
@@ -108,6 +101,7 @@ class Project extends CI_Controller {
     }
 
     public function add_supplier($pid) {
+        $data['project'] = $this->project_model->get($pid);
         $data['suppliers'] = $this->products_model->getfrom('suppliers', false, false, array('order_by' => 'potential_level'));
         $this->form_validation->set_rules('supplier_name', 'Supplier Name', 'trim|required');
 
@@ -439,6 +433,7 @@ class Project extends CI_Controller {
         /* if ($this->form_validation->run('project') == FALSE){ */
 
         $data['project_type'] = $this->project_model->get_all_types();
+        $data['project_manager'] = $this->project_model->get_project_manager();
         $data['categories'] = $this->project_model->get_caregory();
         $data['project'] = $this->project_model->get($id);
         $data['action_plan'] = $this->project_model->get_action_plan($id);

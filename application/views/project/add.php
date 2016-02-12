@@ -103,18 +103,18 @@
                                                 }
                                                 ?>		
                                             </select>
-                                            <span style="color:red"><?php echo form_error('project_type_id'); ?><span>
+                                            <span style="color:red"><?php echo form_error('project_type_id'); ?></span>
                                                     </div>
                                                     <div class='form-group'>
                                                         <label for='inputText'>Estimate Days</label><span style="color:red">*</span>
                                                         <!--<input class='form-control' id='inputText' placeholder='Estimate Days' type='text' name='estimated_days' value="<?php echo set_value('estimated_days'); ?>">-->
                                                         <div class='estdate input-group' id='datepicker'>
-                                                            <input class='form-control ' name='estimated_days' data-format='yyyy-MM-dd' placeholder='Select datepicker' type='text'>
+                                                            <input id="estimated_days" class='form-control ' name='estimated_days' data-format='yyyy-MM-dd' placeholder='Select datepicker' type='text' readonly="">
                                                             <span class='input-group-addon'>
                                                                 <span data-date-icon='icon-calendar' data-time-icon='icon-time'></span>
                                                             </span>
                                                         </div>
-                                                        <span style="color:red"><?php echo form_error('estimated_days'); ?><span>
+                                                        <span style="color:red"><?php echo form_error('estimated_days'); ?></span>
                                                                 </div>
                                                                 <div class='form-group'>
                                                                     <label for='inputText'>Project Manager</label><span style="color:red">*</span>
@@ -145,7 +145,7 @@
                                                                         <i class='icon-save'></i>
                                                                         Next
                                                                     </button>
-                                                                    <a class='btn' type='submit' href="<?php echo site_url('project/'); ?>">Cancel</a>
+                                                                    <a class='btn' href="<?php echo site_url('project/'); ?>">Cancel</a>
                                                                 </div>
                                                                 </div>
                                                                 <div class="clearfix"></div>
@@ -160,6 +160,23 @@
                                                                 </div>
                                                                 </div>
 
-                                                                <script>
-                                                                    
+                                                                <script type="text/javascript">
+                                                                    $(function () {
+
+                                                                        $('.estdate').datetimepicker({
+                                                                            autoclose: true,
+                                                                            pickTime: false,
+                                                                            startDate: new Date()})
+                                                                                .on('changeDate', function (ev) {
+
+                                                                                    var oneDay = 24 * 60 * 60 * 1000; // hours*minutes*seconds*milliseconds
+                                                                                    var start = new Date();
+                                                                                    var end = new Date(ev.date);
+                                                                                    if (!start || !end)
+                                                                                        return;
+                                                                                    var diffDays = Math.round((end.getTime() - start.getTime()) / (oneDay));
+                                                                                    $('#estimated_days').val(diffDays);
+                                                                                });
+
+                                                                    });
                                                                 </script>

@@ -177,28 +177,44 @@ if (!empty($project['id'])) {
                                                         </div>
                                                         <div class='form-group'>
                                                             <label for='inputText'>Estimate Days</label>
-                                                            <input class='form-control' id='inputText' placeholder='Estimate Days' type='text' name='estimated_days' value="<?php
-                                                            if (!empty($project['estimated_days'])) {
-                                                                echo $project['estimated_days'];
-                                                            }
-                                                            ?>" <?php echo $disabled; ?> >
-
+                                                            <div class='estdate input-group' id='datepicker'>
+                                                                <input id="estimated_days_edit" class='form-control' name='estimated_days' data-format='yyyy-MM-dd' placeholder='Select datepicker' type='text' value="<?php
+                                                                if (!empty($project['estimated_days'])) {
+                                                                    echo $project['estimated_days'];
+                                                                }
+                                                                ?>" readonly="">
+                                                                <span class='input-group-addon'>
+                                                                    <span data-date-icon='icon-calendar' data-time-icon='icon-time'></span>
+                                                                </span>
+                                                            </div>
                                                         </div>
                                                         <div class='form-group'>
                                                             <label for='inputText'>Project manager</label>
-                                                            <input class='form-control' id='inputText' placeholder='Project manager' type='text' name='project_manager' value="<?php
-                                                            if (!empty($project['project_manager'])) {
-                                                                echo $project['project_manager'];
-                                                            }
-                                                            ?>" <?php echo $disabled; ?>>
+                                                            <select class="form-control" name="project_manager" <?php echo $disabled; ?>>
+                                                                <option value="">Select Project Manager</option>
+                                                                <?php
+                                                                if (!empty($project_manager)) {
+                                                                    foreach ($project_manager as $k => $v) {
+                                                                        if ($project['project_manager'] == $v->username) {
+                                                                            ?>
+                                                                            <option value="<?php echo $v->username; ?>" selected><?php echo $v->username; ?></option>
 
+                                                                        <?php } else { ?>
+
+                                                                            <option value="<?php echo $v->username; ?>"><?php echo $v->username; ?></option>
+                                                                            <?php
+                                                                        }
+                                                                    }
+                                                                }
+                                                                ?>		
+                                                            </select>
                                                         </div>
                                                         <div class='text-right form-actions form-actions-padding-sm form-actions-padding-md form-actions-padding-lg' style='margin-bottom: 0;'>
                                                             <button class='btn btn-success' type='submit'>
                                                                 <i class='icon-save'></i>
                                                                 Save
                                                             </button>
-                                                            <a class='btn' type='submit' href="<?php echo site_url('project/'); ?>">Cancel</a>
+                                                            <a class='btn' href="<?php echo site_url('project/'); ?>">Cancel</a>
                                                         </div>
 
                                                         </div>
@@ -430,7 +446,7 @@ if (!empty($project['id'])) {
                                                                                                     </div>
                                                                                                 </td>
                                                                                             </tr>
-                                                                                        <?php
+                                                                                            <?php
                                                                                         }
                                                                                     }
                                                                                     ?> 
@@ -478,11 +494,11 @@ if (!empty($project['id'])) {
                                                                                                     ?>
                                                                                                     <li style="list-style:none"><input type="checkbox" name="chk[]" id="chk_attachment" class="chk_attachment" value="<?php echo $u_key->id; ?>"><a class="fancybox" href='uploads/<?php echo $u_key->name; ?>' ><?php echo $u_key->name; ?></a></li>
 
-    <?php } else { ?>
+                                                                                                <?php } else { ?>
 
                                                                                                     <li style="list-style:none"><input type="checkbox" name="chk[]" id="chk_attachment" class="chk_attachment" value="<?php echo $u_key->id; ?>"><a class="no_preview" href='uploads/<?php echo $u_key->name; ?>' ><?php echo $u_key->name; ?></a></li>
 
-                                                                                                <?php
+                                                                                                    <?php
                                                                                                 }
                                                                                             }
                                                                                             ?> 
@@ -558,7 +574,7 @@ if (!empty($project['id'])) {
                                                                                                                             <ul id="notes" class="tab-ul">
                                                                                                                                 <?php foreach ($notes as $u_key) { ?>
                                                                                                                                     <li style="list-style:none"><input type="checkbox" name="chk[]" id="chk_notes" class="chk_notes" value="<?php echo $u_key->id; ?>"><a href="javascript:void(0)"  data-desc="<?php echo $u_key->description; ?>" class="notes_link" id="<?php echo $u_key->id; ?>"><?php echo $u_key->name; ?></a><span style="margin-left: 60px;"></span></li>
-<?php } ?> 
+                                                                                                                                <?php } ?> 
                                                                                                                             </ul>
                                                                                                                         </div>
                                                                                                                     </div>
@@ -630,7 +646,7 @@ if (!empty($project['id'])) {
                                                                                                                             <ul id="external_links" class="tab-ul">
                                                                                                                                 <?php foreach ($external_link as $u_key) { ?>
                                                                                                                                     <li style="list-style:none"><input type="checkbox" name="chk[]" id="chk_external" class="chk_external" value="<?php echo $u_key->id; ?>"><a href="javascript::void(0)" class="external_link_data " data-desc="<?php echo $u_key->description; ?>" ><?php echo $u_key->name; ?></a><span style="margin-left: 60px;"></span></li>
-<?php } ?> 
+                                                                                                                                <?php } ?> 
                                                                                                                             </ul>
                                                                                                                         </div>
                                                                                                                     </div>
@@ -745,9 +761,10 @@ if (!empty($project['id'])) {
                                                                                                             <script>
                                                                                                                 $(document).ready(function () {
                                                                                                                     $(".fancybox").fancybox({
-                                                                                                                        width: 1200,
-                                                                                                                        height: 900,
-                                                                                                                        type: 'iframe'
+//                                                                                                                        width: 1200,
+//                                                                                                                        height: 900,
+                                                                                                                        type: 'iframe',
+                                                                                                                        scrolling: 'yes',
                                                                                                                     });
 
 
@@ -916,7 +933,24 @@ if (!empty($project['id'])) {
                                                                                                             </script>	
 
                                                                                                             <script type="text/javascript">
+                                                                                                                $(function () {
 
+                                                                                                                    $('.estdate').datetimepicker({
+                                                                                                                        autoclose: true,
+                                                                                                                        pickTime: false,
+                                                                                                                        startDate: new Date()})
+                                                                                                                            .on('changeDate', function (ev) {
+
+                                                                                                                                var oneDay = 24 * 60 * 60 * 1000; // hours*minutes*seconds*milliseconds
+                                                                                                                                var start = new Date();
+                                                                                                                                var end = new Date(ev.date);
+                                                                                                                                if (!start || !end)
+                                                                                                                                    return;
+                                                                                                                                var diffDays = Math.round((end.getTime() - start.getTime()) / (oneDay));
+                                                                                                                                $('#estimated_days_edit').val(diffDays);
+                                                                                                                            });
+
+                                                                                                                });
 
 
                                                                                                                 function add_similar_project() {

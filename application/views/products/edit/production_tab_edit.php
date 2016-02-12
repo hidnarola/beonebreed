@@ -496,7 +496,17 @@
                             <div class='' style='margin-bottom: 0;'>
                                 <div class="attachment_wrapper">
                                     <ul id="production_attachment" class="tab-ul my_attachment">
-
+                                        <?php 
+                                        if(!empty($data_production_part_2_all_attachment)){
+                                            foreach($data_production_part_2_all_attachment as $atch) {
+                                    ?>    
+                                    <li style=list-style-type:none;>
+                                        <input type='checkbox' name='chk[]' id='chk_production_attachment' class='chk_notes' value="<?php echo $atch['id'];?>">
+                                            <a  class='no_preview'  href="uploads/products/<?php echo $atch['attachment']; ?>">
+                                                <?php echo $atch['attachment']; ?>
+                                            </a>
+                                    </li>
+                                    <?php } } ?> 
                                     </ul>
                                 </div>
                             </div>
@@ -1224,7 +1234,7 @@
                 $.ajax({
                     url: '<?php echo base_url() . "products/delete_production_tab_selected_attachemnt"?>',
                     type: 'post',
-                    data: {ids: cek_id,pid: product_id},
+                    data: {ids: cek_id,pid: prod_id},
                     dataType: 'json',
                     success: function(data) {
                         if (data.status == 'success') {

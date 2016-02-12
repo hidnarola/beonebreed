@@ -43,7 +43,7 @@
                         <div class='form-group'>
                             <label for='inputText'>Action</label><span style="color:red">*</span>
                             <input class='form-control' id='inputText' placeholder='Action' type='text' name='action'>
-                            <span style="color:red"><?php echo form_error('action'); ?><span>
+                            <span style="color:red"><?php echo form_error('action'); ?></span>
                                     </div>
                                     <div class='form-group'>
                                         <label for='inputText'>Resposible</label>
@@ -56,18 +56,19 @@
                                     </div>
 
                                     <div class='form-group'>
-                                        <label for='inputText'>Complete Level</label>
+                                        <label for='inputText'>Complete Level</label><span style="color:red">*</span>
                                         <input class='form-control' id='inputText' placeholder='Complete Level' type='text' name='complete_level'>
                                         <span style="color:red"><?php echo form_error('complete_level'); ?><span>
                                                 </div>
                                                 <div>
-                                                    <label for='inputText'>Target Date</label>
+                                                    <label for='inputText'>Target Date</label><span style="color:red">*</span>
                                                     <div class='datetimepicker input-group form-group' id='target_datetimepicker'>
                                                         <input class='form-control' data-format='yyyy-MM-dd hh:mm:ss'  placeholder='Select timepicker' type='text' name='target_date' id="datepicker_timesheet">
                                                         <span class='input-group-addon'>
                                                             <span data-date-icon='icon-calendar' data-time-icon='icon-time'></span>
                                                         </span>
                                                     </div>
+                                                     <span style="color:red"><?php echo form_error('target_date'); ?></span>
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="comment">Note</label>

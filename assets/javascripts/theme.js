@@ -174,14 +174,21 @@
             $(".datepicker").datetimepicker({
                 pickTime: false
             });
-            
-            
-            $('.estdate').datetimepicker({
-            autoclose: true,
-            pickTime: false,
-            startDate: new Date()
-        });
 
+
+            $('.estdate').datetimepicker({
+                autoclose: true,
+                pickTime: false,
+                startDate: new Date(),
+                onSelect: function(dateText) {
+     alert("Selected: " + dateText);
+ }
+            });
+
+            $(".estdate").on('change', function (ev) {
+                var dateData = $(this).val();
+                window.location.href = "?day=" + dateData;
+            });
             $(".timepicker").datetimepicker({
                 pickDate: false
             });

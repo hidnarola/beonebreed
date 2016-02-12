@@ -45,16 +45,22 @@
                                 <!-- inserting add project form -->	
                                 <form class="form" style="margin-bottom: 0;" method="post" action="" accept-charset="UTF-8" enctype="multipart/form-data">   
                                     <div class='box-content'>
-
+                                        <div class='form-group'>
+                                            <label for='project_name'>Project Name</label>
+                                            <input class='form-control' id='project_name' placeholder='project_name' 
+                                                   type='text' value="<?php echo $project['name']; ?>" name='project_name' disabled="">
+                                        </div>
                                         <div class='form-group'>
                                             <label for='s_name'>Supplier Name</label><span style="color:red">*</span>
                                             <select name="supplier_name" id="supplier_name" class="form-control">
+                                                <option value="">Please select</option>
                                                 <?php
                                                 if (!empty($suppliers)) {
                                                     foreach ($suppliers as $supp) {
                                                         ?>
                                                         <option value="<?php echo $supp['id']; ?>"><?php echo $supp['supplier_name']; ?></option>
-                                                    <?php }
+                                                        <?php
+                                                    }
                                                 }
                                                 ?>
                                             </select>
@@ -92,7 +98,7 @@
                                                                                                     <div class='form-group'>
                                                                                                         <label for='tel_no'>Potential Level</label><span style="color:red">*</span>
                                                                                                         <input class='form-control' id='potential_level' placeholder='potential_level' 
-                                                                                                   type='text' value="<?php echo set_value('potential_level'); ?>" name='potential_level' disabled="">
+                                                                                                               type='text' value="<?php echo set_value('potential_level'); ?>" name='potential_level' disabled="">
                                                                                                     </div>
 
                                                                                                     <div class='form-group'>
