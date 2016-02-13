@@ -279,16 +279,12 @@ if (!empty($project['id'])) {
                                                                                             <td><?php echo $u_key->resposible; ?> </td>
                                                                                             <td><?php echo $u_key->mertic_key; ?> </td>
                                                                                             <td>
-                                                                                                <!--
-                                                                                                <div class='text-right'><small id='slider-example1-amount' class="slider-example1-amount"></small>
-                                                                                                </div> <div id='slider-example1' style='margin-bottom: 20px; clear: both;' class="slider-example1"></div> -->
-
-                                                                                                <div class="slider" id="<?php echo $u_key->id; ?>" data-value="<?php echo $u_key->complete_level; ?>"></div>
-                                                                                                <p class=""><span class="slider-value"><?php
-                                                                                                        if (!empty($u_key->complete_level)) {
-                                                                                                            echo $u_key->complete_level . " %";
-                                                                                                        }
-                                                                                                        ?></span></p>
+                                                                                                <div class='task'>
+                                                                                                    <small class='pull-right'><?php echo $u_key->complete_level; ?>%</small>
+                                                                                                </div>
+                                                                                                <div class='progress'>
+                                                                                                    <div class='progress-bar progress-bar-success' style='width:<?php echo $u_key->complete_level; ?>%;'><?php echo $u_key->complete_level; ?>%</div>
+                                                                                                </div>
                                                                                             </td>
                                                                                             <td>
                                                                                                 <?php
@@ -751,7 +747,7 @@ if (!empty($project['id'])) {
                                                                                                             </div>
 
                                                                                                             <style>
-    
+
                                                                                                                 .fancybox-inner body {
                                                                                                                     overflow-x: visible !important; 
                                                                                                                 }
@@ -773,13 +769,13 @@ if (!empty($project['id'])) {
                                                                                                                      //                                                                                                                        height: 900,
                                                                                                                      type: 'iframe'
                                                                                                                      });*/
-                                                                                                                   
+
 
                                                                                                                     $('.fancybox').fancybox({
                                                                                                                         type: 'iframe',
                                                                                                                         afterShow: function () {
-                                                                                                                           $('.fancybox-inner body').css('overflow-x','visible !important');
-                                                                                                                        }                                                                                                                       
+                                                                                                                            $('.fancybox-inner body').css('overflow-x', 'visible !important');
+                                                                                                                        }
 
                                                                                                                     });
 

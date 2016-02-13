@@ -25,10 +25,13 @@
 	                          		if(!empty($projects)) {
 	                          			foreach($projects as $project) {
 	                          				$total_action = 0;
-	                          				$all_action_plan = $this->products_model->getfrom('project_actionplan',false,array('where'=>array('id'=>$project['id'])));
+	                          				$all_action_plan = $this->products_model->getfrom('project_actionplan',false,array('where'=>array('project_id'=>$project['id'])));
 	                          				if(!empty($all_action_plan)){
+                                                                    $total_action_count = count($all_action_plan);
+                                                                    $multi = 100 / $total_action_count;
 	                          					foreach($all_action_plan as $action_plan){
-	                          						$total_action += $action_plan['complete_level'];
+                                                                            $sum = ($multi * $action_plan['complete_level']) / 100;
+	                          						$total_action += round($sum);
 	                          					}
 	                          				}
 	                          	?>

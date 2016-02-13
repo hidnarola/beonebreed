@@ -4793,7 +4793,7 @@ a, a:hover, .btn-link, .btn-link:hover, .btn-link:focus {
   .btn-group.open .btn-primary.dropdown-toggle[disabled], 
   .btn.btn-primary:focus, 
   .btn.btn-primary.disabled, 
-  .btn.btn-primary[disabled] {  background-color: #FFF100; }
+  /*.btn.btn-primary[disabled] {  background-color: red; }*/
   
   
   .btn-group.open .btn-primary.dropdown-toggle:active, 

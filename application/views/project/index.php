@@ -33,23 +33,18 @@
     </div>
 
 <?php } ?>  
-
-<!--
-<div style="margin-right:15px;">
-<a href="<?php //echo site_url('project/add')                 ?>" class="btn btn-primary pull-right">Add Project</a>     
-</div> -->
 <div class="clearfix">	</div>
 <br/>
-<div class="container">
+<!--<div class="container">
     <?php
     if (!empty($inprogress_projects)) {
         foreach ($inprogress_projects as $u_key) {
             ?>
-            <!-- Modal -->
+             Modal 
             <div class="modal fade" id="myModal_<?php echo $u_key['id']; ?>" role="dialog">
                 <div class="modal-dialog">
 
-                    <!-- Modal content-->
+                     Modal content
                     <div class="modal-content">
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -95,7 +90,7 @@
     }
     ?>
 
-</div>
+</div>-->
 <div class='col-sm-12'>
     <div class='box bordered-box orange-border' style='margin-bottom:0;'>
         <div class='box-header orange-background'>
@@ -170,9 +165,32 @@
                                             <?php } ?>
                                         </td>
                                         <td>
-                                            <a href="" data-toggle="modal" data-target="#myModal_<?php echo $u_key['id']; ?>">
-                                                <?php echo $u_key['name']; ?>
-                                            </a>
+                                            <!--<a href="" data-toggle="modal" data-target="#myModal_<?php // echo $u_key['id']; ?>">
+                                                <?php // echo $u_key['name']; ?>
+                                            </a>-->
+                                            <a class='accordion-toggle' data-parent='#accordion' data-toggle='collapse' href='#collapseOne-accordion_<?php echo $u_key['id']; ?>'><?php echo $u_key['name']; ?></a>
+                                            <div class='panel-collapse collapse' id='collapseOne-accordion_<?php echo $u_key['id']; ?>'>
+                                                <?php
+                                    if (!empty($u_key['action_plans'])) {
+                                        foreach ($u_key['action_plans'] as $u_key_action) {
+                                            ?>
+                                                <div class='task'>
+                                                    <span class='pull-left'>
+                                                        <?php echo $u_key_action->action ?>
+                                                    </span><br>
+                                                    <small class='pull-right'><?php echo $u_key_action->complete_level ?>%</small>
+                                                </div>
+                                                <div class='progress progress-small'>
+                                                    <div class='progress-bar' style='width: <?php echo $u_key_action->complete_level ?>%'></div>
+                                                </div>
+                                    <?php } } else {?>
+                                                <div class='task'>
+                                                    <span class='pull-left'>
+                                                        No action plan found!
+                                                    </span>
+                                                </div>
+                                    <?php }?>
+                                            </div>
                                         </td>
                                         <td>
                                             <?php
@@ -219,7 +237,7 @@
                                                 </a>
                                                 <?php if ($this->session->userdata('user_type') == 1) { ?>
                                                     <a class='btn btn-primary btn-xs btn-delete' href='<?php echo site_url('project/delete/' . $u_key['id']) ?>' onClick='return doconfirm(this.href);'>
-                                                        <i class='icon-edit'></i>
+                                                        <i class='icon-remove'></i>
                                                         Delete
                                                     </a>
                                                 <?php }
@@ -241,142 +259,142 @@
 
             <!--start of idea project -->
 
-                <div class='box bordered-box orange-border' style='margin-bottom:0;'>
-                    <div class='box-header orange-background'>
-                        <div class='title'>IDEA</div>
+            <div class='box bordered-box orange-border' style='margin-bottom:0;'>
+                <div class='box-header orange-background'>
+                    <div class='title'>IDEA</div>
 
-                        <div class='actions'>
+                    <div class='actions'>
 
 
-                            <a class="btn box-collapse btn-xs btn-link" href="#">
-                            </a>
-                        </div>
+                        <a class="btn box-collapse btn-xs btn-link" href="#">
+                        </a>
                     </div>
-                    <div class='box-content box-no-padding'>
-                        <div class='responsive-table'>
-                            <div class='scrollable-area'>
-                                <table class='data-table table table-bordered' style='margin-bottom:0;'>
-                                    <thead>
-                                        <tr>
-                                            <th>
-                                                ID
-                                            </th>
-                                            <th>
-                                                Project Name
-                                            </th>
-                                            <th>
-                                                Date Created
-                                            </th>
-                                            <th>
-                                                Creator
-                                            </th>
-                                            <th>
-                                                Notes
-                                            </th>
-                                            <th>
-                                                Action
-                                            </th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <?php
-                                        if (!empty($idea_projects)) {
-                                            foreach ($idea_projects as $u_key) {
-                                                ?>
-                                                <tr>
-                                                    <td><?php echo $u_key['pid']; ?> 
-                                                        <?php
-                                                        if (!empty($u_key['image'])) {
-                                                            $cnt = 0;
-                                                            ?>
-                                                            <?php foreach ($u_key['image'] as $image) { ?>
-                                                                <a class="fancybox <?php
-                                                                if ($cnt == 0) {
-                                                                    $cnt++;
-                                                                } else {
-                                                                    echo 'hide';
-                                                                }
-                                                                ?>" rel="gallery2_<?php echo $u_key['pid']; ?>" href="<?php echo site_url('uploads/' . $image) ?>" title="<?php echo $image; ?>">
-                                                                    <img class="projectImage" src="<?php echo site_url('uploads/' . $image) ?>" alt=""/>
-                                                                </a>
-                                                                <?php
+                </div>
+                <div class='box-content box-no-padding'>
+                    <div class='responsive-table'>
+                        <div class='scrollable-area'>
+                            <table class='data-table table table-bordered' style='margin-bottom:0;'>
+                                <thead>
+                                    <tr>
+                                        <th>
+                                            ID
+                                        </th>
+                                        <th>
+                                            Project Name
+                                        </th>
+                                        <th>
+                                            Date Created
+                                        </th>
+                                        <th>
+                                            Creator
+                                        </th>
+                                        <th>
+                                            Notes
+                                        </th>
+                                        <th>
+                                            Action
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php
+                                    if (!empty($idea_projects)) {
+                                        foreach ($idea_projects as $u_key) {
+                                            ?>
+                                            <tr>
+                                                <td><?php echo $u_key['pid']; ?> 
+                                                    <?php
+                                                    if (!empty($u_key['image'])) {
+                                                        $cnt = 0;
+                                                        ?>
+                                                        <?php foreach ($u_key['image'] as $image) { ?>
+                                                            <a class="fancybox <?php
+                                                            if ($cnt == 0) {
+                                                                $cnt++;
+                                                            } else {
+                                                                echo 'hide';
                                                             }
-                                                        } else {
-                                                            ?>
-                                                            <a class="fancybox" href="<?php echo site_url('uploads/no_image/no_image_available.jpg') ?>" title="No Image">
-                                                                <img class="projectImage" src="<?php echo site_url('uploads/no_image/no_image_available.jpg') ?>" alt=""/>
+                                                            ?>" rel="gallery2_<?php echo $u_key['pid']; ?>" href="<?php echo site_url('uploads/' . $image) ?>" title="<?php echo $image; ?>">
+                                                                <img class="projectImage" src="<?php echo site_url('uploads/' . $image) ?>" alt=""/>
                                                             </a>
-                                                        <?php } ?>
-                                                    </td>
-                                                    <td><?php echo $u_key['name']; ?> </td>
-                                                    <td>
-                                                        <?php
-                                                        $date = new DateTime($u_key['p_created_at']);
-                                                        echo $date->format('d F Y');
-                                                        ?> 
-                                                    </td>
-                                                    <td>
-                                                        <?php
-                                                        echo $u_key['username'];
-                                                        ?> 
-                                                    </td>
-                                                    <td>
-                                                        <p class="fixed_width"> <?php echo $u_key['quick_notes']; ?> </p>
-                                                    </td>
-                                                    <td>
-                                                        <div class='text-left'>
-                                                            <a class='btn btn-primary btn-xs' href='<?php echo site_url('project/edit/' . $u_key['pid']) ?>'>
-                                                                <i class='icon-edit'></i>
-                                                                Edit
+                                                            <?php
+                                                        }
+                                                    } else {
+                                                        ?>
+                                                        <a class="fancybox" href="<?php echo site_url('uploads/no_image/no_image_available.jpg') ?>" title="No Image">
+                                                            <img class="projectImage" src="<?php echo site_url('uploads/no_image/no_image_available.jpg') ?>" alt=""/>
+                                                        </a>
+                                                    <?php } ?>
+                                                </td>
+                                                <td><?php echo $u_key['name']; ?> </td>
+                                                <td>
+                                                    <?php
+                                                    $date = new DateTime($u_key['p_created_at']);
+                                                    echo $date->format('d F Y');
+                                                    ?> 
+                                                </td>
+                                                <td>
+                                                    <?php
+                                                    echo $u_key['username'];
+                                                    ?> 
+                                                </td>
+                                                <td>
+                                                    <p class="fixed_width"> <?php echo $u_key['quick_notes']; ?> </p>
+                                                </td>
+                                                <td>
+                                                    <div class='text-left'>
+                                                        <a class='btn btn-primary btn-xs' href='<?php echo site_url('project/edit/' . $u_key['pid']) ?>'>
+                                                            <i class='icon-edit'></i>
+                                                            Edit
+                                                        </a>
+                                                        <?php if ($this->session->userdata('user_type') == 1) { ?>
+                                                            <a class='btn btn-primary btn-xs btn-delete' href='<?php echo site_url('project/delete/' . $u_key['pid']) ?>' onClick='return doconfirm(href);'>
+                                                                <i class='icon-remove'></i>
+                                                                Delete
                                                             </a>
-                                                            <?php if ($this->session->userdata('user_type') == 1) { ?>
-                                                                <a class='btn btn-primary btn-xs btn-delete' href='<?php echo site_url('project/delete/' . $u_key['pid']) ?>' onClick='return doconfirm(href);'>
-                                                                    <i class='icon-edit'></i>
-                                                                    Delete
-                                                                </a>
-                                                            <?php }
-                                                            ?>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                                <?php
-                                            }
+                                                        <?php }
+                                                        ?>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <?php
                                         }
-                                        ?> 
-                                    </tbody>
-                                </table>
-                            </div>
+                                    }
+                                    ?> 
+                                </tbody>
+                            </table>
                         </div>
-
-                        <!--end of idea project -->
                     </div>
+
+                    <!--end of idea project -->
                 </div>
+            </div>
 
-                <div id="actionModal" class="modal hide fade" role="dialog" aria-labelledby="actionModalLabel" aria-hidden="true">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
-                        <h3>Order</h3>
+            <div id="actionModal" class="modal hide fade" role="dialog" aria-labelledby="actionModalLabel" aria-hidden="true">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+                    <h3>Order</h3>
 
-                    </div>
-                    <div id="actionDetails" class="modal-body"></div>
-                    <div id="actionItems" class="modal-body"></div>
-                    <div class="modal-footer">
-                        <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-                    </div>
                 </div>
-                <script>
-                    function doconfirm(href)
-                    {
-                        $(function () {
-                            bootbox.confirm('Are you sure you want to delete this record?', function (res) {
-                                if (res)
-                                {
-                                    window.location.href = href;
-                                }
-                            });
+                <div id="actionDetails" class="modal-body"></div>
+                <div id="actionItems" class="modal-body"></div>
+                <div class="modal-footer">
+                    <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+                </div>
+            </div>
+            <script>
+                function doconfirm(href)
+                {
+                    $(function () {
+                        bootbox.confirm('Are you sure you want to delete this record?', function (res) {
+                            if (res)
+                            {
+                                window.location.href = href;
+                            }
                         });
+                    });
 
-                        return false;
+                    return false;
 //                        if (confirm("Are you sure you want to delete this record?"))
 //                        {
 //                            return true;
@@ -385,24 +403,24 @@
 //                        {
 //                            return false;
 //                        }
-                    }
-                </script>
-                <script type="text/javascript">
-                    $(document).ready(function () {
-                        $(".fancybox").fancybox({
-                            openEffect: 'none',
-                            closeEffect: 'none'
-                        });
-                        $('#actionModal').modal({
-                            keyboard: true,
-                            backdrop: "static",
-                            show: false,
-                        }).on('show', function () {
-                            var getIdFromRow = $(event.target).closest('a').data('id');
-                            alert(getIdFromRow);
-                            //make your ajax call populate items or what even you need
-                            $(this).find('#actionDetails').html($('<b> action Id selected: ' + getIdFromRow + '</b>'))
-                        });
+                }
+            </script>
+            <script type="text/javascript">
+                $(document).ready(function () {
+                    $(".fancybox").fancybox({
+                        openEffect: 'none',
+                        closeEffect: 'none'
                     });
+                    $('#actionModal').modal({
+                        keyboard: true,
+                        backdrop: "static",
+                        show: false,
+                    }).on('show', function () {
+                        var getIdFromRow = $(event.target).closest('a').data('id');
+                        alert(getIdFromRow);
+                        //make your ajax call populate items or what even you need
+                        $(this).find('#actionDetails').html($('<b> action Id selected: ' + getIdFromRow + '</b>'))
+                    });
+                });
 
-                </script>
+            </script>

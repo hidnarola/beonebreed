@@ -24,7 +24,7 @@ class Dashboard extends CI_Controller {
                 $user_id = $this->session->userdata('id');
 		$data['news_list'] = $news_list;
 		$data['products'] = $this->products_model->getfrom('products_new');
-		$data['projects'] = $this->products_model->getfrom('projects',false,array('where'=>array('priority'=>'1','created_by' => $user_id)));
+		$data['projects'] = $this->products_model->getfrom('projects',false,array('where'=>array('priority'=>'1')));
 		
 		$this->template->load('admin_default', 'dashboard/index', $data);
     }

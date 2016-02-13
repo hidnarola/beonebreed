@@ -16,7 +16,7 @@
                         <i class='icon-angle-right'></i>
                     </li>
                     <li>
-                        <a href='<?php echo site_url('project/edit/' . $project['id']); ?>'><?php echo $project['name'];?></a>
+                        <a href='<?php echo site_url('project/edit/' . $project['id']); ?>'><?php echo $project['name']; ?></a>
                     </li>
                     <li class='separator'>
                         <i class='icon-angle-right'></i>
@@ -78,12 +78,12 @@
 
                                     <div class='form-group'>
                                         <label for='inputText'>Complete Level</label>
-                                        <input class='form-control' id='inputText' placeholder='Complete Level' type='text' name='complete_level' value="<?php
+                                        <input id="edit_complete_level" class='form-control' id='inputText' placeholder='Complete Level' type='text' name='complete_level' value="<?php
                                         if (!empty($action_plan['complete_level'])) {
                                             echo $action_plan['complete_level'];
                                         }
                                         ?>">
-
+                                        <span id="complete_level_msg" style="color:red"><?php echo form_error('complete_level'); ?></span>
                                     </div>
                                     <div>
                                         <label for='inputText'>Target Date</label>
@@ -119,4 +119,16 @@
                                     </div>
                                     </div>  
                                     </div>
+                                    <script>
+                                        $('#edit_complete_level').keyup(function () {
+                                            var clvalue = $('#edit_complete_level').val();
+                                            if (clvalue < 0 || clvalue > 100) {
+                                                $('#complete_level_msg').html('The Complete Level field must contain numbers between 0 to 100.');
+                                            }
+                                            else
+                                            {
+                                                $('#complete_level_msg').html('');
+                                            }
+                                        });
+                                    </script>
 
