@@ -81,7 +81,8 @@
                                                 <td>
                                                     <div>
                                                         <a class='btn btn-primary btn-xs' href='<?php echo base_url() . "products/edit/$prod->p_id"; ?>'>
-                                                            <i class='icon-edit'></i>Edit
+                                                            <i class='icon-edit'></i>
+                                                            Edit
                                                         </a>
                                                     </div>
                                                 </td>

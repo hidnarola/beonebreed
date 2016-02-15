@@ -43,7 +43,7 @@ if ($controller == 'project' && ($actions == 'index' || $actions == 'archieve_pr
     $quality_setting = "display:none";
     $idea_setting = "display:none";
     //$sub_setting="display:none";
-} else if ($controller == 'client') {
+} else if ($controller == 'client' || $controller == 'product_brand') {
     $setting = "display:block";
     $design = "display:none";
     $sub_setting = "display:none";
@@ -235,19 +235,23 @@ if ($controller == 'project' && ($actions == 'index' || $actions == 'archieve_pr
                         </form>
                     </div>
                     <ul class='nav nav-stacked'>
-                        <li class='active'>
-                            <a href='<?php echo site_url('dashboard/') ?>'>
-                                <i class='icon-dashboard'></i>
+                        <li class=''>
+                            <a class='<?php
+                            if ($u_str == 'dashboard') {
+                                echo 'in';
+                            }
+                            ?>' href='<?php echo site_url('dashboard/') ?>'>
+                                <i class="icon-dashboard"></i>
                                 <span>Dashboard</span>
                             </a>
                         </li>
 
-                        <li class="<?php
-                        if ($u_str == 'products/index/admin') {
-                            echo 'active';
-                        }
-                        ?>">
-                            <a class='dropdown-collapse' href='#'>
+                        <li class="">
+                            <a class='dropdown-collapse <?php
+                            if ($u_str == 'products/index/admin') {
+                                echo 'in';
+                            }
+                            ?>' href='#'>
                                 <i class="icon-star"></i>
                                 <span>Admin</span>
                                 <i class='icon-angle-down angle-down'></i>
@@ -258,7 +262,11 @@ if ($controller == 'project' && ($actions == 'index' || $actions == 'archieve_pr
                                 echo 'in';
                             }
                             ?> nav nav-stacked '>
-                                <li class="">
+                                <li class="<?php
+                                if ($u_str == 'products/index/admin') {
+                                    echo 'active';
+                                }
+                                ?>">
                                     <a href='<?php echo site_url('products/index/admin') ?>'>
                                         <i class='icon-caret-right'></i>
                                         <span>Products</span>
@@ -268,7 +276,11 @@ if ($controller == 'project' && ($actions == 'index' || $actions == 'archieve_pr
                         </li>
 
                         <li>
-                            <a class='dropdown-collapse' href='#'>
+                            <a class='dropdown-collapse <?php
+                            if (($controller == 'project' && ($actions == 'index' || $actions == 'add' || $actions == 'edit')) || ($controller == 'project' && ($actions == 'archieve_projects' || $actions == 'view_archieve'))) {
+                                echo 'in';
+                            }
+                            ?>' href='#'>
                                 <i class='icon-file-text'></i>
                                 <span>Design</span>
                                 <i class='icon-angle-down angle-down'></i>
@@ -318,12 +330,20 @@ if ($controller == 'project' && ($actions == 'index' || $actions == 'archieve_pr
                         }
                         ?>
                         <li class="">
-                            <a class='dropdown-collapse' href='#'>
+                            <a class='dropdown-collapse <?php
+                            if ($controller == 'news' || $u_str == 'products/index/marketing') {
+                                echo 'in';
+                            }
+                            ?>' href='#'>
                                 <i class="icon-bullhorn"></i>
                                 <span>Marketing</span>
                                 <i class='icon-angle-down angle-down'></i>
                             </a>
-
+                            <?php
+                            if ($u_str == 'products/index/marketing') {
+                                $news_setting = "display:block";
+                            }
+                            ?>
                             <ul class='nav nav-stacked' style="<?php echo $news_setting; ?>">
                                 <?php
                                 if ($controller == 'news') {
@@ -338,7 +358,11 @@ if ($controller == 'project' && ($actions == 'index' || $actions == 'archieve_pr
                                         <span>News</span>
                                     </a>
                                 </li>
-                                <li class="">
+                                <li class="<?php
+                                if ($u_str == 'products/index/marketing') {
+                                    echo 'active';
+                                }
+                                ?>">
                                     <a href='<?php echo site_url('products/index/marketing') ?>'>
                                         <i class='icon-caret-right'></i>
                                         <span>Products</span>
@@ -347,15 +371,14 @@ if ($controller == 'project' && ($actions == 'index' || $actions == 'archieve_pr
                             </ul>
                         </li>
 
-                        <li class="<?php
-                        if (in_array($u_str, array('products/index/admin', 'products/index/marketing', 'products/index/production')) == false) {
-                            if ($controller == 'barcode' || $controller == 'products' ||
-                                    $controller == 'suppliers') {
-                                echo 'active';
+                        <li class="">
+                            <a class='dropdown-collapse <?php
+                            if (in_array($u_str, array('products/index/admin', 'products/index/marketing', 'products/index/production')) == false) {
+                                if ($controller == 'barcode' || $controller == 'products' || $controller == 'suppliers') {
+                                    echo 'in';
+                                }
                             }
-                        }
-                        ?>">
-                            <a class='dropdown-collapse' href='#'>
+                            ?>' href='#'>
                                 <i class="icon-gears"></i>
                                 <span>Products</span>
                                 <i class='icon-angle-down angle-down'></i>
@@ -363,28 +386,37 @@ if ($controller == 'project' && ($actions == 'index' || $actions == 'archieve_pr
 
                             <ul class='<?php
                             if (in_array($u_str, array('products/index/admin', 'products/index/marketing', 'products/index/production')) == false) {
-                                if ($controller == 'barcode' || $controller == 'products' ||
-                                        $controller == 'suppliers') {
+                                if ($controller == 'barcode' || $controller == 'products' || $controller == 'suppliers') {
                                     echo 'in';
                                 }
                             }
-                            ?> 
-
-                                nav nav-stacked '>
-                                <li class="">
+                            ?> nav nav-stacked'>
+                                <li class="<?php
+                            if ($controller == 'products') {
+                                echo 'active';
+                            }
+                            ?>">
                                     <a href='<?php echo site_url('products') ?>'>
                                         <i class='icon-caret-right'></i>
                                         <span>Products</span>
                                     </a>
                                 </li>
-                                <li class="">
+                                <li class="<?php
+                                if ($controller == 'barcode') {
+                                    echo 'active';
+                                }
+                            ?>">
                                     <a href='<?php echo site_url('barcode') ?>'>
                                         <i class='icon-caret-right'></i>
                                         <span>Barcode</span>
                                     </a>
                                 </li>
 
-                                <li class="">
+                                <li class="<?php
+                                    if ($controller == 'suppliers') {
+                                        echo 'active';
+                                    }
+                            ?>">
                                     <a href='<?php echo site_url('suppliers') ?>'>
                                         <i class='icon-caret-right'></i>
                                         <span>Suppliers</span>
@@ -395,21 +427,21 @@ if ($controller == 'project' && ($actions == 'index' || $actions == 'archieve_pr
                             </ul>
                         </li>
 
-                        <li class="<?php
-                        if ($u_str == 'products/index/production') {
-                            echo 'active';
-                        }
-                        ?>">
-                            <a class='dropdown-collapse' href='#'>
+                        <li class="">
+                            <a class='dropdown-collapse <?php
+                            if ($u_str == 'products/index/production') {
+                                echo 'in';
+                            }
+                            ?>' href='#'>
                                 <i class="icon-cloud-upload "></i>
                                 <span>Production</span>
                                 <i class='icon-angle-down angle-down'></i>
                             </a>
 
                             <ul class='<?php
-                            if ($u_str == 'products/index/production') {
-                                echo 'in';
-                            }
+                                if ($u_str == 'products/index/production') {
+                                    echo 'in';
+                                }
                             ?> nav nav-stacked '>
                                 <li class="">
                                     <a href='<?php echo site_url('products/index/production') ?>'>
@@ -422,7 +454,9 @@ if ($controller == 'project' && ($actions == 'index' || $actions == 'archieve_pr
 
 
                         <li class='' >
-                            <a class="dropdown-collapse" href="#"><i class="icon-upload-alt"></i></i>
+                            <a class="dropdown-collapse <?php if ($controller == 'quality') {
+                                    echo "in";
+                                } ?>" href="#"><i class="icon-upload-alt"></i></i>
                                 <span>Quality</span>
                                 <i class='icon-angle-down angle-down'></i>
                             </a>
@@ -453,10 +487,10 @@ if ($controller == 'project' && ($actions == 'index' || $actions == 'archieve_pr
                                                         <span><?php echo ucfirst($val->username); ?></span>
                                                     </a>
                                                 </li>	
-                                                <?php
-                                            }
-                                        }
-                                        ?>
+                                <?php
+                            }
+                        }
+                        ?>
                                     </ul>
                                 </li>    
                         </li>
@@ -464,25 +498,29 @@ if ($controller == 'project' && ($actions == 'index' || $actions == 'archieve_pr
                     </li>
 
                     <li class=''>
-                        <a class="dropdown-collapse" href="#"><i class='icon-trello'></i>
+                        <a class="dropdown-collapse <?php
+                           if ($controller == 'suggestion') {
+                               echo 'in';
+                           }
+                        ?>" href="#"><i class='icon-trello'></i>
                             <span>Idea</span>
                             <i class='icon-angle-down angle-down'></i>
                         </a>
                         <ul class='nav nav-stacked <?php
-                        if ($controller == 'suggestion') {
-                            echo 'in';
-                        }
-                        ?>' >
-                            <li>
-                                <a class="dropdown-collapse" href="#"><i class='icon-asterisk'></i>
-                                    <span>Store Idea</span>
-                                    <i class='icon-angle-down angle-down'></i>
-                                </a> 
-                                <ul class='nav nav-stacked <?php
                                 if ($controller == 'suggestion') {
                                     echo 'in';
                                 }
                                 ?>' >
+                            <li>
+                                <a class="dropdown-collapse " href="#"><i class='icon-asterisk'></i>
+                                    <span>Store Idea</span>
+                                    <i class='icon-angle-down angle-down'></i>
+                                </a> 
+                                <ul class='nav nav-stacked <?php
+                                    if ($controller == 'suggestion') {
+                                        echo 'in';
+                                    }
+                                    ?>' >
 
                                     <?php
                                     if (!empty($result)) {
@@ -503,30 +541,30 @@ if ($controller == 'project' && ($actions == 'index' || $actions == 'archieve_pr
                                                     <span><?php echo ucfirst($val->username); ?></span>
                                                 </a>
                                             </li>	
-                                            <?php
-                                        }
-                                    }
-                                    ?>
+                                <?php
+                            }
+                        }
+                        ?>
                                 </ul>
                             </li>    
                     </li>
                     </ul>
                     </li>
 
-                    <li class='<?php
-                    if ($controller == 'product_brand') {
-                        echo 'active';
-                    }
-                    ?>' style="<?php echo $display_setting; ?>">
-                        <a class="dropdown-collapse" href="#"><i class='icon-cog'></i>
+                    <li class='' style="<?php echo $display_setting; ?>">
+                        <a class="dropdown-collapse <?php
+                        if ($controller == 'category' || $controller == 'project_type' || $controller == 'user' || $controller == 'client' || $controller == 'product_brand') {
+                            echo 'in';
+                        }
+                        ?>" href="#"><i class='icon-cog'></i>
                             <span>Settings</span>
                             <i class='icon-angle-down angle-down'></i>
                         </a>
                         <ul class=' <?php
-                        if ($controller == 'product_brand') {
-                            echo 'in';
-                        }
-                        ?> nav nav-stacked' style="<?php echo $setting; ?>">
+                                    if ($controller == 'product_brand') {
+                                        echo 'in';
+                                    }
+                                    ?> nav nav-stacked' style="<?php echo $setting; ?>">
                             <li>
                                 <a class="dropdown-collapse" href="#"><i class='icon-file-text'></i>
                                     <span>Design</span>
@@ -546,13 +584,13 @@ if ($controller == 'project' && ($actions == 'index' || $actions == 'archieve_pr
                                             <span>Project Category</span>
                                         </a>
                                     </li>
-                                    <?php
-                                    if ($controller == 'project_type') {
-                                        $project_type = "active";
-                                    } else {
-                                        $project_type = "";
-                                    }
-                                    ?>
+<?php
+if ($controller == 'project_type') {
+    $project_type = "active";
+} else {
+    $project_type = "";
+}
+?>
                                     <li class='<?php echo $project_type; ?>'>
                                         <a href='<?php echo site_url('project_type/') ?>'>
                                             <i class='icon-caret-right'></i>
@@ -568,13 +606,13 @@ if ($controller == 'project' && ($actions == 'index' || $actions == 'archieve_pr
                                     <i class='icon-angle-down angle-down'></i>
                                 </a> 
                                 <ul class='nav nav-stacked' style="<?php echo $sub_user_setting; ?>">
-                                    <?php
-                                    if ($controller == 'user') {
-                                        $user = "active";
-                                    } else {
-                                        $user = "";
-                                    }
-                                    ?>
+<?php
+if ($controller == 'user') {
+    $user = "active";
+} else {
+    $user = "";
+}
+?>
                                     <li class='<?php echo $user; ?>'>
                                         <a href='<?php echo site_url('user/') ?>'>
                                             <i class='icon-caret-right'></i>
@@ -596,8 +634,14 @@ if ($controller == 'project' && ($actions == 'index' || $actions == 'archieve_pr
                                     <span>Client</span>
                                 </a>
                             </li>
-
-                            <li class='<?php echo $client; ?>'>
+<?php
+if ($controller == 'product_brand') {
+    $product_brand = "active";
+} else {
+    $product_brand = "";
+}
+?>
+                            <li class='<?php echo $product_brand; ?>'>
                                 <a href='<?php echo site_url('product_brand/') ?>'>
                                     <i class='icon-user'></i>
                                     <span>Product Brand</span>
@@ -616,7 +660,7 @@ if ($controller == 'project' && ($actions == 'index' || $actions == 'archieve_pr
             <section id='content'>
                 <div class='container'>
 
-                    <?php echo $body; ?>
+<?php echo $body; ?>
 
                     <!--
                   <footer id='footer'>
@@ -678,85 +722,85 @@ if ($controller == 'project' && ($actions == 'index' || $actions == 'archieve_pr
         <script src="assets/javascripts/plugins/common/bootstrap-wysihtml5.js" type="text/javascript"></script>
         <script src="assets/javascripts/plugins/pwstrength/pwstrength.js" type="text/javascript"></script>-->
         <script>
-            var data, dataset, gd, options, previousLabel, previousPoint, showTooltip, ticks;
-            var blue, data, datareal, getRandomData, green, i, newOrders, options, orange, orders, placeholder, plot, purple, randNumber, randSmallerNumber, red, series, totalPoints, update, updateInterval;
-            var red = "#f34541";
-            var orange = "#f8a326";
-            var blue = "#00acec";
-            var purple = "#9564e2";
-            var green = "#49bf67";
-            randNumber = function () {
-                return ((Math.floor(Math.random() * (1 + 50 - 20))) + 20) * 800;
-            };
-            randSmallerNumber = function () {
-                return ((Math.floor(Math.random() * (1 + 40 - 20))) + 10) * 200;
-            };
-            if ($("#stats-chart1").length !== 0) {
-                orders = [[1, randNumber() - 10], [2, randNumber() - 10], [3, randNumber() - 10], [4, randNumber()], [5, randNumber()], [6, 4 + randNumber()], [7, 5 + randNumber()], [8, 6 + randNumber()], [9, 6 + randNumber()], [10, 8 + randNumber()], [11, 9 + randNumber()], [12, 10 + randNumber()], [13, 11 + randNumber()], [14, 12 + randNumber()], [15, 13 + randNumber()], [16, 14 + randNumber()], [17, 15 + randNumber()], [18, 15 + randNumber()], [19, 16 + randNumber()], [20, 17 + randNumber()], [21, 18 + randNumber()], [22, 19 + randNumber()], [23, 20 + randNumber()], [24, 21 + randNumber()], [25, 14 + randNumber()], [26, 24 + randNumber()], [27, 25 + randNumber()], [28, 26 + randNumber()], [29, 27 + randNumber()], [30, 31 + randNumber()]];
-                newOrders = [[1, randSmallerNumber() - 10], [2, randSmallerNumber() - 10], [3, randSmallerNumber() - 10], [4, randSmallerNumber()], [5, randSmallerNumber()], [6, 4 + randSmallerNumber()], [7, 5 + randSmallerNumber()], [8, 6 + randSmallerNumber()], [9, 6 + randSmallerNumber()], [10, 8 + randSmallerNumber()], [11, 9 + randSmallerNumber()], [12, 10 + randSmallerNumber()], [13, 11 + randSmallerNumber()], [14, 12 + randSmallerNumber()], [15, 13 + randSmallerNumber()], [16, 14 + randSmallerNumber()], [17, 15 + randSmallerNumber()], [18, 15 + randSmallerNumber()], [19, 16 + randSmallerNumber()], [20, 17 + randSmallerNumber()], [21, 18 + randSmallerNumber()], [22, 19 + randSmallerNumber()], [23, 20 + randSmallerNumber()], [24, 21 + randSmallerNumber()], [25, 14 + randSmallerNumber()], [26, 24 + randSmallerNumber()], [27, 25 + randSmallerNumber()], [28, 26 + randSmallerNumber()], [29, 27 + randSmallerNumber()], [30, 31 + randSmallerNumber()]];
-                plot = $.plot($("#stats-chart1"), [
+                    var data, dataset, gd, options, previousLabel, previousPoint, showTooltip, ticks;
+                    var blue, data, datareal, getRandomData, green, i, newOrders, options, orange, orders, placeholder, plot, purple, randNumber, randSmallerNumber, red, series, totalPoints, update, updateInterval;
+                    var red = "#f34541";
+                    var orange = "#f8a326";
+                    var blue = "#00acec";
+                    var purple = "#9564e2";
+                    var green = "#49bf67";
+                    randNumber = function () {
+                    return ((Math.floor(Math.random() * (1 + 50 - 20))) + 20) * 800;
+                    };
+                    randSmallerNumber = function () {
+                    return ((Math.floor(Math.random() * (1 + 40 - 20))) + 10) * 200;
+                    };
+                    if ($("#stats-chart1").length !== 0) {
+            orders = [[1, randNumber() - 10], [2, randNumber() - 10], [3, randNumber() - 10], [4, randNumber()], [5, randNumber()], [6, 4 + randNumber()], [7, 5 + randNumber()], [8, 6 + randNumber()], [9, 6 + randNumber()], [10, 8 + randNumber()], [11, 9 + randNumber()], [12, 10 + randNumber()], [13, 11 + randNumber()], [14, 12 + randNumber()], [15, 13 + randNumber()], [16, 14 + randNumber()], [17, 15 + randNumber()], [18, 15 + randNumber()], [19, 16 + randNumber()], [20, 17 + randNumber()], [21, 18 + randNumber()], [22, 19 + randNumber()], [23, 20 + randNumber()], [24, 21 + randNumber()], [25, 14 + randNumber()], [26, 24 + randNumber()], [27, 25 + randNumber()], [28, 26 + randNumber()], [29, 27 + randNumber()], [30, 31 + randNumber()]];
+                    newOrders = [[1, randSmallerNumber() - 10], [2, randSmallerNumber() - 10], [3, randSmallerNumber() - 10], [4, randSmallerNumber()], [5, randSmallerNumber()], [6, 4 + randSmallerNumber()], [7, 5 + randSmallerNumber()], [8, 6 + randSmallerNumber()], [9, 6 + randSmallerNumber()], [10, 8 + randSmallerNumber()], [11, 9 + randSmallerNumber()], [12, 10 + randSmallerNumber()], [13, 11 + randSmallerNumber()], [14, 12 + randSmallerNumber()], [15, 13 + randSmallerNumber()], [16, 14 + randSmallerNumber()], [17, 15 + randSmallerNumber()], [18, 15 + randSmallerNumber()], [19, 16 + randSmallerNumber()], [20, 17 + randSmallerNumber()], [21, 18 + randSmallerNumber()], [22, 19 + randSmallerNumber()], [23, 20 + randSmallerNumber()], [24, 21 + randSmallerNumber()], [25, 14 + randSmallerNumber()], [26, 24 + randSmallerNumber()], [27, 25 + randSmallerNumber()], [28, 26 + randSmallerNumber()], [29, 27 + randSmallerNumber()], [30, 31 + randSmallerNumber()]];
+                    plot = $.plot($("#stats-chart1"), [
                     {
-                        data: orders,
-                        label: "Orders"
+                    data: orders,
+                            label: "Orders"
                     }, {
-                        data: newOrders,
-                        label: "New rders"
+                    data: newOrders,
+                            label: "New rders"
                     }
-                ], {
+                    ], {
                     series: {
-                        lines: {
-                            show: true,
+                    lines: {
+                    show: true,
                             lineWidth: 3
-                        },
-                        shadowSize: 0
                     },
-                    legend: {
-                        show: false
+                            shadowSize: 0
                     },
-                    grid: {
-                        clickable: true,
-                        hoverable: true,
-                        borderWidth: 0,
-                        tickColor: "#f4f7f9"
-                    },
-                    colors: ["#00acec", "#f8a326"]
-                });
+                            legend: {
+                            show: false
+                            },
+                            grid: {
+                            clickable: true,
+                                    hoverable: true,
+                                    borderWidth: 0,
+                                    tickColor: "#f4f7f9"
+                            },
+                            colors: ["#00acec", "#f8a326"]
+                    });
             }
             if ($("#stats-chart2").length !== 0) {
-                orders = [[1, randNumber() - 5], [2, randNumber() - 6], [3, randNumber() - 10], [4, randNumber()], [5, randNumber()], [6, 4 + randNumber()], [7, 10 + randNumber()], [8, 12 + randNumber()], [9, 6 + randNumber()], [10, 8 + randNumber()], [11, 9 + randNumber()], [12, 10 + randNumber()], [13, 11 + randNumber()], [14, 12 + randNumber()], [15, 3 + randNumber()], [16, 14 + randNumber()], [17, 14 + randNumber()], [18, 15 + randNumber()], [19, 16 + randNumber()], [20, 17 + randNumber()], [21, 18 + randNumber()], [22, 19 + randNumber()], [23, 20 + randNumber()], [24, 21 + randNumber()], [25, 14 + randNumber()], [26, 24 + randNumber()], [27, 25 + randNumber()], [28, 26 + randNumber()], [29, 27 + randNumber()], [30, 31 + randNumber()]];
-                newOrders = [[1, randSmallerNumber() - 10], [2, randSmallerNumber() - 10], [3, randSmallerNumber() - 10], [4, randSmallerNumber()], [5, randSmallerNumber()], [6, 4 + randSmallerNumber()], [7, 5 + randSmallerNumber()], [8, 6 + randSmallerNumber()], [9, 6 + randSmallerNumber()], [10, 8 + randSmallerNumber()], [11, 9 + randSmallerNumber()], [12, 10 + randSmallerNumber()], [13, 11 + randSmallerNumber()], [14, 12 + randSmallerNumber()], [15, 13 + randSmallerNumber()], [16, 14 + randSmallerNumber()], [17, 15 + randSmallerNumber()], [18, 15 + randSmallerNumber()], [19, 16 + randSmallerNumber()], [20, 17 + randSmallerNumber()], [21, 18 + randSmallerNumber()], [22, 19 + randSmallerNumber()], [23, 20 + randSmallerNumber()], [24, 21 + randSmallerNumber()], [25, 14 + randSmallerNumber()], [26, 24 + randSmallerNumber()], [27, 25 + randSmallerNumber()], [28, 26 + randSmallerNumber()], [29, 27 + randSmallerNumber()], [30, 31 + randSmallerNumber()]];
-                plot = $.plot($("#stats-chart2"), [
+            orders = [[1, randNumber() - 5], [2, randNumber() - 6], [3, randNumber() - 10], [4, randNumber()], [5, randNumber()], [6, 4 + randNumber()], [7, 10 + randNumber()], [8, 12 + randNumber()], [9, 6 + randNumber()], [10, 8 + randNumber()], [11, 9 + randNumber()], [12, 10 + randNumber()], [13, 11 + randNumber()], [14, 12 + randNumber()], [15, 3 + randNumber()], [16, 14 + randNumber()], [17, 14 + randNumber()], [18, 15 + randNumber()], [19, 16 + randNumber()], [20, 17 + randNumber()], [21, 18 + randNumber()], [22, 19 + randNumber()], [23, 20 + randNumber()], [24, 21 + randNumber()], [25, 14 + randNumber()], [26, 24 + randNumber()], [27, 25 + randNumber()], [28, 26 + randNumber()], [29, 27 + randNumber()], [30, 31 + randNumber()]];
+                    newOrders = [[1, randSmallerNumber() - 10], [2, randSmallerNumber() - 10], [3, randSmallerNumber() - 10], [4, randSmallerNumber()], [5, randSmallerNumber()], [6, 4 + randSmallerNumber()], [7, 5 + randSmallerNumber()], [8, 6 + randSmallerNumber()], [9, 6 + randSmallerNumber()], [10, 8 + randSmallerNumber()], [11, 9 + randSmallerNumber()], [12, 10 + randSmallerNumber()], [13, 11 + randSmallerNumber()], [14, 12 + randSmallerNumber()], [15, 13 + randSmallerNumber()], [16, 14 + randSmallerNumber()], [17, 15 + randSmallerNumber()], [18, 15 + randSmallerNumber()], [19, 16 + randSmallerNumber()], [20, 17 + randSmallerNumber()], [21, 18 + randSmallerNumber()], [22, 19 + randSmallerNumber()], [23, 20 + randSmallerNumber()], [24, 21 + randSmallerNumber()], [25, 14 + randSmallerNumber()], [26, 24 + randSmallerNumber()], [27, 25 + randSmallerNumber()], [28, 26 + randSmallerNumber()], [29, 27 + randSmallerNumber()], [30, 31 + randSmallerNumber()]];
+                    plot = $.plot($("#stats-chart2"), [
                     {
-                        data: orders,
-                        label: "Orders"
+                    data: orders,
+                            label: "Orders"
                     }, {
-                        data: newOrders,
-                        label: "New orders"
+                    data: newOrders,
+                            label: "New orders"
                     }
-                ], {
+                    ], {
                     series: {
-                        lines: {
-                            show: true,
+                    lines: {
+                    show: true,
                             lineWidth: 3
-                        },
-                        shadowSize: 0
                     },
-                    legend: {
-                        show: false
+                            shadowSize: 0
                     },
-                    grid: {
-                        clickable: true,
-                        hoverable: true,
-                        borderWidth: 0,
-                        tickColor: "#f4f7f9"
-                    },
-                    colors: ["#f34541", "#49bf67"]
-                });
-                $("#stats-chart2").bind("plotclick", function (event, pos, item) {
-                    if (item) {
-                        return alert("Yeah! You just clicked on point " + item.dataIndex + " in " + item.series.label + ".");
-                    }
-                });
+                            legend: {
+                            show: false
+                            },
+                            grid: {
+                            clickable: true,
+                                    hoverable: true,
+                                    borderWidth: 0,
+                                    tickColor: "#f4f7f9"
+                            },
+                            colors: ["#f34541", "#49bf67"]
+                    });
+                    $("#stats-chart2").bind("plotclick", function (event, pos, item) {
+            if (item) {
+            return alert("Yeah! You just clicked on point " + item.dataIndex + " in " + item.series.label + ".");
+            }
+            });
             }
         </script>
         <script src="assets/javascripts/plugins/bootstrap_daterangepicker/bootstrap-daterangepicker.js" type="text/javascript"></script>
@@ -792,192 +836,213 @@ if ($controller == 'project' && ($actions == 'index' || $actions == 'archieve_pr
 
 
 
-        <!-- / END - page related files and scripts [optional] -->    
+        <!-- / END - page related files and scripts [optional] -->   
+        <script>
+                    function doconfirm(href)
+                    {
+                    $(function () {
+                    bootbox.confirm('Are you sure you want to delete this record?', function (res) {
+                    if (res)
+                    {
+                    window.location.href = href;
+                    }
+                    });
+                    });
+                            return false;
+                    }
+        </script>
+        <script>
+                    function doconfirmSimilarProject(href)
+                    {
+                    $(function () {
+                    bootbox.confirm('Are you sure you want to create a Similar Project?', function (res) {
+                    if (res)
+                    {
+                    window.location.href = href;
+                    }
+                    });
+                    });
+                            return false;
+                    }
+        </script>
         <script>
             $(document).ready(function () {
-                $('#supplier_name').change(function () {
-                    var supp_id = $(this).find('option:selected').val();
-                    $.ajax({
-                        url: '<?php echo base_url() . "products/fetch_supplier_data"; ?>',
-                        type: 'POST',
-                        dataType: 'json',
-                        data: {supplier_id: supp_id},
-                        success: function (data) {
-                            $('#country_id').val(data.country);
-                            $('#tel_no').val(data.tel_no);
-                            $('#potential_level').val(data.potential_level);
-                            $('#address_id').val(data.address);
-                            $('#c_name').val(data.contact_name);
-                            $('#c_email').val(data.contact_email);
-                        }
-                    });
-                });
+            $(".alert").delay(4000).slideUp(200, function() {
+            $(this).alert('close');
             });
-        </script> 
+                    $('#supplier_name').change(function () {
+            var supp_id = $(this).find('option:selected').val();
+                    $.ajax({
+                    url: '<?php echo base_url() . "products/fetch_supplier_data"; ?>',
+                            type: 'POST',
+                            dataType: 'json',
+                            data: {supplier_id: supp_id},
+                            success: function (data) {
+                            $('#country_id').val(data.country);
+                                    $('#tel_no').val(data.tel_no);
+                                    $('#potential_level').val(data.potential_level);
+                                    $('#address_id').val(data.address);
+                                    $('#c_name').val(data.contact_name);
+                                    $('#c_email').val(data.contact_email);
+                            }
+                    });
+            });
+            });</script> 
         <script>
 
 
-            (function () {
-                var cal, calendarDate, d, m, y;
-
-                this.setDraggableEvents = function () {
-                    return $("#events .external-event").each(function () {
-                        var eventObject;
-                        eventObject = {
-                            title: $.trim($(this).text())
-                        };
-                        $(this).data("eventObject", eventObject);
-                        return $(this).draggable({
+                    (function () {
+                    var cal, calendarDate, d, m, y;
+                            this.setDraggableEvents = function () {
+                            return $("#events .external-event").each(function () {
+                            var eventObject;
+                                    eventObject = {
+                                    title: $.trim($(this).text())
+                                    };
+                                    $(this).data("eventObject", eventObject);
+                                    return $(this).draggable({
                             zIndex: 999,
-                            revert: true,
-                            revertDuration: 0
-                        });
-                    });
-                };
-
-                setDraggableEvents();
-
-                calendarDate = new Date();
-
-                d = calendarDate.getDate();
-
-                m = calendarDate.getMonth();
-
-                y = calendarDate.getFullYear();
-
-                cal = $(".full-calendar-demo").fullCalendar({
+                                    revert: true,
+                                    revertDuration: 0
+                            });
+                            });
+                            };
+                            setDraggableEvents();
+                            calendarDate = new Date();
+                            d = calendarDate.getDate();
+                            m = calendarDate.getMonth();
+                            y = calendarDate.getFullYear();
+                            cal = $(".full-calendar-demo").fullCalendar({
                     header: {
-                        center: "title",
-                        left: "basicDay,basicWeek,month",
-                        right: "prev,today,next"
+                    center: "title",
+                            left: "basicDay,basicWeek,month",
+                            right: "prev,today,next"
                     },
-                    buttonText: {
-                        prev: "<span class=\"icon-chevron-left\"></span>",
-                        next: "<span class=\"icon-chevron-right\"></span>",
-                        today: "Today",
-                        basicDay: "Day",
-                        basicWeek: "Week",
-                        month: "Month"
-                    },
-                    droppable: true,
-                    editable: true,
-                    selectable: true,
-                    select: function (start, end, allDay) {
-                        return bootbox.prompt("Event title", function (title) {
+                            buttonText: {
+                            prev: "<span class=\"icon-chevron-left\"></span>",
+                                    next: "<span class=\"icon-chevron-right\"></span>",
+                                    today: "Today",
+                                    basicDay: "Day",
+                                    basicWeek: "Week",
+                                    month: "Month"
+                            },
+                            droppable: true,
+                            editable: true,
+                            selectable: true,
+                            select: function (start, end, allDay) {
+                            return bootbox.prompt("Event title", function (title) {
                             if (title !== null) {
-                                cal.fullCalendar("renderEvent", {
-                                    title: title,
+                            cal.fullCalendar("renderEvent", {
+                            title: title,
                                     start: start,
                                     end: end,
                                     allDay: allDay
-                                }, true);
-                                return cal.fullCalendar('unselect');
+                            }, true);
+                                    return cal.fullCalendar('unselect');
                             }
-                        });
-                    },
-                    eventClick: function (calEvent, jsEvent, view) {
-                        return bootbox.dialog({
+                            });
+                            },
+                            eventClick: function (calEvent, jsEvent, view) {
+                            return bootbox.dialog({
                             message: $("<form class='form'><label>Change event name</label></form><input id='new-event-title' class='form-control' type='text' value='" + calEvent.title + "' /> "),
-                            buttons: {
-                                "delete": {
+                                    buttons: {
+                                    "delete": {
                                     label: "<i class='icon-trash'></i> Delete Event",
-                                    className: "pull-left",
-                                    callback: function () {
-                                        return cal.fullCalendar("removeEvents", function (ev) {
+                                            className: "pull-left",
+                                            callback: function () {
+                                            return cal.fullCalendar("removeEvents", function (ev) {
                                             return ev._id === calEvent._id;
-                                        });
+                                            });
+                                            }
+                                    },
+                                            success: {
+                                            label: "<i class='icon-save'></i> Save",
+                                                    className: "btn-success",
+                                                    callback: function () {
+                                                    calEvent.title = $("#new-event-title").val();
+                                                            return cal.fullCalendar('updateEvent', calEvent);
+                                                    }
+                                            }
                                     }
-                                },
-                                success: {
-                                    label: "<i class='icon-save'></i> Save",
-                                    className: "btn-success",
-                                    callback: function () {
-                                        calEvent.title = $("#new-event-title").val();
-                                        return cal.fullCalendar('updateEvent', calEvent);
-                                    }
-                                }
-                            }
-                        });
-                    },
-                    drop: function (date, allDay) {
-                        var copiedEventObject, eventClass, originalEventObject;
-                        originalEventObject = $(this).data("eventObject");
-                        originalEventObject.id = Math.floor(Math.random() * 99999);
-                        eventClass = $(this).attr('data-event-class');
-                        console.log(originalEventObject);
-                        copiedEventObject = $.extend({}, originalEventObject);
-                        copiedEventObject.start = date;
-                        copiedEventObject.allDay = allDay;
-                        if (eventClass) {
+                            });
+                            },
+                            drop: function (date, allDay) {
+                            var copiedEventObject, eventClass, originalEventObject;
+                                    originalEventObject = $(this).data("eventObject");
+                                    originalEventObject.id = Math.floor(Math.random() * 99999);
+                                    eventClass = $(this).attr('data-event-class');
+                                    console.log(originalEventObject);
+                                    copiedEventObject = $.extend({}, originalEventObject);
+                                    copiedEventObject.start = date;
+                                    copiedEventObject.allDay = allDay;
+                                    if (eventClass) {
                             copiedEventObject["className"] = [eventClass];
-                        }
-                        $(".full-calendar-demo").fullCalendar("renderEvent", copiedEventObject, true);
-                        if ($("#calendar-remove-after-drop").is(":checked")) {
+                            }
+                            $(".full-calendar-demo").fullCalendar("renderEvent", copiedEventObject, true);
+                                    if ($("#calendar-remove-after-drop").is(":checked")) {
                             return $(this).remove();
-                        }
-                    },
-                    events: [
-                        {
+                            }
+                            },
+                            events: [
+                            {
                             id: "event1",
-                            title: "All Day Event",
-                            start: new Date(y, m, 1),
-                            className: 'event-orange'
-                        }, {
+                                    title: "All Day Event",
+                                    start: new Date(y, m, 1),
+                                    className: 'event-orange'
+                            }, {
                             id: "event2",
-                            title: "Long Event",
-                            start: new Date(y, m, d - 5),
-                            end: new Date(y, m, d - 2),
-                            className: "event-red"
-                        }, {
+                                    title: "Long Event",
+                                    start: new Date(y, m, d - 5),
+                                    end: new Date(y, m, d - 2),
+                                    className: "event-red"
+                            }, {
                             id: 999,
-                            id: "event3",
+                                    id: "event3",
                                     title: "Repeating Event",
-                            start: new Date(y, m, d - 3, 16, 0),
-                            allDay: false,
-                            className: "event-blue"
-                        }, {
+                                    start: new Date(y, m, d - 3, 16, 0),
+                                    allDay: false,
+                                    className: "event-blue"
+                            }, {
                             id: 999,
-                            id: "event3",
+                                    id: "event3",
                                     title: "Repeating Event",
-                            start: new Date(y, m, d + 4, 16, 0),
-                            allDay: false,
-                            className: "event-green"
-                        }, {
+                                    start: new Date(y, m, d + 4, 16, 0),
+                                    allDay: false,
+                                    className: "event-green"
+                            }, {
                             id: "event4",
-                            title: "Meeting",
-                            start: new Date(y, m, d, 10, 30),
-                            allDay: false,
-                            className: "event-orange"
-                        }, {
+                                    title: "Meeting",
+                                    start: new Date(y, m, d, 10, 30),
+                                    allDay: false,
+                                    className: "event-orange"
+                            }, {
                             id: "event5",
-                            title: "Lunch",
-                            start: new Date(y, m, d, 12, 0),
-                            end: new Date(y, m, d, 14, 0),
-                            allDay: false,
-                            className: "event-red"
-                        }, {
+                                    title: "Lunch",
+                                    start: new Date(y, m, d, 12, 0),
+                                    end: new Date(y, m, d, 14, 0),
+                                    allDay: false,
+                                    className: "event-red"
+                            }, {
                             id: "event6",
-                            title: "Birthday Party",
-                            start: new Date(y, m, d + 1, 19, 0),
-                            end: new Date(y, m, d + 1, 22, 30),
-                            allDay: false,
-                            className: "event-purple"
-                        }
-                    ]
-                });
-
-            }).call(this);
-        </script>
+                                    title: "Birthday Party",
+                                    start: new Date(y, m, d + 1, 19, 0),
+                                    end: new Date(y, m, d + 1, 22, 30),
+                                    allDay: false,
+                                    className: "event-purple"
+                            }
+                            ]
+                    });
+                    }).call(this);</script>
         <script>
-            $(".chat .new-message").live('submit', function (e) {
-                var chat, date, li, message, months, reply, scrollable, sender, timeago;
-                date = new Date();
-                months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-                chat = $(this).parents(".chat");
-                message = $(this).find("#message_body").val();
-                $(this).find("#message_body").val("");
-                if (message.length !== 0) {
-                    li = chat.find("li.message").first().clone();
+                    $(".chat .new-message").live('submit', function (e) {
+            var chat, date, li, message, months, reply, scrollable, sender, timeago;
+                    date = new Date();
+                    months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+                    chat = $(this).parents(".chat");
+                    message = $(this).find("#message_body").val();
+                    $(this).find("#message_body").val("");
+                    if (message.length !== 0) {
+            li = chat.find("li.message").first().clone();
                     li.find(".body").text(message);
                     timeago = li.find(".timeago");
                     timeago.removeClass("in");
@@ -990,190 +1055,173 @@ if ($controller == 'project' && ($actions == 'index' || $actions == 'archieve_pr
                     chat.find("ul").append(li);
                     scrollable = li.parents(".scrollable");
                     $(scrollable).slimScroll({
-                        scrollTo: scrollable.prop('scrollHeight') + "px"
-                    });
+            scrollTo: scrollable.prop('scrollHeight') + "px"
+            });
                     li.effect("highlight", {}, 500);
                     reply = scrollable.find("li").not(":contains('" + sender + "')").first().clone();
                     setTimeout((function () {
-                        date = new Date();
-                        timeago = reply.find(".timeago");
-                        timeago.attr("title", "" + (date.getFullYear()) + "-" + (month < 10 ? '0' : '') + month + "-" + (date_day < 10 ? '0' : '') + date_day + " " + (date.getHours()) + ":" + (date.getMinutes()) + ":" + (date.getSeconds()) + " +0200");
-                        timeago.text("" + months[date.getMonth()] + " " + (date.getDate()) + ", " + (date.getFullYear()) + " " + (date.getHours()) + ":" + (date.getMinutes()));
-                        setTimeAgo(timeago);
-                        scrollable.find("ul").append(reply);
-                        $(scrollable).slimScroll({
-                            scrollTo: scrollable.prop('scrollHeight') + "px"
-                        });
-                        return reply.effect("highlight", {}, 500);
+                    date = new Date();
+                            timeago = reply.find(".timeago");
+                            timeago.attr("title", "" + (date.getFullYear()) + "-" + (month < 10 ? '0' : '') + month + "-" + (date_day < 10 ? '0' : '') + date_day + " " + (date.getHours()) + ":" + (date.getMinutes()) + ":" + (date.getSeconds()) + " +0200");
+                            timeago.text("" + months[date.getMonth()] + " " + (date.getDate()) + ", " + (date.getFullYear()) + " " + (date.getHours()) + ":" + (date.getMinutes()));
+                            setTimeAgo(timeago);
+                            scrollable.find("ul").append(reply);
+                            $(scrollable).slimScroll({
+                    scrollTo: scrollable.prop('scrollHeight') + "px"
+                    });
+                            return reply.effect("highlight", {}, 500);
                     }), 1000);
-                }
-                return e.preventDefault();
-            });
-        </script>
+            }
+            return e.preventDefault();
+            });</script>
         <script>
-            $(".recent-activity .ok").live("click", function (e) {
-                $(this).tooltip("hide");
-                $(this).parents("li").fadeOut(500, function () {
-                    return $(this).remove();
-                });
-                return e.preventDefault();
+                    $(".recent-activity .ok").live("click", function (e) {
+            $(this).tooltip("hide");
+                    $(this).parents("li").fadeOut(500, function () {
+            return $(this).remove();
             });
-            $(".recent-activity .remove").live("click", function (e) {
-                $(this).tooltip("hide");
-                $(this).parents("li").fadeOut(500, function () {
-                    return $(this).remove();
-                });
-                return e.preventDefault();
+                    return e.preventDefault();
             });
-            $("#comments-more-activity").live("click", function (e) {
-                $(this).button("loading");
-                setTimeout((function () {
+                    $(".recent-activity .remove").live("click", function (e) {
+            $(this).tooltip("hide");
+                    $(this).parents("li").fadeOut(500, function () {
+            return $(this).remove();
+            });
+                    return e.preventDefault();
+            });
+                    $("#comments-more-activity").live("click", function (e) {
+            $(this).button("loading");
+                    setTimeout((function () {
                     var list;
-                    list = $("#comments-more-activity").parent().parent().find("ul");
-                    list.append(list.find("li:not(:first)").clone().effect("highlight", {}, 500));
-                    return $("#comments-more-activity").button("reset");
-                }), 1000);
-                e.preventDefault();
-                return false;
+                            list = $("#comments-more-activity").parent().parent().find("ul");
+                            list.append(list.find("li:not(:first)").clone().effect("highlight", {}, 500));
+                            return $("#comments-more-activity").button("reset");
+                    }), 1000);
+                    e.preventDefault();
+                    return false;
             });
-            $("#users-more-activity").live("click", function (e) {
-                $(this).button("loading");
-                setTimeout((function () {
+                    $("#users-more-activity").live("click", function (e) {
+            $(this).button("loading");
+                    setTimeout((function () {
                     var list;
-                    list = $("#users-more-activity").parent().parent().find("ul");
-                    list.append(list.find("li:not(:first)").clone().effect("highlight", {}, 500));
-                    return $("#users-more-activity").button("reset");
-                }), 1000);
-                e.preventDefault();
-                return false;
-            });
-        </script>
+                            list = $("#users-more-activity").parent().parent().find("ul");
+                            list.append(list.find("li:not(:first)").clone().effect("highlight", {}, 500));
+                            return $("#users-more-activity").button("reset");
+                    }), 1000);
+                    e.preventDefault();
+                    return false;
+            });</script>
         <script>
-            (function () {
-                $("#daterange").daterangepicker({
+                    (function () {
+                    $("#daterange").daterangepicker({
                     ranges: {
-                        Yesterday: [moment().subtract("days", 1), moment().subtract("days", 1)],
-                        "Last 30 Days": [moment().subtract("days", 29), moment()],
-                        "This Month": [moment().startOf("month"), moment().endOf("month")]
+                    Yesterday: [moment().subtract("days", 1), moment().subtract("days", 1)],
+                            "Last 30 Days": [moment().subtract("days", 29), moment()],
+                            "This Month": [moment().startOf("month"), moment().endOf("month")]
                     },
-                    startDate: moment().subtract("days", 29),
-                    endDate: moment(),
-                    opens: "left",
-                    cancelClass: "btn-danger",
-                    buttonClasses: ['btn', 'btn-sm']
-                }, function (start, end) {
+                            startDate: moment().subtract("days", 29),
+                            endDate: moment(),
+                            opens: "left",
+                            cancelClass: "btn-danger",
+                            buttonClasses: ['btn', 'btn-sm']
+                    }, function (start, end) {
                     return $("#daterange span").html(start.format("MMMM D, YYYY") + " - " + end.format("MMMM D, YYYY"));
-                });
-
-            }).call(this);
-        </script>
+                    });
+                    }).call(this);</script>
         <script>
 
-            $(".todo-list .new-todo").live('submit', function (e) {
-                var li, todo_name;
-                todo_name = $(this).find("#todo_name").val();
-                $(this).find("#todo_name").val("");
-                if (todo_name.length !== 0) {
-                    li = $(this).parents(".todo-list").find("li.item").first().clone();
+                    $(".todo-list .new-todo").live('submit', function (e) {
+            var li, todo_name;
+                    todo_name = $(this).find("#todo_name").val();
+                    $(this).find("#todo_name").val("");
+                    if (todo_name.length !== 0) {
+            li = $(this).parents(".todo-list").find("li.item").first().clone();
                     li.find("input[type='checkbox']").attr("checked", false);
                     li.removeClass("important").removeClass("done");
                     li.find("label.todo span").text(todo_name);
                     $(".todo-list ul").first().prepend(li);
                     li.effect("highlight", {}, 500);
-                }
-                return e.preventDefault();
+            }
+            return e.preventDefault();
             });
-
-            $(".todo-list .actions .remove").live("click", function (e) {
-                $(this).tooltip("hide");
-                $(this).parents("li").fadeOut(500, function () {
-                    return $(this).remove();
-                });
-                e.stopPropagation();
-                e.preventDefault();
-                return false;
+                    $(".todo-list .actions .remove").live("click", function (e) {
+            $(this).tooltip("hide");
+                    $(this).parents("li").fadeOut(500, function () {
+            return $(this).remove();
             });
-
-            $(".todo-list .actions .important").live("click", function (e) {
-                $(this).parents("li").toggleClass("important");
-                e.stopPropagation();
-                e.preventDefault();
-                return false;
+                    e.stopPropagation();
+                    e.preventDefault();
+                    return false;
             });
-
-            $(".todo-list .check").live("click", function () {
-                var checkbox;
-                checkbox = $(this).find("input[type='checkbox']");
-                if (checkbox.is(":checked")) {
-                    return $(this).parents("li").addClass("done");
-                } else {
-                    return $(this).parents("li").removeClass("done");
-                }
+                    $(".todo-list .actions .important").live("click", function (e) {
+            $(this).parents("li").toggleClass("important");
+                    e.stopPropagation();
+                    e.preventDefault();
+                    return false;
             });
-
-            $("#slider-example > span").each(function () {
-                var value;
-                value = parseInt($(this).text(), 10);
-                return $(this).empty().slider({
-                    value: value,
+                    $(".todo-list .check").live("click", function () {
+            var checkbox;
+                    checkbox = $(this).find("input[type='checkbox']");
+                    if (checkbox.is(":checked")) {
+            return $(this).parents("li").addClass("done");
+            } else {
+            return $(this).parents("li").removeClass("done");
+            }
+            });
+                    $("#slider-example > span").each(function () {
+            var value;
+                    value = parseInt($(this).text(), 10);
+                    return $(this).empty().slider({
+            value: value,
                     range: "min",
                     animate: true,
                     orientation: "vertical"
-                });
             });
-
-            $(".slider-example1").slider({
-                value: 1,
-                min: 0,
-                max: 100,
-                step: 1,
-                slide: function (event, ui) {
+            });
+                    $(".slider-example1").slider({
+            value: 1,
+                    min: 0,
+                    max: 100,
+                    step: 1,
+                    slide: function (event, ui) {
 
                     return $(".slider-example1-amount").text(ui.value + "%");
-                }
+                    }
             });
+                    $(".slider").each(function () {
 
 
-
-
-            $(".slider").each(function () {
-
-
-                var estimate_value = $(this).data("value");
-                var slider = this;
-                $(slider).slider({
-                    value: estimate_value,
+            var estimate_value = $(this).data("value");
+                    var slider = this;
+                    $(slider).slider({
+            value: estimate_value,
                     min: 1,
                     max: 100,
                     step: 1,
                     slide: function (event, ui) {
-                        var id = $(this).attr('id');
-                        var slider_value = 0;
-                        slider_value = ui.value;
-                        $.ajax({
+                    var id = $(this).attr('id');
+                            var slider_value = 0;
+                            slider_value = ui.value;
+                            $.ajax({
                             url: '<?php echo base_url() . "project/updates_estimate_level"; ?>',
-                            type: 'post',
-                            data: {id: id, s_value: slider_value},
-                            dataType: 'json',
-                            success: function (data) {
+                                    type: 'post',
+                                    data: {id: id, s_value: slider_value},
+                                    dataType: 'json',
+                                    success: function (data) {
 
-                            }
-                        });
-                        $(this).next().find('span.slider-value').html(ui.value + "%");
+                                    }
+                            });
+                            $(this).next().find('span.slider-value').html(ui.value + "%");
                     }
-                });
             });
-            $(document).ready(function () {
-                setTimeout(function () {
-                    $('.alert').fadeOut('fast');
-                }, 3000);
-
-                $(".js-example-data-array-selected").select2();
-
-
-                setDataTable($(".for_action_dt"));
-
-                this.setDataTable = function (selector) {
+            });
+                    $(document).ready(function () {
+            setTimeout(function () {
+            $('.alert').fadeOut('fast');
+            }, 3000);
+                    $(".js-example-data-array-selected").select2();
+                    setDataTable($(".for_action_dt"));
+                    this.setDataTable = function (selector) {
                     if (jQuery().dataTable) {
                     var dt, sdom;
                             if ($(selector).data("pagination-top-bottom") === true) {
@@ -1193,17 +1241,15 @@ if ($controller == 'project' && ($actions == 'index' || $actions == 'archieve_pr
                             dt.closest('.dataTables_wrapper').find('div[id$=_filter] input').css("width", "200px");
                             return dt.closest('.dataTables_wrapper').find('input').addClass("form-control input-sm").attr('placeholder', 'Search');
                     }
-                };
-
-            });
-
-
-            /*        
-             $("#select2-tags").select2({  
-             tags: ["today", "tomorrow", "toyota"],
-             tokenSeparators: [","," "],
-             placeholder: "Type your Project Manager... "
-             });*/
+                    };
+                    });
+                    });
+                            /*        
+                             $("#select2-tags").select2({  
+                             tags: ["today", "tomorrow", "toyota"],
+                             tokenSeparators: [","," "],
+                             placeholder: "Type your Project Manager... "
+                             });*/
         </script>
 
         <!-- / END - page related files and scripts [optional] -->

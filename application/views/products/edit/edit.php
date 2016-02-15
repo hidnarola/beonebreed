@@ -17,7 +17,7 @@
                             <i class='icon-angle-right'></i>
                         </li>
                         <li>
-                            Edit Product
+                            <?php echo $data_admin_part_1['product_name'];?>
                         </li>
                     </ul>
                 </div>

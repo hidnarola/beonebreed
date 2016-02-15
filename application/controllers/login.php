@@ -9,36 +9,45 @@ class Login extends CI_Controller {
         $this->load->helper('url');
         $this->load->helper('form');
         $this->load->model('login_model');
-
     }
+
     public function index($user = null) {
+        if ($this->session->userdata('admin_logged_in') || $this->session->userdata('client_user_logged_in')) {
+            if ($this->session->userdata('user_type') == 1 || $this->session->userdata('user_type') == 2) {
+                    redirect('dashboard');
+                } else if ($this->session->userdata('user_type') == 3) {
+                    redirect('client_news');
+                } else if ($this->session->userdata('user_type') == 4) {
+                    redirect('client_news');
+                }
+        }
         $data = array();
         $data['company_logo'] = '';
 
         //Get All username
-        $where_in_array = array('3','4');
-        $all_db_users = $this->login_model->getfrom('users',false,array('where'=>array('is_deleted'=>'0'),'where_in'=>array('user_type'=>$where_in_array)) );
+        $where_in_array = array('3', '4');
+        $all_db_users = $this->login_model->getfrom('users', false, array('where' => array('is_deleted' => '0'), 'where_in' => array('user_type' => $where_in_array)));
 
-        $all_users = array("",'bob');
+        $all_users = array("", 'bob');
 
-        if(!empty($all_db_users)){
-            foreach($all_db_users as $db_user){
+        if (!empty($all_db_users)) {
+            foreach ($all_db_users as $db_user) {
                 array_push($all_users, $db_user['username']);
             }
         }
 
-        if(empty($user)){
-            $cur_url =  current_url();            
+        if (empty($user)) {
+            $cur_url = current_url();
             preg_match('/([^.]+)\.beonebreed\.com/', $_SERVER['SERVER_NAME'], $matches);
-            if(isset($matches[1])) {
-               $user = $matches[1];
+            if (isset($matches[1])) {
+                $user = $matches[1];
             }
         }
 
-        if(in_array($user, $all_users) == false){
+        if (in_array($user, $all_users) == false) {
             //show_404();
         }
-    
+
         if (!empty($_POST)) {
 
 
@@ -84,25 +93,23 @@ class Login extends CI_Controller {
                 } else if ($user_type == 4) {
                     redirect('client_news');
                 }
-
             } else {
 
                 $data['msg'] = "Please enter Correct login information";
             }
         }
-        
+
         if (!empty($user)) {
             $client_result = $this->login_model->get_client_info($user);
             if ($client_result) {
                 $data['company_logo'] = $client_result[0]->logo_name;
             }
-        }else{
+        } else {
 
             $client_result = $this->login_model->get_client_info($user);
             if ($client_result) {
                 $data['company_logo'] = $client_result[0]->logo_name;
-            }         
-
+            }
         }
 
         $this->template->load('admin_login', 'login/index', $data);

@@ -382,29 +382,7 @@
                     <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
                 </div>
             </div>
-            <script>
-                function doconfirm(href)
-                {
-                    $(function () {
-                        bootbox.confirm('Are you sure you want to delete this record?', function (res) {
-                            if (res)
-                            {
-                                window.location.href = href;
-                            }
-                        });
-                    });
-
-                    return false;
-//                        if (confirm("Are you sure you want to delete this record?"))
-//                        {
-//                            return true;
-//                        }
-//                        else
-//                        {
-//                            return false;
-//                        }
-                }
-            </script>
+            
             <script type="text/javascript">
                 $(document).ready(function () {
                     $(".fancybox").fancybox({

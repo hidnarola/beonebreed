@@ -245,8 +245,6 @@ class Project_model extends CI_Model {
                 'quick_notes' => $quick_notes,
             );
         }
-        p($data);
-        exit;
         $this->db->where('id', $id);
         return $this->db->update('projects', $data);
     }

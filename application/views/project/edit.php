@@ -16,7 +16,7 @@ if (!empty($project['id'])) {
                     $pid = $project['id'];
                     ?>
                     <h4 class='pull-right text-center right_side_link_w_icon' style=" margin-left: 10px;">
-                        <a href="<?php echo base_url(); ?>project/project_archieve/<?php echo $project['id']; ?>" onClick="return confirm('Are You Want To Sure To Archieve Project?');" id="archive_projects" data-archieve="<?php
+                        <a href="<?php echo base_url(); ?>project/project_archieve/<?php echo $project['id']; ?>" id="archive_projects" data-archieve="<?php
                         if (!empty($project['id'])) {
                             echo $project['id'];
                         }
@@ -26,7 +26,7 @@ if (!empty($project['id'])) {
                         </a>
                     </h4>
                     <h4 class='pull-right text-center right_side_link_w_icon'>
-                        <a href="<?php echo base_url(); ?>project/similar/<?php echo $project['id']; ?>" class="" style=""  onClick="return confirm('Are You Want To Sure Create a Similar Project?');" id="similar_projects"
+                        <a href="<?php echo base_url(); ?>project/similar/<?php echo $project['id']; ?>" class="" style=""  onClick='return doconfirmSimilarProject(this.href);' id="similar_projects"
                            data-similar="<?php
                            if (!empty($project['id'])) {
                                echo $project['id'];
@@ -765,8 +765,8 @@ if (!empty($project['id'])) {
                                                                                                                         "aaSorting": [[4, 'asc']],
                                                                                                                     });
                                                                                                                     /* $(".fancybox").fancybox({
-                                                                                                                     //                                                                                                                        width: 1200,
-                                                                                                                     //                                                                                                                        height: 900,
+                                                                                                                     //width: 1200,
+                                                                                                                     //height: 900,
                                                                                                                      type: 'iframe'
                                                                                                                      });*/
 
@@ -775,6 +775,7 @@ if (!empty($project['id'])) {
                                                                                                                         type: 'iframe',
                                                                                                                         afterShow: function () {
                                                                                                                             $('.fancybox-inner body').css('overflow-x', 'visible !important');
+                                                                                                                            $('.fancybox-inner').css('width', 'auto !important');
                                                                                                                         }
 
                                                                                                                     });
@@ -819,7 +820,15 @@ if (!empty($project['id'])) {
                                                                                                                 });
                                                                                                                 $(document).on('click', '#archive_projects', function () {
                                                                                                                     var id = $(this).attr("data-archieve");
-                                                                                                                    archieveProject(id);
+                                                                                                                    $(function () {
+                                                                                                                        bootbox.confirm('Are you sure you want to archieve this project?', function (res) {
+                                                                                                                            if (res)
+                                                                                                                            {
+                                                                                                                                archieveProject(id);
+                                                                                                                            }
+                                                                                                                        });
+                                                                                                                    });
+                                                                                                                    return false;
                                                                                                                 });
                                                                                                                 $(document).on('click', '.no_preview', function () {
                                                                                                                     var filename = $(this).text();
@@ -831,7 +840,6 @@ if (!empty($project['id'])) {
                                                                                                                 function archieveProject(id) {
                                                                                                                     event.preventDefault();
                                                                                                                     var project_id = id;
-                                                                                                                    if (confirm("Are you sure you want to archieve this project?")) {
                                                                                                                         $.ajax({
                                                                                                                             url: '<?php echo site_url('project/project_archieve'); ?>',
                                                                                                                             type: 'post',
@@ -843,9 +851,6 @@ if (!empty($project['id'])) {
                                                                                                                                 }
                                                                                                                             }
                                                                                                                         });
-                                                                                                                    } else {
-                                                                                                                        return false;
-                                                                                                                    }
                                                                                                                 }
 
                                                                                                                 function noteForm() {

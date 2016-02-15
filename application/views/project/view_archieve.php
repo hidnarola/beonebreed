@@ -6,18 +6,18 @@
                     <i class='icon-archive'></i>
                     <span>Archieve Project</span>
                 </h1>
-               
-                <!--
-                <div class='pull-right'>
-                    <ul class='breadcrumb'>
-
-                    </ul>
-                </div> -->
+                <ul class='breadcrumb' style="padding-top: 62px;">
+                    <li class='separator'>
+                    </li>
+                    <li>
+                        <a href="<?php echo site_url('project/archieve_projects'); ?>">Design/Archive</a>
+                    </li>
+                </ul>
             </div>
         </div>
     </div>
 
-    <?php if ($this->session->flashdata('msg')!='') { ?>
+    <?php if ($this->session->flashdata('msg') != '') { ?>
         <div class='alert alert-success alert-dismissable'>
             <a class="close" data-dismiss="alert" href="#">&times;</a>
             <i class='icon-ok-sign'></i>
@@ -26,7 +26,7 @@
             endif;
             ?>  
         </div>
-<?php } ?>
+    <?php } ?>
     <div class='row'>
         <div class='col-sm-12'>
             <div class='box'>
@@ -39,7 +39,11 @@
                 </div>
                 <div class='box-content'>
                     <?php
-                        if($project['project_type_id']==2){ $disabled='disabled';}else{$disabled='';};
+                    if ($project['project_type_id'] == 2) {
+                        $disabled = 'disabled';
+                    } else {
+                        $disabled = '';
+                    };
                     ?>
                     <form class="form" style="margin-bottom: 0;" method="post" action="" accept-charset="UTF-8">   
                         <div style="display:inline-block;float:left;width:45%" class='box-content'>
@@ -48,10 +52,10 @@
                             <div class='form-group'>
                                 <label for='inputText'>Project Name</label><span style="color:red">*</span>
                                 <input class='form-control' id='inputText' placeholder='Project Name' type='text' name='name' value="<?php
-                                if (!empty($project['name'])) {
-                                    echo $project['name'];
-                                }
-                                ?>" <?php echo $disabled; ?> disabled>
+                    if (!empty($project['name'])) {
+                        echo $project['name'];
+                    }
+                    ?>" <?php echo $disabled; ?> disabled>
                                 <span style="color:red"><?php echo form_error('name'); ?><span>
                                         </div>
                                         <div class='form-group'>
@@ -64,7 +68,7 @@
                                                         if ($project['category_id'] == $v->id) {
                                                             ?>
                                                             <option value="<?php echo $v->id; ?>" selected><?php echo $v->name; ?></option>
-                                                       <?php } else { ?>
+                                                        <?php } else { ?>
                                                             <option value="<?php echo $v->id; ?>"><?php echo $v->name; ?></option>
 
                                                             <?php
@@ -89,20 +93,20 @@
                                                     <?php } else { ?>
 
                                                         <option value=<?php echo $i; ?> ><?php echo $i; ?></option>
-                                                        <?php
-                                                    }
-                                                }
-                                                ?>							
+        <?php
+    }
+}
+?>							
                                             </select>	
                                         </div>
 
                                         <div class="form-group">
                                             <label for="comment">Quick Notes:</label>
                                             <textarea class="form-control" rows="5" id="comment" name="quick_notes" disabled><?php
-                                                if (!empty($project['quick_notes'])) {
-                                                    echo $project['quick_notes'];
-                                                }
-                                                ?></textarea>
+if (!empty($project['quick_notes'])) {
+    echo $project['quick_notes'];
+}
+?></textarea>
                                         </div>  
 
 
@@ -122,7 +126,7 @@
                                                                 ?>
                                                                 <option value="<?php echo $v->id; ?>" selected><?php echo $v->type; ?></option>
 
-                                                               <?php } else { ?>
+                                                            <?php } else { ?>
 
                                                                 <option value="<?php echo $v->id; ?>"><?php echo $v->type; ?></option>
                                                                 <?php
@@ -136,19 +140,19 @@
                                                         <div class='form-group'>
                                                             <label for='inputText'>Estimate Days</label>
                                                             <input class='form-control' id='inputText' placeholder='Estimate Days' type='text' name='estimated_days' value="<?php
-                                                            if (!empty($project['estimated_days'])) {
-                                                                echo $project['estimated_days'];
-                                                            }
-                                                            ?>" disabled >
+                                                    if (!empty($project['estimated_days'])) {
+                                                        echo $project['estimated_days'];
+                                                    }
+                                                    ?>" disabled >
 
                                                         </div>
                                                         <div class='form-group'>
                                                             <label for='inputText'>Project manager</label>
                                                             <input class='form-control' id='inputText' placeholder='Project manager' type='text' name='project_manager' value="<?php
-                                                            if (!empty($project['project_manager'])) {
-                                                                echo $project['project_manager'];
-                                                            }
-                                                            ?>" disabled>
+                                                    if (!empty($project['project_manager'])) {
+                                                        echo $project['project_manager'];
+                                                    }
+                                                    ?>" disabled>
 
                                                         </div>
                                                         <!--
@@ -167,13 +171,13 @@
                                                         <hr class="hr-normal">
                                                         <!--
                                                                 <div class='pull-left' style="color:green;margin-left:15px;">
-<?php //if($this->session->flashdata('msg')):echo $this->session->flashdata('msg');endif;  ?>  
+<?php //if($this->session->flashdata('msg')):echo $this->session->flashdata('msg');endif;   ?>  
                                                                 </div> -->
 
                                                         <div class="clearfix">	</div>
                                                         <div class='col-sm-12' style="margin-top:15px;">
                                                             <div class='row' style='margin-bottom:0;'>
-                                                               
+
                                                                 <div class='box-gray'>
                                                                     <div style="" class="pull-right">
 
@@ -185,7 +189,7 @@
                                                                             $pid = '';
                                                                         }
                                                                         ?>
-                                                                        
+
                                                                     </div>
                                                                     <h4 class='title pull-left'>Action Plan</h4>
                                                                     <div class="clearfix"></div>
@@ -214,7 +218,7 @@
                                                                                     </tr>
                                                                                 </thead>
                                                                                 <tbody>
-                                                                                <?php foreach ($action_plan as $u_key) { ?>
+<?php foreach ($action_plan as $u_key) { ?>
                                                                                         <tr>
                                                                                             <td><?php echo $u_key->action; ?> </td>
                                                                                             <td><?php echo $u_key->resposible; ?> </td>
@@ -226,10 +230,10 @@
 
                                                                                                 <div class="slider" id="<?php echo $u_key->id; ?>" data-value="<?php echo $u_key->complete_level; ?>"></div>
                                                                                                 <p class=""><span class="slider-value"><?php
-                                                                                                        if (!empty($u_key->complete_level)) {
-                                                                                                            echo $u_key->complete_level . " %";
-                                                                                                        }
-                                                                                                        ?></span></p>
+                                                                                                    if (!empty($u_key->complete_level)) {
+                                                                                                        echo $u_key->complete_level . " %";
+                                                                                                    }
+                                                                                                    ?></span></p>
                                                                                             </td>
                                                                                             <td>
 
@@ -263,7 +267,7 @@
                                                             <div class='row' style='margin-bottom:0;'>
                                                                 <div class='box-gray'>
                                                                     <div class="pull-right">
-                                                                        
+
                                                                     </div>
                                                                     <h4 class='title pull-left'>Daily sheet</h4>
                                                                     <div class="clearfix"></div>
@@ -280,7 +284,7 @@
                                                                                         <th>
                                                                                             Username
                                                                                         </th>
-                          
+
                                                                                         <th>
                                                                                             Action
                                                                                         </th>
@@ -290,13 +294,13 @@
                                                                                             <?php foreach ($timesheet as $u_key) { ?>
                                                                                         <tr>
                                                                                             <td>
-                                                                                                <?php
-                                                                                                $date = new DateTime($u_key->dates);
-                                                                                                echo $date->format('d F Y');
-                                                                                                ?> 
+    <?php
+    $date = new DateTime($u_key->dates);
+    echo $date->format('d F Y');
+    ?> 
                                                                                             </td>
                                                                                             <td><?php echo $u_key->username; ?> </td>
-                         
+
                                                                                             <td>
                                                                                                 <div class='text-left'>
                                                                                                     <a class='btn btn-primary btn-xs' href='<?php echo site_url('project/view_timesheet/' . $u_key->id) ?>'>
@@ -350,24 +354,24 @@
                                                                         <!-- Tab panes -->
                                                                         <div class="tab-content">
                                                                             <div class="tab-pane fade active in" id="home">
-                                                                                
+
                                                                                 <div class='row' style='margin-bottom: 0;'>
 
-                                                                                   
+
                                                                                     <div class="col-md-6">
                                                                                         <ul id="attachment" class="tab-ul">   
                                                                                             <?php foreach ($attachment as $u_key) { ?>
 
                                                                                                 <li style="list-style:none"><a href='uploads/<?php echo $u_key->name; ?>' target='_blank'><?php echo $u_key->name; ?></a></li>
-                                                                                                 
-                                                                                                <?php } ?> 
+
+<?php } ?> 
                                                                                         </ul>
                                                                                     </div> 
 
-                                                                                   
+
                                                                                 </div>
-                                                                               
-                                                                                
+
+
                                                                             </div>
 
                                                                             <!-- bootstrap upload container start-->
@@ -378,10 +382,10 @@
                                                                                     <div class="modal fade" id="myuploadModal" role="dialog">
                                                                                         <div class="modal-dialog">
                                                                                             <input  type='hidden' name='hdn_project_id' id="hdn_project_id" class="hdn_project_id" value="<?php
-                                                                                               if (!empty($project['id'])) {
-                                                                                                        echo $project['id'];
-                                                                                                    }
-                                                                                                    ?>">
+if (!empty($project['id'])) {
+    echo $project['id'];
+}
+?>">
                                                                                             <!-- Modal content-->
                                                                                             <div class="modal-content">
                                                                                                 <div class="modal-header">
@@ -411,12 +415,13 @@
                                                                                                             <!-- bootstrap container end -->
                                                                                                             <div class="tab-pane fade" id="profile"> 
                                                                                                                 <div class="tab-pane fade active in" id="home">
-                                                                                                                                                       <div class='row' style='margin-bottom: 0;' id="notes_div_form">
+                                                                                                                    <div class='row' style='margin-bottom: 0;' id="notes_div_form">
                                                                                                                         <div class="col-md-6">
                                                                                                                             <ul id="notes" class="tab-ul">
                                                                                                                                 <?php foreach ($notes as $u_key) { ?>
-                                                                                                                                    
-                                                                                                                                    <li style="list-style:none"><a href="javascript:void(0)"  data-desc="<?php echo $u_key->description; ?>" class="notes_link" id="<?php echo $u_key->id; ?>"><?php echo $u_key->name; ?></a><span style="margin-left: 60px;"><?php $date = new DateTime($u_key->created_date); echo $date->format('d F Y'); ?></span></li>
+
+                                                                                                                                    <li style="list-style:none"><a href="javascript:void(0)"  data-desc="<?php echo $u_key->description; ?>" class="notes_link" id="<?php echo $u_key->id; ?>"><?php echo $u_key->name; ?></a><span style="margin-left: 60px;"><?php $date = new DateTime($u_key->created_date);
+                                                                                                                                echo $date->format('d F Y'); ?></span></li>
 
 <?php } ?> 
                                                                                                                             </ul>
@@ -437,10 +442,10 @@
                                                                                                                     <form class="form" style="margin-bottom: 0;" method="post" action="#" accept-charset="UTF-8" id="project_notes_form" >
                                                                                                                         <div class='' style='margin-bottom: 0;display:none' id="expand_notes_form">
                                                                                                                             <input  type='hidden' name='hdn_project_id' id="hdn_project_id" class="hdn_project_id" value="<?php
-                                                                                                                                    if (!empty($project['id'])) {
-                                                                                                                                        echo $project['id'];
-                                                                                                                                    }
-                                                                                                                                    ?>">
+if (!empty($project['id'])) {
+    echo $project['id'];
+}
+?>">
                                                                                                                             <div class='form-group'>
                                                                                                                                 <label for='inputText'>Title</label><span style="color:red">*</span>
                                                                                                                                 <input class='form-control'   type='text' name='notes_name' id="notes_title">
@@ -455,8 +460,8 @@
 
                                                                                                                         </div>
                                                                                                                     </form>    
-                                                                                 
-                                                                                                                     <!-- bootstrap container for notes information -->
+
+                                                                                                                    <!-- bootstrap container for notes information -->
                                                                                                                     <div id="my_notes_description" class="modal fade" role="dialog">
                                                                                                                         <div class="modal-dialog">
                                                                                                                             <!-- Modal content-->
@@ -485,9 +490,10 @@
                                                                                                                         <div class="col-md-6">
                                                                                                                             <ul id="external_links" class="tab-ul">
 
-                                                                                                                                <?php foreach ($external_link as $u_key) { ?>
-                                                                                                                                    
-                                                                                                                                    <li style="list-style:none"><a href="javascript::void(0)" class="external_link_data" data-desc="<?php echo $u_key->description; ?>" ><?php echo $u_key->name; ?></a><span style="margin-left: 60px;"><?php $date = new DateTime($u_key->created_date); echo $date->format('d F Y'); ?></span></li>
+<?php foreach ($external_link as $u_key) { ?>
+
+                                                                                                                                    <li style="list-style:none"><a href="javascript::void(0)" class="external_link_data" data-desc="<?php echo $u_key->description; ?>" ><?php echo $u_key->name; ?></a><span style="margin-left: 60px;"><?php $date = new DateTime($u_key->created_date);
+    echo $date->format('d F Y'); ?></span></li>
 
 <?php } ?> 
 
@@ -509,11 +515,11 @@
                                                                                                                     <form class="form" style="margin-bottom: 0;" method="post" action="#" accept-charset="UTF-8" id="project_external_form" >  
                                                                                                                         <div class='' style='margin-bottom: 0;display:none' id="expand_external_form">
                                                                                                                             <input  type='hidden' name='hdn_project_id' id="hdn_project_id" class="hdn_project_id" value="<?php
-                                                                                                                                    if (!empty($project['id'])) {
-                                                                                                                                        echo $project['id'];
-                                                                                                                                    }
-                                                                                                                                    ?>">
-                                                                                                                             <div class='form-group'>
+if (!empty($project['id'])) {
+    echo $project['id'];
+}
+?>">
+                                                                                                                            <div class='form-group'>
                                                                                                                                 <label for='inputText'>Title</label><span style="color:red">*</span>
                                                                                                                                 <input class='form-control' placeholder='Title' type='text' name='external_com' id="external_com">
                                                                                                                                 <span style="color:red" id="link_err_msg"></span>
@@ -528,27 +534,27 @@
 
                                                                                                                         </div>
                                                                                                                     </form>    
-                                                                                                                    
-                                                                                                                     <!-- bootstrap container for external notes information -->
-                                                                                                                        <div id="my_external_description" class="modal fade" role="dialog">
-                                                                                                                            <div class="modal-dialog">
-                                                                                                                                <!-- Modal content-->
-                                                                                                                                <div class="modal-content">
-                                                                                                                                    <div class="modal-header">
-                                                                                                                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                                                                                                                        <h4 class="modal-title">External Com</h4>
-                                                                                                                                    </div>
-                                                                                                                                    <div class="modal-body" id="external_desc">
 
-                                                                                                                                    </div>
-                                                                                                                                    <div class="modal-footer">
-                                                                                                                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                                                                                                                    </div>
+                                                                                                                    <!-- bootstrap container for external notes information -->
+                                                                                                                    <div id="my_external_description" class="modal fade" role="dialog">
+                                                                                                                        <div class="modal-dialog">
+                                                                                                                            <!-- Modal content-->
+                                                                                                                            <div class="modal-content">
+                                                                                                                                <div class="modal-header">
+                                                                                                                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                                                                                                    <h4 class="modal-title">External Com</h4>
                                                                                                                                 </div>
+                                                                                                                                <div class="modal-body" id="external_desc">
 
+                                                                                                                                </div>
+                                                                                                                                <div class="modal-footer">
+                                                                                                                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                                                                                                </div>
                                                                                                                             </div>
+
                                                                                                                         </div>
-                                                                                                                        <!-- bootstrap container for notes information ends -->
+                                                                                                                    </div>
+                                                                                                                    <!-- bootstrap container for notes information ends -->
 
                                                                                                                 </div>
 
@@ -568,392 +574,392 @@
                                                                                                             </div>
                                                                                                             </div>
                                                                                                             </div>
-<div class="modal fade" id="confirm_archieve" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-            
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 class="modal-title" id="myModalLabel">Confirm Delete</h4>
-                </div>
-            
-                <div class="modal-body">
-                    <p>Do you want to archieve this project !</p>
-            
-                    <p class="debug-url"></p>
-                </div>
-                
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-danger btn-ok" id="btnArchive">Archive</a>
-                </div>
-            </div>
-        </div>
-    </div>
+                                                                                                            <div class="modal fade" id="confirm_archieve" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                                                                                                <div class="modal-dialog">
+                                                                                                                    <div class="modal-content">
 
+                                                                                                                        <div class="modal-header">
+                                                                                                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                                                                                                            <h4 class="modal-title" id="myModalLabel">Confirm Delete</h4>
+                                                                                                                        </div>
 
+                                                                                                                        <div class="modal-body">
+                                                                                                                            <p>Do you want to archieve this project !</p>
 
+                                                                                                                            <p class="debug-url"></p>
+                                                                                                                        </div>
 
+                                                                                                                        <div class="modal-footer">
+                                                                                                                            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                                                                                                                            <a class="btn btn-danger btn-ok" id="btnArchive">Archive</a>
+                                                                                                                        </div>
+                                                                                                                    </div>
+                                                                                                                </div>
+                                                                                                            </div>
 
 
 
 
 
-<script>
-    
-     $(document).ready(function() { 
 
-      disableForm('project_add_form');
 
-    });
-    
-    
-    
-    function disableForm(formID){
-        
-       
-        $('#' + formID).children(':input').attr('disabled', 'disabled');
-    }
- 
 
-    $(document).on("click", "#btn_finish_send", function() {
 
-        submitForm();
-    });
-    $(document).on("click", "#upload_form_data", function() {
+                                                                                                            <script>
 
-        uploadForm();
-    });
-    $(document).on("click", "#notes_form_data", function() {
+                                                                                                                $(document).ready(function () {
 
-        noteForm();
-    });
+                                                                                                                    disableForm('project_add_form');
 
-    $(document).on("click", "#external_form_data", function() {
+                                                                                                                });
 
-        externalForm();
-    });
 
-    $(document).on("click", "#expand_notes", function() {
 
-        $('#expand_notes_form').show();
-        $('#notes_div_form').hide();
-
-    });
-    $(document).on("click", "#expand_external_links", function() {
-
-        $('#expand_external_form').show();
-        $('#external_link_div').hide();
+                                                                                                                function disableForm(formID) {
 
-    });
-    $(document).on("click", "#cancel_external_form", function() {
 
-        $("#expand_external_form").css("display", "none");
-        $('#external_link_div').show();
-    });
-    $(document).on("click", "#cancel_notes_form", function() {
-
-        $('#expand_notes_form').hide();
-        $('#notes_div_form').show();
-    });
-
-     $(document).on('click', '.notes_link', function() {
-
-            var data = $(this).attr("data-desc");
-            $('#notes_desc').text(data);
-            $('#my_notes_description').modal('show');
-       });
-       $(document).on('click', '.external_link_data', function() {
-
-            var data = $(this).attr("data-desc");
-            $('#external_desc').text(data);
-            $('#my_external_description').modal('show');
-        });
-        $(document).on('click', '#archive_projects', function() {
-
-            var id = $(this).attr("data-archieve");
-            archieveProject(id);
-
-        });
-
-    //deleting notes
-    $('#delete_my_notes').click(function() {
-
-        var cek_id = new Array();
-        $('.chk_notes:checked').each(function() {
-            cek_id.push($(this).val());// an array of selected values
-        });
-        if (cek_id.length == 0) {
-            alert("Please select atleast one checkbox");
-        } else {
-
-            if (confirm("Are you sure you want to delete this?")) {
-                $.ajax({
-                    url: '<?php echo base_url() . "project/delete_selected_notes"; ?>',
-                    type: 'post',
-                    data: {ids: cek_id},
-                    dataType: 'json',
-                    success: function(data) {
-
-                        if (data.status == 'success') {
-
-                            location.reload();
-                        }
-                    }
-                });
-            } else {
-                return false;
-            }
-
-        }
-    });
-
-
-
-    //deleting attachment
-    $('#delete_my_upload').click(function() {
-
-        var cek_id = new Array();
-        $('.chk_attachment:checked').each(function() {
-            cek_id.push($(this).val());// an array of selected values
-        });
-        if (cek_id.length == 0) {
-            alert("Please select atleast one checkbox");
-        } else {
-
-            if (confirm("Are you sure you want to delete this?")) {
-                $.ajax({
-                    url: '<?php echo base_url() . "project/delete_selected_attachemnt"; ?>',
-                    type: 'post',
-                    data: {ids: cek_id},
-                    dataType: 'json',
-                    success: function(data) {
-
-                        if (data.status == 'success') {
-
-                            location.reload();
-                        }
-                    }
-                });
-            } else {
-                return false;
-            }
-
-        }
-    });
-
-    //delete selected link
-    $('#delete_my_external_link').click(function() {
-
-        var cek_id = new Array();
-        $('.chk_external_link:checked').each(function() {
-            cek_id.push($(this).val());// an array of selected values
-        });
-        if (cek_id.length == 0) {
-            alert("Please select atleast one checkbox");
-        } else {
-
-            if (confirm("Are you sure you want to delete this?")) {
-                $.ajax({
-                    url: '<?php echo base_url() . "project/delete_selected_link"; ?>',
-                    type: 'post',
-                    data: {ids: cek_id},
-                    dataType: 'json',
-                    success: function(data) {
-
-                        if (data.status == 'success') {
-
-                            location.reload();
-                        }
-                    }
-                });
-            } else {
-                return false;
-            }
-
-        }
-    });
-
-
-
-    function archieveProject(id){
-        var project_id=id; 
-        if (confirm("Are you sure you want to archieve this project?")) {
-            $.ajax({
-                url: '<?php echo site_url('project/project_archieve'); ?>',
-                type: 'post',
-                data: {id:project_id},
-                dataType: 'json', 
-                success: function(response) {
-                     if (response.status == 'success') {
-                         window.location.href = "<?php echo site_url('project/archieve_projects'); ?>";
-                    }
-                }
-            });
-         }else{
-            return false;
-         }   
-    }
-    
-    function externalForm() {
-
-        $('#link_err_msg').text('');
-        var external_link = $('#external_com').val();
-
-        if (external_link == '') {
-            $('#link_err_msg').text('please enter External link');
-            $("#external_com").focus();
-            return false;
-        }
-        var data = new FormData($("#project_external_form")[0]);
-        $('#response_msg').html('');
-        $.ajax({
-            url: '<?php echo site_url('project/project_add_links'); ?>',
-            processData: false,
-            type: 'post',
-            dataType: 'json',
-            data: data,
-            contentType: false,
-            success: function(response) {
-
-                if (response.status == 'success') {
-
-                    $('#myexternalModal').modal('hide');
-                    //$("#external_links").append($("<li style=list-style-type:none;>").text(response.link_name));
-                     $('#external_links').append('<li style=list-style-type:none;><input type=checkbox name=chk[] id="chk_attachment" class=chk_external_link value='+response.link_id+'><a data-desc="' + response.link_desc + '" class="external_link_data" id="' + response.link_id + '" href="javascript::void(0)">' + response.link_name + '</a><span style=margin-left:60px>'+response.dates1+'</span></li>');
-                    $('#project_external_form')[0].reset();
-                    $("#expand_external_form").css("display", "none");
-                    $('#external_link_div').show();
-                    //location.reload();
-
-                } else {
-
-                }
-            }
-        });
-
-        return false;
-    }
-    function noteForm() {
-
-        $('#notes_err_msg').text('');
-        var notes_title = $('#notes_title').val();
-
-
-        if (notes_title == '') {
-            $('#notes_err_msg').text('please enter notes title');
-            $("#notes_name").focus();
-            return false;
-        }
-
-        var data = new FormData($("#project_notes_form")[0]);
-        $('#response_msg').html('');
-        $.ajax({
-            url: '<?php echo site_url('project/project_add_notes'); ?>',
-            processData: false,
-            type: 'post',
-            dataType: 'json',
-            data: data,
-            contentType: false,
-            success: function(response) {
-
-                if (response.status == 'success') {
-                    $('#project_notes_form')[0].reset();
-                    $('#mynoteModal').modal('hide');
-                    //$("#notes").append($("<li style=list-style-type:none;>").text(response.notes_name));
-                    //$('#notes').append('<li style=list-style-type:none;></li>');
-                    $('#notes').append('<li style=list-style-type:none;><input type=checkbox name=chk[] id="chk_attachment" class=chk_notes value='+response.id+'><a data-desc="' + response.desc + '" class="notes_link" id="' + response.id + '" href="javascript::void(0)">' + response.notes_name + '</a><span style=margin-left:60px>'+response.dates1+'</span></li>');
-                   $("#expand_notes_form").css("display", "none");
-                   $("#notes_div_form").css("display", "block");
-
-
-                    //location.reload();
-
-                } else {
-
-                }
-            }
-        });
-
-        return false;
-    }
-    function uploadForm() {
-
-        $('#file_err_msg').text('');
-        var file = $('#file').val();
-        if (file == '') {
-            $('#file_err_msg').text('please upload some attachment');
-            $("#file").focus();
-            return false;
-        }
-        var data = new FormData($("#project_upload_form")[0]);
-        $('#response_msg').html('');
-        $.ajax({
-            url: '<?php echo site_url('project/project_upload_form'); ?>',
-            processData: false,
-            type: 'post',
-            dataType: 'json',
-            data: data,
-            contentType: false,
-            success: function(response) {
-
-                if (response.status == 'success') {
-
-                    $('#myuploadModal').modal('hide');
-                    $('#response_msg').append('<span style=color:green; id=msgs>' + response.msg + '</span>');
-                    //location.reload();
-
-                    $('#attachment').append('<li style=list-style-type:none;><input type=checkbox name=chk[] id="chk_attachment" class=chk_attachment value='+response.id+'><a target=_blank href=uploads/' + response.file_name + '>' + response.file_name + '</a></li>');
-                  
-                    //$("#attachment").append($("<input type=checkbox name=checkbox[] value='1'><li style=list-style-type:none;>").text(response.file_name));
-                } else {
-                    $('#response_msg').append('<span style=color:red; id=msgs>' + response.msg + '</span>');
-                }
-            }
-        });
-
-        return false;
-    }
-    function submitForm() {
-
-        var project_name = $('#name').val();
-        $('#response_msg').html('');
-        $('#type_err_msg').text('');
-        $('#name_err_msg').text('');
-        var project_type = $('#project_type_id').val();
-        if (project_name == '') {
-            $('#name_err_msg').text('please enter project name');
-            $("#name").focus();
-            return false;
-        }
-        if (project_type == '') {
-
-            $('#type_err_msg').text('please enter project type');
-            $("#project_type_id").focus();
-            return false;
-        }
-        var data = new FormData($("#project_add_form")[0]);
-        $.ajax({
-            url: '<?php echo site_url('project/add'); ?>',
-            processData: false,
-            type: 'post',
-            dataType: 'json',
-            data: data,
-            contentType: false,
-            success: function(response) {
-
-                if (response.status == 'success') {
-
-                    $('#response_msg').append('<span style=color:green; id=msgs>' + response.msg + '</span>');
-                } else {
-                    $('#response_msg').append('<span style=color:red; id=msgs>' + response.msg + '</span>');
-                }
-            }
-        });
-
-        return false;
-    }
-
-
-    //$("#slider-example1-amount").text("$" + $("#slider-example1").slider("value"));
-</script>	
+                                                                                                                    $('#' + formID).children(':input').attr('disabled', 'disabled');
+                                                                                                                }
+
+
+                                                                                                                $(document).on("click", "#btn_finish_send", function () {
+
+                                                                                                                    submitForm();
+                                                                                                                });
+                                                                                                                $(document).on("click", "#upload_form_data", function () {
+
+                                                                                                                    uploadForm();
+                                                                                                                });
+                                                                                                                $(document).on("click", "#notes_form_data", function () {
+
+                                                                                                                    noteForm();
+                                                                                                                });
+
+                                                                                                                $(document).on("click", "#external_form_data", function () {
+
+                                                                                                                    externalForm();
+                                                                                                                });
+
+                                                                                                                $(document).on("click", "#expand_notes", function () {
+
+                                                                                                                    $('#expand_notes_form').show();
+                                                                                                                    $('#notes_div_form').hide();
+
+                                                                                                                });
+                                                                                                                $(document).on("click", "#expand_external_links", function () {
+
+                                                                                                                    $('#expand_external_form').show();
+                                                                                                                    $('#external_link_div').hide();
+
+                                                                                                                });
+                                                                                                                $(document).on("click", "#cancel_external_form", function () {
+
+                                                                                                                    $("#expand_external_form").css("display", "none");
+                                                                                                                    $('#external_link_div').show();
+                                                                                                                });
+                                                                                                                $(document).on("click", "#cancel_notes_form", function () {
+
+                                                                                                                    $('#expand_notes_form').hide();
+                                                                                                                    $('#notes_div_form').show();
+                                                                                                                });
+
+                                                                                                                $(document).on('click', '.notes_link', function () {
+
+                                                                                                                    var data = $(this).attr("data-desc");
+                                                                                                                    $('#notes_desc').text(data);
+                                                                                                                    $('#my_notes_description').modal('show');
+                                                                                                                });
+                                                                                                                $(document).on('click', '.external_link_data', function () {
+
+                                                                                                                    var data = $(this).attr("data-desc");
+                                                                                                                    $('#external_desc').text(data);
+                                                                                                                    $('#my_external_description').modal('show');
+                                                                                                                });
+                                                                                                                $(document).on('click', '#archive_projects', function () {
+
+                                                                                                                    var id = $(this).attr("data-archieve");
+                                                                                                                    archieveProject(id);
+
+                                                                                                                });
+
+                                                                                                                //deleting notes
+                                                                                                                $('#delete_my_notes').click(function () {
+
+                                                                                                                    var cek_id = new Array();
+                                                                                                                    $('.chk_notes:checked').each(function () {
+                                                                                                                        cek_id.push($(this).val());// an array of selected values
+                                                                                                                    });
+                                                                                                                    if (cek_id.length == 0) {
+                                                                                                                        alert("Please select atleast one checkbox");
+                                                                                                                    } else {
+
+                                                                                                                        if (confirm("Are you sure you want to delete this?")) {
+                                                                                                                            $.ajax({
+                                                                                                                                url: '<?php echo base_url() . "project/delete_selected_notes"; ?>',
+                                                                                                                                type: 'post',
+                                                                                                                                data: {ids: cek_id},
+                                                                                                                                dataType: 'json',
+                                                                                                                                success: function (data) {
+
+                                                                                                                                    if (data.status == 'success') {
+
+                                                                                                                                        location.reload();
+                                                                                                                                    }
+                                                                                                                                }
+                                                                                                                            });
+                                                                                                                        } else {
+                                                                                                                            return false;
+                                                                                                                        }
+
+                                                                                                                    }
+                                                                                                                });
+
+
+
+                                                                                                                //deleting attachment
+                                                                                                                $('#delete_my_upload').click(function () {
+
+                                                                                                                    var cek_id = new Array();
+                                                                                                                    $('.chk_attachment:checked').each(function () {
+                                                                                                                        cek_id.push($(this).val());// an array of selected values
+                                                                                                                    });
+                                                                                                                    if (cek_id.length == 0) {
+                                                                                                                        alert("Please select atleast one checkbox");
+                                                                                                                    } else {
+
+                                                                                                                        if (confirm("Are you sure you want to delete this?")) {
+                                                                                                                            $.ajax({
+                                                                                                                                url: '<?php echo base_url() . "project/delete_selected_attachemnt"; ?>',
+                                                                                                                                type: 'post',
+                                                                                                                                data: {ids: cek_id},
+                                                                                                                                dataType: 'json',
+                                                                                                                                success: function (data) {
+
+                                                                                                                                    if (data.status == 'success') {
+
+                                                                                                                                        location.reload();
+                                                                                                                                    }
+                                                                                                                                }
+                                                                                                                            });
+                                                                                                                        } else {
+                                                                                                                            return false;
+                                                                                                                        }
+
+                                                                                                                    }
+                                                                                                                });
+
+                                                                                                                //delete selected link
+                                                                                                                $('#delete_my_external_link').click(function () {
+
+                                                                                                                    var cek_id = new Array();
+                                                                                                                    $('.chk_external_link:checked').each(function () {
+                                                                                                                        cek_id.push($(this).val());// an array of selected values
+                                                                                                                    });
+                                                                                                                    if (cek_id.length == 0) {
+                                                                                                                        alert("Please select atleast one checkbox");
+                                                                                                                    } else {
+
+                                                                                                                        if (confirm("Are you sure you want to delete this?")) {
+                                                                                                                            $.ajax({
+                                                                                                                                url: '<?php echo base_url() . "project/delete_selected_link"; ?>',
+                                                                                                                                type: 'post',
+                                                                                                                                data: {ids: cek_id},
+                                                                                                                                dataType: 'json',
+                                                                                                                                success: function (data) {
+
+                                                                                                                                    if (data.status == 'success') {
+
+                                                                                                                                        location.reload();
+                                                                                                                                    }
+                                                                                                                                }
+                                                                                                                            });
+                                                                                                                        } else {
+                                                                                                                            return false;
+                                                                                                                        }
+
+                                                                                                                    }
+                                                                                                                });
+
+
+
+                                                                                                                function archieveProject(id) {
+                                                                                                                    var project_id = id;
+                                                                                                                    if (confirm("Are you sure you want to archieve this project?")) {
+                                                                                                                        $.ajax({
+                                                                                                                            url: '<?php echo site_url('project/project_archieve'); ?>',
+                                                                                                                            type: 'post',
+                                                                                                                            data: {id: project_id},
+                                                                                                                            dataType: 'json',
+                                                                                                                            success: function (response) {
+                                                                                                                                if (response.status == 'success') {
+                                                                                                                                    window.location.href = "<?php echo site_url('project/archieve_projects'); ?>";
+                                                                                                                                }
+                                                                                                                            }
+                                                                                                                        });
+                                                                                                                    } else {
+                                                                                                                        return false;
+                                                                                                                    }
+                                                                                                                }
+
+                                                                                                                function externalForm() {
+
+                                                                                                                    $('#link_err_msg').text('');
+                                                                                                                    var external_link = $('#external_com').val();
+
+                                                                                                                    if (external_link == '') {
+                                                                                                                        $('#link_err_msg').text('please enter External link');
+                                                                                                                        $("#external_com").focus();
+                                                                                                                        return false;
+                                                                                                                    }
+                                                                                                                    var data = new FormData($("#project_external_form")[0]);
+                                                                                                                    $('#response_msg').html('');
+                                                                                                                    $.ajax({
+                                                                                                                        url: '<?php echo site_url('project/project_add_links'); ?>',
+                                                                                                                        processData: false,
+                                                                                                                        type: 'post',
+                                                                                                                        dataType: 'json',
+                                                                                                                        data: data,
+                                                                                                                        contentType: false,
+                                                                                                                        success: function (response) {
+
+                                                                                                                            if (response.status == 'success') {
+
+                                                                                                                                $('#myexternalModal').modal('hide');
+                                                                                                                                //$("#external_links").append($("<li style=list-style-type:none;>").text(response.link_name));
+                                                                                                                                $('#external_links').append('<li style=list-style-type:none;><input type=checkbox name=chk[] id="chk_attachment" class=chk_external_link value=' + response.link_id + '><a data-desc="' + response.link_desc + '" class="external_link_data" id="' + response.link_id + '" href="javascript::void(0)">' + response.link_name + '</a><span style=margin-left:60px>' + response.dates1 + '</span></li>');
+                                                                                                                                $('#project_external_form')[0].reset();
+                                                                                                                                $("#expand_external_form").css("display", "none");
+                                                                                                                                $('#external_link_div').show();
+                                                                                                                                //location.reload();
+
+                                                                                                                            } else {
+
+                                                                                                                            }
+                                                                                                                        }
+                                                                                                                    });
+
+                                                                                                                    return false;
+                                                                                                                }
+                                                                                                                function noteForm() {
+
+                                                                                                                    $('#notes_err_msg').text('');
+                                                                                                                    var notes_title = $('#notes_title').val();
+
+
+                                                                                                                    if (notes_title == '') {
+                                                                                                                        $('#notes_err_msg').text('please enter notes title');
+                                                                                                                        $("#notes_name").focus();
+                                                                                                                        return false;
+                                                                                                                    }
+
+                                                                                                                    var data = new FormData($("#project_notes_form")[0]);
+                                                                                                                    $('#response_msg').html('');
+                                                                                                                    $.ajax({
+                                                                                                                        url: '<?php echo site_url('project/project_add_notes'); ?>',
+                                                                                                                        processData: false,
+                                                                                                                        type: 'post',
+                                                                                                                        dataType: 'json',
+                                                                                                                        data: data,
+                                                                                                                        contentType: false,
+                                                                                                                        success: function (response) {
+
+                                                                                                                            if (response.status == 'success') {
+                                                                                                                                $('#project_notes_form')[0].reset();
+                                                                                                                                $('#mynoteModal').modal('hide');
+                                                                                                                                //$("#notes").append($("<li style=list-style-type:none;>").text(response.notes_name));
+                                                                                                                                //$('#notes').append('<li style=list-style-type:none;></li>');
+                                                                                                                                $('#notes').append('<li style=list-style-type:none;><input type=checkbox name=chk[] id="chk_attachment" class=chk_notes value=' + response.id + '><a data-desc="' + response.desc + '" class="notes_link" id="' + response.id + '" href="javascript::void(0)">' + response.notes_name + '</a><span style=margin-left:60px>' + response.dates1 + '</span></li>');
+                                                                                                                                $("#expand_notes_form").css("display", "none");
+                                                                                                                                $("#notes_div_form").css("display", "block");
+
+
+                                                                                                                                //location.reload();
+
+                                                                                                                            } else {
+
+                                                                                                                            }
+                                                                                                                        }
+                                                                                                                    });
+
+                                                                                                                    return false;
+                                                                                                                }
+                                                                                                                function uploadForm() {
+
+                                                                                                                    $('#file_err_msg').text('');
+                                                                                                                    var file = $('#file').val();
+                                                                                                                    if (file == '') {
+                                                                                                                        $('#file_err_msg').text('please upload some attachment');
+                                                                                                                        $("#file").focus();
+                                                                                                                        return false;
+                                                                                                                    }
+                                                                                                                    var data = new FormData($("#project_upload_form")[0]);
+                                                                                                                    $('#response_msg').html('');
+                                                                                                                    $.ajax({
+                                                                                                                        url: '<?php echo site_url('project/project_upload_form'); ?>',
+                                                                                                                        processData: false,
+                                                                                                                        type: 'post',
+                                                                                                                        dataType: 'json',
+                                                                                                                        data: data,
+                                                                                                                        contentType: false,
+                                                                                                                        success: function (response) {
+
+                                                                                                                            if (response.status == 'success') {
+
+                                                                                                                                $('#myuploadModal').modal('hide');
+                                                                                                                                $('#response_msg').append('<span style=color:green; id=msgs>' + response.msg + '</span>');
+                                                                                                                                //location.reload();
+
+                                                                                                                                $('#attachment').append('<li style=list-style-type:none;><input type=checkbox name=chk[] id="chk_attachment" class=chk_attachment value=' + response.id + '><a target=_blank href=uploads/' + response.file_name + '>' + response.file_name + '</a></li>');
+
+                                                                                                                                //$("#attachment").append($("<input type=checkbox name=checkbox[] value='1'><li style=list-style-type:none;>").text(response.file_name));
+                                                                                                                            } else {
+                                                                                                                                $('#response_msg').append('<span style=color:red; id=msgs>' + response.msg + '</span>');
+                                                                                                                            }
+                                                                                                                        }
+                                                                                                                    });
+
+                                                                                                                    return false;
+                                                                                                                }
+                                                                                                                function submitForm() {
+
+                                                                                                                    var project_name = $('#name').val();
+                                                                                                                    $('#response_msg').html('');
+                                                                                                                    $('#type_err_msg').text('');
+                                                                                                                    $('#name_err_msg').text('');
+                                                                                                                    var project_type = $('#project_type_id').val();
+                                                                                                                    if (project_name == '') {
+                                                                                                                        $('#name_err_msg').text('please enter project name');
+                                                                                                                        $("#name").focus();
+                                                                                                                        return false;
+                                                                                                                    }
+                                                                                                                    if (project_type == '') {
+
+                                                                                                                        $('#type_err_msg').text('please enter project type');
+                                                                                                                        $("#project_type_id").focus();
+                                                                                                                        return false;
+                                                                                                                    }
+                                                                                                                    var data = new FormData($("#project_add_form")[0]);
+                                                                                                                    $.ajax({
+                                                                                                                        url: '<?php echo site_url('project/add'); ?>',
+                                                                                                                        processData: false,
+                                                                                                                        type: 'post',
+                                                                                                                        dataType: 'json',
+                                                                                                                        data: data,
+                                                                                                                        contentType: false,
+                                                                                                                        success: function (response) {
+
+                                                                                                                            if (response.status == 'success') {
+
+                                                                                                                                $('#response_msg').append('<span style=color:green; id=msgs>' + response.msg + '</span>');
+                                                                                                                            } else {
+                                                                                                                                $('#response_msg').append('<span style=color:red; id=msgs>' + response.msg + '</span>');
+                                                                                                                            }
+                                                                                                                        }
+                                                                                                                    });
+
+                                                                                                                    return false;
+                                                                                                                }
+
+
+                                                                                                                //$("#slider-example1-amount").text("$" + $("#slider-example1").slider("value"));
+                                                                                                            </script>	
