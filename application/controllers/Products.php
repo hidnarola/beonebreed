@@ -560,7 +560,7 @@ class Products extends CI_Controller {
         public function delete($id = 0) {
 
         if ($this->products_model->delete_records($id, TRUE)) {
-            $this->session->set_flashdata('msg', 'Your project has been successfully deleted');
+            $this->session->set_flashdata('msg', 'Your product has been successfully deleted');
         } else {
 
             $this->session->set_flashdata('err_msg', 'Oops!Something Wrong!');
