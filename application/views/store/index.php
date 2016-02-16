@@ -5,7 +5,7 @@
 		  <div class='page-header'>
 			<h1 class='pull-left'>
 			  <i class='icon-retweet'></i>
-			  <span>STORES MONDOU</span>
+			  <span>STORES <?php echo $client['username'];?></span>
 			</h1>
 			<div class='pull-right'>
 			 
@@ -91,8 +91,9 @@
 						  <i class='icon-edit'></i>
 						  Edit
 						</a>
-						<a class='btn btn-danger btn-xs' href='<?php echo site_url('store/delete/'.$u_key->id.'/'.$client_id) ?>' onclick="if(!confirm('Are you sure want to delete')){return false;}">
-						  <i class='icon-remove'></i>Delete
+						<a class='btn btn-danger btn-xs' href='<?php echo site_url('store/delete/'.$u_key->id.'/'.$client_id) ?>' onClick='return doconfirm(this.href);'>
+						  <i class='icon-remove'></i>
+                                                  Delete
 						</a>
 					  </div>
 					</td>

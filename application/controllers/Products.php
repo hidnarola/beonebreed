@@ -556,7 +556,18 @@ class Products extends CI_Controller {
 
 		echo json_encode(array('res'=>$prod_array,'complete_bar_no'=>$complete_bar_no));
 	}	
+        
+        public function delete($id = 0) {
 
+        if ($this->products_model->delete_records($id, TRUE)) {
+            $this->session->set_flashdata('msg', 'Your project has been successfully deleted');
+        } else {
+
+            $this->session->set_flashdata('err_msg', 'Oops!Something Wrong!');
+        }
+        redirect('project');
+    }
+        
 	public function prod_part_1_delete(){
 		$id = $this->input->post('production_supplier');
 		$this->products_model->deletefrom('products_suppliers',$id);

@@ -62,8 +62,9 @@
 						  <i class='icon-edit'></i>
 						  Edit
 						</a>
-						<a class='btn btn-danger btn-xs' href='<?php echo site_url('client_user/delete/'.$u_key->id.'/'.$client_id) ?>' onclick="if(!confirm('Are you sure want to delete')){return false;}">
-						  <i class='icon-remove'></i>Delete
+						<a class='btn btn-danger btn-xs' href='<?php echo site_url('client_user/delete/'.$u_key->id.'/'.$client_id) ?>' onClick='return doconfirm(this.href);'>
+						  <i class='icon-remove'></i>
+                                                  Delete
 						</a>
 						 
 					  </div>

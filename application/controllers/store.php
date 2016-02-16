@@ -5,6 +5,7 @@
     $this->load->helper('url');
     $this->load->helper('form');
     $this->load->model('store_model');
+    $this->load->model('user_model');
     $this->load->database();
     //$this->load->library('pagination');
     $this->load->library('form_validation');
@@ -15,6 +16,7 @@
   }
   public function index($client_id=0) {
     $data['client_id']=$client_id;
+    $data['client'] = $this->user_model->get($client_id);
     $data['store_list'] = $this->store_model->get_all_store($client_id);
     $this->template->load('admin_default', 'store/index', $data);
   }

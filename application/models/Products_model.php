@@ -379,6 +379,24 @@ class Products_model extends CI_Model {
          $this->db->delete($table);
          return '1';
     }
+    
+    public function delete_records($id) {
+        $this->delete_records_by_product_id($id);
+        $this->db->where('id', $id);
+        return $this->db->delete('products_new');
+    }
+
+    public function delete_records_by_product_id($id) {
+        $tables = array('dimension', 'products_attachments', 'products_marketing_part_1', 'products_marketing_part_2', 'products_marketing_part_5', 'products_notes','products_sample','products_suppliers','product_question');
+        foreach ($tables as $table) {
+            $this->db->where('product_id',$id);
+            $q = $this->db->get($table); 
+            if ( $q->num_rows() > 0 )  {
+                $this->db->where('product_id', $id);
+                $this->db->delete($table);
+            }
+        }
+    }
 
     /**
 	 * This returns all products data

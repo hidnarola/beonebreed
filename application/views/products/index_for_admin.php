@@ -99,8 +99,16 @@
                                                 <td>
                                                     <div>
                                                         <a class='btn btn-primary btn-xs' href='<?php echo base_url() . "products/edit/$prod->p_id"; ?>'>
-                                                            <i class='icon-edit'></i>Edit
+                                                            <i class='icon-edit'></i>
+                                                            Edit
                                                         </a>
+                                                        <?php if ($this->session->userdata('user_type') == 1) { ?>
+                                                    <a class='btn btn-primary btn-xs btn-delete' href='<?php echo site_url('products/delete/' . $prod->p_id) ?>' onClick='return doconfirm(this.href);'>
+                                                        <i class='icon-remove'></i>
+                                                        Delete
+                                                    </a>
+                                                <?php }
+                                                ?>
                                                     </div>
                                                 </td>
                                             </tr>
