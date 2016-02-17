@@ -191,6 +191,87 @@ if ($controller == 'project' && ($actions == 'index' || $actions == 'archieve_pr
                     <i class='icon-reorder'></i>
                 </a> 
                 <ul class='nav'>
+                    <li class='dropdown medium only-icon widget hide'>
+                        <a class='dropdown-toggle' data-toggle='dropdown' href='#'>
+                            <i class='icon-rss'></i>
+                            <div class='label'>5</div>
+                        </a>
+                        <ul class='dropdown-menu'>
+                          <li>
+                            <a href='#'>
+                              <div class='widget-body'>
+                                <div class='pull-left icon'>
+                                  <i class='icon-user text-success'></i>
+                                </div>
+                                <div class='pull-left text'>
+                                  John Doe signed up
+                                  <small class='text-muted'>just now</small>
+                                </div>
+                              </div>
+                            </a>
+                          </li>
+                          <li class='divider'></li>
+                          <li>
+                            <a href='#'>
+                              <div class='widget-body'>
+                                <div class='pull-left icon'>
+                                  <i class='icon-inbox text-error'></i>
+                                </div>
+                                <div class='pull-left text'>
+                                  New Order #002
+                                  <small class='text-muted'>3 minutes ago</small>
+                                </div>
+                              </div>
+                            </a>
+                          </li>
+                          <li class='divider'></li>
+                          <li>
+                            <a href='#'>
+                              <div class='widget-body'>
+                                <div class='pull-left icon'>
+                                  <i class='icon-comment text-warning'></i>
+                                </div>
+                                <div class='pull-left text'>
+                                  America Leannon commented Flatty with veeery long text.
+                                  <small class='text-muted'>1 hour ago</small>
+                                </div>
+                              </div>
+                            </a>
+                          </li>
+                          <li class='divider'></li>
+                          <li>
+                            <a href='#'>
+                              <div class='widget-body'>
+                                <div class='pull-left icon'>
+                                  <i class='icon-user text-success'></i>
+                                </div>
+                                <div class='pull-left text'>
+                                  Jane Doe signed up
+                                  <small class='text-muted'>last week</small>
+                                </div>
+                              </div>
+                            </a>
+                          </li>
+                          <li class='divider'></li>
+                          <li>
+                            <a href='#'>
+                              <div class='widget-body'>
+                                <div class='pull-left icon'>
+                                  <i class='icon-inbox text-error'></i>
+                                </div>
+                                <div class='pull-left text'>
+                                  New Order #001
+                                  <small class='text-muted'>1 year ago</small>
+                                </div>
+                              </div>
+                            </a>
+                          </li>
+                          <li class='widget-footer'>
+                            <a href='#'>All notifications</a>
+                          </li>
+                        </ul>
+                    </li>
+
                     <li class='dropdown light only-icon'>
 
                         <ul class='dropdown-menu color-settings'>
@@ -1215,35 +1296,38 @@ if ($controller == 'product_brand') {
                     }
             });
             });
-                    $(document).ready(function () {
-            setTimeout(function () {
-            $('.alert').fadeOut('fast');
-            }, 3000);
-                    $(".js-example-data-array-selected").select2();
-                    setDataTable($(".for_action_dt"));
-                    this.setDataTable = function (selector) {
-                    if (jQuery().dataTable) {
-                    var dt, sdom;
-                            if ($(selector).data("pagination-top-bottom") === true) {
-                    sdom = "<'row datatables-top'<'col-sm-6'l><'col-sm-6 text-right'pf>r>t<'row datatables-bottom'<'col-sm-6'i><'col-sm-6 text-right'p>>";
-                    } else if ($(selector).data("pagination-top") === true) {
-                    sdom = "<'row datatables-top'<'col-sm-6'l><'col-sm-6 text-right'pf>r>t<'row datatables-bottom'<'col-sm-6'i><'col-sm-6 text-right'>>";
-                    } else {
-                    sdom = "<'row datatables-top'<'col-sm-6'l><'col-sm-6 text-right'f>r>t<'row datatables-bottom'<'col-sm-6'i><'col-sm-6 text-right'p>>";
-                    }
-                    dt = $(selector).DataTable({
-                    sDom: sdom,
-                            sPaginationType: "bootstrap",
-                            "iDisplayLength": $(selector).data("pagination-records") || 10,
-                            oLanguage: {
-                            sLengthMenu: "_MENU_ records per page"
-                            },
-                            dt.closest('.dataTables_wrapper').find('div[id$=_filter] input').css("width", "200px");
-                            return dt.closest('.dataTables_wrapper').find('input').addClass("form-control input-sm").attr('placeholder', 'Search');
-                    }
-                    };
-                    });
-                    });
+            
+            $(document).ready(function () {
+                setTimeout(function () {
+                $('.alert').fadeOut('fast');
+                }, 3000);
+
+            // $(".js-example-data-array-selected").select2();
+            
+            //     setDataTable($(".for_action_dt"));
+            //     this.setDataTable = function (selector) {
+            //     if (jQuery().dataTable) {
+            //         var dt, sdom;
+            //                 if ($(selector).data("pagination-top-bottom") === true) {
+            //         sdom = "<'row datatables-top'<'col-sm-6'l><'col-sm-6 text-right'pf>r>t<'row datatables-bottom'<'col-sm-6'i><'col-sm-6 text-right'p>>";
+            //         } else if ($(selector).data("pagination-top") === true) {
+            //         sdom = "<'row datatables-top'<'col-sm-6'l><'col-sm-6 text-right'pf>r>t<'row datatables-bottom'<'col-sm-6'i><'col-sm-6 text-right'>>";
+            //         } else {
+            //         sdom = "<'row datatables-top'<'col-sm-6'l><'col-sm-6 text-right'f>r>t<'row datatables-bottom'<'col-sm-6'i><'col-sm-6 text-right'p>>";
+            //         }
+            //         dt = $(selector).DataTable({
+            //         sDom: sdom,
+            //                 sPaginationType: "bootstrap",
+            //                 "iDisplayLength": $(selector).data("pagination-records") || 10,
+            //                 oLanguage: {
+            //                 sLengthMenu: "_MENU_ records per page"
+            //                 },
+            //                 dt.closest('.dataTables_wrapper').find('div[id$=_filter] input').css("width", "200px");
+            //                 return dt.closest('.dataTables_wrapper').find('input').addClass("form-control input-sm").attr('placeholder', 'Search');
+            //         }
+            //         };
+            //     });
+            });
                             /*        
                              $("#select2-tags").select2({  
                              tags: ["today", "tomorrow", "toyota"],

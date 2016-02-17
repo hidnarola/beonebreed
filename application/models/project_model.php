@@ -330,7 +330,8 @@ class Project_model extends CI_Model {
     }
 
     public function delete_records_by_project_id($id) {
-        $tables = array('project_actionplan', 'project_attachments', 'project_external_notes', 'project_notes', 'project_suppliers', 'project_timesheet');
+        $tables = array('project_actionplan', 'project_attachments', 'project_external_notes', 'project_notes', 
+                        'project_suppliers', 'project_timesheet');
         foreach ($tables as $table) {
             $this->db->where('project_id',$id);
             $q = $this->db->get($table); 

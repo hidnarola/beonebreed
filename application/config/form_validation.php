@@ -1,6 +1,7 @@
 <?php
 
 $config = array(
+
     'project' => array(
         array(
             'field' => 'name',
@@ -64,6 +65,7 @@ $config = array(
             'rules' => 'required'
         ),
     ),
+
     'category' => array(
         array(
             'field' => 'name',
@@ -71,6 +73,7 @@ $config = array(
             'rules' => 'required'
         ),
     ),
+
     'action_plan' => array(
         array(
             'field' => 'action',
@@ -84,10 +87,16 @@ $config = array(
         ),
         array(
             'field' => 'target_date',
-            'label' => 'target_date',
+            'label' => 'Target Date',
             'rules' => 'required'
         ),
+        array(
+            'field'=>'resposible',
+            'label'=>'Responsible',
+            'rules'=>'trim'
+        )
     ),
+
     'type' => array(
         array(
             'field' => 'type',
@@ -95,6 +104,7 @@ $config = array(
             'rules' => 'required'
         ),
     ),
+
     'timesheet' => array(
         array(
             'field' => 'dates',
@@ -112,6 +122,7 @@ $config = array(
             'rules' => 'required'
         ),
     ),
+
     'login' => array(
         array(
             'field' => 'email',
@@ -124,6 +135,7 @@ $config = array(
             'rules' => 'password'
         ),
     ),
+
     'user' => array(
         array(
             'field' => 'username',
@@ -159,9 +171,9 @@ $config = array(
             'field' => 'language',
             'label' => 'language',
             'rules' => 'trim'
-        ),
-        
+        ),        
     ),
+
     'edit_user' => array(
         array(
             'field' => 'username',
@@ -174,6 +186,7 @@ $config = array(
             'rules' => 'required|valid_email'
         ),
     ),
+
     'store' => array(
         array(
             'field' => 'name',
@@ -201,6 +214,7 @@ $config = array(
             'rules' => 'trim'
         ),
     ),
+
     'news' => array(
         array(
             'field' => 'title',
@@ -218,6 +232,7 @@ $config = array(
             'rules' => 'trim'
         ),
     ),
+
     'edit_news' => array(
         array(
             'field' => 'client_visibility',
@@ -225,6 +240,7 @@ $config = array(
             'rules' => 'required'
         ),
     ),
+
     'quality' => array(
         array(
             'field' => 'name',
@@ -277,6 +293,7 @@ $config = array(
             'rules' => 'trim'
         ),
     ),
+
     'suggestion' => array(
         array(
             'field' => 'name',
@@ -314,6 +331,7 @@ $config = array(
             'rules' => 'trim'
         ),
     ),
+
     'edit_suggestion' => array(
         array(
             'field' => 'status',
@@ -321,6 +339,7 @@ $config = array(
             'rules' => 'required'
         ),
     ),
+
     'client_user' => array(
         array(
             'field' => 'username',
@@ -348,6 +367,7 @@ $config = array(
             'rules' => 'required'
         ),
     ),
+
     'edit_client_user' => array(
         array(
             'field' => 'username',
@@ -365,12 +385,14 @@ $config = array(
             'rules' => 'required'
         ),
     ),
+
     'admin_quality' => array(
         array(
             'field' => 'status',
             'label' => 'status',
             'rules' => 'required'
         ),
-    ),
+    )
+
 );
 ?>

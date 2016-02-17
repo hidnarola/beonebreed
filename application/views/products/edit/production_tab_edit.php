@@ -502,7 +502,7 @@
                                     ?>    
                                     <li style=list-style-type:none;>
                                         <input type='checkbox' name='chk[]' id='chk_production_attachment' class='chk_notes' value="<?php echo $atch['id'];?>">
-                                            <a  class='no_preview'  href="uploads/products/<?php echo $atch['attachment']; ?>">
+                                            <a  class='fancybox'  href="uploads/products/<?php echo $atch['attachment']; ?>">
                                                 <?php echo $atch['attachment']; ?>
                                             </a>
                                     </li>

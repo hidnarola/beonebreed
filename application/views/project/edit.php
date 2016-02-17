@@ -81,7 +81,7 @@ if (!empty($project['id'])) {
                         $disabled = 'disabled';
                     } else {
                         $disabled = '';
-                    };
+                    }
                     ?>
                     <form class="form" style="margin-bottom: 0;" method="post" action="" accept-charset="UTF-8">   
                         <div style="display:inline-block;float:left;width:45%" class='box-content'>
@@ -190,7 +190,7 @@ if (!empty($project['id'])) {
                                                         </div>
                                                         <div class='form-group'>
                                                             <label for='inputText'>Project manager</label>
-                                                            <select class="form-control" name="project_manager" <?php echo $disabled; ?>>
+                                                            <select class="form-control" name="project_manager" <?php echo $disabled; ?> >
                                                                 <option value="">Select Project Manager</option>
                                                                 <?php
                                                                 if (!empty($project_manager)) {
@@ -241,7 +241,10 @@ if (!empty($project['id'])) {
                                                                             $pid = '';
                                                                         }
                                                                         ?>
-                                                                        <a href="<?php echo site_url('project/add_action_plan/' . $pid) ?>" class="btn btn-primary pull-right">Add Action Plan</a>     
+                                                                        <a href="<?php echo site_url('project/add_action_plan/' . $pid) ?>" class="btn btn-primary pull-right">
+                                                                            <i class="icon-plus"></i>
+                                                                            Add Action Plan
+                                                                        </a>     
                                                                     </div>
                                                                     <h4 class='title pull-left'>Action Plan</h4>
                                                                     <div class="clearfix"></div>
@@ -249,7 +252,7 @@ if (!empty($project['id'])) {
                                                                 <div class='box-content box-no-padding'>
                                                                     <div class='responsive-table'>
                                                                         <div class='scrollable-area'>
-                                                                            <table id="actsort" class='for_action_dt table table-bordered table-striped' style='margin-bottom:0;'>
+                                                                            <table id="actsort" class='table table-bordered table-striped' style='margin-bottom:0;'>
                                                                                 <thead>
                                                                                     <tr>
                                                                                         <th>
@@ -323,7 +326,10 @@ if (!empty($project['id'])) {
                                                             <div class='row' style='margin-bottom:0;'>
                                                                 <div class='box-gray'>
                                                                     <div class="pull-right">
-                                                                        <a href="<?php echo site_url('project/add_timesheet/' . $pid) ?>" class="btn btn-primary pull-right">Add Daily Sheet</a>     
+                                                                        <a href="<?php echo site_url('project/add_timesheet/' . $pid) ?>" class="btn btn-primary pull-right">
+                                                                            <i class="icon-plus"></i>
+                                                                            Add Daily Sheet
+                                                                        </a>     
                                                                     </div>
                                                                     <h4 class='title pull-left'>Daily sheet</h4>
                                                                     <div class="clearfix"></div>
@@ -398,7 +404,9 @@ if (!empty($project['id'])) {
                                                             <div class='row' style='margin-bottom:0;'>
                                                                 <div class='box-gray'>
                                                                     <div class="pull-right">
-                                                                        <a href="<?php echo site_url('project/add_supplier/' . $pid) ?>" class="btn btn-primary pull-right">Add Supplier
+                                                                        <a href="<?php echo site_url('project/add_supplier/' . $pid) ?>" class="btn btn-primary pull-right">
+                                                                            <i class="icon-plus"></i>
+                                                                            Add Supplier
                                                                         </a>     
                                                                     </div>
                                                                     <h4 class='title pull-left'>Suppliers</h4>
@@ -503,10 +511,12 @@ if (!empty($project['id'])) {
                                                                                 </div>
                                                                                 <div class='' style='margin-bottom: 0;'>
                                                                                     <button class='btn btn-success' type='button' data-target="#myuploadModal" data-toggle="modal">
-                                                                                        <i class='icon-save'></i>Add
+                                                                                        <i class='icon-save'></i>
+                                                                                        Add
                                                                                     </button>
                                                                                     <button class='btn btn-danger' type='button' id="delete_my_upload">
-                                                                                        <i class='icon-save'></i>Remove
+                                                                                        <i class='icon-remove'></i>
+                                                                                        Remove
                                                                                     </button>
                                                                                 </div> 
                                                                             </div>
@@ -581,7 +591,7 @@ if (!empty($project['id'])) {
                                                                                                                             Add
                                                                                                                         </button>
                                                                                                                         <button class='btn btn-danger' type='button' id="delete_my_upload_notes">
-                                                                                                                            <i class='icon-save'></i>
+                                                                                                                            <i class='icon-remove'></i>
                                                                                                                             Remove
                                                                                                                         </button>
                                                                                                                     </div>
@@ -654,7 +664,7 @@ if (!empty($project['id'])) {
                                                                                                                             Add
                                                                                                                         </button>
                                                                                                                         <button class='btn btn-danger' type='button' id="delete_my_external_link">
-                                                                                                                            <i class='icon-save'></i>
+                                                                                                                            <i class='icon-remove'></i>
                                                                                                                             Remove
                                                                                                                         </button>   
                                                                                                                     </div> 
@@ -752,9 +762,6 @@ if (!empty($project['id'])) {
                                                                                                                     overflow-x: visible !important; 
                                                                                                                 }
                                                                                                             </style>
-
-
-
 
 
 
@@ -951,7 +958,7 @@ if (!empty($project['id'])) {
                                                                                                                                 var diffDays = Math.round((end.getTime() - start.getTime()) / (oneDay));
                                                                                                                                 $('#estimated_days_edit').val(diffDays);
                                                                                                                             });
-                                                                                                                });
+                                                                                                                    });
                                                                                                                 function add_similar_project() {
                                                                                                                     var error_cnt = 0;
                                                                                                                     var old_project_id = $('#old_project_id').val();

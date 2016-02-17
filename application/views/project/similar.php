@@ -104,8 +104,9 @@
                                             <!-- Estimate Days -->
                                             <div class='form-group'>
                                                             <label for='inputText'>Estimate Days</label>
-                                                            <div class='estdate input-group' id='datepicker'>
-                                                            <input class='form-control ' name='estimated_days' data-format='yyyy-MM-dd' placeholder='Select datepicker' type='text' value="<?php
+                                                            <div class='estdate input-group estdate' id='datepicker'>
+                                                            <input class='form-control  ' name='estimated_days' id="estimated_days_edit" data-format='yyyy-MM-dd' 
+                                                                   placeholder='Select datepicker' type='text' value="<?php
                                                             if (!empty($project_data[0]['estimated_days'])) {
                                                                 echo $project_data[0]['estimated_days'];
                                                             }
@@ -119,7 +120,9 @@
                                             <!-- Project Manager  -->
                                             <div class='form-group'>
                                                 <label for='inputText'>Project manager</label>
-                                                    <select class="js-example-data-array-selected form-control" name="project_manager">
+                                                    <select class="js-example-data-array-selected form-control" 
+                                                            name="project_manager" onchange="$('.error_project_manager').addClass('hide');"
+                                                            id="project_manager">
                                                         <option value="">Select Project Manager</option>
                                                          <?php
                                                                 if (!empty($project_manager)) {
@@ -137,6 +140,7 @@
                                                                 }
                                                                 ?>  
                                                     </select>
+                                                    <span class="color_red error_project_manager hide">Field Is Required</span>
                                             </div>
 
 
@@ -161,7 +165,10 @@
                       <div class='row' style='margin-bottom:0;'>
                         <div class='box-gray'>
                           <div style="" class="pull-right">
-                            <a href="" id="similar_project_action_plan" onClick="return validation_action_plan()" class="btn btn-primary pull-right">Add Action Plan</a>     
+                            <a href="" id="similar_project_action_plan" onClick="return validation_action_plan()" class="btn btn-primary pull-right">
+                                <i class="icon-plus"></i>
+                                Add Action Plan
+                            </a>     
                           </div>
                           <h4 class='title pull-left'>Action Plan</h4>
                           <div class="clearfix"></div>
@@ -169,7 +176,7 @@
                         <div class='box-content box-no-padding'>
                             <div class='responsive-table'>
                                 <div class='scrollable-area'>
-                                    <table class='data-table table table-bordered table-striped' style='margin-bottom:0;'>
+                                    <table id="actsort" class='table table-bordered' style='margin-bottom:0;'>
                                         <thead>
                                             <tr>
                                                 <th>Action To Take</th>
@@ -187,24 +194,22 @@
                                                 <td><?php echo $action_plan->resposible; ?> </td>
                                                 <td><?php echo $action_plan->mertic_key; ?> </td>
                                                 <td>
-                                                  <div class="slider" id="<?php echo $action_plan->id; ?>" data-value="<?php echo $action_plan->complete_level; ?>"></div>
-                                                  <p class=""><span class="slider-value">
-                                                    <?php
-                                                       if(!empty($action_plan->complete_level)) {
-                                                            echo $action_plan->complete_level . " %";
-                                                        }
-                                                     ?></span>
-                                                  </p>
+                                                    <div class='task'>
+                                                        <small class='pull-right'><?php echo $action_plan->complete_level; ?>%</small>
+                                                    </div>
+                                                    <div class='progress'>
+                                                        <div class='progress-bar progress-bar-success' style='width:<?php echo $action_plan->complete_level; ?>%;'><?php echo $action_plan->complete_level; ?>%</div>
+                                                    </div>  
                                                 </td>
                                                 <td>
                                                     <?php
-                                                        $date = new DateTime($u_key->target_date);
+                                                        $date = new DateTime($action_plan->target_date);
                                                         echo $date->format('d F Y');
                                                     ?>
                                                 </td>
                                                 <td>
                                                   <div class='text-left'>
-                                                    <a class='btn btn-primary btn-xs' href='<?php echo site_url('project/edit_action_plan/' . $u_key->id) ?>'>
+                                                    <a class='btn btn-primary btn-xs' href='<?php echo site_url('project/edit_action_plan/' . $action_plan->id) ?>'>
                                                         <i class='icon-edit'></i>
                                                         Edit
                                                     </a>
@@ -231,7 +236,10 @@
                       <div class='row' style='margin-bottom:0;'>
                                                                 <div class='box-gray'>
                                                                     <div class="pull-right">
-                                                                        <a href="" id="similar_project_daily_sheet" onClick="return validation_action_plan()" class="btn btn-primary pull-right">Add Daily Sheet</a>     
+                                                                        <a href="" id="similar_project_daily_sheet" onClick="return validation_action_plan()" class="btn btn-primary pull-right">
+                                                                            <i class="icon-plus"></i>
+                                                                            Add Daily Sheet
+                                                                        </a>     
                                                                     </div>
                                                                     <h4 class='title pull-left'>Daily sheet</h4>
                                                                     <div class="clearfix"></div>
@@ -555,12 +563,29 @@
     
     
   $(document).ready(function() { 
+  
       $(".fancybox").fancybox({
           width  : 1200,
           height : 900,
           type   :'iframe'
       });
-    });
+
+      $('.estdate').datetimepicker({
+            autoclose: true,
+            pickTime: false,
+            startDate: new Date()})
+                .on('changeDate', function (ev) {
+                    var oneDay = 24 * 60 * 60 * 1000; // hours*minutes*seconds*milliseconds
+                    var start = new Date();
+                    var end = new Date(ev.date);
+                    if (!start || !end)
+                        return;
+                    var diffDays = Math.round((end.getTime() - start.getTime()) / (oneDay));
+                    $('#estimated_days_edit').val(diffDays);
+                });
+        });
+
+    
 
     $(document).on("click", "#btn_finish_send", function() {
 
@@ -668,48 +693,48 @@
 <script type="text/javascript">
 
     function add_similar_project(){
-      var error_cnt = 0;
-      var old_project_id = $('#old_project_id').val();
+        var error_cnt = 0;
+      
+        var old_project_id = $('#old_project_id').val();
+        var similar_project_quick_notes = $('#similar_project_quick_notes').val();
+        var similar_project_name = $('#similar_project_name').val();
+        var project_manager = $('#project_manager').val();
 
-      var similar_project_quick_notes = $('#similar_project_quick_notes').val();
-      var similar_project_name = $('#similar_project_name').val();
+        var form_data = $("#similar_project_form").serializeArray();
+        form_data.push({name:"old_project_id",value:old_project_id});
 
-      var form_data = $("#similar_project_form").serializeArray();
-      form_data.push({name:"old_project_id",value:old_project_id});
+        if(similar_project_name === ''){ $('.error_similar_project_name').removeClass('hide'); error_cnt++; }else{ $('.error_similar_project_name').addClass('hide'); }
+        if(project_manager === ''){ $('.error_project_manager').removeClass('hide'); error_cnt++; }else{ $('.error_project_manager').addClass('hide'); }
+        if(similar_project_quick_notes === ''){ $('.error_similar_project_quick_notes').removeClass('hide'); error_cnt++; }else{ $('.error_similar_project_quick_notes').addClass('hide'); }
 
-       if(similar_project_name === ''){ $('.error_similar_project_name').removeClass('hide'); error_cnt++; }else{ $('.error_similar_project_name').addClass('hide'); }
-       if(similar_project_quick_notes === ''){ $('.error_similar_project_quick_notes').removeClass('hide'); error_cnt++; }else{ $('.error_similar_project_quick_notes').addClass('hide'); }
+        if(error_cnt != '0'){
+            return false;
+        }else{
 
-      if(error_cnt != '0'){
-              return false;
-      }else{
-
-              $("#fakeLoader").attr('style',''); // Remove Style Attribute for reuse
-              $("#fakeLoader").fakeLoader({
-                  timeToHide:1200,
-                  bgColor:"#2ecc71",
-                  spinner:"spinner7"
-              }); // Fakeloader plugin
-        $.ajax({
-          url: '<?php echo base_url()."project/add_similar_project"; ?>',
-                   type: 'POST',
-                   dataType: 'json',
-                   data: form_data,
-                   success:function(data){
-                        if(data.status=="success"){
-                            $('#similar_project_h1').val(data.project_id);
-                            $('#similar_project_action_plan').attr('href',"<?php echo base_url().'project/add_action_plan/'; ?>"+data.project_id);
-                            $('#similar_project_daily_sheet').attr('href',"<?php echo base_url().'project/add_timesheet/'; ?>"+data.project_id);
-                            //$('input[type="submit"]').attr('disabled','disabled');
-                            return false;
-                        }
-                        if(data.status=="unsuccess"){
-                          $('.error_similar_project_name_unique').removeClass('hide'); error_cnt++; }else{ $('.error_similar_project_name_unique').addClass('hide'); 
-                        }
-
-                   }
-                });
-      }
+            $("#fakeLoader").attr('style',''); // Remove Style Attribute for reuse
+            $("#fakeLoader").fakeLoader({
+                timeToHide:1200,
+                bgColor:"#2ecc71",
+                spinner:"spinner7"
+            }); // Fakeloader plugin
+            $.ajax({
+                url: '<?php echo base_url()."project/add_similar_project"; ?>',
+                type: 'POST',
+                dataType: 'json',
+                data: form_data,
+                success:function(data){
+                    if(data.status=="success"){
+                        $('#similar_project_h1').val(data.project_id);
+                        $('#similar_project_action_plan').attr('href',"<?php echo base_url().'project/add_action_plan/'; ?>"+data.project_id);
+                        $('#similar_project_daily_sheet').attr('href',"<?php echo base_url().'project/add_timesheet/'; ?>"+data.project_id);
+                        return false;
+                    }
+                    if(data.status=="unsuccess"){
+                      $('.error_similar_project_name_unique').removeClass('hide'); error_cnt++; }else{ $('.error_similar_project_name_unique').addClass('hide'); 
+                    }
+                }
+            });
+        }
     }
 
     function validation_action_plan(){
@@ -912,6 +937,13 @@
             }
 
         }
+    });
+
+
+    $(document).ready(function () {
+        $('#actsort').dataTable({
+            "aaSorting": [[4, 'asc']],
+        });
     });
 </script>
 

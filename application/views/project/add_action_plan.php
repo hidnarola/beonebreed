@@ -42,28 +42,33 @@
                     <form class="form" style="margin-bottom: 0;" method="post" action="" accept-charset="UTF-8" enctype="multipart/form-data">
                         <div class='form-group'>
                             <label for='inputText'>Action</label><span style="color:red">*</span>
-                            <input class='form-control' id='inputText' placeholder='Action' type='text' name='action'>
+                            <input class='form-control' id='inputText' placeholder='Action' type='text' name='action' value="<?php echo set_value('action'); ?>">
                             <span style="color:red"><?php echo form_error('action'); ?></span>
                                     </div>
                                     <div class='form-group'>
-                                        <label for='inputText'>Resposible</label>
-                                        <input class='form-control' id='inputText' placeholder='Resposible' type='text' name='resposible'>
+                                        <label for='inputText'>Responsible</label>
+                                        <input class='form-control' id='inputText' placeholder='Responsible' 
+                                               type='text' name='resposible' value="<?php echo set_value('resposible'); ?>">
                                     </div>
 
                                     <div class='form-group'>
                                         <label for='inputText'>Metric Key</label>
-                                        <input class='form-control' id='inputText' placeholder='Metric Key' type='text' name='mertic_key'>
+                                        <input class='form-control' id='inputText' placeholder='Metric Key' 
+                                               type='text' name='mertic_key' value="<?php echo set_value('mertic_key'); ?>">
                                     </div>
 
                                     <div class='form-group'>
                                         <label for='inputText'>Complete Level</label><span style="color:red">*</span>
-                                        <input class='form-control' id='complete_level' placeholder='Complete Level' type='text' name='complete_level'>
+                                        <input class='form-control' id='complete_level' placeholder='Complete Level' 
+                                                type='text' name='complete_level' value="<?php echo set_value('complete_level'); ?>">
                                         <span id="complete_level_msg" style="color:red"><?php echo form_error('complete_level'); ?></span>
-                                                </div>
+                                    </div>
                                                 <div>
                                                     <label for='inputText'>Target Date</label><span style="color:red">*</span>
                                                     <div class='datetimepicker input-group form-group' id='target_datetimepicker'>
-                                                        <input class='form-control' data-format='yyyy-MM-dd hh:mm:ss'  placeholder='Select timepicker' type='text' name='target_date' id="datepicker_timesheet">
+                                                        <input class='form-control' data-format='yyyy-MM-dd hh:mm:ss'  
+                                                              placeholder='Select timepicker' type='text' name='target_date' id="datepicker_timesheet" 
+                                                              readonly value="<?php echo set_value('target_date'); ?>">
                                                         <span class='input-group-addon'>
                                                             <span data-date-icon='icon-calendar' data-time-icon='icon-time'></span>
                                                         </span>

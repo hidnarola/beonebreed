@@ -47,19 +47,22 @@
                                     <div style="display:inline-block;float:left;width:45%" class='box-content'>
                                         <div class='form-group'>
                                             <label for='inputText'>Username</label><span style="color:red">*</span>
-                                            <input class='form-control' id='inputText' placeholder='Username' type='text' name='username'>
+                                            <input class='form-control' id='inputText' placeholder='Username' 
+                                                   type='text' name='username' value="<?php echo set_value('username'); ?>">
                                             <span style="color:red"><?php echo form_error('username'); ?><span>
 
                                         </div>
                                         <div class='form-group'>
                                            <label for='inputText'>Total Time</label>
-                                           <input class='form-control' id='inputText' placeholder='Total time' type='text' name='total_time'>
+                                           <input class='form-control' id='inputText' placeholder='Total time' type='text' 
+                                                  name='total_time' value="<?php echo set_value('total_time'); ?>">
                                            <span style="color:red"><?php echo form_error('total_time'); ?><span>
                                         </div>
                                         <div>
                                              <label for='inputText'>Date</label><span style="color:red">*</span>
                                              <div class='datetimepicker input-group form-group' id='datetimepicker'>
-                                                     <input class='form-control' data-format='yyyy-MM-dd'  placeholder='Select timepicker' type='text' name='dates' id="datepicker_timesheet">
+                                                     <input class='form-control' data-format='yyyy-MM-dd'  placeholder='Select timepicker' 
+                                                            type='text' name='dates' id="datepicker_timesheet" value="<?php echo set_value('dates'); ?>">
                                                      <span class='input-group-addon'>
                                                              <span data-date-icon='icon-calendar' data-time-icon='icon-time'></span>
                                                      </span>
@@ -72,24 +75,20 @@
                                     <div style="display:inline-block;float:right;width:50%" class='box-content'>
                                          <div class="form-group">
                                             <label for="comment">Introduction of what has be done today</label>
-                                            <textarea class="form-control" rows="5" id="comment" name="today_introduction"></textarea>
+                                            <textarea class="form-control" rows="5" id="comment" name="today_introduction"><?php echo set_value('today_introduction'); ?></textarea>
                                         </div>
                                         
                                         <div class="form-group">
                                             <label for="comment">Research report of what has be done today</label>
-                                            <textarea class="form-control" rows="5" id="comment" name="today_research_report"></textarea>
+                                            <textarea class="form-control" rows="5" id="comment" 
+                                                      name="today_research_report"><?php echo set_value('total_research_report'); ?></textarea>
                                         </div>
                                     </div>
                                     <div class="clearfix"></div>
-                                	
                              <!-- end of add form -->	
                             </div>
                           <!--first part end -->
-                          
                           <!-- second part starts -->
-                          
-                          
-                          
                           <div class='step-content'>
                                 <hr class='hr-normal'>
                                 <!-- inserting add project form -->	
@@ -97,18 +96,17 @@
                                     <div style="display:inline-block;float:left;width:45%" class='box-content'>
                                         <div class='form-group'>
                                             <label for='inputText'>Username</label>
-                                            <input class='form-control' id='inputText' placeholder='Username' type='text' name='speciality_username'>
-                                            
+                                            <input class='form-control' id='inputText' placeholder='Username' 
+                                                   type='text' name='speciality_username' value="<?php echo set_value('speciality_username'); ?>">
                                         </div>
                                         <div>
-                                             <label for='inputText'>Date and Time</label>
-                                             <div class='datetimepicker input-group form-group' id='specialist_datetimepicker'>
-                                                     <input class='form-control' data-format='yyyy-MM-dd hh:mm:ss'  placeholder='Select timepicker' type='text' name='speciality_date' id="datepicker_timesheet">
-                                                     <span class='input-group-addon'>
-                                                             <span data-date-icon='icon-calendar' data-time-icon='icon-time'></span>
-                                                     </span>
-                                                    
-                                             </div>
+                                            <label for='inputText'>Date and Time</label>
+                                            <div class='datetimepicker input-group form-group' id='specialist_datetimepicker'>
+                                                 <input class='form-control' data-format='yyyy-MM-dd hh:mm:ss'  placeholder='Select timepicker' type='text' name='speciality_date' id="datepicker_timesheet">
+                                                 <span class='input-group-addon'>
+                                                         <span data-date-icon='icon-calendar' data-time-icon='icon-time'></span>
+                                                 </span>    
+                                            </div>
                                        </div>
                                         <div class='form-group'>
                                            <label for='inputText'>Speciality</label>
@@ -154,18 +152,17 @@
           
 </div>
 <script type="text/javascript">
-	
-	 $(document).ready(function() {
+
+	$(document).ready(function() {
                  
 		$('#datetimepicker').datetimepicker({
-                        pickTime: false,
-                        orientation: "auto top",                   
-                });
-                $('#specialist_datetimepicker').datetimepicker({
-                       
-                        orientation: "auto top",                   
-                });
-                
+                pickTime: false,
+                orientation: "auto top",                   
+        });
+        $('#specialist_datetimepicker').datetimepicker({
+               
+                orientation: "auto top",                   
+        });         
 	});
         
         

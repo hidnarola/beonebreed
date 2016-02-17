@@ -96,7 +96,10 @@
         <div class='box-header orange-background'>
             <div class='title'>IN PROGRESS</div>
             <div class='actions'>
-                <a href="<?php echo site_url('project/add') ?>" class="btn btn-primary pull-right">Add Project</a>     
+                <a href="<?php echo site_url('project/add') ?>" class="btn btn-primary pull-right">
+                    <i class="icon-plus"></i>
+                    Add Project
+                </a>     
                 <a class="btn box-collapse btn-xs btn-link" href="#">
                 </a>
             </div>

@@ -9,7 +9,10 @@ class Barcode extends CI_Controller {
 
 	public function index(){
 		
-		$data['barcodes'] = $this->barcode_model->get_all();
+		$data['barcodes'] = $this->barcode_model->get_all_join();
+		// qry();	
+		// p($data,true);
+		// die();
 		$this->template->load('admin_default', 'barcode/index',$data);
 	}
 
@@ -29,14 +32,14 @@ class Barcode extends CI_Controller {
 			}
 
 			if($data['barcode']['ean'] !== $ean){
-				$ean_rule = 'trim|required|exact_length[13]|is_unique[bar_code.ean]';
+				$ean_rule = 'trim|required|exact_length[12]|is_unique[bar_code.ean]';
 			}else{
-				$ean_rule = 'trim|required|exact_length[13]';
+				$ean_rule = 'trim|required|exact_length[12]';
 			}
 
 		}else{
 			$upc_rule = 'trim|required|exact_length[12]';
-			$ean_rule = 'trim|required|exact_length[13]';
+			$ean_rule = 'trim|required|exact_length[12]';
 		}
 
 		$this->form_validation->set_rules('upc', 'UPC', $upc_rule);
@@ -55,7 +58,6 @@ class Barcode extends CI_Controller {
 			$this->session->set_flashdata('success', 'Barcode has been Successfully Updated.');
 			redirect('barcode');
 		}
-
 	}
 
 	public function test(){
@@ -141,7 +143,6 @@ class Barcode extends CI_Controller {
 				$path = $_SERVER['DOCUMENT_ROOT'].'/uploads/barcode/'.$file_name;
 				$data = $this->csvimport->get_array($path, "", TRUE);
 
-				 
 				if(!empty($data)){
 					foreach($data as $d){	
 
@@ -155,20 +156,20 @@ class Barcode extends CI_Controller {
 						$fetch_ean = $this->barcode_model->get_all(array('ean'=>$ean));	
 
 						if(empty($fetch_upc) && empty($fetch_ean) && 
-						  !empty($upc) && !empty($ean) && strlen($upc) == 12 && strlen($ean) == 13){
+						  !empty($upc) && !empty($ean) && strlen($upc) == 12 && 
+						   strlen($ean) == 12){
 							
 							$data_barcode = array(
 												'upc'=>$upc,
 												'ean'=>$ean,
 												'description'=>$description
 											);
-							// $this->barcode_model->insert($data_barcode);									
+							$this->barcode_model->insert($data_barcode);									
 						}
-					}
+					}				
 				}
-
-				// $this->session->set_flashdata('success', 'Barcode has been imported successfully.');
-				// redirect('barcode');
+				$this->session->set_flashdata('success', 'Barcode has been imported successfully.');
+				redirect('barcode');
 			}
 		}
 		
@@ -230,13 +231,15 @@ class Barcode extends CI_Controller {
 			$cnt++;
 		}	
 
+		ob_clean();
+		ob_end_clean();
+
         $filename='barcode.xls'; //save our workbook as this file name	
 		header('Content-Type: application/vnd.ms-excel'); //mime type
         header('Content-Disposition: attachment;filename="' . $filename . '"'); //tell browser what's the file name
         header('Cache-Control: max-age=0'); //no cache
         $objWriter = PHPExcel_IOFactory::createWriter($this->excel, 'Excel5');
         $objWriter->save('php://output'); 
-
 	}
 
 

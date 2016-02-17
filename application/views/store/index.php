@@ -36,9 +36,9 @@
   <div class='col-sm-12 text-right'>
     <button class='btn btn-danger inline-block margin-b-10' type='button' data-target="#myuploadModal" data-toggle="modal">
       <i class='icon-save'></i>
-      IMP .CSV
+      IMPLODE
     </button>
-    <a href="<?php echo site_url('store/export_to_csv') ?>" class="btn btn-warning inline-block margin-b-10">EXP .CSV</a>
+    <a href="<?php echo site_url('store/export_to_csv') ?>" class="btn btn-warning inline-block margin-b-10">EXPLODE</a>
   </div>
   
  <div style="clear: both;"></div>

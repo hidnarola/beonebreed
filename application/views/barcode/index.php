@@ -10,23 +10,25 @@
                     </h1>
 
                     <div class='pull-right'>  
-                        <a href="<?php echo base_url() . 'barcode/import'; ?>" class="btn btn-success">Import UPC EAN Codes</a>
-                        <a href="<?php echo base_url() . 'barcode/export'; ?>" class="btn btn-info">Export</a>
+                        <a href="<?php echo base_url() . 'barcode/import'; ?>" class="btn btn-success">
+                            <i class="icon-mail-reply-all"></i>
+                            Import UPC EAN Codes
+                        </a>
+                        <a href="<?php echo base_url() . 'barcode/export'; ?>" class="btn btn-info">
+                            <i class="icon-circle-arrow-down"></i>
+                            Export
+                        </a>
                     </div>
                     <ul class='breadcrumb' style="padding-top: 62px;">
-                        <li class='separator'>
-                        </li>
-                        <li>
-                            <a href='<?php echo site_url('barcode/') ?>'>Products/Barcode</a>
-                        </li>
+                        <li class='separator'> </li>
+                        <li> <a href="<?php echo site_url('barcode/') ?>">Products/Barcode</a> </li>
                     </ul>
                 </div>
             </div>
         </div>
 
 
-        <?php echo myflash_message('success', 'success');
-        echo myflash_message('error'); ?>
+        <?php echo myflash_message('success', 'success'); echo myflash_message('error'); ?>
         <div class="clearfix">	</div>
         <br/>
         <div class='col-sm-12'>
@@ -41,7 +43,7 @@
                 <div class='box-content box-no-padding'>
                     <div class='responsive-table'>
                         <div class='scrollable-area'>
-                            <table class='data-table table table-bordered table-striped' style='margin-bottom:0;'>
+                            <table id="actsort" class='table table-bordered' style='margin-bottom:0;'>
                                 <thead>
                                     <tr>
                                         <th>
@@ -57,13 +59,13 @@
                                             DESCRIPTION
                                         </th>
                                         <th>
+                                            ASSIGN FOR
+                                        </th>
+                                        <th>
                                             CREATED DATE
                                         </th>
                                         <th>
-                                            MODIFIED DATE
-                                        </th>
-                                        <th>
-                                            Action
+                                            ACTION
                                         </th>
                                     </tr>
                                 </thead>
@@ -73,23 +75,23 @@
                                         foreach ($barcodes as $barcode) {
                                             ?>
                                             <tr>
-                                                <td><?php echo $barcode['id']; ?></td>
+                                                <td><?php echo $barcode['b_id']; ?></td>
                                                 <td><?php echo $barcode['upc']; ?></td>
                                                 <td><?php echo $barcode['ean']; ?></td>
-                                                <td><?php echo $barcode['description']; ?></td>
+                                                <td><?php echo character_limiter($barcode['b_desc'],5); ?></td>
+                                                <td> <?php echo ($barcode['p_name'] == '') ? '-' : $barcode['p_name']; ?> </td>
                                                 <td><?php echo $barcode['created_date']; ?></td>                        
-                                                <td><?php echo $barcode['modified_date']; ?></td>                        
                                                 <td>
                                                     <div class='text-left'>
-                                                        <a class='btn btn-primary btn-xs' href="<?php echo base_url() . 'barcode/edit/' . $barcode['id']; ?>">
+                                                        <a class='btn btn-primary btn-xs' href="<?php echo base_url() . 'barcode/edit/' . $barcode['b_id']; ?>">
                                                             <i class='icon-edit'></i>
                                                             Edit
                                                         </a>
                                                     </div>
                                                 </td>
                                             </tr>
-    <?php }
-} ?> 
+                                        <?php }
+                                    } ?> 
 
                                 </tbody>
                             </table>
@@ -103,8 +105,14 @@
 
     </div>
 </div>
+
 <script type="text/javascript">
-
-
+    
+    $(document).ready(function () {
+        $('#actsort').dataTable({
+            "aaSorting": [[4, 'desc']],
+        });
+    });    
 
 </script>
+ 

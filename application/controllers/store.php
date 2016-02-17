@@ -1,54 +1,59 @@
-<?php class Store extends CI_Controller {
-  public function __construct() {
-    parent::__construct();
-    $this->load->library('template');
-    $this->load->helper('url');
-    $this->load->helper('form');
-    $this->load->model('store_model');
-    $this->load->model('user_model');
-    $this->load->database();
-    //$this->load->library('pagination');
-    $this->load->library('form_validation');
-    $this->load->library('csvimport');
-    if ($this->session->userdata('admin_logged_in')=='') {
-      redirect('login');
-    }
-  }
-  public function index($client_id=0) {
-    $data['client_id']=$client_id;
-    $data['client'] = $this->user_model->get($client_id);
-    $data['store_list'] = $this->store_model->get_all_store($client_id);
-    $this->template->load('admin_default', 'store/index', $data);
-  }
-  public function add($client_id=0) {
+<?php 
+class Store extends CI_Controller {
+  
+    public function __construct() {
+        parent::__construct();
+        $this->load->library('template');
+        $this->load->helper('url');
+        $this->load->helper('form');
+        $this->load->model('store_model');
+        $this->load->model('user_model');
+        $this->load->database();
+        //$this->load->library('pagination');
+        $this->load->library('form_validation');
+        $this->load->library('csvimport');
+        
+        if ($this->session->userdata('admin_logged_in')=='') {
+          redirect('login');
+        }
 
-    if ($this->form_validation->run('store') == FALSE) { 
-      $data['client_id']=$client_id;
-      $this->template->load('admin_default', 'store/add',$data);
-    } else {
-      if (!empty($_POST)) {   
-        if(!empty($client_id)){
-          $id=$client_id;
-        }else{
-           $id=0;
-        }
-        $data = array(
-            'name' => $this->input->post('name'),
-            'address' => $this->input->post('address'),
-            'telephone' => $this->input->post('telephone'),
-            'contact' => $this->input->post('contact'),
-            'fax' => $this->input->post('fax'),
-            'client_id' =>$id,
-        );
-        if ($this->store_model->add_records($data, TRUE)) {
-          $this->session->set_flashdata('msg', 'Store has been successfully added');
-        } else {
-          $this->session->set_flashdata('err_msg', 'Oops!Something Wrong!');
-        }
-        redirect('store/index/'.$client_id);
       }
+    public function index($client_id=0) {
+        $data['client_id']=$client_id;
+        $data['client'] = $this->user_model->get($client_id);
+        $data['store_list'] = $this->store_model->get_all_store($client_id);
+        $this->template->load('admin_default', 'store/index', $data);
     }
-  }
+
+    public function add($client_id=0) {
+
+        if ($this->form_validation->run('store') == FALSE) { 
+            $data['client_id']=$client_id;
+            $this->template->load('admin_default', 'store/add',$data);
+        } else {
+            if (!empty($_POST)) {   
+                if(!empty($client_id)){
+                  $id=$client_id;
+                }else{
+                   $id=0;
+                }
+                $data = array(
+                    'name' => $this->input->post('name'),
+                    'address' => $this->input->post('address'),
+                    'telephone' => $this->input->post('telephone'),
+                    'contact' => $this->input->post('contact'),
+                    'fax' => $this->input->post('fax'),
+                    'client_id' =>$id,
+                );
+                if ($this->store_model->add_records($data, TRUE)) {
+                  $this->session->set_flashdata('msg', 'Store has been successfully added');
+                } else {
+                  $this->session->set_flashdata('err_msg', 'Oops!Something Wrong!');
+                }
+                redirect('store/index/'.$client_id);
+            }
+        }
+    }
 
   public function edit($id = 0,$client_id=0) {
     if ($this->form_validation->run('store') == FALSE) {

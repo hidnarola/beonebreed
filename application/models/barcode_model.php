@@ -4,10 +4,21 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Barcode_model extends CI_Model {
 
 	public function get_all($where=null){
+
+		if(!empty($where)){
+			$this->db->where($where);
+		}
+
+		return $this->db->get('bar_code')->result_array();
+	}
+
+	public function get_all_join($where=null){
 		
 		if(!empty($where)){
 			$this->db->where($where);
 		}
+		$this->db->select('bar_code.*,products_new.id as p_id,products_new.description as p_desc,products_new.product_name as p_name,bar_code.id as b_id,bar_code.description as b_desc');
+		$this->db->join('products_new', 'products_new.barcode_id = bar_code.id', 'left');
 
 		return $this->db->get('bar_code')->result_array();
 	}

@@ -44,7 +44,7 @@ class Project extends CI_Controller {
             $idea_project['image'] = $this->project_model->get_project_attachment_by_image($attachment->pid);
             $idea_projects[] = $idea_project;
         }
-    }
+        }
         $data['inprogress_projects'] = $inprogress_projects;
         $data['idea_projects'] = $idea_projects;
 
@@ -443,7 +443,7 @@ class Project extends CI_Controller {
         $data['notes'] = $this->project_model->get_project_notes($id);
         $data['external_link'] = $this->project_model->get_project_external_link($id);
         $data['suppliers'] = $this->products_model->getfrom('project_suppliers','project_suppliers.id as pid,project_suppliers.*,suppliers.*',array('where'=>array('project_suppliers.project_id'=>$id)),array('join'=>array( array('table'=>'suppliers','condition'=>'suppliers.id = project_suppliers.supplier_id') )));
-      
+
         
         if (!empty($data['project'])) {
             $this->template->load('admin_default', 'project/edit', $data);
@@ -606,6 +606,7 @@ class Project extends CI_Controller {
     public function similar($id) {
         $data['project_data'] = $this->project_model->get_all_projects_by_id($id);
         $data['project_action_plan'] = $this->project_model->get_all_actionplan_by_projects_id($id);
+        // p($data['project_action_plan'],true);
         $data['project_type'] = $this->project_model->get_all_types();
         $data['categories'] = $this->project_model->get_caregory();
         $data['project_manager'] = $this->project_model->get_project_manager();
