@@ -150,8 +150,7 @@ class Products_model extends CI_Model {
 
 	public function getfrom($table,$select = null, $where = null, $options = null){
 		
-		
-
+	
 		if(!empty($select)){
 			$this->db->select($select);
 		}

@@ -437,6 +437,10 @@
             contentType: false,
             success: function(response) {
 
+                // Clear the input type file from the form
+                document.getElementById("file").value = "";
+                $('.file-input-name').html('');
+
                 if (response.status == 'success') {
                     $('#myuploadModal').modal('hide');
                     $('#response_msg').append('<span style=color:green; id=msgs>' + response.msg + '</span>');

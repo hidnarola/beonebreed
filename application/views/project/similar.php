@@ -127,13 +127,13 @@
                                                          <?php
                                                                 if (!empty($project_manager)) {
                                                                     foreach ($project_manager as $k => $v) {
-                                                                        if ($project_data[0]['project_manager'] == $v->username) {
+                                                                        if ($project_data[0]['project_manager'] == $v->id) {
                                                                             ?>
-                                                                            <option value="<?php echo $v->username; ?>" selected><?php echo $v->username; ?></option>
+                                                                            <option value="<?php echo $v->id; ?>" selected><?php echo $v->username; ?></option>
 
                                                                         <?php } else { ?>
 
-                                                                            <option value="<?php echo $v->username; ?>"><?php echo $v->username; ?></option>
+                                                                            <option value="<?php echo $v->id; ?>"><?php echo $v->username; ?></option>
                                                                             <?php
                                                                         }
                                                                     }

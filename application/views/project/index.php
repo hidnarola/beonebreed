@@ -31,10 +31,10 @@
         endif;
         ?>  
     </div>
-
+    <br/>
 <?php } ?>  
 <div class="clearfix">	</div>
-<br/>
+
 <!--<div class="container">
     <?php
     if (!empty($inprogress_projects)) {
@@ -126,7 +126,7 @@
                                     Days
                                 </th>
                                 <th>
-                                    Last User
+                                    Project Manager
                                 </th>
                                 <th style="width:auto">
                                     Notes

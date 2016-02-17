@@ -61,7 +61,7 @@
                           </div>
                         </div>
                         <div class='box-content '>
-	                       	<div class='scrollable' data-scrollable-height='300' data-scrollable-start='bottom'>
+	                       	<div class='scrollable' data-scrollable-height='300' data-scrollable-start='top'>
 	                          <ul class='list-unstyled tasks'>
 	                          	<?php
 	                          		if(!empty($products)) {

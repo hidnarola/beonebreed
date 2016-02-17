@@ -445,6 +445,14 @@
 .processBar{ width:100%; display:block; vertical-align:top;  }
 .processBar p{ color:#000; font-size:14px; line-height:100%; padding:0 0 5px; margin:0;     }
 
+.contrast-banana .header-notification .dropdown-menu > .active > a, 
+.contrast-banana .header-notification .dropdown-menu > .active > a:hover, 
+.contrast-banana .header-notification .dropdown-menu > .active > a:focus, 
+.contrast-banana .header-notification .dropdown-menu > li > a:hover, 
+.contrast-banana .header-notification .dropdown-menu > li > a:focus, 
+.contrast-banana .header-notification .dropdown-submenu:hover > a, 
+.contrast-banana .header-notification .dropdown-submenu:focus > a { background-color: #ccc !important; color: #646469;}
+header .navbar .header-notification .widget .dropdown-menu > li > a:hover small { opacity: 1;}
 
 @media(max-width: 767px){
   .border-left::after {

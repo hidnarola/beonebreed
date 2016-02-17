@@ -95,11 +95,12 @@ if (!empty($project['id'])) {
                                 }
                                 ?>" <?php echo $disabled; ?>>
                                 <span style="color:red"><?php echo form_error('name'); ?><span>
+                                <?php echo $this->session->flashdata('unique_project','<span style="color:red">','</span>'); ?>
+
                                         </div>
                                         <div class='form-group'>
                                             <label for='inputText'>Project Category</label>
                                             <select class="form-control" name="category_id" <?php echo $disabled; ?>>
-                                                <option value="">Select Project Category</option>
                                                 <?php
                                                 if (!empty($categories)) {
                                                     foreach ($categories as $k => $v) {
@@ -120,7 +121,6 @@ if (!empty($project['id'])) {
                                         <div class='form-group'>
                                             <label for='inputText'>Priority</label>
                                             <select class="form-control" name="priority" >								
-                                                <option value="">Select Priority</option>	
                                                 <?php
                                                 for ($i = 1; $i <= 3; $i++) {
 
@@ -156,7 +156,6 @@ if (!empty($project['id'])) {
                                             <div class='form-group'>
                                                 <label for='inputText'>Project Type</label><span style="color:red">*</span>
                                                 <select class="form-control" name="project_type_id" <?php echo $disabled; ?>>
-                                                    <option value="">Select Project Type</option>
                                                     <?php
                                                     if (!empty($project_type)) {
                                                         foreach ($project_type as $k => $v) {
@@ -191,17 +190,16 @@ if (!empty($project['id'])) {
                                                         <div class='form-group'>
                                                             <label for='inputText'>Project manager</label>
                                                             <select class="form-control" name="project_manager" <?php echo $disabled; ?> >
-                                                                <option value="">Select Project Manager</option>
                                                                 <?php
                                                                 if (!empty($project_manager)) {
                                                                     foreach ($project_manager as $k => $v) {
-                                                                        if ($project['project_manager'] == $v->username) {
+                                                                        if ($project['project_manager'] == $v->id) {
                                                                             ?>
-                                                                            <option value="<?php echo $v->username; ?>" selected><?php echo $v->username; ?></option>
+                                                                            <option value="<?php echo $v->id; ?>" selected><?php echo $v->username; ?></option>
 
                                                                         <?php } else { ?>
 
-                                                                            <option value="<?php echo $v->username; ?>"><?php echo $v->username; ?></option>
+                                                                            <option value="<?php echo $v->id; ?>"><?php echo $v->username; ?></option>
                                                                             <?php
                                                                         }
                                                                     }

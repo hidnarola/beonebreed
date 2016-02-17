@@ -1,101 +1,108 @@
 <?php
-require_once( BASEPATH . 'database/DB.php' );
-$db = & DB();
-$db->where('user_type', '3');
-$db->where('is_deleted', '0');
-$query = $db->get('users');
-$result = $query->result();
+    
+    require_once( BASEPATH . 'database/DB.php' );
+    $db = & DB();
+    $db->where('user_type', '3');
+    $db->where('is_deleted', '0');
+    $query = $db->get('users');
+    $result = $query->result();
 
-$u_str = uri_string();
+    $u_str = uri_string();
 
-session_start();
+    session_start();
+    
+    // p($this->session->all_userdata());
 
-$controller = $this->router->fetch_class();
-$actions = $this->router->fetch_method();
+    $controller = $this->router->fetch_class();
+    $actions = $this->router->fetch_method();
 
-if ($controller == 'project' && ($actions == 'index' || $actions == 'archieve_projects')) {
+    $sess_user_type = $this->session->userdata('user_type');
+    $all_notifications = $this->products_model->getfrom('notifications',false,array('where'=>array('status'=>'1')),
+                        array('order_by'=>'created_date desc','limit'=>'5'));
 
-    $design = "display:block";
-    $setting = "display:none";
-    $sub_user_setting = "display:none";
-    $sub_setting = "display:none";
-    $store_setting = "display:none";
-    $news_setting = "display:none";
-    $quality_setting = "display:none";
-    $idea_setting = "display:none";
-} else if ($controller == 'category' || $controller == 'project_type') {
-    $setting = "display:block";
-    //$sub_setting="display:none";
-    $design = "display:none";
-    $sub_setting = "display:block";
-    $sub_user_setting = "display:none";
-    $store_setting = "display:none";
-    $news_setting = "display:none";
-    $quality_setting = "display:none";
-    $idea_setting = "display:none";
-} else if ($controller == 'user') {
-    $setting = "display:block";
-    $design = "display:none";
-    $sub_setting = "display:none";
-    $sub_user_setting = "display:block";
-    $store_setting = "display:none";
-    $news_setting = "display:none";
-    $quality_setting = "display:none";
-    $idea_setting = "display:none";
-    //$sub_setting="display:none";
-} else if ($controller == 'client' || $controller == 'product_brand') {
-    $setting = "display:block";
-    $design = "display:none";
-    $sub_setting = "display:none";
-    $sub_user_setting = "display:none";
-    $store_setting = "display:block";
-    $news_setting = "display:none";
-    $quality_setting = "display:none";
-    $idea_setting = "display:none";
-    //$sub_setting="display:none";
-} else if ($controller == 'news') {
+    if ($controller == 'project' && ($actions == 'index' || $actions == 'archieve_projects')) {
 
-    $setting = "display:none";
-    $design = "display:none";
-    $sub_setting = "display:none";
-    $sub_user_setting = "display:none";
-    $store_setting = "display:none";
-    $news_setting = "display:block";
-    $quality_setting = "display:none";
-    $idea_setting = "display:none";
+        $design = "display:block";
+        $setting = "display:none";
+        $sub_user_setting = "display:none";
+        $sub_setting = "display:none";
+        $store_setting = "display:none";
+        $news_setting = "display:none";
+        $quality_setting = "display:none";
+        $idea_setting = "display:none";
+    } else if ($controller == 'category' || $controller == 'project_type') {
+        $setting = "display:block";
+        //$sub_setting="display:none";
+        $design = "display:none";
+        $sub_setting = "display:block";
+        $sub_user_setting = "display:none";
+        $store_setting = "display:none";
+        $news_setting = "display:none";
+        $quality_setting = "display:none";
+        $idea_setting = "display:none";
+    } else if ($controller == 'user') {
+        $setting = "display:block";
+        $design = "display:none";
+        $sub_setting = "display:none";
+        $sub_user_setting = "display:block";
+        $store_setting = "display:none";
+        $news_setting = "display:none";
+        $quality_setting = "display:none";
+        $idea_setting = "display:none";
+        //$sub_setting="display:none";
+    } else if ($controller == 'client' || $controller == 'product_brand') {
+        $setting = "display:block";
+        $design = "display:none";
+        $sub_setting = "display:none";
+        $sub_user_setting = "display:none";
+        $store_setting = "display:block";
+        $news_setting = "display:none";
+        $quality_setting = "display:none";
+        $idea_setting = "display:none";
+        //$sub_setting="display:none";
+    } else if ($controller == 'news') {
 
-    //$sub_setting="display:none";
-} else if ($controller == 'quality') {
+        $setting = "display:none";
+        $design = "display:none";
+        $sub_setting = "display:none";
+        $sub_user_setting = "display:none";
+        $store_setting = "display:none";
+        $news_setting = "display:block";
+        $quality_setting = "display:none";
+        $idea_setting = "display:none";
 
-    $setting = "display:none";
-    $design = "display:none";
-    $sub_setting = "display:none";
-    $sub_user_setting = "display:none";
-    $store_setting = "display:none";
-    $news_setting = "display:none";
-    $quality_setting = "display:block";
-    $idea_setting = "display:none";
+        //$sub_setting="display:none";
+    } else if ($controller == 'quality') {
 
-    //$sub_setting="display:none";
-} else if ($controller == 'suggestion') {
-    $setting = "display:none";
-    $design = "display:none";
-    $sub_setting = "display:none";
-    $sub_user_setting = "display:none";
-    $store_setting = "display:none";
-    $news_setting = "display:none";
-    $quality_setting = "display:none";
-    $idea_setting = "display:block";
-} else {
-    $setting = "display:none";
-    $design = "display:none";
-    $sub_setting = "display:none";
-    $sub_user_setting = "display:none";
-    $store_setting = "display:none";
-    $news_setting = "display:none";
-    $quality_setting = "display:none";
-    $idea_setting = "display:none";
-}
+        $setting = "display:none";
+        $design = "display:none";
+        $sub_setting = "display:none";
+        $sub_user_setting = "display:none";
+        $store_setting = "display:none";
+        $news_setting = "display:none";
+        $quality_setting = "display:block";
+        $idea_setting = "display:none";
+
+        //$sub_setting="display:none";
+    } else if ($controller == 'suggestion') {
+        $setting = "display:none";
+        $design = "display:none";
+        $sub_setting = "display:none";
+        $sub_user_setting = "display:none";
+        $store_setting = "display:none";
+        $news_setting = "display:none";
+        $quality_setting = "display:none";
+        $idea_setting = "display:block";
+    } else {
+        $setting = "display:none";
+        $design = "display:none";
+        $sub_setting = "display:none";
+        $sub_user_setting = "display:none";
+        $store_setting = "display:none";
+        $news_setting = "display:none";
+        $quality_setting = "display:none";
+        $idea_setting = "display:none";
+    }
 ?>
 <!DOCTYPE html>
 <html>
@@ -157,7 +164,6 @@ if ($controller == 'project' && ($actions == 'index' || $actions == 'archieve_pr
         <!-- Add fancyBox -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css" type="text/css" media="screen" />
         <script type="text/javascript" src="assets/javascripts/jquery.fancybox.min.js"></script>
-
         <script type="text/javascript" src="assets/javascripts/jquery.tokeninput.js"></script>
         <link rel="stylesheet" href="assets/stylesheets/token-input.css" type="text/css" />
         <link rel="stylesheet" href="assets/stylesheets/token-input-facebook.css" type="text/css" />
@@ -190,88 +196,58 @@ if ($controller == 'project' && ($actions == 'index' || $actions == 'archieve_pr
                 <a class='toggle-nav btn pull-left' href='#'>
                     <i class='icon-reorder'></i>
                 </a> 
-                <ul class='nav'>
-                    <li class='dropdown medium only-icon widget hide'>
+                
+                <ul class='nav header-notification'>
+                    <?php
+                        if($sess_user_type == '2') {
+                    ?>
+                    <li class='dropdown medium only-icon widget'>
                         <a class='dropdown-toggle' data-toggle='dropdown' href='#'>
-                            <i class='icon-rss'></i>
-                            <div class='label'>5</div>
+                            <i class='icon-bell-alt'></i>
+                            <?php if(!empty($all_notifications)) { ?>            
+                                <div class='label'><?php echo count($all_notifications); ?></div>
+                            <?php } ?>
                         </a>
                         <ul class='dropdown-menu'>
-                          <li>
-                            <a href='#'>
-                              <div class='widget-body'>
-                                <div class='pull-left icon'>
-                                  <i class='icon-user text-success'></i>
-                                </div>
-                                <div class='pull-left text'>
-                                  John Doe signed up
-                                  <small class='text-muted'>just now</small>
-                                </div>
-                              </div>
-                            </a>
-                          </li>
-                          <li class='divider'></li>
-                          <li>
-                            <a href='#'>
-                              <div class='widget-body'>
-                                <div class='pull-left icon'>
-                                  <i class='icon-inbox text-error'></i>
-                                </div>
-                                <div class='pull-left text'>
-                                  New Order #002
-                                  <small class='text-muted'>3 minutes ago</small>
-                                </div>
-                              </div>
-                            </a>
-                          </li>
-                          <li class='divider'></li>
-                          <li>
-                            <a href='#'>
-                              <div class='widget-body'>
-                                <div class='pull-left icon'>
-                                  <i class='icon-comment text-warning'></i>
-                                </div>
-                                <div class='pull-left text'>
-                                  America Leannon commented Flatty with veeery long text.
-                                  <small class='text-muted'>1 hour ago</small>
-                                </div>
-                              </div>
-                            </a>
-                          </li>
-                          <li class='divider'></li>
-                          <li>
-                            <a href='#'>
-                              <div class='widget-body'>
-                                <div class='pull-left icon'>
-                                  <i class='icon-user text-success'></i>
-                                </div>
-                                <div class='pull-left text'>
-                                  Jane Doe signed up
-                                  <small class='text-muted'>last week</small>
-                                </div>
-                              </div>
-                            </a>
-                          </li>
-                          <li class='divider'></li>
-                          <li>
-                            <a href='#'>
-                              <div class='widget-body'>
-                                <div class='pull-left icon'>
-                                  <i class='icon-inbox text-error'></i>
-                                </div>
-                                <div class='pull-left text'>
-                                  New Order #001
-                                  <small class='text-muted'>1 year ago</small>
-                                </div>
-                              </div>
-                            </a>
-                          </li>
-                          <li class='widget-footer'>
-                            <a href='#'>All notifications</a>
-                          </li>
+                            <?php 
+                                if(!empty($all_notifications)) {
+                                    foreach($all_notifications as $notification) {
+                             ?>
+                            <li>
+                                <a href='#'>
+                                  <div class='widget-body'>
+                                    <div class='pull-left icon'>
+                                      <i class='icon-user text-success'></i>
+                                    </div>
+                                    <div class='pull-left text'>
+                                        <?php echo character_limiter($notification['notification_en'],'70'); ?>
+                                      
+                                      <small class='text-muted'> <?php echo '- '.date('d/m/y h:i:s',strtotime($notification['created_date'])); ?></small>
+                                    </div>
+                                  </div>
+                                </a>
+                            </li>
+                            <li class='divider'></li>
+                            <?php } }else{  ?>
+                            <li>
+                                <a href='#'>
+                                  <div class='widget-body'>
+                                    <div class='pull-left icon'>
+                                      <i class='icon-user text-success'></i>
+                                    </div>
+                                    <div class='pull-left text'>
+                                        No Notifications are found.
+                                    </div>
+                                  </div>
+                                </a>
+                            </li>    
+                            <?php } ?>
+                            <li class='widget-footer'>
+                                <a href='#'>All notifications</a>
+                            </li>
                         </ul>
                     </li>
-
+                    <?php } ?>
                     <li class='dropdown light only-icon'>
 
                         <ul class='dropdown-menu color-settings'>
@@ -300,6 +276,7 @@ if ($controller == 'project' && ($actions == 'index' || $actions == 'archieve_pr
                         </ul>
                     </li>
                 </ul>
+                
             </nav>
         </header>
         <div id='wrapper'>

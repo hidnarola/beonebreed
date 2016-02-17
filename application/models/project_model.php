@@ -116,9 +116,6 @@ class Project_model extends CI_Model {
     }
 
     public function get_all_archieve_project() {
-
-        //get archieve project.
-
         $query = $this->db->get_where('projects', array('status' => 'archieve'));
         return $query->result();
     }
@@ -155,10 +152,12 @@ class Project_model extends CI_Model {
     //get project manager
 
     public function get_project_manager() {
-        $type_ids = array('2', '4');
-        $this->db->where_in('user_type', $type_ids);
+        $type_ids = array('2');
+        $this->db->where('user_type','2');
+        $this->db->where('is_deleted','0');
         $query = $this->db->get_where('users');
-        return $query->result();
+        $res = $query->result();
+        return $res;
     }
 
     public function get($id = 0) {
@@ -189,44 +188,19 @@ class Project_model extends CI_Model {
     }
 
     public function update_records($id = 0) {
-        if ($this->input->post('category_id') == '') {
-
-            $category_id = 0;
-        } else {
-
-            $category_id = $this->input->post('category_id');
-        }
-
-        if ($this->input->post('estimated_days') == '') {
-
-            $estimated_days = 0;
-        } else {
-
-            $estimated_days = $this->input->post('estimated_days');
-        }
-        if ($this->input->post('priority') == '') {
-
-            $priority = 0;
-        } else {
-
-            $priority = $this->input->post('priority');
-        }
-        if ($this->input->post('project_manager') == '') {
-
-            $project_manager = '';
-        } else {
-            $project_manager = $this->input->post('project_manager');
-        }
-        if ($this->input->post('quick_notes') == '') {
-
-            $quick_notes = '';
-        } else {
-            $quick_notes = $this->input->post('quick_notes');
-        }
+        
+        $category_id = (int)$this->input->post('category_id');
+        $estimated_days = (int)$this->input->post('estimated_days');
+        $priority = $this->input->post('priority');
+        $project_manager = $this->input->post('project_manager');
+        $quick_notes = $this->input->post('quick_notes');
+        $quick_notes = htmlentities($quick_notes);
 
         $query_type = $this->db->get_where('projects', array('id' => $id));
         $project = $query_type->row_array();
         $project_type_id = $project['project_type_id'];
+
+        $project_name = $this->input->post('name');
 
         if ($project_type_id == 2) {
 
@@ -235,8 +209,15 @@ class Project_model extends CI_Model {
                 'quick_notes' => $quick_notes,
             );
         } else {
+            if($project_name != $project['name']){
+                $res_proj_res = $this->products_model->getfrom('projects',false,array('where'=>array('name'=>$project_name)));
+                if(!empty($res_proj_res)){
+                    $this->session->set_flashdata('unique_project', 'The Project Name field must contain a unique value.');
+                    redirect('project/edit/'.$id);
+                }
+            }
             $data = array(
-                'name' => $this->input->post('name'),
+                'name' => $project_name,
                 'project_type_id' => $this->input->post('project_type_id'),
                 'category_id' => $category_id,
                 'estimated_days' => $estimated_days,
@@ -376,6 +357,16 @@ class Project_model extends CI_Model {
     public function get_all_project_data_by_name($proj_name) {
         $query = $this->db->get_where('projects', array('name' => $proj_name));
         return $query->num_rows();
+    }
+
+    // ------------------------------------------------------------------------
+    // All Notification Queries
+    // ------------------------------------------------------------------------
+
+    public function add_notification($data){
+        $this->db->insert('notifications', $data);
+        $last_id = $this->db->insert_id();
+        return $last_id;
     }
 
 }

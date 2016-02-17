@@ -16,34 +16,37 @@ class Project extends CI_Controller {
     }
 
     public function index() {
+        
         $data['inprogress_list'] = $this->project_model->get_all_inprogress_project();
         $data['idea_list'] = $this->project_model->get_all_idea_project();
-         $inprogress_projects = array();
-         if(!empty($data['inprogress_list'])) {
-        foreach ($data['inprogress_list'] as $attach) {
-            $inprogress_project['id'] = $attach->id;
-            $inprogress_project['name'] = $attach->name;
-            $inprogress_project['created_date'] = $attach->created_date;
-            $inprogress_project['priority'] = $attach->priority;
-            $inprogress_project['estimated_days'] = $attach->estimated_days;
-            $inprogress_project['project_manager'] = $attach->project_manager;
-            $inprogress_project['quick_notes'] = $attach->quick_notes;
-            $inprogress_project['image'] = $this->project_model->get_project_attachment_by_image($attach->id);
-            $inprogress_project['action_plans'] = $this->project_model->get_all_actionplan_by_projects_id($attach->id);
-            $inprogress_projects[] = $inprogress_project;
+        $inprogress_projects = array();
+
+        if(!empty($data['inprogress_list'])) {
+            foreach ($data['inprogress_list'] as $attach) {
+                $inprogress_project['id'] = $attach->id;
+                $inprogress_project['name'] = $attach->name;
+                $inprogress_project['created_date'] = $attach->created_date;
+                $inprogress_project['priority'] = $attach->priority;
+                $inprogress_project['estimated_days'] = $attach->estimated_days;
+                $inprogress_project['project_manager'] = $attach->project_manager;
+                $inprogress_project['quick_notes'] = $attach->quick_notes;
+                $inprogress_project['image'] = $this->project_model->get_project_attachment_by_image($attach->id);
+                $inprogress_project['action_plans'] = $this->project_model->get_all_actionplan_by_projects_id($attach->id);
+                $inprogress_projects[] = $inprogress_project;
+            }
         }
-         }
+
         $idea_projects = array();
         if(!empty($data['idea_list'])) {
-        foreach ($data['idea_list'] as $attachment) {
-            $idea_project['pid'] = $attachment->pid;
-            $idea_project['name'] = $attachment->name;
-            $idea_project['p_created_at'] = $attachment->p_created_at;
-            $idea_project['username'] = $attachment->username;
-            $idea_project['quick_notes'] = $attachment->quick_notes;
-            $idea_project['image'] = $this->project_model->get_project_attachment_by_image($attachment->pid);
-            $idea_projects[] = $idea_project;
-        }
+            foreach ($data['idea_list'] as $attachment) {
+                $idea_project['pid'] = $attachment->pid;
+                $idea_project['name'] = $attachment->name;
+                $idea_project['p_created_at'] = $attachment->p_created_at;
+                $idea_project['username'] = $attachment->username;
+                $idea_project['quick_notes'] = $attachment->quick_notes;
+                $idea_project['image'] = $this->project_model->get_project_attachment_by_image($attachment->pid);
+                $idea_projects[] = $idea_project;
+            }
         }
         $data['inprogress_projects'] = $inprogress_projects;
         $data['idea_projects'] = $idea_projects;
@@ -56,12 +59,16 @@ class Project extends CI_Controller {
         $this->template->load('admin_default', 'project/archieve', $data);
     }
 
+    // Project Add functionality 
     public function add() {
-        if ($this->form_validation->run('project') == FALSE) {
+        
+        // p($this->session->all_userdata(),true);    
 
-            $data['project_type'] = $this->project_model->get_all_types();
-            $data['categories'] = $this->project_model->get_caregory();
-            $data['project_manager'] = $this->project_model->get_project_manager();
+        $data['project_type'] = $this->project_model->get_all_types();
+        $data['categories'] = $this->project_model->get_caregory();
+        $data['project_manager'] = $this->project_model->get_project_manager();
+
+        if ($this->form_validation->run('project') == FALSE) {
             $this->template->load('admin_default', 'project/add', $data);
         } else {
             $category_id = 0;
@@ -71,12 +78,10 @@ class Project extends CI_Controller {
             $project_manager = '';
 
             $estimated_days = $this->input->post('estimated_days');
-
             $category_id = $this->input->post('category_id');
             $priority = $this->input->post('priority');
             $project_manager = $this->input->post('project_manager');
             $quick_notes = $this->input->post('quick_notes');
-
             $created_by = $this->session->userdata('id');
 
             $data = array(
@@ -88,10 +93,21 @@ class Project extends CI_Controller {
                 'project_manager' => $project_manager,
                 'quick_notes' => $quick_notes,
                 'created_by' => $created_by,
-                'created_date' => date("Y-m-d H:i:s"),
+                'created_date' => date("Y-m-d H:i:s")
             );
 
             $id = $this->project_model->add_records($data, TRUE);
+
+            
+            // ---------------------------- Notification --------------------------------------------
+            $sess_username = $this->session->userdata('username');
+            $en_msg = 'Project has been assigned it to you by '.$sess_username;
+            $fr_msg = 'Projet a été attribué à vous par '.$sess_username;
+            //id for last inseted project
+            $not_data = array('user_id'=>$project_manager,'notification_en'=>$en_msg,'notification_fr'=>$fr_msg,
+                              'project_id'=>$id);
+            $this->project_model->add_notification($not_data);
+            // ---------------------------- //Notification --------------------------------------------
 
             if ($id) {
                 redirect('project/add_next/' . $id);
@@ -258,18 +274,11 @@ class Project extends CI_Controller {
         }
     }
 
+    //Change Project status to archive
     public function project_archieve() {
         $project_id = $this->input->post('id');
-        if ($this->project_model->update_project_status($project_id)) {
-            redirect('project');
-            // $response = array('status' => 'success', 'msg' => 'Project has been successfully archieved');
-            // echo json_encode($response);
-            // die();
-        } else {
-            // $response = array('status' => 'fail', 'msg' => 'Oops!Something Wrong!');
-            // echo json_encode($response);
-            // die();
-        }
+        $this->project_model->update_project_status($project_id);
+        redirect('project');
     }
 
     //adding action plan
@@ -432,7 +441,8 @@ class Project extends CI_Controller {
 
     public function edit($id = 0) {
         /* if ($this->form_validation->run('project') == FALSE){ */
-
+        if($id == '' || $id == 0){ show_404();}
+    
         $data['project_type'] = $this->project_model->get_all_types();
         $data['project_manager'] = $this->project_model->get_project_manager();
         $data['categories'] = $this->project_model->get_caregory();
@@ -444,12 +454,10 @@ class Project extends CI_Controller {
         $data['external_link'] = $this->project_model->get_project_external_link($id);
         $data['suppliers'] = $this->products_model->getfrom('project_suppliers','project_suppliers.id as pid,project_suppliers.*,suppliers.*',array('where'=>array('project_suppliers.project_id'=>$id)),array('join'=>array( array('table'=>'suppliers','condition'=>'suppliers.id = project_suppliers.supplier_id') )));
 
+        if(empty($data['project'])){ show_404(); } 
         
-        if (!empty($data['project'])) {
-            $this->template->load('admin_default', 'project/edit', $data);
-        } else {
-            $this->template->load('admin_default', 'project/edit');
-        }
+        $this->template->load('admin_default', 'project/edit', $data);
+        
         /* }else{ */
         if (!empty($_POST)) {
             if ($this->project_model->update_records($id, TRUE)) {
@@ -457,6 +465,7 @@ class Project extends CI_Controller {
             } else {
                 $this->session->set_flashdata('err_msg', 'Oops!Something Wrong!');
             }
+            qry(true);
             redirect('project');
         }
         /* } */

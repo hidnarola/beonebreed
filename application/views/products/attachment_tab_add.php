@@ -92,7 +92,7 @@
                             <i class='icon-save'></i> ADD
                         </a>
                         <button class='btn btn-danger' type='button' id="delete_my_external_link">
-                          <i class='icon-save'></i>
+                          <i class='icon-remove'></i>
                           Remove
                         </button>
 

@@ -113,10 +113,9 @@
         $('#notes_project_id').val(product_id);
         $('#hdn_marketting_part_3').val(product_id);
         $('#hdn_marketting_part_4').val(product_id);
-
         event.preventDefault();
         // return false;
-
+        
     });
 
 </script>
