@@ -9,7 +9,7 @@ class Notifications extends CI_Controller {
 	}
 
 	public function index(){
-		
+			
 	}
 
 	public function change_status(){
