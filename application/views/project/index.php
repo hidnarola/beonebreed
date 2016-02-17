@@ -35,62 +35,6 @@
 <?php } ?>  
 <div class="clearfix">	</div>
 
-<!--<div class="container">
-    <?php
-    if (!empty($inprogress_projects)) {
-        foreach ($inprogress_projects as $u_key) {
-            ?>
-             Modal 
-            <div class="modal fade" id="myModal_<?php echo $u_key['id']; ?>" role="dialog">
-                <div class="modal-dialog">
-
-                     Modal content
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal">&times;</button>
-                            <h4 class="modal-title">Action Plan</h4>
-                        </div>
-                        <div class="modal-body">
-                            <div class='box-content'>
-                                <ul class='list-unstyled tasks'>
-                                    <?php
-                                    if (!empty($u_key['action_plans'])) {
-                                        foreach ($u_key['action_plans'] as $u_key_action) {
-                                            ?>
-                                            <li>
-                                                <div class='task'>
-                                                    <span class='pull-left'>
-                                                        <?php echo $u_key_action->action ?>
-                                                    </span>
-                                                    <small class='pull-right'><?php echo $u_key_action->complete_level ?>%</small>
-                                                </div>
-                                                <div class='progress progress-small'>
-                                                    <div class='progress-bar' style='width: <?php echo $u_key_action->complete_level ?>%'></div>
-                                                </div>
-                                            </li>
-                                            <?php
-                                        }
-                                    } else {
-                                        ?>
-                                        <li> No Actions found!</li>
-                                    <?php }
-                                    ?>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-            <?php
-        }
-    }
-    ?>
-
-</div>-->
 <div class='col-sm-12'>
     <div class='box bordered-box orange-border' style='margin-bottom:0;'>
         <div class='box-header orange-background'>
@@ -229,7 +173,11 @@
                                             }
                                             ?> 
                                         </td>
-                                        <td><?php echo $u_key['project_manager']; ?> </td>
+                                        <td>
+                                            <?php 
+                                                $r = $this->products_model->getfrom('users',false,array('where'=>array('id'=>$u_key['project_manager'])),array('single'=>true)); 
+                                                echo $r['username']; ?>
+                                        </td>
                                         <td style="width:auto"><p class="fixed_width"><?php echo substr($u_key['quick_notes'], 0, 80); ?></p> </td>
 
                                         <td>

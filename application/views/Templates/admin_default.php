@@ -15,13 +15,13 @@
 
     $controller = $this->router->fetch_class();
     $actions = $this->router->fetch_method();
-
+    
     $sess_user_type = $this->session->userdata('user_type');
-    $all_notifications = $this->products_model->getfrom('notifications',false,array('where'=>array('status'=>'1')),
+    $sess_user_id = $this->session->userdata('id');
+    $all_notifications = $this->products_model->getfrom('notifications',false,array('where'=>array('status'=>'1','user_id'=>$sess_user_id)),
                         array('order_by'=>'created_date desc','limit'=>'5'));
 
     if ($controller == 'project' && ($actions == 'index' || $actions == 'archieve_projects')) {
-
         $design = "display:block";
         $setting = "display:none";
         $sub_user_setting = "display:none";
@@ -214,7 +214,7 @@
                                     foreach($all_notifications as $notification) {
                              ?>
                             <li>
-                                <a href='#'>
+                                <a href='<?php echo base_url()."project";?>'>
                                   <div class='widget-body'>
                                     <div class='pull-left icon'>
                                       <i class='icon-user text-success'></i>
@@ -243,7 +243,7 @@
                             </li>    
                             <?php } ?>
                             <li class='widget-footer'>
-                                <a href='#'>All notifications</a>
+                                <a href='<?php echo base_url()."notifications";?>'>All notifications</a>
                             </li>
                         </ul>
                     </li>
@@ -896,17 +896,15 @@ if ($controller == 'product_brand') {
 
         <!-- / END - page related files and scripts [optional] -->   
         <script>
-                    function doconfirm(href)
-                    {
-                    $(function () {
-                    bootbox.confirm('Are you sure you want to delete this record?', function (res) {
-                    if (res)
-                    {
-                    window.location.href = href;
-                    }
-                    });
-                    });
-                            return false;
+                    function doconfirm(href){
+                        $(function () {
+                            bootbox.confirm('Are you sure?', function (res) {
+                                if (res){
+                                    window.location.href = href;
+                                }
+                            });
+                        });
+                        return false;
                     }
         </script>
         <script>
