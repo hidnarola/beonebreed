@@ -260,15 +260,13 @@ class Products_model extends CI_Model {
 	}	
 
 	public function getfromtable($table,$id){
-		
-		$this->db->from($table);
-
+	
 		if(is_array($id)){
 			$this->db->where($id);
 		}else{
 			$this->db->where('id',$id);
 		}		
-		return $this->db->get('bar_code')->row_array();
+		return $this->db->get($table)->row_array();
 	}
 
 	// ---------------------------------------------------------------------------------------------------------
@@ -303,7 +301,7 @@ class Products_model extends CI_Model {
         }
 		$this->db->update($table,$data);
 		$update_id = $this->db->affected_rows(); // fetch affected rown in table.
-		return $update_id;
+		return $id;
 	}
     
     public function get_question_part_3(){

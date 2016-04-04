@@ -1,3 +1,4 @@
+<?php //p($marketing_part1_title,1);?>
 <div class='row' id='content-wrapper'>
     <div class='col-xs-12'>
         <div class='row'>
@@ -85,6 +86,7 @@
                                         <!-- ====== END ====== -->
                                     </div>
                                     <div class='tab-pane ' id='tab4'>
+                                        <?php //p($data_production_part_1,1); ?>
                                         <?php $this->load->view('products/edit/production_tab_edit'); ?>
                                     </div>
                                     <div class='tab-pane' id='tab5'>
@@ -101,6 +103,9 @@
 </div>
 
 <script type="text/javascript">
+    
+    $('#brand_name').val('<?php echo $data_admin_part_1["brand_id"]; ?>');
+    $('#category').val('<?php echo $data_admin_part_1["short_name"]; ?>');
 
     $('.other_tabs').click(function (event) {
 

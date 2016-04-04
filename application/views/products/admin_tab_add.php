@@ -785,6 +785,16 @@
                               <input type='checkbox' name="switch_12" id="12" value="12" >
                             </div>
                         </div>
+                        <div class="clearfix"></div>
+                        <div class="col-sm-6">
+                            <span class="check-list-number">3</span>
+                            <label class='control-label'>HAVE YOU CREATED THE SUPPLIER IN OUR ERP ?</label>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class='make-switch switch' data-off-label='&lt;i class="icon-remove"&gt;&lt;/i&gt;' data-on-label='&lt;i class="icon-ok"&gt;&lt;/i&gt;'>
+                                <input type='checkbox' name="switch_24" id="24" value="24" >
+                            </div>
+                        </div>
                     </div>
                 </div>                    
                 <div class="col-sm-6">                   
@@ -805,6 +815,7 @@
                                 <input type="hidden" name="id_14" id="id_14" >
                                 <input type="hidden" name="id_15" id="id_15" >
                                 <input type="hidden" name="id_16" id="id_16" >
+                                <input type="hidden" name="id_24" id="id_24" >
                                 <a class="btn btn-success" onclick="validate_admin_part_3()" >
                                     <i class='icon-save'></i> Save
                                 </a>
@@ -1255,6 +1266,7 @@
                     $('#id_14').val(data.id_14);
                     $('#id_15').val(data.id_15);
                     $('#id_16').val(data.id_16);
+                    $('#id_24').val(data.id_24);
                     $('#complete_admin_part_3').attr('disabled',true); // Disable Checkbox
                      $('.percentage_complete_admin').html(data.complete_bar_no+'%'); // Update Percentage for product update
                     $('.part_3_admin').addClass('active'); 

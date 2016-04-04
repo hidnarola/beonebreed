@@ -32,6 +32,7 @@
     $ques_14 = array('id'=>'','question_id'=>'','product_id'=>'','answer'=>'','notes'=>''); 
     $ques_15 = array('id'=>'','question_id'=>'','product_id'=>'','answer'=>'','notes'=>''); 
     $ques_16 = array('id'=>'','question_id'=>'','product_id'=>'','answer'=>'','notes'=>'');  
+    $ques_24 = array('id'=>'','question_id'=>'','product_id'=>'','answer'=>'','notes'=>'');  
 
     if(!empty($data_admin_part_3)){
         foreach($data_admin_part_3 as $ques){
@@ -40,7 +41,8 @@
             if($ques['question_id']=='13'){ $ques_13 = $ques; }    
             if($ques['question_id']=='14'){ $ques_14 = $ques; }    
             if($ques['question_id']=='15'){ $ques_15 = $ques; }    
-            if($ques['question_id']=='16'){ $ques_16 = $ques; }    
+            if($ques['question_id']=='16'){ $ques_16 = $ques; } 
+            if($ques['question_id']=='24'){ $ques_24 = $ques; }
         }
     }    
 
@@ -862,6 +864,17 @@
                               <?php if(isset($ques_12['answer'])){ if($ques_12['answer'] == '1'){ echo 'checked'; } }?> >
                             </div>
                         </div>
+                        <div class="clearfix"></div>
+                        <div class="col-sm-6">
+                            <span class="check-list-number">3</span>
+                            <label class='control-label'>HAVE YOU CREATED THE SUPPLIER IN OUR ERP ?</label>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class='make-switch switch' data-off-label='&lt;i class="icon-remove"&gt;&lt;/i&gt;' data-on-label='&lt;i class="icon-ok"&gt;&lt;/i&gt;'>
+                                <input type='checkbox' name="switch_24" id="24" value="24" 
+                                <?php if(isset($ques_24['answer'])){ if($ques_24['answer'] == '1'){ echo 'checked'; } }?>>
+                            </div>
+                        </div>
                     </div>
                 </div>                    
                 <div class="col-sm-6">                   
@@ -877,12 +890,13 @@
                         <div class="col-sm-6">
                             <div class='form-group pull-right'>
                                 <div class='controls'>
-                                <input type="hidden" name="id_11" id="id_11" >
-                                <input type="hidden" name="id_12" id="id_12" >
-                                <input type="hidden" name="id_13" id="id_13" >
-                                <input type="hidden" name="id_14" id="id_14" >
-                                <input type="hidden" name="id_15" id="id_15" >
-                                <input type="hidden" name="id_16" id="id_16" >
+                                <input type="hidden" name="id_11" id="id_11" value="<?php if(!empty($ques_11['id'])){ echo $ques_11['id']; } ?>" >
+                                <input type="hidden" name="id_12" id="id_12" value="<?php if(!empty($ques_12['id'])){ echo $ques_12['id']; } ?>">
+                                <input type="hidden" name="id_13" id="id_13" value="<?php if(!empty($ques_13['id'])){ echo $ques_13['id']; } ?>" >
+                                <input type="hidden" name="id_14" id="id_14" value="<?php if(!empty($ques_14['id'])){ echo $ques_14['id']; } ?>">
+                                <input type="hidden" name="id_15" id="id_15" value="<?php if(!empty($ques_15['id'])){ echo $ques_15['id']; } ?>">
+                                <input type="hidden" name="id_16" id="id_16" value="<?php if(!empty($ques_16['id'])){ echo $ques_16['id']; } ?>">
+                                <input type="hidden" name="id_24" id="id_24" value="<?php if(!empty($ques_24['id'])){ echo $ques_24['id']; } ?>">
                                 <a class="btn btn-success" onclick="validate_admin_part_3()" >
                                     <i class='icon-save'></i> Save
                                 </a>
