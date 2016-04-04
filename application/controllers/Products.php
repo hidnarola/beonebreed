@@ -13,10 +13,9 @@ class Products extends CI_Controller {
     }
 
     public function index($tab = false) {
-        $data['products_new'] = $this->products_model->get_all_products();
-       // p($data['products_new'],true);
-        if ($tab == false) {
 
+        if ($tab == false) {
+            $data['products_new'] = $this->products_model->get_all_products();
             $this->template->load('admin_default', 'products/index', $data);
         } else {
             $data['tab'] = $tab;
@@ -32,6 +31,7 @@ class Products extends CI_Controller {
             if (in_array($tab, array('admin', 'marketing', 'production')) == false) {
                 show_404();
             }
+            $data['products_new'] = $this->products_model->get_all_products();
             $this->template->load('admin_default', 'products/' . $view, $data);
         }
     }
@@ -75,9 +75,9 @@ class Products extends CI_Controller {
                 ),
             )
         ));
-        // p($data['data_admin_part_1'],true);
         $data['data_admin_part_2'] = $this->products_model->getfrom('dimension', false, array('where_in' => array('dimension_id' => ['1', '2', '3', '4']), 'where' => array('product_id' => $pid)));
-        $data['data_admin_part_3'] = $this->products_model->getfrom('product_question', false, array('where_in' => array('question_id' => ['11', '12', '13', '14', '15', '16']), 'where' => array('product_id' => $pid)));
+        $data['data_admin_part_3'] = $this->products_model->getfrom('product_question', false, array('where_in' => array('question_id' => ['11', '12', '13', '14', '15', '16', '24']), 'where' => array('product_id' => $pid)));
+        // p($data['data_admin_part_3'],true);
         // ------------------------------------------------------------------------
         // ------------------------------------------------------------------------
         // Marketing Tab's Data                
@@ -89,7 +89,7 @@ class Products extends CI_Controller {
         $data['marketing_part2_data'] = $this->products_model->getfrom('products_marketing_part_2', false, array('where' => array('product_id' => $pid)));
 
         $data['marketing_part5_data'] = $this->products_model->getfrom('products_marketing_part_5', false, array('where' => array('product_id' => $pid)), array('single' => true));
-        // p($data['marketing_part2_data'],true);
+        // p($data['marketing_part1_title'],true);
         // ------------------------------------------------------------------------
 
         $data['all_attachment'] = $this->products_model->getfrom('products_attachments', false, array('where' => array('product_id' => $pid, 'tab' => 'attachments')));
@@ -104,6 +104,7 @@ class Products extends CI_Controller {
         													products_suppliers.*,suppliers.*', array('where' => array('products_suppliers.product_id' => $pid)), array('join' => array(array('table' => 'suppliers',
                     'condition' => 'products_suppliers.supplier_id=suppliers.id')))
         );
+        // p($data['data_production_part_1'],1);
 
         $data['data_production_part_2'] = $this->products_model->getfrom('products_sample', false, array('where' => array('product_id' => $pid)));
         $data['data_production_part_2_all_attachment'] = $this->products_model->getfrom('products_attachments', false, array('where' => array('product_id' => $pid, 'tab' => 'production')));
@@ -359,6 +360,7 @@ class Products extends CI_Controller {
 
         $switch_11 = $this->input->post('switch_11'); // HAVE YOU SENT THE UPC CODE TO THE SUPPLIER ?
         $switch_12 = $this->input->post('switch_12'); // HAVE YOU CREATED THE PRODUCT IN OUR ERP (ACOMBA) ?
+        $switch_24 = $this->input->post('switch_24'); // HAVE YOU CREATED THE PRODUCT IN OUR ERP (ACOMBA) ?
         $note_13 = $this->input->post('mrsp_canada');
         $note_14 = $this->input->post('hs_code');
         $note_15 = $this->input->post('mrsp_international');
@@ -371,6 +373,7 @@ class Products extends CI_Controller {
         $id_14 = $this->input->post('id_14');
         $id_15 = $this->input->post('id_15');
         $id_16 = $this->input->post('id_16');
+        $id_24 = $this->input->post('id_24');
 
         //If Id Found then Update otherwise Insert data
         if (!empty($id_11) || !empty($id_12) || !empty($id_13) || !empty($id_14) || !empty($id_15) || !empty($id_16)) {
@@ -389,6 +392,14 @@ class Products extends CI_Controller {
             } else {
                 $data_q12 = array('question_id' => '12', 'product_id' => $product_id, 'answer' => '0');
                 $this->products_model->update_into('product_question', $id_12, $data_q12);
+            }
+
+            if (!empty($switch_24)) {
+                $data_q24 = array('question_id' => '24', 'product_id' => $product_id, 'answer' => '1');
+                $this->products_model->update_into('product_question', $id_24, $data_q24);
+            } else {
+                $data_q24 = array('question_id' => '24', 'product_id' => $product_id, 'answer' => '0');
+                $this->products_model->update_into('product_question', $id_24, $data_q24);
             }
 
             $data_q13 = array('question_id' => '13', 'product_id' => $product_id, 'notes' => $note_13);
@@ -418,6 +429,14 @@ class Products extends CI_Controller {
             } else {
                 $data_q12 = array('question_id' => '12', 'product_id' => $product_id, 'answer' => '0');
                 $id_12 = $this->products_model->insert_into('product_question', $data_q12);
+            }
+
+            if (!empty($switch_24)) {
+                $data_q24 = array('question_id' => '24', 'product_id' => $product_id, 'answer' => '1');
+                $id_24 = $this->products_model->insert_into('product_question', $data_q24);
+            } else {
+                $data_q24 = array('question_id' => '24', 'product_id' => $product_id, 'answer' => '0');
+                $id_24 = $this->products_model->insert_into('product_question', $data_q24);
             }
 
             $data_q13 = array('question_id' => '13', 'product_id' => $product_id, 'notes' => $note_13);
@@ -459,6 +478,7 @@ class Products extends CI_Controller {
                     'id_14' => $id_14,
                     'id_15' => $id_15,
                     'id_16' => $id_16,
+                    'id_24' => $id_24,
                     'complete_bar_no' => $complete_bar_no,
                     'qry' => $this->db->last_query()
                 )
@@ -527,6 +547,7 @@ class Products extends CI_Controller {
 
 
         $prod_array = array();
+        $test = '';
 
         for ($i = 1; $i <= $production_part_1_count; $i++) {
 
@@ -539,15 +560,17 @@ class Products extends CI_Controller {
             $production_hidden_id = $this->input->post('production_supplier_' . $i); // Hidden Id
 
             if (!empty($production_hidden_id)) {
+                $test .= 'If';
                 array_push($prod_array, $production_hidden_id);
                 $this->products_model->update_into('products_suppliers', $production_hidden_id, $prod_data);
             } else {
+                $test .= 'ELSE';
                 $last_id = $this->products_model->insert_into('products_suppliers', $prod_data);
                 array_push($prod_array, $last_id);
             }
         }
 
-        echo json_encode(array('res' => $prod_array, 'complete_bar_no' => $complete_bar_no));
+        echo json_encode(array('res' => $prod_array, 'complete_bar_no' => $complete_bar_no, 'test' => $test));
     }
 
     public function delete($id = 0) {

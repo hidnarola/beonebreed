@@ -168,7 +168,7 @@
                                 if(!empty($suppliers)) { 
                                     foreach($suppliers as $supplier) {
                             ?>
-                                <option value="<?php echo $supplier['id']; ?>"><?php echo $supplier['supplier_name']; ?></option>        
+                                <option value="<?php echo $supplier['id']; ?>" <?php if($data_production_part_1[$i-1]['supplier_id'] == $supplier['id']){ echo 'selected'; } ?>><?php echo $supplier['supplier_name']; ?></option>        
                             <?php } } ?>
                             </select>
                             <span class="color_red error_supplier_name_<?php echo $i; ?>"></span>
@@ -220,7 +220,7 @@
                           <span class="color_red error_product_cost_<?php echo $i; ?>"> </span>
                         </div>
                         <div class="clearfix"></div>                    
-                        <input type="hidden" name="production_supplier_<?php echo $i; ?>" id="production_supplier_<?php echo $i; ?>" value="<?php echo $data_production_part_1[$i-1]['id']; ?>">
+                        <input type="hidden" name="production_supplier_<?php echo $i; ?>" id="production_supplier_<?php echo $i; ?>" value="<?php echo $data_production_part_1[$i-1]['prod_supp_id']; ?>">
                     </div>    
                 </div>    
             <?php } }  ?>

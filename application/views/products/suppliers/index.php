@@ -56,7 +56,7 @@
                 ?>
                     <tr>
                       <td class="text-center"><?php echo $supplier['potential_level']; ?></td>
-                      <td><?php echo $supplier['supplier_name']; ?></td>
+                      <td><?php echo character_limiter($supplier['supplier_name'],40); ?></td>
                       <td><?php echo $supplier['created_date']; ?></td>                        
                       <td>
                         <div class='text-left'>

@@ -24,7 +24,7 @@
         <div class='col-sm-12'>
             <div class='box bordered-box orange-border' style='margin-bottom:0;'>
                 <div class='box-header orange-background'>
-                    <div class='title'> Product Brand </div>
+                    <div class='title'> Product Notifications </div>
                     <div class='actions'>
                         <a class="btn box-collapse btn-xs btn-link" href="#">
                         </a>

@@ -1,5 +1,6 @@
 <?php
-    
+    // p($marketing_part1_title['en_title']);
+    // die();
     $m_part1_class = '';
     $m_part2_class = '';
     $m_part3_class = '';
@@ -96,7 +97,7 @@
                                          <div class='controls margin-bottom-10'>
                                          <input class='form-control' id='product_name_en' name="product_name_en" 
                                             type='text' onkeyup="$('.error_product_name_en').addClass('hide');"
-                                            value="<?php echo (!empty($marketing_part1_title)) ? $marketing_part1_title['en_title'] :''; ?>" >
+                                            value="<?php echo (!empty($marketing_part1_title)) ? htmlentities($marketing_part1_title['en_title']) :''; ?>" >
                                             <span class="color_red hide error_product_name_en" >Field Is Required </span>
                                           </div>
                                      </div>
@@ -109,7 +110,7 @@
                                          <div class='controls margin-bottom-10'>
                                          <input class='form-control' id='product_name_fr' name="product_name_fr" 
                                             type='text' onkeyup="$('.error_product_name_fr').addClass('hide');"
-                                            value="<?php echo (!empty($marketing_part1_title)) ? $marketing_part1_title['fr_title'] :''; ?>" >
+                                            value="<?php echo (!empty($marketing_part1_title)) ? htmlentities($marketing_part1_title['fr_title']) :''; ?>" >
                                             <span class="color_red hide error_product_name_fr" >Field Is Required </span>
                                           </div>
                                      </div>
@@ -131,7 +132,7 @@
                                          <div class='controls margin-bottom-10'>
                                          <input class='form-control' id='product_highlight1_en' name="product_highlight1_en" 
                                             type='text' onkeyup="$('.error_product_highlight1_en').addClass('hide');"
-                                            value="<?php echo (!empty($marketing_part1_highlight)) ? $marketing_part1_highlight[0]['en_title'] :''; ?>" >
+                                            value="<?php echo (!empty($marketing_part1_highlight)) ? htmlentities($marketing_part1_highlight[0]['en_title']) :''; ?>" >
                                          <span class="color_red hide error_product_highlight1_en" >Field Is Required </span>
                                           </div>
                                      </div>
@@ -144,7 +145,7 @@
                                          <div class='controls margin-bottom-10'>
                                          <input class='form-control' id='product_highlight1_fr' name="product_highlight1_fr" 
                                             type='text' onkeyup="$('.error_product_highlight1_fr').addClass('hide');"
-                                            value="<?php echo (!empty($marketing_part1_highlight)) ? $marketing_part1_highlight[0]['fr_title'] :''; ?>" >
+                                            value="<?php echo (!empty($marketing_part1_highlight)) ? htmlentities($marketing_part1_highlight[0]['fr_title']) :''; ?>" >
                                             <span class="color_red hide error_product_highlight1_fr" >Field Is Required </span>
                                           </div>
                                      </div>
@@ -165,7 +166,7 @@
                                          <div class='controls margin-bottom-10'>
                                          <input class='form-control' id='product_highlight2_en' name="product_highlight2_en" 
                                             type='text' onkeyup="$('.error_product_highlight2_en').addClass('hide');"
-                                            value="<?php echo (!empty($marketing_part1_highlight)) ? $marketing_part1_highlight[1]['en_title'] :''; ?>">
+                                            value="<?php echo (!empty($marketing_part1_highlight)) ? htmlentities($marketing_part1_highlight[1]['en_title']) :''; ?>">
                                             <span class="color_red hide error_product_highlight2_en" >Field Is Required</span>
                                           </div>
                                      </div>
@@ -178,7 +179,7 @@
                                          <div class='controls margin-bottom-10'>
                                          <input class='form-control' id='product_highlight2_fr' name="product_highlight2_fr" 
                                             type='text' onkeyup="$('.error_product_highlight2_fr').addClass('hide');"
-                                            value="<?php echo (!empty($marketing_part1_highlight)) ? $marketing_part1_highlight[1]['fr_title'] :''; ?>">
+                                            value="<?php echo (!empty($marketing_part1_highlight)) ? htmlentities($marketing_part1_highlight[1]['fr_title']) :''; ?>">
                                             <span class="color_red hide error_product_highlight2_fr" >Field Is Required </span>
                                           </div>
                                      </div>
@@ -199,7 +200,7 @@
                                          <div class='controls margin-bottom-10'>
                                          <input class='form-control' id='product_highlight3_en' name="product_highlight3_en" 
                                             type='text' onkeyup="$('.error_product_highlight3_en').addClass('hide');"
-                                            value="<?php echo (!empty($marketing_part1_highlight)) ? $marketing_part1_highlight[2]['en_title'] :''; ?>" >
+                                            value="<?php echo (!empty($marketing_part1_highlight)) ? htmlentities($marketing_part1_highlight[2]['en_title']) :''; ?>" >
                                             <span class="color_red hide error_product_highlight3_en" >Field Is Required </span>
                                           </div>
                                      </div>
@@ -212,7 +213,7 @@
                                          <div class='controls margin-bottom-10'>
                                          <input class='form-control' id='product_highlight3_fr' name="product_highlight3_fr" 
                                             type='text' onkeyup="$('.error_product_highlight3_fr').addClass('hide');"
-                                            value="<?php echo (!empty($marketing_part1_highlight)) ? $marketing_part1_highlight[2]['fr_title'] :''; ?>" >
+                                            value="<?php echo (!empty($marketing_part1_highlight)) ? htmlentities($marketing_part1_highlight[2]['fr_title']) :''; ?>" >
                                          <span class="color_red hide error_product_highlight3_fr" >Field Is Required </span>
                                           </div>
                                      </div>
@@ -235,7 +236,7 @@
                                          <div class='controls margin-bottom-10'>
                                          <input class='form-control' id='product_paragraph_en' name="product_paragraph_en" 
                                             type='text' onkeyup="$('.error_product_paragraph_en').addClass('hide');"
-                                            value="<?php echo (!empty($marketing_part1_paragraph)) ? $marketing_part1_paragraph['en_title'] :''; ?>" >
+                                            value="<?php echo (!empty($marketing_part1_paragraph)) ? htmlentities($marketing_part1_paragraph['en_title']) :''; ?>" >
                                             <span class="color_red hide error_product_paragraph_en" >Field Is Required </span>
                                           </div>
                                      </div>
@@ -248,7 +249,7 @@
                                          <div class='controls margin-bottom-10'>
                                          <input class='form-control' id='product_paragraph_fr' name="product_paragraph_fr" 
                                             type='text' onkeyup="$('.error_product_paragraph_fr').addClass('hide');"
-                                            value="<?php echo (!empty($marketing_part1_paragraph)) ? $marketing_part1_paragraph['fr_title'] :''; ?>" >
+                                            value="<?php echo (!empty($marketing_part1_paragraph)) ? htmlentities($marketing_part1_paragraph['fr_title']) :''; ?>" >
                                             <span class="color_red hide error_product_paragraph_fr" >Field Is Required </span>
                                           </div>
                                      </div>
