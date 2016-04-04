@@ -101,6 +101,9 @@
 </div>
 
 <script type="text/javascript">
+    
+    $('#brand_name').val('<?php echo $data_admin_part_1["brand_id"]; ?>');
+    $('#category').val('<?php echo $data_admin_part_1["short_name"]; ?>');
 
     $('.other_tabs').click(function (event) {
 

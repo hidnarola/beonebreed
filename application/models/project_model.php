@@ -46,7 +46,13 @@ class Project_model extends CI_Model {
         $id = $this->db->insert('project_attachments', $data);
         $last_id = $this->db->insert_id();
         return $last_id;
-        //return $id;
+    }
+
+    public function add_multiple_attachemnt($data) {
+
+        $id = $this->db->insert_batch('project_attachments', $data);
+        $last_id = $this->db->insert_id();
+        return $last_id;
     }
 
     public function add_timesheet_attachemnt($data) {
@@ -153,8 +159,8 @@ class Project_model extends CI_Model {
 
     public function get_project_manager() {
         $type_ids = array('2');
-        $this->db->where('user_type','2');
-        $this->db->where('is_deleted','0');
+        $this->db->where('user_type', '2');
+        $this->db->where('is_deleted', '0');
         $query = $this->db->get_where('users');
         $res = $query->result();
         return $res;
@@ -188,9 +194,9 @@ class Project_model extends CI_Model {
     }
 
     public function update_records($id = 0) {
-        
-        $category_id = (int)$this->input->post('category_id');
-        $estimated_days = (int)$this->input->post('estimated_days');
+
+        $category_id = (int) $this->input->post('category_id');
+        $estimated_days = (int) $this->input->post('estimated_days');
         $priority = $this->input->post('priority');
         $project_manager = $this->input->post('project_manager');
         $quick_notes = $this->input->post('quick_notes');
@@ -209,11 +215,11 @@ class Project_model extends CI_Model {
                 'quick_notes' => $quick_notes,
             );
         } else {
-            if($project_name != $project['name']){
-                $res_proj_res = $this->products_model->getfrom('projects',false,array('where'=>array('name'=>$project_name)));
-                if(!empty($res_proj_res)){
+            if ($project_name != $project['name']) {
+                $res_proj_res = $this->products_model->getfrom('projects', false, array('where' => array('name' => $project_name)));
+                if (!empty($res_proj_res)) {
                     $this->session->set_flashdata('unique_project', 'The Project Name field must contain a unique value.');
-                    redirect('project/edit/'.$id);
+                    redirect('project/edit/' . $id);
                 }
             }
             $data = array(
@@ -311,12 +317,12 @@ class Project_model extends CI_Model {
     }
 
     public function delete_records_by_project_id($id) {
-        $tables = array('project_actionplan', 'project_attachments', 'project_external_notes', 'project_notes', 
-                        'project_suppliers', 'project_timesheet');
+        $tables = array('project_actionplan', 'project_attachments', 'project_external_notes', 'project_notes',
+            'project_suppliers', 'project_timesheet');
         foreach ($tables as $table) {
-            $this->db->where('project_id',$id);
-            $q = $this->db->get($table); 
-            if ( $q->num_rows() > 0 )  {
+            $this->db->where('project_id', $id);
+            $q = $this->db->get($table);
+            if ($q->num_rows() > 0) {
                 $this->db->where('project_id', $id);
                 $this->db->delete($table);
             }
@@ -363,7 +369,7 @@ class Project_model extends CI_Model {
     // All Notification Queries
     // ------------------------------------------------------------------------
 
-    public function add_notification($data){
+    public function add_notification($data) {
         $this->db->insert('notifications', $data);
         $last_id = $this->db->insert_id();
         return $last_id;
