@@ -1,4 +1,3 @@
-
 <div class='row' id='content-wrapper'>
     <div class='col-xs-12'>
         <div class='row'>
@@ -69,11 +68,22 @@
                                 <tbody>
                                     <?php
                                     if (!empty($products_new)) {
+                                        $images = ['jpeg', 'jpg', 'gif', 'png'];
                                         foreach ($products_new as $prod) {
+                                            $ext = strtolower(pathinfo($prod->profile_image, PATHINFO_EXTENSION));
+                                            $image_profile = '#';
+                                            $class = 'no_preview';
+                                            if (in_array($ext, $images)) {
+                                                $image_profile = '/uploads/'.$prod->profile_image;
+                                                $class = 'fancybox';
+                                            }
                                             ?>
                                             <tr>
                                                 <!-- changes -->
-                                                <td><?php echo $prod->p_id; ?></td>
+                                                <td><?php echo $prod->p_id; ?>
+                                                    <a class="<?php echo $class; ?>" rel="gallery1_10" href="<?php echo $image_profile; ?>" title="robe.jpg">
+                                                        <img class="projectImage" src="<?php echo $image_profile; ?>" alt="">
+                                                    </a> </td>
                                                 <td><?php echo $prod->product_name; ?></td>
                                                 <td><?php echo $prod->name; ?></td>
                                                 <td><?php echo $prod->product_code; ?></td>
@@ -104,5 +114,16 @@
     </div>
 </div>
 <script type="text/javascript">
+    $(document).ready(function () {
+        $('.fancybox').fancybox({
+            type: 'iframe',
+            afterShow: function () {
+                $('.fancybox-inner body').css('overflow-x', 'visible !important');
+                $('.fancybox-inner').css('width', 'auto !important');
+            }
 
+        });
+
+
+    });
 </script>

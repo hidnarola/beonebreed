@@ -16,12 +16,12 @@ class Project extends CI_Controller {
     }
 
     public function index() {
-        
+
         $data['inprogress_list'] = $this->project_model->get_all_inprogress_project();
         $data['idea_list'] = $this->project_model->get_all_idea_project();
         $inprogress_projects = array();
 
-        if(!empty($data['inprogress_list'])) {
+        if (!empty($data['inprogress_list'])) {
             foreach ($data['inprogress_list'] as $attach) {
                 $inprogress_project['id'] = $attach->id;
                 $inprogress_project['name'] = $attach->name;
@@ -37,7 +37,7 @@ class Project extends CI_Controller {
         }
 
         $idea_projects = array();
-        if(!empty($data['idea_list'])) {
+        if (!empty($data['idea_list'])) {
             foreach ($data['idea_list'] as $attachment) {
                 $idea_project['pid'] = $attachment->pid;
                 $idea_project['name'] = $attachment->name;
@@ -61,7 +61,7 @@ class Project extends CI_Controller {
 
     // Project Add functionality 
     public function add() {
-        
+
         // p($this->session->all_userdata(),true);    
 
         $data['project_type'] = $this->project_model->get_all_types();
@@ -98,14 +98,14 @@ class Project extends CI_Controller {
 
             $id = $this->project_model->add_records($data, TRUE);
 
-            
+
             // ---------------------------- Notification --------------------------------------------
             $sess_username = $this->session->userdata('username');
-            $en_msg = 'Project has been assigned it to you by '.$sess_username;
-            $fr_msg = 'Projet a été attribué à vous par '.$sess_username;
+            $en_msg = 'Project has been assigned it to you by ' . $sess_username;
+            $fr_msg = 'Projet a été attribué à vous par ' . $sess_username;
             //id for last inseted project
-            $not_data = array('user_id'=>$project_manager,'notification_en'=>$en_msg,'notification_fr'=>$fr_msg,
-                              'project_id'=>$id);
+            $not_data = array('user_id' => $project_manager, 'notification_en' => $en_msg, 'notification_fr' => $fr_msg,
+                'project_id' => $id);
             $this->project_model->add_notification($not_data);
             // ---------------------------- //Notification --------------------------------------------
 
@@ -133,7 +133,7 @@ class Project extends CI_Controller {
 
             $this->products_model->insert_into('project_suppliers', $data_add);
             $this->session->set_flashdata('success', 'Supplier has been successfully added.');
-             redirect('project/edit/' . $pid);
+            redirect('project/edit/' . $pid);
         }
     }
 
@@ -441,8 +441,10 @@ class Project extends CI_Controller {
 
     public function edit($id = 0) {
         /* if ($this->form_validation->run('project') == FALSE){ */
-        if($id == '' || $id == 0){ show_404();}
-    
+        if ($id == '' || $id == 0) {
+            show_404();
+        }
+
         $data['project_type'] = $this->project_model->get_all_types();
         $data['project_manager'] = $this->project_model->get_project_manager();
         $data['categories'] = $this->project_model->get_caregory();
@@ -452,12 +454,14 @@ class Project extends CI_Controller {
         $data['attachment'] = $this->project_model->get_project_attachment($id);
         $data['notes'] = $this->project_model->get_project_notes($id);
         $data['external_link'] = $this->project_model->get_project_external_link($id);
-        $data['suppliers'] = $this->products_model->getfrom('project_suppliers','project_suppliers.id as pid,project_suppliers.*,suppliers.*',array('where'=>array('project_suppliers.project_id'=>$id)),array('join'=>array( array('table'=>'suppliers','condition'=>'suppliers.id = project_suppliers.supplier_id') )));
+        $data['suppliers'] = $this->products_model->getfrom('project_suppliers', 'project_suppliers.id as pid,project_suppliers.*,suppliers.*', array('where' => array('project_suppliers.project_id' => $id)), array('join' => array(array('table' => 'suppliers', 'condition' => 'suppliers.id = project_suppliers.supplier_id'))));
 
-        if(empty($data['project'])){ show_404(); } 
-        
+        if (empty($data['project'])) {
+            show_404();
+        }
+
         $this->template->load('admin_default', 'project/edit', $data);
-        
+
         /* }else{ */
         if (!empty($_POST)) {
             if ($this->project_model->update_records($id, TRUE)) {
@@ -686,27 +690,38 @@ class Project extends CI_Controller {
     /*  By Parth Viramgama pav */
     public function add_similar_project_attachment() {
 
+        $uploaded_file = reArrayFiles($_FILES['userfile']);
+
         $config['upload_path'] = './uploads/';
         $config['allowed_types'] = '*';
         $this->load->library('upload', $config);
-
-        if ($_FILES['file']['name']) {
-            if (!$this->upload->do_upload('file')) {
-                $response = array('status' => 'fail', 'msg' => $this->upload->display_errors());
-                echo json_encode($response);
-                die();
-            } else {
-                $upload_data = array('uploads' => $this->upload->data('file'));
+        $response = array();
+        $upload_data = array();
+        if (count($uploaded_file) > 0) {
+            foreach ($uploaded_file as $a => $b) {
+                $_FILES['userfile'] = $b;
+                if (!$this->upload->do_upload('userfile')) {
+                    $response[] = array('status' => 'fail', 'msg' => $this->upload->display_errors());
+                } else {
+                    $upload_data[] = array('uploads' => $this->upload->data('userfile'));
+                }
             }
         }
-        $data_upload = array(
-            'project_id' => $this->input->post('project_id'),
-            'name' => $upload_data['uploads']['file_name'],
-        );
-        $last_inserted_id = $this->project_model->add_attachemnt($data_upload, TRUE);
+        $responce_file = array();
+        foreach ($upload_data as $a => $b) {
+            $data_upload[] = array(
+                'project_id' => $this->input->post('project_id'),
+                'name' => $b['uploads']['file_name'],
+            );
+            $responce_file[] = $b['uploads']['file_name'];
+        }
+
+        //   p($data_upload, true);
+
+        $last_inserted_id = $this->project_model->add_multiple_attachemnt($data_upload);
 
         if (!empty($last_inserted_id)) {
-            $response = array('status' => 'success', 'msg' => 'Your file has been successfully added', 'file_name' => $upload_data['uploads']['file_name'], 'id' => $last_inserted_id);
+            $response = array('status' => 'success', 'msg' => 'Your file has been successfully added', 'file_name' => $responce_file);
             echo json_encode($response);
             die();
         } else {
