@@ -362,7 +362,7 @@ if (!empty($project['quick_notes'])) {
                                                                                         <ul id="attachment" class="tab-ul">   
                                                                                             <?php foreach ($attachment as $u_key) { ?>
 
-                                                                                                <li style="list-style:none"><a href='uploads/<?php echo $u_key->name; ?>' target='_blank'><?php echo $u_key->name; ?></a></li>
+                                                                                                <li style="list-style:none"><a href='uploads/<?php echo $u_key->name; ?>' target='_blank' class="fancybox"><?php echo $u_key->name; ?></a></li>
 
 <?php } ?> 
                                                                                         </ul>
@@ -420,7 +420,8 @@ if (!empty($project['id'])) {
                                                                                                                             <ul id="notes" class="tab-ul">
                                                                                                                                 <?php foreach ($notes as $u_key) { ?>
 
-                                                                                                                                    <li style="list-style:none"><a href="javascript:void(0)"  data-desc="<?php echo $u_key->description; ?>" class="notes_link" id="<?php echo $u_key->id; ?>"><?php echo $u_key->name; ?></a><span style="margin-left: 60px;"><?php $date = new DateTime($u_key->created_date);
+                                                                                                                                    <li style="list-style:none">
+                                                                                                                                        <a href="javascript:void(0)"  data-desc="<?php echo $u_key->description; ?>" class="notes_link" id="<?php echo $u_key->id; ?>"><?php echo $u_key->name; ?></a><span style="margin-left: 60px;"><?php $date = new DateTime($u_key->created_date);
                                                                                                                                 echo $date->format('d F Y'); ?></span></li>
 
 <?php } ?> 
@@ -605,361 +606,368 @@ if (!empty($project['id'])) {
 
 
 
-                                                                                                            <script>
+<script>
 
-                                                                                                                $(document).ready(function () {
+    $(document).ready(function () {
 
-                                                                                                                    disableForm('project_add_form');
+        disableForm('project_add_form');
 
-                                                                                                                });
+        $('.fancybox').fancybox({
+            type: 'iframe',
+            afterShow: function () {
+                $('.fancybox-inner body').css('overflow-x', 'visible !important');
+                $('.fancybox-inner').css('width', 'auto !important');
+            }
 
+        });
 
+    });
 
-                                                                                                                function disableForm(formID) {
 
 
-                                                                                                                    $('#' + formID).children(':input').attr('disabled', 'disabled');
-                                                                                                                }
+    function disableForm(formID) {
+        $('#' + formID).children(':input').attr('disabled', 'disabled');
+    }
 
 
-                                                                                                                $(document).on("click", "#btn_finish_send", function () {
+    $(document).on("click", "#btn_finish_send", function () {
 
-                                                                                                                    submitForm();
-                                                                                                                });
-                                                                                                                $(document).on("click", "#upload_form_data", function () {
+        submitForm();
+    });
+    $(document).on("click", "#upload_form_data", function () {
 
-                                                                                                                    uploadForm();
-                                                                                                                });
-                                                                                                                $(document).on("click", "#notes_form_data", function () {
+        uploadForm();
+    });
+    $(document).on("click", "#notes_form_data", function () {
 
-                                                                                                                    noteForm();
-                                                                                                                });
+        noteForm();
+    });
 
-                                                                                                                $(document).on("click", "#external_form_data", function () {
+    $(document).on("click", "#external_form_data", function () {
 
-                                                                                                                    externalForm();
-                                                                                                                });
+        externalForm();
+    });
 
-                                                                                                                $(document).on("click", "#expand_notes", function () {
+    $(document).on("click", "#expand_notes", function () {
 
-                                                                                                                    $('#expand_notes_form').show();
-                                                                                                                    $('#notes_div_form').hide();
+        $('#expand_notes_form').show();
+        $('#notes_div_form').hide();
 
-                                                                                                                });
-                                                                                                                $(document).on("click", "#expand_external_links", function () {
+    });
+    $(document).on("click", "#expand_external_links", function () {
 
-                                                                                                                    $('#expand_external_form').show();
-                                                                                                                    $('#external_link_div').hide();
+        $('#expand_external_form').show();
+        $('#external_link_div').hide();
 
-                                                                                                                });
-                                                                                                                $(document).on("click", "#cancel_external_form", function () {
+    });
+    $(document).on("click", "#cancel_external_form", function () {
 
-                                                                                                                    $("#expand_external_form").css("display", "none");
-                                                                                                                    $('#external_link_div').show();
-                                                                                                                });
-                                                                                                                $(document).on("click", "#cancel_notes_form", function () {
+        $("#expand_external_form").css("display", "none");
+        $('#external_link_div').show();
+    });
+    $(document).on("click", "#cancel_notes_form", function () {
 
-                                                                                                                    $('#expand_notes_form').hide();
-                                                                                                                    $('#notes_div_form').show();
-                                                                                                                });
+        $('#expand_notes_form').hide();
+        $('#notes_div_form').show();
+    });
 
-                                                                                                                $(document).on('click', '.notes_link', function () {
+    $(document).on('click', '.notes_link', function () {
 
-                                                                                                                    var data = $(this).attr("data-desc");
-                                                                                                                    $('#notes_desc').text(data);
-                                                                                                                    $('#my_notes_description').modal('show');
-                                                                                                                });
-                                                                                                                $(document).on('click', '.external_link_data', function () {
+        var data = $(this).attr("data-desc");
+        $('#notes_desc').text(data);
+        $('#my_notes_description').modal('show');
+    });
+    $(document).on('click', '.external_link_data', function () {
 
-                                                                                                                    var data = $(this).attr("data-desc");
-                                                                                                                    $('#external_desc').text(data);
-                                                                                                                    $('#my_external_description').modal('show');
-                                                                                                                });
-                                                                                                                $(document).on('click', '#archive_projects', function () {
+        var data = $(this).attr("data-desc");
+        $('#external_desc').text(data);
+        $('#my_external_description').modal('show');
+    });
+    $(document).on('click', '#archive_projects', function () {
 
-                                                                                                                    var id = $(this).attr("data-archieve");
-                                                                                                                    archieveProject(id);
+        var id = $(this).attr("data-archieve");
+        archieveProject(id);
 
-                                                                                                                });
+    });
 
-                                                                                                                //deleting notes
-                                                                                                                $('#delete_my_notes').click(function () {
+    //deleting notes
+    $('#delete_my_notes').click(function () {
 
-                                                                                                                    var cek_id = new Array();
-                                                                                                                    $('.chk_notes:checked').each(function () {
-                                                                                                                        cek_id.push($(this).val());// an array of selected values
-                                                                                                                    });
-                                                                                                                    if (cek_id.length == 0) {
-                                                                                                                        alert("Please select atleast one checkbox");
-                                                                                                                    } else {
+        var cek_id = new Array();
+        $('.chk_notes:checked').each(function () {
+            cek_id.push($(this).val());// an array of selected values
+        });
+        if (cek_id.length == 0) {
+            alert("Please select atleast one checkbox");
+        } else {
 
-                                                                                                                        if (confirm("Are you sure you want to delete this?")) {
-                                                                                                                            $.ajax({
-                                                                                                                                url: '<?php echo base_url() . "project/delete_selected_notes"; ?>',
-                                                                                                                                type: 'post',
-                                                                                                                                data: {ids: cek_id},
-                                                                                                                                dataType: 'json',
-                                                                                                                                success: function (data) {
-
-                                                                                                                                    if (data.status == 'success') {
-
-                                                                                                                                        location.reload();
-                                                                                                                                    }
-                                                                                                                                }
-                                                                                                                            });
-                                                                                                                        } else {
-                                                                                                                            return false;
-                                                                                                                        }
-
-                                                                                                                    }
-                                                                                                                });
-
-
-
-                                                                                                                //deleting attachment
-                                                                                                                $('#delete_my_upload').click(function () {
-
-                                                                                                                    var cek_id = new Array();
-                                                                                                                    $('.chk_attachment:checked').each(function () {
-                                                                                                                        cek_id.push($(this).val());// an array of selected values
-                                                                                                                    });
-                                                                                                                    if (cek_id.length == 0) {
-                                                                                                                        alert("Please select atleast one checkbox");
-                                                                                                                    } else {
-
-                                                                                                                        if (confirm("Are you sure you want to delete this?")) {
-                                                                                                                            $.ajax({
-                                                                                                                                url: '<?php echo base_url() . "project/delete_selected_attachemnt"; ?>',
-                                                                                                                                type: 'post',
-                                                                                                                                data: {ids: cek_id},
-                                                                                                                                dataType: 'json',
-                                                                                                                                success: function (data) {
-
-                                                                                                                                    if (data.status == 'success') {
-
-                                                                                                                                        location.reload();
-                                                                                                                                    }
-                                                                                                                                }
-                                                                                                                            });
-                                                                                                                        } else {
-                                                                                                                            return false;
-                                                                                                                        }
-
-                                                                                                                    }
-                                                                                                                });
-
-                                                                                                                //delete selected link
-                                                                                                                $('#delete_my_external_link').click(function () {
-
-                                                                                                                    var cek_id = new Array();
-                                                                                                                    $('.chk_external_link:checked').each(function () {
-                                                                                                                        cek_id.push($(this).val());// an array of selected values
-                                                                                                                    });
-                                                                                                                    if (cek_id.length == 0) {
-                                                                                                                        alert("Please select atleast one checkbox");
-                                                                                                                    } else {
-
-                                                                                                                        if (confirm("Are you sure you want to delete this?")) {
-                                                                                                                            $.ajax({
-                                                                                                                                url: '<?php echo base_url() . "project/delete_selected_link"; ?>',
-                                                                                                                                type: 'post',
-                                                                                                                                data: {ids: cek_id},
-                                                                                                                                dataType: 'json',
-                                                                                                                                success: function (data) {
-
-                                                                                                                                    if (data.status == 'success') {
-
-                                                                                                                                        location.reload();
-                                                                                                                                    }
-                                                                                                                                }
-                                                                                                                            });
-                                                                                                                        } else {
-                                                                                                                            return false;
-                                                                                                                        }
-
-                                                                                                                    }
-                                                                                                                });
-
-
-
-                                                                                                                function archieveProject(id) {
-                                                                                                                    var project_id = id;
-                                                                                                                    if (confirm("Are you sure you want to archieve this project?")) {
-                                                                                                                        $.ajax({
-                                                                                                                            url: '<?php echo site_url('project/project_archieve'); ?>',
-                                                                                                                            type: 'post',
-                                                                                                                            data: {id: project_id},
-                                                                                                                            dataType: 'json',
-                                                                                                                            success: function (response) {
-                                                                                                                                if (response.status == 'success') {
-                                                                                                                                    window.location.href = "<?php echo site_url('project/archieve_projects'); ?>";
-                                                                                                                                }
-                                                                                                                            }
-                                                                                                                        });
-                                                                                                                    } else {
-                                                                                                                        return false;
-                                                                                                                    }
-                                                                                                                }
-
-                                                                                                                function externalForm() {
-
-                                                                                                                    $('#link_err_msg').text('');
-                                                                                                                    var external_link = $('#external_com').val();
-
-                                                                                                                    if (external_link == '') {
-                                                                                                                        $('#link_err_msg').text('please enter External link');
-                                                                                                                        $("#external_com").focus();
-                                                                                                                        return false;
-                                                                                                                    }
-                                                                                                                    var data = new FormData($("#project_external_form")[0]);
-                                                                                                                    $('#response_msg').html('');
-                                                                                                                    $.ajax({
-                                                                                                                        url: '<?php echo site_url('project/project_add_links'); ?>',
-                                                                                                                        processData: false,
-                                                                                                                        type: 'post',
-                                                                                                                        dataType: 'json',
-                                                                                                                        data: data,
-                                                                                                                        contentType: false,
-                                                                                                                        success: function (response) {
-
-                                                                                                                            if (response.status == 'success') {
-
-                                                                                                                                $('#myexternalModal').modal('hide');
-                                                                                                                                //$("#external_links").append($("<li style=list-style-type:none;>").text(response.link_name));
-                                                                                                                                $('#external_links').append('<li style=list-style-type:none;><input type=checkbox name=chk[] id="chk_attachment" class=chk_external_link value=' + response.link_id + '><a data-desc="' + response.link_desc + '" class="external_link_data" id="' + response.link_id + '" href="javascript::void(0)">' + response.link_name + '</a><span style=margin-left:60px>' + response.dates1 + '</span></li>');
-                                                                                                                                $('#project_external_form')[0].reset();
-                                                                                                                                $("#expand_external_form").css("display", "none");
-                                                                                                                                $('#external_link_div').show();
-                                                                                                                                //location.reload();
-
-                                                                                                                            } else {
-
-                                                                                                                            }
-                                                                                                                        }
-                                                                                                                    });
-
-                                                                                                                    return false;
-                                                                                                                }
-                                                                                                                function noteForm() {
-
-                                                                                                                    $('#notes_err_msg').text('');
-                                                                                                                    var notes_title = $('#notes_title').val();
-
-
-                                                                                                                    if (notes_title == '') {
-                                                                                                                        $('#notes_err_msg').text('please enter notes title');
-                                                                                                                        $("#notes_name").focus();
-                                                                                                                        return false;
-                                                                                                                    }
-
-                                                                                                                    var data = new FormData($("#project_notes_form")[0]);
-                                                                                                                    $('#response_msg').html('');
-                                                                                                                    $.ajax({
-                                                                                                                        url: '<?php echo site_url('project/project_add_notes'); ?>',
-                                                                                                                        processData: false,
-                                                                                                                        type: 'post',
-                                                                                                                        dataType: 'json',
-                                                                                                                        data: data,
-                                                                                                                        contentType: false,
-                                                                                                                        success: function (response) {
-
-                                                                                                                            if (response.status == 'success') {
-                                                                                                                                $('#project_notes_form')[0].reset();
-                                                                                                                                $('#mynoteModal').modal('hide');
-                                                                                                                                //$("#notes").append($("<li style=list-style-type:none;>").text(response.notes_name));
-                                                                                                                                //$('#notes').append('<li style=list-style-type:none;></li>');
-                                                                                                                                $('#notes').append('<li style=list-style-type:none;><input type=checkbox name=chk[] id="chk_attachment" class=chk_notes value=' + response.id + '><a data-desc="' + response.desc + '" class="notes_link" id="' + response.id + '" href="javascript::void(0)">' + response.notes_name + '</a><span style=margin-left:60px>' + response.dates1 + '</span></li>');
-                                                                                                                                $("#expand_notes_form").css("display", "none");
-                                                                                                                                $("#notes_div_form").css("display", "block");
-
-
-                                                                                                                                //location.reload();
-
-                                                                                                                            } else {
-
-                                                                                                                            }
-                                                                                                                        }
-                                                                                                                    });
-
-                                                                                                                    return false;
-                                                                                                                }
-                                                                                                                function uploadForm() {
-
-                                                                                                                    $('#file_err_msg').text('');
-                                                                                                                    var file = $('#file').val();
-                                                                                                                    if (file == '') {
-                                                                                                                        $('#file_err_msg').text('please upload some attachment');
-                                                                                                                        $("#file").focus();
-                                                                                                                        return false;
-                                                                                                                    }
-                                                                                                                    var data = new FormData($("#project_upload_form")[0]);
-                                                                                                                    $('#response_msg').html('');
-                                                                                                                    $.ajax({
-                                                                                                                        url: '<?php echo site_url('project/project_upload_form'); ?>',
-                                                                                                                        processData: false,
-                                                                                                                        type: 'post',
-                                                                                                                        dataType: 'json',
-                                                                                                                        data: data,
-                                                                                                                        contentType: false,
-                                                                                                                        success: function (response) {
-
-                                                                                                                            if (response.status == 'success') {
-
-                                                                                                                                $('#myuploadModal').modal('hide');
-                                                                                                                                $('#response_msg').append('<span style=color:green; id=msgs>' + response.msg + '</span>');
-                                                                                                                                //location.reload();
-
-                                                                                                                                $('#attachment').append('<li style=list-style-type:none;><input type=checkbox name=chk[] id="chk_attachment" class=chk_attachment value=' + response.id + '><a target=_blank href=uploads/' + response.file_name + '>' + response.file_name + '</a></li>');
-
-                                                                                                                                //$("#attachment").append($("<input type=checkbox name=checkbox[] value='1'><li style=list-style-type:none;>").text(response.file_name));
-                                                                                                                            } else {
-                                                                                                                                $('#response_msg').append('<span style=color:red; id=msgs>' + response.msg + '</span>');
-                                                                                                                            }
-                                                                                                                        }
-                                                                                                                    });
-
-                                                                                                                    return false;
-                                                                                                                }
-                                                                                                                function submitForm() {
-
-                                                                                                                    var project_name = $('#name').val();
-                                                                                                                    $('#response_msg').html('');
-                                                                                                                    $('#type_err_msg').text('');
-                                                                                                                    $('#name_err_msg').text('');
-                                                                                                                    var project_type = $('#project_type_id').val();
-                                                                                                                    if (project_name == '') {
-                                                                                                                        $('#name_err_msg').text('please enter project name');
-                                                                                                                        $("#name").focus();
-                                                                                                                        return false;
-                                                                                                                    }
-                                                                                                                    if (project_type == '') {
-
-                                                                                                                        $('#type_err_msg').text('please enter project type');
-                                                                                                                        $("#project_type_id").focus();
-                                                                                                                        return false;
-                                                                                                                    }
-                                                                                                                    var data = new FormData($("#project_add_form")[0]);
-                                                                                                                    $.ajax({
-                                                                                                                        url: '<?php echo site_url('project/add'); ?>',
-                                                                                                                        processData: false,
-                                                                                                                        type: 'post',
-                                                                                                                        dataType: 'json',
-                                                                                                                        data: data,
-                                                                                                                        contentType: false,
-                                                                                                                        success: function (response) {
-
-                                                                                                                            if (response.status == 'success') {
-
-                                                                                                                                $('#response_msg').append('<span style=color:green; id=msgs>' + response.msg + '</span>');
-                                                                                                                            } else {
-                                                                                                                                $('#response_msg').append('<span style=color:red; id=msgs>' + response.msg + '</span>');
-                                                                                                                            }
-                                                                                                                        }
-                                                                                                                    });
-
-                                                                                                                    return false;
-                                                                                                                }
-
-
-                                                                                                                //$("#slider-example1-amount").text("$" + $("#slider-example1").slider("value"));
-                                                                                                            </script>	
+            if (confirm("Are you sure you want to delete this?")) {
+                $.ajax({
+                    url: '<?php echo base_url() . "project/delete_selected_notes"; ?>',
+                    type: 'post',
+                    data: {ids: cek_id},
+                    dataType: 'json',
+                    success: function (data) {
+
+                        if (data.status == 'success') {
+
+                            location.reload();
+                        }
+                    }
+                });
+            } else {
+                return false;
+            }
+
+        }
+    });
+
+
+
+    //deleting attachment
+    $('#delete_my_upload').click(function () {
+
+        var cek_id = new Array();
+        $('.chk_attachment:checked').each(function () {
+            cek_id.push($(this).val());// an array of selected values
+        });
+        if (cek_id.length == 0) {
+            alert("Please select atleast one checkbox");
+        } else {
+
+            if (confirm("Are you sure you want to delete this?")) {
+                $.ajax({
+                    url: '<?php echo base_url() . "project/delete_selected_attachemnt"; ?>',
+                    type: 'post',
+                    data: {ids: cek_id},
+                    dataType: 'json',
+                    success: function (data) {
+
+                        if (data.status == 'success') {
+
+                            location.reload();
+                        }
+                    }
+                });
+            } else {
+                return false;
+            }
+
+        }
+    });
+
+    //delete selected link
+    $('#delete_my_external_link').click(function () {
+
+        var cek_id = new Array();
+        $('.chk_external_link:checked').each(function () {
+            cek_id.push($(this).val());// an array of selected values
+        });
+        if (cek_id.length == 0) {
+            alert("Please select atleast one checkbox");
+        } else {
+
+            if (confirm("Are you sure you want to delete this?")) {
+                $.ajax({
+                    url: '<?php echo base_url() . "project/delete_selected_link"; ?>',
+                    type: 'post',
+                    data: {ids: cek_id},
+                    dataType: 'json',
+                    success: function (data) {
+
+                        if (data.status == 'success') {
+
+                            location.reload();
+                        }
+                    }
+                });
+            } else {
+                return false;
+            }
+
+        }
+    });
+
+
+
+    function archieveProject(id) {
+        var project_id = id;
+        if (confirm("Are you sure you want to archieve this project?")) {
+            $.ajax({
+                url: '<?php echo site_url('project/project_archieve'); ?>',
+                type: 'post',
+                data: {id: project_id},
+                dataType: 'json',
+                success: function (response) {
+                    if (response.status == 'success') {
+                        window.location.href = "<?php echo site_url('project/archieve_projects'); ?>";
+                    }
+                }
+            });
+        } else {
+            return false;
+        }
+    }
+
+    function externalForm() {
+
+        $('#link_err_msg').text('');
+        var external_link = $('#external_com').val();
+
+        if (external_link == '') {
+            $('#link_err_msg').text('please enter External link');
+            $("#external_com").focus();
+            return false;
+        }
+        var data = new FormData($("#project_external_form")[0]);
+        $('#response_msg').html('');
+        $.ajax({
+            url: '<?php echo site_url('project/project_add_links'); ?>',
+            processData: false,
+            type: 'post',
+            dataType: 'json',
+            data: data,
+            contentType: false,
+            success: function (response) {
+
+                if (response.status == 'success') {
+
+                    $('#myexternalModal').modal('hide');
+                    //$("#external_links").append($("<li style=list-style-type:none;>").text(response.link_name));
+                    $('#external_links').append('<li style=list-style-type:none;><input type=checkbox name=chk[] id="chk_attachment" class=chk_external_link value=' + response.link_id + '><a data-desc="' + response.link_desc + '" class="external_link_data" id="' + response.link_id + '" href="javascript::void(0)">' + response.link_name + '</a><span style=margin-left:60px>' + response.dates1 + '</span></li>');
+                    $('#project_external_form')[0].reset();
+                    $("#expand_external_form").css("display", "none");
+                    $('#external_link_div').show();
+                    //location.reload();
+
+                } else {
+
+                }
+            }
+        });
+
+        return false;
+    }
+    function noteForm() {
+
+        $('#notes_err_msg').text('');
+        var notes_title = $('#notes_title').val();
+
+
+        if (notes_title == '') {
+            $('#notes_err_msg').text('please enter notes title');
+            $("#notes_name").focus();
+            return false;
+        }
+
+        var data = new FormData($("#project_notes_form")[0]);
+        $('#response_msg').html('');
+        $.ajax({
+            url: '<?php echo site_url('project/project_add_notes'); ?>',
+            processData: false,
+            type: 'post',
+            dataType: 'json',
+            data: data,
+            contentType: false,
+            success: function (response) {
+
+                if (response.status == 'success') {
+                    $('#project_notes_form')[0].reset();
+                    $('#mynoteModal').modal('hide');
+                    //$("#notes").append($("<li style=list-style-type:none;>").text(response.notes_name));
+                    //$('#notes').append('<li style=list-style-type:none;></li>');
+                    $('#notes').append('<li style=list-style-type:none;><input type=checkbox name=chk[] id="chk_attachment" class=chk_notes value=' + response.id + '><a data-desc="' + response.desc + '" class="notes_link" id="' + response.id + '" href="javascript::void(0)">' + response.notes_name + '</a><span style=margin-left:60px>' + response.dates1 + '</span></li>');
+                    $("#expand_notes_form").css("display", "none");
+                    $("#notes_div_form").css("display", "block");
+
+
+                    //location.reload();
+
+                } else {
+
+                }
+            }
+        });
+
+        return false;
+    }
+    function uploadForm() {
+
+        $('#file_err_msg').text('');
+        var file = $('#file').val();
+        if (file == '') {
+            $('#file_err_msg').text('please upload some attachment');
+            $("#file").focus();
+            return false;
+        }
+        var data = new FormData($("#project_upload_form")[0]);
+        $('#response_msg').html('');
+        $.ajax({
+            url: '<?php echo site_url('project/project_upload_form'); ?>',
+            processData: false,
+            type: 'post',
+            dataType: 'json',
+            data: data,
+            contentType: false,
+            success: function (response) {
+
+                if (response.status == 'success') {
+
+                    $('#myuploadModal').modal('hide');
+                    $('#response_msg').append('<span style=color:green; id=msgs>' + response.msg + '</span>');
+                    //location.reload();
+
+                    $('#attachment').append('<li style=list-style-type:none;><input type=checkbox name=chk[] id="chk_attachment" class=chk_attachment value=' + response.id + '><a target=_blank href=uploads/' + response.file_name + '>' + response.file_name + '</a></li>');
+
+                    //$("#attachment").append($("<input type=checkbox name=checkbox[] value='1'><li style=list-style-type:none;>").text(response.file_name));
+                } else {
+                    $('#response_msg').append('<span style=color:red; id=msgs>' + response.msg + '</span>');
+                }
+            }
+        });
+
+        return false;
+    }
+    function submitForm() {
+
+        var project_name = $('#name').val();
+        $('#response_msg').html('');
+        $('#type_err_msg').text('');
+        $('#name_err_msg').text('');
+        var project_type = $('#project_type_id').val();
+        if (project_name == '') {
+            $('#name_err_msg').text('please enter project name');
+            $("#name").focus();
+            return false;
+        }
+        if (project_type == '') {
+
+            $('#type_err_msg').text('please enter project type');
+            $("#project_type_id").focus();
+            return false;
+        }
+        var data = new FormData($("#project_add_form")[0]);
+        $.ajax({
+            url: '<?php echo site_url('project/add'); ?>',
+            processData: false,
+            type: 'post',
+            dataType: 'json',
+            data: data,
+            contentType: false,
+            success: function (response) {
+
+                if (response.status == 'success') {
+
+                    $('#response_msg').append('<span style=color:green; id=msgs>' + response.msg + '</span>');
+                } else {
+                    $('#response_msg').append('<span style=color:red; id=msgs>' + response.msg + '</span>');
+                }
+            }
+        });
+
+        return false;
+    }
+
+
+    //$("#slider-example1-amount").text("$" + $("#slider-example1").slider("value"));
+</script>	
