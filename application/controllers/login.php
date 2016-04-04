@@ -3,7 +3,6 @@
 class Login extends CI_Controller {
 
     public function __construct() {
-
         parent::__construct();
         $this->load->library('template');
         $this->load->helper('url');
@@ -14,12 +13,12 @@ class Login extends CI_Controller {
     public function index($user = null) {
         if ($this->session->userdata('admin_logged_in') || $this->session->userdata('client_user_logged_in')) {
             if ($this->session->userdata('user_type') == 1 || $this->session->userdata('user_type') == 2) {
-                    redirect('dashboard');
-                } else if ($this->session->userdata('user_type') == 3) {
-                    redirect('client_news');
-                } else if ($this->session->userdata('user_type') == 4) {
-                    redirect('client_news');
-                }
+                redirect('dashboard');
+            } else if ($this->session->userdata('user_type') == 3) {
+                redirect('client_news');
+            } else if ($this->session->userdata('user_type') == 4) {
+                redirect('client_news');
+            }
         }
         $data = array();
         $data['company_logo'] = '';
