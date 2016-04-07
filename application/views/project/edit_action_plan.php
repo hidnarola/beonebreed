@@ -56,16 +56,21 @@
                             ?>">
                             <span style="color:red"><?php echo form_error('action'); ?><span>
                                     </div>
-
-                                    <div class='form-group'>
-                                        <label for='inputText'>Resposible</label>
-                                        <input class='form-control' id='inputText' placeholder='Resposible' type='text' name='resposible' value="<?php
-                                        if (!empty($action_plan['resposible'])) {
-                                            echo $action_plan['resposible'];
-                                        }
-                                        ?>">
-                                    </div>
-
+                                    <?php if (!empty($action_plan_user)) { ?>
+                                        <div class='form-group'>
+                                            <label for='inputText'>Resposible</label>
+                                            <select name="responsible_id" class='form-control'>
+                                                <?php foreach ($action_plan_user as $a => $b) { ?>
+                                                    <option value="<?= $b['id']; ?>" <?php echo $action_plan['resposible_id'] == $b['id']?'selected':'' ?>  ><?= $b['username'] ?></option>
+                                                <?php } ?>
+                                            </select>
+    <!--                                        <input class='form-control' id='inputText' placeholder='Resposible' type='text' name='resposible' value="<?php
+                                            if (!empty($action_plan['resposible'])) {
+                                                echo $action_plan['resposible'];
+                                            }
+                                            ?>">-->
+                                        </div>
+                                    <?php } ?>
                                     <div class='form-group'>
                                         <label for='inputText'>Metric Key</label>
                                         <input class='form-control' id='inputText' placeholder='Metric Key' type='text' name='mertic_key' value="<?php

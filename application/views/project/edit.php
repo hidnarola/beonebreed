@@ -274,17 +274,20 @@ if (!empty($project['id'])) {
                                                                                     </tr>
                                                                                 </thead>
                                                                                 <tbody>
+                                                                                    
                                                                                     <?php foreach ($action_plan as $u_key) { ?>
                                                                                         <tr>
                                                                                             <td><?php echo $u_key->action; ?> </td>
-                                                                                            <td><?php echo $u_key->resposible; ?> </td>
+                                                                                            <td><?php echo ucfirst($u_key->resposible); ?> </td>
                                                                                             <td><?php echo $u_key->mertic_key; ?> </td>
-                                                                                            <td>
+                                                                                            <td class="progress_td" >
                                                                                                 <div class='task'>
-                                                                                                    <small class='pull-right'><?php echo $u_key->complete_level; ?>%</small>
+                                                                                                    <small class='pull-right'>
+                                                                                                        <span><?php echo $u_key->complete_level; ?></span>%
+                                                                                                    </small>
                                                                                                 </div>
-                                                                                                <div class='progress'>
-                                                                                                    <div class='progress-bar progress-bar-success' style='width:<?php echo $u_key->complete_level; ?>%;'><?php echo $u_key->complete_level; ?>%</div>
+                                                                                                <div class="progress"  data-id="<?php echo $u_key->id; ?>" data-level="<?php echo $u_key->complete_level; ?>"  >
+                                                                                                    <div data-level="<?php echo $u_key->complete_level; ?>"></div>
                                                                                                 </div>
                                                                                             </td>
                                                                                             <td>
@@ -1226,4 +1229,53 @@ if (!empty($project['id'])) {
                                                                                                                     }
                                                                                                                 });
                                                                                                             </script>
+                                                                                                            <script>
+                                                                                                                $(function () {
+
+                                                                                                                    $("table tbody tr td.progress_td > .progress").each(function () {
+
+                                                                                                                        var value = $(this).data('level');
+                                                                                                                        var id = null;
+                                                                                                                        //console.log(value);
+                                                                                                                        $(this).children('div').empty().slider({
+                                                                                                                            range: "min",
+                                                                                                                            value: value,
+                                                                                                                            min: 0,
+                                                                                                                            max: 100,
+                                                                                                                            slide: function (event, ui) {
+
+
+                                                                                                                                $(this).data('level', ui.value);
+                                                                                                                                $(this).parent().parent().children('.task').children('small').children('span').html(ui.value);
+
+                                                                                                                            },
+                                                                                                                            stop: function (event, ui) {
+                                                                                                                                $.ajax({
+                                                                                                                                    url: '<?php echo base_url('project/action_plan_change_level'); ?>',
+                                                                                                                                    type: 'POST',
+                                                                                                                                    data: {
+                                                                                                                                        id: $(this).parent().data('id'),
+                                                                                                                                        level: ui.value
+                                                                                                                                    },
+                                                                                                                                    dataType: 'json',
+                                                                                                                                    success: function (data) {
+
+                                                                                                                                    }
+                                                                                                                                });
+
+                                                                                                                            }
+
+                                                                                                                        });
+
+                                                                                                                    });
+                                                                                                                });
+                                                                                                            </script>
+                                                                                                            <style>
+                                                                                                                .ui-slider .ui-slider-range {
+                                                                                                                    background-color: #3c3c3c !important;
+                                                                                                                }
+                                                                                                                .ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default {
+                                                                                                                    background-color: #BDBCBC !important;
+                                                                                                                }
+                                                                                                            </style>
 

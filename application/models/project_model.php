@@ -64,8 +64,11 @@ class Project_model extends CI_Model {
     }
 
     public function get_action_plan($id = 0) {
-
-        $query = $this->db->get_where('project_actionplan', array('project_id' => $id));
+        $this->db->select('users.username as resposible ,project_actionplan.*');
+        $this->db->from('project_actionplan');
+        $this->db->join('users', 'users.id = project_actionplan.resposible_id');
+        $this->db->where(array('project_actionplan.project_id' => $id));
+        $query = $this->db->get();
         return $query->result();
     }
 
@@ -184,8 +187,18 @@ class Project_model extends CI_Model {
     }
 
     public function get_action_plan_data($id = 0) {
+
         $query = $this->db->get_where('project_actionplan', array('id' => $id));
         return $query->row_array();
+    }
+
+    public function action_plan_user() {
+        $this->db->select('id,username');
+        $this->db->from('users');
+        $this->db->where(array('user_group_id !=' => '1', 'is_deleted' => '0'));
+        $query = $this->db->get();
+        //p($this->db->last_query());
+        return $query->result_array();
     }
 
     public function get_timesheet_data($id = 0) {
@@ -257,26 +270,7 @@ class Project_model extends CI_Model {
         return $this->db->update('projects', $data);
     }
 
-    public function update_action_plan($id = 0) {
-
-        if ($this->input->post('target_date') == '') {
-            $target_date = '0000-00-00 00:00:00';
-        } else {
-            $target_date = $this->input->post('target_date');
-        }
-        if ($this->input->post('notes') == '') {
-            $notes = '';
-        } else {
-            $notes = $this->input->post('notes');
-        }
-        $data = array(
-            'action' => $this->input->post('action'),
-            'resposible' => $this->input->post('resposible'),
-            'mertic_key' => $this->input->post('mertic_key'),
-            'complete_level' => $this->input->post('complete_level'),
-            'target_date' => $target_date,
-            'notes' => $notes,
-        );
+    public function update_action_plan($id = 0, $data) {
         $this->db->where('id', $id);
         return $this->db->update('project_actionplan', $data);
     }

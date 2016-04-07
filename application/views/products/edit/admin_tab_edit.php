@@ -961,6 +961,8 @@
             }
         });
     }
+    var part_1 = 0;
+    var part_2 = 0
 
     function validate_admin_part_1(){
         
@@ -996,7 +998,7 @@
                dataType: 'json',
                data: form_data,
                success:function(data){
-                    
+                     part_1 = data.complete_bar_no;
                     $('#product_id').val(data.product_id);
                     $('.percentage_complete_admin').html(data.complete_bar_no+'%');
                     $('#complete_admin_part_1').attr('disabled',true);
@@ -1278,7 +1280,7 @@
                     $('#complete_admin_part_2').attr('disabled',true);
                     $('.part_2_admin').addClass('active');
                     $('.percentage_complete_admin').html(data.complete_bar_no+'%');
-                        
+                       part_2 = data.complete_bar_no;
                     return false;
                     
                }
@@ -1296,6 +1298,11 @@
         if(product_id == ''){
             //uncommetn below line for validate Part-1 Required Part
             $(function(){ bootbox.alert('Please create product in Part-1.');  });
+            return false;
+        }
+        
+         if (part_2 == 0) {
+            bootbox.alert('Please fill part-2.');
             return false;
         }
 

@@ -376,22 +376,53 @@ class Project extends CI_Controller {
     public function edit_action_plan($id = 0) {
 
         if ($this->form_validation->run('action_plan') == FALSE) {
-
-
             $data['action_plan'] = $this->project_model->get_action_plan_data($id);
             $data['project'] = $this->project_model->get($data['action_plan']['project_id']);
-
+            $data['action_plan_user'] = $this->project_model->action_plan_user();
             $this->template->load('admin_default', 'project/edit_action_plan', $data);
         } else {
             if (!empty($_POST)) {
+
+                if ($this->input->post('target_date') == '') {
+                    $target_date = '0000-00-00 00:00:00';
+                } else {
+                    $target_date = $this->input->post('target_date');
+                }
+                if ($this->input->post('notes') == '') {
+                    $notes = '';
+                } else {
+                    $notes = $this->input->post('notes');
+                }
                 $data = array(
                     'action' => $this->input->post('action'),
-                    'resposible' => $this->input->post('resposible'),
+                    'resposible_id' => $this->input->post('responsible_id'),
                     'mertic_key' => $this->input->post('mertic_key'),
-                    'complete_level' => $this->input->post('name'),
+                    'complete_level' => $this->input->post('complete_level'),
+                    'target_date' => $target_date,
+                    'notes' => $notes,
                 );
+                $old_action_plan = $this->project_model->get_action_plan_data($id);
 
-                if ($this->project_model->update_action_plan($id)) {
+                if ($this->project_model->update_action_plan($id, $data)) {
+                    if ($old_action_plan['resposible_id'] != $this->input->post('responsible_id')) {
+
+
+
+                        $this->db->insert('notifications', [
+                            'user_id' => $old_action_plan['resposible_id'],
+                            'project_id' => $id,
+                            'notification_en' => 'Action plan has been revoked from you by ' . $this->session->userdata('username'),
+                            'notification_fr' => 'Le plan d\'action a été révoqué de vous par ' . $this->session->userdata('username')]
+                        );
+
+                        $this->db->insert('notifications', [
+                            'user_id' => $this->input->post('responsible_id'),
+                            'project_id' => $id,
+                            'notification_en' => 'Action has been assigned to you by ' . $this->session->userdata('username'),
+                            'notification_fr' => 'Des mesures ont été attribué par ' . $this->session->userdata('username')]
+                        );
+                    }
+
                     $this->session->set_flashdata('msg', 'Your Action plan has been successfully updated');
                 } else {
                     $this->session->set_flashdata('err_msg', 'Oops!Something Wrong!');
@@ -450,6 +481,7 @@ class Project extends CI_Controller {
         $data['categories'] = $this->project_model->get_caregory();
         $data['project'] = $this->project_model->get($id);
         $data['action_plan'] = $this->project_model->get_action_plan($id);
+        //p($data['action_plan'],1);
         $data['timesheet'] = $this->project_model->get_timesheet($id);
         $data['attachment'] = $this->project_model->get_project_attachment($id);
         $data['notes'] = $this->project_model->get_project_notes($id);
@@ -459,7 +491,7 @@ class Project extends CI_Controller {
         if (empty($data['project'])) {
             show_404();
         }
-
+        //  p($data['action_plan'],true);
         $this->template->load('admin_default', 'project/edit', $data);
 
         /* }else{ */
@@ -777,6 +809,19 @@ class Project extends CI_Controller {
         );
         echo json_encode($response);
         die();
+    }
+
+    public function action_plan_change_level() {
+        $id = $this->input->post('id');
+        $level = $this->input->post('level');
+        if (!empty($id) && !empty($level)) {
+            $this->db->where('id', $id);
+            if ($this->db->update('project_actionplan', ['complete_level' => $level])) {
+                echo json_encode(['status' => 'success']);
+            } else {
+                echo json_encode(['status' => 'fail']);
+            }
+        }
     }
 
 }
