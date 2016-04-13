@@ -108,7 +108,7 @@
                             <span class="color_red error_generate hide">Please generate product code</span>
                         </div>  
                         <div class='controls pull-right'>
-                            <a onclick="generate_upc_ean()" id="generate_barcode" class="btn btn-success btn-lg">GENERATE</a>
+                            <a onclick="generate_upc_ean('#upc')" id="generate_barcode" class="btn btn-success btn-lg">GENERATE</a>
                         </div>
                     </div>
                     <div class="clearfix"></div>
@@ -269,7 +269,7 @@
                         <div class='form-group col-sm-4 padding-l-0'>
                             <div class='controls'>
                                 <a onclick="event.preventDefault();
-                                        m_upc_get();
+                                        generate_upc_ean('#m_upc');
                                         $('.error_master_case').html('');" class="btn btn-g-bar-code btn-success">G</a>
                             </div>
                         </div>
@@ -410,7 +410,7 @@
                         <div class='form-group col-sm-4 padding-l-0'>
                             <div class='controls'>
                                 <a onclick="event.preventDefault();
-                                        i_upc_get();
+                                        generate_upc_ean('#i_upc');
                                         $('.error_innercase').html('');" class="btn btn-g-bar-code btn-success">G</a>
                             </div>
                         </div>
@@ -551,7 +551,7 @@
                         <div class='form-group col-sm-4 padding-l-0'>
                             <div class='controls'>
                                 <a onclick="event.preventDefault();
-                                        p_upc_get();
+                                        generate_upc_ean('#p_upc');
                                         $('.error_pallet').html('');" class="btn btn-g-bar-code btn-success">G</a>
                             </div>
                         </div>
@@ -867,7 +867,7 @@
 //------------------- ADMIN PART 1 START ---------------------/
 
     // For generate UPC and EAN number     
-    function generate_upc_ean() {
+    function generate_upc_ean(id) {
 
         $("#fakeLoader").attr('style', ''); // Remove Style Attribute for reuse
         $("#fakeLoader").fakeLoader({
@@ -883,12 +883,20 @@
             url: '<?php echo base_url() . "products/generate_upc_ean"; ?>',
             type: 'POST',
             dataType: 'json',
-            data: {cat_id: cat_id},
+            data: {cat_id: cat_id, type: id},
             success: function (data) {
-                $('#upc').val(data.upc);
-                $('#ean').val(data.ean);
-                $('#prod_code').val(data.product_code);
-                $('#barcode_id').val(data.id);
+                if (data.upc != '0') {
+                    $(id).val(data.upc);
+                    if (id == '#upc') {
+                        $('#ean').val(data.ean);
+                        $('#prod_code').val(data.product_code);
+                        $('#barcode_id').val(data.id);
+                    } else {
+                        // $(id).data()
+                    }
+                } else {
+                    alert('All bar codes are assigned!!');
+                }
             }
         });
     }
