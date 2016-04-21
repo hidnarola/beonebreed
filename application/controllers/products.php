@@ -76,7 +76,7 @@ class Products extends CI_Controller {
             )
         ));
         $data['data_admin_part_2'] = $this->products_model->getfrom('dimension', false, array('where_in' => array('dimension_id' => ['1', '2', '3', '4']), 'where' => array('product_id' => $pid)));
-        $data['data_admin_part_3'] = $this->products_model->getfrom('product_question', false, array('where_in' => array('question_id' => ['11', '12', '13', '14', '15', '16', '24']), 'where' => array('product_id' => $pid)));
+        $data['data_admin_part_3'] = $this->products_model->getfrom('product_question', false, array('where_in' => array('question_id' => ['11', '12', '13', '14', '15', '16', '24','25']), 'where' => array('product_id' => $pid)));
         // p($data['data_admin_part_3'],true);
         // ------------------------------------------------------------------------
         // ------------------------------------------------------------------------
@@ -118,7 +118,8 @@ class Products extends CI_Controller {
         // qry();
         // p($data['data_admin_part_3']);	
         // exit();
-
+//        var_dump($data);
+//        die();
         $this->template->load('admin_default', 'products/edit/edit', $data);
     }
 
@@ -144,6 +145,7 @@ class Products extends CI_Controller {
         //$this->session->unset_userdata('some_name');
         $not_in = array_values($list_upc);
         $barcodes = $this->barcode_model->get_unique_barcode($not_in);
+
         if (empty($barcodes)) {
             echo json_encode(['upc' => 0]);
             return;
@@ -158,6 +160,454 @@ class Products extends CI_Controller {
         $random_barcode['product_code'] = $product_code;
 
         echo json_encode($random_barcode);
+    }
+
+    public function admin_form_alltab() {
+        $form_data = $this->input->post();
+
+        //add or update part 1
+        $barcode_id = $this->input->post('barcode_id');
+        $brand_id = $this->input->post('brand_name');
+        $cat_short_name = $this->input->post('category');
+        $description = $this->input->post('description');
+        $description = empty($description)?NULL:$description;
+        $product_id = $this->input->post('product_id');
+        $product_name = $this->input->post('product_name');
+        $product_code = $this->input->post('prod_code');
+
+        $category_data = $this->products_model->getfromtable('categories', array('short_name' => $cat_short_name));
+        $cat_id = $category_data['id'];
+
+        $data_admin_part_1 = array(
+            'product_name' => $product_name,
+            'category_id' => $cat_id,
+            'brand_id' => $brand_id,
+            'product_code' => $product_code,
+            'description' => $description,
+            'barcode_id' => $barcode_id
+        );
+        if (!empty($product_id)) {
+            unset($data_admin_part_1['barcode_id']);
+            unset($data_admin_part_1['product_code']);
+            $this->products_model->update($product_id, $data_admin_part_1);
+        } else {
+            $product_id = $this->products_model->insert($data_admin_part_1);
+            $this->db->where('id', $barcode_id);
+            $this->db->update('bar_code', ['is_assigned' => '1', 'description' => 'Assigned for product : ' . $product_name]);
+
+            $list_upc = $this->session->userdata('UPC');
+            if (isset($list_upc['#upc'])) {
+                unset($list_upc['#upc']);
+                $this->session->set_userdata('UPC', $list_upc);
+            }
+        }
+
+        // ------------------------------------------------------------------------
+
+        $decode_json = array();
+        $product_new_data = $this->products_model->getfrom('products_new', false, array('where' => array('id' => $product_id)), array('single' => true));
+
+        if ($product_new_data['admin_tab_complete'] != '') {
+            $decode_json = json_decode($product_new_data['admin_tab_complete'], true);
+            $decode_json['part_1'] = '33';
+            $complete_bar_no = array_sum(array($decode_json['part_1'], $decode_json['part_2'], $decode_json['part_3']));
+        } else {
+            $decode_json['part_1'] = '33';
+            $decode_json['part_2'] = '0';
+            $decode_json['part_3'] = '0';
+            $complete_bar_no = '33';
+        }
+
+        $encode_json = json_encode($decode_json);
+        $this->products_model->update_into('products_new', $product_id, array('admin_tab_complete' => $encode_json));
+
+        //add or update part 2
+        //For Retail
+        $r_length = $this->input->post('r_length');
+        $r_length = empty($r_length)?NULL:$r_length;
+        
+        $r_width = $this->input->post('r_width');
+        $r_width = empty($r_width)?NULL:$r_width;
+        
+        $r_height = $this->input->post('r_height');
+        $r_height = empty($r_height)?NULL:$r_height;
+        
+        $r_gross_weight = $this->input->post('r_gross_weight');
+        $r_gross_weight = empty($r_gross_weight)?NULL:$r_gross_weight;
+        
+        $r_net_weight = $this->input->post('r_net_weight');
+        $r_net_weight = empty($r_net_weight)?NULL:$r_net_weight;
+        
+        $dm3_retail = $this->input->post('dm3_retail');
+        $dm3_retail = empty($dm3_retail)?NULL:$dm3_retail;
+        
+        $product_retail_id = $this->input->post('product_retail_id'); // Retail ID from dimension Table
+
+        $data_retail = array(
+            'product_id' => $product_id,
+            'dimension_id' => '1',
+            'length' => $r_length,
+            'width' => $r_width,
+            'height' => $r_height,
+            'gross_weight' => $r_gross_weight,
+            'net_weight' => $r_net_weight,
+            'dm3' => $dm3_retail
+        );
+
+        // If Id find then UPDATE otherwise insert
+        if (!empty($product_retail_id)) {
+            $this->products_model->update_into('dimension', $product_retail_id, $data_retail);
+        } else {
+            $product_retail_id = $this->products_model->insert_into('dimension', $data_retail);
+        }
+
+        // ------------------------------------------------------------------------
+
+        $m_upc = $this->input->post('m_upc');
+        
+        $m_length = $this->input->post('m_length');
+        $m_length = empty($m_length)?NULL:$m_length;
+        
+        $m_width = $this->input->post('m_width');
+        $m_width = empty($m_width)?NULL:$m_width;
+        
+        $m_height = $this->input->post('m_height');
+        $m_height = empty($m_height)?NULL:$m_height;
+        
+        $m_gross_weight = $this->input->post('m_gross_weight');
+        $m_gross_weight = empty($m_gross_weight)?NULL:$m_gross_weight;
+        
+        $m_net_weight = $this->input->post('m_net_weight');
+        $m_net_weight = empty($m_net_weight)?NULL:$m_net_weight;
+        
+        $dm3_master = $this->input->post('dm3_master');
+        $dm3_master = empty($dm3_master)?NULL:$dm3_master;
+        
+        $no_pc_master = $this->input->post('no_pc_master');
+        $no_pc_master = empty($no_pc_master)?NULL:$no_pc_master;
+        
+        $product_master_id = $this->input->post('product_master_id'); // MasterCase ID from dimension Table
+
+        $data_master = array(
+            'product_id' => $product_id,
+            'dimension_id' => '2',
+            'length' => $m_length,
+            'width' => $m_width,
+            'height' => $m_height,
+            'gross_weight' => $m_gross_weight,
+            'net_weight' => $m_net_weight,
+            'dm3' => $dm3_master,
+            'no_of_pc_case' => $no_pc_master,
+            'upc' => $m_upc
+        );
+
+        // If Id find then UPDATE otherwise insert
+        if (!empty($product_master_id)) {
+            unset($data_master['upc']);
+            $this->products_model->update_into('dimension', $product_master_id, $data_master);
+        } else {
+
+            $product_master_id = $this->products_model->insert_into('dimension', $data_master);
+            $this->db->where('upc', $m_upc);
+            $this->db->update('bar_code', ['is_assigned' => '1', 'description' => 'Assigned for mastercase  UPC']);
+
+            $list_upc = $this->session->userdata('UPC');
+            if (isset($list_upc['#m_upc'])) {
+                unset($list_upc['#m_upc']);
+                $this->session->set_userdata('UPC', $list_upc);
+            }
+        }
+
+        // ------------------------------------------------------------------------
+
+        $i_upc = $this->input->post('i_upc');
+        $i_length = $this->input->post('i_length');
+        $i_length = empty($i_length)?NUll:$i_length;
+        
+        $i_width = $this->input->post('i_width');
+        $i_width = empty($i_width)?NULL:$i_width;
+        
+        $i_height = $this->input->post('i_height');
+        $i_height = empty($i_height)?NULL:$i_height;
+        
+        $i_gross_weight = $this->input->post('i_gross_weight');
+        $i_gross_weight = empty($i_gross_weight)?NULL:$i_gross_weight;
+        
+        $i_net_weight = $this->input->post('i_net_weight');
+        $i_net_weight = empty($i_net_weight)?NULL:$i_net_weight;
+        
+        $dm3_inner = $this->input->post('dm3_inner');
+        $dm3_inner = empty($dm3_inner)?NULL:$dm3_inner;
+        
+        $no_pc_inner = $this->input->post('no_pc_inner');
+        $no_pc_inner = empty($no_pc_inner)?NULL:$no_pc_inner;
+        
+        $product_inner_id = $this->input->post('product_inner_id'); // InnerCase ID from dimension Table
+
+        if (!empty($i_upc)) {
+
+            $data_inner = array(
+                'product_id' => $product_id,
+                'dimension_id' => '3',
+                'length' => $i_length,
+                'width' => $i_width,
+                'height' => $i_height,
+                'gross_weight' => $i_gross_weight,
+                'net_weight' => $i_net_weight,
+                'dm3' => $dm3_inner,
+                'no_of_pc_case' => $no_pc_inner,
+                'upc' => $i_upc
+            );
+
+            if (!empty($product_inner_id)) {
+                unset($data_master['upc']);
+                $this->products_model->update_into('dimension', $product_inner_id, $data_inner);
+            } else {
+                $product_inner_id = $this->products_model->insert_into('dimension', $data_inner);
+                $this->db->where('upc', $i_upc);
+                $this->db->update('bar_code', ['is_assigned' => '1', 'description' => 'Assigned for intercase UPC']);
+
+                $list_upc = $this->session->userdata('UPC');
+                if (isset($list_upc['#i_upc'])) {
+                    unset($list_upc['#i_upc']);
+                    $this->session->set_userdata('UPC', $list_upc);
+                }
+            }
+        }
+
+        // ------------------------------------------------------------------------
+
+        $p_upc = $this->input->post('p_upc');
+        
+        $p_length = $this->input->post('p_length');
+        $p_length = empty($p_length)?NULL:$p_length;
+        
+        $p_width = $this->input->post('p_width');
+        $p_width = empty($p_width)?NULL:$p_width;
+        
+        $p_height = $this->input->post('p_height');
+        $p_height = empty($p_height)?NULL:$p_height;
+        
+        $p_gross_weight = $this->input->post('p_gross_weight');
+        $p_gross_weight = empty($p_gross_weight)?NULL:$p_gross_weight;
+        
+        $p_net_weight = $this->input->post('p_net_weight');
+        $p_net_weight = empty($p_net_weight)?NULL:$p_net_weight;
+        
+        $dm3_pallet = $this->input->post('dm3_pallet');
+        $dm3_pallet = empty($dm3_pallet)?NULL:$dm3_pallet;
+        
+        $p_case_row = $this->input->post('p_case_row');
+        $p_case_row = empty($p_case_row)?NULL:$p_case_row;
+        
+        $p_no_of_row = $this->input->post('p_no_of_row');
+        $p_no_of_row = empty($p_no_of_row)?NULL:$p_no_of_row;
+        
+        $p_cma_per_pal = $this->input->post('p_cma_per_pal');
+        $p_cma_per_pal = empty($p_cma_per_pal)?NULL:$p_cma_per_pal;
+        
+        $product_pallet_id = $this->input->post('product_pallet_id');
+
+        $data_pallet = array(
+            'product_id' => $product_id,
+            'dimension_id' => '4',
+            'length' => $p_length,
+            'width' => $p_width,
+            'height' => $p_height,
+            'gross_weight' => $p_gross_weight,
+            'net_weight' => $p_net_weight,
+            'dm3' => $dm3_pallet,
+            'upc' => $p_upc,
+            'case_row' => $p_case_row,
+            'no_of_rows' => $p_no_of_row,
+            'cma_per_pal' => $p_cma_per_pal
+        );
+
+        // If Id find then UPDATE otherwise insert
+        if (!empty($product_pallet_id)) {
+            unset($data_master['upc']);
+            $this->products_model->update_into('dimension', $product_pallet_id, $data_pallet);
+        } else {
+            $product_pallet_id = $this->products_model->insert_into('dimension', $data_pallet);
+            $this->db->where('upc', $p_upc);
+            $this->db->update('bar_code', ['is_assigned' => '1', 'description' => 'Assigned for pallet UPC']);
+
+            $list_upc = $this->session->userdata('UPC');
+            if (isset($list_upc['#p_upc'])) {
+                unset($list_upc['#p_upc']);
+                $this->session->set_userdata('UPC', $list_upc);
+            }
+        }
+
+        // ------------------------------------------------------------------------
+
+        $decode_json = array();
+        $product_new_data = $this->products_model->getfrom('products_new', false, array('where' => array('id' => $product_id)), array('single' => true));
+
+        if ($product_new_data['admin_tab_complete'] != '') {
+            $decode_json = json_decode($product_new_data['admin_tab_complete'], true);
+            $decode_json['part_2'] = '33';
+            $complete_bar_no = array_sum(array($decode_json['part_1'], $decode_json['part_2'], $decode_json['part_3']));
+        } else {
+            $decode_json['part_2'] = '33';
+        }
+
+        $encode_json = json_encode($decode_json);
+        $this->products_model->update_into('products_new', $product_id, array('admin_tab_complete' => $encode_json));
+
+        //add or update part-3 data
+        $switch_11 = $this->input->post('switch_11'); // HAVE YOU SENT THE UPC CODE TO THE SUPPLIER ?
+        $switch_12 = $this->input->post('switch_12'); // HAVE YOU CREATED THE PRODUCT IN OUR ERP (ACOMBA) ?
+        $switch_24 = $this->input->post('switch_24'); // HAVE YOU CREATED THE PRODUCT IN OUR ERP (ACOMBA) ?
+        $switch_25 = $this->input->post('switch_25'); // HAVE YOU CREATED THE PRODUCT IN OUR ERP (ACOMBA) ?
+        
+        $note_13 = $this->input->post('mrsp_canada');
+        $note_13 = empty($note_13)?NULL:$note_13;
+        
+        $note_14 = $this->input->post('hs_code');
+        $note_14 = empty($note_14)?NULL:$note_14;
+        
+        $note_15 = $this->input->post('mrsp_international');
+        $note_15 = empty($note_15)?NULL:$note_15;
+        
+        $note_16 = $this->input->post('country_origin');
+        $note_16 = empty($note_16)?NULL:$note_16;
+        
+
+        $id_11 = $this->input->post('id_11');
+        $id_12 = $this->input->post('id_12');
+        $id_13 = $this->input->post('id_13');
+        $id_14 = $this->input->post('id_14');
+        $id_15 = $this->input->post('id_15');
+        $id_16 = $this->input->post('id_16');
+        $id_24 = $this->input->post('id_24');
+        $id_25 = $this->input->post('id_25');
+
+        //If Id Found then Update otherwise Insert data
+        if (!empty($id_11) || !empty($id_12) || !empty($id_13) || !empty($id_14) || !empty($id_15) || !empty($id_16)) {
+
+            if (!empty($switch_11)) {
+                $data_q11 = array('question_id' => '11', 'product_id' => $product_id, 'answer' => '1');
+                $this->products_model->update_into('product_question', $id_11, $data_q11);
+            } else {
+                $data_q11 = array('question_id' => '11', 'product_id' => $product_id, 'answer' => '0');
+                $this->products_model->update_into('product_question', $id_11, $data_q11);
+            }
+
+            if (!empty($switch_12)) {
+                $data_q12 = array('question_id' => '12', 'product_id' => $product_id, 'answer' => '1');
+                $this->products_model->update_into('product_question', $id_12, $data_q12);
+            } else {
+                $data_q12 = array('question_id' => '12', 'product_id' => $product_id, 'answer' => '0');
+                $this->products_model->update_into('product_question', $id_12, $data_q12);
+            }
+
+            if (!empty($switch_24)) {
+                $data_q24 = array('question_id' => '24', 'product_id' => $product_id, 'answer' => '1');
+                $this->products_model->update_into('product_question', $id_24, $data_q24);
+            } else {
+                $data_q24 = array('question_id' => '24', 'product_id' => $product_id, 'answer' => '0');
+                $this->products_model->update_into('product_question', $id_24, $data_q24);
+            }
+
+            if (!empty($switch_25)) {
+                $data_q25 = array('question_id' => '25', 'product_id' => $product_id, 'answer' => '1');
+                $this->products_model->update_into('product_question', $id_25, $data_q25);
+            } else {
+                $data_q25 = array('question_id' => '25', 'product_id' => $product_id, 'answer' => '0');
+                $this->products_model->update_into('product_question', $id_25, $data_q25);
+            }
+
+            $data_q13 = array('question_id' => '13', 'product_id' => $product_id, 'notes' => $note_13);
+            $this->products_model->update_into('product_question', $id_13, $data_q13);
+
+            $data_q14 = array('question_id' => '14', 'product_id' => $product_id, 'notes' => $note_14);
+            $this->products_model->update_into('product_question', $id_14, $data_q14);
+
+            $data_q15 = array('question_id' => '15', 'product_id' => $product_id, 'notes' => $note_15);
+            $this->products_model->update_into('product_question', $id_15, $data_q15);
+
+            $data_q16 = array('question_id' => '16', 'product_id' => $product_id, 'notes' => $note_16);
+            $this->products_model->update_into('product_question', $id_16, $data_q16);
+        } else {
+
+            if (!empty($switch_11)) {
+                $data_q11 = array('question_id' => '11', 'product_id' => $product_id, 'answer' => '1');
+                $id_11 = $this->products_model->insert_into('product_question', $data_q11);
+            } else {
+                $data_q11 = array('question_id' => '11', 'product_id' => $product_id, 'answer' => '0');
+                $id_11 = $this->products_model->insert_into('product_question', $data_q11);
+            }
+
+            if (!empty($switch_12)) {
+                $data_q12 = array('question_id' => '12', 'product_id' => $product_id, 'answer' => '1');
+                $id_12 = $this->products_model->insert_into('product_question', $data_q12);
+            } else {
+                $data_q12 = array('question_id' => '12', 'product_id' => $product_id, 'answer' => '0');
+                $id_12 = $this->products_model->insert_into('product_question', $data_q12);
+            }
+
+            if (!empty($switch_24)) {
+                $data_q24 = array('question_id' => '24', 'product_id' => $product_id, 'answer' => '1');
+                $id_24 = $this->products_model->insert_into('product_question', $data_q24);
+            } else {
+                $data_q24 = array('question_id' => '24', 'product_id' => $product_id, 'answer' => '0');
+                $id_24 = $this->products_model->insert_into('product_question', $data_q24);
+            }
+
+            if (!empty($switch_25)) {
+                $data_q25 = array('question_id' => '25', 'product_id' => $product_id, 'answer' => '1');
+                $id_25 = $this->products_model->insert_into('product_question', $data_q25);
+            } else {
+                $data_q25 = array('question_id' => '24', 'product_id' => $product_id, 'answer' => '0');
+                $id_25 = $this->products_model->insert_into('product_question', $data_q25);
+            }
+
+            $data_q13 = array('question_id' => '13', 'product_id' => $product_id, 'notes' => $note_13);
+            $id_13 = $this->products_model->insert_into('product_question', $data_q13);
+
+            $data_q14 = array('question_id' => '14', 'product_id' => $product_id, 'notes' => $note_14);
+            $id_14 = $this->products_model->insert_into('product_question', $data_q14);
+
+            $data_q15 = array('question_id' => '15', 'product_id' => $product_id, 'notes' => $note_15);
+            $id_15 = $this->products_model->insert_into('product_question', $data_q15);
+
+            $data_q16 = array('question_id' => '16', 'product_id' => $product_id, 'notes' => $note_16);
+            $id_16 = $this->products_model->insert_into('product_question', $data_q16);
+        }
+
+        // ------------------------------------------------------------------------
+
+        $decode_json = array();
+        $product_new_data = $this->products_model->getfrom('products_new', false, array('where' => array('id' => $product_id)), array('single' => true));
+
+        if ($product_new_data['admin_tab_complete'] != '') {
+            $decode_json = json_decode($product_new_data['admin_tab_complete'], true);
+            $decode_json['part_3'] = '34';
+            $complete_bar_no = array_sum(array($decode_json['part_1'], $decode_json['part_2'], $decode_json['part_3']));
+        } else {
+            $decode_json['part_3'] = '34';
+        }
+
+        $encode_json = json_encode($decode_json);
+        $this->products_model->update_into('products_new', $product_id, array('admin_tab_complete' => $encode_json));
+        echo json_encode(
+                array(
+                    'product_id' => $product_id, 
+                    'complete_bar_no' => $complete_bar_no,
+                    'product_retail_id' => $product_retail_id,
+                    'product_master_id' => $product_master_id,
+                    'product_pallet_id' => $product_pallet_id,
+                    'product_inner_id' => $product_inner_id,
+                    'id_11' => $id_11,
+                    'id_12' => $id_12,
+                    'id_13' => $id_13,
+                    'id_14' => $id_14,
+                    'id_15' => $id_15,
+                    'id_16' => $id_16,
+                    'id_24' => $id_24,
+                    'id_25' => $id_25,
+                ));
     }
 
     public function admin_form_tab_1() {
@@ -190,13 +640,12 @@ class Products extends CI_Controller {
             $product_id = $this->products_model->insert($data_admin_part_1);
             $this->db->where('id', $barcode_id);
             $this->db->update('bar_code', ['is_assigned' => '1', 'description' => 'Assigned for product : ' . $product_name]);
-            
-                $list_upc = $this->session->userdata('UPC');
-                if (isset($list_upc['#upc'])) {
-                    unset($list_upc['#upc']);
-                    $this->session->set_userdata('UPC', $list_upc);
-                }
-            
+
+            $list_upc = $this->session->userdata('UPC');
+            if (isset($list_upc['#upc'])) {
+                unset($list_upc['#upc']);
+                $this->session->set_userdata('UPC', $list_upc);
+            }
         }
 
         // ------------------------------------------------------------------------
@@ -283,17 +732,16 @@ class Products extends CI_Controller {
             unset($data_master['upc']);
             $this->products_model->update_into('dimension', $product_master_id, $data_master);
         } else {
-            
+
             $product_master_id = $this->products_model->insert_into('dimension', $data_master);
             $this->db->where('upc', $m_upc);
             $this->db->update('bar_code', ['is_assigned' => '1', 'description' => 'Assigned for mastercase  UPC']);
-            
-                $list_upc = $this->session->userdata('UPC');
-                if (isset($list_upc['#m_upc'])) {
-                    unset($list_upc['#m_upc']);
-                    $this->session->set_userdata('UPC', $list_upc);
-                }
-            
+
+            $list_upc = $this->session->userdata('UPC');
+            if (isset($list_upc['#m_upc'])) {
+                unset($list_upc['#m_upc']);
+                $this->session->set_userdata('UPC', $list_upc);
+            }
         }
 
         // ------------------------------------------------------------------------
@@ -330,13 +778,12 @@ class Products extends CI_Controller {
                 $product_inner_id = $this->products_model->insert_into('dimension', $data_inner);
                 $this->db->where('upc', $i_upc);
                 $this->db->update('bar_code', ['is_assigned' => '1', 'description' => 'Assigned for intercase UPC']);
-                
-                    $list_upc = $this->session->userdata('UPC');
-                    if (isset($list_upc['#i_upc'])) {
-                        unset($list_upc['#i_upc']);
-                        $this->session->set_userdata('UPC', $list_upc);
-                    }
-                
+
+                $list_upc = $this->session->userdata('UPC');
+                if (isset($list_upc['#i_upc'])) {
+                    unset($list_upc['#i_upc']);
+                    $this->session->set_userdata('UPC', $list_upc);
+                }
             }
         }
 
@@ -377,13 +824,12 @@ class Products extends CI_Controller {
             $product_pallet_id = $this->products_model->insert_into('dimension', $data_pallet);
             $this->db->where('upc', $p_upc);
             $this->db->update('bar_code', ['is_assigned' => '1', 'description' => 'Assigned for pallet UPC']);
-            
-                $list_upc = $this->session->userdata('UPC');
-                if (isset($list_upc['#p_upc'])) {
-                    unset($list_upc['#p_upc']);
-                    $this->session->set_userdata('UPC', $list_upc);
-                }
-            
+
+            $list_upc = $this->session->userdata('UPC');
+            if (isset($list_upc['#p_upc'])) {
+                unset($list_upc['#p_upc']);
+                $this->session->set_userdata('UPC', $list_upc);
+            }
         }
 
         // ------------------------------------------------------------------------
@@ -421,6 +867,7 @@ class Products extends CI_Controller {
         $switch_11 = $this->input->post('switch_11'); // HAVE YOU SENT THE UPC CODE TO THE SUPPLIER ?
         $switch_12 = $this->input->post('switch_12'); // HAVE YOU CREATED THE PRODUCT IN OUR ERP (ACOMBA) ?
         $switch_24 = $this->input->post('switch_24'); // HAVE YOU CREATED THE PRODUCT IN OUR ERP (ACOMBA) ?
+        $switch_25 = $this->input->post('switch_25'); // HAVE YOU CREATED THE PRODUCT IN OUR ERP (ACOMBA) ?
         $note_13 = $this->input->post('mrsp_canada');
         $note_14 = $this->input->post('hs_code');
         $note_15 = $this->input->post('mrsp_international');
@@ -434,6 +881,7 @@ class Products extends CI_Controller {
         $id_15 = $this->input->post('id_15');
         $id_16 = $this->input->post('id_16');
         $id_24 = $this->input->post('id_24');
+        $id_25 = $this->input->post('id_25');
 
         //If Id Found then Update otherwise Insert data
         if (!empty($id_11) || !empty($id_12) || !empty($id_13) || !empty($id_14) || !empty($id_15) || !empty($id_16)) {
@@ -460,6 +908,14 @@ class Products extends CI_Controller {
             } else {
                 $data_q24 = array('question_id' => '24', 'product_id' => $product_id, 'answer' => '0');
                 $this->products_model->update_into('product_question', $id_24, $data_q24);
+            }
+
+            if (!empty($switch_25)) {
+                $data_q25 = array('question_id' => '25', 'product_id' => $product_id, 'answer' => '1');
+                $this->products_model->update_into('product_question', $id_25, $data_q25);
+            } else {
+                $data_q25 = array('question_id' => '25', 'product_id' => $product_id, 'answer' => '0');
+                $this->products_model->update_into('product_question', $id_25, $data_q25);
             }
 
             $data_q13 = array('question_id' => '13', 'product_id' => $product_id, 'notes' => $note_13);
@@ -497,6 +953,14 @@ class Products extends CI_Controller {
             } else {
                 $data_q24 = array('question_id' => '24', 'product_id' => $product_id, 'answer' => '0');
                 $id_24 = $this->products_model->insert_into('product_question', $data_q24);
+            }
+
+            if (!empty($switch_25)) {
+                $data_q25 = array('question_id' => '25', 'product_id' => $product_id, 'answer' => '1');
+                $id_25 = $this->products_model->insert_into('product_question', $data_q25);
+            } else {
+                $data_q25 = array('question_id' => '24', 'product_id' => $product_id, 'answer' => '0');
+                $id_25 = $this->products_model->insert_into('product_question', $data_q25);
             }
 
             $data_q13 = array('question_id' => '13', 'product_id' => $product_id, 'notes' => $note_13);
@@ -539,6 +1003,7 @@ class Products extends CI_Controller {
                     'id_15' => $id_15,
                     'id_16' => $id_16,
                     'id_24' => $id_24,
+                    'id_25' => $id_25,
                     'complete_bar_no' => $complete_bar_no,
                     'qry' => $this->db->last_query()
                 )

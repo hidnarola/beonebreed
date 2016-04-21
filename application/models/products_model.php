@@ -403,9 +403,9 @@ class Products_model extends CI_Model {
     public function get_all_products() {
         $this->db->select("products_new.id as p_id,products_new.*,categories.name,bar_code.*, `pa`.`attachment` as `profile_image`");
         $this->db->from('products_new');
-        $this->db->join('categories', 'products_new.category_id=categories.id');
-        $this->db->join('bar_code', 'products_new.barcode_id=bar_code.id');
-        $this->db->join('products_attachments pa', "pa.product_id = products_new.id");
+        $this->db->join('categories', 'products_new.category_id=categories.id','left');
+        $this->db->join('bar_code', 'products_new.barcode_id=bar_code.id','left');
+        $this->db->join('products_attachments pa', "pa.product_id = products_new.id",'left');
        // $this->db->group_by('products_new.id');
         $query = $this->db->get();
         return $query->result();
