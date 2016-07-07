@@ -8,22 +8,9 @@
             <i class='icon-user'></i>
             <span>Manage User</span>
           </h1>
-            <ul class='breadcrumb' style="padding-top: 62px;">
-                        <li class='separator'>
-                        </li>
-                        <li>
-                            <a href="<?php echo site_url('user'); ?>">Settings/User</a>
-                        </li>
-                        <li class='separator'>
-                            <i class='icon-angle-right'></i>
-                        </li>
-                        <li>
-                            Add User
-                        </li>
-                    </ul>
-<!--          <div class='pull-right'>
+          <div class='pull-right'>
 
-          </div>-->
+          </div>
         </div>
       </div>
     </div>

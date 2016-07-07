@@ -406,7 +406,7 @@ class Products_model extends CI_Model {
         $this->db->join('categories', 'products_new.category_id=categories.id','left');
         $this->db->join('bar_code', 'products_new.barcode_id=bar_code.id','left');
         $this->db->join('products_attachments pa', "pa.product_id = products_new.id",'left');
-       // $this->db->group_by('products_new.id');
+        $this->db->group_by('products_new.id');
         $query = $this->db->get();
         return $query->result();
     }

@@ -71,10 +71,10 @@
                                         $images = ['jpeg', 'jpg', 'gif', 'png'];
                                         foreach ($products_new as $prod) {
                                             $ext = strtolower(pathinfo($prod->profile_image, PATHINFO_EXTENSION));
-                                            $image_profile = '#';
+                                            $image_profile = base_url().'uploads/no_image_available.jpg';
                                             $class = 'no_preview';
                                             if (in_array($ext, $images)) {
-                                                $image_profile = '/uploads/'.$prod->profile_image;
+                                                $image_profile = base_url().'uploads/products/'.$prod->profile_image;
                                                 $class = 'fancybox';
                                             }
                                             ?>

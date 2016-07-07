@@ -1,3 +1,9 @@
+.fancybox-nav {
+    width: 3% !important;
+}
+.fancybox-next {
+    right: 14px !important;
+}
 @media (max-width: 767px) {
   .text-center-xs {
     text-align: center; } }

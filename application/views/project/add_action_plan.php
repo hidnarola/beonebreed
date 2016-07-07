@@ -17,7 +17,7 @@
                         <i class='icon-angle-right'></i>
                     </li>
                     <li>
-                        <a href='<?php echo site_url('project/edit/' . $project['id']); ?>'><?php echo $project['name'];?></a>
+                        <a href='<?php echo site_url('project/edit/' . $project['id']); ?>'><?php echo $project['name']; ?></a>
                     </li>
                     <li class='separator'>
                         <i class='icon-angle-right'></i>
@@ -44,71 +44,76 @@
                             <label for='inputText'>Action</label><span style="color:red">*</span>
                             <input class='form-control' id='inputText' placeholder='Action' type='text' name='action' value="<?php echo set_value('action'); ?>">
                             <span style="color:red"><?php echo form_error('action'); ?></span>
-                                    </div>
-                                    <div class='form-group'>
-                                        <label for='inputText'>Responsible</label>
-                                        <input class='form-control' id='inputText' placeholder='Responsible' 
-                                               type='text' name='resposible' value="<?php echo set_value('resposible'); ?>">
-                                    </div>
+                        </div>
+                        <?php if (!empty($action_plan_user)) { ?>
+                            <div class='form-group'>
+                                <label for='inputText'>Resposible</label>
+                                <select name="responsible_id" class='form-control'>
+                                    <?php foreach ($action_plan_user as $a => $b) { ?>
+                                        <option value="<?= $b['id']; ?>"><?= $b['username'] ?></option>
+                                    <?php } ?>
+                                </select>
+                            </div>
+                        <?php } ?>
 
-                                    <div class='form-group'>
-                                        <label for='inputText'>Metric Key</label>
-                                        <input class='form-control' id='inputText' placeholder='Metric Key' 
-                                               type='text' name='mertic_key' value="<?php echo set_value('mertic_key'); ?>">
-                                    </div>
+                        <div class='form-group'>
+                            <label for='inputText'>Metric Key</label>
+                            <input class='form-control' id='inputText' placeholder='Metric Key' 
+                                   type='text' name='mertic_key' value="<?php echo set_value('mertic_key'); ?>">
+                        </div>
 
-                                    <div class='form-group'>
-                                        <label for='inputText'>Complete Level</label><span style="color:red">*</span>
-                                        <input class='form-control' id='complete_level' placeholder='Complete Level' 
-                                                type='text' name='complete_level' value="<?php echo set_value('complete_level'); ?>">
-                                        <span id="complete_level_msg" style="color:red"><?php echo form_error('complete_level'); ?></span>
-                                    </div>
-                                                <div>
-                                                    <label for='inputText'>Target Date</label><span style="color:red">*</span>
-                                                    <div class='datetimepicker input-group form-group' id='target_datetimepicker'>
-                                                        <input class='form-control' data-format='yyyy-MM-dd hh:mm:ss'  
-                                                              placeholder='Select timepicker' type='text' name='target_date' id="datepicker_timesheet" 
-                                                              readonly value="<?php echo set_value('target_date'); ?>">
-                                                        <span class='input-group-addon'>
-                                                            <span data-date-icon='icon-calendar' data-time-icon='icon-time'></span>
-                                                        </span>
-                                                    </div>
-                                                     <span style="color:red"><?php echo form_error('target_date'); ?></span>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="comment">Note</label>
-                                                    <textarea class="form-control" rows="5" id="comment" name="notes"></textarea>
-                                                </div>
-                                                <div class='form-actions form-actions-padding-sm form-actions-padding-md form-actions-padding-lg' style='margin-bottom: 0;'>
-                                                    <button class='btn btn-success' type='submit'>
-                                                        <i class='icon-save'></i>
-                                                        Save
-                                                    </button>
-                                                    <a class='btn' href="<?php echo site_url('project/edit/' . $project['id']); ?>">Cancel</a>
-                                                </div>
+                        <div class='form-group'>
+                            <label for='inputText'>Complete Level</label><span style="color:red">*</span>
+                            <input class='form-control' id='complete_level' placeholder='Complete Level' 
+                                   type='text' name='complete_level' value="<?php echo set_value('complete_level'); ?>">
+                            <span id="complete_level_msg" style="color:red"><?php echo form_error('complete_level'); ?></span>
+                        </div>
+                        <div>
+                            <label for='inputText'>Target Date</label><span style="color:red">*</span>
+                            <div class='datetimepicker input-group form-group' id='target_datetimepicker'>
+                                <input class='form-control' data-format='yyyy-MM-dd hh:mm:ss'  
+                                       placeholder='Select timepicker' type='text' name='target_date' id="datepicker_timesheet" 
+                                       readonly value="<?php echo set_value('target_date'); ?>">
+                                <span class='input-group-addon'>
+                                    <span data-date-icon='icon-calendar' data-time-icon='icon-time'></span>
+                                </span>
+                            </div>
+                            <span style="color:red"><?php echo form_error('target_date'); ?></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="comment">Note</label>
+                            <textarea class="form-control" rows="5" id="comment" name="notes"></textarea>
+                        </div>
+                        <div class='form-actions form-actions-padding-sm form-actions-padding-md form-actions-padding-lg' style='margin-bottom: 0;'>
+                            <button class='btn btn-success' type='submit'>
+                                <i class='icon-save'></i>
+                                Save
+                            </button>
+                            <a class='btn' href="<?php echo site_url('project/edit/' . $project['id']); ?>">Cancel</a>
+                        </div>
 
-                                                </div>
-                                                </div>
-                                                </div>
-                                                </div>  
-                                                </div>
+                </div>
+            </div>
+        </div>
+    </div>  
+</div>
 
-                                                <script type="text/javascript">
-                                                    $(document).ready(function () {
+<script type="text/javascript">
+    $(document).ready(function () {
 
-                                                        $('#target_datetimepicker').datetimepicker({
-                                                            pickTime: false,
-                                                            orientation: "auto top",
-                                                        });
-                                                        $('#complete_level').keyup(function () {
-                                                           var clvalue = $('#complete_level').val();
-                                                           if(clvalue < 0 || clvalue >100) {
-                                                               $('#complete_level_msg').html('The Complete Level field must contain numbers between 0 to 100.');
-                                                           }
-                                                           else
-                                                           {
-                                                               $('#complete_level_msg').html('');
-                                                           }
-                                                        });
-                                                    });
-                                                </script>
+        $('#target_datetimepicker').datetimepicker({
+            pickTime: false,
+            orientation: "auto top",
+        });
+        $('#complete_level').keyup(function () {
+            var clvalue = $('#complete_level').val();
+            if (clvalue < 0 || clvalue > 100) {
+                $('#complete_level_msg').html('The Complete Level field must contain numbers between 0 to 100.');
+            }
+            else
+            {
+                $('#complete_level_msg').html('');
+            }
+        });
+    });
+</script>

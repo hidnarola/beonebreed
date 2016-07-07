@@ -76,7 +76,7 @@ class Products extends CI_Controller {
             )
         ));
         $data['data_admin_part_2'] = $this->products_model->getfrom('dimension', false, array('where_in' => array('dimension_id' => ['1', '2', '3', '4']), 'where' => array('product_id' => $pid)));
-        $data['data_admin_part_3'] = $this->products_model->getfrom('product_question', false, array('where_in' => array('question_id' => ['11', '12', '13', '14', '15', '16', '24','25']), 'where' => array('product_id' => $pid)));
+        $data['data_admin_part_3'] = $this->products_model->getfrom('product_question', false, array('where_in' => array('question_id' => ['11', '12', '13', '14', '15', '16', '24', '25']), 'where' => array('product_id' => $pid)));
         // p($data['data_admin_part_3'],true);
         // ------------------------------------------------------------------------
         // ------------------------------------------------------------------------
@@ -137,15 +137,16 @@ class Products extends CI_Controller {
         $cat_id = $this->input->post('cat_id');
         $list_upc = array();
         $er = $this->session->userdata('UPC');
+
         if (!empty($er)) {
             $list_upc = $this->session->userdata('UPC');
         } else {
             $this->session->set_userdata('UPC', []);
         }
+
         //$this->session->unset_userdata('some_name');
         $not_in = array_values($list_upc);
         $barcodes = $this->barcode_model->get_unique_barcode($not_in);
-
         if (empty($barcodes)) {
             echo json_encode(['upc' => 0]);
             return;
@@ -158,7 +159,56 @@ class Products extends CI_Controller {
         $last_four_characters = substr($random_barcode['upc'], 8);
         $product_code = $cat_id . $last_four_characters;
         $random_barcode['product_code'] = $product_code;
+        echo json_encode($random_barcode);
+    }
+    
+    public function update_upc_ean() {
+//        var_dump($this->input->post());
+//        die();
+        $cat_id = $this->input->post('cat_id');
+        $list_upc = array();
+        $er = $this->session->userdata('UPC');
 
+        if (!empty($er)) {
+            $list_upc = $this->session->userdata('UPC');
+        } else {
+            $this->session->set_userdata('UPC', []);
+        }
+
+        //$this->session->unset_userdata('some_name');
+        $not_in = array_values($list_upc);
+        $barcodes = $this->barcode_model->get_unique_barcode($not_in);
+        if (empty($barcodes)) {
+            echo json_encode(['upc' => 0]);
+            return;
+        }
+
+        $list_upc[$this->input->post('type')] = $barcodes[0]['upc'];
+        $this->session->set_userdata('UPC', $list_upc);
+
+        $random_barcode = $barcodes[array_rand($barcodes)];
+        $last_four_characters = substr($random_barcode['upc'], 8);
+        $product_code = $cat_id . $last_four_characters;
+        $random_barcode['product_code'] = $product_code;
+        $data = array(
+                'dimension_id' =>$this->input->post('dimention_id'),
+                'product_id' =>  $this->input->post('product_id'),
+                'upc' =>$random_barcode['upc']
+            );
+        $id = $this->input->post('id');
+        $last_id = "";
+        if(!empty($id))
+        {
+            $this->products_model->update_into('dimension',$id,$data);
+            $last_id = $id;
+        }
+        else
+        {
+            $this->products_model->insert_into('dimension',$data);
+            $last_id = $this->db->insert_id();
+        }
+        $random_barcode['last_id'] = $last_id;
+        $random_barcode['type'] = $this->input->post('type');
         echo json_encode($random_barcode);
     }
 
@@ -170,7 +220,7 @@ class Products extends CI_Controller {
         $brand_id = $this->input->post('brand_name');
         $cat_short_name = $this->input->post('category');
         $description = $this->input->post('description');
-        $description = empty($description)?NULL:$description;
+        $description = empty($description) ? NULL : $description;
         $product_id = $this->input->post('product_id');
         $product_name = $this->input->post('product_name');
         $product_code = $this->input->post('prod_code');
@@ -224,23 +274,23 @@ class Products extends CI_Controller {
         //add or update part 2
         //For Retail
         $r_length = $this->input->post('r_length');
-        $r_length = empty($r_length)?NULL:$r_length;
-        
+        $r_length = empty($r_length) ? NULL : $r_length;
+
         $r_width = $this->input->post('r_width');
-        $r_width = empty($r_width)?NULL:$r_width;
-        
+        $r_width = empty($r_width) ? NULL : $r_width;
+
         $r_height = $this->input->post('r_height');
-        $r_height = empty($r_height)?NULL:$r_height;
-        
+        $r_height = empty($r_height) ? NULL : $r_height;
+
         $r_gross_weight = $this->input->post('r_gross_weight');
-        $r_gross_weight = empty($r_gross_weight)?NULL:$r_gross_weight;
-        
+        $r_gross_weight = empty($r_gross_weight) ? NULL : $r_gross_weight;
+
         $r_net_weight = $this->input->post('r_net_weight');
-        $r_net_weight = empty($r_net_weight)?NULL:$r_net_weight;
-        
+        $r_net_weight = empty($r_net_weight) ? NULL : $r_net_weight;
+
         $dm3_retail = $this->input->post('dm3_retail');
-        $dm3_retail = empty($dm3_retail)?NULL:$dm3_retail;
-        
+        $dm3_retail = empty($dm3_retail) ? NULL : $dm3_retail;
+
         $product_retail_id = $this->input->post('product_retail_id'); // Retail ID from dimension Table
 
         $data_retail = array(
@@ -264,28 +314,28 @@ class Products extends CI_Controller {
         // ------------------------------------------------------------------------
 
         $m_upc = $this->input->post('m_upc');
-        
+
         $m_length = $this->input->post('m_length');
-        $m_length = empty($m_length)?NULL:$m_length;
-        
+        $m_length = empty($m_length) ? NULL : $m_length;
+
         $m_width = $this->input->post('m_width');
-        $m_width = empty($m_width)?NULL:$m_width;
-        
+        $m_width = empty($m_width) ? NULL : $m_width;
+
         $m_height = $this->input->post('m_height');
-        $m_height = empty($m_height)?NULL:$m_height;
-        
+        $m_height = empty($m_height) ? NULL : $m_height;
+
         $m_gross_weight = $this->input->post('m_gross_weight');
-        $m_gross_weight = empty($m_gross_weight)?NULL:$m_gross_weight;
-        
+        $m_gross_weight = empty($m_gross_weight) ? NULL : $m_gross_weight;
+
         $m_net_weight = $this->input->post('m_net_weight');
-        $m_net_weight = empty($m_net_weight)?NULL:$m_net_weight;
-        
+        $m_net_weight = empty($m_net_weight) ? NULL : $m_net_weight;
+
         $dm3_master = $this->input->post('dm3_master');
-        $dm3_master = empty($dm3_master)?NULL:$dm3_master;
-        
+        $dm3_master = empty($dm3_master) ? NULL : $dm3_master;
+
         $no_pc_master = $this->input->post('no_pc_master');
-        $no_pc_master = empty($no_pc_master)?NULL:$no_pc_master;
-        
+        $no_pc_master = empty($no_pc_master) ? NULL : $no_pc_master;
+
         $product_master_id = $this->input->post('product_master_id'); // MasterCase ID from dimension Table
 
         $data_master = array(
@@ -322,26 +372,26 @@ class Products extends CI_Controller {
 
         $i_upc = $this->input->post('i_upc');
         $i_length = $this->input->post('i_length');
-        $i_length = empty($i_length)?NUll:$i_length;
-        
+        $i_length = empty($i_length) ? NUll : $i_length;
+
         $i_width = $this->input->post('i_width');
-        $i_width = empty($i_width)?NULL:$i_width;
-        
+        $i_width = empty($i_width) ? NULL : $i_width;
+
         $i_height = $this->input->post('i_height');
-        $i_height = empty($i_height)?NULL:$i_height;
-        
+        $i_height = empty($i_height) ? NULL : $i_height;
+
         $i_gross_weight = $this->input->post('i_gross_weight');
-        $i_gross_weight = empty($i_gross_weight)?NULL:$i_gross_weight;
-        
+        $i_gross_weight = empty($i_gross_weight) ? NULL : $i_gross_weight;
+
         $i_net_weight = $this->input->post('i_net_weight');
-        $i_net_weight = empty($i_net_weight)?NULL:$i_net_weight;
-        
+        $i_net_weight = empty($i_net_weight) ? NULL : $i_net_weight;
+
         $dm3_inner = $this->input->post('dm3_inner');
-        $dm3_inner = empty($dm3_inner)?NULL:$dm3_inner;
-        
+        $dm3_inner = empty($dm3_inner) ? NULL : $dm3_inner;
+
         $no_pc_inner = $this->input->post('no_pc_inner');
-        $no_pc_inner = empty($no_pc_inner)?NULL:$no_pc_inner;
-        
+        $no_pc_inner = empty($no_pc_inner) ? NULL : $no_pc_inner;
+
         $product_inner_id = $this->input->post('product_inner_id'); // InnerCase ID from dimension Table
 
         if (!empty($i_upc)) {
@@ -378,34 +428,34 @@ class Products extends CI_Controller {
         // ------------------------------------------------------------------------
 
         $p_upc = $this->input->post('p_upc');
-        
+
         $p_length = $this->input->post('p_length');
-        $p_length = empty($p_length)?NULL:$p_length;
-        
+        $p_length = empty($p_length) ? NULL : $p_length;
+
         $p_width = $this->input->post('p_width');
-        $p_width = empty($p_width)?NULL:$p_width;
-        
+        $p_width = empty($p_width) ? NULL : $p_width;
+
         $p_height = $this->input->post('p_height');
-        $p_height = empty($p_height)?NULL:$p_height;
-        
+        $p_height = empty($p_height) ? NULL : $p_height;
+
         $p_gross_weight = $this->input->post('p_gross_weight');
-        $p_gross_weight = empty($p_gross_weight)?NULL:$p_gross_weight;
-        
+        $p_gross_weight = empty($p_gross_weight) ? NULL : $p_gross_weight;
+
         $p_net_weight = $this->input->post('p_net_weight');
-        $p_net_weight = empty($p_net_weight)?NULL:$p_net_weight;
-        
+        $p_net_weight = empty($p_net_weight) ? NULL : $p_net_weight;
+
         $dm3_pallet = $this->input->post('dm3_pallet');
-        $dm3_pallet = empty($dm3_pallet)?NULL:$dm3_pallet;
-        
+        $dm3_pallet = empty($dm3_pallet) ? NULL : $dm3_pallet;
+
         $p_case_row = $this->input->post('p_case_row');
-        $p_case_row = empty($p_case_row)?NULL:$p_case_row;
-        
+        $p_case_row = empty($p_case_row) ? NULL : $p_case_row;
+
         $p_no_of_row = $this->input->post('p_no_of_row');
-        $p_no_of_row = empty($p_no_of_row)?NULL:$p_no_of_row;
-        
+        $p_no_of_row = empty($p_no_of_row) ? NULL : $p_no_of_row;
+
         $p_cma_per_pal = $this->input->post('p_cma_per_pal');
-        $p_cma_per_pal = empty($p_cma_per_pal)?NULL:$p_cma_per_pal;
-        
+        $p_cma_per_pal = empty($p_cma_per_pal) ? NULL : $p_cma_per_pal;
+
         $product_pallet_id = $this->input->post('product_pallet_id');
 
         $data_pallet = array(
@@ -460,19 +510,19 @@ class Products extends CI_Controller {
         $switch_12 = $this->input->post('switch_12'); // HAVE YOU CREATED THE PRODUCT IN OUR ERP (ACOMBA) ?
         $switch_24 = $this->input->post('switch_24'); // HAVE YOU CREATED THE PRODUCT IN OUR ERP (ACOMBA) ?
         $switch_25 = $this->input->post('switch_25'); // HAVE YOU CREATED THE PRODUCT IN OUR ERP (ACOMBA) ?
-        
+
         $note_13 = $this->input->post('mrsp_canada');
-        $note_13 = empty($note_13)?NULL:$note_13;
-        
+        $note_13 = empty($note_13) ? NULL : $note_13;
+
         $note_14 = $this->input->post('hs_code');
-        $note_14 = empty($note_14)?NULL:$note_14;
-        
+        $note_14 = empty($note_14) ? NULL : $note_14;
+
         $note_15 = $this->input->post('mrsp_international');
-        $note_15 = empty($note_15)?NULL:$note_15;
-        
+        $note_15 = empty($note_15) ? NULL : $note_15;
+
         $note_16 = $this->input->post('country_origin');
-        $note_16 = empty($note_16)?NULL:$note_16;
-        
+        $note_16 = empty($note_16) ? NULL : $note_16;
+
 
         $id_11 = $this->input->post('id_11');
         $id_12 = $this->input->post('id_12');
@@ -593,7 +643,7 @@ class Products extends CI_Controller {
         $this->products_model->update_into('products_new', $product_id, array('admin_tab_complete' => $encode_json));
         echo json_encode(
                 array(
-                    'product_id' => $product_id, 
+                    'product_id' => $product_id,
                     'complete_bar_no' => $complete_bar_no,
                     'product_retail_id' => $product_retail_id,
                     'product_master_id' => $product_master_id,
@@ -607,7 +657,7 @@ class Products extends CI_Controller {
                     'id_16' => $id_16,
                     'id_24' => $id_24,
                     'id_25' => $id_25,
-                ));
+        ));
     }
 
     public function admin_form_tab_1() {
@@ -647,7 +697,7 @@ class Products extends CI_Controller {
                 $this->session->set_userdata('UPC', $list_upc);
             }
         }
-
+        $completed = $this->input->post('complited');
         // ------------------------------------------------------------------------
 
         $decode_json = array();
@@ -655,13 +705,30 @@ class Products extends CI_Controller {
 
         if ($product_new_data['admin_tab_complete'] != '') {
             $decode_json = json_decode($product_new_data['admin_tab_complete'], true);
-            $decode_json['part_1'] = '33';
+            if ($completed == 'true') 
+            {
+                $decode_json['part_1'] = '33';
+            }
+            else
+            {
+                $decode_json['part_1'] = '0';
+            }
             $complete_bar_no = array_sum(array($decode_json['part_1'], $decode_json['part_2'], $decode_json['part_3']));
-        } else {
-            $decode_json['part_1'] = '33';
+        } 
+        else 
+        {
+            if ($completed == 'true') 
+            {
+                $decode_json['part_1'] = '33';
+                $complete_bar_no = '33';
+            }
+            else
+            {
+                $decode_json['part_1'] = '0';
+                $complete_bar_no = '0';
+            }
             $decode_json['part_2'] = '0';
             $decode_json['part_3'] = '0';
-            $complete_bar_no = '33';
         }
 
         $encode_json = json_encode($decode_json);
@@ -669,18 +736,30 @@ class Products extends CI_Controller {
 
         // ------------------------------------------------------------------------
 
-        echo json_encode(array('product_id' => $product_id, 'complete_bar_no' => $complete_bar_no));
+        echo json_encode(array('product_id' => $product_id, 'complete_bar_no' => $complete_bar_no,'completed' => $completed));
     }
 
     public function admin_form_tab_2() {
-
+        
         //For Retail
         $r_length = $this->input->post('r_length');
+        $r_length = empty($r_length) ? NULL : $r_length;
+
         $r_width = $this->input->post('r_width');
+        $r_width = empty($r_width) ? NULL : $r_width;
+
         $r_height = $this->input->post('r_height');
+        $r_height = empty($r_height) ? NULL : $r_height;
+
         $r_gross_weight = $this->input->post('r_gross_weight');
+        $r_gross_weight = empty($r_gross_weight) ? NULL : $r_gross_weight;
+
         $r_net_weight = $this->input->post('r_net_weight');
+        $r_net_weight = empty($r_net_weight) ? NULL : $r_net_weight;
+
         $dm3_retail = $this->input->post('dm3_retail');
+        $dm3_retail = empty($dm3_retail) ? NULL : $dm3_retail;
+
         $product_id = $this->input->post('product_id');
         $product_retail_id = $this->input->post('product_retail_id'); // Retail ID from dimension Table
 
@@ -704,14 +783,33 @@ class Products extends CI_Controller {
 
         // ------------------------------------------------------------------------
 
+
+
+
         $m_upc = $this->input->post('m_upc');
+        $m_upc = empty($m_upc) ? NULL : $m_upc;
+
         $m_length = $this->input->post('m_length');
+        $m_length = empty($m_length) ? NULL : $m_length;
+
         $m_width = $this->input->post('m_width');
+        $m_width = empty($m_width) ? NULL : $m_width;
+
         $m_height = $this->input->post('m_height');
+        $m_height = empty($m_height) ? NULL : $m_height;
+
         $m_gross_weight = $this->input->post('m_gross_weight');
+        $m_gross_weight = empty($m_gross_weight) ? NULL : $m_gross_weight;
+
         $m_net_weight = $this->input->post('m_net_weight');
+        $m_net_weight = empty($m_net_weight) ? NULL : $m_net_weight;
+
         $dm3_master = $this->input->post('dm3_master');
+        $dm3_master = empty($dm3_master) ? NULL : $dm3_master;
+
         $no_pc_master = $this->input->post('no_pc_master');
+        $no_pc_master = empty($no_pc_master) ? NULL : $no_pc_master;
+
         $product_master_id = $this->input->post('product_master_id'); // MasterCase ID from dimension Table
 
         $data_master = array(
@@ -729,7 +827,6 @@ class Products extends CI_Controller {
 
         // If Id find then UPDATE otherwise insert
         if (!empty($product_master_id)) {
-            unset($data_master['upc']);
             $this->products_model->update_into('dimension', $product_master_id, $data_master);
         } else {
 
@@ -745,60 +842,90 @@ class Products extends CI_Controller {
         }
 
         // ------------------------------------------------------------------------
-
         $i_upc = $this->input->post('i_upc');
+        $i_upc = empty($i_upc) ? NULL : $i_upc;
+
         $i_length = $this->input->post('i_length');
+        $i_length = empty($i_length) ? NUll : $i_length;
+
         $i_width = $this->input->post('i_width');
+        $i_width = empty($i_width) ? NULL : $i_width;
+
         $i_height = $this->input->post('i_height');
+        $i_height = empty($i_height) ? NULL : $i_height;
+
         $i_gross_weight = $this->input->post('i_gross_weight');
+        $i_gross_weight = empty($i_gross_weight) ? NULL : $i_gross_weight;
+
         $i_net_weight = $this->input->post('i_net_weight');
+        $i_net_weight = empty($i_net_weight) ? NULL : $i_net_weight;
+
         $dm3_inner = $this->input->post('dm3_inner');
+        $dm3_inner = empty($dm3_inner) ? NULL : $dm3_inner;
+
         $no_pc_inner = $this->input->post('no_pc_inner');
+        $no_pc_inner = empty($no_pc_inner) ? NULL : $no_pc_inner;
+
         $product_inner_id = $this->input->post('product_inner_id'); // InnerCase ID from dimension Table
 
-        if (!empty($i_upc)) {
+        $data_inner = array(
+            'product_id' => $product_id,
+            'dimension_id' => '3',
+            'length' => $i_length,
+            'width' => $i_width,
+            'height' => $i_height,
+            'gross_weight' => $i_gross_weight,
+            'net_weight' => $i_net_weight,
+            'dm3' => $dm3_inner,
+            'no_of_pc_case' => $no_pc_inner,
+            'upc' => $i_upc
+        );
 
-            $data_inner = array(
-                'product_id' => $product_id,
-                'dimension_id' => '3',
-                'length' => $i_length,
-                'width' => $i_width,
-                'height' => $i_height,
-                'gross_weight' => $i_gross_weight,
-                'net_weight' => $i_net_weight,
-                'dm3' => $dm3_inner,
-                'no_of_pc_case' => $no_pc_inner,
-                'upc' => $i_upc
-            );
+        if (!empty($product_inner_id)) {
+            $this->products_model->update_into('dimension', $product_inner_id, $data_inner);
+        } else {
+            $product_inner_id = $this->products_model->insert_into('dimension', $data_inner);
+            $this->db->where('upc', $i_upc);
+            $this->db->update('bar_code', ['is_assigned' => '1', 'description' => 'Assigned for intercase UPC']);
 
-            if (!empty($product_inner_id)) {
-                unset($data_master['upc']);
-                $this->products_model->update_into('dimension', $product_inner_id, $data_inner);
-            } else {
-                $product_inner_id = $this->products_model->insert_into('dimension', $data_inner);
-                $this->db->where('upc', $i_upc);
-                $this->db->update('bar_code', ['is_assigned' => '1', 'description' => 'Assigned for intercase UPC']);
-
-                $list_upc = $this->session->userdata('UPC');
-                if (isset($list_upc['#i_upc'])) {
-                    unset($list_upc['#i_upc']);
-                    $this->session->set_userdata('UPC', $list_upc);
-                }
+            $list_upc = $this->session->userdata('UPC');
+            if (isset($list_upc['#i_upc'])) {
+                unset($list_upc['#i_upc']);
+                $this->session->set_userdata('UPC', $list_upc);
             }
         }
 
         // ------------------------------------------------------------------------
-
         $p_upc = $this->input->post('p_upc');
+        $p_upc = empty($p_upc) ? NULL : $p_upc;
+
         $p_length = $this->input->post('p_length');
+        $p_length = empty($p_length) ? NULL : $p_length;
+
         $p_width = $this->input->post('p_width');
+        $p_width = empty($p_width) ? NULL : $p_width;
+
         $p_height = $this->input->post('p_height');
+        $p_height = empty($p_height) ? NULL : $p_height;
+
         $p_gross_weight = $this->input->post('p_gross_weight');
+        $p_gross_weight = empty($p_gross_weight) ? NULL : $p_gross_weight;
+
         $p_net_weight = $this->input->post('p_net_weight');
+        $p_net_weight = empty($p_net_weight) ? NULL : $p_net_weight;
+
         $dm3_pallet = $this->input->post('dm3_pallet');
+        $dm3_pallet = empty($dm3_pallet) ? NULL : $dm3_pallet;
+
         $p_case_row = $this->input->post('p_case_row');
+        $p_case_row = empty($p_case_row) ? NULL : $p_case_row;
+
         $p_no_of_row = $this->input->post('p_no_of_row');
+        $p_no_of_row = empty($p_no_of_row) ? NULL : $p_no_of_row;
+
         $p_cma_per_pal = $this->input->post('p_cma_per_pal');
+        $p_cma_per_pal = empty($p_cma_per_pal) ? NULL : $p_cma_per_pal;
+
         $product_pallet_id = $this->input->post('product_pallet_id');
 
         $data_pallet = array(
@@ -818,7 +945,6 @@ class Products extends CI_Controller {
 
         // If Id find then UPDATE otherwise insert
         if (!empty($product_pallet_id)) {
-            unset($data_master['upc']);
             $this->products_model->update_into('dimension', $product_pallet_id, $data_pallet);
         } else {
             $product_pallet_id = $this->products_model->insert_into('dimension', $data_pallet);
@@ -831,18 +957,41 @@ class Products extends CI_Controller {
                 $this->session->set_userdata('UPC', $list_upc);
             }
         }
-
+        // update notes of admin par2 
+            $note = $this->input->post('admin_part2_notes');
+            $note = !empty($note)?$this->input->post('admin_part2_notes'):NULL;
+            $notes = array(
+              'admin_part2_notes'=>$note  
+            );
+            $this->products_model->update($product_id,$notes);
         // ------------------------------------------------------------------------
-
+        $completed = $this->input->post('completed');
+        
         $decode_json = array();
         $product_new_data = $this->products_model->getfrom('products_new', false, array('where' => array('id' => $product_id)), array('single' => true));
 
         if ($product_new_data['admin_tab_complete'] != '') {
             $decode_json = json_decode($product_new_data['admin_tab_complete'], true);
-            $decode_json['part_2'] = '33';
+            if($completed == 'true')
+            {
+                $decode_json['part_2'] = '33';
+            }
+            else
+            {
+                $decode_json['part_2'] = '0';
+            }
             $complete_bar_no = array_sum(array($decode_json['part_1'], $decode_json['part_2'], $decode_json['part_3']));
-        } else {
-            $decode_json['part_2'] = '33';
+        }
+        else 
+        {
+            if($completed == 'true')
+            {
+                $decode_json['part_2'] = '33';
+            }
+            else
+            {
+                $decode_json['part_2'] = '0';
+            }
         }
 
         $encode_json = json_encode($decode_json);
@@ -857,6 +1006,7 @@ class Products extends CI_Controller {
                     'product_pallet_id' => $product_pallet_id,
                     'product_inner_id' => $product_inner_id,
                     'complete_bar_no' => $complete_bar_no,
+                    'completed' => $completed,
                     'qry' => $this->db->last_query()
                 )
         );
@@ -868,10 +1018,18 @@ class Products extends CI_Controller {
         $switch_12 = $this->input->post('switch_12'); // HAVE YOU CREATED THE PRODUCT IN OUR ERP (ACOMBA) ?
         $switch_24 = $this->input->post('switch_24'); // HAVE YOU CREATED THE PRODUCT IN OUR ERP (ACOMBA) ?
         $switch_25 = $this->input->post('switch_25'); // HAVE YOU CREATED THE PRODUCT IN OUR ERP (ACOMBA) ?
+
         $note_13 = $this->input->post('mrsp_canada');
+        $note_13 = empty($note_13) ? NULL : $note_13;
+
         $note_14 = $this->input->post('hs_code');
+        $note_14 = empty($note_14) ? NULL : $note_14;
+
         $note_15 = $this->input->post('mrsp_international');
+        $note_15 = empty($note_15) ? NULL : $note_15;
+
         $note_16 = $this->input->post('country_origin');
+        $note_16 = empty($note_16) ? NULL : $note_16;
         $product_id = $this->input->post('product_id');
 
         $id_11 = $this->input->post('id_11');
@@ -883,9 +1041,18 @@ class Products extends CI_Controller {
         $id_24 = $this->input->post('id_24');
         $id_25 = $this->input->post('id_25');
 
-        //If Id Found then Update otherwise Insert data
-        if (!empty($id_11) || !empty($id_12) || !empty($id_13) || !empty($id_14) || !empty($id_15) || !empty($id_16)) {
-
+        // if hidden filed is empty then insert data other wise do update
+        if (empty($id_11)) {
+            //if switch is not empty then insert answer 1 other wise 0 
+            if (!empty($switch_11)) {
+                $data_q11 = array('question_id' => '11', 'product_id' => $product_id, 'answer' => '1');
+                $id_11 = $this->products_model->insert_into('product_question', $data_q11);
+            } else {
+                $data_q11 = array('question_id' => '11', 'product_id' => $product_id, 'answer' => '0');
+                $id_11 = $this->products_model->insert_into('product_question', $data_q11);
+            }
+        } else {
+            //if switch is not empty then update answer 1 other wise 0 
             if (!empty($switch_11)) {
                 $data_q11 = array('question_id' => '11', 'product_id' => $product_id, 'answer' => '1');
                 $this->products_model->update_into('product_question', $id_11, $data_q11);
@@ -893,7 +1060,20 @@ class Products extends CI_Controller {
                 $data_q11 = array('question_id' => '11', 'product_id' => $product_id, 'answer' => '0');
                 $this->products_model->update_into('product_question', $id_11, $data_q11);
             }
+        }
 
+        // if hidden filed is empty then insert data other wise do update
+        if (empty($id_12)) {
+            //if switch is not empty then insert answer 1 other wise 0
+            if (!empty($switch_12)) {
+                $data_q12 = array('question_id' => '12', 'product_id' => $product_id, 'answer' => '1');
+                $id_12 = $this->products_model->insert_into('product_question', $data_q12);
+            } else {
+                $data_q12 = array('question_id' => '12', 'product_id' => $product_id, 'answer' => '0');
+                $id_12 = $this->products_model->insert_into('product_question', $data_q12);
+            }
+        } else {
+            //if switch is not empty then update answer 1 other wise 0 
             if (!empty($switch_12)) {
                 $data_q12 = array('question_id' => '12', 'product_id' => $product_id, 'answer' => '1');
                 $this->products_model->update_into('product_question', $id_12, $data_q12);
@@ -901,7 +1081,54 @@ class Products extends CI_Controller {
                 $data_q12 = array('question_id' => '12', 'product_id' => $product_id, 'answer' => '0');
                 $this->products_model->update_into('product_question', $id_12, $data_q12);
             }
+        }
+        // if hidden filed is empty then insert data other wise do update
+        if (empty($id_13)) {
+            $data_q13 = array('question_id' => '13', 'product_id' => $product_id, 'notes' => $note_13);
+            $id_13 = $this->products_model->insert_into('product_question', $data_q13);
+        } else {
+            $data_q13 = array('question_id' => '13', 'product_id' => $product_id, 'notes' => $note_13);
+            $this->products_model->update_into('product_question', $id_13, $data_q13);
+        }
 
+        // if hidden filed is empty then insert data other wise do update
+        if (empty($id_14)) {
+            $data_q14 = array('question_id' => '14', 'product_id' => $product_id, 'notes' => $note_14);
+            $id_14 = $this->products_model->insert_into('product_question', $data_q14);
+        } else {
+            $data_q14 = array('question_id' => '14', 'product_id' => $product_id, 'notes' => $note_14);
+            $this->products_model->update_into('product_question', $id_14, $data_q14);
+        }
+        // if hidden filed is empty then insert data other wise do update
+        if (empty($id_15)) {
+            $data_q15 = array('question_id' => '15', 'product_id' => $product_id, 'notes' => $note_15);
+            $id_15 = $this->products_model->insert_into('product_question', $data_q15);
+        } else {
+            $data_q15 = array('question_id' => '15', 'product_id' => $product_id, 'notes' => $note_15);
+            $this->products_model->update_into('product_question', $id_15, $data_q15);
+        }
+
+        // if hidden filed is empty then insert data other wise do update
+        if (empty($id_16)) {
+            $data_q16 = array('question_id' => '16', 'product_id' => $product_id, 'notes' => $note_16);
+            $id_16 = $this->products_model->insert_into('product_question', $data_q16);
+        } else {
+            $data_q16 = array('question_id' => '16', 'product_id' => $product_id, 'notes' => $note_16);
+            $this->products_model->update_into('product_question', $id_16, $data_q16);
+        }
+
+        // if hidden filed is empty then insert data other wise do update
+        if (empty($id_24)) {
+            //if switch is not empty then insert answer 1 other wise 0
+            if (!empty($switch_24)) {
+                $data_q24 = array('question_id' => '24', 'product_id' => $product_id, 'answer' => '1');
+                $id_24 = $this->products_model->insert_into('product_question', $data_q24);
+            } else {
+                $data_q24 = array('question_id' => '24', 'product_id' => $product_id, 'answer' => '0');
+                $id_24 = $this->products_model->insert_into('product_question', $data_q24);
+            }
+        } else {
+            //if switch is not empty then update answer 1 other wise 0 
             if (!empty($switch_24)) {
                 $data_q24 = array('question_id' => '24', 'product_id' => $product_id, 'answer' => '1');
                 $this->products_model->update_into('product_question', $id_24, $data_q24);
@@ -909,7 +1136,20 @@ class Products extends CI_Controller {
                 $data_q24 = array('question_id' => '24', 'product_id' => $product_id, 'answer' => '0');
                 $this->products_model->update_into('product_question', $id_24, $data_q24);
             }
+        }
 
+        // if hidden filed is empty then insert data other wise do update
+        if (empty($id_25)) {
+            //if switch is not empty then insert answer 1 other wise 0
+            if (!empty($switch_25)) {
+                $data_q25 = array('question_id' => '25', 'product_id' => $product_id, 'answer' => '1');
+                $id_25 = $this->products_model->insert_into('product_question', $data_q25);
+            } else {
+                $data_q25 = array('question_id' => '25', 'product_id' => $product_id, 'answer' => '0');
+                $id_25 = $this->products_model->insert_into('product_question', $data_q25);
+            }
+        } else {
+            //if switch is not empty then update answer 1 other wise 0 
             if (!empty($switch_25)) {
                 $data_q25 = array('question_id' => '25', 'product_id' => $product_id, 'answer' => '1');
                 $this->products_model->update_into('product_question', $id_25, $data_q25);
@@ -917,76 +1157,36 @@ class Products extends CI_Controller {
                 $data_q25 = array('question_id' => '25', 'product_id' => $product_id, 'answer' => '0');
                 $this->products_model->update_into('product_question', $id_25, $data_q25);
             }
-
-            $data_q13 = array('question_id' => '13', 'product_id' => $product_id, 'notes' => $note_13);
-            $this->products_model->update_into('product_question', $id_13, $data_q13);
-
-            $data_q14 = array('question_id' => '14', 'product_id' => $product_id, 'notes' => $note_14);
-            $this->products_model->update_into('product_question', $id_14, $data_q14);
-
-            $data_q15 = array('question_id' => '15', 'product_id' => $product_id, 'notes' => $note_15);
-            $this->products_model->update_into('product_question', $id_15, $data_q15);
-
-            $data_q16 = array('question_id' => '16', 'product_id' => $product_id, 'notes' => $note_16);
-            $this->products_model->update_into('product_question', $id_16, $data_q16);
-        } else {
-
-            if (!empty($switch_11)) {
-                $data_q11 = array('question_id' => '11', 'product_id' => $product_id, 'answer' => '1');
-                $id_11 = $this->products_model->insert_into('product_question', $data_q11);
-            } else {
-                $data_q11 = array('question_id' => '11', 'product_id' => $product_id, 'answer' => '0');
-                $id_11 = $this->products_model->insert_into('product_question', $data_q11);
-            }
-
-            if (!empty($switch_12)) {
-                $data_q12 = array('question_id' => '12', 'product_id' => $product_id, 'answer' => '1');
-                $id_12 = $this->products_model->insert_into('product_question', $data_q12);
-            } else {
-                $data_q12 = array('question_id' => '12', 'product_id' => $product_id, 'answer' => '0');
-                $id_12 = $this->products_model->insert_into('product_question', $data_q12);
-            }
-
-            if (!empty($switch_24)) {
-                $data_q24 = array('question_id' => '24', 'product_id' => $product_id, 'answer' => '1');
-                $id_24 = $this->products_model->insert_into('product_question', $data_q24);
-            } else {
-                $data_q24 = array('question_id' => '24', 'product_id' => $product_id, 'answer' => '0');
-                $id_24 = $this->products_model->insert_into('product_question', $data_q24);
-            }
-
-            if (!empty($switch_25)) {
-                $data_q25 = array('question_id' => '25', 'product_id' => $product_id, 'answer' => '1');
-                $id_25 = $this->products_model->insert_into('product_question', $data_q25);
-            } else {
-                $data_q25 = array('question_id' => '24', 'product_id' => $product_id, 'answer' => '0');
-                $id_25 = $this->products_model->insert_into('product_question', $data_q25);
-            }
-
-            $data_q13 = array('question_id' => '13', 'product_id' => $product_id, 'notes' => $note_13);
-            $id_13 = $this->products_model->insert_into('product_question', $data_q13);
-
-            $data_q14 = array('question_id' => '14', 'product_id' => $product_id, 'notes' => $note_14);
-            $id_14 = $this->products_model->insert_into('product_question', $data_q14);
-
-            $data_q15 = array('question_id' => '15', 'product_id' => $product_id, 'notes' => $note_15);
-            $id_15 = $this->products_model->insert_into('product_question', $data_q15);
-
-            $data_q16 = array('question_id' => '16', 'product_id' => $product_id, 'notes' => $note_16);
-            $id_16 = $this->products_model->insert_into('product_question', $data_q16);
         }
 
         // ------------------------------------------------------------------------
-
+        $completed = $this->input->post('completed');
+        
         $decode_json = array();
         $product_new_data = $this->products_model->getfrom('products_new', false, array('where' => array('id' => $product_id)), array('single' => true));
 
         if ($product_new_data['admin_tab_complete'] != '') {
             $decode_json = json_decode($product_new_data['admin_tab_complete'], true);
-            $decode_json['part_3'] = '34';
+            if($completed == 'true')
+            {
+                $decode_json['part_3'] = '34';
+            }
+            else
+            {
+                $decode_json['part_3'] = '0';
+            }
             $complete_bar_no = array_sum(array($decode_json['part_1'], $decode_json['part_2'], $decode_json['part_3']));
-        } else {
-            $decode_json['part_3'] = '34';
+        } 
+        else 
+        {
+            if($completed == 'true')
+            {
+                $decode_json['part_3'] = '34';
+            }
+            else
+            {
+                $decode_json['part_3'] = '0';
+            }
         }
 
         $encode_json = json_encode($decode_json);
@@ -1005,6 +1205,7 @@ class Products extends CI_Controller {
                     'id_24' => $id_24,
                     'id_25' => $id_25,
                     'complete_bar_no' => $complete_bar_no,
+                    'completed' => $completed,
                     'qry' => $this->db->last_query()
                 )
         );
@@ -1045,24 +1246,41 @@ class Products extends CI_Controller {
 
         $production_part_1_count = (int) $this->input->post('production_part_1_count');
         $product_id = $this->input->post('product_id');
-
+        $completed = $this->input->post('completed');
+        $complete_bar_no = 0;
         // ------------------------------------------------------------------------
-
+        
         $decode_json = array();
         $product_new_data = $this->products_model->getfrom('products_new', false, array('where' => array('id' => $product_id)), array('single' => true));
 
         if ($product_new_data['production_complete'] != '') {
             $decode_json = json_decode($product_new_data['production_complete'], true);
-            $decode_json['part_1'] = '20';
+            if($completed == 'true')
+            {
+                $decode_json['part_1'] = '20';
+            }
+            else 
+            {
+                $decode_json['part_1'] = '0';
+            }
             $complete_bar_no = array_sum(array($decode_json['part_1'], $decode_json['part_2'], $decode_json['part_3'],
                 $decode_json['part_4'], $decode_json['part_5']));
         } else {
-            $decode_json['part_1'] = '20';
+            if($completed == 'true')
+            {
+                $decode_json['part_1'] = '20';
+                $complete_bar_no = '20';
+            }
+            else 
+            {
+                $decode_json['part_1'] = '0';
+                $complete_bar_no = '0';
+            }
             $decode_json['part_2'] = '0';
             $decode_json['part_3'] = '0';
             $decode_json['part_4'] = '0';
             $decode_json['part_5'] = '0';
-            $complete_bar_no = '20';
+            
         }
 
         $encode_json = json_encode($decode_json);
@@ -1095,7 +1313,7 @@ class Products extends CI_Controller {
             }
         }
 
-        echo json_encode(array('res' => $prod_array, 'complete_bar_no' => $complete_bar_no, 'test' => $test));
+        echo json_encode(array('res' => $prod_array, 'complete_bar_no' => $complete_bar_no, 'test' => $test,'completed'=>$completed));
     }
 
     public function delete($id = 0) {
@@ -1126,26 +1344,44 @@ class Products extends CI_Controller {
     }
 
     public function production_form_tab_2() {
+
         $production_part_2_count = (int) $this->input->post('production_part_2_count');
         $product_id = $this->input->post('product_id');
-
+        $completed = $this->input->post('completed');
+        $complete_bar_no = 0;
         // ------------------------------------------------------------------------
 
         $decode_json = array();
         $product_new_data = $this->products_model->getfrom('products_new', false, array('where' => array('id' => $product_id)), array('single' => true));
-
+        
         if ($product_new_data['production_complete'] != '') {
             $decode_json = json_decode($product_new_data['production_complete'], true);
-            $decode_json['part_2'] = '20';
+            if($completed == 'true')
+            {
+                $decode_json['part_2'] = '20';
+            }
+            else
+            {
+                $decode_json['part_2'] = '0';
+            }
             $complete_bar_no = array_sum(array($decode_json['part_1'], $decode_json['part_2'], $decode_json['part_3'],
                 $decode_json['part_4'], $decode_json['part_5']));
         } else {
             $decode_json['part_1'] = '0';
-            $decode_json['part_2'] = '20';
+            if($completed == 'true')
+            {
+                $decode_json['part_2'] = '20';
+                $complete_bar_no = '20';
+            }
+            else
+            {
+                $decode_json['part_2'] = '0';
+                $complete_bar_no = '0';
+            }
             $decode_json['part_3'] = '0';
             $decode_json['part_4'] = '0';
             $decode_json['part_5'] = '0';
-            $complete_bar_no = '20';
+            
         }
 
         $encode_json = json_encode($decode_json);
@@ -1177,7 +1413,7 @@ class Products extends CI_Controller {
             }
         }
 
-        echo json_encode(array('res' => $prod_array, 'complete_bar_no' => $complete_bar_no));
+        echo json_encode(array('res' => $prod_array, 'complete_bar_no' => $complete_bar_no,'completed'=>$completed));
     }
 
     public function production_part3() {
@@ -1201,7 +1437,8 @@ class Products extends CI_Controller {
 
         if (!empty($production_part3_h1) || !empty($production_part3_h2) || !empty($production_part3_h3) ||
                 !empty($production_part3_h4) || !empty($production_part3_h5) || !empty($production_part3_h6) ||
-                !empty($production_part3_h7)) {
+                !empty($production_part3_h7)) 
+        {
 
             if (!empty($production_part3_switch1)) {
                 $production_part3_q1 = array('question_id' => '17', 'product_id' => $product_id, 'answer' => '1', 'notes' => $production_part3_notes1);
@@ -1253,7 +1490,9 @@ class Products extends CI_Controller {
 
             $production_part3_q7 = array('question_id' => '23', 'product_id' => $product_id, 'notes' => $production_part3_notes2);
             $this->products_model->update_into('product_question', $production_part3_h7, $production_part3_q7);
-        } else {
+        } 
+        else
+        {
             if (!empty($production_part3_switch1)) {
                 $production_part3_q1 = array('question_id' => '17', 'product_id' => $product_id, 'answer' => '1', 'notes' => $production_part3_notes1);
                 $production_part3_h1 = $this->products_model->insert_into('product_question', $production_part3_q1);
@@ -1306,22 +1545,42 @@ class Products extends CI_Controller {
             $production_part3_h7 = $this->products_model->insert_into('product_question', $production_part3_q7);
 
             // ------------------------------------------------------------------------
-
+        }
+            $completed = $this->input->post('completed');
+            $complete_bar_no = 0;
+            
             $decode_json = array();
             $product_new_data = $this->products_model->getfrom('products_new', false, array('where' => array('id' => $product_id)), array('single' => true));
-
+            
             if ($product_new_data['production_complete'] != '') {
                 $decode_json = json_decode($product_new_data['production_complete'], true);
-                $decode_json['part_3'] = '20';
+                if($completed == 'true')
+                {    
+                     $decode_json['part_3'] = '20';
+                }
+                else
+                {
+                    $decode_json['part_3'] = '0';
+                }
                 $complete_bar_no = array_sum(array($decode_json['part_1'], $decode_json['part_2'], $decode_json['part_3'],
                     $decode_json['part_4'], $decode_json['part_5']));
             } else {
                 $decode_json['part_1'] = '0';
                 $decode_json['part_2'] = '0';
-                $decode_json['part_3'] = '20';
+                
+                if( $completed == 'true')
+                {    
+                     $decode_json['part_3'] = '20';
+                     $complete_bar_no = '20';
+                }
+                else
+                {
+                    $decode_json['part_3'] = '0';
+                    $complete_bar_no = '0';
+                }
                 $decode_json['part_4'] = '0';
                 $decode_json['part_5'] = '0';
-                $complete_bar_no = '20';
+                
             }
 
             $encode_json = json_encode($decode_json);
@@ -1340,10 +1599,10 @@ class Products extends CI_Controller {
                         'production_part3_7' => $production_part3_h7,
                         'status' => 'success',
                         'complete_bar_no' => $complete_bar_no,
+                        'completed' => $completed,
                         'qry' => $this->db->last_query()
                     )
             );
-        }
     }
 
     public function production_part4() {
@@ -1357,54 +1616,74 @@ class Products extends CI_Controller {
         if (!empty($production_part4_h1) || !empty($production_part4_h2)) {
 
             if (!empty($production_part4_switch1)) {
-                $production_part4_q1 = array('question_id' => '24', 'product_id' => $product_id, 'answer' => '1');
+                $production_part4_q1 = array('question_id' => '28', 'product_id' => $product_id, 'answer' => '1');
                 $this->products_model->update_into('product_question', $production_part4_h1, $production_part4_q1);
             } else {
-                $production_part4_q1 = array('question_id' => '24', 'product_id' => $product_id, 'answer' => '0');
+                $production_part4_q1 = array('question_id' => '28', 'product_id' => $product_id, 'answer' => '0');
                 $this->products_model->update_into('product_question', $production_part4_h1, $production_part4_q1);
             }
 
             if (!empty($production_part4_switch2)) {
-                $production_part4_q2 = array('question_id' => '25', 'product_id' => $product_id, 'answer' => '1');
+                $production_part4_q2 = array('question_id' => '29', 'product_id' => $product_id, 'answer' => '1');
                 $this->products_model->update_into('product_question', $production_part4_h2, $production_part4_q2);
             } else {
-                $production_part4_q2 = array('question_id' => '25', 'product_id' => $product_id, 'answer' => '0');
+                $production_part4_q2 = array('question_id' => '29', 'product_id' => $product_id, 'answer' => '0');
                 $this->products_model->update_into('product_question', $production_part4_h2, $production_part4_q2);
             }
         } else {
             if (!empty($production_part4_switch1)) {
-                $production_part4_q1 = array('question_id' => '24', 'product_id' => $product_id, 'answer' => '1');
+                $production_part4_q1 = array('question_id' => '28', 'product_id' => $product_id, 'answer' => '1');
                 $production_part4_h1 = $this->products_model->insert_into('product_question', $production_part4_q1);
             } else {
-                $production_part4_q1 = array('question_id' => '24', 'product_id' => $product_id, 'answer' => '0');
+                $production_part4_q1 = array('question_id' => '28', 'product_id' => $product_id, 'answer' => '0');
                 $production_part4_h1 = $this->products_model->insert_into('product_question', $production_part4_q1);
             }
 
             if (!empty($production_part4_switch2)) {
-                $production_part4_q2 = array('question_id' => '25', 'product_id' => $product_id, 'answer' => '1');
+                $production_part4_q2 = array('question_id' => '29', 'product_id' => $product_id, 'answer' => '1');
                 $production_part4_h2 = $this->products_model->insert_into('product_question', $production_part4_q2);
             } else {
-                $production_part4_q2 = array('question_id' => '25', 'product_id' => $product_id, 'answer' => '0');
+                $production_part4_q2 = array('question_id' => '29', 'product_id' => $product_id, 'answer' => '0');
                 $production_part4_h2 = $this->products_model->insert_into('product_question', $production_part4_q2);
             }
 
             // ------------------------------------------------------------------------
-
+            
+        }
+        $completed = $this->input->post('completed');
+            $complete_bar_no = 0;
+            
             $decode_json = array();
             $product_new_data = $this->products_model->getfrom('products_new', false, array('where' => array('id' => $product_id)), array('single' => true));
 
             if ($product_new_data['production_complete'] != '') {
                 $decode_json = json_decode($product_new_data['production_complete'], true);
-                $decode_json['part_4'] = '20';
+                if($completed == 'true')
+                {
+                    $decode_json['part_4'] = '20';
+                }
+                else
+                {
+                    $decode_json['part_4'] = '0';
+                }
                 $complete_bar_no = array_sum(array($decode_json['part_1'], $decode_json['part_2'], $decode_json['part_3'],
                     $decode_json['part_4'], $decode_json['part_5']));
             } else {
                 $decode_json['part_1'] = '0';
                 $decode_json['part_2'] = '0';
                 $decode_json['part_3'] = '0';
-                $decode_json['part_4'] = '20';
+                if($completed == 'true')
+                {
+                    $decode_json['part_4'] = '20';
+                    $complete_bar_no = '20';
+                }
+                else
+                {
+                    $decode_json['part_4'] = '0';
+                    $complete_bar_no = '0';
+                }
                 $decode_json['part_5'] = '0';
-                $complete_bar_no = '20';
+                
             }
 
             $encode_json = json_encode($decode_json);
@@ -1418,10 +1697,10 @@ class Products extends CI_Controller {
                         'production_part4_2' => $production_part4_h2,
                         'status' => 'success',
                         'complete_bar_no' => $complete_bar_no,
+                        'completed' => $completed,
                         'qry' => $this->db->last_query()
                     )
             );
-        }
     }
 
     public function production_part5() {
@@ -1468,13 +1747,22 @@ class Products extends CI_Controller {
         }
 
         // ------------------------------------------------------------------------
-
+        $completed = $this->input->post('completed');
+        $complete_bar_no = 0;
+        
         $decode_json = array();
         $product_new_data = $this->products_model->getfrom('products_new', false, array('where' => array('id' => $product_id)), array('single' => true));
 
         if ($product_new_data['production_complete'] != '') {
             $decode_json = json_decode($product_new_data['production_complete'], true);
-            $decode_json['part_5'] = '20';
+            if($completed == 'true')
+            {
+                $decode_json['part_5'] = '20';
+            }
+            else
+            {
+                $decode_json['part_5'] = '0';
+            }
             $complete_bar_no = array_sum(array($decode_json['part_1'], $decode_json['part_2'], $decode_json['part_3'],
                 $decode_json['part_4'], $decode_json['part_5']));
         } else {
@@ -1482,8 +1770,16 @@ class Products extends CI_Controller {
             $decode_json['part_2'] = '0';
             $decode_json['part_3'] = '0';
             $decode_json['part_4'] = '0';
-            $decode_json['part_5'] = '20';
-            $complete_bar_no = '20';
+            if($completed == 'true')
+            {
+                $decode_json['part_5'] = '20';
+                $complete_bar_no = '20';
+            }
+            else
+            {
+                $decode_json['part_5'] = '0';
+                $complete_bar_no = '0';
+            }
         }
 
         $encode_json = json_encode($decode_json);
@@ -1497,6 +1793,7 @@ class Products extends CI_Controller {
                     'production_part5_2' => $production_part5_h2,
                     'status' => 'success',
                     'complete_bar_no' => $complete_bar_no,
+                    'completed' => $completed,
                     'qry' => $this->db->last_query()
                 )
         );
@@ -1677,7 +1974,7 @@ class Products extends CI_Controller {
         $marketing_part1_4 = $this->input->post('marketing_part1_4');
         $marketing_part1_5 = $this->input->post('marketing_part1_5');
         $marketing_part1_6 = $this->input->post('marketing_part1_6');
-
+        $complited = $this->input->post('complited');
         if (!empty($marketing_part1_1) || !empty($marketing_part1_2) || !empty($marketing_part1_3) ||
                 !empty($marketing_part1_4) || !empty($marketing_part1_5) || !empty($marketing_part1_6)) {
 
@@ -1721,29 +2018,50 @@ class Products extends CI_Controller {
         }
 
         // ------------------------------------------------------------------------
+        $complete_bar_no = 0;
+        if ($complited == "true") {
+            $decode_json = array();
+            $product_new_data = $this->products_model->getfrom('products_new', false, array('where' => array('id' => $product_id)), array('single' => true));
 
-        $decode_json = array();
-        $product_new_data = $this->products_model->getfrom('products_new', false, array('where' => array('id' => $product_id)), array('single' => true));
+            if ($product_new_data['marketing_complete'] != '') {
+                $decode_json = json_decode($product_new_data['marketing_complete'], true);
+                $decode_json['part_1'] = '20';
+                $complete_bar_no = array_sum(array($decode_json['part_1'], $decode_json['part_2'], $decode_json['part_3'],
+                    $decode_json['part_4'], $decode_json['part_5']));
+            } else {
+                $decode_json['part_1'] = '20';
+                $decode_json['part_2'] = '0';
+                $decode_json['part_3'] = '0';
+                $decode_json['part_4'] = '0';
+                $decode_json['part_5'] = '0';
+                $complete_bar_no = '20';
+            }
 
-        if ($product_new_data['marketing_complete'] != '') {
-            $decode_json = json_decode($product_new_data['marketing_complete'], true);
-            $decode_json['part_1'] = '20';
-            $complete_bar_no = array_sum(array($decode_json['part_1'], $decode_json['part_2'], $decode_json['part_3'],
-                $decode_json['part_4'], $decode_json['part_5']));
+            $encode_json = json_encode($decode_json);
+            $this->products_model->update_into('products_new', $product_id, array('marketing_complete' => $encode_json));
+
+            // ------------------------------------------------------------------------
         } else {
-            $decode_json['part_1'] = '20';
-            $decode_json['part_2'] = '0';
-            $decode_json['part_3'] = '0';
-            $decode_json['part_4'] = '0';
-            $decode_json['part_5'] = '0';
-            $complete_bar_no = '20';
+            $decode_json = array();
+            $product_new_data = $this->products_model->getfrom('products_new', false, array('where' => array('id' => $product_id)), array('single' => true));
+
+            if ($product_new_data['marketing_complete'] != '') {
+                $decode_json = json_decode($product_new_data['marketing_complete'], true);
+                $decode_json['part_1'] = '0';
+                $complete_bar_no = array_sum(array($decode_json['part_1'], $decode_json['part_2'], $decode_json['part_3'],
+                    $decode_json['part_4'], $decode_json['part_5']));
+            } else {
+                $decode_json['part_1'] = '0';
+                $decode_json['part_2'] = '0';
+                $decode_json['part_3'] = '0';
+                $decode_json['part_4'] = '0';
+                $decode_json['part_5'] = '0';
+                $complete_bar_no = '0';
+            }
+
+            $encode_json = json_encode($decode_json);
+            $this->products_model->update_into('products_new', $product_id, array('marketing_complete' => $encode_json));
         }
-
-        $encode_json = json_encode($decode_json);
-        $this->products_model->update_into('products_new', $product_id, array('marketing_complete' => $encode_json));
-
-        // ------------------------------------------------------------------------
-
         echo json_encode(
                 array(
                     'marketing_part1_1' => $marketing_part1_1,
@@ -1754,6 +2072,7 @@ class Products extends CI_Controller {
                     'marketing_part1_6' => $marketing_part1_6,
                     'status' => 'success',
                     'complete_bar_no' => $complete_bar_no,
+                    'completed' => $complited,
                     'qry' => $this->db->last_query()
                 )
         );
@@ -1811,6 +2130,7 @@ class Products extends CI_Controller {
         $marketing_part2_7 = $this->input->post('marketing_part2_7');
         $marketing_part2_8 = $this->input->post('marketing_part2_8');
 
+        $complited = $this->input->post('complited');
 
 
         if (!empty($marketing_part2_1) || !empty($marketing_part2_2) || !empty($marketing_part2_3) || !empty($marketing_part2_4) ||
@@ -1883,27 +2203,47 @@ class Products extends CI_Controller {
         }
 
         // ------------------------------------------------------------------------
+        if ($complited == "true") {
+            $decode_json = array();
+            $product_new_data = $this->products_model->getfrom('products_new', false, array('where' => array('id' => $product_id)), array('single' => true));
 
-        $decode_json = array();
-        $product_new_data = $this->products_model->getfrom('products_new', false, array('where' => array('id' => $product_id)), array('single' => true));
+            if ($product_new_data['marketing_complete'] != '') {
+                $decode_json = json_decode($product_new_data['marketing_complete'], true);
+                $decode_json['part_2'] = '20';
+                $complete_bar_no = array_sum(array($decode_json['part_1'], $decode_json['part_2'], $decode_json['part_3'],
+                    $decode_json['part_4'], $decode_json['part_5']));
+            } else {
+                $decode_json['part_1'] = '0';
+                $decode_json['part_2'] = '20';
+                $decode_json['part_3'] = '0';
+                $decode_json['part_4'] = '0';
+                $decode_json['part_5'] = '0';
+                $complete_bar_no = '20';
+            }
 
-        if ($product_new_data['marketing_complete'] != '') {
-            $decode_json = json_decode($product_new_data['marketing_complete'], true);
-            $decode_json['part_2'] = '20';
-            $complete_bar_no = array_sum(array($decode_json['part_1'], $decode_json['part_2'], $decode_json['part_3'],
-                $decode_json['part_4'], $decode_json['part_5']));
+            $encode_json = json_encode($decode_json);
+            $this->products_model->update_into('products_new', $product_id, array('marketing_complete' => $encode_json));
         } else {
-            $decode_json['part_1'] = '0';
-            $decode_json['part_2'] = '20';
-            $decode_json['part_3'] = '0';
-            $decode_json['part_4'] = '0';
-            $decode_json['part_5'] = '0';
-            $complete_bar_no = '20';
+            $decode_json = array();
+            $product_new_data = $this->products_model->getfrom('products_new', false, array('where' => array('id' => $product_id)), array('single' => true));
+
+            if ($product_new_data['marketing_complete'] != '') {
+                $decode_json = json_decode($product_new_data['marketing_complete'], true);
+                $decode_json['part_2'] = '0';
+                $complete_bar_no = array_sum(array($decode_json['part_1'], $decode_json['part_2'], $decode_json['part_3'],
+                    $decode_json['part_4'], $decode_json['part_5']));
+            } else {
+                $decode_json['part_1'] = '0';
+                $decode_json['part_2'] = '0';
+                $decode_json['part_3'] = '0';
+                $decode_json['part_4'] = '0';
+                $decode_json['part_5'] = '0';
+                $complete_bar_no = '20';
+            }
+
+            $encode_json = json_encode($decode_json);
+            $this->products_model->update_into('products_new', $product_id, array('marketing_complete' => $encode_json));
         }
-
-        $encode_json = json_encode($decode_json);
-        $this->products_model->update_into('products_new', $product_id, array('marketing_complete' => $encode_json));
-
         // ------------------------------------------------------------------------
 
         echo json_encode(
@@ -1918,6 +2258,7 @@ class Products extends CI_Controller {
                     'marketing_part2_8' => $marketing_part2_8,
                     'status' => 'success',
                     'complete_bar_no' => $complete_bar_no,
+                    'completed' => $complited,
                     'qry' => $this->db->last_query()
                 )
         );
@@ -1968,32 +2309,55 @@ class Products extends CI_Controller {
                 }
             }
         }
-
+        $complited = $this->input->post("marketting_step_3");
         // ------------------------------------------------------------------------
+        $complete_bar_no = 0;
+        if ($complited == 'on') {
+            $decode_json = array();
+            $product_new_data = $this->products_model->getfrom('products_new', false, array('where' => array('id' => $product_id)), array('single' => true));
 
-        $decode_json = array();
-        $product_new_data = $this->products_model->getfrom('products_new', false, array('where' => array('id' => $product_id)), array('single' => true));
+            if ($product_new_data['marketing_complete'] != '') {
+                $decode_json = json_decode($product_new_data['marketing_complete'], true);
+                $decode_json['part_3'] = '20';
+                $complete_bar_no = array_sum(array($decode_json['part_1'], $decode_json['part_2'], $decode_json['part_3'],
+                    $decode_json['part_4'], $decode_json['part_5']));
+            } else {
+                $decode_json['part_1'] = '0';
+                $decode_json['part_2'] = '0';
+                $decode_json['part_3'] = '20';
+                $decode_json['part_4'] = '0';
+                $decode_json['part_5'] = '0';
+                $complete_bar_no = '20';
+            }
 
-        if ($product_new_data['marketing_complete'] != '') {
-            $decode_json = json_decode($product_new_data['marketing_complete'], true);
-            $decode_json['part_3'] = '20';
-            $complete_bar_no = array_sum(array($decode_json['part_1'], $decode_json['part_2'], $decode_json['part_3'],
-                $decode_json['part_4'], $decode_json['part_5']));
+            $encode_json = json_encode($decode_json);
+            $this->products_model->update_into('products_new', $product_id, array('marketing_complete' => $encode_json));
         } else {
-            $decode_json['part_1'] = '0';
-            $decode_json['part_2'] = '0';
-            $decode_json['part_3'] = '20';
-            $decode_json['part_4'] = '0';
-            $decode_json['part_5'] = '0';
-            $complete_bar_no = '20';
-        }
+            $decode_json = array();
+            $product_new_data = $this->products_model->getfrom('products_new', false, array('where' => array('id' => $product_id)), array('single' => true));
 
-        $encode_json = json_encode($decode_json);
-        $this->products_model->update_into('products_new', $product_id, array('marketing_complete' => $encode_json));
+            if ($product_new_data['marketing_complete'] != '') {
+                $decode_json = json_decode($product_new_data['marketing_complete'], true);
+                $decode_json['part_3'] = '0';
+                $complete_bar_no = array_sum(array($decode_json['part_1'], $decode_json['part_2'], $decode_json['part_3'],
+                    $decode_json['part_4'], $decode_json['part_5']));
+            } else {
+                $decode_json['part_1'] = '0';
+                $decode_json['part_2'] = '0';
+                $decode_json['part_3'] = '0';
+                $decode_json['part_4'] = '0';
+                $decode_json['part_5'] = '0';
+                $complete_bar_no = '0';
+            }
+
+            $encode_json = json_encode($decode_json);
+            $this->products_model->update_into('products_new', $product_id, array('marketing_complete' => $encode_json));
+        }
 
         // ------------------------------------------------------------------------
 
         $response['complete_bar_no'] = $complete_bar_no;
+        $response['completed'] = $complited == 'on' ? true : false;
 
         echo json_encode($response);
         die();
@@ -2001,6 +2365,7 @@ class Products extends CI_Controller {
 
     public function marketting_part_4() {
 
+        $completed = $this->input->post('complete_admin_part_1');
         $switch_ans = $_POST['check_list'];
 
         if ($this->input->post('hdn_marketting_part_4') != '') {
@@ -2053,16 +2418,25 @@ class Products extends CI_Controller {
 
         if ($product_new_data['marketing_complete'] != '') {
             $decode_json = json_decode($product_new_data['marketing_complete'], true);
-            $decode_json['part_4'] = '20';
+            if ($completed == 'on') {
+                $decode_json['part_4'] = '20';
+            } else {
+                $decode_json['part_4'] = '0';
+            }
             $complete_bar_no = array_sum(array($decode_json['part_1'], $decode_json['part_2'], $decode_json['part_3'],
                 $decode_json['part_4'], $decode_json['part_5']));
         } else {
             $decode_json['part_1'] = '0';
             $decode_json['part_2'] = '0';
             $decode_json['part_3'] = '0';
-            $decode_json['part_4'] = '20';
+            if ($completed == 'on') {
+                $decode_json['part_4'] = '20';
+                $complete_bar_no = '20';
+            } else {
+                $decode_json['part_4'] = '0';
+                $complete_bar_no = '0';
+            }
             $decode_json['part_5'] = '0';
-            $complete_bar_no = '20';
         }
 
         $encode_json = json_encode($decode_json);
@@ -2071,6 +2445,7 @@ class Products extends CI_Controller {
         // ------------------------------------------------------------------------
 
         $response['complete_bar_no'] = $complete_bar_no;
+        $response['completed'] = $completed == 'on' ? true : false;
 
         echo json_encode($response);
         die();
@@ -2122,15 +2497,20 @@ class Products extends CI_Controller {
                 $marketing_part5_1 = $this->products_model->insert_into('products_marketing_part_5', $marketing_part5_data);
             }
         }
-
+        $completed = $this->input->post("completed");
         // ------------------------------------------------------------------------
+
 
         $decode_json = array();
         $product_new_data = $this->products_model->getfrom('products_new', false, array('where' => array('id' => $product_id)), array('single' => true));
 
         if ($product_new_data['marketing_complete'] != '') {
             $decode_json = json_decode($product_new_data['marketing_complete'], true);
-            $decode_json['part_5'] = '20';
+            if ($completed == 'true') {
+                $decode_json['part_5'] = '20';
+            } else {
+                $decode_json['part_5'] = '0';
+            }
             $complete_bar_no = array_sum(array($decode_json['part_1'], $decode_json['part_2'], $decode_json['part_3'],
                 $decode_json['part_4'], $decode_json['part_5']));
         } else {
@@ -2138,10 +2518,14 @@ class Products extends CI_Controller {
             $decode_json['part_2'] = '0';
             $decode_json['part_3'] = '0';
             $decode_json['part_4'] = '0';
-            $decode_json['part_5'] = '20';
-            $complete_bar_no = '20';
+            if ($completed == 'true') {
+                $decode_json['part_5'] = '20';
+                $complete_bar_no = '20';
+            } else {
+                $decode_json['part_5'] = '0';
+                $complete_bar_no = '0';
+            }
         }
-
         $encode_json = json_encode($decode_json);
         $this->products_model->update_into('products_new', $product_id, array('marketing_complete' => $encode_json));
 
@@ -2152,7 +2536,8 @@ class Products extends CI_Controller {
                     'marketing_part5_1' => $marketing_part5_1,
                     'status' => 'success',
                     'qry' => $this->db->last_query(),
-                    'complete_bar_no' => $complete_bar_no
+                    'complete_bar_no' => $complete_bar_no,
+                    'completed' => $completed
                 )
         );
     }

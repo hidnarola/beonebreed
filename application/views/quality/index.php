@@ -10,13 +10,6 @@
 					} ?>
 			</span>
 		    </h1>
-                    <ul class='breadcrumb' style="padding-top: 62px;">
-                        <li class='separator'>
-                        </li>
-                        <li>
-                            Quality/Store Report
-                        </li>
-                    </ul>
 		    <div class='pull-right'>
 
 		    </div>
@@ -105,7 +98,7 @@
     					    </div>
     					</td>
     				    </tr>
-				<?php } ?> 
+<?php } ?> 
 
 				</tbody>
 			    </table>

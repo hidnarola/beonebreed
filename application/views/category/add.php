@@ -6,19 +6,26 @@
                       <i class='icon-tint'></i>
                       <span>Manage Project Category</span>
                     </h1>
-                    <ul class='breadcrumb' style="padding-top: 62px;">
-                        <li class='separator'>
-                        </li>
+                    <div class='pull-right'>
+                      <ul class='breadcrumb'>
                         <li>
-                            <a href="<?php echo site_url('category'); ?>">Settings/Design/Project Category</a>
+                          <a href='index.html'>
+                            <i class='icon-bar-chart'></i>
+
+                          </a>
                         </li>
                         <li class='separator'>
-                            <i class='icon-angle-right'></i>
+                          <i class='icon-angle-right'></i>
                         </li>
-                        <li>
-                            Add Category
+                       <!-- <li>
+                          Forms
                         </li>
-                    </ul>
+                        <li class='separator'>
+                          <i class='icon-angle-right'></i>
+                        </li>
+                        <li class='active'>Form styles and features</li>-->
+                      </ul>
+                    </div>
                   </div>
                 </div>
               </div>

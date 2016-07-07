@@ -28,7 +28,7 @@
 <div class='row'>
     <div class='col-sm-12'>
         <!--  =========== ADMIN TAB PART 1 START ===============  -->
-        <form class="form" style="margin-bottom: 0;" method="post" action="#" accept-charset="UTF-8" id="admin_parts">
+        <form class="form" style="margin-bottom: 0;" method="post" action="#" accept-charset="UTF-8" id="admin_part_1">
             <div class="row">
                 <div class="col-sm-12 pull-left"> 
                     <span class="">
@@ -123,19 +123,19 @@
                         <div class='controls'>
                             <input type="hidden" name="barcode_id" id="barcode_id" value="">
                             <input type='hidden' name="product_id" id="product_id" >
-                            <!--                            <a class="btn btn-success" onclick="validate_admin_part_1()" >
-                                                            <i class='icon-save'></i> Save
-                                                        </a>
-                                                        <a href="" class="btn btn-default" >Cancel</a>-->
+                            <a class="btn btn-success" onclick="validate_admin_part_1()" >
+                                <i class='icon-save'></i> Save
+                            </a>
+                            <a href="" class="btn btn-default" >Cancel</a>
                         </div>
                     </div>
                 </div>    
             </div>                                                
-
+        </form>    
             <!--  =========== // END TAB-1 ===============  -->
             <hr class="hr-normal">
             <!--  =========== ADMIN TAB PART 2 START ===============  -->
-
+            <form class="form" style="margin-bottom: 0;" method="post" action="#" accept-charset="UTF-8" id="admin_part_2">    
             <div class="row">
                 <div class="col-sm-12 pull-left"> 
                     <span class="">
@@ -699,7 +699,18 @@
                         <span class="color_red error_pallet"></span>
                     </div>
                 </div>    
-
+                
+                <div class="row">
+                    <div class='form-group' style='padding-left: 60px;'>
+                        <label class='control-label' >Notes </label>
+                        <div class='controls'>
+                            <input class='form-control' style="width:40%"  id='admin_part2_notes' name="admin_part2_notes" 
+                                   placeholder='Notes' type='text' >       
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+                
                 <div class="col-sm-12">
                     <div class='form-group col-sm-4 text-left'>
                         <div class='controls'>
@@ -718,19 +729,19 @@
                             <input type="hidden" name="product_retail_id" id="product_retail_id">
                             <input type="hidden" name="product_master_id" id="product_master_id">
                             <input type="hidden" name="product_pallet_id" id="product_pallet_id">
-                            <!--                            <a class="btn btn-success" onclick="validate_admin_part_2()" >
-                                                            <i class='icon-save'></i> Save
-                                                        </a>
-                                                        <a href="" class="btn btn-default" >Cancel</a>-->
+                            <a class="btn btn-success" onclick="validate_admin_part_2()" >
+                                <i class='icon-save'></i> Save
+                            </a>
+                            <a href="" class="btn btn-default" >Cancel</a>
                         </div>
                     </div>
                 </div>
             </div>   
-
+            </form>
             <!--  =========== //END TAB-2 ===============  -->
             <hr class="hr-normal">
             <!--  =========== ADMIN TAB PART 3 START ===============  -->
-
+            <form class="form" style="margin-bottom: 0;" method="post" action="#" accept-charset="UTF-8" id="admin_part_3">
             <div class="row">
                 <div class="col-sm-12 pull-left"> 
                     <span class="">
@@ -838,7 +849,7 @@
                                     <input type="hidden" name="id_16" id="id_16" >
                                     <input type="hidden" name="id_24" id="id_24" >
                                     <input type="hidden" name="id_25" id="id_25" >
-                                    <a class="btn btn-success" onclick="validate_all_admin_part()" >
+                                    <a class="btn btn-success" onclick="validate_admin_part_3()" >
                                         <i class='icon-save'></i> Save
                                     </a>
                                     <a href="" class="btn btn-default" >Cancel</a>
@@ -849,7 +860,7 @@
                     <div class="clearfix"></div>
                 </div>   
             </div>                                                
-        </form> 
+            </form> 
         <!--  =========== //END TAB-3 ===============  -->
     </div>
 </div>
@@ -873,14 +884,48 @@
             return false;
         }
     }
-    //-----------------All part------------------------------------
+    
+//------------------- ADMIN PART 1 START ---------------------/
 
-    function validate_all_admin_part() {
+    // For generate UPC and EAN number     
+    function generate_upc_ean(id) {
+        $("#fakeLoader").attr('style', ''); // Remove Style Attribute for reuse
+        $("#fakeLoader").fakeLoader({
+            timeToHide: 300,
+            bgColor: "#2ecc71",
+            spinner: "spinner7"
+        }); // Fakeloader plugin
 
-        
-        
+        $('.error_generate').addClass('hide');
+        var cat_id = $('#category').val();
+
+        $.ajax({
+            url: '<?php echo base_url() . "products/generate_upc_ean"; ?>',
+            type: 'POST',
+            dataType: 'json',
+            data: {cat_id: cat_id, type: id},
+            success: function (data) {
+                if (data.upc != '0') {
+                    $(id).val(data.upc);
+                    if (id == '#upc') {
+                        $('#ean').val(data.ean);
+                        $('#prod_code').val(data.product_code);
+                        $('#barcode_id').val(data.id);
+                    } else {
+                        // $(id).data()
+                    }
+                } else {
+                    alert('All bar codes are assigned!!');
+                }
+            }
+        });
+    }
+    var part_1 = 0;
+    var part_2 = 0;
+
+    function validate_admin_part_1() {
+
         var error_cnt = 0;
-        /* validate part 1 data */
         var product_name = $('#product_name').val();
         product_name = $.trim(product_name);
 
@@ -889,6 +934,9 @@
         var prod_code = $('#prod_code').val();
         var complete_admin_part_1 = validate_checkbox('complete_admin_part_1');
 
+        var form_data = $("#admin_part_1").serializeArray();
+        form_data.push({name: "complited", value: complete_admin_part_1});
+        
         if (product_name == '') {
             $('.error_product_name').removeClass('hide');
             error_cnt++;
@@ -902,8 +950,59 @@
             $('.error_generate').addClass('hide');
         }
 
-        /* validate part 2 data */
 
+        if (error_cnt != '0') {
+            return false;
+        } else {
+
+            $("#fakeLoader").attr('style', ''); // Remove Style Attribute for reuse
+            $("#fakeLoader").fakeLoader({
+                timeToHide: 1200,
+                bgColor: "#2ecc71",
+                spinner: "spinner7"
+            }); // Fakeloader plugin
+
+            $.ajax({
+                url: '<?php echo base_url() . "products/admin_form_tab_1"; ?>',
+                type: 'POST',
+                dataType: 'json',
+                data: form_data,
+                success: function (data) {
+
+                    $('#product_id').val(data.product_id);
+                    part_1 = data.complete_bar_no;
+                    $('.percentage_complete_admin').html(data.complete_bar_no + '%');
+//                    $('#complete_admin_part_1').prop('checked', true);
+                    $('#generate_barcode').attr('disabled', true);
+                    if(data.completed == 'true')
+                    {
+//                        $('#complete_admin_part_1').attr('disabled', true);
+                        $('.part_1_admin').addClass('active');
+                    }
+                    else
+                    {
+                        $('.part_1_admin').removeClass('active');
+                    }
+                }
+            });
+        }
+    }
+
+
+//------------------- //ADMIN PART 1 END ---------------------/
+
+//------------------- ADMIN PART 2 START ---------------------/
+    function validate_admin_part_2() {
+        var product_id = $('#product_id').val();
+        if (product_id == '') {
+            //uncommetn below line for validate Part-1 Required Part
+            $(function () {
+                bootbox.alert('Please create product in Part-1.');
+            });
+            return false;
+        }
+
+        var error_cnt = 0;
         var complete_admin_part_2 = validate_checkbox('complete_admin_part_2');
 
         // Retail Unit Dimension Validation [STRAT]
@@ -931,7 +1030,6 @@
                 error_cnt++;
             }
         }
-
         $('.error_retail').html(error_retail_str); // Append Retail Error String to error_retail Class        
         // Retail Unit Dimension Validation [END]
 
@@ -992,11 +1090,12 @@
         var no_pc_inner = $('#no_pc_inner').val(); //*
         var error_inner_str = '';
 
-        if (i_upc == '') {
-            error_inner_str += '<p> UPC is Required.</p>';
-            error_cnt++;
-        }
+//        if (i_upc == '') {
+//            error_inner_str += '<p> UPC is Required.</p>';
+//            error_cnt++;
+//        }
         if (i_upc != '' || i_gross_weight != '' || i_net_weight != '' || dm3_inner != '' || no_pc_inner != '') {
+
 
             if (i_gross_weight != '') {
                 if (isNumber(i_gross_weight) == false) {
@@ -1004,7 +1103,6 @@
                     error_cnt++;
                 }
             }
-
             if (i_net_weight != '') {
                 if (isNumber(i_net_weight) == false) {
                     error_inner_str += '<p> Net Weight should be Number.</p>';
@@ -1027,7 +1125,7 @@
             }
         }
 
-        $('.error_innercase').html(error_inner_str); // Apply validation
+        $('.error_innercase').html(error_inner_str);
 
         // InnerCase Dimentsion Valdiation [END]
 
@@ -1039,10 +1137,10 @@
         var p_cma_per_pal = $('#p_cma_per_pal').val();
         var error_pallet_str = '';
 
-        if (p_upc == '') {
-            error_pallet_str += '<p> UPC is Required.</p>';
-            error_cnt++;
-        }
+//        if (p_upc == '') {
+//            error_pallet_str += '<p> UPC is Required.</p>';
+//            error_cnt++;
+//        }
 
         if (p_gross_weight != '') {
             if (isNumber(p_gross_weight) == false) {
@@ -1056,6 +1154,7 @@
                 error_cnt++;
             }
         }
+
         if (dm3_pallet != '') {
             if (isNumber(dm3_pallet) == false) {
                 error_pallet_str += '<p> DM3 should be Number.</p>';
@@ -1070,125 +1169,67 @@
             }
         }
 
-        $('.error_pallet').html(error_pallet_str); // Apply validation
+        $('.error_pallet').html(error_pallet_str);
 
-        /* validate Part-3 data */
 
-        var mrsp_canada = $('#mrsp_canada').val();
-        var hs_code = $('#hs_code').val();
-        var mrsp_international = $('#mrsp_international').val();
-        var country_origin = $('#country_origin').val();
-        var complete_admin_part_3 = validate_checkbox('complete_admin_part_3');
 
-        if (error_cnt == 0)
-        {
 
-            var form_data = $("#admin_parts").serializeArray();
+        if (error_cnt != '0') {
+            return false;
+        } else {
+
             $("#fakeLoader").attr('style', ''); // Remove Style Attribute for reuse
             $("#fakeLoader").fakeLoader({
                 timeToHide: 1200,
                 bgColor: "#2ecc71",
                 spinner: "spinner7"
             }); // Fakeloader plugin
- 
+
+            var form_data = $("#admin_part_2").serializeArray();
+
+            form_data.push({name: "product_id", value: product_id});
+            form_data.push({name: "completed", value: complete_admin_part_2});
+
             $.ajax({
-                url: '<?php echo base_url() . "products/admin_form_alltab"; ?>',
+                url: '<?php echo base_url() . "products/admin_form_tab_2"; ?>',
                 type: 'POST',
                 dataType: 'json',
                 data: form_data,
-                success: function (data)
-                {
-                    $('#product_id').val(data.product_id);
+                success: function (data) {
+
                     $('#product_retail_id').val(data.product_retail_id);
                     $('#product_master_id').val(data.product_master_id);
                     $('#product_pallet_id').val(data.product_pallet_id);
                     $('#product_inner_id').val(data.product_inner_id);
-                    $('#id_11').val(data.id_11);
-                    $('#id_12').val(data.id_12);
-                    $('#id_13').val(data.id_13);
-                    $('#id_14').val(data.id_14);
-                    $('#id_15').val(data.id_15);
-                    $('#id_16').val(data.id_16);
-                    $('#id_24').val(data.id_24);
-                    $('#id_25').val(data.id_25);
-                    $('#generate_barcode').attr('disabled', true);
-                    $('.part_1_admin').addClass('active');
-                    $('.part_2_admin').addClass('active');
-                    $('.part_3_admin').addClass('active');
-                    $('.percentage_complete_admin').html('100%');
-                    
-                    $('#complete_admin_part_1').prop('checked',true);
-                    $('#complete_admin_part_2').prop('checked',true);
-                    $('#complete_admin_part_3').prop('checked',true);
-                    
-                    $('#complete_admin_part_1').attr('disabled', true);
-                    $('#complete_admin_part_2').attr('disabled', true);
-                    $('#complete_admin_part_3').attr('disabled', true);
-                    
-                    $('#pg').attr('disabled', true);
-                    $('#ig').attr('disabled', true);
-                    $('#mg').attr('disabled', true);
+
+                    if(data.completed == 'true')
+                    {
+                        $('.part_2_admin').addClass('active');
+//                        $('#complete_admin_part_2').attr('disabled', true);
+                    }
+                    else
+                    {
+                        $('.part_2_admin').removeClass('active');
+                    }
+                    $('.percentage_complete_admin').html(data.complete_bar_no + '%');
+                    part_2 = data.complete_bar_no;
+                    return false;
+
                 }
             });
         }
-
-
-
-
+        // Pallet Dimension Validation [END]        
     }
 
-
-//------------------- ADMIN PART 1 START ---------------------/
-
-    // For generate UPC and EAN number     
-    function generate_upc_ean(id) {
-
-        $("#fakeLoader").attr('style', ''); // Remove Style Attribute for reuse
-        $("#fakeLoader").fakeLoader({
-            timeToHide: 300,
-            bgColor: "#2ecc71",
-            spinner: "spinner7"
-        }); // Fakeloader plugin
-
-        $('.error_generate').addClass('hide');
-        var cat_id = $('#category').val();
-
-        $.ajax({
-            url: '<?php echo base_url() . "products/generate_upc_ean"; ?>',
-            type: 'POST',
-            dataType: 'json',
-            data: {cat_id: cat_id, type: id},
-            success: function (data) {
-                if (data.upc != '0') {
-                    $(id).val(data.upc);
-                    if (id == '#upc') {
-                        $('#ean').val(data.ean);
-                        $('#prod_code').val(data.product_code);
-                        $('#barcode_id').val(data.id);
-                    } else {
-                        // $(id).data()
-                    }
-                } else {
-                    alert('All bar codes are assigned!!');
-                }
-            }
-        });
-    }
-    var part_1 = 0;
-    var part_2 = 0;
-    
-
-//------------------- //ADMIN PART 1 END ---------------------/
-
-//------------------- ADMIN PART 2 START ---------------------/
 
 
     function dm3_retail_func() {
+
         $('.error_retail').html(''); // Empty the Error in Error Retail class
 
-        var r_length = 0;
-        var r_width = 0;
-        var r_height = 0;
+        var r_length = 1;
+        var r_width = 1;
+        var r_height = 1;
 
         if ($('#r_length').val() == '' && $('#r_width').val() == '' && $('#r_height').val() == '') {
             $('#dm3_retail').val('');
@@ -1214,9 +1255,9 @@
 
         $('.error_master_case').html('');
 
-        var m_length = 0;
-        var m_width = 0;
-        var m_height = 0;
+        var m_length;
+        var m_width;
+        var m_height;
 
         if ($('#m_length').val() == '' && $('#m_width').val() == '' && $('#m_height').val() == '') {
             $('#dm3_master').val('');
@@ -1242,9 +1283,9 @@
 
         $('.error_innercase').html('');
 
-        var i_length = 0;
-        var i_width = 0;
-        var i_height = 0;
+        var i_length;
+        var i_width;
+        var i_height;
 
         if ($('#i_length').val() == '' && $('#i_width').val() == '' && $('#i_height').val() == '') {
             $('#dm3_inner').val('');
@@ -1269,9 +1310,9 @@
     function dm3_pallet_func() {
 
         $('.error_pallet').html('');
-        var p_length = 0;
-        var p_width = 0;
-        var p_height = 0;
+        var p_length;
+        var p_width;
+        var p_height;
 
         if ($('#p_length').val() == '' && $('#p_width').val() == '' && $('#p_height').val() == '') {
             $('#dm3_pallet').val('');
@@ -1352,6 +1393,70 @@
 //------------------- //ADMIN PART 2 END ---------------------/
 
 //------------------- ADMIN PART 3 START ---------------------/
+    function validate_admin_part_3() {
+        var product_id = $('#product_id').val();
+        if (product_id == '') {
+            //uncommetn below line for validate Part-1 Required Part
+            $(function () {
+                bootbox.alert('Please create product in Part-1.');
+            });
+            return false;
+        }
+
+        var error_cnt = 0;
+        var mrsp_canada = $('#mrsp_canada').val();
+        var hs_code = $('#hs_code').val();
+        var mrsp_international = $('#mrsp_international').val();
+        var country_origin = $('#country_origin').val();
+        var complete_admin_part_3 = validate_checkbox('complete_admin_part_3');
+
+        if (error_cnt != '0') {
+            return false;
+        } else {
+
+            $("#fakeLoader").attr('style', ''); // Remove Style Attribute for reuse
+            $("#fakeLoader").fakeLoader({
+                timeToHide: 1200,
+                bgColor: "#2ecc71",
+                spinner: "spinner7"
+            }); // Fakeloader plugin
+
+            var form_data = $("#admin_part_3").serializeArray();
+            form_data.push({name: "product_id", value: product_id});
+            form_data.push({name: "completed", value: complete_admin_part_3});
+
+            $.ajax({
+                url: '<?php echo base_url() . "products/admin_form_tab_3"; ?>',
+                type: 'POST',
+                dataType: 'json',
+                data: form_data,
+                success: function (data) {
+                    $('#id_11').val(data.id_11);
+                    $('#id_12').val(data.id_12);
+                    $('#id_13').val(data.id_13);
+                    $('#id_14').val(data.id_14);
+                    $('#id_15').val(data.id_15);
+                    $('#id_16').val(data.id_16);
+                    $('#id_24').val(data.id_24);
+                    $('#id_25').val(data.id_25);
+//                    $('#complete_admin_part_3').attr('disabled', true); // Disable Checkbox
+//                    $('#complete_admin_part_3').prop('checked', true);
+                    $('.percentage_complete_admin').html(data.complete_bar_no + '%'); // Update Percentage for product update
+                    if(data.completed == 'true')
+                    {
+                        $('.part_3_admin').addClass('active');
+//                        $('#complete_admin_part_3').attr('disabled', true);
+                    }
+                    else
+                    {
+                        $('.part_3_admin').removeClass('active');
+                    }
+                    return false;
+                }
+            });
+        }
+    }
+
 
 //------------------- //ADMIN PART 3 END ---------------------/
 

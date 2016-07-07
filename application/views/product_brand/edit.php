@@ -8,19 +8,6 @@
             <i class='icon-user'></i>
             <span>Manage Product Brand</span>
           </h1>
-            <ul class='breadcrumb' style="padding-top: 62px;">
-                        <li class='separator'>
-                        </li>
-                        <li>
-                            <a href="<?php echo site_url('product_brand'); ?>">Settings/Product Brand</a>
-                        </li>
-                        <li class='separator'>
-                            <i class='icon-angle-right'></i>
-                        </li>
-                        <li>
-                            Edit Product Brand
-                        </li>
-                    </ul>
           <div class='pull-right'>
 
           </div>

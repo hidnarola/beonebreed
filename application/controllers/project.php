@@ -286,10 +286,10 @@ class Project extends CI_Controller {
 
         if ($this->form_validation->run('action_plan') == FALSE) {
             $data['project'] = $this->project_model->get($id);
+            $data['action_plan_user'] = $this->project_model->action_plan_user();
             $this->template->load('admin_default', 'project/add_action_plan', $data);
         } else {
             if (!empty($_POST)) {
-
                 if ($this->input->post('target_date') == '') {
                     $target_date = '0000-00-00 00:00:00';
                 } else {
@@ -300,10 +300,11 @@ class Project extends CI_Controller {
                 } else {
                     $notes = $this->input->post('notes');
                 }
+                
                 $data = array(
                     'action' => $this->input->post('action'),
                     'project_id' => $id,
-                    'resposible' => $this->input->post('resposible'),
+                    'resposible_id' => $this->input->post('responsible_id'),
                     'mertic_key' => $this->input->post('mertic_key'),
                     'complete_level' => $this->input->post('complete_level'),
                     'target_date' => $target_date,

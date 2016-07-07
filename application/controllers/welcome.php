@@ -22,41 +22,15 @@ class Welcome extends CI_Controller {
 	 
 	public function __construct(){
 		parent::__construct();
-		 
+		$this->load->library('template');
+		$this->load->helper('url');
+		$this->load->helper('form'); 
 	}	
 	
 	public function index()
 	{
-		$this->load->library('zip');
-		$name = 'mydata1.jpg';
+		$this->load->view('welcome_message');
 		
-		$data = file_get_contents("http://forum.codeigniter.com/images/duende/logo.png"); // Read the file's contents
-		$this->zip->add_data($name, $data);
-
-		// Download the file to your desktop. Name it "my_backup.zip"
-		$this->zip->download('my_backup.zip'); 
-		
-	}
-
-	public function pdf_create(){
-		
-		$this->load->library('m_pdf');
-		
-		 $data = [];
-        //load the view and saved it into $html variable
-        $html=$this->load->view('welcome_message', $data, true);
- 
-        //this the the PDF filename that user will get to download
-        $pdfFilePath = "output_pdf_name.pdf";
- 
-        //load mPDF library
-        $this->load->library('m_pdf');
- 
-       //generate the PDF from the given html
-        $this->m_pdf->pdf->WriteHTML($html);
- 
-        //download it.
-        $this->m_pdf->pdf->Output($pdfFilePath, "D");
 	}
 }
 

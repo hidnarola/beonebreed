@@ -13,7 +13,7 @@
 		  </div>
 		</div>
 	  </div>
-	  <?php  if($this->session->flashdata('msg') != ''){ ?>
+	  <?php  if(!empty($this->session->flashdata('msg'))){ ?>
             <div class='alert alert-success alert-dismissable'>
                        <a class="close" data-dismiss="alert" href="#">&times;</a>
            <i class='icon-ok-sign'></i>

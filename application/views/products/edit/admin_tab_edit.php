@@ -70,6 +70,27 @@ if (!empty($data_admin_part_3)) {
         }
     }
 }
+$part1_style = '';
+$part2_style = '';
+$part3_style = '';
+
+if(!empty($admin_complete_part))
+{
+    if($admin_complete_part['part_1'] != 0)
+    {
+        $part1_style = 'checked="checked"';
+    }
+
+    if($admin_complete_part['part_2'] != 0)
+    {
+        $part2_style = 'checked="checked"';
+    }
+
+    if($admin_complete_part['part_3'] != 0)
+    {
+        $part3_style = 'checked="checked"';
+    }
+}
 
 // p($retail_data);    
 // p($mastercase_data);
@@ -80,7 +101,11 @@ if (!empty($data_admin_part_3)) {
     <h5>COMPLETE LEVEL</h5>
     <div class="inline-block complete-level-ul"> 
         <ul>
-            <li class="part_1_admin active">
+            <li class="part_1_admin <?php
+            if ($admin_complete_part['part_1'] != '0') {
+                echo 'active';
+            }
+            ?>">
                 <span></span>
                 <span>PART 1</span>
             </li>
@@ -194,7 +219,7 @@ if (!empty($data_admin_part_3)) {
                     <div class="clearfix"></div>
                     <br/>
                     <div>
-                        <input type="checkbox" name="complete_admin_part_1" id="complete_admin_part_1" checked disabled > Part-1 Completed (33%)
+                        <input type="checkbox" name="complete_admin_part_1" id="complete_admin_part_1" <?php echo $part1_style; ?>> Part-1 Completed (33%)
                         <br/>
                         <span class="color_red error_admin_part_1 hide">Please Check this checkbox to procced further.</span>
                     </div>    
@@ -349,9 +374,7 @@ if (!empty($data_admin_part_3)) {
                         </div>
                         <div class='form-group col-sm-4 padding-l-0'>
                             <div class='controls'>
-                                <a onclick="event.preventDefault();
-                                        m_upc_get();
-                                        $('.error_master_case').html('');" class="btn btn-g-bar-code btn-success">G</a>
+                                <a onclick="return generate_upc_ean('#m_upc')" class="btn btn-g-bar-code btn-success">G</a>
                             </div>
                         </div>
                         <div class="clearfix"></div>
@@ -490,9 +513,7 @@ if (!empty($data_admin_part_3)) {
                         </div>
                         <div class='form-group col-sm-4 padding-l-0'>
                             <div class='controls'>
-                                <a onclick="event.preventDefault();
-                                        i_upc_get();
-                                        $('.error_innercase').html('');" class="btn btn-g-bar-code btn-success">G</a>
+                                <a onclick="return generate_upc_ean('#i_upc')" class="btn btn-g-bar-code btn-success">G</a>
                             </div>
                         </div>
                         <div class="clearfix"></div>
@@ -631,9 +652,7 @@ if (!empty($data_admin_part_3)) {
                         </div>
                         <div class='form-group col-sm-4 padding-l-0'>
                             <div class='controls'>
-                                <a onclick="event.preventDefault();
-                                        p_upc_get();
-                                        $('.error_pallet').html('');" class="btn btn-g-bar-code btn-success">G</a>
+                                <a onclick="generate_upc_ean('#p_upc')" class="btn btn-g-bar-code btn-success">G</a>
                             </div>
                         </div>
                         <div class="clearfix"></div>
@@ -780,7 +799,19 @@ if (!empty($data_admin_part_3)) {
                         <span class="color_red error_pallet"></span>
                     </div>
                 </div>    
-
+                
+                <div class="row">
+                    <div class='form-group' style='padding-left: 60px;'>
+                        <label class='control-label' >Notes </label>
+                        <div class='controls'>
+                            <input class='form-control' style="width:40%" value="<?php echo $data_admin_part_1['admin_part2_notes']; ?>" id='admin_part2_notes' name="admin_part2_notes" 
+                                   placeholder='Notes' type='text' >       
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+                
+                
                 <div class="col-sm-12">
                     <div class='form-group col-sm-4 text-left'>
                         <div class='controls'>
@@ -801,14 +832,12 @@ if (!empty($data_admin_part_3)) {
                                 ?>
                                 <input type="checkbox" name="complete_admin_part_2" 
                                        id="complete_admin_part_2" <?php
-                                if ($admin_part2_checkbox == '1') {
-                                    echo 'checked disabled';
-                                }
+                                echo $part2_style;
                                 ?> > 
                                 <span>PART 2 COMPLETED (33%)</span>
                             </label>
                             <br/>
-                            <span class="hide  color_red error_admin_part_2">Plese Check this checkbox to proceed further.</span>
+                            <span class="hide  color_red error_admin_part_2">Please Check this checkbox to proceed further.</span>
                         </div>    
                     </div>
 
@@ -940,6 +969,22 @@ if (isset($ques_24['answer'])) {
 ?>>
                             </div>
                         </div>
+                        <div class="col-sm-6">
+                            <span class="check-list-number">4</span>
+                            <label class='control-label'>HAVE YOU CREATED THE 'BATCH FORM' ?</label>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class='make-switch switch' data-off-label='&lt;i class="icon-remove"&gt;&lt;/i&gt;' data-on-label='&lt;i class="icon-ok"&gt;&lt;/i&gt;'>
+                                <input type='checkbox' name="switch_25" id="25" value="25" <?php
+if (isset($ques_25['answer'])) {
+    if ($ques_25['answer'] == '1') {
+        echo 'checked';
+    }
+}
+?>>
+                            </div>
+                        </div>
+                        
                     </div>
                 </div>                    
                 <div class="col-sm-6">                   
@@ -949,9 +994,7 @@ if (isset($ques_24['answer'])) {
                         <div class="col-sm-6">
                             <input type="checkbox" name="complete_admin_part_3"  
                                            <?php
-                                           if ($admin_part3_checkbox == '1') {
-                                               echo 'checked="checked" disabled="disabled"';
-                                           }
+                                               echo $part3_style;
                                            ?>id="complete_admin_part_3" > Part-3 Completed (34%)
                             <br/>
                             <span class="color_red error_admin_part_3 hide">Please Check this checkbox for procced further.</span>
@@ -994,6 +1037,12 @@ if (isset($ques_24['answer'])) {
                                         echo $ques_24['id'];
                                     }
                                            ?>">
+                                    
+                                    <input type="hidden" name="id_25" id="id_25" value="<?php
+                                    if (!empty($ques_25['id'])) {
+                                        echo $ques_25['id'];
+                                    }
+                                           ?>">
                                     <a class="btn btn-success" onclick="validate_admin_part_3()" >
                                         <i class='icon-save'></i> Save
                                     </a>
@@ -1031,32 +1080,83 @@ if (isset($ques_24['answer'])) {
     }
 
 //------------------- ADMIN PART 1 START ---------------------/
+    function generate_upc_ean(id) {
+        if(confirm("Are you sure you want to generate new barcode ?"))
+        {
+            $("#fakeLoader").attr('style', ''); // Remove Style Attribute for reuse
+            $("#fakeLoader").fakeLoader({
+                timeToHide: 300,
+                bgColor: "#2ecc71",
+                spinner: "spinner7"
+            }); // Fakeloader plugin
 
-    // For generate UPC and EAN number     
-    function generate_upc_ean() {
-
-        $("#fakeLoader").attr('style', ''); // Remove Style Attribute for reuse
-        $("#fakeLoader").fakeLoader({
-            timeToHide: 300,
-            bgColor: "#2ecc71",
-            spinner: "spinner7"
-        }); // Fakeloader plugin
-
-        $('.error_generate').addClass('hide');
-        var cat_id = $('#category').val();
-
-        $.ajax({
-            url: '<?php echo base_url() . "products/generate_upc_ean"; ?>',
-            type: 'POST',
-            dataType: 'json',
-            data: {cat_id: cat_id},
-            success: function (data) {
-                $('#upc').val(data.upc);
-                $('#ean').val(data.ean);
-                $('#prod_code').val(data.product_code);
-                $('#barcode_id').val(data.id);
+            $('.error_generate').addClass('hide');
+            var cat_id = $('#category').val();
+            
+            var product_id = $('#product_id').val();
+            var master_id = '';
+            var dimention_id = '';
+            if(id == "#m_upc")
+            {
+                master_id = $('#product_master_id').val();
+                dimention_id = 2;
             }
-        });
+            else if(id == "#i_upc")
+            {
+                master_id = $('#product_inner_id').val();
+                dimention_id = 3;
+            }
+            else if(id == "#p_upc")
+            {
+                master_id = $('#product_pallet_id').val();
+                dimention_id = 4;
+            }
+            
+
+            $.ajax({
+                url: '<?php echo base_url() . "products/update_upc_ean"; ?>',
+                type: 'POST',
+                dataType: 'json',
+                data: {cat_id: cat_id, type: id,id:master_id,dimention_id:dimention_id,product_id:product_id},
+                success: function (data) {
+                    if (data.upc != '0') {
+                        $(id).val(data.upc);
+                        
+                        if(data.type == "#m_upc")
+                        {
+                            $('#product_master_id').val(data.last_id);
+                            
+                        }
+                        else if(data.type == "#i_upc")
+                        {
+                            $('#product_inner_id').val(data.last_id);
+                            
+                        }
+                        else if(data.type == "#p_upc")
+                        {
+                            $('#product_pallet_id').val(data.last_id);
+                            
+                        }
+                        
+                        
+                        if (id == '#upc') {
+                            $('#ean').val(data.ean);
+                            $('#prod_code').val(data.product_code);
+                            $('#barcode_id').val(data.id);
+                        } else {
+                            // $(id).data()
+                        }
+                    } else {
+                        alert('All bar codes are assigned!!');
+                    }
+                }
+            });
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
     var part_1 = 0;
     var part_2 = 0
@@ -1073,6 +1173,7 @@ if (isset($ques_24['answer'])) {
         var complete_admin_part_1 = validate_checkbox('complete_admin_part_1');
 
         var form_data = $("#admin_part_1").serializeArray();
+        form_data.push({name: "complited", value: complete_admin_part_1});
 
         if (product_name == '') {
             $('.error_product_name').removeClass('hide');
@@ -1108,9 +1209,17 @@ if (isset($ques_24['answer'])) {
                     part_1 = data.complete_bar_no;
                     $('#product_id').val(data.product_id);
                     $('.percentage_complete_admin').html(data.complete_bar_no + '%');
-                    $('#complete_admin_part_1').attr('disabled', true);
+//                    $('#complete_admin_part_1').attr('disabled', true);
                     $('#generate_barcode').attr('disabled', true);
-                    $('.part_1_admin').addClass('active');
+                    if(data.completed == 'true')
+                    {
+                        $('.part_1_admin').addClass('active');
+//                        $('#complete_admin_part_1').attr('disabled', true);
+                    }
+                    else
+                    {
+                        $('.part_1_admin').removeClass('active');
+                    }
                 }
             });
         }
@@ -1394,10 +1503,10 @@ if (isset($ques_24['answer'])) {
         var no_pc_inner = $('#no_pc_inner').val(); //*
         var error_inner_str = '';
 
-        if (i_upc == '') {
-            error_inner_str += '<p> UPC is Required.</p>';
-            error_cnt++;
-        }
+//        if (i_upc == '') {
+//            error_inner_str += '<p> UPC is Required.</p>';
+//            error_cnt++;
+//        }
         if (i_upc != '' || i_gross_weight != '' || i_net_weight != '' || dm3_inner != '' || no_pc_inner != '') {
 
 
@@ -1442,10 +1551,10 @@ if (isset($ques_24['answer'])) {
         var p_cma_per_pal = $('#p_cma_per_pal').val();
         var error_pallet_str = '';
 
-        if (p_upc == '') {
-            error_pallet_str += '<p> UPC is Required.</p>';
-            error_cnt++;
-        }
+//        if (p_upc == '') {
+//            error_pallet_str += '<p> UPC is Required.</p>';
+//            error_cnt++;
+//        }
 
         if (p_gross_weight != '') {
             if (isNumber(p_gross_weight) == false) {
@@ -1491,6 +1600,8 @@ if (isset($ques_24['answer'])) {
             var form_data = $("#admin_part_2").serializeArray();
 
             form_data.push({name: "product_id", value: product_id});
+            form_data.push({name: "completed", value: complete_admin_part_2});
+            
 
             $.ajax({
                 url: '<?php echo base_url() . "products/admin_form_tab_2"; ?>',
@@ -1503,8 +1614,16 @@ if (isset($ques_24['answer'])) {
                     $('#product_master_id').val(data.product_master_id);
                     $('#product_pallet_id').val(data.product_pallet_id);
                     $('#product_inner_id').val(data.product_inner_id);
-                    $('#complete_admin_part_2').attr('disabled', true);
-                    $('.part_2_admin').addClass('active');
+//                    $('#complete_admin_part_2').attr('disabled', true);
+                    if(data.completed == 'true')
+                    {
+                        $('.part_2_admin').addClass('active');
+//                        $('#complete_admin_part_2').attr('disabled', true);
+                    }
+                    else
+                    {
+                        $('.part_2_admin').removeClass('active');
+                    }
                     $('.percentage_complete_admin').html(data.complete_bar_no + '%');
                     part_2 = data.complete_bar_no;
                     return false;
@@ -1537,41 +1656,6 @@ if (isset($ques_24['answer'])) {
         var country_origin = $('#country_origin').val();
         var complete_admin_part_3 = validate_checkbox('complete_admin_part_3');
 
-//        if (mrsp_canada == '') {
-//            $('.error_mrsp_canada').removeClass('hide');
-//            error_cnt++;
-//        } else {
-//            $('.error_mrsp_canada').addClass('hide');
-//        }
-//
-//        if (hs_code == '') {
-//            $('.error_hs_code').removeClass('hide');
-//            error_cnt++;
-//        } else {
-//            $('.error_hs_code').addClass('hide');
-//        }
-//
-//        if (mrsp_international == '') {
-//            $('.error_mrsp_international').removeClass('hide');
-//            error_cnt++;
-//        } else {
-//            $('.error_mrsp_international').addClass('hide');
-//        }
-//
-//        if (country_origin == '') {
-//            $('.error_country_origin').removeClass('hide');
-//            error_cnt++;
-//        } else {
-//            $('.error_country_origin').addClass('hide');
-//        }
-//
-//        if (complete_admin_part_3 == false) {
-//            $('.error_admin_part_3').removeClass('hide');
-//            error_cnt++;
-//        } else {
-//            $('.error_admin_part_3').addClass('hide');
-//        }
-
         if (error_cnt != '0') {
             return false;
         } else {
@@ -1584,7 +1668,9 @@ if (isset($ques_24['answer'])) {
             }); // Fakeloader plugin
 
             var form_data = $("#admin_part_3").serializeArray();
+            
             form_data.push({name: "product_id", value: product_id});
+            form_data.push({name: "completed", value: complete_admin_part_3});
 
             $.ajax({
                 url: '<?php echo base_url() . "products/admin_form_tab_3"; ?>',
@@ -1598,9 +1684,20 @@ if (isset($ques_24['answer'])) {
                     $('#id_14').val(data.id_14);
                     $('#id_15').val(data.id_15);
                     $('#id_16').val(data.id_16);
-                    $('#complete_admin_part_3').attr('disabled', true); // Disable Checkbox
+                    $('#id_24').val(data.id_24);
+                    $('#id_25').val(data.id_25);
+                    
+//                    $('#complete_admin_part_3').attr('disabled', true); // Disable Checkbox
                     $('.percentage_complete_admin').html(data.complete_bar_no + '%'); // Update Percentage for product update
-                    $('.part_3_admin').addClass('active');
+                    if(data.completed == 'true')
+                    {
+                        $('.part_3_admin').addClass('active');
+//                        $('#complete_admin_part_3').attr('disabled', true);
+                    }
+                    else
+                    {
+                        $('.part_3_admin').removeClass('active');
+                    }
                     return false;
                 }
             });
