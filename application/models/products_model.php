@@ -426,6 +426,12 @@ class Products_model extends CI_Model {
         $query = $this->db->get();
         return $query->result_array();
     }
+    
+    public function get_supplyer_by_id($id)
+    {
+        $this->db->where('id',$id);
+        return $this->db->get("suppliers")->row_array();
+    }
 
 }
 

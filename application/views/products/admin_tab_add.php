@@ -108,7 +108,7 @@
                             <span class="color_red error_generate hide">Please generate product code</span>
                         </div>  
                         <div class='controls pull-right'>
-                            <a onclick="generate_upc_ean('#upc')" id="generate_barcode" class="btn btn-success btn-lg">GENERATE</a>
+                            <a onclick="generate_upc_ean_part1('#upc')" id="generate_barcode" class="btn btn-success btn-lg">GENERATE</a>
                         </div>
                     </div>
                     <div class="clearfix"></div>
@@ -887,8 +887,95 @@
     
 //------------------- ADMIN PART 1 START ---------------------/
 
+function generate_upc_ean(id) {
+        var product_id = $('#product_id').val();
+        if (product_id == '') {
+            //uncommetn below line for validate Part-1 Required Part
+            $(function () {
+                bootbox.alert('Please create product in Part-1.');
+            });
+            return false;
+        }
+        if(confirm("Are you sure you want to generate new barcode ?"))
+        {
+            $("#fakeLoader").attr('style', ''); // Remove Style Attribute for reuse
+            $("#fakeLoader").fakeLoader({
+                timeToHide: 300,
+                bgColor: "#2ecc71",
+                spinner: "spinner7"
+            }); // Fakeloader plugin
+
+            $('.error_generate').addClass('hide');
+            var cat_id = $('#category').val();
+            
+            var product_id = $('#product_id').val();
+            var master_id = '';
+            var dimention_id = '';
+            if(id == "#m_upc")
+            {
+                master_id = $('#product_master_id').val();
+                dimention_id = 2;
+            }
+            else if(id == "#i_upc")
+            {
+                master_id = $('#product_inner_id').val();
+                dimention_id = 3;
+            }
+            else if(id == "#p_upc")
+            {
+                master_id = $('#product_pallet_id').val();
+                dimention_id = 4;
+            }
+            
+
+            $.ajax({
+                url: '<?php echo base_url() . "products/update_upc_ean"; ?>',
+                type: 'POST',
+                dataType: 'json',
+                data: {cat_id: cat_id, type: id,id:master_id,dimention_id:dimention_id,product_id:product_id},
+                success: function (data) {
+                    if (data.upc != '0') {
+                        $(id).val(data.upc);
+                        
+                        if(data.type == "#m_upc")
+                        {
+                            $('#product_master_id').val(data.last_id);
+                            
+                        }
+                        else if(data.type == "#i_upc")
+                        {
+                            $('#product_inner_id').val(data.last_id);
+                            
+                        }
+                        else if(data.type == "#p_upc")
+                        {
+                            $('#product_pallet_id').val(data.last_id);
+                            
+                        }
+                        
+                        
+                        if (id == '#upc') {
+                            $('#ean').val(data.ean);
+                            $('#prod_code').val(data.product_code);
+                            $('#barcode_id').val(data.id);
+                        } else {
+                            // $(id).data()
+                        }
+                    } else {
+                        alert('All bar codes are assigned!!');
+                    }
+                }
+            });
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
     // For generate UPC and EAN number     
-    function generate_upc_ean(id) {
+    function generate_upc_ean_part1(id) {
         $("#fakeLoader").attr('style', ''); // Remove Style Attribute for reuse
         $("#fakeLoader").fakeLoader({
             timeToHide: 300,
@@ -920,6 +1007,7 @@
             }
         });
     }
+    
     var part_1 = 0;
     var part_2 = 0;
 

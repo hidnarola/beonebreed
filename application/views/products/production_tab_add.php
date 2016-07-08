@@ -47,7 +47,7 @@
             <div class="col-sm-6"><div class="form-group">
                     <label class="control-label" for="supplier_name_1">Supplier Name</label>
                     <div class="controls">
-                        <select name="supplier_1" id="supplier_1" class="form-control" onchange="$('.error_supplier_name_1').html('');
+                        <select name="supplier_1" id="supplier_1" class="form-control supplier_dropdown" onchange="$('.error_supplier_name_1').html('');
                                 fetch_supplier_data(this)" >
                             <option value="" selected readonly>Select Supplier</option>
                             <?php
@@ -60,8 +60,8 @@
                         </select>
                         <span class="color_red error_supplier_name_1"></span>
                         <div class="text-right" style="padding-top: 10px;">
-                            <a href="suppliers/add" class="btn-sm btn-success">Add New</a>
-                        </div>
+                            <button type="button" no="1" class="btn-sm btn-success add_supplier" data-toggle="modal">Add New</button>
+                        </div> 
                     </div>
                 </div>
                 <div class="form-group">
@@ -244,11 +244,190 @@
         </div>
     </div>
 </form>
+
+<div id="addSuppluer" class="modal fade" role="dialog">
+  <div class="modal-dialog modal-lg" >
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title"><div class="title">Add Supplier</div></h4>
+      </div>
+      <div class="modal-body">
+        <div class='col-sm-12'>
+               
+            <form class="form" id="supplier_form" style="margin-bottom: 0;" method="post">   
+                    <div class='form-group'>
+                        <label for='s_name'>Supplier Name</label><span style="color:red">*</span>
+                        <input class='form-control' id='s_name' placeholder='Supplier Name' 
+                               type='text' name='supplier_name'>
+                        <span style="color:red" id="err_sname" class="error"></span>
+                    </div>
+
+                    <div class='form-group'>
+                        <label for='c_name'>Contact Name</label><span style="color:red">*</span>
+                        <input class='form-control' id='c_name' placeholder='Contact Name' 
+                               type='text' name='contact_name'>
+                        <span style="color:red" id="err_cname" class="error"></span>
+                    </div>
+
+                    <div class='form-group'>
+                        <label for='country_id'>Country</label><span style="color:red">*</span>
+                        <input class='form-control' id='country_id' placeholder='Country' 
+                               type='text' name='country'>
+                        <span style="color:red" id="err_country" class="error"></span>
+                    </div>
+
+                    <div class='form-group'>
+                        <label for='c_email'>Contact Email</label><span style="color:red">*</span>
+                        <input class='form-control' id='c_email' placeholder='Contact Email' 
+                               type='text' name='contact_email'>
+                        <span style="color:red" id="err_email" class="error"></span>
+                    </div>
+
+                    <div class='form-group'>
+                        <label for='tel_no'>Tel No</label><span style="color:red">*</span>
+                        <input class='form-control' id='tel_no' placeholder='Tel No' 
+                               type='text' name='tel_no'>
+                        <span style="color:red" id="err_tel_no" class="error">
+                            
+                        </span>
+                    </div>
+                    <div class='form-group'>
+                        <label for='tel_no'>Potential Level</label><span style="color:red">*</span>
+                        <select name="potential_level" id="potential_level" class="form-control">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                        </select>
+                    </div>
+                    <div class='form-group'>
+                        <label for='address_id'>Address</label><span style="color:red">*</span>
+                        <textarea name="supplier_address" id="address" cols="30" rows="5" class="form-control"></textarea>
+                        <span style="color:red" id="err_address" class="error">
+                        </span>
+                    </div>
+                
+                    <div class='text-right form-actions form-actions-padding-sm 
+                                form-actions-padding-md form-actions-padding-lg' 
+                         style='margin-bottom: 0;'>
+                        <button class='btn btn-success' id="saveSupplyer" type='button'>
+                            <i class='icon-save'></i>
+                            Save
+                        </button>
+                    </div>
+                <div class="clearfix"></div>
+            </form>		
+                <!-- end of add form -->	
+        </div>      
+      </div>
+      
+    </div>
+
+  </div>
+</div>
 <!--  =========== //PRODUCTION TAB PART 2 END ===============  -->
 
 <?php $this->load->view('products/prod_tab_3'); ?>
 
 <script type="text/javascript">
+    // Add Suppler.
+    var id = "1";
+    $(document).on('click','.add_supplier',function()
+    {
+        $(".error").html("");
+        id = $(this).attr("no");
+        $("#supplier_form")[0].reset();
+        $("#addSuppluer").modal();
+    });
+    $("#saveSupplyer").click(function(){
+        $(".error").html("");
+        var  s_name = $("#s_name").val().trim();
+        var  c_name = $("#c_name").val().trim();
+        var  country_id = $("#country_id").val().trim();
+        var  c_email = $("#c_email").val().trim();
+        var  tel_no = $("#tel_no").val().trim();
+        var  address = $("#address").val().trim();
+        
+        var email = new RegExp('^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$');
+        var no = new RegExp('^[0-9]+$');
+        
+        var flag = 0; 
+        
+        if(s_name == '')
+        {
+            var msg = "This field is required.";
+            $("#err_sname").html(msg);
+            flag ++;
+        }
+        if(c_name == '')
+        {
+            var msg = "This field is required.";
+            $("#err_cname").html(msg);
+            flag ++;
+        }
+        if(country_id == '')
+        {
+            var msg = "This field is required.";
+            $("#err_country").html(msg);
+            flag ++;
+        }
+        if(tel_no == '')
+        {
+            var msg = "This field is required.";
+            $("#err_tel_no").html(msg);
+            flag ++;
+        }
+        else if (!no.test(tel_no)) {
+            var msg = "Please enter only numeric value.";
+            $("#err_tel_no").html(msg);
+            flag ++;
+        }
+        if(address == "")
+        {
+            var msg = "This field is required.";
+            $("#err_address").html(msg);
+            flag ++;
+        }
+        if(c_email == '')
+        {
+            var msg = "This field is required.";
+            $("#err_email").html(msg);
+            flag ++;
+        }
+        else if (!email.test(c_email)) {
+            var msg = "Please enter valid email";
+            $("#err_email").html(msg);
+            flag ++;
+        }
+        
+        if(flag == 0)
+        {
+            var form_data = $("#supplier_form").serializeArray();
+            $.ajax({
+                    url: '<?php echo base_url() . "products/add_supplyer"; ?>',
+                    type: 'POST',
+                    dataType: 'json',
+                    data: form_data,
+                    success: function (data) 
+                    {
+                        if(data.status)
+                        {
+                            var option = "<option value="+data.id+">"+data.supplier_name+"</option>";
+                            $(".supplier_dropdown").append(option);
+                            $("#addSuppluer").modal("hide");
+                            //supplier_1
+                            $('#supplier_'+ id ).val(data.id);
+                            $('#country_' + id).val(data.country);
+                            $('#tel_no_' + id).val(data.tel_no);
+                            $('#address_' + id).val(data.address);
+                            $('#contact_name_' + id).val(data.contact_name);
+                            $('#contact_email_' + id).val(data.contact_email);
+                        }
+                    }
+               });
+           }
+    });
 
     // Production Tab-1 Add More & Save Functionality Start
     function add_production_part_1() {

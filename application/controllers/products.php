@@ -2541,6 +2541,49 @@ class Products extends CI_Controller {
                 )
         );
     }
+    
+    public function add_supplyer()
+    {
+        $data = array();
+        $data['status'] = FALSE;
+        $this->form_validation->set_rules('supplier_name', 'Supplier Name', 'trim|required');
+        $this->form_validation->set_rules('contact_name', 'Contact Name', 'trim|required');
+        $this->form_validation->set_rules('country', 'Country', 'trim|required');
+        $this->form_validation->set_rules('contact_email', 'Contact Email', 'trim|required|valid_email');
+        $this->form_validation->set_rules('tel_no', 'Tel No', 'trim|required');
+        $this->form_validation->set_rules('supplier_address', 'Supplier Address', 'trim|required');
+
+        if($this->form_validation->run() == false)
+        {
+                $this->template->load('admin_default', 'products/add');
+        }
+        else
+        {
+                $supplier_name = $this->input->post('supplier_name');
+                $contact_name = $this->input->post('contact_name');
+                $country = $this->input->post('country');
+                $contact_email = $this->input->post('contact_email');
+                $tel_no = $this->input->post('tel_no');
+                $supplier_address = $this->input->post('supplier_address');
+                $potential_level = $this->input->post('potential_level');
+
+                $data_add = array(
+                            'supplier_name'=>$supplier_name,
+                            'contact_name'=>$contact_name,
+                            'country'=>$country,
+                            'contact_email'=>$contact_email,
+                            'tel_no'=>$tel_no,
+                            'address'=>$supplier_address,
+                            'potential_level'=>$potential_level
+                        );
+                $this->products_model->insert_into('suppliers',$data_add);
+                $id = $this->db->insert_id();
+                $data = $this->products_model->get_supplyer_by_id($id);
+                $data['status'] = TRUE;
+        }
+        echo json_encode($data);
+        die();
+    }
 
     //----------------------------------------------------------------------------------------------------------------
 }

@@ -45,8 +45,11 @@
                             <table class='data-table table table-bordered table-striped' style='margin-bottom:0;'>
                                 <thead>
                                     <tr>
-                                        <th>
+                                        <th width="50">
                                             ID
+                                        </th>
+                                        <th>
+                                            Image
                                         </th>
                                         <th>
                                             Product
@@ -80,10 +83,13 @@
                                             ?>
                                             <tr>
                                                 <!-- changes -->
-                                                <td><?php echo $prod->p_id; ?>
-                                                    <a class="<?php echo $class; ?>" rel="gallery1_10" href="<?php echo $image_profile; ?>" title="robe.jpg">
-                                                        <img class="projectImage" src="<?php echo $image_profile; ?>" alt="">
-                                                    </a> </td>
+                                                <td width="50"><?php echo $prod->p_id; ?>
+                                                   </td>
+                                                   <td>
+                                                        <a class="<?php echo $class; ?>" rel="gallery1_10" href="<?php echo $image_profile; ?>" title="robe.jpg">
+                                                            <img class="projectImage" src="<?php echo $image_profile; ?>" alt="">
+                                                        </a> 
+                                                   </td>
                                                 <td><?php echo $prod->product_name; ?></td>
                                                 <td><?php echo $prod->name; ?></td>
                                                 <td><?php echo $prod->product_code; ?></td>
