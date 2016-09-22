@@ -1393,12 +1393,17 @@ foreach ($question_list_4 as $u_key) {
             $('.error_marketing_part5_cost1_num').addClass('hide');
         }
 
+    /* Changes made by ar
+        Put validation code of upc1 in comment as client don't want validation.
+     */
+    /*
         if (marketing_part5_upc1 === '') {
             $('.error_marketing_part5_upc1').removeClass('hide');
             error_cnt++;
         } else {
             $('.error_marketing_part5_upc1').addClass('hide');
         }
+    */
 
         if (!/^\d{0,6}(?:\.\d{0,5})?$/.test(marketing_part5_cost2)) {
             $('.error_marketing_part5_cost2_num').removeClass('hide');
@@ -1406,13 +1411,18 @@ foreach ($question_list_4 as $u_key) {
         } else {
             $('.error_marketing_part5_cost2_num').addClass('hide');
         }
-        
+      
+    /* Changes made by ar
+        Put validation code of upc2 in comment as client don't want validation.
+     */  
+    /*
         if (marketing_part5_upc2 === '') {
             $('.error_marketing_part5_upc2').removeClass('hide');
             error_cnt++;
         } else {
             $('.error_marketing_part5_upc2').addClass('hide');
         }
+    */
 
         if (error_cnt != '0') {
             return false;
