@@ -241,8 +241,6 @@ class Barcode extends CI_Controller {
         $objWriter = PHPExcel_IOFactory::createWriter($this->excel, 'Excel5');
         $objWriter->save('php://output'); 
 	}
-
-
 }
 
 /* End of file Barcode.php */

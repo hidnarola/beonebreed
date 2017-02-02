@@ -1502,5 +1502,4 @@ foreach ($question_list_4 as $u_key) {
             }
         });
     }
-
 </script>

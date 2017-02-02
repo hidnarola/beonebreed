@@ -118,8 +118,9 @@ class Products extends CI_Controller {
         // qry();
         // p($data['data_admin_part_3']);	
         // exit();
-//        var_dump($data);
-//        die();
+    //    var_dump($data);
+    //    die();
+
         $this->template->load('admin_default', 'products/edit/edit', $data);
     }
 
@@ -197,7 +198,7 @@ class Products extends CI_Controller {
             );
         $id = $this->input->post('id');
         $last_id = "";
-        if(!empty($id))
+		/*if(!empty($id))
         {
             $this->products_model->update_into('dimension',$id,$data);
             $last_id = $id;
@@ -206,7 +207,7 @@ class Products extends CI_Controller {
         {
             $this->products_model->insert_into('dimension',$data);
             $last_id = $this->db->insert_id();
-        }
+        }*/
         $random_barcode['last_id'] = $last_id;
         $random_barcode['type'] = $this->input->post('type');
         echo json_encode($random_barcode);

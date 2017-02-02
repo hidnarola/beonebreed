@@ -367,7 +367,7 @@ if(!empty($admin_complete_part))
                             </div>    
                         </div> 
                         <div class='form-group col-sm-6'>
-                            <div class='controls'>
+                            <div class='controls' data-abc="<?php echo exists($mastercase_data['upc']); ?>">
                                 <input class='form-control' id='m_upc' readonly name="m_upc" 
                                        placeholder='UPC' value="<?php echo exists($mastercase_data['upc']); ?>" type='text' >       
                             </div>
@@ -1130,12 +1130,10 @@ if (isset($ques_25['answer'])) {
                         else if(data.type == "#i_upc")
                         {
                             $('#product_inner_id').val(data.last_id);
-                            
                         }
                         else if(data.type == "#p_upc")
                         {
                             $('#product_pallet_id').val(data.last_id);
-                            
                         }
                         
                         
