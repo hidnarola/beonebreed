@@ -936,7 +936,7 @@ function generate_upc_ean(id) {
                 success: function (data) {
                     if (data.upc != '0') {
                         $(id).val(data.upc);
-                        
+                        /*
                         if(data.type == "#m_upc")
                         {
                             $('#product_master_id').val(data.last_id);
@@ -951,7 +951,7 @@ function generate_upc_ean(id) {
                         {
                             $('#product_pallet_id').val(data.last_id);
                             
-                        }
+                        }*/
                         
                         
                         if (id == '#upc') {

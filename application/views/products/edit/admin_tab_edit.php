@@ -369,7 +369,12 @@ if(!empty($admin_complete_part))
                         <div class='form-group col-sm-6'>
                             <div class='controls' data-abc="<?php echo exists($mastercase_data['upc']); ?>">
                                 <input class='form-control' id='m_upc' readonly name="m_upc" 
-                                       placeholder='UPC' value="<?php echo exists($mastercase_data['upc']); ?>" type='text' >       
+                                       placeholder='UPC' value="<?php echo exists($mastercase_data['upc']); ?>" type='text' >
+                                
+                                <!-- Changes made by ar
+                                    Added one extra hidden field to store new generated barcode of new generated UPC
+                                -->
+                                <input type="hidden" id="m_upc_barcode_id"/>
                             </div>
                         </div>
                         <div class='form-group col-sm-4 padding-l-0'>
@@ -508,7 +513,12 @@ if(!empty($admin_complete_part))
                         <div class='form-group col-sm-6'>
                             <div class='controls'>
                                 <input class='form-control' id='i_upc' readonly name="i_upc" 
-                                       placeholder='UPC' type='text' value="<?php echo exists($innercase_data['upc']); ?>" >       
+                                       placeholder='UPC' type='text' value="<?php echo exists($innercase_data['upc']); ?>" > 
+                                
+                                <!-- Changes made by ar
+                                    Added one extra hidden field to store new generated barcode of new generated UPC
+                                -->
+                                <input type="hidden" id="i_upc_barcode_id"/>
                             </div>
                         </div>
                         <div class='form-group col-sm-4 padding-l-0'>
@@ -647,7 +657,11 @@ if(!empty($admin_complete_part))
                         <div class='form-group col-sm-6'>
                             <div class='controls'>
                                 <input class='form-control' id='p_upc' readonly name="p_upc" 
-                                       placeholder='UPC' value="<?php echo exists($pallet_data['upc']); ?>" type='text' >       
+                                       placeholder='UPC' value="<?php echo exists($pallet_data['upc']); ?>" type='text' >   
+                                <!-- Changes made by ar
+                                    Added one extra hidden field to store new generated barcode of new generated UPC
+                                -->
+                                <input type="hidden" id="p_upc_barcode_id"/>
                             </div>
                         </div>
                         <div class='form-group col-sm-4 padding-l-0'>
@@ -1112,7 +1126,6 @@ if (isset($ques_25['answer'])) {
                 dimention_id = 4;
             }
             
-
             $.ajax({
                 url: '<?php echo base_url() . "products/update_upc_ean"; ?>',
                 type: 'POST',
@@ -1121,28 +1134,29 @@ if (isset($ques_25['answer'])) {
                 success: function (data) {
                     if (data.upc != '0') {
                         $(id).val(data.upc);
-                        
-                        if(data.type == "#m_upc")
+                    /*    if(data.type == "#m_upc")
                         {
                             $('#product_master_id').val(data.last_id);
+                            $('#m_upc_barcode_id').val(data.id);
                             
                         }
                         else if(data.type == "#i_upc")
                         {
                             $('#product_inner_id').val(data.last_id);
+                            $('#i_upc_barcode_id').val(data.id);
                         }
                         else if(data.type == "#p_upc")
                         {
                             $('#product_pallet_id').val(data.last_id);
-                        }
-                        
+                            $('#p_upc_barcode_id').val(data.id);
+                        }*/
                         
                         if (id == '#upc') {
                             $('#ean').val(data.ean);
                             $('#prod_code').val(data.product_code);
                             $('#barcode_id').val(data.id);
                         } else {
-                            // $(id).data()
+                            
                         }
                     } else {
                         alert('All bar codes are assigned!!');

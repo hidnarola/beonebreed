@@ -829,6 +829,10 @@ class Products extends CI_Controller {
         // If Id find then UPDATE otherwise insert
         if (!empty($product_master_id)) {
             $this->products_model->update_into('dimension', $product_master_id, $data_master);
+            
+            // Changes made by "ar" to resolve duplicate entry in dimension table
+            $this->db->where('upc', $m_upc);
+            $this->db->update('bar_code', ['is_assigned' => '1', 'description' => 'Assigned for mastercase  UPC']);
         } else {
 
             $product_master_id = $this->products_model->insert_into('dimension', $data_master);

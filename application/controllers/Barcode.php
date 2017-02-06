@@ -124,6 +124,8 @@ class Barcode extends CI_Controller {
 	public function import(){
 
 		if($_POST){
+                    
+                    
 			$config['upload_path'] = './uploads/barcode/';
 			$config['allowed_types'] = 'csv';
 
@@ -131,18 +133,19 @@ class Barcode extends CI_Controller {
 			$this->load->library('upload', $config);
 			
 			if (!$this->upload->do_upload('file')){
+//                        echo "error comes";die;
 				
 				$error = array('error' => $this->upload->display_errors());
 				$this->session->set_flashdata('error', $error['error']);
 				redirect('barcode/import');
 
 			} else {
+  //                              echo "error not comes";die;
 
 				$data = array('upload_data' => $this->upload->data());
 				$file_name = $data['upload_data']['file_name'];
 				$path = $_SERVER['DOCUMENT_ROOT'].'/uploads/barcode/'.$file_name;
 				$data = $this->csvimport->get_array($path, "", TRUE);
-
 				if(!empty($data)){
 					foreach($data as $d){	
 

@@ -39,6 +39,7 @@
                                         Finish
                                         <i class='icon-arrow-right'></i>
                                     </button>
+                                    <button class="btn btn-success" onclick="window.location.href='<?php echo base_url().'uploads/barcode/sample_barcode.csv' ?>'"><i class='icon icon-download-alt'></i> Download Sample file</button>
                                 </div>
                             </div>
                             <div class='step-content'>
